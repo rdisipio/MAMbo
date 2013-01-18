@@ -46,7 +46,7 @@ class CutFlowFactory
 
 
     void Dump() {
-       cout << "Registered cut flows:" << endl;
+       cout << "INFO: Registered cut flows:" << endl;
        for( CutFlowConfiguratorsCollection_t::const_iterator itr = m_configurators.begin() ; itr != m_configurators.end() ; ++itr ) {
           cout << "* " << itr->first << endl;
        }

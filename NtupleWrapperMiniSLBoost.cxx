@@ -1,6 +1,6 @@
-#include "MiniSLBoostWrapper.h"
+#include "NtupleWrapperMiniSLBoost.h"
 
-MiniSLBoostWrapper::MiniSLBoostWrapper( const char * fileListName, const char * branchListName, const char * treeName ) : 
+NtupleWrapperMiniSLBoost::NtupleWrapperMiniSLBoost( const char * fileListName, const char * branchListName, const char * treeName ) : 
   NtupleWrapper< MiniSLBoost >( fileListName, branchListName, treeName )
 {
 }
@@ -8,7 +8,7 @@ MiniSLBoostWrapper::MiniSLBoostWrapper( const char * fileListName, const char * 
 /////////////////////////////////////////////
 
 
-MiniSLBoostWrapper::~MiniSLBoostWrapper()
+NtupleWrapperMiniSLBoost::~NtupleWrapperMiniSLBoost()
 {
 
 }
@@ -16,7 +16,7 @@ MiniSLBoostWrapper::~MiniSLBoostWrapper()
 /////////////////////////////////////////////
 
 
-bool MiniSLBoostWrapper::MakeEventInfo( EventData * ed )
+bool NtupleWrapperMiniSLBoost::MakeEventInfo( EventData * ed )
 {
   bool success = true;
 
@@ -33,7 +33,7 @@ bool MiniSLBoostWrapper::MakeEventInfo( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool MiniSLBoostWrapper::MakeEventMET( EventData * ed )
+bool NtupleWrapperMiniSLBoost::MakeEventMET( EventData * ed )
 {
   bool success = true;
 
@@ -50,7 +50,7 @@ bool MiniSLBoostWrapper::MakeEventMET( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool MiniSLBoostWrapper::MakeEventElectrons( EventData * ed )
+bool NtupleWrapperMiniSLBoost::MakeEventElectrons( EventData * ed )
 {
   bool success = true;
 
@@ -74,7 +74,7 @@ bool MiniSLBoostWrapper::MakeEventElectrons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool MiniSLBoostWrapper::MakeEventMuons( EventData * ed )
+bool NtupleWrapperMiniSLBoost::MakeEventMuons( EventData * ed )
 {
   bool success = true;
 
@@ -85,7 +85,7 @@ bool MiniSLBoostWrapper::MakeEventMuons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool MiniSLBoostWrapper::MakeEventJets( EventData * ed )
+bool NtupleWrapperMiniSLBoost::MakeEventJets( EventData * ed )
 {
   bool success = true;
   

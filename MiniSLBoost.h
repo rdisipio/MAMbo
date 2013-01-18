@@ -220,14 +220,6 @@ MiniSLBoost::MiniSLBoost(TTree *tree) : fChain(0)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
-   if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("el.root");
-      if (!f || !f->IsOpen()) {
-         f = new TFile("el.root");
-      }
-      f->GetObject("mini",tree);
-
-   }
    Init(tree);
 }
 

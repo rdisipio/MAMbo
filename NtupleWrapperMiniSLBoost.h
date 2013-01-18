@@ -5,11 +5,11 @@
 
 #include "MiniSLBoost.h"
 
-class MiniSLBoostWrapper : public NtupleWrapper< MiniSLBoost > 
+class NtupleWrapperMiniSLBoost : public NtupleWrapper< MiniSLBoost > 
 {
  public:
-  MiniSLBoostWrapper( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" );
-  virtual ~MiniSLBoostWrapper();
+  NtupleWrapperMiniSLBoost( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" );
+  virtual ~NtupleWrapperMiniSLBoost();
 
 
  protected:
@@ -21,7 +21,7 @@ class MiniSLBoostWrapper : public NtupleWrapper< MiniSLBoost >
 
 };
 
-typedef NtupleWrapperPluginFactory< MiniSLBoostWrapper > NtupleWrapperPluginFactory_MiniSLBoost;
+typedef NtupleWrapperPluginFactory< NtupleWrapperMiniSLBoost > NtupleWrapperPluginFactory_MiniSLBoost;
 
 extern "C" {
   NtupleWrapperPluginFactory_MiniSLBoost * MakeNtupleWrapperPlugin();

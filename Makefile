@@ -13,8 +13,10 @@ PROJECT = MAMbo
 SOLIB   = lib$(PROJECT).so
 
 NTUPLE  = MiniSLBoost
+NTUPLESRC = NtupleWrapper$(NTUPLE).cxx
+NTUPLEOBJ = $(NTUPLESRC:.cxx=.o)
 TOOLS   = HelperFunctions PluginManager HistogramManager
-SRCS    = $(NTUPLE).cxx INtupleWrapper.cxx CutFlow.cxx $(TOOLS:=.cxx) $(NTUPLE)Wrapper.cxx
+SRCS    = $(NTUPLE).cxx INtupleWrapper.cxx CutFlow.cxx $(TOOLS:=.cxx) $(NTUPLESRC)
 OBJS    = ${SRCS:.cxx=.o}
 
 EXE     = runMAMbo
@@ -46,7 +48,7 @@ plugins:
 	$(LD) $(DEBUG) $(SOFLAGS) -c $(CUTFLOW).cxx
 	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(CUTFLOWLIB) $(CUTFLOW).o -ldl -o $(CUTFLOWLIB)
 
-	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(NTUPLELIB) $(NTUPLE)Wrapper.o -ldl -o $(NTUPLELIB)
+	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(NTUPLELIB) $(NTUPLEOBJ) -ldl -o $(NTUPLELIB)
 
 clean:
 	rm -rf *.o *.so $(EXE) 

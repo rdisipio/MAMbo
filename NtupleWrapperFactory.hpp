@@ -45,7 +45,7 @@ public:
   ////////////////////////////////////////////////
 
   void Dump() {
-    cout << "Registered ntuples:" << endl;
+    cout << "INFO: Registered ntuples:" << endl;
     for( NtupleConfiguratorsCollection_t::const_iterator itr = m_configurators.begin() ; itr != m_configurators.end() ; ++itr ) {
       cout << "* " << itr->first << endl;
     }

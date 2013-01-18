@@ -115,12 +115,12 @@ analysisParams.treeName.c_str() );
  
   const Long64_t nEntries = wrapper->GetEntries();
  
-  cout << "Event found in ntuple: " << nEntries << endl;
+  cout << "INFO: No. of events found in ntuple: " << nEntries << endl;
 
   if( globalArgs.eventMax == -1 ) globalArgs.eventMax = nEntries;
   if( globalArgs.eventMax > nEntries ) globalArgs.eventMax = nEntries;
 
-  cout << "Loop on " << globalArgs.eventMax << " events" << endl;
+  cout << "INFO: MAMbo will loop on " << globalArgs.eventMax << " events" << endl;
 
   wrapper->Loop( globalArgs.eventMax );
 

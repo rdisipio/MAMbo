@@ -14,7 +14,7 @@ void * PluginManager::LoadPlugin( const string& name )
 {
   if( name.empty() ) throw runtime_error( "Please specify plugin name\n" );
 
-  cout << "Looking for " << name << " ..." << endl;
+  cout << "DEBUG: Looking for " << name << " ..." << endl;
 
   void * handle = dlopen( name.c_str(), RTLD_LAZY );
   if( !handle ) throw runtime_error( "Cannot load plugin\n" );
