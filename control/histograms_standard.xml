@@ -1,0 +1,32 @@
+<histograms>
+<!-- 3 jets -->
+<TH1F name="njet3excl_nbtag0excl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet3excl_nbtag0excl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<TH1F name="njet3excl_nbtag1excl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet3excl_nbtag1excl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<TH1F name="njet3excl_nbtag2incl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet3excl_nbtag2incl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<!-- 4 jets -->
+<TH1F name="njet4excl_nbtag0excl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet4excl_nbtag0excl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<TH1F name="njet4excl_nbtag1excl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300."
+<TH1F name="njet4excl_nbtag1excl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<TH1F name="njet4excl_nbtag2incl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." />
+<TH1F name="njet4excl_nbtag2incl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<!-- 5 jets -->
+<TH1F name="njet5incl_nbtag0excl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet5incl_nbtag0excl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<TH1F name="njet5incl_nbtag1excl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet5incl_nbtag1excl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+<TH1F name="njet5incl_nbtag2incl_etmiss" title="Missing Transverse Energy [GeV]" nbins="60" xmin="0."   xmax="300." /> 
+<TH1F name="njet5incl_nbtag2incl_mtw" title="W Transverse Mass [GeV]"            nbins="50" xmin="0."   xmax="200." /> 
+
+</histograms>

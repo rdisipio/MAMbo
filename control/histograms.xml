@@ -1,0 +1,5 @@
+<histograms>
+  <TH1F name="jet_n" title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
+  <TH1F name="jet_pt" title="Jet p_{T}"  nbins="20" xmin="0."   xmax="1000." />
+  <TH1F name="fjet_pt" title="Fat Jet p_{T}"  nbins="10" edges="0.,300.,400.,500.,600.,700.,800.,900.,1000.,1100.,1500." />
+</histograms>

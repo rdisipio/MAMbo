@@ -1,0 +1,6 @@
+<analysis name="BoostedSL">
+  <branches>control/branch_list_MiniSLBoost.txt</branches>
+  <tree>mini</tree>
+  <histograms>control/histograms.xml</histograms>
+  <cutflow>BoostedSL</cutflow>
+</analysis>
