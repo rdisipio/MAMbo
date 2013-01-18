@@ -19,8 +19,8 @@ OBJS    = ${SRCS:.cxx=.o}
 
 EXE     = runMAMbo
 
-PLUGIN  = CutFlowBoostedSL
-SOPLIB  = lib$(PLUGIN).so
+PLUGIN     = CutFlowBoostedSL
+PLUGINLIB  = lib$(PLUGIN).so
 
 .SUFFIXES:
 .SUFFIXES: .o .cxx .C
@@ -42,7 +42,7 @@ $(EXE): $(EXE).o $(SOLIB)
 
 plugins: 
 	$(LD) $(DEBUG) $(SOFLAGS) -c $(PLUGIN).cxx
-	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(SOPLIB) $(PLUGIN).o -ldl -o $(SOLIB)
+	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(PLUGINLIB) $(PLUGIN).o -ldl -o $(PLUGINLIB)
 
 clean:
-	rm -rf *.o $(EXE) $(SOLIB)
+	rm -rf *.o *.so $(EXE) 
