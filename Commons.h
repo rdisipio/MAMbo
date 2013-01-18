@@ -31,7 +31,7 @@ using namespace std;
 #include <TH1F.h>
 #include <TH2F.h>
 #include <TDirectory.h>
-
+#include <TChain.h>
 
 /////////////////////////////////////////////
 

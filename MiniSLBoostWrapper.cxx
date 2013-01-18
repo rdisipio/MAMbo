@@ -112,3 +112,13 @@ bool MiniSLBoostWrapper::MakeEventJets( EventData * ed )
 
 
 /////////////////////////////////////////////
+
+
+/////////////////////////////////////////
+// Plugin
+
+extern "C" {
+  NtupleWrapperPluginFactory_MiniSLBoost * MakeNtupleWrapperPlugin() {
+    return new NtupleWrapperPluginFactory_MiniSLBoost( "MiniSLBoost" );
+  };
+}

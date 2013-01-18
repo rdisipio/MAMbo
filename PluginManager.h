@@ -7,6 +7,7 @@
 #include <map>
 
 #include "CutFlowFactory.hpp"
+#include "NtupleWrapperFactory.hpp"
 
 typedef map< string, string > PluginMap;
 typedef map< string, void* >  HandleMap;
@@ -19,6 +20,7 @@ public:
   static PluginManager * GetHandle();
 
   bool LoadCutFlowPlugin( const string& name );
+  bool LoadNtupleWrapperPlugin( const string& name );
 
  private:
   PluginManager() {};
@@ -28,7 +30,7 @@ public:
  private:
   HandleMap m_handles;
   PluginMap m_cutflows;
-  
+  PluginMap m_ntuples;
 };
 
 

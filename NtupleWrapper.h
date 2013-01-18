@@ -6,9 +6,7 @@
 #define MAKE_OBJECT(OBJ, ED) if( !MakeEvent##OBJ( ED ) ) throw runtime_error( "Cannot create " # OBJ )
 
 #include "INtupleWrapper.h"
-#include "MiniSLBoost.h"
-
-//typedef MiniSLBoost NTUPLE;
+#include "NtupleWrapperFactory.hpp"
 
 template <typename NTUPLE>
 class NtupleWrapper : public INtupleWrapper

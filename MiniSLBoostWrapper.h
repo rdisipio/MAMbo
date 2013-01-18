@@ -21,4 +21,10 @@ class MiniSLBoostWrapper : public NtupleWrapper< MiniSLBoost >
 
 };
 
+typedef NtupleWrapperPluginFactory< MiniSLBoostWrapper > NtupleWrapperPluginFactory_MiniSLBoost;
+
+extern "C" {
+  NtupleWrapperPluginFactory_MiniSLBoost * MakeNtupleWrapperPlugin();
+}
+
 #endif /** __MINISLBOOST_WRAPPER_H__ */

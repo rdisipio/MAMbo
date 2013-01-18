@@ -19,8 +19,10 @@ OBJS    = ${SRCS:.cxx=.o}
 
 EXE     = runMAMbo
 
-PLUGIN     = CutFlowBoostedSL
-PLUGINLIB  = lib$(PLUGIN).so
+CUTFLOW     = CutFlowBoostedSL
+CUTFLOWLIB  = lib$(CUTFLOW).so
+
+NTUPLELIB   = libNtupleWrapper$(NTUPLE).so
 
 .SUFFIXES:
 .SUFFIXES: .o .cxx .C
@@ -41,8 +43,10 @@ $(EXE): $(EXE).o $(SOLIB)
 
 
 plugins: 
-	$(LD) $(DEBUG) $(SOFLAGS) -c $(PLUGIN).cxx
-	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(PLUGINLIB) $(PLUGIN).o -ldl -o $(PLUGINLIB)
+	$(LD) $(DEBUG) $(SOFLAGS) -c $(CUTFLOW).cxx
+	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(CUTFLOWLIB) $(CUTFLOW).o -ldl -o $(CUTFLOWLIB)
+
+	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$(NTUPLELIB) $(NTUPLE)Wrapper.o -ldl -o $(NTUPLELIB)
 
 clean:
 	rm -rf *.o *.so $(EXE) 

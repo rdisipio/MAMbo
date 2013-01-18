@@ -11,7 +11,6 @@ using namespace std;
 #include "CutFlowFactory.hpp"
 #include "PluginManager.h"
 
-#include "MiniSLBoostWrapper.h"
 
 /////////////////////////////
 
@@ -31,6 +30,7 @@ struct analysisParams_t {
   string cutflowName;
   string treeName;
   string branchFileName;
+  string ntupleName;
 } analysisParams;
 
 
@@ -84,6 +84,10 @@ int main( int argc, char ** argv )
       analysisParams.branchFileName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
 	//string( (const char*) nodeParam->children->name );
     }
+    else if( xmlStrEqual( nodeParam->name, BAD_CAST "ntuple" ) ) {
+      analysisParams.ntupleName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
+    }
+
   }
   xmlFreeDoc( doc );
   // XML config
@@ -93,8 +97,14 @@ int main( int argc, char ** argv )
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
   CF_Factory->Dump();
+ 
+  pluginManager->LoadNtupleWrapperPlugin( analysisParams.ntupleName );
+  NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
+  NW_Factory->Dump();
 
-  MiniSLBoostWrapper * wrapper = new MiniSLBoostWrapper( globalArgs.listFileName, analysisParams.branchFileName.c_str(), analysisParams.treeName.c_str() );
+  INtupleWrapper * wrapper = NW_Factory->Create( analysisParams.ntupleName, globalArgs.listFileName, analysisParams.branchFileName.c_str(), 
+analysisParams.treeName.c_str() ); 
+//  MiniSLBoostWrapper * wrapper = new MiniSLBoostWrapper( globalArgs.listFileName, analysisParams.branchFileName.c_str(), analysisParams.treeName.c_str() );
 
   if( !wrapper->AddCutFlow( analysisParams.cutflowName ) )
     throw runtime_error( "Cannot add cutflow\n" );

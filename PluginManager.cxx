@@ -47,3 +47,28 @@ bool PluginManager::LoadCutFlowPlugin( const string& name )
 
   return success;
 }
+
+
+///////////////////////////////////
+
+
+bool PluginManager::LoadNtupleWrapperPlugin( const string& name )
+{
+  bool success = true;
+
+  char libNtupleWrapperFileName[128];
+  sprintf( libNtupleWrapperFileName,  "%s/libNtupleWrapper%s.so", getenv( "PWD" ), name.c_str() );
+  void* handle = LoadPlugin( libNtupleWrapperFileName );
+
+  INtupleWrapperPluginFactory * pluginFactory     = NULL;
+
+  fp_MakeNtupleWrapperPlugin    MakeNtupleWrapperPlugin = (fp_MakeNtupleWrapperPlugin)dlsym( handle, "MakeNtupleWrapperPlugin" );
+  if( !MakeNtupleWrapperPlugin ) throw runtime_error( "Invalid pointer to function to create ntuple wrapper plugin\n" );
+
+  pluginFactory = MakeNtupleWrapperPlugin();
+
+  pluginFactory->Register();
+
+  return success;
+}
+

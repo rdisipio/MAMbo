@@ -1,4 +1,5 @@
 <analysis name="BoostedSL">
+  <ntuple>MiniSLBoost</ntuple>
   <branches>control/branch_list_MiniSLBoost.txt</branches>
   <tree>mini</tree>
   <histograms>control/histograms.xml</histograms>
