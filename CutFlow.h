@@ -6,6 +6,9 @@
 #include "EventData.h"
 #include "HistogramManager.h"
 
+class CutFlow;
+typedef map< string, CutFlow * > CutFlowCollection_t;
+
 class CutFlow
 {
  public:
@@ -26,3 +29,4 @@ class CutFlow
 };
 
 #endif /** __CUTFLOW_H__ */
+

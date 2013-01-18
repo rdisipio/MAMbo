@@ -14,7 +14,7 @@ SOLIB   = lib$(PROJECT).so
 
 NTUPLE  = MiniSLBoost
 TOOLS   = HelperFunctions PluginManager HistogramManager
-SRCS    = $(NTUPLE).cxx NtupleWrapper.cxx EventMaker.cxx CutFlow.cxx $(TOOLS:=.cxx)
+SRCS    = $(NTUPLE).cxx INtupleWrapper.cxx CutFlow.cxx $(TOOLS:=.cxx) $(NTUPLE)Wrapper.cxx
 OBJS    = ${SRCS:.cxx=.o}
 
 EXE     = runMAMbo

@@ -8,21 +8,26 @@
 #define GET_VALUE_ARRAY(X,N) m_ntuple-> X ->at( N )
 #define MAKE_OBJECT(OBJ, ED) if( !Make##OBJ( ED ) ) throw runtime_error( "Cannot create " # OBJ )
 
-typedef MiniSLBoost NTUPLE;
+//typedef MiniSLBoost NTUPLE;
 
+template <typename NTUPLE>
 class EventMaker 
 {
  public:
-  static EventMaker * GetHandle();
+  static EventMaker * GetHandle() {
+    static EventMaker< NTUPLE > instance;
 
-  virtual ~EventMaker();
+    return &instance;
+  }
+
+  virtual ~EventMaker() {};
   
   virtual bool SetNtuple( NTUPLE * ntuple );
    
   virtual EventData * MakeEvent( Long64_t i );
 
  protected:
-   EventMaker();
+  EventMaker() : m_ntuple(NULL) {};
 
    virtual bool MakeInfo( EventData * ed );
    virtual bool MakeMET( EventData * ed );

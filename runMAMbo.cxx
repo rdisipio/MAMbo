@@ -1,18 +1,17 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include <dlfcn.h>
-
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
 using namespace std;
 
-#include "NtupleWrapper.h"
 #include "HistogramManager.h"
 #include "CutFlowFactory.hpp"
 #include "PluginManager.h"
+
+#include "MiniSLBoostWrapper.h"
 
 /////////////////////////////
 
@@ -91,13 +90,11 @@ int main( int argc, char ** argv )
   
   PluginManager * pluginManager = PluginManager::GetHandle();
   pluginManager->LoadCutFlowPlugin( analysisParams.cutflowName );
-  
-  
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
   CF_Factory->Dump();
 
-  NtupleWrapper * wrapper = new NtupleWrapper( globalArgs.listFileName, analysisParams.branchFileName.c_str(), analysisParams.treeName.c_str() );
+  MiniSLBoostWrapper * wrapper = new MiniSLBoostWrapper( globalArgs.listFileName, analysisParams.branchFileName.c_str(), analysisParams.treeName.c_str() );
 
   if( !wrapper->AddCutFlow( analysisParams.cutflowName ) )
     throw runtime_error( "Cannot add cutflow\n" );

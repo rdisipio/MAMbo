@@ -16,7 +16,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed, int * lastCutPassed )
 {
   bool success = true;
 
-  Start();
+  CutFlow::Start();
 
   double weight = ed->info.mcWeight;
 

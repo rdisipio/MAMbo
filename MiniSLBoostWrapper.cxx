@@ -1,73 +1,22 @@
-#include "EventMaker.h"
+#include "MiniSLBoostWrapper.h"
 
-EventMaker * EventMaker::GetHandle()
+MiniSLBoostWrapper::MiniSLBoostWrapper( const char * fileListName, const char * branchListName, const char * treeName ) : 
+  NtupleWrapper< MiniSLBoost >( fileListName, branchListName, treeName )
 {
-  static EventMaker instance;
-
-  return &instance;
 }
-
 
 /////////////////////////////////////////////
 
 
-EventMaker::EventMaker() : m_ntuple(NULL)
+MiniSLBoostWrapper::~MiniSLBoostWrapper()
 {
 
 }
 
-
 /////////////////////////////////////////////
 
 
-EventMaker::~EventMaker()
-{
-
-}
-
-
-/////////////////////////////////////////////
-
-
-bool EventMaker::SetNtuple( NTUPLE * ntuple )
-{
-  bool success = true;
-
-  m_ntuple = ntuple;
-
-  if( !m_ntuple ) return !success;
-
-  return success;
-}
-
-
-/////////////////////////////////////////////
-
-
-EventData * EventMaker::MakeEvent( Long64_t i )
-{
-  EventData * ed = new EventData();
-
-  Long64_t j = m_ntuple->LoadTree( i );
-
-  if( j < 0 ) throw runtime_error( "Cannot load tree\n" );
-
-  m_ntuple->GetEntry( i );
-
-  MAKE_OBJECT( Info, ed );
-  MAKE_OBJECT( MET, ed );
-  MAKE_OBJECT( Electrons, ed );
-  MAKE_OBJECT( Muons, ed );
-  MAKE_OBJECT( Jets, ed );
-    
-  return ed;
-}
-
-
-/////////////////////////////////////////////
-
-
-bool EventMaker::MakeInfo( EventData * ed )
+bool MiniSLBoostWrapper::MakeEventInfo( EventData * ed )
 {
   bool success = true;
 
@@ -84,7 +33,7 @@ bool EventMaker::MakeInfo( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool EventMaker::MakeMET( EventData * ed )
+bool MiniSLBoostWrapper::MakeEventMET( EventData * ed )
 {
   bool success = true;
 
@@ -101,7 +50,7 @@ bool EventMaker::MakeMET( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool EventMaker::MakeElectrons( EventData * ed )
+bool MiniSLBoostWrapper::MakeEventElectrons( EventData * ed )
 {
   bool success = true;
 
@@ -125,7 +74,7 @@ bool EventMaker::MakeElectrons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool EventMaker::MakeMuons( EventData * ed )
+bool MiniSLBoostWrapper::MakeEventMuons( EventData * ed )
 {
   bool success = true;
 
@@ -136,7 +85,7 @@ bool EventMaker::MakeMuons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool EventMaker::MakeJets( EventData * ed )
+bool MiniSLBoostWrapper::MakeEventJets( EventData * ed )
 {
   bool success = true;
   

@@ -11,8 +11,9 @@ CutFlow * CreateCutFlow() {
   //config?
   return cf;
 };
+
 typedef CutFlow* (*fp_CreateCutFlow)();
-typedef map< string, fp_CreateCutFlow > CutFlowConfiguratorsCollection;
+typedef map< string, fp_CreateCutFlow > CutFlowConfiguratorsCollection_t;
 
 class CutFlowFactory
 {
@@ -46,7 +47,7 @@ class CutFlowFactory
 
     void Dump() {
        cout << "Registered cut flows:" << endl;
-       for( CutFlowConfiguratorsCollection::const_iterator itr = m_configurators.begin() ; itr != m_configurators.end() ; ++itr ) {
+       for( CutFlowConfiguratorsCollection_t::const_iterator itr = m_configurators.begin() ; itr != m_configurators.end() ; ++itr ) {
           cout << "* " << itr->first << endl;
        }
        cout << endl;
@@ -56,7 +57,7 @@ private:
   CutFlowFactory() {};
     
 private:
-  CutFlowConfiguratorsCollection m_configurators;
+  CutFlowConfiguratorsCollection_t m_configurators;
 };
 
 
