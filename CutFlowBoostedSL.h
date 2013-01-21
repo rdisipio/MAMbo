@@ -1,7 +1,7 @@
 #ifndef __CF_BOOSTED_SL_H__
 #define __CF_BOOSTED_SL_H__
 
-#include "CutFlow.h"
+#include "ICutFlow.h"
 
 class CutFlowBoostedSL : public CutFlow
 {

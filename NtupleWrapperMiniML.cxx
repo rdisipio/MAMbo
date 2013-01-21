@@ -1,14 +1,14 @@
-#include "NtupleWrapper@NAME@.h"
+#include "NtupleWrapperMiniML.h"
 
-NtupleWrapper@NAME@::NtupleWrapper@NAME@( const char * fileListName, const char * branchListName, const char * treeName ) : 
-  NtupleWrapper< @NAME@ >( fileListName, branchListName, treeName )
+NtupleWrapperMiniML::NtupleWrapperMiniML( const char * fileListName, const char * branchListName, const char * treeName ) : 
+  NtupleWrapper< MiniML >( fileListName, branchListName, treeName )
 {
 }
 
 /////////////////////////////////////////////
 
 
-NtupleWrapper@NAME@::~NtupleWrapper@NAME@()
+NtupleWrapperMiniML::~NtupleWrapperMiniML()
 {
 
 }
@@ -16,7 +16,7 @@ NtupleWrapper@NAME@::~NtupleWrapper@NAME@()
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventInfo( EventData * ed )
+bool NtupleWrapperMiniML::MakeEventInfo( EventData * ed )
 {
   bool success = true;
 
@@ -33,7 +33,7 @@ bool NtupleWrapper@NAME@::MakeEventInfo( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventMET( EventData * ed )
+bool NtupleWrapperMiniML::MakeEventMET( EventData * ed )
 {
   bool success = true;
 
@@ -50,7 +50,7 @@ bool NtupleWrapper@NAME@::MakeEventMET( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventElectrons( EventData * ed )
+bool NtupleWrapperMiniML::MakeEventElectrons( EventData * ed )
 {
   bool success = true;
 
@@ -74,7 +74,7 @@ bool NtupleWrapper@NAME@::MakeEventElectrons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventMuons( EventData * ed )
+bool NtupleWrapperMiniML::MakeEventMuons( EventData * ed )
 {
   bool success = true;
 
@@ -85,7 +85,7 @@ bool NtupleWrapper@NAME@::MakeEventMuons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventJets( EventData * ed )
+bool NtupleWrapperMiniML::MakeEventJets( EventData * ed )
 {
   bool success = true;
 
@@ -120,7 +120,7 @@ bool NtupleWrapper@NAME@::MakeEventJets( EventData * ed )
 // Plugin
 
 extern "C" {
-  NtupleWrapperPluginFactory_@NAME@ * MakeNtupleWrapperPlugin() {
-    return new NtupleWrapperPluginFactory_@NAME@( "@NAME@" );
+  NtupleWrapperPluginFactory_MiniML * MakeNtupleWrapperPlugin() {
+    return new NtupleWrapperPluginFactory_MiniML( "MiniML" );
   };
 }

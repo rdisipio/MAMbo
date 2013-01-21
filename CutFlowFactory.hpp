@@ -1,7 +1,7 @@
 #ifndef __CUTFLOW_FACTORY_H__
 #define __CUTFLOW_FACTORY_H__
 
-#include "CutFlow.h"
+#include "ICutFlow.h"
 
 class CutFlow;
 

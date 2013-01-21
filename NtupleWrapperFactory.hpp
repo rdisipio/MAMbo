@@ -65,6 +65,8 @@ private:
 // Plugin
 //////////////////////////////////////////////
 
+#ifndef __NTUP_PLUGIN_FACTORY__
+#define __NTUP_PLUGIN_FACTORY__
 
 class INtupleWrapperPluginFactory {
  public:
@@ -97,6 +99,6 @@ class NtupleWrapperPluginFactory : public INtupleWrapperPluginFactory {
     };
 };
 
-
+#endif /** __NTUP_PLUGIN_FACTORY__ */
 
 #endif /** __NTUPLE_FACTORY_HPP__ */

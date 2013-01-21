@@ -1,13 +1,13 @@
 #ifndef __CF_@NAME@_H__
 #define __CF_@NAME@_H__
 
-#include "CutFlow.h"
+#include "ICutFlow.h"
 
 class CutFlow@NAME@ : public CutFlow
 {
  public:
   CutFlow@NAME@();
-  virtual ~CutFlow@NAME();
+  virtual ~CutFlow@NAME@();
 
   virtual bool Apply( EventData * ed, int * lastCutPassed = NULL );
 

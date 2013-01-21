@@ -1,4 +1,4 @@
-#include "CutFlow.h"
+#include "ICutFlow.h"
 
 CutFlow::CutFlow( const string& name ) : m_name( name ), m_hm(NULL)
 {
