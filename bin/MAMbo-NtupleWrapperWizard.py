@@ -6,7 +6,7 @@ import os
 import optparse
 import shutil
 
-shareDir = os.environ["MAMBODIR"] + "/share/"
+shareDir = os.environ["MAMBODIR"] + "/share/templates/"
 templateWHeader = open( shareDir + "NtupleWrapperTEMPLATE.h", 'r' ).read()
 templateWSrc    = open( shareDir + "NtupleWrapperTEMPLATE.cxx", 'r' ).read()
 

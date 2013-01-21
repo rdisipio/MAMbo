@@ -33,7 +33,7 @@ bool PluginManager::LoadCutFlowPlugin( const string& name )
   bool success = true;
 
   char libCutFlowFileName[128];
-  sprintf( libCutFlowFileName,  "%s/libCutFlow%s.so", getenv( "PWD" ), name.c_str() );
+  sprintf( libCutFlowFileName,  "%s/lib/libCutFlow%s.so", getenv( "MAMBODIR" ), name.c_str() );
   void* handle = LoadPlugin( libCutFlowFileName );
   
   ICutFlowPluginFactory * pluginFactory     = NULL;
@@ -57,7 +57,7 @@ bool PluginManager::LoadNtupleWrapperPlugin( const string& name )
   bool success = true;
 
   char libNtupleWrapperFileName[128];
-  sprintf( libNtupleWrapperFileName,  "%s/libNtupleWrapper%s.so", getenv( "PWD" ), name.c_str() );
+  sprintf( libNtupleWrapperFileName,  "%s/lib/libNtupleWrapper%s.so", getenv( "MAMBODIR" ), name.c_str() );
   void* handle = LoadPlugin( libNtupleWrapperFileName );
 
   INtupleWrapperPluginFactory * pluginFactory     = NULL;
