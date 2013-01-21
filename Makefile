@@ -15,7 +15,7 @@ SOLIB   = lib$(PROJECT).so
 NTUPLE  = MiniSLBoost
 NTUPLESRC = NtupleWrapper$(NTUPLE).cxx
 NTUPLEOBJ = $(NTUPLESRC:.cxx=.o)
-TOOLS   = HelperFunctions PluginManager HistogramManager
+TOOLS   = HelperFunctions PluginManager HistogramManager ConfigManager
 SRCS    = $(NTUPLE).cxx INtupleWrapper.cxx CutFlow.cxx $(TOOLS:=.cxx) $(NTUPLESRC)
 OBJS    = ${SRCS:.cxx=.o}
 

@@ -1,16 +1,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-
 using namespace std;
 
 #include "HistogramManager.h"
 #include "CutFlowFactory.hpp"
 #include "PluginManager.h"
-
+#include "ConfigManager.h"
 
 /////////////////////////////
 
@@ -23,15 +19,6 @@ struct globalArgs_t {
 } globalArgs;
 
 static const char * options = "p:o:f:b:t:n:vh?";
-
-
-struct analysisParams_t {
-  string histoFileName;
-  string cutflowName;
-  string treeName;
-  string branchFileName;
-  string ntupleName;
-} analysisParams;
 
 
 /////////////////////////////
@@ -68,28 +55,9 @@ int main( int argc, char ** argv )
   }
 
   // XML config
-  xmlDocPtr doc = xmlParseFile( globalArgs.paramsFileName );
-  xmlNodePtr nodeRoot = doc->children;
-  for( xmlNodePtr nodeParam = nodeRoot->children; nodeParam != NULL; nodeParam = nodeParam->next ) {
-    if( xmlStrEqual( nodeParam->name, BAD_CAST "histograms" ) ) {
-      analysisParams.histoFileName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
-    }
-    else if( xmlStrEqual( nodeParam->name, BAD_CAST "cutflow" ) ) {
-      analysisParams.cutflowName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
-    }
-    else if( xmlStrEqual( nodeParam->name, BAD_CAST "tree" ) ) {
-      analysisParams.treeName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
-    }
-    else if( xmlStrEqual( nodeParam->name, BAD_CAST "branches" ) ) {
-      analysisParams.branchFileName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
-	//string( (const char*) nodeParam->children->name );
-    }
-    else if( xmlStrEqual( nodeParam->name, BAD_CAST "ntuple" ) ) {
-      analysisParams.ntupleName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
-    }
-
-  }
-  xmlFreeDoc( doc );
+  AnalysisParams_t analysisParams;
+  ConfigManager * configManager = ConfigManager::GetHandle();
+  configManager->Configure( globalArgs.paramsFileName, analysisParams );
   // XML config
   
   PluginManager * pluginManager = PluginManager::GetHandle();
@@ -102,9 +70,10 @@ int main( int argc, char ** argv )
   NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
   NW_Factory->Dump();
 
-  INtupleWrapper * wrapper = NW_Factory->Create( analysisParams.ntupleName, globalArgs.listFileName, analysisParams.branchFileName.c_str(), 
-analysisParams.treeName.c_str() ); 
-//  MiniSLBoostWrapper * wrapper = new MiniSLBoostWrapper( globalArgs.listFileName, analysisParams.branchFileName.c_str(), analysisParams.treeName.c_str() );
+  INtupleWrapper * wrapper = NW_Factory->Create( analysisParams.ntupleName, 
+						 globalArgs.listFileName, 
+						 analysisParams.branchFileName.c_str(), 
+						 analysisParams.treeName.c_str() ); 
 
   if( !wrapper->AddCutFlow( analysisParams.cutflowName ) )
     throw runtime_error( "Cannot add cutflow\n" );
