@@ -1,0 +1,13 @@
+<analysis name="LeptonFakeRate">
+  <ntuple>MiniML</ntuple>
+  <branches>control/branch_list_MiniML.txt</branches>
+  <tree>mini</tree>
+  <histograms>control/histograms_fakerate.xml</histograms>
+  <cutflow>FakeRateZjet</cutflow>
+  <cuts>
+    <param name="j1pTmin"     value="200" />
+    <param name="j2pTmax"     value="30" />
+    <param name="ZmassWindow" value="15" />
+    <param name="ZpTmin"      value="200" />
+  </cuts>
+</analysis>

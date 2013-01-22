@@ -89,7 +89,7 @@ int main( int argc, char ** argv )
   if( globalArgs.eventMax == -1 ) globalArgs.eventMax = nEntries;
   if( globalArgs.eventMax > nEntries ) globalArgs.eventMax = nEntries;
 
-  cout << "INFO: MAMbo will loop on " << globalArgs.eventMax << " events" << endl;
+  cout << "INFO: MAMbo will loop on " << globalArgs.eventMax << " (unweighted) events" << endl;
 
   wrapper->Loop( globalArgs.eventMax );
 

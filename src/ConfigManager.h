@@ -17,6 +17,7 @@ struct AnalysisParams_t {
   string treeName;
   string branchFileName;
   string ntupleName;
+  map< string, double > cuts;
 };
 
 
@@ -31,9 +32,12 @@ class ConfigManager
 
   bool Configure( const char * configFileName, AnalysisParams_t& analysisParams );
 
+  inline AnalysisParams_t  * GetConfiguration() { return &m_params; };
+
  private:
   ConfigManager();
 
+  AnalysisParams_t m_params;
 };
 
 #endif /** __CONFIGMANAGER_H__ */

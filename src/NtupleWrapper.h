@@ -2,7 +2,8 @@
 #define __NTUP_TOP_WRAPPER_H__
 
 #define GET_VALUE(X) m_ntuple-> X
-#define GET_VALUE_ARRAY(X,N) m_ntuple-> X ->at( N )
+#define GET_VALUE_VECTOR(X,N) m_ntuple-> X ->at( N )
+#define GET_VALUE_ARRAY(X,N) m_ntuple-> X[N]
 #define MAKE_OBJECT(OBJ, ED) if( !MakeEvent##OBJ( ED ) ) throw runtime_error( "Cannot create " # OBJ )
 
 #include "INtupleWrapper.h"

@@ -16,6 +16,7 @@ struct EventData
     double   mu;
     int      hfor;
     float    MC_vxp_z;
+    double   eventWeight;
   } info;
 
   struct Lepton_t { 

@@ -73,26 +73,26 @@ public :
    UInt_t          channel_TTZ;
    Float_t         scaledWeight;
    UInt_t          lep_n;
-   Bool_t          lep_truthMatched[2];   //[lep_n]
-   Bool_t          lep_trigMatched[2];   //[lep_n]
-   Float_t         lep_pt[2];   //[lep_n]
-   Float_t         lep_eta[2];   //[lep_n]
-   Float_t         lep_phi[2];   //[lep_n]
-   Float_t         lep_E[2];   //[lep_n]
-   Float_t         lep_z0[2];   //[lep_n]
-   Float_t         lep_charge[2];   //[lep_n]
-   Bool_t          lep_isTight[2];   //[lep_n]
-   UInt_t          lep_type[2];   //[lep_n]
-   UInt_t          lep_flag[2];   //[lep_n]
-   Float_t         el_cl_eta[2];   //[lep_n]
-   Float_t         lep_ptcone30[2];   //[lep_n]
-   Float_t         lep_etcone20[2];   //[lep_n]
-   Float_t         lep_miniIso10_4[2];   //[lep_n]
-   Float_t         massTrans_LMet_Vec[2];   //[lep_n]
+   Bool_t          lep_truthMatched[5];   //[lep_n]
+   Bool_t          lep_trigMatched[5];   //[lep_n]
+   Float_t         lep_pt[5];   //[lep_n]
+   Float_t         lep_eta[5];   //[lep_n]
+   Float_t         lep_phi[5];   //[lep_n]
+   Float_t         lep_E[5];   //[lep_n]
+   Float_t         lep_z0[5];   //[lep_n]
+   Float_t         lep_charge[5];   //[lep_n]
+   Bool_t          lep_isTight[5];   //[lep_n]
+   UInt_t          lep_type[5];   //[lep_n]
+   UInt_t          lep_flag[5];   //[lep_n]
+   Float_t         el_cl_eta[5];   //[lep_n]
+   Float_t         lep_ptcone30[5];   //[lep_n]
+   Float_t         lep_etcone20[5];   //[lep_n]
+   Float_t         lep_miniIso10_4[5];   //[lep_n]
+   Float_t         massTrans_LMet_Vec[5];   //[lep_n]
    UInt_t          lepPair_n;
-   Bool_t          isSameFlavor_LL_Vec[1];   //[lepPair_n]
-   Bool_t          isOppSign_LL_Vec[1];   //[lepPair_n]
-   Float_t         massInv_LL_Vec[1];   //[lepPair_n]
+   Bool_t          isSameFlavor_LL_Vec[5];   //[lepPair_n]
+   Bool_t          isOppSign_LL_Vec[5];   //[lepPair_n]
+   Float_t         massInv_LL_Vec[5];   //[lepPair_n]
    Float_t         met_sumet;
    Float_t         met_et;
    Float_t         met_phi;
@@ -215,16 +215,6 @@ public :
 #ifdef MiniML_cxx
 MiniML::MiniML(TTree *tree) : fChain(0) 
 {
-// if parameter tree is not specified (or zero), connect the file
-// used to generate this class and read the Tree.
-   if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/ATLAS/disipio/development/BoostedTops/runD3PD/MiniML/ML_2D.root");
-      if (!f || !f->IsOpen()) {
-         f = new TFile("/home/ATLAS/disipio/development/BoostedTops/runD3PD/MiniML/ML_2D.root");
-      }
-      f->GetObject("mini",tree);
-
-   }
    Init(tree);
 }
 
