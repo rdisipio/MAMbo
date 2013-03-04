@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-NTUPLES  = MiniSLBoost MiniML
+NTUPLES  = MiniSLBoost MiniML NTUPTOP
 NTUPLESRC = $(foreach NTUPLE, $(NTUPLES), NtupleWrapper$(NTUPLE).cxx)
 NTUPLEOBJ = $(NTUPLESRC:.cxx=.o)
 NTUPLELIB   = $(foreach NTUPLE, $(NTUPLES), libNtupleWrapper$(NTUPLE).so )

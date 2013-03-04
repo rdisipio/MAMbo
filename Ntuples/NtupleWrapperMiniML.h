@@ -18,7 +18,7 @@ class NtupleWrapperMiniML : public NtupleWrapper< MiniML >
   virtual bool MakeEventElectrons( EventData * ed );
   virtual bool MakeEventMuons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
-
+  virtual bool MakeEventTruth( EventData * ed ) { return true; };
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperMiniML > NtupleWrapperPluginFactory_MiniML;

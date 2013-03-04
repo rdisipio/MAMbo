@@ -97,15 +97,17 @@ bool NtupleWrapperMiniSLBoost::MakeEventJets( EventData * ed )
     ed->jets.E.push_back(   m_ntuple->jet_E[i]   );
   }
 
-  ed->fjet.n   = m_ntuple->fjet_n;
-  ed->fjet.pT  = m_ntuple->fjet_pt[0];
-  ed->fjet.eta = m_ntuple->fjet_eta[0];
-  ed->fjet.phi = m_ntuple->fjet_phi[0];
-  ed->fjet.E   = m_ntuple->fjet_E[0];
+  ed->fjets.n = GET_VALUE( jet_n );
+  for( int i = 0 ; i < ed->jets.n ; ++i ) {
+    ed->fjets.pT.push_back(  m_ntuple->jet_pt[i]  );
+    ed->fjets.eta.push_back( m_ntuple->jet_eta[i] );
+    ed->fjets.phi.push_back( m_ntuple->jet_phi[i] );
+    ed->fjets.E.push_back(   m_ntuple->jet_E[i]   );
 
-  ed->fjet.d12     =  m_ntuple->fjet_d12[0];
-  ed->fjet.dR_lj   =  m_ntuple->fjet_DeltaPhi_Lap_FatJet[0];
-  ed->fjet.dPhi_lj =  m_ntuple->fjet_DeltaR_LapJet_Fatjet[0];
+    ed->fjets.d12.push_back( m_ntuple->fjet_d12[i] );
+    ed->fjets.dR_lj.push_back( m_ntuple->fjet_DeltaPhi_Lap_FatJet[i] );
+    ed->fjets.dPhi_lj.push_back( m_ntuple->fjet_DeltaR_LapJet_Fatjet[i] );
+  }
 
   return success;
 }
