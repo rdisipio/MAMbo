@@ -4,6 +4,7 @@
 #define GET_VALUE(X) m_ntuple-> X
 #define GET_VALUE_VECTOR(X,N) m_ntuple-> X ->at( N )
 #define GET_VALUE_ARRAY(X,N) m_ntuple-> X[N]
+#define CHECK_TRIGGER(T) if( GET_VALUE( T ) ) ed->trigger[ #T ] = 1
 #define MAKE_OBJECT(OBJ, ED) if( !MakeEvent##OBJ( ED ) ) throw runtime_error( "Cannot create " # OBJ )
 
 #include "INtupleWrapper.h"
@@ -104,6 +105,7 @@ class NtupleWrapper : public INtupleWrapper
       m_ntuple->GetEntry( i );
   
       MAKE_OBJECT( Info, ed );
+      MAKE_OBJECT( Trigger, ed );
       MAKE_OBJECT( MET, ed );
       MAKE_OBJECT( Electrons, ed );
       MAKE_OBJECT( Muons, ed );
@@ -115,6 +117,7 @@ class NtupleWrapper : public INtupleWrapper
 
       
     virtual bool MakeEventInfo( EventData * ed )      { return true; };
+    virtual bool MakeEventTrigger( EventData * ed )   { return true; };
     virtual bool MakeEventMET( EventData * ed )       { return true; };
     virtual bool MakeEventElectrons( EventData * ed ) { return true; };
     virtual bool MakeEventMuons( EventData * ed )     { return true; };

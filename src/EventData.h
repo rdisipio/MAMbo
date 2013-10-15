@@ -100,6 +100,7 @@ struct EventData
     double sumet;
   } MET;
 
+  map< string, int > trigger;
   map< string, double > property;
 };
 

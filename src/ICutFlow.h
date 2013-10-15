@@ -32,5 +32,7 @@ class CutFlow
    AnalysisParams_t * m_config;
 };
 
+#define PASSED_TRIGGER(T) ( ed->trigger[ T ] == 1 )
+
 #endif /** __CUTFLOW_H__ */
 

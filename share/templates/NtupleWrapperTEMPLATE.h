@@ -14,6 +14,7 @@ class NtupleWrapper@NAME@ : public NtupleWrapper< @NAME@ >
 
  protected:
   virtual bool MakeEventInfo( EventData * ed );
+  virtual bool MakeEventTrigger( EventData * ed );
   virtual bool MakeEventMET( EventData * ed );
   virtual bool MakeEventElectrons( EventData * ed );
   virtual bool MakeEventMuons( EventData * ed );

@@ -20,11 +20,22 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
 
   //// example:
   double weight = ed->info.mcWeight;
+  /*
   if( fabs(weight) > 10. ) {
     cout << "WARNING: very large event weight = " << weight << " re-set to zero" << endl;
     weight = 0.;
   }
+  */
   // m_hm->GetHistogram( "fjet_pt" )->Fill( ed->fjet.pT / GeV, weight );
+
+  if( !( PASSED_TRIGGER( "EF_e24vhi_medium1" ) || 
+	 PASSED_TRIGGER( "EF_e24vhi_medium1" ) ||
+	 PASSED_TRIGGER( "EF_e60_medium1" ) ||
+	 PASSED_TRIGGER( "EF_mu24i_tight" ) ) )
+      return success;
+
+  PassedCut( weight );
+  
 
   double ETmiss = ed->MET.et;
   if( ETmiss == 0. ) ETmiss = -1e10;
@@ -39,7 +50,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "el_pt" )->Fill( ed->electrons.pT.at( j ) / GeV, weight );
     m_hm->GetHistogram( "el_eta" )->Fill( ed->electrons.eta.at( j ), weight );
     m_hm->GetHistogram( "el_phi" )->Fill( ed->electrons.phi.at( j ), weight );
-    // m_hm->GetHistogram( "el_E" )->Fill( ed->electrons.E.at( j ) / GeV, weight );
+    m_hm->GetHistogram( "el_E" )->Fill( ed->electrons.E.at( j ) / GeV, weight );
   }
   
   m_hm->GetHistogram( "mu_n" )->Fill( mu_n, weight );
@@ -47,7 +58,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "mu_pt" )->Fill( ed->muons.pT.at( j ) / GeV, weight );
     m_hm->GetHistogram( "mu_eta" )->Fill( ed->muons.eta.at( j ), weight );
     m_hm->GetHistogram( "mu_phi" )->Fill( ed->muons.phi.at( j ), weight );
-    //m_hm->GetHistogram( "mu_E" )->Fill( ed->muons.E.at( j ) / GeV, weight );
+    m_hm->GetHistogram( "mu_E" )->Fill( ed->muons.E.at( j ) / GeV, weight );
   }
 
   m_hm->GetHistogram( "jet_n" )->Fill( jet_n, weight );

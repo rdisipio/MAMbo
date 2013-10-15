@@ -33,6 +33,19 @@ bool NtupleWrapper@NAME@::MakeEventInfo( EventData * ed )
 /////////////////////////////////////////////
 
 
+bool NtupleWrapper@NAME@::MakeEventTrigger( EventData * ed )
+{ 
+  bool success = true;
+
+// CHECK_TRIGGER( "EF_mu18i" );
+
+  return success;
+}
+
+
+/////////////////////////////////////////////
+
+
 bool NtupleWrapper@NAME@::MakeEventMET( EventData * ed )
 {
   bool success = true;
