@@ -1,6 +1,12 @@
 include ../Makefile.inc
 
-CUTFLOWS     = BoostedSL FakeRateZjet FakeRateZel FakeRateZfjet
+# modify the following line CUTFLOWS = ... according to your needs
+# to add more ntuples, lauch bin/
+CUTFLOWS      = TTHTo2LeptonsSS
+#CUTFLOWS     = BoostedSL FakeRateZjet FakeRateZel FakeRateZfjet
+
+# do not change what follows unless you know what you're doing
+
 CUTFLOWSSRCS = $(foreach CF, $(CUTFLOWS), CutFlow$(CF).cxx)
 CUTFLOWLIBS  = $(foreach CF, $(CUTFLOWS), lib$(CF).so)
 
