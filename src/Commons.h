@@ -10,6 +10,7 @@
 
 /////////////////////////////////////////////
 
+#include <math.h>
 
 #include <iostream>
 #include <fstream>
@@ -41,6 +42,7 @@ enum LeptonFlavor { kElectron, kMuon, kTau, kNeutrino };
 enum JetTag       { kLight, kBTagged, kCTagged, kTauTagged, kGTagged };
 
 typedef vector< string >       StringVector_t;
+typedef vector< unsigned int > array_ui;
 typedef vector< double >       array_d;
 typedef vector< LeptonFlavor > array_fl;
 typedef vector< JetTag >       array_tag;

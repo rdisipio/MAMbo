@@ -1,7 +1,7 @@
 #include "HistogramManager.h"
 
 HistogramManager::HistogramManager() :
-  m_sumw2( false )
+  m_sumw2( true )
 {
 
 }
@@ -132,9 +132,93 @@ TH1F * HistogramManager::Book1DHistogram( const xmlNodePtr xml )
 /////////////////////////////////////////
 
 
+TH2F * HistogramManager::Book2DHistogram( TH2F * h, const string& path )
+{
+  TDirectory * hdir = CreatePath( path, true );
+
+  hdir->cd();
+  //cout << "DEBUG: create h: current dir " << gDirectory->GetPath() << endl;
+
+  m_histograms[path] = (TH2F*)h->Clone();
+  m_histograms[path]->SetDirectory( hdir );
+
+  if( m_sumw2 ) m_histograms[path]->Sumw2();
+
+  m_h2_names.push_back( path );
+  cout << "DEBUG: Created histogram " << path << endl;
+
+  return (TH2F*)m_histograms[path];
+}
+
+
+/////////////////////////////////////////
+
+
 TH2F * HistogramManager::Book2DHistogram( const xmlNodePtr xml )
 {
-  return NULL;
+  const char * path  = (const char*) xmlGetProp( xml, BAD_CAST "name" );
+  const char * title = (const char*) xmlGetProp( xml, BAD_CAST "title" );
+  const int    nbinsx = atoi( (const char*) xmlGetProp( xml, BAD_CAST "nbinsx" ) );
+  const int    nbinsy = atoi( (const char*) xmlGetProp( xml, BAD_CAST "nbinsy" ) );
+
+  if( xmlHasProp( xml, BAD_CAST "xedges" ) ) {
+    
+    string sx( (const char*)xmlGetProp( xml, BAD_CAST "xedges" ) );
+    StringVector_t xtokens;
+    size_t Nxedges = HelperFunctions::Tokenize( sx, xtokens, "," );
+
+    Double_t xedges[Nxedges+1];
+    for( int n = 0 ; n < Nxedges ; ++n ) {
+      xedges[n] = atof( xtokens.at(n).c_str() );
+    }
+
+    string sy( (const char*)xmlGetProp( xml, BAD_CAST "yedges" ) );
+    StringVector_t ytokens;
+    size_t Nyedges = HelperFunctions::Tokenize( sy, ytokens, "," );
+
+    Double_t yedges[Nyedges+1];
+    for( int n = 0 ; n < Nyedges ; ++n ) {
+      yedges[n] = atof( ytokens.at(n).c_str() );
+    }
+
+    return Book2DHistogram( path, title, nbinsx, xedges, nbinsy, yedges );
+  }
+  else {
+    Double_t xmin = atof( (const char*) xmlGetProp( xml, BAD_CAST "xmin" ) );
+    Double_t xmax = atof( (const char*) xmlGetProp( xml, BAD_CAST "xmax" ) );
+    Double_t ymin = atof( (const char*) xmlGetProp( xml, BAD_CAST "ymin" ) );
+    Double_t ymax = atof( (const char*) xmlGetProp( xml, BAD_CAST "ymax" ) );
+
+    return Book2DHistogram( path, title, nbinsx, xmin, xmax, nbinsy, ymin, ymax );
+  }
+}
+
+
+/////////////////////////////////////////
+
+
+TH2F * HistogramManager::Book2DHistogram( const string& path, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax )
+{
+  size_t found      = path.find_last_of("/");
+  const string name = path.substr( found+1 );
+
+  TH2F h( name.c_str(), title.c_str(), nbinsx, xmin, xmax, nbinsy, ymin, ymax );
+
+  return Book2DHistogram( &h, path );
+}
+
+
+/////////////////////////////////////////
+
+
+TH2F * HistogramManager::Book2DHistogram( const string& path, const string& title, int nbinsx, const Double_t* xedges, int nbinsy, Double_t* yedges )
+{
+  size_t found      = path.find_last_of("/");
+  const string name = path.substr( found+1 );
+
+  TH2F h( name.c_str(), title.c_str(), nbinsx, xedges, nbinsy, yedges );
+
+  return Book2DHistogram( &h, path );
 }
 
 

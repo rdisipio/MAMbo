@@ -36,6 +36,7 @@ class INtupleWrapper
    virtual bool         MakeEventElectrons( EventData * ed ) = 0;
    virtual bool         MakeEventMuons( EventData * ed )     = 0;
    virtual bool         MakeEventJets( EventData * ed )      = 0;
+   virtual bool         MakeEventTruth( EventData * ed )     = 0;
 
  protected:
    HistogramManager * m_hm;

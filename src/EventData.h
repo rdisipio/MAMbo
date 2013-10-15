@@ -67,15 +67,30 @@ struct EventData
 
   struct fJet_t { 
     int    n;
-    double pT;
-    double eta;
-    double phi;
-    double E;
-    double m;
-    double d12;
-    double dR_lj;
-    double dPhi_lj;
-  } fjet;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_d d12;
+    array_d dR_lj;
+    array_d dPhi_lj;
+    array_d tag;
+    array_d hadt_m;
+  } fjets;
+
+  struct Truth_t {
+    int     n;
+    array_ui pdgId;
+    array_ui status;
+    array_ui barcode;
+
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+  };
 
   struct MET_t {
     double et;
@@ -84,6 +99,8 @@ struct EventData
     double phi;
     double sumet;
   } MET;
+
+  map< string, double > property;
 };
 
 #endif /** __EVENTDATA_H__ */

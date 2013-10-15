@@ -1,13 +1,23 @@
 CC=g++
 LD=g++
 CFLAGS  = -fPIC -g 
+
+DEBUG = -O3
+CFLAGS += $(DEBUG)
+
 ROOTCFLAGS = $(shell root-config --cflags)
 XMLCFLAGS  = $(shell xml2-config --cflags)
-CFLAGS += $(ROOTCFLAGS) $(XMLCFLAGS)
-DEBUG = -g
-SOFLAGS = -fPIC -shared $(ROOTCFLAGS) $(XMLCFLAGS)
+FASTJETCFLAGS = $(shell fastjet-config --cxxflags)
 
-LIBS    = $(shell root-config --libs) $(shell xml2-config --libs)
+CFLAGS += $(ROOTCFLAGS) $(XMLCFLAGS) $(FASTJETCFLAGS)
+
+SOFLAGS = -fPIC -shared $(ROOTCFLAGS) $(XMLCFLAGS) $(FASTJETCFLAGS)
+
+ROOTLIBS = $(shell root-config --libs)
+XMLLIBS  = $(shell xml2-config --libs)
+FASTJETLIBS = $(shell fastjet-config --libs)
+
+LIBS    = $(ROOTLIBS) $(XMLLIBS) $(FASTJETLIBS)
 
 PROJECT = MAMbo
 EXE     = run$(PROJECT)

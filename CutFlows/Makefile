@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-CUTFLOWS     = BoostedSL FakeRateZjet
+CUTFLOWS     = BoostedSL FakeRateZjet FakeRateZel FakeRateZfjet
 CUTFLOWSSRCS = $(foreach CF, $(CUTFLOWS), CutFlow$(CF).cxx)
 CUTFLOWLIBS  = $(foreach CF, $(CUTFLOWS), lib$(CF).so)
 

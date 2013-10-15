@@ -27,7 +27,10 @@ class HistogramManager
   TH1F * Book1DHistogram( const string& path, const string& title, int nbins, const Double_t* xedges );
   TH1F * Book1DHistogram( const xmlNodePtr xml );
 
+  TH2F * Book2DHistogram( TH2F * h, const string& path = "" );
   TH2F * Book2DHistogram( const xmlNodePtr xml );
+  TH2F * Book2DHistogram( const string& path, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax );
+  TH2F * Book2DHistogram( const string& path, const string& title, int nbinsx, const Double_t* xedges, int nbinsy, Double_t* yedges );
 
   TFile * SetOutFileName( const char * name );
 
@@ -36,6 +39,7 @@ class HistogramManager
   TDirectory * CreatePath( const string& path, bool lastIsHistogramName = false );
 
   inline TH1 * GetHistogram( const string& name ) { return (TH1*)m_outFile->Get( name.c_str() ); };
+  inline TH2F * Get2DHistogram( const string& name ) { return (TH2F*)m_outFile->Get( name.c_str() ); };
 
   inline void  ToggleSumW2() { m_sumw2 = !m_sumw2; };
 

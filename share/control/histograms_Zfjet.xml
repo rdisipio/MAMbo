@@ -1,0 +1,44 @@
+<histograms>
+  <TH1F name="cutflow" title="CutFlow" nbins="6" xmin="-0.5" xmax="5.5" />
+
+  <TH1F name="el_n"   title="No. of electrons" nbins="6"  xmin="-0.5" xmax="5.5" />
+  <TH1F name="el_pt"  title="Electron p_{T} [GeV]"           nbins="20" xmin="0."   xmax="1000." />
+  <TH1F name="el_eta" title="Electron pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />
+  <TH1F name="el_phi" title="Electron azimuthal angle #phi"  nbins="64" xmin="-3.14"   xmax="3.14" />
+  <TH1F name="el_E"   title="Electron energy [GeV]"          nbins="20" xmin="0."   xmax="1000." />
+
+  <TH1F name="mu_n"   title="No. of muons" nbins="5"  xmin="-0.5" xmax="4.5" />
+  <TH1F name="mu_pt"  title="Muon p_{T} [GeV]"           nbins="20" xmin="0."   xmax="1000." />
+  <TH1F name="mu_eta" title="Muon pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />
+  <TH1F name="mu_phi" title="Muon azimuthal angle #phi"  nbins="64" xmin="-3.14"   xmax="3.14" />
+  <TH1F name="mu_E"   title="Muon energy [GeV]"          nbins="20" xmin="0."   xmax="1000." />
+
+  <TH1F name="jet_n"   title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
+  <TH1F name="jet_pt"  title="Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="jet_eta" title="Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="jet_phi" title="Jet azimuthal angle #phi"  nbins="64" xmin="-3.14"   xmax="3.14" />
+  <TH1F name="jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
+
+  <TH1F name="fjet_n"   title="No. of FatJets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="fjet_pt"  title="FatJet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1000." />
+  <TH1F name="fjet_eta" title="FatJet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="fjet_phi" title="FatJet azimuthal angle #phi"  nbins="64" xmin="-3.14"   xmax="3.14" />
+  <TH1F name="fjet_E"   title="FatJet energy [GeV]"          nbins="50" xmin="0."   xmax="1000." />
+  <TH1F name="fjet_m"   title="FatJet mass [GeV]"            nbins="50" xmin="0."   xmax="500." />
+ 
+  <TH1F name="tjet_n"   title="No. of TopJets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="hadt_m"   title="HEPTopTagger had top mass" nbins="10" xmin="130" xmax="230" />  
+  <TH1F name="hadt_pt"  title="HEPTopTagger had top p_{T}" nbins="50" xmin="0."   xmax="1000." />
+  <TH1F name="hadt_pt_zoom"  title="HEPTopTagger had top p_{T}" nbins="20" xmin="0."   xmax="1000." />
+
+  <TH1F name="fjet_pt_hiPtZ"  title="Jet p_{T} High-p_{T} Z [GeV]"   nbins="50" xmin="0."   xmax="1000." />
+
+  <TH1F name="m_ll"    title="Di-lepton invariant mass [GeV]" nbins="200" xmin="0." xmax="200." />
+  <TH1F name="m_ll_high"    title="Di-lepton invariant mass [GeV]" nbins="1000" xmin="0." xmax="2000." />
+  <TH1F name="Z_pt"   title="Z transverse momentum [GeV]" nbins="100" xmin="0" xmax="500" />
+  <TH2F name="fjet_pt_vs_Z_pt" title="FatJet p_{T} vs Z p_{T}" nbinsx="100" xmin="0" xmax="500" nbinsy="50" ymin="0."   ymax="1000." /> 
+  <TH1F name="dPhi_Zfj_allZ" title="#Delta#phi(Z,fj) All Z"         nbins="64" xmin="0" xmax="3.14" />
+  <TH2F name="dPhi_Zfj_vs_Z_pt" title="#Delta#phi(Z,fj) vs Z p_{T}" nbinsx="100" xmin="0" xmax="500" nbinsy="64" ymin="0" ymax="3.14" />
+  <TH1F name="dPhi_Zfj_hiPtZ" title="#Delta#phi(Z,fj) High-p_{T} Z" nbins="64" xmin="0" xmax="3.14" />
+</histograms>

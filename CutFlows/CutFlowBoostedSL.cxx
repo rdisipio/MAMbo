@@ -27,7 +27,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "jet_pt" )->Fill( ed->jets.pT.at( j ) / GeV, weight );
   }
 
-  m_hm->GetHistogram( "fjet_pt" )->Fill( ed->fjet.pT / GeV, weight );
+  m_hm->GetHistogram( "fjet_pt" )->Fill( ed->fjets.pT.at(0) / GeV, weight );
 
   return success;
 }

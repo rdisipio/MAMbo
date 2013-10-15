@@ -116,6 +116,14 @@ bool NtupleWrapper@NAME@::MakeEventJets( EventData * ed )
 /////////////////////////////////////////////
 
 
+bool NtupleWrapper@NAME@::MakeEventTruth( EventData * ed )
+{
+  bool success = true;
+
+  return success;
+}
+
+
 /////////////////////////////////////////
 // Plugin
 

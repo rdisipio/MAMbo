@@ -39,6 +39,7 @@ jet_pt
 jet_eta
 jet_phi
 jet_E
+jet_m
 jet_jvf
 jet_SV0
 jet_MV1

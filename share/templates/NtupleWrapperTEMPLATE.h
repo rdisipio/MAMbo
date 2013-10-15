@@ -18,7 +18,7 @@ class NtupleWrapper@NAME@ : public NtupleWrapper< @NAME@ >
   virtual bool MakeEventElectrons( EventData * ed );
   virtual bool MakeEventMuons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
-
+  virtual bool MakeEventTruth( EventData * ed );
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapper@NAME@ > NtupleWrapperPluginFactory_@NAME@;

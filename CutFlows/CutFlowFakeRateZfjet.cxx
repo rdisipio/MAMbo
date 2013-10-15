@@ -1,13 +1,13 @@
-#include "CutFlowFakeRateZjet.h"
+#include "CutFlowFakeRateZfjet.h"
 
-CutFlowFakeRateZjet::CutFlowFakeRateZjet()
+CutFlowFakeRateZfjet::CutFlowFakeRateZfjet()
 {
   SetCounterName( "cutflow" );
 
   cout << "DEBUG: ZpT min = " << m_config->cuts["ZpTmin"] << endl;
 }
 
-CutFlowFakeRateZjet::~CutFlowFakeRateZjet()
+CutFlowFakeRateZfjet::~CutFlowFakeRateZfjet()
 {
 }
 
@@ -15,7 +15,7 @@ CutFlowFakeRateZjet::~CutFlowFakeRateZjet()
 /////////////////////////////////////////
 
 
-bool CutFlowFakeRateZjet::Apply( EventData * ed, int * lastCutPassed )
+bool CutFlowFakeRateZfjet::Apply( EventData * ed, int * lastCutPassed )
 {
   bool success = true;
 
@@ -38,8 +38,12 @@ bool CutFlowFakeRateZjet::Apply( EventData * ed, int * lastCutPassed )
   if( mu_n < 2 ) return success;
   PassedCut( weight );
 
-  if( jet_n != 1 ) return success;
+  if( jet_n == 0 ) return success;
   PassedCut( weight );
+
+  
+  const int fjet_n = HelperFunctions::FindFatJets( ed, 200*GeV, fastjet::cambridge_algorithm, 1.2 );
+
   
   m_hm->GetHistogram( "el_n" )->Fill( el_n, weight );
   for( int j = 0 ; j < el_n ; ++j ) {
@@ -65,11 +69,20 @@ bool CutFlowFakeRateZjet::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "jet_eta" )->Fill( ed->jets.eta.at( j ), weight );
     m_hm->GetHistogram( "jet_phi" )->Fill( ed->jets.phi.at( j ), weight );
     m_hm->GetHistogram( "jet_E" )->Fill( ed->jets.E.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "jet_m" )->Fill( ed->jets.m.at( j ), weight );
+    m_hm->GetHistogram( "jet_m" )->Fill( ed->jets.m.at( j ) / GeV, weight );
+  }
+  
+  m_hm->GetHistogram( "fjet_n" )->Fill( jet_n, weight );
+  for( int j = 0 ; j < fjet_n ; ++j ) {
+    m_hm->GetHistogram( "fjet_pt" )->Fill( ed->fjets.pT.at( j ) / GeV, weight );
+    m_hm->GetHistogram( "fjet_eta" )->Fill( ed->fjets.eta.at( j ), weight );
+    m_hm->GetHistogram( "fjet_phi" )->Fill( ed->fjets.phi.at( j ), weight );
+    m_hm->GetHistogram( "fjet_E" )->Fill( ed->fjets.E.at( j ) / GeV, weight );
+    m_hm->GetHistogram( "fjet_m" )->Fill( ed->fjets.m.at( j ) / GeV, weight );
   }
   
   
-  TLorentzVector Z, l1, l2, j1;
+  TLorentzVector Z, l1, l2, fj;
   l1.SetPtEtaPhiE( ed->muons.pT.at( 0 ), ed->muons.eta.at( 0 ), ed->muons.phi.at( 0 ), ed->muons.E.at( 0 ) );
   l2.SetPtEtaPhiE( ed->muons.pT.at( 1 ), ed->muons.eta.at( 1 ), ed->muons.phi.at( 1 ), ed->muons.E.at( 1 ) );
 
@@ -85,30 +98,38 @@ bool CutFlowFakeRateZjet::Apply( EventData * ed, int * lastCutPassed )
   double ZpT = Z.Pt();
   m_hm->GetHistogram( "Z_pt" )->Fill( ZpT/GeV, weight );
 
-  j1.SetPtEtaPhiE( ed->jets.pT.at( 0 ), ed->jets.eta.at( 0 ), ed->jets.phi.at( 0 ), ed->jets.E.at( 0 ) );
-  double dPhi = fabs( Z.DeltaPhi( j1 ) );
-  m_hm->GetHistogram( "dPhi_Zj_allZ" )->Fill( dPhi, weight );
-
-  for( int j = 0 ; j < jet_n ; ++j ) {
-    m_hm->Get2DHistogram( "jet_pt_vs_Z_pt" )->Fill( ZpT/GeV, ed->jets.pT.at(j)/GeV, weight );
-  }
-  m_hm->Get2DHistogram( "dPhi_Zj1_vs_Z_pt" )->Fill( ZpT/GeV, dPhi, weight );
-
   if( ZpT < 200 * GeV ) return success;
   PassedCut( weight );
 
-  // dPhi( Z, j ) ~ back to back 
-  m_hm->GetHistogram( "dPhi_Zj_hiPtZ" )->Fill( dPhi, weight );
-  for( int j = 0 ; j < jet_n ; ++j ) {
-    m_hm->GetHistogram( "jet_pt_hiPtZ" )->Fill( ed->jets.pT.at( j ) / GeV, weight );
-    //m_hm->GetHistogram( "jet_eta" )->Fill( ed->jets.eta.at( j ), weight );
-    //m_hm->GetHistogram( "jet_phi" )->Fill( ed->jets.phi.at( j ), weight );
-    //m_hm->GetHistogram( "jet_E" )->Fill( ed->jets.E.at( j ) / GeV, weight );
-    //m_hm->GetHistogram( "jet_m" )->Fill( ed->jets.m.at( j ), weight );
-  }  
+  // No. of fat jets > 0
+  if( fjet_n == 0 ) return success;
+  PassedCut( weight );
 
-  if( ( jet_n > 1 ) && ( ed->jets.pT.at(1) > 30*GeV ) ) return success;
-  //if( dPhi < 2.5 ) return success;
+  fj.SetPtEtaPhiE( ed->fjets.pT.at( 0 ), ed->fjets.eta.at( 0 ), ed->fjets.phi.at( 0 ), ed->fjets.E.at( 0 ) );
+
+  double dPhi = fabs( Z.DeltaPhi( fj ) );
+  m_hm->GetHistogram( "dPhi_Zfj_allZ" )->Fill( dPhi, weight );
+  m_hm->Get2DHistogram( "fjet_pt_vs_Z_pt" )->Fill( ZpT/GeV, fj.Pt()/GeV, weight );
+  m_hm->Get2DHistogram( "dPhi_Zfj_vs_Z_pt" )->Fill( ZpT/GeV, dPhi, weight );
+
+  int tjet_n = 0;
+  for( int i = 0 ; i < fjet_n ; ++i ) {
+    if( ed->fjets.tag.at(i) == 1 ) {
+      ++tjet_n;
+
+      m_hm->GetHistogram( "hadt_m" )->Fill( ed->fjets.hadt_m.at(i) / GeV, weight );
+      m_hm->GetHistogram( "hadt_pt" )->Fill( ed->fjets.pT.at(i) / GeV, weight );
+      m_hm->GetHistogram( "hadt_pt_zoom" )->Fill( ed->fjets.pT.at(i) / GeV, weight );
+    }
+  }
+  m_hm->GetHistogram( "tjet_n" )->Fill( tjet_n, weight );
+  
+  // dPhi( Z, fj ) ~ back to back 
+  m_hm->GetHistogram( "dPhi_Zfj_hiPtZ" )->Fill( dPhi, weight );
+ 
+  m_hm->GetHistogram( "fjet_pt_hiPtZ" )->Fill( fj.Pt() / GeV, weight );
+
+  if( dPhi < 2.5 ) return success;
   PassedCut( weight );
 
   return success;
@@ -119,8 +140,8 @@ bool CutFlowFakeRateZjet::Apply( EventData * ed, int * lastCutPassed )
 // Plugin
 
 extern "C" {
-  CutFlowPluginFactory_FakeRateZjet * MakeCutFlowPlugin() {
-    return new CutFlowPluginFactory_FakeRateZjet( "FakeRateZjet" );
+  CutFlowPluginFactory_FakeRateZfjet * MakeCutFlowPlugin() {
+    return new CutFlowPluginFactory_FakeRateZfjet( "FakeRateZfjet" );
   };
 }
 
