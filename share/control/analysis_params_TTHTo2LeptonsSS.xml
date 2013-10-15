@@ -1,0 +1,7 @@
+<analysis name="TTHTo2LeptonsSS">
+  <ntuple>HWWtth</ntuple>
+  <branches>control/branch_list_HWWtth.txt</branches>
+  <tree>HWWTree</tree>
+  <histograms>control/histograms_ttHTo2LeptonsSS_baseline.xml</histograms>
+  <cutflow>TTHTo2LeptonsSS</cutflow>
+</analysis>
