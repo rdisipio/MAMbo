@@ -50,6 +50,7 @@ CutFlow * INtupleWrapper::AddCutFlow( const string& name )
 
 //////////////////////////////////////////
 
+
 void INtupleWrapper::Loop( Long64_t nEventsMax )
 {
   m_maxEvents = nEventsMax - 1;
@@ -68,6 +69,7 @@ void INtupleWrapper::Loop( Long64_t nEventsMax )
 
 }
 
+
 //////////////////////////////////////////
 
 
@@ -79,7 +81,7 @@ EventData * INtupleWrapper::NextEvent()
 
    if( ( m_thisEventNumber % int(m_maxEvents/10) ) == 0 ) {
      double perc = 100. * m_thisEventNumber / m_maxEvents;
-     printf( "INFO: Event %i (n = %i, r = %i ) (%3.0f %%)\n", m_thisEventNumber, m_thisEvent->info.eventNumber, m_thisEvent->info.runNumber, perc );
+     printf( "INFO: Event %i (en = %i, rn = %i )       (%3.0f %%)\n", m_thisEventNumber, m_thisEvent->info.eventNumber, m_thisEvent->info.runNumber, perc );
    }
 
    return m_thisEvent;
@@ -88,4 +90,9 @@ EventData * INtupleWrapper::NextEvent()
 
 //////////////////////////////////////////
 
-
+void INtupleWrapper::Finalize()
+{
+   for( CutFlowCollection_t::const_iterator itr = m_cutFlows.begin() ; itr != m_cutFlows.end() ; ++itr ) {
+      itr->second->PrintOutStats();
+    }
+}

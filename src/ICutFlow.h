@@ -22,6 +22,7 @@ class CutFlow
 
    inline virtual void SetCounterName( const string& name ) { m_counterName = name; };
    virtual bool Start();
+   virtual void PrintOutStats();
 
  protected:
    string m_name;

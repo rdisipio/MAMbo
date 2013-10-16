@@ -1,5 +1,7 @@
 <histograms>
-  <TH1F name="cutflow" title="CutFlow" nbins="6" xmin="-0.5" xmax="5.5" />
+  <TH1F name="ELEL_cutflow" title="Cut Flow ee channel" nbins="6" xmin="-0.5" xmax="5.5" />
+  <TH1F name="MUMU_cutflow" title="Cut Flow #mu#mu channel" nbins="6" xmin="-0.5" xmax="5.5" />
+  <TH1F name="ELMU_cutflow" title="Cut Flow e#mu channel" nbins="6" xmin="-0.5" xmax="5.5" />
 
   <TH1F name="el_n"   title="No. of electrons" nbins="6"  xmin="-0.5" xmax="5.5" />
   <TH1F name="el_pt"  title="Electron p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />

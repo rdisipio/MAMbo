@@ -87,7 +87,11 @@ class NtupleWrapper : public INtupleWrapper
 
       Nbranches = m_activeBranches.size();
 
-      if( Nbranches == 0 ) throw runtime_error( "No actived branch\n" );
+ //     if( Nbranches == 0 ) throw runtime_error( "No active branch\n" );
+      if( Nbranches == 0 ) {
+	 cout << "WARNING: no active branch define. All switched on, this could be SLOW!" << endl;
+	 m_ntuple->fChain->SetBranchStatus( "*", 1 );
+      }
 
       cout << "DEBUG: No. of active branches = " << Nbranches << endl;
 

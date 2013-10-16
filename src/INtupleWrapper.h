@@ -6,8 +6,6 @@
 #include "CutFlowFactory.hpp"
 #include "HistogramManager.h"
 
-//#include "NtupleWrapperFactory.hpp"
-
 class INtupleWrapper 
 {
  public:
@@ -22,7 +20,9 @@ class INtupleWrapper
 
    virtual EventData * MakeEvent( Long64_t i ) = 0;
 
-   virtual Long64_t GetEntries() = 0;
+   virtual Long64_t    GetEntries() = 0;
+
+   virtual void        Finalize();
 
  protected:
    bool                SetupTools();

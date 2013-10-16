@@ -92,6 +92,7 @@ int main( int argc, char ** argv )
   cout << "INFO: MAMbo will loop on " << globalArgs.eventMax << " (unweighted) events" << endl;
 
   wrapper->Loop( globalArgs.eventMax );
+  wrapper->Finalize();
 
   hm->WriteToFile();
 

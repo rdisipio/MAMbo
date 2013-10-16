@@ -2,6 +2,7 @@
 
 CutFlowTTHTo2LeptonsSS::CutFlowTTHTo2LeptonsSS()
 {
+  SetCounterName( "ELEL_cutflow" );
 }
 
 CutFlowTTHTo2LeptonsSS::~CutFlowTTHTo2LeptonsSS()
@@ -20,13 +21,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
 
   //// example:
   double weight = ed->info.mcWeight;
-  /*
-  if( fabs(weight) > 10. ) {
-    cout << "WARNING: very large event weight = " << weight << " re-set to zero" << endl;
-    weight = 0.;
-  }
-  */
-  // m_hm->GetHistogram( "fjet_pt" )->Fill( ed->fjet.pT / GeV, weight );
+  PassedCut( weight );
 
   if( !( PASSED_TRIGGER( "EF_e24vhi_medium1" ) || 
 	 PASSED_TRIGGER( "EF_e24vhi_medium1" ) ||
@@ -36,14 +31,16 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
 
   PassedCut( weight );
   
+  int el_n  = ed->electrons.n;
+  int mu_n  = ed->muons.n;
+  int jet_n = ed->jets.n;
+
+  if( el_n == 0 ) return success;
+  PassedCut( weight );
 
   double ETmiss = ed->MET.et;
   if( ETmiss == 0. ) ETmiss = -1e10;
   m_hm->GetHistogram( "met_pt" )->Fill( ETmiss/GeV, weight );
-
-  int el_n  = ed->electrons.n;
-  int mu_n  = ed->muons.n;
-  int jet_n = ed->jets.n;
 
   m_hm->GetHistogram( "el_n" )->Fill( el_n, weight );
   for( int j = 0 ; j < el_n ; ++j ) {
@@ -69,6 +66,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "jet_E" )->Fill( ed->jets.E.at( j ) / GeV, weight );
   }
 
+  PassedCut( weight );
 
   return success;
 }
