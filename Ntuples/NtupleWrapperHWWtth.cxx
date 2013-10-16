@@ -77,6 +77,9 @@ bool NtupleWrapperHWWtth::MakeEventElectrons( EventData * ed )
     ed->electrons.eta.push_back( GET_VALUE_VECTOR( electron_eta, i ) );
     ed->electrons.phi.push_back( GET_VALUE_VECTOR( electron_phi, i ) );
     ed->electrons.E.push_back( GET_VALUE_VECTOR( electron_E, i ) );
+  
+    const double q = ( GET_VALUE_VECTOR( electron_ID, i ) < 0 ) ? -1. : 1.; 
+    ed->electrons.q.push_back( q );
   }
  
 
@@ -98,6 +101,9 @@ bool NtupleWrapperHWWtth::MakeEventMuons( EventData * ed )
     ed->muons.eta.push_back( GET_VALUE_VECTOR( muon_eta, i ) );
     ed->muons.phi.push_back( GET_VALUE_VECTOR( muon_phi, i ) );
     ed->muons.E.push_back( GET_VALUE_VECTOR( muon_E, i ) );
+
+    const double q = ( GET_VALUE_VECTOR( muon_ID, i ) < 0 ) ? -1. : 1.;
+    ed->muons.q.push_back( q );
   }
 
   return success;

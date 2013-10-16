@@ -26,6 +26,7 @@ struct EventData
     double phi;
     double E;
     double m;
+    double q;
   } lepton;
 
   struct Electrons_t { 
@@ -35,6 +36,7 @@ struct EventData
     array_d phi;
     array_d E;
     array_d m;
+    array_d q;
   } electrons;
 
   struct Muons_t { 
@@ -44,6 +46,7 @@ struct EventData
     array_d phi;
     array_d E;
     array_d m;
+    array_d q;
   } muons;
 
   struct Jets_t { 
@@ -90,8 +93,9 @@ struct EventData
     array_d phi;
     array_d E;
     array_d m;
+    array_d q;
   };
-
+ 
   struct MET_t {
     double et;
     double etx;
