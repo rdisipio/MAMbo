@@ -13,6 +13,27 @@ CutFlowTTHTo2LeptonsSS::~CutFlowTTHTo2LeptonsSS()
 /////////////////////////////////////////
 
 
+bool CutFlowTTHTo2LeptonsSS::Initialize()
+{
+  bool success = true;
+
+  SetCutName( 0, "All Events" );
+  SetCutName( 1, "Trigger" );
+  SetCutName( 2, "Prim. Vtx" );
+  SetCutName( 3, "Cleaning" );
+  SetCutName( 4, "2 leptons" );
+  SetCutName( 5, "2 electrons" );
+  SetCutName( 6, ">= 1 SS pair" );
+  SetCutName( 7, "Z mass veto" );
+  SetCutName( 8, ">= 2 jet" );
+
+  return success;
+}
+
+
+/////////////////////////////////////////
+
+
 bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
 {
   bool success = true;
@@ -29,8 +50,6 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
     ( PASSED_TRIGGER( "EF_e60_medium1" )    || PASSED_TRIGGER( "EF_mu24i_tight" ) );
   if( !trigflag ) return success;
   PassedCut( weight );
-      //	 PASSED_TRIGGER( "EF_e60_medium1" ) ||
-      //	 PASSED_TRIGGER( "EF_mu24i_tight" ) ) )
   
   // PV
   if( int(ed->property["goodPV"]) == 0 ) return success;
@@ -73,7 +92,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
   }
 
   // At least 2 electrons, or 2 muons, or 1e1mu
-  if( el_n + mu_n < 2 ) return success;
+  if( ( el_n + mu_n ) < 2 ) return success;
   PassedCut( weight );
 
   // 2 el

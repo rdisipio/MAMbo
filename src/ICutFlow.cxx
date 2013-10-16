@@ -14,6 +14,17 @@ CutFlow::~CutFlow()
 ///////////////////////////////////////
 
 
+bool CutFlow::Initialize()
+{
+   bool success = true;
+
+   return success;
+}
+
+
+///////////////////////////////////////
+
+
 bool CutFlow::Start()
 {
   bool success = true;
@@ -60,8 +71,27 @@ void CutFlow::PrintOutStats()
    cout << " * Cut flow: " << p_cfh->GetTitle() << endl << endl;
 
    for( int nc = 0 ; nc < ncuts ; ++nc ) {
-        printf( "%2i) %10.0f\n", nc, p_cfh->GetBinContent(nc+1) );
+        printf( "%2i) %-20s %10.0f\n", nc, p_cfh->GetXaxis()->GetBinLabel(nc+1), p_cfh->GetBinContent(nc+1) );
    } 
 
    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+}
+
+
+///////////////////////////////////////
+
+
+void CutFlow::SetCutName( int n, const char * name )
+{
+   if( m_counterName.empty() ) return;
+
+   TH1 * p_cfh = m_hm->GetHistogram( m_counterName );
+   if( !p_cfh ) {
+       cout << "WARNING: no cut flow histogram defined with name " << m_counterName << endl;
+       return;
+   } 
+
+   TAxis * p_x = (TAxis*)p_cfh->GetXaxis();
+
+   p_x->SetBinLabel( n+1, name );
 }

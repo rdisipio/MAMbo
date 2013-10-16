@@ -57,6 +57,10 @@ void INtupleWrapper::Loop( Long64_t nEventsMax )
 
   m_thisEventNumber = 0; // default = uninitialized = -1
 
+  for( CutFlowCollection_t::const_iterator itr = m_cutFlows.begin() ; itr != m_cutFlows.end() ; ++itr ) {
+      itr->second->Initialize();
+  }
+
   for( Long64_t i = 0 ; i < m_maxEvents ; ++i ) {
     m_thisEvent = NextEvent();
 
@@ -96,3 +100,8 @@ void INtupleWrapper::Finalize()
       itr->second->PrintOutStats();
     }
 }
+
+
+//////////////////////////////////////////
+
+

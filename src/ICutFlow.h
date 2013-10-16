@@ -16,6 +16,7 @@ class CutFlow
    CutFlow( const string& name = "" );
    virtual ~CutFlow();
 
+   virtual bool Initialize();
    virtual bool Apply( EventData * ed, int * lastCutPassed = NULL ) = 0;
    virtual void Connect( const string& name, int cutN );
    virtual void PassedCut( const double weight = 1. );
@@ -23,6 +24,7 @@ class CutFlow
    inline virtual void SetCounterName( const string& name ) { m_counterName = name; };
    virtual bool Start();
    virtual void PrintOutStats();
+   virtual void SetCutName( int n, const char * name );
 
  protected:
    string m_name;

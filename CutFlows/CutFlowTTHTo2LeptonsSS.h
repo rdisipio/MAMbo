@@ -9,6 +9,7 @@ class CutFlowTTHTo2LeptonsSS : public CutFlow
   CutFlowTTHTo2LeptonsSS();
   virtual ~CutFlowTTHTo2LeptonsSS();
 
+  virtual bool Initialize();
   virtual bool Apply( EventData * ed, int * lastCutPassed = NULL );
 
  protected:

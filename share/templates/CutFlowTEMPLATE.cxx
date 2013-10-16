@@ -12,6 +12,17 @@ CutFlow@NAME@::~CutFlow@NAME@()
 /////////////////////////////////////////
 
 
+bool CutFlow@NAME@::Initialize()
+{
+   bool success = true;
+
+   return success;
+}
+
+
+/////////////////////////////////////////
+
+
 bool CutFlow@NAME@::Apply( EventData * ed, int * lastCutPassed )
 {
   bool success = true;
