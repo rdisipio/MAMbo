@@ -88,4 +88,15 @@ namespace HelperFunctions {
   }
 
 
+  //////////////////////////////////////////////////////
+
+  TLorentzVector MakeMomentum( const EventData::Electrons_t& coll, int i )
+  {
+      TLorentzVector p;
+
+      p.SetPtEtaPhiE( coll.pT.at(i), coll.eta.at(i), coll.phi.at(i), coll.E.at(i) );
+     
+      return p;
+  }
+
 };

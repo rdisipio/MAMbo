@@ -23,20 +23,26 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
   double weight = ed->info.mcWeight;
   PassedCut( weight );
 
-  if( !( PASSED_TRIGGER( "EF_e24vhi_medium1" ) || 
-	 PASSED_TRIGGER( "EF_e24vhi_medium1" ) ||
-	 PASSED_TRIGGER( "EF_e60_medium1" ) ||
-	 PASSED_TRIGGER( "EF_mu24i_tight" ) ) )
-      return success;
-
+  // Pass electron trigger
+  bool trigflag = 
+    ( PASSED_TRIGGER( "EF_e24vhi_medium1" ) || PASSED_TRIGGER( "EF_e24vhi_medium1" ) ) ||
+    ( PASSED_TRIGGER( "EF_e60_medium1" )    || PASSED_TRIGGER( "EF_mu24i_tight" ) );
+  if( !trigflag ) return success;
   PassedCut( weight );
+      //	 PASSED_TRIGGER( "EF_e60_medium1" ) ||
+      //	 PASSED_TRIGGER( "EF_mu24i_tight" ) ) )
   
+  // PV
+  if( int(ed->property["goodPV"]) == 0 ) return success;
+  PassedCut( weight );
+
+  // Event cleaning
+  if( int( ed->property["passEventCleaning"] ) != 1 ) return success;
+  PassedCut( weight );
+
   int el_n  = ed->electrons.n;
   int mu_n  = ed->muons.n;
   int jet_n = ed->jets.n;
-
-  if( el_n == 0 ) return success;
-  PassedCut( weight );
 
   double ETmiss = ed->MET.et;
   if( ETmiss == 0. ) ETmiss = -1e10;
@@ -66,6 +72,27 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "jet_E" )->Fill( ed->jets.E.at( j ) / GeV, weight );
   }
 
+  // At least 2 electrons, or 2 muons, or 1e1mu
+  if( el_n + mu_n < 2 ) return success;
+  PassedCut( weight );
+
+  // 2 el
+  if( el_n < 2 ) return success;
+  PassedCut( weight );
+
+  // Same-sign
+  const double q1 = ed->electrons.q[0];
+  const double q2 = ed->electrons.q[1];
+  if( q1*q1 < 0 ) return success;
+  PassedCut( weight );
+
+  // Z mass veto
+  TLorentzVector Z = HelperFunctions::MakeMomentum( ed->electrons, 0 ) + HelperFunctions::MakeMomentum( ed->electrons, 1 );
+  if( fabs( Z.M()/GeV - 91.2 ) <= 10. ) return success;
+  PassedCut( weight );
+
+  // jet count
+  if( jet_n < 2 ) return success;
   PassedCut( weight );
 
   return success;

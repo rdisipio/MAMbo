@@ -26,6 +26,25 @@ bool NtupleWrapperHWWtth::MakeEventInfo( EventData * ed )
   ed->info.mcChannelNumber = GET_VALUE( mc_channel_number );
   ed->info.mcWeight        = GET_VALUE( mcEventWeight );
 
+  SET_PROPERTY( onelep_type );
+  SET_PROPERTY( dilep_type );
+  SET_PROPERTY( trilep_type );
+  SET_PROPERTY( quadlep_type );
+
+  SET_PROPERTY( larError );
+  SET_PROPERTY( passEventCleaning );
+
+  // good PV
+  bool goodPV = false;
+  for( int n = 0 ; n < m_ntuple->Nvxp ; ++n ) {
+    const int ntrx = m_ntuple->m_vxp_nTracks->at(n);
+    if( ntrx >= 5 ) {
+	goodPV = true;
+	break;
+    }
+  }
+  ed->property["goodPV"] = goodPV;
+
   return success;
 }
 

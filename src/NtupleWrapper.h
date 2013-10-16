@@ -6,6 +6,7 @@
 #define GET_VALUE_ARRAY(X,N) m_ntuple-> X[N]
 #define CHECK_TRIGGER(T) if( GET_VALUE( T ) ) ed->trigger[ #T ] = 1
 #define MAKE_OBJECT(OBJ, ED) if( !MakeEvent##OBJ( ED ) ) throw runtime_error( "Cannot create " # OBJ )
+#define SET_PROPERTY(P) ed->property[ #P ] = GET_VALUE( P )
 
 #include "INtupleWrapper.h"
 #include "NtupleWrapperFactory.hpp"

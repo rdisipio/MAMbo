@@ -13,6 +13,8 @@
 #include "fastjet/ClusterSequenceArea.hh"
 #include "fastjet/PseudoJet.hh"
 
+#include "TLorentzVector.h"
+
 #include "HEPTopTagger.h"
 #include "EventData.h"
 
@@ -22,6 +24,8 @@ namespace HelperFunctions {
   int    ListDirectory( string dir, vector<string> &files );
 
   int    FindFatJets( EventData * ed, const double fjet_ptmin = 300.*GeV, fastjet::JetAlgorithm alg = fastjet::antikt_algorithm, double R = 1.0 );
+
+  TLorentzVector MakeMomentum( const EventData::Electrons_t& coll, int i );
 };
 
 #endif /**  __HELPERFUNCTIONS_H__ */

@@ -3,6 +3,13 @@ EventNumber
 mc_channel_number
 mcEventWeight
 larError
+passEventCleaning
+onelep_type
+dilep_type
+trilep_type
+quadlep_type
+Nvxp
+m_vxp_nTracks
 EF_e24vhi_medium1
 EF_e60_medium1
 EF_mu24i_tight
