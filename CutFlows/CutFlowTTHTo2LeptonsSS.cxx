@@ -2,7 +2,10 @@
 
 CutFlowTTHTo2LeptonsSS::CutFlowTTHTo2LeptonsSS()
 {
-  SetCounterName( "ELEL_cutflow" );
+  AddChannel( "ELEL" );
+
+  AddCounterName( "ELEL", "weighted" );
+  AddCounterName( "ELEL", "unweight" );
 }
 
 CutFlowTTHTo2LeptonsSS::~CutFlowTTHTo2LeptonsSS()
@@ -17,15 +20,25 @@ bool CutFlowTTHTo2LeptonsSS::Initialize()
 {
   bool success = true;
 
-  SetCutName( 0, "All Events" );
-  SetCutName( 1, "Trigger" );
-  SetCutName( 2, "Prim. Vtx" );
-  SetCutName( 3, "Cleaning" );
-  SetCutName( 4, "2 leptons" );
-  SetCutName( 5, "2 electrons" );
-  SetCutName( 6, ">= 1 SS pair" );
-  SetCutName( 7, "Z mass veto" );
-  SetCutName( 8, ">= 2 jet" );
+  SetCutName( "ELEL", "weighted", 0, "All Events" );
+  SetCutName( "ELEL", "weighted", 1, "Trigger" );
+  SetCutName( "ELEL", "weighted", 2, "Prim. Vtx" );
+  SetCutName( "ELEL", "weighted", 3, "Cleaning" );
+  SetCutName( "ELEL", "weighted", 4, "2 leptons" );
+  SetCutName( "ELEL", "weighted", 5, "2 electrons" );
+  SetCutName( "ELEL", "weighted", 6, ">= 1 SS pair" );
+  SetCutName( "ELEL", "weighted", 7, "Z mass veto" );
+  SetCutName( "ELEL", "weighted", 8, ">= 2 jet" );
+
+  SetCutName( "ELEL", "unweight", 0, "All Events" );
+  SetCutName( "ELEL", "unweight", 1, "Trigger" );
+  SetCutName( "ELEL", "unweight", 2, "Prim. Vtx" );
+  SetCutName( "ELEL", "unweight", 3, "Cleaning" );
+  SetCutName( "ELEL", "unweight", 4, "2 leptons" );
+  SetCutName( "ELEL", "unweight", 5, "2 electrons" );
+  SetCutName( "ELEL", "unweight", 6, ">= 1 SS pair" );
+  SetCutName( "ELEL", "unweight", 7, "Z mass veto" );
+  SetCutName( "ELEL", "unweight", 8, ">= 2 jet" );
 
   return success;
 }
@@ -34,7 +47,7 @@ bool CutFlowTTHTo2LeptonsSS::Initialize()
 /////////////////////////////////////////
 
 
-bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
+bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
 {
   bool success = true;
 
@@ -42,22 +55,26 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
 
   //// example:
   double weight = ed->info.mcWeight;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
  
   // Pass electron trigger
   bool trigflag = 
     ( PASSED_TRIGGER( "EF_e24vhi_medium1" ) || PASSED_TRIGGER( "EF_e24vhi_medium1" ) ) ||
     ( PASSED_TRIGGER( "EF_e60_medium1" )    || PASSED_TRIGGER( "EF_mu24i_tight" ) );
   if( !trigflag ) return success;
-  PassedCut( weight );
-  
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+
   // PV
   if( int(ed->property["goodPV"]) == 0 ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // Event cleaning
   if( int( ed->property["passEventCleaning"] ) != 1 ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
 
   int el_n  = ed->electrons.n;
@@ -97,26 +114,31 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
 
   // At least 2 electrons, or 2 muons, or 1e1mu
   if( ( el_n + mu_n ) < 2 ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // 2 el
   if( el_n < 2 ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // Same-sign
   const double q1 = ed->electrons.q[0];
   const double q2 = ed->electrons.q[1];
   if( q1*q2 < 0 ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // Z mass veto
   TLorentzVector Z = HelperFunctions::MakeFourMomentum( ed->electrons, 0 ) + HelperFunctions::MakeFourMomentum( ed->electrons, 1 );
   if( fabs( Z.M()/GeV - 91.2 ) <= 10. ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // jet count
   if( jet_n < 2 ) return success;
-  PassedCut( weight );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   return success;
 }

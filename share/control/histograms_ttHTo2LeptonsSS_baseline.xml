@@ -2,9 +2,12 @@
   
   <TH1F name="vxp_nTracks"   title="No. of tracks per pv" nbins="20"  xmin="0" xmax="20" />
   
-  <TH1F name="ELEL_cutflow" title="Cut Flow ee channel"     nbins="10" xmin="-0.5" xmax="9.5" />
+  <TH1F name="ELEL_weighted" title="Cut Flow ee channel (weighted)"      nbins="10" xmin="-0.5" xmax="9.5" />
+  <TH1F name="ELEL_unweight" title="Cut Flow ee channel (unweighted)"    nbins="10" xmin="-0.5" xmax="9.5" />
+
   <TH1F name="MUMU_cutflow" title="Cut Flow #mu#mu channel" nbins="10" xmin="-0.5" xmax="9.5" />
   <TH1F name="ELMU_cutflow" title="Cut Flow e#mu channel"   nbins="10" xmin="-0.5" xmax="9.5" />
+
   <TH1F name="el_n"   title="No. of electrons" nbins="6"  xmin="-0.5" xmax="5.5" />
   <TH1F name="el_pt"  title="Electron p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
   <TH1F name="el_eta" title="Electron pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />

@@ -17,19 +17,22 @@ class CutFlow
    virtual ~CutFlow();
 
    virtual bool Initialize();
-   virtual bool Apply( EventData * ed, int * lastCutPassed = NULL ) = 0;
-   virtual void Connect( const string& name, int cutN );
-   virtual void PassedCut( const double weight = 1. );
+   virtual bool Apply( EventData * ed ) = 0;
+   virtual void PassedCut( const string& channelName, const string& counterName, const double weight = 1. );
 
-   inline virtual void SetCounterName( const string& name ) { m_counterName = name; };
+   virtual void AddChannel( const string& name );
+   virtual void AddCounterName( const string& channelName, const string& counterName );
+
    virtual bool Start();
    virtual void PrintOutStats();
-   virtual void SetCutName( int n, const char * name );
+   virtual void SetCutName( const string& channelName, const string& counterName, int n, const char * cutName );
 
  protected:
+   vector< string > m_channelName;
    string m_name;
-   string m_counterName;
-   int    m_lastCutPassed;
+   map< string, string >           m_counter2channel;
+   map< string, vector< string > > m_counterName;
+   map< string, int >              m_lastCutPassed;
 
    HistogramManager * m_hm;
    AnalysisParams_t * m_config;
