@@ -36,15 +36,16 @@ bool NtupleWrapperHWWtth::MakeEventInfo( EventData * ed )
 
   // good PV
   bool goodPV = false;
-  for( int n = 0 ; n < m_ntuple->Nvxp ; ++n ) {
-    const int ntrx = m_ntuple->m_vxp_nTracks->at(n);
-    if( ntrx >= 5 ) {
-	goodPV = true;
-	break;
-    }
+//  for( int n = 0 ; n < m_ntuple->Nvxp ; ++n ) {
+//    const int ntrx = m_ntuple->m_vxp_nTracks->at(n);
+  const int ntrx = m_ntuple->m_vxp_nTracks->at(0);	
+  if( ntrx >= 5 ) {
+    goodPV = true;
+    // break;
   }
+  // }
   ed->property["goodPV"] = goodPV;
-
+  
   return success;
 }
 

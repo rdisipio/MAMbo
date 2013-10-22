@@ -43,7 +43,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
   //// example:
   double weight = ed->info.mcWeight;
   PassedCut( weight );
-
+ 
   // Pass electron trigger
   bool trigflag = 
     ( PASSED_TRIGGER( "EF_e24vhi_medium1" ) || PASSED_TRIGGER( "EF_e24vhi_medium1" ) ) ||
@@ -58,6 +58,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
   // Event cleaning
   if( int( ed->property["passEventCleaning"] ) != 1 ) return success;
   PassedCut( weight );
+
 
   int el_n  = ed->electrons.n;
   int mu_n  = ed->muons.n;
@@ -105,11 +106,11 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
   // Same-sign
   const double q1 = ed->electrons.q[0];
   const double q2 = ed->electrons.q[1];
-  if( q1*q1 < 0 ) return success;
+  if( q1*q2 < 0 ) return success;
   PassedCut( weight );
 
   // Z mass veto
-  TLorentzVector Z = HelperFunctions::MakeMomentum( ed->electrons, 0 ) + HelperFunctions::MakeMomentum( ed->electrons, 1 );
+  TLorentzVector Z = HelperFunctions::MakeFourMomentum( ed->electrons, 0 ) + HelperFunctions::MakeFourMomentum( ed->electrons, 1 );
   if( fabs( Z.M()/GeV - 91.2 ) <= 10. ) return success;
   PassedCut( weight );
 

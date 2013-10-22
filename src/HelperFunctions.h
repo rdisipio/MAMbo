@@ -26,7 +26,7 @@ namespace HelperFunctions {
   int    FindFatJets( EventData * ed, const double fjet_ptmin = 300.*GeV, fastjet::JetAlgorithm alg = fastjet::antikt_algorithm, double R = 1.0 );
 
   template< class T > 
-  TLorentzVector MakeMomentum( const T& coll, int i ) {
+  TLorentzVector MakeFourMomentum( const T& coll, int i ) {
      TLorentzVector p;
 
      p.SetPtEtaPhiE( coll.pT.at(i), coll.eta.at(i), coll.phi.at(i), coll.E.at(i) );
