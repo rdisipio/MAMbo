@@ -49,6 +49,8 @@ typedef vector< JetTag >       array_tag;
 
 typedef map< string, TH1* > HistogramCollection_t;
 
+typedef map< string, vector< double > > PropertyCollection_t;
+
 /////////////////////////////////////////////
 
 

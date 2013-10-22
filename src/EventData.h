@@ -17,6 +17,7 @@ struct EventData
     int      hfor;
     float    MC_vxp_z;
     double   eventWeight;
+    map< string, double > property;
   } info;
 
   struct Lepton_t { 
@@ -27,6 +28,7 @@ struct EventData
     double E;
     double m;
     double q;
+    PropertyCollection_t property; // see src/Commons.h
   } lepton;
 
   struct Electrons_t { 
@@ -37,6 +39,7 @@ struct EventData
     array_d E;
     array_d m;
     array_d q;
+    PropertyCollection_t property;
   } electrons;
 
   struct Muons_t { 
@@ -47,6 +50,7 @@ struct EventData
     array_d E;
     array_d m;
     array_d q;
+    PropertyCollection_t property;
   } muons;
 
   struct Jets_t { 
@@ -57,6 +61,7 @@ struct EventData
     array_d E;
     array_d m;
     array_tag tag;
+    PropertyCollection_t property;
   } jets;
 
   struct bJets_t { 
@@ -66,6 +71,7 @@ struct EventData
     array_d phi;
     array_d E;
     array_d m;
+    PropertyCollection_t property;
   } bjets;
 
   struct fJet_t { 
@@ -80,6 +86,7 @@ struct EventData
     array_d dPhi_lj;
     array_d tag;
     array_d hadt_m;
+    PropertyCollection_t property;
   } fjets;
 
   struct Truth_t {
@@ -94,6 +101,7 @@ struct EventData
     array_d E;
     array_d m;
     array_d q;
+    PropertyCollection_t property;
   };
  
   struct MET_t {

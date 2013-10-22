@@ -73,6 +73,9 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed, int * lastCutPassed )
     m_hm->GetHistogram( "el_eta" )->Fill( ed->electrons.eta.at( j ), weight );
     m_hm->GetHistogram( "el_phi" )->Fill( ed->electrons.phi.at( j ), weight );
     m_hm->GetHistogram( "el_E" )->Fill( ed->electrons.E.at( j ) / GeV, weight );
+
+    double etcone20_o_pT = ed->electrons.property["Etcone20"].at(j) / ed->electrons.pT.at( j );
+    m_hm->GetHistogram( "el_Etcone20_over_pT" )->Fill( etcone20_o_pT, weight );
   }
   
   m_hm->GetHistogram( "mu_n" )->Fill( mu_n, weight );

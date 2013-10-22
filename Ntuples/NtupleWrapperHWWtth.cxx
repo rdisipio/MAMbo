@@ -99,6 +99,8 @@ bool NtupleWrapperHWWtth::MakeEventElectrons( EventData * ed )
   
     const double q = ( GET_VALUE_VECTOR( electron_ID, i ) < 0 ) ? -1. : 1.; 
     ed->electrons.q.push_back( q );
+
+    ed->electrons.property["Etcone20"].push_back( GET_VALUE_VECTOR( electron_Etcone20, i) );
   }
  
 
