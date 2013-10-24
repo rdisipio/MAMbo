@@ -109,6 +109,8 @@ bool NtupleWrapperHWWtth::MakeEventElectrons( EventData * ed )
     ed->electrons.property["sigd0PV"].push_back( GET_VALUE_VECTOR( electron_sigd0PV, i) );
     ed->electrons.property["d0"].push_back( GET_VALUE_VECTOR( electron_d0, i) );
     ed->electrons.property["ptcone20"].push_back( GET_VALUE_VECTOR( electron_ptcone20, i) );
+    ed->electrons.property["z0SinTheta"].push_back( GET_VALUE_VECTOR( electron_z0SinTheta, i) );
+
   }
  
 
@@ -135,7 +137,9 @@ bool NtupleWrapperHWWtth::MakeEventMuons( EventData * ed )
     ed->muons.property["isTight"].push_back( GET_VALUE_VECTOR( muon_isTight, i) );
     ed->muons.property["Etcone20"].push_back( GET_VALUE_VECTOR( muon_Etcone20, i) );
     ed->muons.property["z0PV"].push_back( GET_VALUE_VECTOR( muon_z0PV, i) );
+    ed->muons.property["z0SinTheta"].push_back( GET_VALUE_VECTOR( muon_z0SinTheta, i) );
     ed->muons.property["sigd0PV"].push_back( GET_VALUE_VECTOR( muon_sigd0PV, i) );
+    ed->muons.property["d0"].push_back( GET_VALUE_VECTOR( muon_d0, i) );
     ed->muons.property["ptcone20"].push_back( GET_VALUE_VECTOR( muon_ptcone20, i) );
 
     const double q = ( GET_VALUE_VECTOR( muon_ID, i ) < 0 ) ? -1. : 1.;

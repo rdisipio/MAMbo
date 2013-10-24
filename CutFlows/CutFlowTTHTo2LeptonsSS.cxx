@@ -71,6 +71,35 @@ bool CutFlowTTHTo2LeptonsSS::Initialize()
   SetCutName( "MUMU", "unweight", 7, "Z mass veto" );
   SetCutName( "MUMU", "unweight", 8, ">= 2 jet" );
 
+  //  good electron channel
+  SetCutName( "ALL", "good_el", 0, "Input" );
+  SetCutName( "ALL", "good_el", 1, "CutAuthor" );
+  SetCutName( "ALL", "good_el", 2, "CutEta" );
+  SetCutName( "ALL", "good_el", 3, "CutEtaCrack" );
+  SetCutName( "ALL", "good_el", 4, "CutPt" );
+  SetCutName( "ALL", "good_el", 5, "CutPID" );
+  SetCutName( "ALL", "good_el", 6, "CutZ0Sin" );
+  SetCutName( "ALL", "good_el", 7, "CutD0SIg" );
+  SetCutName( "ALL", "good_el", 8, "CutEtIso1" );
+  SetCutName( "ALL", "good_el", 9, "CutEtIso2" );
+  SetCutName( "ALL", "good_el", 10, "CutPtIso" );
+
+  //  good muon channel
+  SetCutName( "ALL", "good_mu", 0, "Input" );
+  SetCutName( "ALL", "good_mu", 1, "CutEta" );
+  SetCutName( "ALL", "good_mu", 2, "CutPt" );
+  SetCutName( "ALL", "good_mu", 3, "CutCombined" );
+  SetCutName( "ALL", "good_mu", 4, "CutPID" );
+  SetCutName( "ALL", "good_mu", 5, "CutZ0Sin" );
+  SetCutName( "ALL", "good_mu", 6, "CutD0Sig" );
+  SetCutName( "ALL", "good_mu", 7, "CutEtIso1" );
+  SetCutName( "ALL", "good_mu", 8, "CutEtIso2" );
+  SetCutName( "ALL", "good_mu", 9, "CutPtIso" );
+
+  SetCutName( "ALL", "good_jet", 0, "Input" );
+  SetCutName( "ALL", "good_jet", 1, "CutPt1" );
+  SetCutName( "ALL", "good_jet", 2, "CutPt2" );
+
   return success;
 }
 
@@ -144,22 +173,22 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
     IncreaseCount( "ALL_cutflow_good_el", 5 );
 
     //CutZ0Sin
-    if (ed->electrons.property["z0PV"].at(j)>= 0.4)
+    if (fabs(ed->electrons.property["z0SinTheta"].at(j))>= 0.4)
       continue;
     IncreaseCount( "ALL_cutflow_good_el", 6 );
 
     //CutD0Sig
-    if (ed->electrons.property["sigd0PV"].at(j)>=3)
+    if (fabs(ed->electrons.property["sigd0PV"].at(j))>=3.)
       continue;
     IncreaseCount( "ALL_cutflow_good_el", 7 );
 
-    //CutEtIso1
-    if (!(el_pt <20 || etcone20_o_pT<0.1))
+     //CutEtIso1
+    if (!(el_pt <20 || etcone20_o_pT < 0.1))
       continue;
     IncreaseCount( "ALL_cutflow_good_el", 8 );
 
     //CutEtIso2
-    if (!(el_pt >= 20 || etcone20_o_pT <0.05))
+    if (!(el_pt >= 20 || etcone20_o_pT < 0.05))
       continue;
     IncreaseCount( "ALL_cutflow_good_el", 9 );
 
@@ -201,11 +230,11 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
       continue;
     IncreaseCount( "ALL_cutflow_good_mu", 4 );
      //CutZ0Sin
-    if (ed->muons.property["z0PV"].at(j)>=1)
+    if (fabs(ed->muons.property["z0SinTheta"].at(j))>=1)
       continue;
     IncreaseCount( "ALL_cutflow_good_mu", 5 );
     //CutD0Sig
-    if (ed->muons.property["sigd0PV"].at(j)>=3)
+    if (fabs(ed->muons.property["sigd0PV"].at(j))>=3)
       continue;
     IncreaseCount( "ALL_cutflow_good_mu", 6 );
     //CutEtIso1

@@ -27,6 +27,7 @@ electron_Etcone20
 electron_author
 electron_isMediumPP
 electron_z0PV
+electron_z0SinTheta
 electron_sigd0PV
 electron_d0
 electron_ptcone20
@@ -40,7 +41,9 @@ muon_isCombined
 muon_isTight
 muon_Etcone20
 muon_z0PV
+muon_z0SinTheta
 muon_sigd0PV
+muon_d0
 muon_ptcone20
 m_jet_n
 m_jet_E
