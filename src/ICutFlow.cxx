@@ -53,14 +53,14 @@ void CutFlow::AddChannel( const string& name )
 ///////////////////////////////////////
 
 
-void CutFlow::AddCounterName( const string& channelName, const string& counterName, unsigned int nbins ) 
+void CutFlow::AddCounterName( const string& channelName, const string& counterName, unsigned int ncuts ) 
 {
   m_counter2channel[counterName] = channelName;
   m_counterName[channelName].push_back( counterName );
 
   cout << "INFO: Channel " << channelName << " | added counter " << counterName << endl;
 
-  if( nbins == 0 ) return;
+  const unsigned int nbins = ncuts + 1;
 
   stringstream histName;
   histName << channelName << "_cutflow_" << counterName;
@@ -76,19 +76,44 @@ void CutFlow::AddCounterName( const string& channelName, const string& counterNa
 ///////////////////////////////////////
 
 
+bool CutFlow::IncreaseCount( const string& histName, unsigned int cut, double weight, double * new_value )
+{
+  TH1 * p_h = m_hm->GetHistogram( histName );
+
+  if( !p_h ) return false;
+
+  const unsigned int bin = cut + 1;
+
+  double old_count = p_h->GetBinContent( bin );
+  double new_count = old_count + weight;
+  p_h->SetBinContent( bin, new_count );
+
+  if( new_value ) *new_value = new_count;
+
+  return true;
+}
+
+
+///////////////////////////////////////
+
+
 void CutFlow::PassedCut( const string& channelName, const string& counterName, const double weight )
 {
   stringstream histName;
-  histName << channelName << "_" << counterName;
+  histName << channelName << "_cutflow_" << counterName;
 
-  m_lastCutPassed[counterName] += 1;
-  const int bin = m_lastCutPassed[counterName];
-
-  TH1 * p_h = m_hm->GetHistogram( histName.str() );
-
-  double old_count = p_h->GetBinContent( bin );
-  p_h->SetBinContent( bin, old_count + weight );
+  m_lastCutPassed[histName.str()] += 1;
+  const int cut = m_lastCutPassed[histName.str()] - 1;
   
+  if( !IncreaseCount( histName.str(), cut, weight ) ) {
+    histName.str("");
+    histName << channelName << "_" << counterName;
+    
+    if( !IncreaseCount( histName.str(), cut, weight ) ) {
+      cout << "ERROR: invalid cut flow " << histName.str() << endl;
+      throw runtime_error( "CutFlow::PassedCut: invalid cut flow\n" );
+    }
+  }
 }
 
 
@@ -102,16 +127,26 @@ void CutFlow::PrintOutStats()
     
     for( vector< string >::const_iterator itrCt = counters->begin() ; itrCt != counters->end() ; ++itrCt ) {
       stringstream histName;
-      histName << (*itrCh) << "_" << (*itrCt);
+      histName << (*itrCh) << "_cutflow_" << (*itrCt);
       
-      TH1 * p_cfh = m_hm->GetHistogram( histName.str() );
-      const int ncuts = p_cfh->GetNbinsX();
+      TH1 * p_h_cf = m_hm->GetHistogram( histName.str() );
+      if( !p_h_cf ) {
+	histName.str("");
+	histName << (*itrCh) << "_" << (*itrCt);
+	p_h_cf = m_hm->GetHistogram( histName.str() );
+      }
+      if( !p_h_cf ) {
+	char buf[256];
+	sprintf( buf, "Invalid histogram %s\n", histName.str().c_str() );
+	throw runtime_error( buf );
+      }
+      const int ncuts = p_h_cf->GetNbinsX();
 
       cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-      cout << " * Cut flow: " << p_cfh->GetTitle() << endl << endl;
+      cout << " * Cut flow: " << p_h_cf->GetTitle() << endl << endl;
 
       for( int nc = 0 ; nc < ncuts ; ++nc ) {
-	printf( "%2i) %-20s %10.0f\n", nc, p_cfh->GetXaxis()->GetBinLabel(nc+1), p_cfh->GetBinContent(nc+1) );
+	printf( "%2i) %-20s %10.0f\n", nc, p_h_cf->GetXaxis()->GetBinLabel(nc+1), p_h_cf->GetBinContent(nc+1) );
       } 
 
       cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
@@ -131,15 +166,20 @@ void CutFlow::PrintOutStats()
 void CutFlow::SetCutName( const string& channelName, const string& counterName, int n, const char * cutName )
 {
   stringstream histName;
-  histName << channelName << "_" << counterName;
+  histName << channelName << "_cutflow_" << counterName;
 
-  TH1 * p_cfh = m_hm->GetHistogram( histName.str() );
-  if( !p_cfh ) {
+  TH1 * p_h_cf = m_hm->GetHistogram( histName.str() );
+  if( !p_h_cf ) {
+    histName.str("");
+    histName << channelName << "_" << counterName;
+    p_h_cf = m_hm->GetHistogram( histName.str() );
+  }
+  if( !p_h_cf ) {
     cout << "WARNING: no cut flow histogram defined with name " << histName << endl;
     return;
   } 
 
-  TAxis * p_x = (TAxis*)p_cfh->GetXaxis();
+  TAxis * p_x = (TAxis*)p_h_cf->GetXaxis();
   
   p_x->SetBinLabel( n+1, cutName );
 }

@@ -63,7 +63,7 @@ TH1F * HistogramManager::Book1DHistogram( TH1F * h, const string& path )
   if( m_sumw2 ) m_histograms[path]->Sumw2();
 
   m_h1_names.push_back( path );
-  cout << "DEBUG: Created histogram " << path << endl;
+  //cout << "DEBUG: Created histogram " << path << endl;
 
   return (TH1F*)m_histograms[path];
 }

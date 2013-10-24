@@ -18,14 +18,20 @@ class CutFlow
 
    virtual bool Initialize();
    virtual bool Apply( EventData * ed ) = 0;
+
+   virtual void PrintOutStats();
+
+ protected:
    virtual void PassedCut( const string& channelName, const string& counterName, const double weight = 1. );
 
    virtual void AddChannel( const string& name );
-   virtual void AddCounterName( const string& channelName, const string& counterName, unsigned int nbins = 0 );
+   virtual void AddCounterName( const string& channelName, const string& counterName, unsigned int ncuts = 0 );
 
    virtual bool Start();
-   virtual void PrintOutStats();
+   
    virtual void SetCutName( const string& channelName, const string& counterName, int n, const char * cutName );
+
+   virtual bool IncreaseCount( const string& histName, unsigned int cut, double weight = 1., double * new_value = NULL );
 
  protected:
    vector< string > m_channelName;

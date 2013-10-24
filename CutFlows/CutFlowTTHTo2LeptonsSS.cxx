@@ -2,12 +2,6 @@
 
 CutFlowTTHTo2LeptonsSS::CutFlowTTHTo2LeptonsSS()
 {
-  AddChannel( "ELEL" );
-  AddChannel( "MUMU" );
-
-  AddCounterName( "ELEL", "ee_weighted" );
-  AddCounterName( "ELEL", "ee_unweight" );
-  AddCounterName( "MUMU", "mumu_unweight" );
 }
 
 CutFlowTTHTo2LeptonsSS::~CutFlowTTHTo2LeptonsSS()
@@ -22,35 +16,60 @@ bool CutFlowTTHTo2LeptonsSS::Initialize()
 {
   bool success = true;
 
-  SetCutName( "ELEL", "ee_weighted", 0, "All Events" );
-  SetCutName( "ELEL", "ee_weighted", 1, "Trigger" );
-  SetCutName( "ELEL", "ee_weighted", 2, "Prim. Vtx" );
-  SetCutName( "ELEL", "ee_weighted", 3, "Cleaning" );
-  SetCutName( "ELEL", "ee_weighted", 4, "2 leptons" );
-  SetCutName( "ELEL", "ee_weighted", 5, "2 electrons" );
-  SetCutName( "ELEL", "ee_weighted", 6, ">= 1 SS pair" );
-  SetCutName( "ELEL", "ee_weighted", 7, "Z mass veto" );
-  SetCutName( "ELEL", "ee_weighted", 8, ">= 2 jet" );
+  AddChannel( "ALL" );
+  AddCounterName( "ALL", "good_el",  10 );
+  AddCounterName( "ALL", "good_mu",  9 );
+  AddCounterName( "ALL", "good_jet", 2 );
 
-  SetCutName( "ELEL", "ee_unweight", 0, "All Events" );
-  SetCutName( "ELEL", "ee_unweight", 1, "Trigger" );
-  SetCutName( "ELEL", "ee_unweight", 2, "Prim. Vtx" );
-  SetCutName( "ELEL", "ee_unweight", 3, "Cleaning" );
-  SetCutName( "ELEL", "ee_unweight", 4, "2 leptons" );
-  SetCutName( "ELEL", "ee_unweight", 5, "2 electrons" );
-  SetCutName( "ELEL", "ee_unweight", 6, ">= 1 SS pair" );
-  SetCutName( "ELEL", "ee_unweight", 7, "Z mass veto" );
-  SetCutName( "ELEL", "ee_unweight", 8, ">= 2 jet" );
+  AddChannel( "ELEL" );
+  AddCounterName( "ELEL", "weighted",   8 );
+  AddCounterName( "ELEL", "unweight",   8 );
 
-  SetCutName( "MUMU", "mumu_unweight", 0, "All Events" );
-  SetCutName( "MUMU", "mumu_unweight", 1, "Trigger" );
-  SetCutName( "MUMU", "mumu_unweight", 2, "Prim. Vtx" );
-  SetCutName( "MUMU", "mumu_unweight", 3, "Cleaning" );
-  SetCutName( "MUMU", "mumu_unweight", 4, "2 leptons" );
-  SetCutName( "MUMU", "mumu_unweight", 5, "2 muons" );
-  SetCutName( "MUMU", "mumu_unweight", 6, ">= 1 SS pair" );
-  SetCutName( "MUMU", "mumu_unweight", 7, "Z mass veto" );
-  SetCutName( "MUMU", "mumu_unweight", 8, ">= 2 jet" );
+  AddChannel( "MUMU" );
+  AddCounterName( "MUMU", "weighted", 8 );
+  AddCounterName( "MUMU", "unweight", 8 );
+
+  // di-electron channel
+  SetCutName( "ELEL", "weighted", 0, "All Events" );
+  SetCutName( "ELEL", "weighted", 1, "Trigger" );
+  SetCutName( "ELEL", "weighted", 2, "Prim. Vtx" );
+  SetCutName( "ELEL", "weighted", 3, "Cleaning" );
+  SetCutName( "ELEL", "weighted", 4, "2 leptons" );
+  SetCutName( "ELEL", "weighted", 5, "2 electrons" );
+  SetCutName( "ELEL", "weighted", 6, ">= 1 SS pair" );
+  SetCutName( "ELEL", "weighted", 7, "Z mass veto" );
+  SetCutName( "ELEL", "weighted", 8, ">= 2 jet" );
+
+  SetCutName( "ELEL", "unweight", 0, "All Events" );
+  SetCutName( "ELEL", "unweight", 1, "Trigger" );
+  SetCutName( "ELEL", "unweight", 2, "Prim. Vtx" );
+  SetCutName( "ELEL", "unweight", 3, "Cleaning" );
+  SetCutName( "ELEL", "unweight", 4, "2 leptons" );
+  SetCutName( "ELEL", "unweight", 5, "2 electrons" );
+  SetCutName( "ELEL", "unweight", 6, ">= 1 SS pair" );
+  SetCutName( "ELEL", "unweight", 7, "Z mass veto" );
+  SetCutName( "ELEL", "unweight", 8, ">= 2 jet" );
+
+  // di-muon channel
+  SetCutName( "MUMU", "weighted", 0, "All Events" );
+  SetCutName( "MUMU", "weighted", 1, "Trigger" );
+  SetCutName( "MUMU", "weighted", 2, "Prim. Vtx" );
+  SetCutName( "MUMU", "weighted", 3, "Cleaning" );
+  SetCutName( "MUMU", "weighted", 4, "2 leptons" );
+  SetCutName( "MUMU", "weighted", 5, "2 muons" );
+  SetCutName( "MUMU", "weighted", 6, ">= 1 SS pair" );
+  SetCutName( "MUMU", "weighted", 7, "Z mass veto" );
+  SetCutName( "MUMU", "weighted", 8, ">= 2 jet" );
+
+  SetCutName( "MUMU", "unweight", 0, "All Events" );
+  SetCutName( "MUMU", "unweight", 1, "Trigger" );
+  SetCutName( "MUMU", "unweight", 2, "Prim. Vtx" );
+  SetCutName( "MUMU", "unweight", 3, "Cleaning" );
+  SetCutName( "MUMU", "unweight", 4, "2 leptons" );
+  SetCutName( "MUMU", "unweight", 5, "2 muons" );
+  SetCutName( "MUMU", "unweight", 6, ">= 1 SS pair" );
+  SetCutName( "MUMU", "unweight", 7, "Z mass veto" );
+  SetCutName( "MUMU", "unweight", 8, ">= 2 jet" );
 
   return success;
 }
@@ -79,6 +98,10 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
   m_hm->GetHistogram( "mu_n" )->Fill( mu_n, weight );
   m_hm->GetHistogram( "jet_n" )->Fill( jet_n, weight );
 
+
+  //////////////////////////////
+  // Start Preselection
+
   for( int j = 0 ; j < el_n ; ++j ) {
 
     double el_pt = ed->electrons.pT.at( j )/GeV;
@@ -92,49 +115,59 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
     m_hm->GetHistogram( "el_Etcone20_over_pT" )->Fill( etcone20_o_pT, weight );
 
     // CutFlow GOOD electrons
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(0);
+    IncreaseCount( "ALL_cutflow_good_el", 0 );
+
     // CutAuthor
     double el_author = ed->electrons.property["author"].at(j);
     if (!(el_author ==1 || el_author==3 ))
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(1);
+    IncreaseCount( "ALL_cutflow_good_el", 1 );
+
     //CutEta
     if (fabs(ed->electrons.property["ClEta"].at(j)) > 2.47)
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(2); 
+    IncreaseCount( "ALL_cutflow_good_el", 2 );
+
     //CutEtaCrack
     if (!(fabs(ed->electrons.property["ClEta"].at(j))<1.37 || fabs(ed->electrons.property["ClEta"].at(j))>1.52))
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(3);
+    IncreaseCount( "ALL_cutflow_good_el", 3 );
+
     //CutPt
     if (el_pt < 10)
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(4);
+    IncreaseCount( "ALL_cutflow_good_el", 4 );
+
     //CutPID
     if (ed->electrons.property["isMediumPP"].at(j)!=1)
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(5);
+    IncreaseCount( "ALL_cutflow_good_el", 5 );
+
     //CutZ0Sin
     if (ed->electrons.property["z0PV"].at(j)>= 0.4)
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(6);
+    IncreaseCount( "ALL_cutflow_good_el", 6 );
+
     //CutD0Sig
     if (ed->electrons.property["sigd0PV"].at(j)>=3)
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(7);
+    IncreaseCount( "ALL_cutflow_good_el", 7 );
+
     //CutEtIso1
     if (!(el_pt <20 || etcone20_o_pT<0.1))
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(8);
+    IncreaseCount( "ALL_cutflow_good_el", 8 );
+
     //CutEtIso2
     if (!(el_pt >= 20 || etcone20_o_pT <0.05))
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(9);
+    IncreaseCount( "ALL_cutflow_good_el", 9 );
+
     //CutPtIso
     double ptcone20_o_pT = ed->electrons.property["ptcone20"].at(j) / el_pt;
     if (ptcone20_o_pT > 0.05)
       continue;
-    m_hm->GetHistogram("el_Good_CutFlow")->Fill(10);
+    IncreaseCount( "ALL_cutflow_good_el", 10 );
 
   }
 
@@ -150,44 +183,44 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
     m_hm->GetHistogram( "mu_E" )->Fill( ed->muons.E.at( j ) / GeV, weight );
 
     // CutFlow GOOD muons
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(0);
+    IncreaseCount( "ALL_cutflow_good_mu", 0 );
     // CutEta
     if (fabs(mu_eta)>2.5)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(1);
+    IncreaseCount( "ALL_cutflow_good_mu", 1 );
     // CutPt
     if (mu_pt<10)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(2);
+    IncreaseCount( "ALL_cutflow_good_mu", 2 );
     // CutCombined
     if (ed->muons.property["isCombined"].at(j)!=1)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(3);
+    IncreaseCount( "ALL_cutflow_good_mu", 3 );
     // CutPID
     if (ed->muons.property["isTight"].at(j)!=1)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(4);
+    IncreaseCount( "ALL_cutflow_good_mu", 4 );
      //CutZ0Sin
     if (ed->muons.property["z0PV"].at(j)>=1)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(5);
+    IncreaseCount( "ALL_cutflow_good_mu", 5 );
     //CutD0Sig
     if (ed->muons.property["sigd0PV"].at(j)>=3)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(6);
+    IncreaseCount( "ALL_cutflow_good_mu", 6 );
     //CutEtIso1
     if (!(mu_pt <20 || etcone20_o_pT<0.1))
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(7);
+    IncreaseCount( "ALL_cutflow_good_mu", 7 );
     //CutEtIso2
     if (!(mu_pt >= 20 || etcone20_o_pT <0.05))
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(8);
+    IncreaseCount( "ALL_cutflow_good_mu", 8 );
     //CutPtIso
     double ptcone20_o_pT = ed->muons.property["ptcone20"].at(j) / mu_pt;
     if (ptcone20_o_pT >= 0.05)
       continue;
-    m_hm->GetHistogram("mu_Good_CutFlow")->Fill(9);
+    IncreaseCount( "ALL_cutflow_good_mu", 9 );
 
   }
 
@@ -202,21 +235,27 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
     m_hm->GetHistogram( "jet_E" )->Fill( ed->jets.E.at( j ) / GeV, weight );
 
     // CutFlow GOOD jets
-    m_hm->GetHistogram("jet_Good_CutFlow")->Fill(0);
+    IncreaseCount( "ALL_cutflow_good_jet", 0 );
+
     // CutPt1
     if (jet_pt<25)
       continue;
-    m_hm->GetHistogram("jet_Good_CutFlow")->Fill(1);
+    IncreaseCount( "ALL_cutflow_good_jet", 1 );
+
     // CutPt2
     if (!(jet_pt>30 || fabs(jet_eta)<2.4))
       continue;
-    m_hm->GetHistogram("jet_Good_CutFlow")->Fill(2);
+   IncreaseCount( "ALL_cutflow_good_jet", 2 );
 
   }
 
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
-  PassedCut( "MUMU", "mumu_unweight" );
+  //////////////////////////////
+  // Start real analysis
+
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
  
   // Pass electron trigger
   bool trigflag = 
@@ -224,75 +263,83 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
     ( PASSED_TRIGGER( "EF_e60_medium1" )    || PASSED_TRIGGER( "EF_mu24i_tight" ) );
   if( !trigflag ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // PV
   if( int(ed->property["goodPV"]) == 0 ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // Event cleaning
   if( int( ed->property["passEventCleaning"] ) != 1 ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // At least 2 electrons, or 2 muons, or 1e1mu
   if( ( el_n + mu_n ) < 2 ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // 2 el
   if( el_n < 2 ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // 2 mu
   if( mu_n < 2 ) 
     return success;
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // Same-sign
   const double q1 = ed->electrons.q[0];
   const double q2 = ed->electrons.q[1];
   if( q1*q2 < 0 ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   const double q1_mu = ed->muons.q[0];
   const double q2_mu = ed->muons.q[1];
   if( q1_mu*q2_mu < 0 ) 
     return success;
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // Z mass veto
   TLorentzVector Z = HelperFunctions::MakeFourMomentum( ed->electrons, 0 ) + HelperFunctions::MakeFourMomentum( ed->electrons, 1 );
   if( fabs( Z.M()/GeV - 91.2 ) <= 10. ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
 
   // Z mass veto
   TLorentzVector Z_mu = HelperFunctions::MakeFourMomentum( ed->muons, 0 ) + HelperFunctions::MakeFourMomentum( ed->muons, 1 );
   if( fabs( Z_mu.M()/GeV - 91.2 ) <= 10. ) 
     return success;
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   // jet count
   if( jet_n < 2 ) 
     return success;
-  PassedCut( "ELEL", "ee_weighted", weight );
-  PassedCut( "ELEL", "ee_unweight" );
-  PassedCut( "MUMU", "mumu_unweight" );
+  PassedCut( "ELEL", "weighted", weight );
+  PassedCut( "ELEL", "unweight" );
+  PassedCut( "MUMU", "weighted", weight );
+  PassedCut( "MUMU", "unweight" );
 
   return success;
 }

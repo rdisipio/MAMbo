@@ -53,7 +53,7 @@ CutFlow * INtupleWrapper::AddCutFlow( const string& name )
 
 void INtupleWrapper::Loop( Long64_t nEventsMax )
 {
-  m_maxEvents = nEventsMax - 1;
+  m_maxEvents = nEventsMax;
 
   m_thisEventNumber = 0; // default = uninitialized = -1
 
@@ -81,7 +81,7 @@ EventData * INtupleWrapper::NextEvent()
 {
    if( m_thisEvent ) delete m_thisEvent;
 
-   m_thisEvent = MakeEvent( ++m_thisEventNumber ); // must be implemented at some point downstream
+   m_thisEvent = MakeEvent( (++m_thisEventNumber-1) ); // must be implemented at some point downstream
 
    if( ( m_thisEventNumber % int(m_maxEvents/10) ) == 0 ) {
      double perc = 100. * m_thisEventNumber / m_maxEvents;
