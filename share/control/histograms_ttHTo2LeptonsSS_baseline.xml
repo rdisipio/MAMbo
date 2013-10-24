@@ -2,8 +2,9 @@
   
   <TH1F name="vxp_nTracks"   title="No. of tracks per pv" nbins="20"  xmin="0" xmax="20" />
   
-  <TH1F name="ELEL_weighted" title="Cut Flow ee channel (weighted)"      nbins="10" xmin="-0.5" xmax="9.5" />
-  <TH1F name="ELEL_unweight" title="Cut Flow ee channel (unweighted)"    nbins="10" xmin="-0.5" xmax="9.5" />
+  <TH1F name="ELEL_ee_weighted"   title="Cut Flow ee channel (weighted)"     nbins="10" xmin="-0.5" xmax="9.5" />
+  <TH1F name="ELEL_ee_unweight"   title="Cut Flow ee channel (unweighted)"   nbins="10" xmin="-0.5" xmax="9.5" />
+  <TH1F name="MUMU_mumu_unweight" title="Cut Flow mumu channel (unweighted)" nbins="10" xmin="-0.5" xmax="9.5" />
 
   <TH1F name="MUMU_cutflow" title="Cut Flow #mu#mu channel" nbins="10" xmin="-0.5" xmax="9.5" />
   <TH1F name="ELMU_cutflow" title="Cut Flow e#mu channel"   nbins="10" xmin="-0.5" xmax="9.5" />
@@ -14,6 +15,10 @@
   <TH1F name="el_phi" title="Electron azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
   <TH1F name="el_E"   title="Electron energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
   <TH1F name="el_Etcone20_over_pT"   title="Electron E_{T}(0.2)/p_{T}"   nbins="100" xmin="0."   xmax="5." />
+
+  <TH1F name="el_Good_CutFlow"   title="CutFlow good electrons" nbins="11"  xmin="-0.5" xmax="10.5" />
+  <TH1F name="mu_Good_CutFlow"   title="CutFlow good muons" nbins="10"  xmin="-0.5" xmax="9.5" />
+  <TH1F name="jet_Good_CutFlow"   title="CutFlow good jets" nbins="3"  xmin="-0.5" xmax="2.5" />
 
   <TH1F name="mu_n"   title="No. of muons" nbins="5"  xmin="-0.5" xmax="4.5" />
   <TH1F name="mu_pt"  title="Muon p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
