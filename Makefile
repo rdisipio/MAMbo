@@ -18,6 +18,7 @@ install: core ntuples cutflows
 	@ln -sf $(PWD)/Ntuples/*.so $(PWD)/lib/
 	@ln -sf $(PWD)/CutFlows/*.so $(PWD)/lib/
 	@ln -sf $(PWD)/share/control/ $(PWD)/run/
+	@ln -sf $(PWD)/bin/setup_env.sh $(PWD)/run/
 
 	@ln -sf $(PWD)/src/$(EXE) $(PWD)/bin/
 
