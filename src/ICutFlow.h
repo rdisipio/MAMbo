@@ -21,7 +21,7 @@ class CutFlow
    virtual void PassedCut( const string& channelName, const string& counterName, const double weight = 1. );
 
    virtual void AddChannel( const string& name );
-   virtual void AddCounterName( const string& channelName, const string& counterName );
+   virtual void AddCounterName( const string& channelName, const string& counterName, unsigned int nbins = 0 );
 
    virtual bool Start();
    virtual void PrintOutStats();

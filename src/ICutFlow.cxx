@@ -53,12 +53,23 @@ void CutFlow::AddChannel( const string& name )
 ///////////////////////////////////////
 
 
-void CutFlow::AddCounterName( const string& channelName, const string& counterName ) 
+void CutFlow::AddCounterName( const string& channelName, const string& counterName, unsigned int nbins ) 
 {
   m_counter2channel[counterName] = channelName;
   m_counterName[channelName].push_back( counterName );
 
   cout << "INFO: Channel " << channelName << " | added counter " << counterName << endl;
+
+  if( nbins == 0 ) return;
+
+  stringstream histName;
+  histName << channelName << "_cutflow_" << counterName;
+
+  stringstream histTitle;
+  histTitle << "Cutflow " << channelName << " " << counterName;
+
+  m_hm->Book1DHistogram( histName.str(), histTitle.str(), nbins, -0.5, nbins-0.5 );
+
 };
 
 
