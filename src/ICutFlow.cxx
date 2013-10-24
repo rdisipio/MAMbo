@@ -70,6 +70,13 @@ void CutFlow::AddCounterName( const string& channelName, const string& counterNa
 
   m_hm->Book1DHistogram( histName.str(), histTitle.str(), nbins, -0.5, nbins-0.5 );
 
+  SetCutName( channelName, counterName, 0, "AllEvents" );  
+  char buf[32];
+  for( unsigned int nc = 1 ; nc <= ncuts ; ++nc ) {
+    sprintf( buf, "Cut %i", nc );
+    SetCutName( channelName, counterName, nc, buf );
+  }
+
 };
 
 
