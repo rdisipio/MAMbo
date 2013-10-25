@@ -70,10 +70,6 @@ cat > $jobfile <<EOF
 #!/bin/bash
 echo Running on \$HOSTNAME
 
-#export PATH=${PATH}
-#export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-#export FASTJETLOCATION=${FASTJETLOCATION}
-
 cd ${WORKDIR}
 
 source MAMbo-setenv.sh
@@ -84,4 +80,4 @@ EOF
 
 chmod +x $jobfile
 
-bsub -q $queue -oe -o $logfile -J $jobname $jobfile
+bsub -q $queue -oe -oo $logfile -J $jobname $jobfile
