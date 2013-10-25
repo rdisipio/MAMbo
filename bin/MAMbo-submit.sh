@@ -64,13 +64,15 @@ test -d $outdir || mkdir -p $outdir
 jobfile=$jobdir/${jobname}.job.sh
 logfile=$logdir/${jobname}.log
 
+rm -fr $logfile
+
 cat > $jobfile <<EOF
 #!/bin/bash
 echo Running on \$HOSTNAME
 
-export PATH=${PATH}
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-export FASTJETLOCATION=${FASTJETLOCATION}
+#export PATH=${PATH}
+#export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
+#export FASTJETLOCATION=${FASTJETLOCATION}
 
 cd ${WORKDIR}
 
