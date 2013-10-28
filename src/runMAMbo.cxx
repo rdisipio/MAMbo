@@ -54,6 +54,8 @@ int main( int argc, char ** argv )
     opt = getopt( argc, argv, options );
   }
 
+  const string s_pwd( getenv( "PWD" ) );
+
   // XML config
   AnalysisParams_t analysisParams;
   ConfigManager * configManager = ConfigManager::GetHandle();
@@ -61,7 +63,16 @@ int main( int argc, char ** argv )
   // XML config
   
   PluginManager * pluginManager = PluginManager::GetHandle();
+  pluginManager->LoadCutFlows();
+
+  /*
+  try {
   pluginManager->LoadCutFlowPlugin( analysisParams.cutflowName );
+  }
+  catch( runtime_error& err ) {
+    pluginManager->LoadCutFlowPlugin( analysisParams.cutflowName, s_pwd );
+  }
+  */
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
   CF_Factory->Dump();

@@ -14,12 +14,12 @@ cutflows:
 	@$(MAKE) $(MFLAGS) -C CutFlows
 
 install: core ntuples cutflows environment
-	@ln -sf $(PWD)/src/libMAMbo.so $(PWD)/lib/
-	@ln -sf $(PWD)/Ntuples/*.so $(PWD)/lib/
-	@ln -sf $(PWD)/CutFlows/*.so $(PWD)/lib/
-	@ln -sf $(PWD)/share/control/ $(PWD)/run/
+	@ln -sf $(PWD)/src/libMAMbo.so   $(PWD)/lib/
+	@ln -sf $(PWD)/Ntuples/*.so      $(PWD)/lib/
+	@ln -sf $(PWD)/CutFlows/*.so     $(PWD)/lib/
+	@ln -sf $(PWD)/share/control/    $(PWD)/run/
 
-	@ln -sf $(PWD)/src/$(EXE) $(PWD)/bin/
+	@ln -sf $(PWD)/src/$(EXE)        $(PWD)/bin/
 
 environment: $(PWD)/bin/MAMbo-setenv.sh.template
 	@sed "s!@PREFIX@!$(PWD)!g" $(PWD)/bin/MAMbo-setenv.sh.template  > $(PWD)/bin/MAMbo-setenv.sh

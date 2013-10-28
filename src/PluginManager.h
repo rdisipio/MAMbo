@@ -19,8 +19,13 @@ public:
 
   static PluginManager * GetHandle();
 
-  bool LoadCutFlowPlugin( const string& name );
-  bool LoadNtupleWrapperPlugin( const string& name );
+  int FindPlugins( const string& pattern, PluginMap& pluginFound );
+  int FindPlugins( const string& dir, const string& pattern, PluginMap& pluginFound );
+
+  int LoadCutFlows();
+
+  bool LoadCutFlowPlugin( const string& name, const string& path = "" );
+  bool LoadNtupleWrapperPlugin( const string& name, const string& path = "" );
 
  private:
   PluginManager() {};

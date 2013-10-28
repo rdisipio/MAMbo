@@ -42,6 +42,17 @@ bool CutFlow::Start()
 ///////////////////////////////////////
 
 
+bool CutFlow::Apply( EventData * ed )
+{
+   bool success = true;
+
+   return success;
+}
+
+
+///////////////////////////////////////
+
+
 void CutFlow::AddChannel( const string& name ) 
 {
   m_channelName.push_back( name ); 

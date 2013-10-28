@@ -1,0 +1,22 @@
+<histograms>  
+  <TH1F name="el_n"   title="No. of electrons" nbins="6"  xmin="-0.5" xmax="5.5" />
+  <TH1F name="el_pt"  title="Electron p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="el_eta" title="Electron pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />
+  <TH1F name="el_phi" title="Electron azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="el_E"   title="Electron energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+
+  <TH1F name="mu_n"   title="No. of muons" nbins="5"  xmin="-0.5" xmax="4.5" />
+  <TH1F name="mu_pt"  title="Muon p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="mu_eta" title="Muon pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />
+  <TH1F name="mu_phi" title="Muon azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="mu_E"   title="Muon energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+
+  <TH1F name="jet_n"   title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
+  <TH1F name="jet_pt"  title="Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="jet_eta" title="Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="jet_phi" title="Jet azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
+
+  <TH1F name="met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+</histograms>
