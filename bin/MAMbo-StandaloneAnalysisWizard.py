@@ -8,13 +8,23 @@ import shutil
 
 analysisParamsXML = """
 <analysis name=\"@ANALYSISNAME@\">
-  <ntuple>HWWtth</ntuple>
-  <branches>control/branch_list_HWWtth.txt</branches>
-  <tree>HWWTree</tree>
+  <ntuple>@NTUPLENAME@</ntuple>
+  <branches>control/branch_list_@NTUPLENAME@.txt</branches>
+  <tree>@TREENAME@</tree>
   <histograms>control/histograms_@ANALYSISNAME@.xml</histograms>
   <cutflow>@CUTFLOWNAME@</cutflow>
 </analysis>
 """
+
+#######################################
+
+
+def PrintOutHelp():
+    print sys.argv[0].split("/")[-1], " analysis_name cutflow_name1[,cutflow_name2,cutflow_name3] [ntuple_wrapper_name,tree_name]"
+
+
+#######################################
+    
 
 shareDir = os.environ["MAMBODIR"] + "/share/templates/"
 templateWHeader  = open( shareDir + "CutFlowTEMPLATE.h", 'r' ).read()
@@ -22,6 +32,10 @@ templateWSrc     = open( shareDir + "CutFlowTEMPLATE.cxx", 'r' ).read()
 templateMakefile = open( shareDir + "Makefile.analysis.template" ).read()
 
 analysisName = sys.argv[1]
+
+if analysisName in [ "-h", "--help", "help" ]:
+    PrintOutHelp()
+    exit(0)
 print "Creating standalone analysis", analysisName
 
 targetDir = os.environ["PWD"] + "/" + analysisName + "/"
@@ -41,6 +55,15 @@ if len( sys.argv ) == 2:
 else:
     cutflows = sys.argv[2].split( ',' )
 
+ntupleName = "HWWtth"
+treeName   = "HWWTree"
+if len( sys.argv ) == 3:
+    tokens = sys.argv[3].split(",")
+    
+    ntupleName = tokens[0]
+    treeName   = tokens[1]
+    
+
 cutflowsTxt = ""
 for cutflowName in cutflows:
     print "Generating cutflow %s / %s" % ( analysisName, cutflowName )
@@ -54,7 +77,10 @@ for cutflowName in cutflows:
     cfsrcFile.write( cfsrc )
 
     paramsFiles = open( targetDir + "control/analysis_params_%s_%s.xml" % ( analysisName, cutflowName ), 'w' )
-    paramsTxt = analysisParamsXML.replace( "@ANALYSISNAME@", analysisName ).replace( "@CUTFLOWNAME@", cutflowName )
+    paramsTxt = analysisParamsXML.replace( "@ANALYSISNAME@", analysisName )
+    paramsTxt = paramsTxt.replace( "@CUTFLOWNAME@",  cutflowName )
+    paramsTxt = paramsTxt.replace( "@ANALYSISNAME@", ntupleName )
+    paramsTxt = paramsTxt.replace( "@TREENAME@",     treeName )
     paramsFiles.write( paramsTxt )
     paramsFiles.close()
 
@@ -73,3 +99,6 @@ shutil.copy2( shareDir + "histograms.xml", targetDir + "control/histograms_%s.xm
 
 # copy README
 shutil.copy2( shareDir + "README_StandaloneAnalysis.txt", targetDir + "README.txt" )
+
+print
+print "IMPORTANT: Please, read " + targetDir + "README.txt"
