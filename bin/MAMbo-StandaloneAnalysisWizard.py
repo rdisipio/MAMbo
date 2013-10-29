@@ -30,6 +30,7 @@ shareDir = os.environ["MAMBODIR"] + "/share/templates/"
 templateWHeader  = open( shareDir + "CutFlowTEMPLATE.h", 'r' ).read()
 templateWSrc     = open( shareDir + "CutFlowTEMPLATE.cxx", 'r' ).read()
 templateMakefile = open( shareDir + "Makefile.analysis.template" ).read()
+templateReadme   = open( shareDir + "README_StandaloneAnalysis.txt" ).read()
 
 analysisName = sys.argv[1]
 
@@ -79,7 +80,7 @@ for cutflowName in cutflows:
     paramsFiles = open( targetDir + "control/analysis_params_%s_%s.xml" % ( analysisName, cutflowName ), 'w' )
     paramsTxt = analysisParamsXML.replace( "@ANALYSISNAME@", analysisName )
     paramsTxt = paramsTxt.replace( "@CUTFLOWNAME@",  cutflowName )
-    paramsTxt = paramsTxt.replace( "@ANALYSISNAME@", ntupleName )
+    paramsTxt = paramsTxt.replace( "@NTUPLENAME@",   ntupleName )
     paramsTxt = paramsTxt.replace( "@TREENAME@",     treeName )
     paramsFiles.write( paramsTxt )
     paramsFiles.close()
@@ -98,7 +99,13 @@ analysisMakefile.write( makefileTxt )
 shutil.copy2( shareDir + "histograms.xml", targetDir + "control/histograms_%s.xml" % analysisName )
 
 # copy README
-shutil.copy2( shareDir + "README_StandaloneAnalysis.txt", targetDir + "README.txt" )
+readmeFile = open( targetDir + "README.txt", 'w' )
+readmeTxt  = templateReadme.replace( "@ANALYSISNAME@", analysisName )
+readmeTxt  = readmeTxt.replace( "@TARGETDIR@", targetDir )
+readmeTxt  = readmeTxt.replace( "@TREENAME@", treeName )
+readmeTxt  = readmeTxt.replace( "@NTUPLENAME@", ntupleName )
+readmeTxt  = readmeTxt.replace( "@CUTFLOWNAME@", cutflowName )
 
 print
-print "IMPORTANT: Please, read " + targetDir + "README.txt"
+#print "IMPORTANT: Please, read " + targetDir + "README.txt"
+print readmeTxt
