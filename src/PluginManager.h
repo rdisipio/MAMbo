@@ -22,7 +22,8 @@ public:
   int FindPlugins( const string& pattern, PluginMap& pluginFound );
   int FindPlugins( const string& dir, const string& pattern, PluginMap& pluginFound );
 
-  int LoadCutFlows();
+  int LoadAllCutFlows();
+  int LoadAllNtupleWrappers();
 
   bool LoadCutFlowPlugin( const string& name, const string& path = "" );
   bool LoadNtupleWrapperPlugin( const string& name, const string& path = "" );

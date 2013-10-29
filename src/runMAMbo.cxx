@@ -63,21 +63,13 @@ int main( int argc, char ** argv )
   // XML config
   
   PluginManager * pluginManager = PluginManager::GetHandle();
-  pluginManager->LoadCutFlows();
-
-  /*
-  try {
-  pluginManager->LoadCutFlowPlugin( analysisParams.cutflowName );
-  }
-  catch( runtime_error& err ) {
-    pluginManager->LoadCutFlowPlugin( analysisParams.cutflowName, s_pwd );
-  }
-  */
+  pluginManager->LoadAllCutFlows();
+  pluginManager->LoadAllNtupleWrappers();
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
   CF_Factory->Dump();
  
-  pluginManager->LoadNtupleWrapperPlugin( analysisParams.ntupleName );
+//  pluginManager->LoadNtupleWrapperPlugin( analysisParams.ntupleName );
   NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
   NW_Factory->Dump();
 

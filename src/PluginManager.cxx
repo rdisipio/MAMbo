@@ -22,8 +22,8 @@ int PluginManager::FindPlugins( const string& dir, const string& pattern, Plugin
     if( fileName.find( ".so" ) == string::npos ) continue;
       
     if( fileName.find( pattern ) != string::npos ) {
-      const string& pluginName = fileName.substr( 10, fileName.size() - 13 );
-      pluginFound[pluginName] = dir + fileName;
+      const string& pluginName = fileName.substr( pattern.size(), fileName.size() - pattern.size() - 3 );
+      pluginFound[pluginName] = dir + "/" + fileName;
     }
   }
 
@@ -36,9 +36,9 @@ int PluginManager::FindPlugins( const string& dir, const string& pattern, Plugin
 
 int PluginManager::FindPlugins( const string& pattern, PluginMap& pluginFound )
 {
-  const string& pwd = string( getenv( "PWD" ) ) + "/";
+  const string& dir = string( getenv( "MAMBODIR" ) ) + "/lib";
 
-  return FindPlugins( pwd, pattern, pluginFound );
+  return FindPlugins( dir, pattern, pluginFound );
 }
 
 ///////////////////////////////////
@@ -47,8 +47,6 @@ int PluginManager::FindPlugins( const string& pattern, PluginMap& pluginFound )
 void * PluginManager::LoadPlugin( const string& name )
 {
   if( name.empty() ) throw runtime_error( "Please specify plugin name\n" );
-
-  //cout << "DEBUG: Looking for " << name << " ..." << endl;
 
   void * handle = dlopen( name.c_str(), RTLD_LAZY );
   if( !handle ) throw runtime_error( "Cannot load plugin\n" );
@@ -62,47 +60,44 @@ void * PluginManager::LoadPlugin( const string& name )
 ///////////////////////////////////
 
 
-int PluginManager::LoadCutFlows()
+int PluginManager::LoadAllCutFlows()
 { 
   ICutFlowPluginFactory * pluginFactory = NULL;
 
-  FindPlugins( "CutFlow", m_cutflows );
+  int n_cutflows_found = 0;
+
+  const string pwd = string( getenv( "PWD" ) );
+  n_cutflows_found += FindPlugins( pwd, "CutFlow", m_cutflows );
 
   const string mambodir = string( getenv( "MAMBODIR" ) ) + "/lib/";
-  FindPlugins( mambodir, "CutFlow", m_cutflows );
+  n_cutflows_found += FindPlugins( mambodir, "CutFlow", m_cutflows );
 
-  for( PluginMap::const_iterator pair = m_cutflows.begin() ; pair != m_cutflows.end() ; ++pair ) {
-    //cout << "INFO: Found cutflow wrapper " << (*pair).first << endl;
-
-    void* handle = LoadPlugin( (*pair).second );
-
-    fp_MakeCutFlowPlugin    MakeCutFlowPlugin = (fp_MakeCutFlowPlugin)dlsym( handle, "MakeCutFlowPlugin" );
-    if( !MakeCutFlowPlugin ) throw runtime_error( "Invalid pointer to function to create cut flow plugin\n" );
-
-    pluginFactory = MakeCutFlowPlugin();
-    
-    pluginFactory->Register();
+  if( n_cutflows_found == 0 ) {
+    cout << "WARNING: no cutflow plugin found" << endl;
+    return 0;
   }
+  else {
+    cout << "INFO: Found " << n_cutflows_found << " cutflows" << endl;
+  }
+
+  int loaded = 0;
+  for( PluginMap::const_iterator pair = m_cutflows.begin() ; pair != m_cutflows.end() ; ++pair ) {
+    if( LoadCutFlowPlugin( (*pair).first, (*pair).second ) ) ++loaded;
+  }
+
+  return loaded;
 }
 
 
-///////////////////////////////////
+//~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 bool PluginManager::LoadCutFlowPlugin( const string& name, const string& path )
 {
   bool success = true;
 
-  stringstream fullpath;
-  if( path.empty() ) fullpath << getenv( "MAMBODIR" ) << "/lib";
-  else {
-     fullpath << path;
-  } 
+  void* handle = LoadPlugin( path );
 
-  char libCutFlowFileName[128];
-  sprintf( libCutFlowFileName,  "%s/libCutFlow%s.so", fullpath.str().c_str(), name.c_str() );
-  void* handle = LoadPlugin( libCutFlowFileName );
-  
   ICutFlowPluginFactory * pluginFactory     = NULL;
 
   fp_MakeCutFlowPlugin    MakeCutFlowPlugin = (fp_MakeCutFlowPlugin)dlsym( handle, "MakeCutFlowPlugin" );
@@ -119,19 +114,41 @@ bool PluginManager::LoadCutFlowPlugin( const string& name, const string& path )
 ///////////////////////////////////
 
 
+int PluginManager::LoadAllNtupleWrappers()
+{
+  INtupleWrapperPluginFactory * pluginFactory     = NULL;
+
+  int n_plugins_found = 0;
+
+  const string pwd = string( getenv( "PWD" ) );
+  n_plugins_found += FindPlugins( pwd, "NtupleWrapper", m_ntuples );
+
+  const string mambodir = string( getenv( "MAMBODIR" ) ) + "/lib/";
+  n_plugins_found += FindPlugins( mambodir, "NtupleWrapper", m_ntuples );
+  
+  if( n_plugins_found == 0 ) {
+    cout << "WARNING: No ntuple wrapper plugin found" << endl;
+    return 0;
+  }
+  else cout << "INFO: Found " << n_plugins_found << " ntuple wrappers" << endl;
+
+  int loaded = 0;
+  for( PluginMap::const_iterator pair = m_ntuples.begin() ; pair != m_ntuples.end() ; ++pair ) {
+    if( LoadNtupleWrapperPlugin( (*pair).first, (*pair).second ) ) ++loaded;
+  }
+
+  return loaded;
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 bool PluginManager::LoadNtupleWrapperPlugin( const string& name, const string& path )
 {
   bool success = true;
 
-  stringstream fullpath;
-  if( path.empty() ) fullpath << getenv( "MAMBODIR" ) << "/lib";
-  else {
-     fullpath << path;
-  } 
-
-  char libNtupleWrapperFileName[128];
-  sprintf( libNtupleWrapperFileName,  "%s/libNtupleWrapper%s.so", fullpath.str().c_str(), name.c_str() );
-  void* handle = LoadPlugin( libNtupleWrapperFileName );
+  void* handle = LoadPlugin( path );
 
   INtupleWrapperPluginFactory * pluginFactory     = NULL;
 
