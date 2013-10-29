@@ -2,6 +2,11 @@
 # Standalone Analysis HOWTO
 #############################
 
+First of all, try to compile:
+
+cd @TARGETDIR@
+make
+
 You may want to edit your analysis params files, e.g.:
 @TARGETDIR@/control/analysis_params_@ANALYSISNAME@_@CUTFLOWNAME@.xml
 
