@@ -183,30 +183,18 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
       continue;
     IncreaseCount( "ALL_cutflow_good_el", 7 );
 
-//     //CutEtIso1
-//     if (!(el_pt < 20 || etcone20_o_pT < 0.1))
-//       continue;  
-//     IncreaseCount( "ALL_cutflow_good_el", 8 );
-   
-    
-//     //CutEtIso2
-//     if (!(el_pt > 20 || etcone20_o_pT < 0.05))
-//       continue;  
-//     IncreaseCount( "ALL_cutflow_good_el", 9 );
-
-
     
     double etcone20 = ed->electrons.property["Etcone20"].at(j); 
-    // Electron Relative EtCone Isolation
-    if (el_pt < 20.){ //This is [CutIso1]
-      IncreaseCount( "ALL_cutflow_good_el", 8 ); 
-      if (etcone20/(el_pt*GeV) > 0.05) continue;    
-         
-    }else{ //This is [CutIso2]
-      
-      if ( etcone20/(el_pt*GeV)> 0.1) continue;
-      IncreaseCount( "ALL_cutflow_good_el", 8 );
-    }
+
+    //CutEtIso1
+    if (!(el_pt < 20 || etcone20/(el_pt*GeV) < 0.1))
+      continue;  
+    IncreaseCount( "ALL_cutflow_good_el", 8 );
+   
+    
+    //CutEtIso2
+    if (!(el_pt > 20 || etcone20/(el_pt*GeV) < 0.05))
+      continue;  
     IncreaseCount( "ALL_cutflow_good_el", 9 );
     
     //CutPtIso
@@ -220,7 +208,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
     
     double mu_eta = ed->muons.eta.at( j );
     double mu_pt = ed->muons.pT.at( j )/GeV;
-    double etcone20_o_pT = ed->muons.property["Etcone20"].at(j) / mu_pt;
+    double etcone20_o_pT = ed->muons.property["Etcone20"].at(j) / (mu_pt*GeV);
 
     m_hm->GetHistogram( "mu_pt" )->Fill( mu_pt, weight );
     m_hm->GetHistogram( "mu_eta" )->Fill( mu_eta, weight );
@@ -262,7 +250,7 @@ bool CutFlowTTHTo2LeptonsSS::Apply( EventData * ed )
       continue;
     IncreaseCount( "ALL_cutflow_good_mu", 8 );
     //CutPtIso
-    double ptcone20_o_pT = ed->muons.property["ptcone20"].at(j) / mu_pt;
+    double ptcone20_o_pT = ed->muons.property["ptcone20"].at(j) / (mu_pt*GeV);
     if (ptcone20_o_pT >= 0.05)
       continue;
     IncreaseCount( "ALL_cutflow_good_mu", 9 );
