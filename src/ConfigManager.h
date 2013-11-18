@@ -17,7 +17,7 @@ struct AnalysisParams_t {
   string treeName;
   string branchFileName;
   string ntupleName;
-  map< string, double > cuts;
+  map< string, double > custom_params;
 };
 
 

@@ -4,7 +4,7 @@
 
 CutFlow::CutFlow( const string& name ) : m_name( name ), m_hm(NULL)
 {
-   m_hm = HistogramManager::GetHandle();
+   m_hm     = HistogramManager::GetHandle();
    m_config = ConfigManager::GetHandle()->GetConfiguration();
 }
 

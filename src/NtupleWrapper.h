@@ -10,6 +10,7 @@
 
 #include "INtupleWrapper.h"
 #include "NtupleWrapperFactory.hpp"
+#include "ConfigManager.h"
 
 template <typename NTUPLE>
 class NtupleWrapper : public INtupleWrapper
@@ -19,7 +20,8 @@ class NtupleWrapper : public INtupleWrapper
   NtupleWrapper( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" ) :
     INtupleWrapper( fileListName, branchListName, treeName ), m_ntuple(NULL)
     {
-      m_ntuple     = new NTUPLE();
+      m_ntuple = new NTUPLE();
+      m_config = ConfigManager::GetHandle()->GetConfiguration();
 
       if( !LoadChain( fileListName, treeName ) ) throw runtime_error( "Cannot load file chain\n" );
 	
@@ -87,14 +89,13 @@ class NtupleWrapper : public INtupleWrapper
       input.close();
 
       Nbranches = m_activeBranches.size();
+      cout << "DEBUG: No. of active branches = " << Nbranches << endl;
 
  //     if( Nbranches == 0 ) throw runtime_error( "No active branch\n" );
       if( Nbranches == 0 ) {
 	 cout << "WARNING: no active branch define. All switched on, this could be SLOW!" << endl;
 	 m_ntuple->fChain->SetBranchStatus( "*", 1 );
       }
-
-      cout << "DEBUG: No. of active branches = " << Nbranches << endl;
 
       return Nbranches;
     };
@@ -108,6 +109,9 @@ class NtupleWrapper : public INtupleWrapper
       if( j < 0 ) throw runtime_error( "Cannot load tree\n" );
 	
       m_ntuple->GetEntry( i );
+
+      // pass global parameters
+      ed->property = m_config->custom_params;
   
       MAKE_OBJECT( Info, ed );
       MAKE_OBJECT( Trigger, ed );
@@ -133,7 +137,8 @@ class NtupleWrapper : public INtupleWrapper
 
 
  protected:
-    NTUPLE           * m_ntuple;
+    NTUPLE            * m_ntuple;
+    AnalysisParams_t  * m_config;
 };
 
 
