@@ -7,7 +7,8 @@ OBJS = ${SRCS:.cxx=.o}
 all: $(MOMA_SOLIB)
 
 $(MOMA_SOLIB): $(OBJS)
-	$(LD) $(DEBUG) $(SOFLAGS) $(OBJS) -o ../lib/$@
+	@echo Linking shared library
+	@$(LD) $(DEBUG) $(SOFLAGS) $(OBJS) -o ../lib/$@
 
 clean:
-	rm -rf *.o *.so
+	@rm -rf *.o *.so
