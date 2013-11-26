@@ -13,6 +13,10 @@ analysisParamsXML = """
   <tree>@TREENAME@</tree>
   <histograms>control/histograms_@ANALYSISNAME@.xml</histograms>
   <cutflow>@CUTFLOWNAME@</cutflow>
+  <parameters>
+    <param name="pTmin" value="20." />    <!-- just an example -->
+    <param name="etaMax" value="2.5" />   <!-- just an example -->
+  </parameters>
 </analysis>
 """
 
