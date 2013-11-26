@@ -1,0 +1,42 @@
+AC_INIT([MAMbo],[00.00.01],[disipio@cern.ch],[MAMbo])
+
+AC_CONFIG_SRCDIR([src,CutFlows,Ntuples])
+
+AC_CONFIG_AUX_DIR(config)
+
+AM_INIT_AUTOMAKE(dist-bzip2)
+
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+AC_CONFIG_MACRO_DIR([m4])
+
+## LCG platform tag
+AC_LCG_TAG
+
+## Set default compiler flags
+if test "x$CXXFLAGS" == "x"; then CXXFLAGS="-O2"; fi
+
+AC_SUBST(MAMBO_CFLAGS)
+AC_SUBST(MAMBO_LIBS)
+
+AC_LANG([C++])
+AC_CONFIG_HEADERS([config.h])
+AC_HEADER_STDC
+AC_CHECK_HEADERS([string])
+AC_CHECK_HEADERS([iostream])
+AC_PROG_CXX
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_LIBTOOL_DLOPEN
+AC_PROG_LIBTOOL
+
+AC_SEARCH_ROOT
+
+AC_SUBST(AM_CXXFLAGS)
+AC_SUBST(AM_LDFLAGS)
+
+AC_CONFIG_FILES(src/Makefile)
+AC_CONFIG_FILES(CutFlows/Makefile)
+AC_CONFIG_FILES(Ntuples/Makefile)
+AC_CONFIG_FILES(Makefile)
+AC_OUTPUT
+

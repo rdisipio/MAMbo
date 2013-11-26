@@ -114,24 +114,25 @@ class NtupleWrapper : public INtupleWrapper
       ed->property = m_config->custom_params;
   
       MAKE_OBJECT( Info, ed );
+      MAKE_OBJECT( Truth, ed );    
       MAKE_OBJECT( Trigger, ed );
       MAKE_OBJECT( MET, ed );
       MAKE_OBJECT( Electrons, ed );
       MAKE_OBJECT( Muons, ed );
       MAKE_OBJECT( Jets, ed );
-    
+
       return ed;
 
     };
 
       
     virtual bool MakeEventInfo( EventData * ed )      { return true; };
+    virtual bool MakeEventTruth( EventData * ed )     { return true; };      
     virtual bool MakeEventTrigger( EventData * ed )   { return true; };
     virtual bool MakeEventMET( EventData * ed )       { return true; };
     virtual bool MakeEventElectrons( EventData * ed ) { return true; };
     virtual bool MakeEventMuons( EventData * ed )     { return true; };
     virtual bool MakeEventJets( EventData * ed )      { return true; };
-      
 
     // virtual EventData   * NextEvent();
 
