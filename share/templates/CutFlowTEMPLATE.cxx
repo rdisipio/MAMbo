@@ -32,7 +32,7 @@ bool CutFlow@NAME@::Initialize()
 /////////////////////////////////////////
 
 
-bool CutFlow@NAME@::Apply( EventData * ed, int * lastCutPassed )
+bool CutFlow@NAME@::Apply( EventData * ed )
 {
   bool success = true;
 

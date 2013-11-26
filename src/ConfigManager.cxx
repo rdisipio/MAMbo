@@ -30,18 +30,52 @@ bool ConfigManager::Configure( const char * configFileName, AnalysisParams_t& an
       analysisParams.ntupleName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
     }
     else if(  xmlStrEqual( nodeParam->name, BAD_CAST "parameters" ) ) {
-      xmlNodePtr nodeCuts = nodeParam->children;
+      xmlXPathContext * xpathCtx = xmlXPathNewContext( doc );
+      xmlXPathObject  * xpathObj = xmlXPathEvalExpression( (xmlChar*)"/analysis/parameters/param", xpathCtx );
 
-      for( xmlNodePtr aCut = nodeCuts->children ; aCut != NULL ; aCut = aCut->next ) {
-	string name( (const char *)xmlGetProp( aCut, BAD_CAST "name" ) );
-	double val = atof( (const char*)xmlGetProp( aCut, BAD_CAST "value" ) );
+      for( int inode = 0 ; inode < xpathObj->nodesetval->nodeNr ; ++inode ) {
+	xmlNode *node = xpathObj->nodesetval->nodeTab[inode];
+      
+	string name;
+	double value = 0;
+
+	xmlAttr *attr = node->properties;
+	while ( attr ){
+	  if( xmlStrEqual( attr->name, BAD_CAST "name" ) )  name  = (const char*) attr->children->content;
+	  if( xmlStrEqual( attr->name, BAD_CAST "value" ) ) value = atof( (const char*)attr->children->content );
+
+	  // std::cout << "Attribute name: " << attr->name << "  value: " << attr->children->content << std::endl;
+	  attr = attr->next;
+	}
+	analysisParams.custom_params[name] = value;
+
+	cout << "INFO: parameter " << name << " values = " << analysisParams.custom_params[name] << endl;
+      }
+
+      xmlXPathFreeObject( xpathObj );
+      xmlXPathFreeContext( xpathCtx );
+    }
+    /*
+    else if(  xmlStrEqual( nodeParam->name, BAD_CAST "parameters" ) ) {
+      xmlNodePtr nodeCustomParams = nodeParam->children;
+
+      cout << "INFO: found some parameters" << endl;
+
+      for( xmlNodePtr aCustomParam = nodeCustomParams->children ; aCustomParam != NULL ; aCustomParam = aCustomParam->next ) {
+
+	string name( (const char *)xmlGetProp( aCustomParam, BAD_CAST "name" ) );
+	double val = atof( (const char*)xmlGetProp( aCustomParam, BAD_CAST "value" ) );
 
 	analysisParams.custom_params[name] = val;
+
+	cout << "INFO: parameter " << name << " values = " << analysisParams.custom_params[name] << endl;
       }
     }
+    */
   }
   xmlFreeDoc( doc );
-  
+  xmlCleanupParser();
+
   m_params = analysisParams;
 
   return success;

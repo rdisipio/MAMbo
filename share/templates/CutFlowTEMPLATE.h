@@ -10,7 +10,7 @@ class CutFlow@NAME@ : public CutFlow
   virtual ~CutFlow@NAME@();
 
   virtual bool Initialize();
-  virtual bool Apply( EventData * ed, int * lastCutPassed = NULL );
+  virtual bool Apply( EventData * ed );
 
  protected:
 

@@ -41,14 +41,16 @@ bool CutFlow::Start()
 
 ///////////////////////////////////////
 
-
+/*
 bool CutFlow::Apply( EventData * ed )
 {
    bool success = true;
+   
+   cout << "base class apply" << endl;
 
    return success;
 }
-
+*/
 
 ///////////////////////////////////////
 
