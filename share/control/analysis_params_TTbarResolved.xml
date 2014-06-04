@@ -1,0 +1,7 @@
+<analysis name="TTbarResolved">
+  <ntuple>TopMini</ntuple>
+  <branches>control/branch_list_TopMini.txt</branches>
+  <tree>mini</tree>
+  <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
+  <cutflow>TTbarResolved</cutflow>
+</analysis>

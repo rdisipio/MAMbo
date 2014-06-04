@@ -2,7 +2,8 @@ include ../Makefile.inc
 
 # modify the following line CUTFLOWS = ... according to your needs
 # to add more ntuples, lauch bin/
-CUTFLOWS      = TTHTo2LeptonsSS
+CUTFLOWS  = TTbarResolved
+#CUTFLOWS      = TTHTo2LeptonsSS
 #CUTFLOWS     = BoostedSL FakeRateZjet FakeRateZel FakeRateZfjet
 
 # do not change what follows unless you know what you're doing
@@ -17,7 +18,7 @@ CutFlow%.o: CutFlow%.cxx
 
 libCutFlow%.so: CutFlow%.o
 	@ echo Compiling library $@
-	$(LD) $(SOFLAGS) -Wl,-export-dynamic,$@ $< -ldl -o $@
+	$(LD) $(SOFLAGS) -Wl,-export-dynamic $< -ldl -o $@
 
 clean:
 	rm -rf *.o *.so  
