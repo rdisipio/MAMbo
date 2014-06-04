@@ -4,4 +4,9 @@
   <tree>mini</tree>
   <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolved</cutflow>
+  <parameters>
+    <param name="pTmin" value="20." />
+    <param name="etaMax" value="2.5" />
+    <param name="control_region" value="1" />
+  </parameters>
 </analysis>
