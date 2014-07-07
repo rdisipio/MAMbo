@@ -179,6 +179,9 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 {
   bool success = true;
 
+  int isMCSignal = (int)m_config->custom_params["isMCSignal"];  
+  if( !isMCSignal ) return success;
+
   for( int i = 0 ; i < m_ntuple->mc_n ; ++i ) {
     const int barcode = m_ntuple->mc_barcode->at(i);
     const int pid     = m_ntuple->mc_pdgId->at(i);
