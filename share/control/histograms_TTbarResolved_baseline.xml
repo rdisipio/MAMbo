@@ -2,32 +2,71 @@
   
   <TH1F name="vxp_nTracks"   title="No. of tracks per pv" nbins="20"  xmin="0" xmax="20" />
 
-  <TH1F name="el_n"   title="No. of electrons" nbins="6"  xmin="-0.5" xmax="5.5" />
-  <TH1F name="el_pt"  title="Electron p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
-  <TH1F name="el_eta" title="Electron pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />
-  <TH1F name="el_phi" title="Electron azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
-  <TH1F name="el_E"   title="Electron energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
-  <TH1F name="el_Etcone20_over_pT"   title="Electron E_{T}(0.2)/p_{T}"   nbins="100" xmin="0."   xmax="5." />
+<!-- Histograms at various cut levels -->
 
-<!--
-  <TH1F name="el_Good_CutFlow"   title="CutFlow good electrons" nbins="11"  xmin="-0.5" xmax="10.5" />
-  <TH1F name="mu_Good_CutFlow"   title="CutFlow good muons" nbins="10"  xmin="-0.5" xmax="9.5" />
-  <TH1F name="jet_Good_CutFlow"   title="CutFlow good jets" nbins="3"  xmin="-0.5" xmax="2.5" />
--->
+<!-- all entries -->
+  <TH1F name="cutflow/c0_lep_pt"  title="Lepton p_{T} [GeV]"           nbins="100" xmin="0."   xmax="500." />
+  <TH1F name="cutflow/c0_lep_eta" title="Lepton pseudorapidity #eta"   nbins="25" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="cutflow/c0_lep_phi" title="Lepton azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/c0_lep_E"   title="Lepton energy [GeV]"          nbins="100" xmin="0."   xmax="500." />
 
-  <TH1F name="mu_n"   title="No. of muons" nbins="5"  xmin="-0.5" xmax="4.5" />
-  <TH1F name="mu_pt"  title="Muon p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
-  <TH1F name="mu_eta" title="Muon pseudorapidity #eta"   nbins="20" xmin="-3."  xmax="3." />
-  <TH1F name="mu_phi" title="Muon azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
-  <TH1F name="mu_E"   title="Muon energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/c0_jet_n"   title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
+  <TH1F name="cutflow/c0_jet_pt"  title="Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/c0_jet_eta" title="Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="cutflow/c0_jet_phi" title="Jet azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/c0_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/c0_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
 
-  <TH1F name="jet_n"   title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
-  <TH1F name="jet_pt"  title="Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
-  <TH1F name="jet_eta" title="Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
-  <TH1F name="jet_phi" title="Jet azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
-  <TH1F name="jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
-  <TH1F name="jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/c0_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
 
-  <TH1F name="met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+<!-- selection: 4j1b -->
+  <TH1F name="cutflow/h_4j1b_lep_pt"  title="Lepton p_{T} [GeV]"           nbins="100" xmin="0."   xmax="500." />
+  <TH1F name="cutflow/h_4j1b_lep_eta" title="Lepton pseudorapidity #eta"   nbins="25" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="cutflow/h_4j1b_lep_phi" title="Lepton azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j1b_lep_E"   title="Lepton energy [GeV]"          nbins="100" xmin="0."   xmax="500." />
+
+  <TH1F name="cutflow/h_4j1b_jet_n"   title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
+  <TH1F name="cutflow/h_4j1b_jet_pt"  title="Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/h_4j1b_jet_eta" title="Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="cutflow/h_4j1b_jet_phi" title="Jet azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j1b_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/h_4j1b_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
+
+  <TH1F name="cutflow/h_4j1b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+
+<!-- selection: 4j2b -->
+  <TH1F name="cutflow/h_4j2b_lep_pt"  title="Lepton p_{T} [GeV]"           nbins="100" xmin="0."   xmax="500." />
+  <TH1F name="cutflow/h_4j2b_lep_eta" title="Lepton pseudorapidity #eta"   nbins="25" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="cutflow/h_4j2b_lep_phi" title="Lepton azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j2b_lep_E"   title="Lepton energy [GeV]"          nbins="100" xmin="0."   xmax="500." />
+
+  <TH1F name="cutflow/h_4j2b_jet_n"   title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
+  <TH1F name="cutflow/h_4j2b_jet_pt"  title="Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/h_4j2b_jet_eta" title="Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="cutflow/h_4j2b_jet_phi" title="Jet azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j2b_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="1000." />
+  <TH1F name="cutflow/h_4j2b_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
+
+  <TH1F name="cutflow/h_4j2b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+
+<!-- pseudo tops -->
+  <TH1F name="cutflow/h_4j2b_pseudotop_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
+  <TH1F name="cutflow/h_4j2b_pseudotop_lep_eta" title="Pseudo-top (leptonic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
+  <TH1F name="cutflow/h_4j2b_pseudotop_lep_phi" title="Pseudo-top (leptonic) azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j2b_pseudotop_lep_E"   title="Pseudo-top (leptonic) energy [GeV]"     	    nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="cutflow/h_4j2b_pseudotop_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
+
+  <TH1F name="cutflow/h_4j2b_pseudotop_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
+  <TH1F name="cutflow/h_4j2b_pseudotop_had_eta" title="Pseudo-top (hadronic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
+  <TH1F name="cutflow/h_4j2b_pseudotop_had_phi" title="Pseudo-top (hadronic) azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j2b_pseudotop_had_E"   title="Pseudo-top (hadronic) energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="cutflow/h_4j2b_pseudotop_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
+
+  <TH1F name="cutflow/h_4j2b_pseudottbar_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
+  <TH1F	name="cutflow/h_4j2b_pseudottbar_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
+  <TH1F name="cutflow/h_4j2b_pseudottbar_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="32" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="cutflow/h_4j2b_pseudottbar_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="cutflow/h_4j2b_pseudottbar_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="20" xmin="0." xmax="1500." /> 
+  <TH1F name="cutflow/h_4j2b_pseudottbar_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="25" xmin="0." xmax="2.5" />
 
 </histograms>

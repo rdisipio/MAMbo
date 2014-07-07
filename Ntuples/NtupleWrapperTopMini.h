@@ -20,6 +20,10 @@ class NtupleWrapperTopMini : public NtupleWrapper< TopMini >
   virtual bool MakeEventMuons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
   virtual bool MakeEventTruth( EventData * ed );
+
+ private:
+  bool HadronicDecay( const int parent_index ) const;
+  bool IsTopHadronic( const int parent_index ) const;
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperTopMini > NtupleWrapperPluginFactory_TopMini;

@@ -83,7 +83,7 @@ EventData * INtupleWrapper::NextEvent()
 
    m_thisEvent = MakeEvent( (++m_thisEventNumber-1) ); // must be implemented at some point downstream
 
-   if( ( m_thisEventNumber % int(m_maxEvents/10) ) == 0 ) {
+   if( ( m_maxEvents < 10 ) || ( m_thisEventNumber % int(m_maxEvents/10) ) == 0 ) {
      double perc = 100. * m_thisEventNumber / m_maxEvents;
      printf( "INFO: Event %-9i (en = %-10i rn = %-10i )       (%3.0f %%)\n", m_thisEventNumber, m_thisEvent->info.eventNumber, m_thisEvent->info.runNumber, perc );
    }

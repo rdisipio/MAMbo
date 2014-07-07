@@ -3,6 +3,10 @@
 
 #include "ICutFlow.h"
 
+#include "PhysicsHelperFunctions.h"
+
+using namespace PhysicsHelperFunctions;
+
 class CutFlowTTbarResolved : public CutFlow
 {
  public:
@@ -13,7 +17,9 @@ class CutFlowTTbarResolved : public CutFlow
   virtual bool Apply( EventData * ed );
 
  protected:
+    PseudoTopReconstruction * m_pseudotop;
 
+ // bool FillHistograms( int cutN );
 };
 
 typedef CutFlowPluginFactory< CutFlowTTbarResolved > CutFlowPluginFactory_TTbarResolved;

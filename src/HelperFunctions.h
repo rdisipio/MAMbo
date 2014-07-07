@@ -34,6 +34,23 @@ namespace HelperFunctions {
      return p;
   }
 
+ 
+  template< class T >
+  size_t DumpParticleToEventData( const TLorentzVector& p, T * p_coll )
+  {
+     const size_t new_index = p_coll->n;
+
+     p_coll->pT.push_back( p.Pt() );
+     p_coll->eta.push_back( p.Eta() );
+     p_coll->phi.push_back( p.Phi() );
+     p_coll->E.push_back( p.E() );
+     p_coll->m.push_back( p.M() ); 
+
+     p_coll->n += 1;
+ 
+     return new_index;
+  }
+
 };
 
 #endif /**  __HELPERFUNCTIONS_H__ */

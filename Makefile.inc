@@ -2,7 +2,8 @@ CC=g++
 LD=g++
 CFLAGS  = -fPIC -g 
 
-DEBUG = -O3
+#DEBUG = -O3
+DEBUG = -g
 CFLAGS += $(DEBUG)
 
 ROOTCFLAGS = $(shell root-config --cflags)

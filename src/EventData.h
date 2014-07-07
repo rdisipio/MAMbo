@@ -55,6 +55,7 @@ struct EventData
 
   struct Jets_t { 
     int     n;
+    array_ui index;
     array_d pT;
     array_d eta;
     array_d phi;
@@ -66,6 +67,7 @@ struct EventData
 
   struct bJets_t { 
     int     n;
+    array_ui index;
     array_d pT;
     array_d eta;
     array_d phi;
@@ -74,8 +76,21 @@ struct EventData
     PropertyCollection_t property;
   } bjets;
 
+  struct lJets_t {
+    int     n;
+    array_ui index;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_tag tag;
+    PropertyCollection_t property;
+  } ljets;
+
   struct fJet_t { 
     int    n;
+    array_ui index;
     array_d pT;
     array_d eta;
     array_d phi;
@@ -102,7 +117,7 @@ struct EventData
     array_d m;
     array_d q;
     PropertyCollection_t property;
-  };
+  } mctruth;
  
   struct MET_t {
     double et;
@@ -111,6 +126,18 @@ struct EventData
     double phi;
     double sumet;
   } MET;
+
+
+  struct Reco_t {
+    int     n;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_ui pdgId;
+    PropertyCollection_t property;
+  } reco;
 
   map< string, int > trigger;
   map< string, double > property;
