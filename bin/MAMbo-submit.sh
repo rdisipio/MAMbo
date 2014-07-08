@@ -69,12 +69,16 @@ rm -fr $logfile
 cat > $jobfile <<EOF
 #!/bin/bash
 echo Running on \$HOSTNAME
+date
 
 cd ${WORKDIR}
 
 source MAMbo-setenv.sh
 
 runMAMbo -p $paramsfile -f $filelist -n $nevtmax -o $outdir/$outfilename
+
+echo "End of run"
+date
 
 EOF
 

@@ -166,8 +166,8 @@ namespace PhysicsHelperFunctions {
     int status = 0;
 
     const double v_pT = m_p_ed->MET.et;
-    const double v_px = v_pT * cos( m_p_ed->MET.phi );
-    const double v_py = v_pT * sin( m_p_ed->MET.phi );
+    const double v_px = ( m_target == kReco ) ? v_pT * cos( m_p_ed->MET.phi ) : 0.;
+    const double v_py = ( m_target == kReco ) ? v_pT * sin( m_p_ed->MET.phi ) : 0.;
 
     const double l_px = m_lepton.Px();
     const double l_py = m_lepton.Py();
@@ -185,13 +185,13 @@ namespace PhysicsHelperFunctions {
     const double delta = b*b - 4.*a*c;
     
     double v_pz = 0.;
-    if( delta < 0. ) {
+    if( delta <= 0. ) {
       v_pz = 0.5*b/a;
     }
     else {
       const double v_pz_1 = 0.5 * ( -b - sqrt(delta) ) / a;
       const double v_pz_2 = 0.5 * ( -b + sqrt(delta) ) / a;
-      v_pz = ( v_pz_1 > v_pz_2 ) ? v_pz_1 : v_pz_2;
+      v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_1 : v_pz_2;
     }
 
     const double v_E  = sqrt( v_pT*v_pT + v_pz*v_pz ); // of course, massless

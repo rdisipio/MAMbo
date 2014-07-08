@@ -51,6 +51,20 @@ namespace HelperFunctions {
      return new_index;
   }
 
+
+  template< class S, class T >
+  size_t CopyParticleToEventData( const S * p_source, const int s_index, T * p_target ) {
+      const size_t new_index = p_target->n;
+
+      p_target->pT.push_back( p_source->pT.at( s_index ) );
+      p_target->eta.push_back( p_source->eta.at( s_index ) );
+      p_target->phi.push_back( p_source->phi.at( s_index ) );
+      p_target->E.push_back( p_source->E.at( s_index ) );
+
+      return new_index;
+  };
+
+
 };
 
 #endif /**  __HELPERFUNCTIONS_H__ */

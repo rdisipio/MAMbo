@@ -18,6 +18,7 @@
   <TH1F name="cutflow/c0_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
 
   <TH1F name="cutflow/c0_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+  <TH1F name="cutflow/c0_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
 <!-- selection: 4j1b -->
   <TH1F name="cutflow/h_4j1b_lep_pt"  title="Lepton p_{T} [GeV]"           nbins="100" xmin="0."   xmax="500." />
@@ -33,6 +34,7 @@
   <TH1F name="cutflow/h_4j1b_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
 
   <TH1F name="cutflow/h_4j1b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+  <TH1F name="cutflow/h_4j1b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
 <!-- selection: 4j2b -->
   <TH1F name="cutflow/h_4j2b_lep_pt"  title="Lepton p_{T} [GeV]"           nbins="100" xmin="0."   xmax="500." />
@@ -48,6 +50,7 @@
   <TH1F name="cutflow/h_4j2b_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="1000." />
 
   <TH1F name="cutflow/h_4j2b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+  <TH1F name="cutflow/h_4j2b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
 <!-- pseudo tops -->
   <TH1F name="cutflow/h_4j2b_pseudotop_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />

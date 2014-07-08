@@ -104,6 +104,31 @@ struct EventData
     PropertyCollection_t property;
   } fjets;
 
+  struct TruthJets_t {
+    int     n;
+    array_ui index;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_tag tag;
+    PropertyCollection_t property;
+  } truth_jets;
+
+  struct TruthFJets_t {
+    int     n;
+    array_ui index;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_tag tag;
+    PropertyCollection_t property;
+  } truth_fjets;
+  
+
   struct Truth_t {
     int     n;
     array_ui pdgId;

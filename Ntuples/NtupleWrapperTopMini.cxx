@@ -24,7 +24,7 @@ bool NtupleWrapperTopMini::MakeEventInfo( EventData * ed )
   ed->info.runNumber       = GET_VALUE( runNumber );
 
   ed->info.mcChannelNumber = GET_VALUE( channelNumber );
-  ed->info.mcWeight        = GET_VALUE( eventWeight );
+  ed->info.mcWeight        = GET_VALUE( mcevt_weight ); /*eventWeight );*/
 
   SET_PROPERTY( dataPeriod );
   SET_PROPERTY( mu );
@@ -44,6 +44,7 @@ bool NtupleWrapperTopMini::MakeEventInfo( EventData * ed )
   ed->property["goodPV"] = goodPV;
 */
 
+/*
   ed->property["scaleFactor_PILEUP"]     = GET_VALUE( scaleFactor_PILEUP     );
   ed->property["scaleFactor_ELE"]        = GET_VALUE( scaleFactor_ELE        );
   ed->property["scaleFactor_MUON"]       = GET_VALUE( scaleFactor_MUON       );
@@ -53,7 +54,17 @@ bool NtupleWrapperTopMini::MakeEventInfo( EventData * ed )
   ed->property["scaleFactor_WJETSSHAPE"] = GET_VALUE( scaleFactor_WJETSSHAPE );
   ed->property["scaleFactor_JVFSF"]      = GET_VALUE( scaleFactor_JVFSF      );
   ed->property["scaleFactor_ZVERTEX"]    = GET_VALUE( scaleFactor_ZVERTEX    );
-  //ed->property[""] = GET_VALUE(  );
+*/
+  ed->property["scaleFactor_PILEUP"]     = GET_VALUE( PUweight     );
+  ed->property["scaleFactor_ELE"]        = GET_VALUE( elecScale  );
+  ed->property["scaleFactor_MUON"]       = GET_VALUE( muonScale     );
+  ed->property["scaleFactor_BTAG"]       = GET_VALUE( BTagSFweight     );
+  ed->property["scaleFactor_TRIGGER"]    = GET_VALUE( trigScale    );
+  ed->property["scaleFactor_WJETSNORM"]  = GET_VALUE( WJetsScale );
+  ed->property["scaleFactor_WJETSSHAPE"] = GET_VALUE( WJetsShapeScale );
+  ed->property["scaleFactor_JVFSF"]      = GET_VALUE( JVFSFweight    );
+  ed->property["scaleFactor_ZVERTEX"]    = GET_VALUE( ZVxpWeight   );
+  ed->property["scaleFactor_KFactor"]    = GET_VALUE( KFactor  );
 
   return success;
 }
@@ -106,13 +117,13 @@ bool NtupleWrapperTopMini::MakeEventElectrons( EventData * ed )
   ed->electrons.q.push_back( GET_VALUE( lep_charge ) );
 
   ed->electrons.property["charge"].push_back( GET_VALUE( lep_charge ) );
-  ed->electrons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
+  //ed->electrons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
 
   //ed->electrons.property["tight"].push_back( GET_VALUE( tight ) );
   ed->electrons.property["el_cl_eta"].push_back( GET_VALUE( el_cl_eta ) );
   ed->electrons.property["eptcone30"].push_back( GET_VALUE( eptcone30 ) );
   ed->electrons.property["eetcone20"].push_back( GET_VALUE( eetcone20 ) );
-  ed->electrons.property["eminiIso10_4"].push_back( GET_VALUE( eminiIso10_4 ) );
+  ed->electrons.property["eminiIso10_4"].push_back( GET_VALUE( m_eminiIso10_4 ) );
 
   return success;
 }
@@ -161,11 +172,25 @@ bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
     ed->jets.property["MV1"].push_back(           GET_VALUE_ARRAY( jet_MV1, i           ) );
     ed->jets.property["MV1c"].push_back(          GET_VALUE_ARRAY( jet_MV1c, i          ) );
     ed->jets.property["isSemilep"].push_back(     GET_VALUE_ARRAY( jet_isSemilep, i     ) );
-    ed->jets.property["BadMediumBCH"].push_back(  GET_VALUE_ARRAY( jet_BadMediumBCH, i  ) );
-    ed->jets.property["BadTightBCH"].push_back(   GET_VALUE_ARRAY( jet_BadTightBCH, i   ) );
-    ed->jets.property["emfrac"].push_back(        GET_VALUE_ARRAY( jet_emfrac, i        ) );
-    ed->jets.property["BCH_CORR_CELL"].push_back( GET_VALUE_ARRAY( jet_BCH_CORR_CELL, i ) );
+    // ed->jets.property["BadMediumBCH"].push_back(  GET_VALUE_ARRAY( jet_BadMediumBCH, i  ) );
+    //ed->jets.property["BadTightBCH"].push_back(   GET_VALUE_ARRAY( jet_BadTightBCH, i   ) );
+    //ed->jets.property["emfrac"].push_back(        GET_VALUE_ARRAY( jet_emfrac, i        ) );
+    // ed->jets.property["BCH_CORR_CELL"].push_back( GET_VALUE_ARRAY( jet_BCH_CORR_CELL, i ) );
+  }
 
+  ed->fjets.n = GET_VALUE( fjet_n );
+  for( int i = 0 ; i < ed->fjets.n ; ++i ) {
+    ed->fjets.index.push_back( i );
+
+    ed->fjets.pT.push_back(  m_ntuple->fjet_pt[i]  );
+    ed->fjets.eta.push_back( m_ntuple->fjet_eta[i] );
+    ed->fjets.phi.push_back( m_ntuple->fjet_phi[i] );
+    ed->fjets.E.push_back(   m_ntuple->fjet_E[i]   );
+    ed->fjets.m.push_back(   m_ntuple->fjet_m[i]   );
+
+    ed->fjets.d12.push_back( m_ntuple->fjet_d12[i] );
+    ed->fjets.dPhi_lj.push_back( m_ntuple->fjet_DeltaPhi_Lap_FatJet[i] );
+    ed->fjets.dR_lj.push_back( m_ntuple->fjet_DeltaR_LapJet_Fatjet[i] );
   }
 
   return success;
@@ -213,6 +238,34 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     }
   }
  
+  // truth jets (narrow)
+  ed->truth_jets.n = GET_VALUE( mc_jet_AntiKt4Truth_n );
+  for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
+
+    ed->truth_jets.index.push_back( i );
+
+    ed->truth_jets.pT.push_back(  m_ntuple->mc_jet_AntiKt4Truth_pt->at(i)  );
+    ed->truth_jets.eta.push_back( m_ntuple->mc_jet_AntiKt4Truth_eta->at(i) );
+    ed->truth_jets.phi.push_back( m_ntuple->mc_jet_AntiKt4Truth_phi->at(i) );
+    ed->truth_jets.E.push_back(   m_ntuple->mc_jet_AntiKt4Truth_E->at(i)   );
+    ed->truth_jets.m.push_back(   m_ntuple->mc_jet_AntiKt4Truth_m->at(i)   );
+
+    ed->truth_jets.tag.push_back(  (JetTag)m_ntuple->mc_jet_AntiKt4Truth_flavor_truth_trueflav->at(i) );
+  }
+
+  ed->truth_fjets.n = GET_VALUE( mc_jet_AntiKt10Truth_n );
+  for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
+
+    ed->truth_fjets.index.push_back( i );
+
+    ed->truth_fjets.pT.push_back(  m_ntuple->mc_jet_AntiKt10Truth_pt->at(i)  );
+    ed->truth_fjets.eta.push_back( m_ntuple->mc_jet_AntiKt10Truth_eta->at(i) );
+    ed->truth_fjets.phi.push_back( m_ntuple->mc_jet_AntiKt10Truth_phi->at(i) );
+    ed->truth_fjets.E.push_back(   m_ntuple->mc_jet_AntiKt10Truth_E->at(i)   );
+    ed->truth_fjets.m.push_back(   m_ntuple->mc_jet_AntiKt10Truth_m->at(i)   );
+  }
+
+
   return success;
 }
 

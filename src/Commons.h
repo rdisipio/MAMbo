@@ -39,7 +39,7 @@ using namespace std;
 
 
 enum LeptonFlavor { kElectron, kMuon, kTau, kNeutrino };
-enum JetTag       { kLight, kBTagged, kCTagged, kTauTagged, kGTagged };
+enum JetTag       { kLight = 0, kCTagged = 4, kBTagged = 5, kTauTagged = 15, kGTagged = 21 };
 
 typedef vector< string >       StringVector_t;
 typedef vector< unsigned int > array_ui;

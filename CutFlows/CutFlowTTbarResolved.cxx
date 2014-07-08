@@ -96,6 +96,11 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
     scaleFactor_BTAG *
     scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE;
 
+  if( fabs(weight) > 5. ) printf( "WARNING: event %i has large weight w = %f\n", ed->info.eventNumber, weight );
+
+  // temporary hack
+  weight = 1.0;
+
   // event-wise quantities
   double ETmiss = ed->MET.et;
   double mwt    = ed->property["mwt"];
@@ -119,8 +124,9 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   m_hm->GetHistogram( "cutflow/c0_lep_phi" )->Fill( lep_phi );
   m_hm->GetHistogram( "cutflow/c0_lep_E"   )->Fill( lep_E/GeV );
   m_hm->GetHistogram( "cutflow/c0_met_pt" )->Fill(  ETmiss/GeV, weight );
-  m_hm->GetHistogram( "cutflow/c0_jet_n" )->Fill(   jet_n, weight );
+  m_hm->GetHistogram( "cutflow/c0_mtw" )->Fill( mwt/GeV, weight );
 
+  m_hm->GetHistogram( "cutflow/c0_jet_n" )->Fill(   jet_n, weight );
   for( int j = 0 ; j < jet_n ; ++j ) {
     double jet_pt  = ed->jets.pT.at( j );
     double jet_eta = ed->jets.eta.at( j );
@@ -226,6 +232,8 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   m_hm->GetHistogram( "cutflow/h_4j1b_lep_phi" )->Fill( lep_phi );
   m_hm->GetHistogram( "cutflow/h_4j1b_lep_E"   )->Fill( lep_E/GeV );
   m_hm->GetHistogram( "cutflow/h_4j1b_met_pt" )->Fill(  ETmiss/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j1b_mtw" )->Fill( mwt/GeV, weight );
+
   m_hm->GetHistogram( "cutflow/h_4j1b_jet_n" )->Fill(   jet_n, weight );
   for( int j = 0 ; j < jet_n ; ++j ) {
     double jet_pt  = ed->jets.pT.at( j );
@@ -252,6 +260,8 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   m_hm->GetHistogram( "cutflow/h_4j2b_lep_phi" )->Fill( lep_phi );
   m_hm->GetHistogram( "cutflow/h_4j2b_lep_E"   )->Fill( lep_E/GeV );
   m_hm->GetHistogram( "cutflow/h_4j2b_met_pt" )->Fill(  ETmiss/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_mtw" )->Fill( mwt/GeV, weight );
+
   m_hm->GetHistogram( "cutflow/h_4j2b_jet_n" )->Fill(   jet_n, weight );
   for( int j = 0 ; j < jet_n ; ++j ) {
     double jet_pt  = ed->jets.pT.at( j );
@@ -273,6 +283,11 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   m_pseudotop->SetChargedLepton( kElectron, 0 );
   m_pseudotop->Run();
   
+  // dumped indices:
+  // reco                : 0=t_lep 1=t_had 2=ttbar
+  // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
+  // truth (parton lvl)  : 6=t_lep 7=t_had 8=ttbar
+  
   const double top_lep_pt  = ed->reco.pT.at(0);
   const double top_lep_eta = ed->reco.eta.at(0);
   const double top_lep_phi = ed->reco.phi.at(0);
@@ -292,23 +307,23 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   const double ttbar_m   = ed->reco.m.at(2);
   const double ttbar_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 2 );
  
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_pt"  )->Fill( top_lep_pt/GeV, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_eta" )->Fill( top_lep_eta, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_phi" )->Fill( top_lep_phi, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_E"   )->Fill( top_lep_E/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_pt"  )->Fill(    top_lep_pt/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_eta" )->Fill(    top_lep_eta, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_phi" )->Fill(    top_lep_phi, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_E"   )->Fill(    top_lep_E/GeV, weight );
   m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_lep_absrap" )->Fill( fabs(top_lep_y), weight );
 
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_pt"  )->Fill( top_had_pt/GeV, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_eta" )->Fill( top_had_eta, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_phi" )->Fill( top_had_phi, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_E"   )->Fill( top_had_E/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_pt"  )->Fill(    top_had_pt/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_eta" )->Fill(    top_had_eta, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_phi" )->Fill(    top_had_phi, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_E"   )->Fill(    top_had_E/GeV, weight );
   m_hm->GetHistogram( "cutflow/h_4j2b_pseudotop_had_absrap" )->Fill( fabs(top_had_y) , weight );
 
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_pt"  )->Fill( ttbar_pt/GeV, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_eta" )->Fill( ttbar_eta, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_phi" )->Fill( ttbar_phi, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_E"   )->Fill( ttbar_E/GeV, weight );
-  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_m"   )->Fill( ttbar_m/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_pt"  )->Fill(    ttbar_pt/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_eta" )->Fill(    ttbar_eta, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_phi" )->Fill(    ttbar_phi, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_E"   )->Fill(    ttbar_E/GeV, weight );
+  m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_m"   )->Fill(    ttbar_m/GeV, weight );
   m_hm->GetHistogram( "cutflow/h_4j2b_pseudottbar_absrap" )->Fill( fabs(ttbar_y), weight );
 
   return success;
