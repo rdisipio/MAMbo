@@ -236,6 +236,43 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       ed->mctruth.property["isHadronic"].push_back( isHadronic );
       //printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", ed->info.eventNumber, i, pid, t_pT, isHadronic );
     }
+    else if( ( apid == 11 ) || ( apid == 13 ) ) {
+      // dressed FS leptons
+      if( status != 1 ) continue;
+
+      TLorentzVector dressed_lepton;
+      dressed_lepton.SetPtEtaPhiM( m_ntuple->mc_pt->at(i),
+			   m_ntuple->mc_eta->at(i),
+			   m_ntuple->mc_phi->at(i),
+			   m_ntuple->mc_m->at(i)
+			   );
+
+      for( int y = 0 ; y < m_ntuple->mc_n ; ++y ) {
+	const int pid     = m_ntuple->mc_pdgId->at(y);
+	const int apid    = abs(pid);
+	const int status  = m_ntuple->mc_status->at(y);
+
+	if( apid != 22 )  continue;
+	if( status != 1 ) continue;
+
+	TLorentzVector gamma;
+	gamma.SetPtEtaPhiM( m_ntuple->mc_pt->at(y),
+			    m_ntuple->mc_eta->at(y),
+			    m_ntuple->mc_phi->at(y),
+			    m_ntuple->mc_m->at(y)
+			   );
+
+	if( dressed_lepton.DeltaR( gamma ) > 0.1 ) continue;
+ 
+	dressed_lepton += gamma;
+      }
+      const int dressed_lepton_index =  HelperFunctions::DumpParticleToEventData( dressed_lepton, &ed->mctruth );
+      
+      ed->mctruth.barcode.push_back( barcode );
+      ed->mctruth.pdgId.push_back( pid );
+      ed->mctruth.status.push_back( 1 );
+      ( pid >= 0 ) ? ed->mctruth.q.push_back( -1 ) : ed->mctruth.q.push_back( 1 );
+    }
   }
  
   // truth jets (narrow)
