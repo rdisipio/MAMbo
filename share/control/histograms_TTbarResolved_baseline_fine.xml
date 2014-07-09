@@ -55,96 +55,82 @@
 <!-- pseudo tops -->
 
 <!-- reco level -->
-  <TH1F name="reco/h_4j2b_pseudotop_reco_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH1F name="reco/h_4j2b_pseudotop_reco_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="reco/h_4j2b_pseudotop_reco_lep_eta" title="Pseudo-top (leptonic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="reco/h_4j2b_pseudotop_reco_lep_phi" title="Pseudo-top (leptonic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="reco/h_4j2b_pseudotop_reco_lep_E"   title="Pseudo-top (leptonic) energy [GeV]"     	    nbins="20" xmin="0." xmax="1500." />
   <TH1F name="reco/h_4j2b_pseudotop_reco_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
-  <TH1F name="reco/h_4j2b_pseudotop_reco_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH1F name="reco/h_4j2b_pseudotop_reco_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="reco/h_4j2b_pseudotop_reco_had_eta" title="Pseudo-top (hadronic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="reco/h_4j2b_pseudotop_reco_had_phi" title="Pseudo-top (hadronic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="reco/h_4j2b_pseudotop_reco_had_E"   title="Pseudo-top (hadronic) energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="reco/h_4j2b_pseudotop_reco_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH1F name="reco/h_4j2b_pseudotop_reco_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
-  <TH1F name="reco/h_4j2b_pseudottbar_reco_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="5" edges="0,25,50,85,125,500" />
+  <TH1F name="reco/h_4j2b_pseudottbar_reco_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F	name="reco/h_4j2b_pseudottbar_reco_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="reco/h_4j2b_pseudottbar_reco_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="reco/h_4j2b_pseudottbar_reco_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="reco/h_4j2b_pseudottbar_reco_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" /> 
-  <TH1F name="reco/h_4j2b_pseudottbar_reco_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
+  <TH1F name="reco/h_4j2b_pseudottbar_reco_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="20" xmin="0." xmax="1500." /> 
+  <TH1F name="reco/h_4j2b_pseudottbar_reco_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="25" xmin="0." xmax="2.5" />
 
 <!-- particle level -->
-  <TH1F name="particle/h_4j2b_pseudotop_particle_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH1F name="particle/h_4j2b_pseudotop_particle_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="particle/h_4j2b_pseudotop_particle_lep_eta" title="Pseudo-top (leptonic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="particle/h_4j2b_pseudotop_particle_lep_phi" title="Pseudo-top (leptonic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/h_4j2b_pseudotop_particle_lep_E"   title="Pseudo-top (leptonic) energy [GeV]"                nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="particle/h_4j2b_pseudotop_particle_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH1F name="particle/h_4j2b_pseudotop_particle_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
-  <TH1F name="particle/h_4j2b_pseudotop_particle_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH1F name="particle/h_4j2b_pseudotop_particle_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="particle/h_4j2b_pseudotop_particle_had_eta" title="Pseudo-top (hadronic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="particle/h_4j2b_pseudotop_particle_had_phi" title="Pseudo-top (hadronic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/h_4j2b_pseudotop_particle_had_E"   title="Pseudo-top (hadronic) energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="particle/h_4j2b_pseudotop_particle_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH1F name="particle/h_4j2b_pseudotop_particle_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
-  <TH1F name="particle/h_4j2b_pseudottbar_particle_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="5" edges="0,25,50,85,125,500" />
+  <TH1F name="particle/h_4j2b_pseudottbar_particle_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="particle/h_4j2b_pseudottbar_particle_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="particle/h_4j2b_pseudottbar_particle_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/h_4j2b_pseudottbar_particle_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="particle/h_4j2b_pseudottbar_particle_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
-  <TH1F name="particle/h_4j2b_pseudottbar_particle_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
+  <TH1F name="particle/h_4j2b_pseudottbar_particle_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="particle/h_4j2b_pseudottbar_particle_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="25" xmin="0." xmax="2.5" />
 
 <!-- parton level -->
-  <TH1F name="parton/h_4j2b_pseudotop_parton_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH1F name="parton/h_4j2b_pseudotop_parton_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="parton/h_4j2b_pseudotop_parton_lep_eta" title="Pseudo-top (leptonic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="parton/h_4j2b_pseudotop_parton_lep_phi" title="Pseudo-top (leptonic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="parton/h_4j2b_pseudotop_parton_lep_E"   title="Pseudo-top (leptonic) energy [GeV]"                nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="parton/h_4j2b_pseudotop_parton_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH1F name="parton/h_4j2b_pseudotop_parton_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
-  <TH1F name="parton/h_4j2b_pseudotop_parton_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH1F name="parton/h_4j2b_pseudotop_parton_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="parton/h_4j2b_pseudotop_parton_had_eta" title="Pseudo-top (hadronic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="parton/h_4j2b_pseudotop_parton_had_phi" title="Pseudo-top (hadronic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="parton/h_4j2b_pseudotop_parton_had_E"   title="Pseudo-top (hadronic) energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="parton/h_4j2b_pseudotop_parton_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH1F name="parton/h_4j2b_pseudotop_parton_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
-  <TH1F name="parton/h_4j2b_pseudottbar_parton_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="5" edges="0,25,50,85,125,500" />
+  <TH1F name="parton/h_4j2b_pseudottbar_parton_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="20" xmin="0." xmax="1000." />
   <TH1F name="parton/h_4j2b_pseudottbar_parton_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="parton/h_4j2b_pseudottbar_parton_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="parton/h_4j2b_pseudottbar_parton_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="parton/h_4j2b_pseudottbar_parton_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
-  <TH1F name="parton/h_4j2b_pseudottbar_parton_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
+  <TH1F name="parton/h_4j2b_pseudottbar_parton_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="parton/h_4j2b_pseudottbar_parton_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="25" xmin="0." xmax="2.5" />
 
 <!-- migration matrices -->
-  <TH2F name="response/h_4j2b_pseudotop_response_lep_pt"  title="Response matrix Pseudo-top (leptonic) p_{T} [GeV]"           
-        nbinsx="10" xedges="0,45,90,120,150,180,220,260,300,350,1000" 
-        nbinsy="10" yedges="0,45,90,120,150,180,220,260,300,350,1000"   />
+  <TH2F name="response/h_4j2b_pseudotop_response_lep_pt"  title="Response matrix Pseudo-top (leptonic) p_{T} [GeV]"           nbinsx="20" xmin="0." xmax="1000." nbinsy="20" ymin="0." ymax="1000." />
   <TH2F name="response/h_4j2b_pseudotop_response_lep_eta" title="Response matrix Pseudo-top (leptonic) pseudorapidity #eta"   nbinsx="25" xmin="-2.5" xmax="2.5" nbinsy="25" ymin="-2.5" ymax="2.5"/>
   <TH2F name="response/h_4j2b_pseudotop_response_lep_phi" title="Response matrix Pseudo-top (leptonic) azimuthal angle #phi"  nbinsx="16" xmin="-3.2"   xmax="3.2" nbinsy="16" ymin="-3.2"   ymax="3.2" />
   <TH2F name="response/h_4j2b_pseudotop_response_lep_E"   title="Response matrix Pseudo-top (leptonic) energy [GeV]"          nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
-  <TH2F name="response/h_4j2b_pseudotop_response_lep_absrap" title="Response matrix Pseudo-top (leptonic) abs rapidity |y_{t}|" 
-        nbinsx="6" xedges="0,0.4,0.8,1.1,1.4,1.8,2.5" 
-        nbinsy="6" yedges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH2F name="response/h_4j2b_pseudotop_response_lep_absrap" title="Response matrix Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbinsx="25" xmin="-0" xmax="2.5" nbinsy="25" ymin="-0" ymax="2.5" />
 
-  <TH2F name="response/h_4j2b_pseudotop_response_had_pt"  title="Response matrix Pseudo-top (hadronic) p_{T} [GeV]"           
-        nbinsx="10" xedges="0,45,90,120,150,180,220,260,300,350,1000"
-        nbinsy="10" yedges="0,45,90,120,150,180,220,260,300,350,1000" />
+  <TH2F name="response/h_4j2b_pseudotop_response_had_pt"  title="Response matrix Pseudo-top (hadronic) p_{T} [GeV]"           nbinsx="20" xmin="0." xmax="1000." nbinsy="20" ymin="0." ymax="1000." />
   <TH2F name="response/h_4j2b_pseudotop_response_had_eta" title="Response matrix Pseudo-top (hadronic) pseudorapidity #eta"   nbinsx="25" xmin="-2.5" xmax="2.5" nbinsy="25" ymin="-2.5" ymax="2.5" />
   <TH2F name="response/h_4j2b_pseudotop_response_had_phi" title="Response matrix Pseudo-top (hadronic) azimuthal angle #phi"  nbinsx="16" xmin="-3.2"   xmax="3.2" nbinsy="16" ymin="-3.2"   ymax="3.2" />
   <TH2F name="response/h_4j2b_pseudotop_response_had_E"   title="Response matrix Pseudo-top (hadronic) energy [GeV]"          nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
-  <TH2F name="response/h_4j2b_pseudotop_response_had_absrap" title="Response matrix Pseudo-top (hadronic) abs rapidity |y_{t}|"   
-        nbinsx="6" xedges="0,0.4,0.8,1.1,1.4,1.8,2.5" 
-        nbinsy="6" yedges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
+  <TH2F name="response/h_4j2b_pseudotop_response_had_absrap" title="Response matrix Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbinsx="25" xmin="-0" xmax="2.5" nbinsy="25" ymin="-0" ymax="2.5" />
 
-  <TH2F name="response/h_4j2b_pseudottbar_response_pt"  title="Response matrix Pseudo-t#bar{t} p_{T} [GeV]"       
-        nbinsx="5" xedges="0,25,50,85,125,500"
-        nbinsy="5" yedges="0,25,50,85,125,500" />
+  <TH2F name="response/h_4j2b_pseudottbar_response_pt"  title="Response matrix Pseudo-t#bar{t} p_{T} [GeV]"           nbinsx="20" xmin="0." xmax="1000." nbinsy="20" ymin="0." ymax="1000." />
   <TH2F name="response/h_4j2b_pseudottbar_response_eta" title="Response matrix Pseudo-t#bar{t} pseudorapidity #eta"   nbinsx="25" xmin="-2.5" xmax="2.5" nbinsy="25" ymin="-2.5" ymax="2.5" />
   <TH2F name="response/h_4j2b_pseudottbar_response_phi" title="Response matrix Pseudo-t#bar{t} azimuthal angle #phi"  nbinsx="16" xmin="-3.2"   xmax="3.2" nbinsy="16" ymin="-3.2"   ymax="3.2" />
   <TH2F name="response/h_4j2b_pseudottbar_response_E"   title="Response matrix Pseudo-t#bar{t} energy [GeV]"          nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
-  <TH2F name="response/h_4j2b_pseudottbar_response_m"   title="Response matrix Pseudo-t#bar{t} Invariant Mass [GeV]" 
-        nbinsx="8" xedges="225,400,500,600,700,850,1000,1250,2500"
-        nbinsy="8" yedges="225,400,500,600,700,850,1000,1250,2500" />
-  <TH2F name="response/h_4j2b_pseudottbar_response_absrap" title="Response matrix Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|"
-        nbinsx="10" xedges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" 
-        nbinsy="10" yedges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
+  <TH2F name="response/h_4j2b_pseudottbar_response_m"   title="Response matrix Pseudo-t#bar{t} Invariant Mass [GeV]"  nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
+  <TH2F name="response/h_4j2b_pseudottbar_response_absrap" title="Response matrix Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbinsx="25" xmin="0." xmax="2.5" nbinsy="25" ymin="0." ymax="2.5" />
 </histograms>
