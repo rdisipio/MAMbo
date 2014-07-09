@@ -64,13 +64,17 @@ void INtupleWrapper::Loop( Long64_t nEventsMax )
   for( Long64_t i = 0 ; i < m_maxEvents ; ++i ) {
     m_thisEvent = NextEvent();
 
-    if( !m_thisEvent ) throw runtime_error( "Cannot create event\n" );
+//    if( !m_thisEvent ) throw runtime_error( "Cannot create event\n" );
+    if( !m_thisEvent ) {
+       printf( "WARNING: Could not process event %i. Skipping..\n", i );
+       continue; 
+    }
 
     for( CutFlowCollection_t::const_iterator itr = m_cutFlows.begin() ; itr != m_cutFlows.end() ; ++itr ) {
       itr->second->Apply( m_thisEvent );
     }
-  }
 
+  }
 }
 
 
@@ -80,12 +84,19 @@ void INtupleWrapper::Loop( Long64_t nEventsMax )
 EventData * INtupleWrapper::NextEvent()
 {
    if( m_thisEvent ) delete m_thisEvent;
+   m_thisEvent = NULL;
 
-   m_thisEvent = MakeEvent( (++m_thisEventNumber-1) ); // must be implemented at some point downstream
+   try {
+     m_thisEvent = MakeEvent( (++m_thisEventNumber-1) ); // must be implemented at some point downstream
+   }
+   catch( ... ) {
+     printf( "ERROR: could not process event %i\n", (++m_thisEventNumber-1) );
+   }
 
    if( ( m_maxEvents < 10 ) || ( m_thisEventNumber % int(m_maxEvents/10) ) == 0 ) {
      double perc = 100. * m_thisEventNumber / m_maxEvents;
-     printf( "INFO: Event %-9i (en = %-10i rn = %-10i )       (%3.0f %%)\n", m_thisEventNumber, m_thisEvent->info.eventNumber, m_thisEvent->info.runNumber, perc );
+     printf( "INFO: Event %-9i (en = %-10i rn = %-10i )       (%3.0f %%)\n", 
+             m_thisEventNumber, m_thisEvent->info.eventNumber, m_thisEvent->info.runNumber, perc );
    }
 
    return m_thisEvent;

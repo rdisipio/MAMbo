@@ -127,6 +127,18 @@ struct EventData
     array_tag tag;
     PropertyCollection_t property;
   } truth_fjets;
+
+  struct TruthBJets_t {
+    int     n;
+    array_ui index;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_tag tag;
+    PropertyCollection_t property;
+  } truth_bjets;
   
 
   struct Truth_t {
@@ -144,14 +156,35 @@ struct EventData
     PropertyCollection_t property;
   } mctruth;
  
+  struct TruthLepton_t {
+    double pT;
+    double eta;
+    double phi;
+    double E;
+    double m;
+    double q;
+    int    pdgId;
+    PropertyCollection_t property; // see src/Commons.h
+  } truth_lepton;
+
   struct MET_t {
     double et;
     double etx;
     double ety;
     double phi;
     double sumet;
+    double mwt;
   } MET;
 
+  struct TruthMET_t {
+    double et;
+    double etx;
+    double ety;
+    double etz;
+    double phi;
+    double sumet;
+    double mwt;
+  } MET_truth;
 
   struct Reco_t {
     int     n;

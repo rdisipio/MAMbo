@@ -52,8 +52,12 @@ namespace PhysicsHelperFunctions {
     m_W_lep = m_neutrino + m_lepton;
 
  
-    TLorentzVector bj1 = HelperFunctions::MakeFourMomentum( m_p_ed->bjets, 0 );
-    TLorentzVector bj2 = HelperFunctions::MakeFourMomentum( m_p_ed->bjets, 1 );
+    TLorentzVector bj1 = ( m_target == kReco ) ? 
+      HelperFunctions::MakeFourMomentum( m_p_ed->bjets, 0 ) :
+      HelperFunctions::MakeFourMomentum( m_p_ed->truth_bjets, 0 );
+    TLorentzVector bj2 = ( m_target == kReco ) ?
+      HelperFunctions::MakeFourMomentum( m_p_ed->bjets, 1 ) :
+      HelperFunctions::MakeFourMomentum( m_p_ed->truth_bjets, 1 );
 
     const double dR1 = m_lepton.DeltaR( bj1 );
     const double dR2 = m_lepton.DeltaR( bj2 );
@@ -71,8 +75,8 @@ namespace PhysicsHelperFunctions {
       
     int Wj1_index = -1;
     int Wj2_index = -1;
-    int bj1_index = m_p_ed->bjets.index.at(0);
-    int bj2_index = m_p_ed->bjets.index.at(1);
+    int bj1_index = ( m_target == kReco ) ? m_p_ed->bjets.index.at(0) : m_p_ed->truth_bjets.index.at(0);
+    int bj2_index = ( m_target == kReco ) ? m_p_ed->bjets.index.at(1) : m_p_ed->truth_bjets.index.at(1);
     for( int j = 0 ; j < m_p_ed->jets.n ; ++j ) {
       const int jindex = m_p_ed->jets.index.at(j);
 
@@ -90,8 +94,12 @@ namespace PhysicsHelperFunctions {
 	}
     }
 
-    TLorentzVector Wj1 = HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj1_index );
-    TLorentzVector Wj2 = HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj2_index );
+    TLorentzVector Wj1 = ( m_target == kReco ) ?
+      HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj1_index ) :
+      HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj1_index );
+    TLorentzVector Wj2 = ( m_target == kReco ) ?
+      HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj2_index ) :
+      HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj2_index );
     // printf( "DEBUG: bjets = j%i, j%i ; hadW = j%i + j%i\n", bj1_index, bj2_index, Wj1_index, Wj2_index );
     m_W_had   = Wj1 + Wj2;
     m_top_had = bj_had + m_W_had;
@@ -103,6 +111,7 @@ namespace PhysicsHelperFunctions {
     const int ttbar_pid   = 611;  // ttbar "meson"
 	
 
+    // dump to event data
     const size_t top_lep_index = HelperFunctions::DumpParticleToEventData( m_top_lep, &m_p_ed->reco );
     const size_t top_had_index = HelperFunctions::DumpParticleToEventData( m_top_had, &m_p_ed->reco );
     const size_t ttbar_index   = HelperFunctions::DumpParticleToEventData( m_ttbar,   &m_p_ed->reco );
@@ -110,6 +119,7 @@ namespace PhysicsHelperFunctions {
     m_p_ed->reco.pdgId.push_back( top_lep_pid );
     m_p_ed->reco.pdgId.push_back( top_had_pid );
     m_p_ed->reco.pdgId.push_back( ttbar_pid );
+   
   }
 
 
@@ -143,13 +153,10 @@ namespace PhysicsHelperFunctions {
       }
     }
     else {
-      if( m_channel == kElectron ) {
-      }
-      else if( m_channel == kMuon ) {
-      }
-      else {
-	throw runtime_error( "PseudoTopReconstruction: tau-lepton channel at truth level not yet implemented\n" );
-      }
+      l_pT  = m_p_ed->truth_lepton.pT;
+      l_eta = m_p_ed->truth_lepton.eta;
+      l_phi = m_p_ed->truth_lepton.phi;
+      l_E   = m_p_ed->truth_lepton.E;
     }
 
     m_lepton.SetPtEtaPhiE( l_pT, l_eta, l_phi, l_E );
@@ -164,6 +171,12 @@ namespace PhysicsHelperFunctions {
   int PseudoTopReconstruction::MakeNeutrino( const double mW )
   {
     int status = 0;
+
+    if( m_target == kTruth ) {
+      m_neutrino.SetXYZM( m_p_ed->MET_truth.etx, m_p_ed->MET_truth.ety, m_p_ed->MET_truth.etz, 0. );
+
+      return status;		
+    }
 
     const double v_pT = m_p_ed->MET.et;
     const double v_px = ( m_target == kReco ) ? v_pT * cos( m_p_ed->MET.phi ) : 0.;

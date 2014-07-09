@@ -204,6 +204,9 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 {
   bool success = true;
 
+  TLorentzVector neutrino;
+  TLorentzVector dressed_lepton;
+
   int isMCSignal = (int)m_config->custom_params["isMCSignal"];  
   if( !isMCSignal ) return success;
 
@@ -214,6 +217,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     const int status  = m_ntuple->mc_status->at(i);
 
     if( apid == 6 ) {
+      if( !m_ntuple->mc_pt ) throw runtime_error( "mc pt not allocated\n" );
       const double t_pT  = m_ntuple->mc_pt->at(i);
       const double t_eta = m_ntuple->mc_eta->at(i);
       const double t_phi = m_ntuple->mc_phi->at(i);
@@ -234,17 +238,18 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       
       const bool isHadronic = IsTopHadronic( i );
       ed->mctruth.property["isHadronic"].push_back( isHadronic );
-      //printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", ed->info.eventNumber, i, pid, t_pT, isHadronic );
+      //printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", 
+      // ed->info.eventNumber, i, pid, t_pT, isHadronic );
     }
     else if( ( apid == 11 ) || ( apid == 13 ) ) {
       // dressed FS leptons
       if( status != 1 ) continue;
 
-      TLorentzVector dressed_lepton;
-      dressed_lepton.SetPtEtaPhiM( m_ntuple->mc_pt->at(i),
-			   m_ntuple->mc_eta->at(i),
-			   m_ntuple->mc_phi->at(i),
-			   m_ntuple->mc_m->at(i)
+      dressed_lepton.SetPtEtaPhiM( 
+				  m_ntuple->mc_pt->at(i),
+				  m_ntuple->mc_eta->at(i),
+				  m_ntuple->mc_phi->at(i),
+				  m_ntuple->mc_m->at(i)
 			   );
 
       for( int y = 0 ; y < m_ntuple->mc_n ; ++y ) {
@@ -266,32 +271,74 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
  
 	dressed_lepton += gamma;
       }
-      const int dressed_lepton_index =  HelperFunctions::DumpParticleToEventData( dressed_lepton, &ed->mctruth );
+
+      ed->truth_lepton.pT  = dressed_lepton.Pt();
+      ed->truth_lepton.eta = dressed_lepton.Eta();
+      ed->truth_lepton.phi = dressed_lepton.Phi();
+      ed->truth_lepton.E   = dressed_lepton.E();
+      ed->truth_lepton.m   = dressed_lepton.M();
+      ed->truth_lepton.q   = ( pid >= 0 ) ? -1 : 1;
+      ed->truth_lepton.pdgId = pid;
+    }
+    else if( ( apid == 12 ) || ( apid == 14 ) || ( apid == 16 ) ) {
+      if( status != 1 ) continue;
+      if( barcode > 20 ) continue;
       
-      ed->mctruth.barcode.push_back( barcode );
-      ed->mctruth.pdgId.push_back( pid );
-      ed->mctruth.status.push_back( 1 );
-      ( pid >= 0 ) ? ed->mctruth.q.push_back( -1 ) : ed->mctruth.q.push_back( 1 );
+      neutrino.SetPtEtaPhiM(
+			    m_ntuple->mc_pt->at(i),
+			    m_ntuple->mc_eta->at(i),
+			    m_ntuple->mc_phi->at(i),
+			    0.
+			    );
+
+      ed->MET_truth.et  = neutrino.Pt();
+      ed->MET_truth.etx = neutrino.Px();
+      ed->MET_truth.ety = neutrino.Py();
+      ed->MET_truth.phi = neutrino.Phi();
+      ed->MET_truth.etz = neutrino.Pz();
+      ed->MET_truth.sumet = -1.;
     }
   }
+  // truth M_T^W
+  //TLorentzVector Wlep = neutrino + dressed_lepton;
+  const double dPhi_lv = dressed_lepton.DeltaPhi( neutrino );
+  ed->MET_truth.mwt = sqrt( 2. * neutrino.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
  
   // truth jets (narrow)
   ed->truth_jets.n = GET_VALUE( mc_jet_AntiKt4Truth_n );
   for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
 
+    const double jet_pt  =  m_ntuple->mc_jet_AntiKt4Truth_pt->at(i);
+    const double jet_eta = m_ntuple->mc_jet_AntiKt4Truth_eta->at(i);
+    const double jet_phi = m_ntuple->mc_jet_AntiKt4Truth_phi->at(i);
+    const double jet_E   = m_ntuple->mc_jet_AntiKt4Truth_E->at(i);
+    const double jet_m   = m_ntuple->mc_jet_AntiKt4Truth_m->at(i);
+
     ed->truth_jets.index.push_back( i );
+    ed->truth_jets.pT.push_back(  jet_pt );
+    ed->truth_jets.eta.push_back( jet_eta );
+    ed->truth_jets.phi.push_back( jet_phi );
+    ed->truth_jets.E.push_back(   jet_E );
+    ed->truth_jets.m.push_back(   jet_m );
 
-    ed->truth_jets.pT.push_back(  m_ntuple->mc_jet_AntiKt4Truth_pt->at(i)  );
-    ed->truth_jets.eta.push_back( m_ntuple->mc_jet_AntiKt4Truth_eta->at(i) );
-    ed->truth_jets.phi.push_back( m_ntuple->mc_jet_AntiKt4Truth_phi->at(i) );
-    ed->truth_jets.E.push_back(   m_ntuple->mc_jet_AntiKt4Truth_E->at(i)   );
-    ed->truth_jets.m.push_back(   m_ntuple->mc_jet_AntiKt4Truth_m->at(i)   );
+    const JetTag tag = (JetTag)m_ntuple->mc_jet_AntiKt4Truth_flavor_truth_trueflav->at(i);
+    ed->truth_jets.tag.push_back( tag  );
 
-    ed->truth_jets.tag.push_back(  (JetTag)m_ntuple->mc_jet_AntiKt4Truth_flavor_truth_trueflav->at(i) );
+    ed->truth_bjets.n = 0;
+    if( tag == kBTagged ) {
+      ed->truth_bjets.n += 1;
+      ed->truth_bjets.index.push_back( i );
+      ed->truth_bjets.pT.push_back(  jet_pt );
+      ed->truth_bjets.eta.push_back( jet_eta );
+      ed->truth_bjets.phi.push_back( jet_phi );
+      ed->truth_bjets.E.push_back(   jet_E );
+      ed->truth_bjets.m.push_back(   jet_m );
+      ed->truth_bjets.tag.push_back( tag  );
+    }
   }
 
   ed->truth_fjets.n = GET_VALUE( mc_jet_AntiKt10Truth_n );
-  for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
+  for( int i = 0 ; i < ed->truth_fjets.n ; ++i ) {
 
     ed->truth_fjets.index.push_back( i );
 

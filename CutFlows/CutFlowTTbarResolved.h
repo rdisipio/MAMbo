@@ -17,8 +17,15 @@ class CutFlowTTbarResolved : public CutFlow
   virtual bool Apply( EventData * ed );
 
  protected:
-    PseudoTopReconstruction * m_pseudotop;
+  bool PassedCutFlowReco(     EventData * ed );
+  bool PassedCutFlowParticle( EventData * ed );
 
+  void FillHistogramsPseudotopReco(     const EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopParticle( const EventData * ed, const double weight = 1. );
+
+ protected:
+    PseudoTopReconstruction * m_pseudotop_reco;
+    PseudoTopReconstruction * m_pseudotop_particle;
  // bool FillHistograms( int cutN );
 };
 

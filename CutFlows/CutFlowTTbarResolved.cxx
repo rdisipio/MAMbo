@@ -2,13 +2,14 @@
 
 CutFlowTTbarResolved::CutFlowTTbarResolved() 
 {
-  m_pseudotop = new PseudoTopReconstruction();
+  m_pseudotop_reco     = new PseudoTopReconstruction();
+  m_pseudotop_particle = new PseudoTopReconstruction();
 }
 
 CutFlowTTbarResolved::~CutFlowTTbarResolved()
 {
-  delete m_pseudotop;
-  m_pseudotop = NULL;
+  delete m_pseudotop_reco;
+  delete m_pseudotop_particle;
 }
 
 
@@ -76,6 +77,8 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   bool success = true;
 
   CutFlow::Start();
+
+  int isMCSignal = (int)m_config->custom_params["isMCSignal"];
 
   int jet_n     = ed->jets.n;
   double weight = 1.0;// ed->info.mcWeight;
@@ -278,16 +281,73 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   
   // Have fun with pseudo tops!
 
-  m_pseudotop->SetEventData( ed );
-  m_pseudotop->SetTarget( PseudoTopReconstruction::kReco );
-  m_pseudotop->SetChargedLepton( kElectron, 0 );
-  m_pseudotop->Run();
-  
+  m_pseudotop_reco->SetEventData( ed );
+  m_pseudotop_reco->SetTarget( PseudoTopReconstruction::kReco );
+  m_pseudotop_reco->SetChargedLepton( kElectron, 0 );
+  m_pseudotop_reco->Run();
+
   // dumped indices:
   // reco                : 0=t_lep 1=t_had 2=ttbar
   // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
   // truth (parton lvl)  : 6=t_lep 7=t_had 8=ttbar
   
+  FillHistogramsPseudotopReco( ed, weight );
+
+  if( isMCSignal ) {
+    m_pseudotop_particle->SetEventData( ed );
+    m_pseudotop_particle->SetTarget( PseudoTopReconstruction::kTruth );
+    m_pseudotop_particle->SetChargedLepton( kElectron, 0 );
+
+    try {
+      m_pseudotop_particle->Run();
+    }
+    catch ( ... ) {
+      return success;
+    }
+
+    FillHistogramsPseudotopParticle( ed, weight );
+  }
+
+  return success;
+}
+
+
+/////////////////////////////////////////
+
+
+bool CutFlowTTbarResolved::PassedCutFlowReco( EventData * ed )
+{
+  bool passed = true;
+
+  int    jet_n   = ed->jets.n;
+  int    bjet_n  = ed->bjets.n;
+  double ETmiss  = ed->MET.et;
+  double mwt     = ed->property["mwt"];
+  double lep_pt  = ed->electrons.pT.at( 0 );
+
+  if( lep_pt < 25*GeV ) return !passed;
+  if( ETmiss < 30*GeV ) return !passed;
+  if( mwt < 35*GeV )    return !passed;
+  if( jet_n < 4 )       return !passed;
+  if( bjet_n < 2 )      return !passed;
+
+  return passed;
+}
+
+
+bool CutFlowTTbarResolved::PassedCutFlowParticle( EventData * ed )
+{
+  bool passed = true;
+
+  return passed;
+}
+
+
+/////////////////////////////////////////
+
+
+void CutFlowTTbarResolved::FillHistogramsPseudotopReco( const EventData * ed, const double weight )
+{
   const double top_lep_pt  = ed->reco.pT.at(0);
   const double top_lep_eta = ed->reco.eta.at(0);
   const double top_lep_phi = ed->reco.phi.at(0);
@@ -325,10 +385,49 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
   m_hm->GetHistogram( "reco/h_4j2b_pseudottbar_reco_E"   )->Fill(    ttbar_E/GeV, weight );
   m_hm->GetHistogram( "reco/h_4j2b_pseudottbar_reco_m"   )->Fill(    ttbar_m/GeV, weight );
   m_hm->GetHistogram( "reco/h_4j2b_pseudottbar_reco_absrap" )->Fill( fabs(ttbar_y), weight );
-
-  return success;
 }
 
+
+void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( const EventData * ed, const double weight )
+{
+  const double top_lep_pt  = ed->reco.pT.at(3);
+  const double top_lep_eta = ed->reco.eta.at(3);
+  const double top_lep_phi = ed->reco.phi.at(3);
+  const double top_lep_E   = ed->reco.E.at(3);
+  const double top_lep_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 3 );
+
+  const double top_had_pt  = ed->reco.pT.at(4);
+  const double top_had_eta = ed->reco.eta.at(4);
+  const double top_had_phi = ed->reco.phi.at(4);
+  const double top_had_E   = ed->reco.E.at(4);
+  const double top_had_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 4 );
+
+  const double ttbar_pt  = ed->reco.pT.at(5);
+  const double ttbar_eta = ed->reco.eta.at(5);
+  const double ttbar_phi = ed->reco.phi.at(5);
+  const double ttbar_E   = ed->reco.E.at(5);
+  const double ttbar_m   = ed->reco.m.at(5);
+  const double ttbar_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 5 );
+ 
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_lep_pt"  )->Fill(    top_lep_pt/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_lep_eta" )->Fill(    top_lep_eta, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_lep_phi" )->Fill(    top_lep_phi, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_lep_E"   )->Fill(    top_lep_E/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_lep_absrap" )->Fill( fabs(top_lep_y), weight );
+
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_had_pt"  )->Fill(    top_had_pt/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_had_eta" )->Fill(    top_had_eta, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_had_phi" )->Fill(    top_had_phi, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_had_E"   )->Fill(    top_had_E/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudotop_particle_had_absrap" )->Fill( fabs(top_had_y) , weight );
+
+  m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_pt"  )->Fill(    ttbar_pt/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_eta" )->Fill(    ttbar_eta, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_phi" )->Fill(    ttbar_phi, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_E"   )->Fill(    ttbar_E/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_m"   )->Fill(    ttbar_m/GeV, weight );
+  m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_absrap" )->Fill( fabs(ttbar_y), weight );
+}
 
 /////////////////////////////////////////
 // Plugin
