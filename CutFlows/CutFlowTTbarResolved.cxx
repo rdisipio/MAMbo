@@ -306,6 +306,8 @@ bool CutFlowTTbarResolved::Apply( EventData * ed )
     }
 
     FillHistogramsPseudotopParticle( ed, weight );
+
+    FillHistogramsPseudotopResponse( ed, weight );
   }
 
   return success;
@@ -388,6 +390,9 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( const EventData * ed, co
 }
 
 
+/////////////////////////////////////////
+
+
 void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( const EventData * ed, const double weight )
 {
   const double top_lep_pt  = ed->reco.pT.at(3);
@@ -428,6 +433,68 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( const EventData * ed
   m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_m"   )->Fill(    ttbar_m/GeV, weight );
   m_hm->GetHistogram( "particle/h_4j2b_pseudottbar_particle_absrap" )->Fill( fabs(ttbar_y), weight );
 }
+
+
+void CutFlowTTbarResolved::FillHistogramsPseudotopResponse( const EventData * ed, const double weight )
+{
+  const double reco_top_lep_pt  = ed->reco.pT.at(0);
+  const double reco_top_lep_eta = ed->reco.eta.at(0);
+  const double reco_top_lep_phi = ed->reco.phi.at(0);
+  const double reco_top_lep_E   = ed->reco.E.at(0);
+  const double reco_top_lep_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 0 );
+
+  const double reco_top_had_pt  = ed->reco.pT.at(1);
+  const double reco_top_had_eta = ed->reco.eta.at(1);
+  const double reco_top_had_phi = ed->reco.phi.at(1);
+  const double reco_top_had_E   = ed->reco.E.at(1);
+  const double reco_top_had_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 1 );
+
+  const double reco_ttbar_pt  = ed->reco.pT.at(2);
+  const double reco_ttbar_eta = ed->reco.eta.at(2);
+  const double reco_ttbar_phi = ed->reco.phi.at(2);
+  const double reco_ttbar_E   = ed->reco.E.at(2);
+  const double reco_ttbar_m   = ed->reco.m.at(2);
+  const double reco_ttbar_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 2 );
+
+  const double particle_top_lep_pt  = ed->reco.pT.at(3);
+  const double particle_top_lep_eta = ed->reco.eta.at(3);
+  const double particle_top_lep_phi = ed->reco.phi.at(3);
+  const double particle_top_lep_E   = ed->reco.E.at(3);
+  const double particle_top_lep_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 3 );
+
+  const double particle_top_had_pt  = ed->reco.pT.at(4);
+  const double particle_top_had_eta = ed->reco.eta.at(4);
+  const double particle_top_had_phi = ed->reco.phi.at(4);
+  const double particle_top_had_E   = ed->reco.E.at(4);
+  const double particle_top_had_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 4 );
+
+  const double particle_ttbar_pt  = ed->reco.pT.at(5);
+  const double particle_ttbar_eta = ed->reco.eta.at(5);
+  const double particle_ttbar_phi = ed->reco.phi.at(5);
+  const double particle_ttbar_E   = ed->reco.E.at(5);
+  const double particle_ttbar_m   = ed->reco.m.at(5);
+  const double particle_ttbar_y   = PhysicsHelperFunctions::Rapidity( ed->reco, 5 );
+
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_lep_pt"  )->Fill(    particle_top_lep_pt/GeV, reco_top_lep_pt/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_lep_eta" )->Fill(    particle_top_lep_eta, reco_top_lep_eta, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_lep_phi" )->Fill(    particle_top_lep_phi, reco_top_lep_phi, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_lep_E"   )->Fill(    particle_top_lep_E/GeV, reco_top_lep_E/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_lep_absrap" )->Fill( fabs(particle_top_lep_y), fabs(reco_top_lep_y), weight );
+
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_had_pt"  )->Fill(    particle_top_had_pt/GeV, reco_top_had_pt/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_had_eta" )->Fill(    particle_top_had_eta, reco_top_had_eta, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_had_phi" )->Fill(    particle_top_had_phi, reco_top_had_phi, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_had_E"   )->Fill(    particle_top_had_E/GeV, reco_top_had_E/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudotop_response_had_absrap" )->Fill( fabs(particle_top_had_y), fabs(reco_top_had_y), weight );
+
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudottbar_response_pt"  )->Fill(    particle_ttbar_pt/GeV, reco_ttbar_pt/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudottbar_response_eta" )->Fill(    particle_ttbar_eta, reco_ttbar_eta, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudottbar_response_phi" )->Fill(    particle_ttbar_phi, reco_ttbar_phi, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudottbar_response_E"   )->Fill(    particle_ttbar_E/GeV, reco_ttbar_E/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudottbar_response_m"   )->Fill(    particle_ttbar_m/GeV, reco_ttbar_m/GeV, weight );
+  m_hm->Get2DHistogram( "response/h_4j2b_pseudottbar_response_absrap" )->Fill( fabs(particle_ttbar_y), fabs(reco_ttbar_y), weight );
+}
+
 
 /////////////////////////////////////////
 // Plugin

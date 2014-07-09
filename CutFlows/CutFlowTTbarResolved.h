@@ -22,6 +22,7 @@ class CutFlowTTbarResolved : public CutFlow
 
   void FillHistogramsPseudotopReco(     const EventData * ed, const double weight = 1. );
   void FillHistogramsPseudotopParticle( const EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopResponse( const EventData * ed, const double weight = 1. );
 
  protected:
     PseudoTopReconstruction * m_pseudotop_reco;
