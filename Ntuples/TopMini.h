@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Jul  8 10:22:19 2014 by ROOT version 5.34/04
+// Fri Jul 11 14:21:25 2014 by ROOT version 5.34/04
 // from TTree physics/4-vectors + variables required for scaling factors
 // found on file: /home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.5.0/run/el.root
 //////////////////////////////////////////////////////////
@@ -16,9 +16,8 @@
 #include <vector>
 #include <vector>
 
-using namespace std;
-
 // Fixed size dimensions of array or collections stored in the TTree if any.
+using namespace std;
 
 class TopMini {
 public :
@@ -62,18 +61,18 @@ public :
    Float_t         mwt;
    Int_t           jet_n;
    Int_t           alljet_n;
-   Float_t         jet_pt[7];   //[alljet_n]
-   Float_t         jet_eta[7];   //[alljet_n]
-   Float_t         jet_phi[7];   //[alljet_n]
-   Float_t         jet_E[7];   //[alljet_n]
-   Float_t         jet_jvf[7];   //[alljet_n]
-   Int_t           jet_trueflav[7];   //[alljet_n]
-   Int_t           jet_truthMatched[7];   //[alljet_n]
-   Float_t         jet_SV0[7];   //[alljet_n]
-   Float_t         jet_COMBNN[7];   //[alljet_n]
-   Float_t         jet_MV1[7];   //[alljet_n]
-   Float_t         jet_MV1c[7];   //[alljet_n]
-   Int_t           jet_isSemilep[7];   //[alljet_n]
+   Float_t         jet_pt[12];   //[alljet_n]
+   Float_t         jet_eta[12];   //[alljet_n]
+   Float_t         jet_phi[12];   //[alljet_n]
+   Float_t         jet_E[12];   //[alljet_n]
+   Float_t         jet_jvf[12];   //[alljet_n]
+   Int_t           jet_trueflav[12];   //[alljet_n]
+   Int_t           jet_truthMatched[12];   //[alljet_n]
+   Float_t         jet_SV0[12];   //[alljet_n]
+   Float_t         jet_COMBNN[12];   //[alljet_n]
+   Float_t         jet_MV1[12];   //[alljet_n]
+   Float_t         jet_MV1c[12];   //[alljet_n]
+   Int_t           jet_isSemilep[12];   //[alljet_n]
    Int_t           lastCutPassed;
    Int_t           mc_n;
    vector<float>   *mc_E;
@@ -577,7 +576,7 @@ void TopMini::Init(TTree *tree)
    fChain->SetBranchAddress("EF_j240_a10tc_EFFS", &EF_j240_a10tc_EFFS, &b_EF_j240_a10tc_EFFS);
    fChain->SetBranchAddress("OrigNumOfEventsInFile", &OrigNumOfEventsInFile, &b_OrigNumOfEventsInFile);
    fChain->SetBranchAddress("PUweight", &PUweight, &b_PUweight);
-   fChain->SetBranchAddress("PUweightDe", &PUweightDe, &b_PUweight);
+   fChain->SetBranchAddress("PUweightDe", &PUweightDe, &b_PUweightDe);
    fChain->SetBranchAddress("ZVxpWeight", &ZVxpWeight, &b_ZVxpWeight);
    fChain->SetBranchAddress("XSection", &XSection, &b_XSection);
    fChain->SetBranchAddress("KFactor", &KFactor, &b_KFactor);

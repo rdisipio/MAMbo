@@ -217,7 +217,15 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     const int status  = m_ntuple->mc_status->at(i);
 
     if( apid == 6 ) {
-      if( !m_ntuple->mc_pt ) throw runtime_error( "mc pt not allocated\n" );
+/*
+      printf( "INFO: branch mc_pt %i for event %i\n", m_ntuple->mc_pt, m_ntuple->eventNumber );
+      if( !m_ntuple->mc_pt ) {
+          printf( "ERROR: branch mc_pt %i for event %i\n", m_ntuple->mc_pt, m_ntuple->eventNumber );
+          TChain * ch = (TChain*)m_ntuple->fChain;
+          printf( "ERROR: file name: %s\n", ch->GetFile()->GetName() );
+          throw runtime_error( "mc pt not allocated\n" );
+      }
+*/
       const double t_pT  = m_ntuple->mc_pt->at(i);
       const double t_eta = m_ntuple->mc_eta->at(i);
       const double t_phi = m_ntuple->mc_phi->at(i);
