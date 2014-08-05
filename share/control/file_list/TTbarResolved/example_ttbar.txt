@@ -1,0 +1,1 @@
+/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/mc12_8TeV.117050.PowhegPythia_P2011C_ttbar.merge.NTUP_COMMON.e1728_s1581_s1586_r3658_r3549_p1562/run0/el.root

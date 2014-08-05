@@ -1,7 +1,12 @@
-<analysis name="BoostedSL">
-  <ntuple>MiniSLBoost</ntuple>
-  <branches>control/branch_list_MiniSLBoost.txt</branches>
-  <tree>mini</tree>
-  <histograms>control/histograms.xml</histograms>
-  <cutflow>BoostedSL</cutflow>
+<analysis name="TTbarResolved">
+  <ntuple>TopMini</ntuple>
+  <branches>control/branch_list_TopMini.txt</branches>
+  <tree>physics</tree>
+  <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
+  <cutflow>TTbarResolved</cutflow>
+  <parameters>
+    <param name="pTmin" value="20." />
+    <param name="etaMax" value="2.5" />
+    <param name="isMCSignal" value="0" />
+  </parameters>
 </analysis>
