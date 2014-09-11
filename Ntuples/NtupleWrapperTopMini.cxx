@@ -1,5 +1,7 @@
 #include "NtupleWrapperTopMini.h"
 
+#include "PhysicsHelperFunctions.h"
+
 NtupleWrapperTopMini::NtupleWrapperTopMini( const char * fileListName, const char * branchListName, const char * treeName ) : 
   NtupleWrapper< TopMini >( fileListName, branchListName, treeName )
 {
@@ -178,6 +180,8 @@ bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
     // ed->jets.property["BCH_CORR_CELL"].push_back( GET_VALUE_ARRAY( jet_BCH_CORR_CELL, i ) );
   }
 
+  // not needed at the moment.
+  /*
   ed->fjets.n = GET_VALUE( fjet_n );
   for( int i = 0 ; i < ed->fjets.n ; ++i ) {
     ed->fjets.index.push_back( i );
@@ -192,6 +196,7 @@ bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
     ed->fjets.dPhi_lj.push_back( m_ntuple->fjet_DeltaPhi_Lap_FatJet[i] );
     ed->fjets.dR_lj.push_back( m_ntuple->fjet_DeltaR_LapJet_Fatjet[i] );
   }
+  */
 
   return success;
 }
@@ -204,8 +209,8 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 {
   bool success = true;
 
-  TLorentzVector neutrino;
   TLorentzVector dressed_lepton;
+  TLorentzVector etmiss;
 
   int isMCSignal = (int)m_config->custom_params["isMCSignal"];  
   if( !isMCSignal ) return success;
@@ -215,6 +220,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     const int pid     = m_ntuple->mc_pdgId->at(i);
     const int apid    = abs(pid);
     const int status  = m_ntuple->mc_status->at(i);
+    const double q    = ( pid >= 0 ) ? 1 : -1;
 
     if( apid == 6 ) {
 /*
@@ -233,18 +239,15 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       const double t_pz  = t_pT * sinh( t_eta ); 
       const double t_E   = sqrt( t_pT*t_pT + t_pz*t_pz + t_m*t_m );
 
-      ed->mctruth.pdgId.push_back( pid );
-      ed->mctruth.status.push_back( status );
-      ed->mctruth.barcode.push_back( barcode );
-      ed->mctruth.pT.push_back( t_pT );
-      ed->mctruth.eta.push_back( t_eta );
-      ed->mctruth.phi.push_back( t_phi );
-      ed->mctruth.E.push_back( t_E );
-      ed->mctruth.m.push_back( t_m );
-
-      ( pid >= 0 ) ? ed->mctruth.q.push_back( 1 ) : ed->mctruth.q.push_back( -1 );
+      assert( t_pT > 0 );
       
-      const bool isHadronic = IsTopHadronic( i );
+      TLorentzVector tquark;
+      tquark.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
+      HelperFunctions::DumpTruthParticleToEventData( tquark, pid, status, barcode, q, &ed->mctruth );
+      
+      const PhysicsHelperFunctions::TOP_QUARK_DECAY_CLASS topdecay = 
+	PhysicsHelperFunctions::ClassifyTopDecay( i, m_ntuple->mc_child_index, m_ntuple->mc_pdgId );
+      const bool isHadronic = ( topdecay == PhysicsHelperFunctions::kTopDecayHadronic );
       ed->mctruth.property["isHadronic"].push_back( isHadronic );
       //printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", 
       // ed->info.eventNumber, i, pid, t_pT, isHadronic );
@@ -253,32 +256,18 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       // dressed FS leptons
       if( status != 1 ) continue;
 
-      dressed_lepton.SetPtEtaPhiM( 
+      TLorentzVector naked_lepton;
+      naked_lepton.SetPtEtaPhiM( 
 				  m_ntuple->mc_pt->at(i),
 				  m_ntuple->mc_eta->at(i),
 				  m_ntuple->mc_phi->at(i),
 				  m_ntuple->mc_m->at(i)
 			   );
 
-      for( int y = 0 ; y < m_ntuple->mc_n ; ++y ) {
-	const int pid     = m_ntuple->mc_pdgId->at(y);
-	const int apid    = abs(pid);
-	const int status  = m_ntuple->mc_status->at(y);
-
-	if( apid != 22 )  continue;
-	if( status != 1 ) continue;
-
-	TLorentzVector gamma;
-	gamma.SetPtEtaPhiM( m_ntuple->mc_pt->at(y),
-			    m_ntuple->mc_eta->at(y),
-			    m_ntuple->mc_phi->at(y),
-			    m_ntuple->mc_m->at(y)
-			   );
-
-	if( dressed_lepton.DeltaR( gamma ) > 0.1 ) continue;
- 
-	dressed_lepton += gamma;
-      }
+      // now dress the lepton with a cone of fixed aperture 0.1
+      dressed_lepton = PhysicsHelperFunctions::MakeDressedLepton( naked_lepton, 0.1, m_ntuple->mc_n, 
+							    m_ntuple->mc_pdgId, m_ntuple->mc_status,
+							    m_ntuple->mc_pt, m_ntuple->mc_eta, m_ntuple->mc_phi, m_ntuple->mc_m );
 
       ed->truth_lepton.pT  = dressed_lepton.Pt();
       ed->truth_lepton.eta = dressed_lepton.Eta();
@@ -287,11 +276,22 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       ed->truth_lepton.m   = dressed_lepton.M();
       ed->truth_lepton.q   = ( pid >= 0 ) ? -1 : 1;
       ed->truth_lepton.pdgId = pid;
+
+      if( apid == 11 ) {
+	HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_electrons );
+      }
+      else if( apid == 13 ) {
+	HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_muons );
+      }
+      else if( apid == 15 ) {
+	HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_taus );
+      }
     }
     else if( ( apid == 12 ) || ( apid == 14 ) || ( apid == 16 ) ) {
       if( status != 1 ) continue;
       if( barcode > 20 ) continue;
       
+      TLorentzVector neutrino;
       neutrino.SetPtEtaPhiM(
 			    m_ntuple->mc_pt->at(i),
 			    m_ntuple->mc_eta->at(i),
@@ -299,24 +299,30 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 			    0.
 			    );
 
+      etmiss += neutrino;
+
+      /*
       ed->MET_truth.et  = neutrino.Pt();
       ed->MET_truth.etx = neutrino.Px();
       ed->MET_truth.ety = neutrino.Py();
       ed->MET_truth.phi = neutrino.Phi();
       ed->MET_truth.etz = neutrino.Pz();
       ed->MET_truth.sumet = -1.;
+      */
     }
   }
+
+
   // truth M_T^W
   //TLorentzVector Wlep = neutrino + dressed_lepton;
-  const double dPhi_lv = dressed_lepton.DeltaPhi( neutrino );
-  ed->MET_truth.mwt = sqrt( 2. * neutrino.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
+  const double dPhi_lv = dressed_lepton.DeltaPhi( etmiss );
+  ed->MET_truth.mwt = sqrt( 2. * etmiss.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
  
   // truth jets (narrow)
   ed->truth_jets.n = GET_VALUE( mc_jet_AntiKt4Truth_n );
   for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
 
-    const double jet_pt  =  m_ntuple->mc_jet_AntiKt4Truth_pt->at(i);
+    const double jet_pt  = m_ntuple->mc_jet_AntiKt4Truth_pt->at(i);
     const double jet_eta = m_ntuple->mc_jet_AntiKt4Truth_eta->at(i);
     const double jet_phi = m_ntuple->mc_jet_AntiKt4Truth_phi->at(i);
     const double jet_E   = m_ntuple->mc_jet_AntiKt4Truth_E->at(i);
@@ -345,6 +351,8 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     }
   }
 
+  // not needed now
+  /*
   ed->truth_fjets.n = GET_VALUE( mc_jet_AntiKt10Truth_n );
   for( int i = 0 ; i < ed->truth_fjets.n ; ++i ) {
 
@@ -356,53 +364,18 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     ed->truth_fjets.E.push_back(   m_ntuple->mc_jet_AntiKt10Truth_E->at(i)   );
     ed->truth_fjets.m.push_back(   m_ntuple->mc_jet_AntiKt10Truth_m->at(i)   );
   }
+  */
 
+  // overlap removal
+  for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
+    // If dR(el,jet) < 0.4 skip the event
+
+    // If dR(mu,jet) < 0.4 skip the event
+
+    // If dR(jet,jet) < 0.5 skip the event
+  }
 
   return success;
-}
-
-bool NtupleWrapperTopMini::HadronicDecay( const int parent_index ) const
-{
-  bool isHadronic = true;
-
-  int n_lquarks = 0;
-
-  const int n_children = m_ntuple->mc_child_index->at( parent_index ).size();
-  for( int ic = 0 ; ic < n_children ; ++ic ) {
-	
-    const int child_index = m_ntuple->mc_child_index->at( parent_index ).at( ic );
-    const int child_pid   = m_ntuple->mc_pdgId->at( child_index );
-    const int child_apid  = abs( child_pid );
-
-    if( child_apid < 5 ) ++n_lquarks;
-  }
-
-  if( n_lquarks < 2 ) return !isHadronic;
-
-  return isHadronic;
-}
-
-bool NtupleWrapperTopMini::IsTopHadronic( const int parent_index ) const
-{
-  bool isHadronic = true;
-
-  const int n_children = m_ntuple->mc_child_index->at( parent_index ).size();
-  for( int ic = 0 ; ic < n_children ; ++ic ) {
-
-    const int child_index = m_ntuple->mc_child_index->at( parent_index ).at( ic );
-    const int child_pid   = m_ntuple->mc_pdgId->at( child_index );
-    const int child_apid  = abs( child_pid );
-    // printf( "DEBUG: mother id=%i pid=%i nchildren=%i child=%i child_pid=%i\n", 
-    //	    parent_index, pid, nchildren, ic, child_pid );
-    
-    if( child_apid == 24 ) {
-      return HadronicDecay( child_index );
-    }
-  }
-
-  throw runtime_error( "Top quark invalid decay, no W found.\n" );
-
-  return !isHadronic;
 }
 
 

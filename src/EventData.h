@@ -143,6 +143,7 @@ struct EventData
 
   struct Truth_t {
     int     n;
+
     array_ui pdgId;
     array_ui status;
     array_ui barcode;
@@ -153,19 +154,75 @@ struct EventData
     array_d E;
     array_d m;
     array_d q;
+
     PropertyCollection_t property;
   } mctruth;
  
   struct TruthLepton_t {
+    int pdgId;
+    int status;
+    int barcode;
+
     double pT;
     double eta;
     double phi;
     double E;
     double m;
     double q;
-    int    pdgId;
+
     PropertyCollection_t property; // see src/Commons.h
   } truth_lepton;
+
+  struct TruthElectrons_t {
+    int     n;
+
+    array_ui pdgId;
+    array_ui status;
+    array_ui barcode;
+
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_d q;
+
+    PropertyCollection_t property;
+  } truth_electrons;
+
+  struct TruthMuons_t {
+    int     n;
+
+    array_ui pdgId;
+    array_ui status;
+    array_ui barcode;
+
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_d q;
+
+    PropertyCollection_t property;
+  } truth_muons;
+
+  struct TruthTaus_t {
+    int     n;
+
+    array_ui pdgId;
+    array_ui status;
+    array_ui barcode;
+
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_d q;
+
+    PropertyCollection_t property;
+  } truth_taus;
 
   struct MET_t {
     double et;

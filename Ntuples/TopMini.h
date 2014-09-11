@@ -378,6 +378,7 @@ TopMini::TopMini(TTree *tree) : fChain(0)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
+/*
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.5.0/run/el.root");
       if (!f || !f->IsOpen()) {
@@ -386,6 +387,7 @@ TopMini::TopMini(TTree *tree) : fChain(0)
       f->GetObject("physics",tree);
 
    }
+*/
    Init(tree);
 }
 

@@ -1,6 +1,9 @@
 #ifndef __TopMini_WRAPPER_H__
 #define __TopMini_WRAPPER_H__
 
+// see also:
+// https://rivet.hepforge.org/trac/browser/src/Analyses/ATLAS_2014_I1304688.cc
+
 #include "NtupleWrapper.h"
 
 #include "TopMini.h"
@@ -22,8 +25,6 @@ class NtupleWrapperTopMini : public NtupleWrapper< TopMini >
   virtual bool MakeEventTruth( EventData * ed );
 
  private:
-  bool HadronicDecay( const int parent_index ) const;
-  bool IsTopHadronic( const int parent_index ) const;
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperTopMini > NtupleWrapperPluginFactory_TopMini;

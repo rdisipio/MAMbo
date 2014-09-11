@@ -38,17 +38,19 @@ namespace HelperFunctions {
   template< class T >
   size_t DumpParticleToEventData( const TLorentzVector& p, T * p_coll )
   {
-     const size_t new_index = p_coll->n;
+    assert( p.Pt() > 0 );
 
-     p_coll->pT.push_back( p.Pt() );
-     p_coll->eta.push_back( p.Eta() );
-     p_coll->phi.push_back( p.Phi() );
-     p_coll->E.push_back( p.E() );
-     p_coll->m.push_back( p.M() ); 
+    const size_t new_index = p_coll->n;
 
-     p_coll->n += 1;
- 
-     return new_index;
+    p_coll->pT.push_back( p.Pt() );
+    p_coll->eta.push_back( p.Eta() );
+    p_coll->phi.push_back( p.Phi() );
+    p_coll->E.push_back( p.E() );
+    p_coll->m.push_back( p.M() ); 
+
+    p_coll->n += 1;
+    
+    return new_index;
   }
 
 
@@ -60,11 +62,34 @@ namespace HelperFunctions {
       p_target->eta.push_back( p_source->eta.at( s_index ) );
       p_target->phi.push_back( p_source->phi.at( s_index ) );
       p_target->E.push_back( p_source->E.at( s_index ) );
+      //p_target->m.push_back( p_source->m.at( s_index ) );
 
       return new_index;
   };
 
+  
+  template< class T >
+    size_t DumpTruthParticleToEventData( const TLorentzVector& p, const int pid, const int status, const int barcode, const float q, T * p_coll ) 
+    {
+      assert( p.Pt() > 0 );
 
+      const size_t new_index = p_coll->n;
+
+      p_coll->pdgId.push_back( pid );
+      p_coll->status.push_back( status );
+      p_coll->barcode.push_back( barcode );
+
+      p_coll->pT.push_back( p.Pt() );
+      p_coll->eta.push_back( p.Eta() );
+      p_coll->phi.push_back( p.Phi() );
+      p_coll->E.push_back( p.E() );
+      p_coll->m.push_back( p.M() ); 
+      p_coll->q.push_back( q ); 
+
+      p_coll->n += 1;
+      
+      return new_index;
+  }
 };
 
 #endif /**  __HELPERFUNCTIONS_H__ */
