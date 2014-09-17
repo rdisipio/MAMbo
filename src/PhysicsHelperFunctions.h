@@ -64,16 +64,16 @@ namespace PhysicsHelperFunctions {
 
 
   template< class INDEX_COLL, class PID_COLL  >
-    bool HadronicDecay( const int parent_index, const INDEX_COLL * mc_child_index, const PID_COLL * mc_pdgId )
+    bool HadronicDecay( const int i, const INDEX_COLL * mc_child_index, const PID_COLL * mc_pdgId )
   {
     bool isHadronic = true;
 
     int n_lquarks = 0;
 
-    const int n_children = mc_child_index->at( parent_index ).size();
+    const int n_children = mc_child_index->at( i ).size();
     for( int ic = 0 ; ic < n_children ; ++ic ) {
 	
-      const int child_index = mc_child_index->at( parent_index ).at( ic );
+      const int child_index = mc_child_index->at( i ).at( ic );
       const int child_pid   = mc_pdgId->at( child_index );
       const int child_apid  = abs( child_pid );
 
@@ -87,8 +87,27 @@ namespace PhysicsHelperFunctions {
 
 
   /////////////////////////////////////////////////
-
-
+  
+  template< class INDEX_COLL, class PID_COLL  >
+    bool IsFromHadronicDecay( const int i, const INDEX_COLL * mc_parent_index, const PID_COLL * mc_pdgId )
+  {
+    bool isFromHadron = true;
+    const int nparents = mc_parent_index->size();
+    for( int ip = 0 ; ip < nparents ; ++ip ) {
+        const int mother_index = mc_parent_index->at(ip);
+        const int mother_pid   = mc_pdgId->at( mother_index );
+        const int mother_apid  = abs( mother_pid );
+        
+        if( mother_apid > 100 ) return isFromHadron;
+    }
+    
+    return !isFromHadron;
+  }
+  
+  /////////////////////////////////////////////////
+  
+  /////////////////////////////////////////////////
+  
   typedef enum top_quark_decay_class { kTopDecayUndecayed, kTopDecayLeptonic, kTopDecayHadronic } TOP_QUARK_DECAY_CLASS;
 
   template< class INDEX_COLL, class PID_COLL  >
@@ -119,9 +138,9 @@ namespace PhysicsHelperFunctions {
 
   /////////////////////////////////////////////////
 
-  template< class INT_COLL, class FLOAT_COLL >
+  template< class INT_COLL, class FLOAT_COLL, class INDEX_COLL >
     TLorentzVector MakeDressedLepton( const TLorentzVector & naked_lepton, const float dR, const int mc_n, 
-				const INT_COLL * mc_pdgId, const INT_COLL * mc_status,
+				const INT_COLL * mc_pdgId, const INT_COLL * mc_status, const INDEX_COLL * mc_parent_index,
 				const FLOAT_COLL * mc_pt, const FLOAT_COLL * mc_eta, const FLOAT_COLL * mc_phi, const FLOAT_COLL * mc_m )
   {
     TLorentzVector dressed_lepton = naked_lepton;
@@ -134,6 +153,8 @@ namespace PhysicsHelperFunctions {
 	if( apid != 22 )  continue;
 	if( status != 1 ) continue;
 
+        if( PhysicsHelperFunctions::IsFromHadronicDecay( y, &mc_parent_index->at(y), mc_pdgId ) ) continue;
+        
 	TLorentzVector gamma;
 	gamma.SetPtEtaPhiM( mc_pt->at(y),
 			    mc_eta->at(y),
