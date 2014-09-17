@@ -255,6 +255,8 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     else if( ( apid == 11 ) || ( apid == 13 ) ) {
       // dressed FS leptons
       if( status != 1 ) continue;
+      
+      if( PhysicsHelperFunctions::IsFromHadronicDecay( i, &m_ntuple->mc_parent_index->at(i), m_ntuple->mc_pdgId ) ) continue;
 
       TLorentzVector naked_lepton;
       naked_lepton.SetPtEtaPhiM( 
@@ -266,7 +268,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 
       // now dress the lepton with a cone of fixed aperture 0.1
       dressed_lepton = PhysicsHelperFunctions::MakeDressedLepton( naked_lepton, 0.1, m_ntuple->mc_n, 
-							    m_ntuple->mc_pdgId, m_ntuple->mc_status,
+							    m_ntuple->mc_pdgId, m_ntuple->mc_status, m_ntuple->mc_parent_index,
 							    m_ntuple->mc_pt, m_ntuple->mc_eta, m_ntuple->mc_phi, m_ntuple->mc_m );
 
       ed->truth_lepton.pT  = dressed_lepton.Pt();
