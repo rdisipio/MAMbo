@@ -211,10 +211,13 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 
   TLorentzVector dressed_lepton;
   TLorentzVector etmiss;
+  TLorentzVector top, antitop, thad, tlep, ttbar;
 
   int isMCSignal = (int)m_config->custom_params["isMCSignal"];  
   if( !isMCSignal ) return success;
 
+  int ntops = 0;
+  
   for( int i = 0 ; i < m_ntuple->mc_n ; ++i ) {
     const int barcode = m_ntuple->mc_barcode->at(i);
     const int pid     = m_ntuple->mc_pdgId->at(i);
@@ -239,7 +242,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       const double t_pz  = t_pT * sinh( t_eta ); 
       const double t_E   = sqrt( t_pT*t_pT + t_pz*t_pz + t_m*t_m );
 
-      assert( t_pT > 0 );
+      //assert( t_pT > 0 );
       
       TLorentzVector tquark;
       tquark.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
@@ -249,8 +252,17 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 	PhysicsHelperFunctions::ClassifyTopDecay( i, m_ntuple->mc_child_index, m_ntuple->mc_pdgId );
       const bool isHadronic = ( topdecay == PhysicsHelperFunctions::kTopDecayHadronic );
       ed->mctruth.property["isHadronic"].push_back( isHadronic );
-      //printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", 
-      // ed->info.eventNumber, i, pid, t_pT, isHadronic );
+      
+      printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", 
+                ed->info.eventNumber, i, pid, t_pT, isHadronic );
+      
+      if( isHadronic ) thad = tquark;
+      else tlep = tquark;
+      
+      if( q > 0 ) top = tquark;
+      else antitop = tquark;
+      
+      ntops++;
     }
     else if( ( apid == 11 ) || ( apid == 13 ) ) {
       // dressed FS leptons
@@ -312,9 +324,17 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       ed->MET_truth.sumet = -1.;
       */
     }
+  } // end loop over MC particles
+
+  if( ntops >= 2 ) {
+    // Create ttbar object and dump it
+    ttbar = top + antitop;
+    HelperFunctions::DumpTruthParticleToEventData( ttbar, 166, 2, 0, 0.0, &ed->mctruth );
+    ed->mctruth.property["isHadronic"].push_back( 3 ); // 0x11
   }
-
-
+  else {
+      cout << "WARNING: no top quarks found in event " << ed->info.eventNumber << endl; 
+  }
   // truth M_T^W
   //TLorentzVector Wlep = neutrino + dressed_lepton;
   const double dPhi_lv = dressed_lepton.DeltaPhi( etmiss );

@@ -245,12 +245,18 @@ struct EventData
 
   struct Reco_t {
     int     n;
+    
+    array_ui pdgId;
+    array_ui status;
+    array_ui barcode;
+    
     array_d pT;
     array_d eta;
     array_d phi;
     array_d E;
     array_d m;
-    array_ui pdgId;
+    array_d q;
+    
     PropertyCollection_t property;
   } reco;
 

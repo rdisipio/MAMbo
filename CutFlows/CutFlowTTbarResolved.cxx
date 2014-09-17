@@ -308,7 +308,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         //            cout << "INFO: event is vetoed at MC particle level due to overlap" << endl;
         //            return success;
         //        }
-
+        
+        FillHistogramsPseudotopParton( ed, weight );
+        
         m_pseudotop_particle->SetEventData(ed);
         m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
         m_pseudotop_particle->SetChargedLepton(kElectron, 0);
@@ -320,7 +322,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         }
 
         FillHistogramsPseudotopParticle(ed, weight);
-
+        
         FillHistogramsPseudotopResponse(ed, weight);
     }
 
@@ -357,7 +359,7 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
 
 /////////////////////////////////////////
 
-void CutFlowTTbarResolved::FillHistogramsPseudotopReco(const EventData * ed, const double weight) {
+void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const double weight) {
     const double top_lep_pt = ed->reco.pT.at(0);
     const double top_lep_eta = ed->reco.eta.at(0);
     const double top_lep_phi = ed->reco.phi.at(0);
@@ -400,7 +402,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco(const EventData * ed, con
 
 /////////////////////////////////////////
 
-void CutFlowTTbarResolved::FillHistogramsPseudotopParticle(const EventData * ed, const double weight) {
+void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, const double weight) {
     const double top_lep_pt = ed->reco.pT.at(3);
     const double top_lep_eta = ed->reco.eta.at(3);
     const double top_lep_phi = ed->reco.phi.at(3);
@@ -440,7 +442,64 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle(const EventData * ed,
     m_hm->GetHistogram("particle/particle_h_4j2b_pseudottbar_absrap")->Fill(fabs(ttbar_y), weight);
 }
 
-void CutFlowTTbarResolved::FillHistogramsPseudotopResponse(const EventData * ed, const double weight) {
+
+void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const double weight )
+{
+    int ilep, ihad;
+    int itt = 2;
+    
+    const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
+    if( isHadronic ) {
+        ihad = 0;
+        ilep = 1;
+    }
+    else {
+        ihad = 1;
+        ilep = 0;
+    }
+    
+    const double top_lep_pt = ed->mctruth.pT.at(ilep);
+    const double top_lep_eta = ed->mctruth.eta.at(ilep);
+    const double top_lep_phi = ed->mctruth.phi.at(ilep);
+    const double top_lep_E = ed->mctruth.E.at(ilep);
+    const double top_lep_y = PhysicsHelperFunctions::Rapidity(ed->mctruth, ilep);
+
+    const double top_had_pt = ed->mctruth.pT.at(ihad);
+    const double top_had_eta = ed->mctruth.eta.at(ihad);
+    const double top_had_phi = ed->mctruth.phi.at(ihad);
+    const double top_had_E = ed->mctruth.E.at(ihad);
+    const double top_had_y = PhysicsHelperFunctions::Rapidity(ed->mctruth, ihad);
+
+    const double ttbar_pt = ed->mctruth.pT.at(itt);
+    const double ttbar_eta = ed->mctruth.eta.at(itt);
+    const double ttbar_phi = ed->mctruth.phi.at(itt);
+    const double ttbar_E = ed->mctruth.E.at(itt);
+    const double ttbar_m = ed->mctruth.m.at(itt);
+    const double ttbar_y = PhysicsHelperFunctions::Rapidity(ed->mctruth, itt);
+
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_lep_pt")->Fill(top_lep_pt / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_lep_eta")->Fill(top_lep_eta, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_lep_phi")->Fill(top_lep_phi, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_lep_E")->Fill(top_lep_E / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_lep_absrap")->Fill(fabs(top_lep_y), weight);
+
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_had_pt")->Fill(top_had_pt / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_had_eta")->Fill(top_had_eta, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_had_phi")->Fill(top_had_phi, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_had_E")->Fill(top_had_E / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudotop_had_absrap")->Fill(fabs(top_had_y), weight);
+
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudottbar_pt")->Fill(ttbar_pt / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudottbar_eta")->Fill(ttbar_eta, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudottbar_phi")->Fill(ttbar_phi, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudottbar_E")->Fill(ttbar_E / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudottbar_m")->Fill(ttbar_m / GeV, weight);
+    m_hm->GetHistogram("parton/parton_h_4j2b_pseudottbar_absrap")->Fill(fabs(ttbar_y), weight);
+
+}
+
+void CutFlowTTbarResolved::FillHistogramsPseudotopResponse( EventData * ed, const double weight) 
+{
     const double reco_top_lep_pt = ed->reco.pT.at(0);
     const double reco_top_lep_eta = ed->reco.eta.at(0);
     const double reco_top_lep_phi = ed->reco.phi.at(0);

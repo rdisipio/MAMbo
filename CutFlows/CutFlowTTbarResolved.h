@@ -20,9 +20,10 @@ class CutFlowTTbarResolved : public CutFlow
   bool PassedCutFlowReco(     EventData * ed );
   bool PassedCutFlowParticle( EventData * ed );
 
-  void FillHistogramsPseudotopReco(     const EventData * ed, const double weight = 1. );
-  void FillHistogramsPseudotopParticle( const EventData * ed, const double weight = 1. );
-  void FillHistogramsPseudotopResponse( const EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopReco(      EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopParton(    EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopResponse(  EventData * ed, const double weight = 1. );
 
  protected:
     PseudoTopReconstruction * m_pseudotop_reco;
