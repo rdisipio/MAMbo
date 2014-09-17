@@ -155,7 +155,7 @@ bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
 {
   bool success = true;
 
-
+  //const int alljets_n = 
   ed->jets.n = GET_VALUE( jet_n );
   for( int i = 0 ; i < ed->jets.n ; ++i ) {
 
@@ -253,8 +253,8 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       const bool isHadronic = ( topdecay == PhysicsHelperFunctions::kTopDecayHadronic );
       ed->mctruth.property["isHadronic"].push_back( isHadronic );
       
-      printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", 
-                ed->info.eventNumber, i, pid, t_pT, isHadronic );
+      //printf( "DEBUG: event %i: parton %i pid=%i pT=%4.1f isHad=%i\n", 
+       //         ed->info.eventNumber, i, pid, t_pT, isHadronic );
       
       if( isHadronic ) thad = tquark;
       else tlep = tquark;
@@ -341,8 +341,12 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
   ed->MET_truth.mwt = sqrt( 2. * etmiss.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
  
   // truth jets (narrow)
-  ed->truth_jets.n = GET_VALUE( mc_jet_AntiKt4Truth_n );
-  for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
+  ed->truth_jets.n  = 0;
+  ed->truth_bjets.n = 0;
+  const int alljets_n = GET_VALUE( mc_jet_AntiKt4Truth_n );
+  int goodj_i = 0;
+  int goodbj_i = 0;
+  for( int i = 0 ; i < alljets_n ; ++i ) {
 
     const double jet_pt  = m_ntuple->mc_jet_AntiKt4Truth_pt->at(i);
     const double jet_eta = m_ntuple->mc_jet_AntiKt4Truth_eta->at(i);
@@ -350,26 +354,34 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     const double jet_E   = m_ntuple->mc_jet_AntiKt4Truth_E->at(i);
     const double jet_m   = m_ntuple->mc_jet_AntiKt4Truth_m->at(i);
 
-    ed->truth_jets.index.push_back( i );
+    if( jet_pt < 25 * GeV ) continue;
+    if( fabs(jet_eta) > 2.5 ) continue;
+    
+    ed->truth_jets.n += 1;
+    
+    ed->truth_jets.index.push_back( goodj_i );
     ed->truth_jets.pT.push_back(  jet_pt );
     ed->truth_jets.eta.push_back( jet_eta );
     ed->truth_jets.phi.push_back( jet_phi );
     ed->truth_jets.E.push_back(   jet_E );
     ed->truth_jets.m.push_back(   jet_m );
 
+    goodj_i++;
+    
     const JetTag tag = (JetTag)m_ntuple->mc_jet_AntiKt4Truth_flavor_truth_trueflav->at(i);
     ed->truth_jets.tag.push_back( tag  );
 
-    ed->truth_bjets.n = 0;
     if( tag == kBTagged ) {
       ed->truth_bjets.n += 1;
-      ed->truth_bjets.index.push_back( i );
+      ed->truth_bjets.index.push_back( goodbj_i );
       ed->truth_bjets.pT.push_back(  jet_pt );
       ed->truth_bjets.eta.push_back( jet_eta );
       ed->truth_bjets.phi.push_back( jet_phi );
       ed->truth_bjets.E.push_back(   jet_E );
       ed->truth_bjets.m.push_back(   jet_m );
       ed->truth_bjets.tag.push_back( tag  );
+      
+      goodbj_i++;
     }
   }
 

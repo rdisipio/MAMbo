@@ -1,1 +1,1 @@
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-september/user.mromano.117050.e1728_s1581_s1586_r3658_r3549_p1575.MC_BOOST_2014_09_10_el.root/el.root
+/home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.6.0/grid/examples_mc/el.root
