@@ -62,7 +62,35 @@ namespace PhysicsHelperFunctions {
 
   /////////////////////////////////////////////////
 
+  double Phi_mphi_phi( double x ) {
+    while ( x >= M_PI) x -= 2*M_PI;
+    while ( x < -M_PI) x += 2*M_PI;
+    return x;
+  }
 
+  
+  /////////////////////////////////////////////////
+  
+   
+  template< class T >
+  double DeltaR( const T& coll, const int i, const int j ) {
+      const double eta1 = coll.eta[i];
+      const double eta2 = coll.eta[j];
+      const double phi1 = coll.phi[i];
+      const double phi2 = coll.phi[j];
+      
+      const double dEta = eta1 - eta2;
+      const double dPhi = Phi_mphi_phi( phi1 - phi2 );
+      
+      const double dR = sqrt( dEta*dEta + dPhi*dPhi );
+      
+      return dR;
+  }
+  
+  
+  /////////////////////////////////////////////////
+  
+  
   template< class INDEX_COLL, class PID_COLL  >
     bool HadronicDecay( const int i, const INDEX_COLL * mc_child_index, const PID_COLL * mc_pdgId )
   {

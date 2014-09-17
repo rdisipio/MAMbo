@@ -143,20 +143,32 @@ namespace PhysicsHelperFunctions {
 	l_E   = m_p_ed->electrons.E.at( m_lepton_index );
       }
       else if( m_channel == kMuon ) {
-	l_pT  = m_p_ed->electrons.pT.at( m_lepton_index );
-	l_eta = m_p_ed->electrons.eta.at( m_lepton_index );
-	l_phi = m_p_ed->electrons.phi.at( m_lepton_index );
-	l_E   = m_p_ed->electrons.E.at( m_lepton_index );
+	l_pT  = m_p_ed->muons.pT.at( m_lepton_index );
+	l_eta = m_p_ed->muons.eta.at( m_lepton_index );
+	l_phi = m_p_ed->muons.phi.at( m_lepton_index );
+	l_E   = m_p_ed->muons.E.at( m_lepton_index );
       }
       else {
 	throw runtime_error( "PseudoTopReconstruction: tau-lepton channel at reco level not yet implemented\n" );
       }
     }
     else {
-      l_pT  = m_p_ed->truth_lepton.pT;
-      l_eta = m_p_ed->truth_lepton.eta;
-      l_phi = m_p_ed->truth_lepton.phi;
-      l_E   = m_p_ed->truth_lepton.E;
+        if( m_channel == kElectron ) {
+	l_pT  = m_p_ed->truth_electrons.pT.at( m_lepton_index );
+	l_eta = m_p_ed->truth_electrons.eta.at( m_lepton_index );
+	l_phi = m_p_ed->truth_electrons.phi.at( m_lepton_index );
+	l_E   = m_p_ed->truth_electrons.E.at( m_lepton_index );
+      }
+      else if( m_channel == kMuon ) {
+	l_pT  = m_p_ed->truth_muons.pT.at( m_lepton_index );
+	l_eta = m_p_ed->truth_muons.eta.at( m_lepton_index );
+	l_phi = m_p_ed->truth_muons.phi.at( m_lepton_index );
+	l_E   = m_p_ed->truth_muons.E.at( m_lepton_index );
+      }
+      else {
+	throw runtime_error( "PseudoTopReconstruction: tau-lepton channel at reco level not yet implemented\n" );
+      }
+      
     }
 
     m_lepton.SetPtEtaPhiE( l_pT, l_eta, l_phi, l_E );

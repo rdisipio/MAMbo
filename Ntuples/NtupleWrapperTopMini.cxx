@@ -368,14 +368,32 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
   }
   */
 
+  bool mc_overlap = false;
   // overlap removal
   for( int i = 0 ; i < ed->truth_jets.n ; ++i ) {
+      TLorentzVector jet = HelperFunctions::MakeFourMomentum( ed->truth_jets, i );
+      
     // If dR(el,jet) < 0.4 skip the event
+      for( int ie = 0 ; ie < ed->truth_electrons.n ; ++ie ) {
+          TLorentzVector el = HelperFunctions::MakeFourMomentum( ed->truth_electrons, ie );
+          if( jet.DeltaR(el) < 0.4 )  mc_overlap = true;
+      }
 
     // If dR(mu,jet) < 0.4 skip the event
-
+     for( int im = 0 ; im < ed->truth_muons.n ; ++im) {
+          TLorentzVector mu = HelperFunctions::MakeFourMomentum( ed->truth_muons, im );
+          if( jet.DeltaR(mu) < 0.4 )  mc_overlap = true;
+      }
+      
     // If dR(jet,jet) < 0.5 skip the event
+      for( int ij = 0 ; ij < ed->truth_jets.n ; ++ij ) {
+          if( ij == i ) continue;
+          TLorentzVector j2 = HelperFunctions::MakeFourMomentum( ed->truth_jets, ij );
+          
+          if( jet.DeltaR( j2 ) < 0.5 ) mc_overlap = true;
+      }
   }
+  ed->property["mc_overlap"] = mc_overlap;
 
   return success;
 }
