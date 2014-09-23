@@ -25,9 +25,17 @@ class CutFlowTTbarResolved : public CutFlow
   void FillHistogramsPseudotopParton(    EventData * ed, const double weight = 1. );
   void FillHistogramsPseudotopResponse(  EventData * ed, const double weight = 1. );
 
+  void FillHistogramsMatchingReco2Particle(   double weight = 1. );   
+  void FillHistogramsMatchingReco2Parton(     double weight = 1. ); 
+  void FillHistogramsMatchingParticle2Parton( double weight = 1. ); 
+  
  protected:
     PseudoTopReconstruction * m_pseudotop_reco;
     PseudoTopReconstruction * m_pseudotop_particle;
+    
+    PseudoTopMatching       * m_pseudotop_matching_reco2particle;
+    PseudoTopMatching       * m_pseudotop_matching_reco2parton;
+    PseudoTopMatching       * m_pseudotop_matching_particle2parton;
  // bool FillHistograms( int cutN );
 };
 

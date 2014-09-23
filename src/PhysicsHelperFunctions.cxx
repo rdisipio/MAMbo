@@ -225,5 +225,60 @@ namespace PhysicsHelperFunctions {
     
     return status;
   }
+  
+  
+  
+  /////////////////////////////////////////
+  // Pseudo Top Matching
+  /////////////////////////////////////////
+  
+  PseudoTopMatching::PseudoTopMatching( MatchingType type ) :
+          m_p_ed( NULL ), m_dR_max(0.2), m_matching_type( type )
+  {
+  }
 
+  PseudoTopMatching::~PseudoTopMatching()
+  {
+  }
+  
+  void PseudoTopMatching::SetEventData( EventData * ed )
+  {
+      if( ed == NULL ) throw runtime_error( "PseudoTopMatching: invalid event data.");
+      m_p_ed = ed;
+  }
+  
+  
+  void PseudoTopMatching::DoMatching( unsigned int i1, unsigned int i2, const string& label )
+  {
+      if( !m_p_ed ) throw runtime_error( "PseudoTopMatching: cannot do matching. Invalid pointer to event data." );
+      
+      if( m_matching_type == kUnspecifiedMatching ) throw runtime_error( "PseudoTopMatching: unspecified matching type." );
+      
+      TLorentzVector p1;
+      TLorentzVector p2; 
+      
+      switch( m_matching_type ) {
+          case kRecoToParticle:
+              p1 = HelperFunctions::MakeFourMomentum( m_p_ed->reco, i1 );
+              p2 = HelperFunctions::MakeFourMomentum( m_p_ed->reco, i2 );
+              break;
+          case kRecoToParton:
+              break;
+          case kParticleToParton:
+              break;
+          default:
+              break;
+      }
+      
+      MatchingResult res;
+      res.delta_R   = p1.DeltaR( p2 );
+      res.delta_pT  = p1.Pt() - p2.Pt();
+      res.delta_eta = p1.Eta() - p2.Eta();
+      res.delta_rapidity = p1.Rapidity() - p2.Rapidity();
+      res.delta_phi = p1.DeltaPhi( p2 );
+      res.delta_m   = p1.M() - p2.M();
+      
+      m_results[label] = res;
+  }
+  
 };

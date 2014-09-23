@@ -3,11 +3,19 @@
 CutFlowTTbarResolved::CutFlowTTbarResolved() {
     m_pseudotop_reco = new PseudoTopReconstruction();
     m_pseudotop_particle = new PseudoTopReconstruction();
+    
+    m_pseudotop_matching_reco2particle   = new PseudoTopMatching( PseudoTopMatching::kRecoToParticle );
+    m_pseudotop_matching_reco2parton     = new PseudoTopMatching( PseudoTopMatching::kRecoToParton );
+    m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
 }
 
 CutFlowTTbarResolved::~CutFlowTTbarResolved() {
     delete m_pseudotop_reco;
     delete m_pseudotop_particle;
+    
+    delete m_pseudotop_matching_reco2particle;
+    delete m_pseudotop_matching_reco2parton;
+    delete m_pseudotop_matching_particle2parton;
 }
 
 
@@ -335,6 +343,12 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         FillHistogramsPseudotopParticle(ed, weight);
         
         FillHistogramsPseudotopResponse(ed, weight);
+        
+        m_pseudotop_matching_reco2particle->SetEventData( ed );
+        m_pseudotop_matching_reco2particle->DoMatching( 0, 3, "pseudotop_lep" );
+        m_pseudotop_matching_reco2particle->DoMatching( 1, 4, "pseudotop_had" );
+        m_pseudotop_matching_reco2particle->DoMatching( 2, 5, "pseudottbar" );
+        FillHistogramsMatchingReco2Particle( weight );
     }
 
     return success;
@@ -509,6 +523,49 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const 
 
 }
 
+//////////////
+// matching
+
+void CutFlowTTbarResolved::FillHistogramsMatchingReco2Particle( double weight )
+{
+   PhysicsHelperFunctions::PseudoTopMatching::MatchingResult pseudotop_lep = m_pseudotop_matching_reco2particle->GetResults( "pseudotop_lep" );
+   
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_lep_delta_R" )->Fill(   pseudotop_lep.delta_R, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_lep_delta_pt" )->Fill(  pseudotop_lep.delta_pT / GeV, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_lep_delta_rapidity" )->Fill( pseudotop_lep.delta_rapidity, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_lep_delta_phi" )->Fill( pseudotop_lep.delta_phi, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_lep_delta_m" )->Fill(   pseudotop_lep.delta_m / GeV, weight );
+   
+   PhysicsHelperFunctions::PseudoTopMatching::MatchingResult pseudotop_had = m_pseudotop_matching_reco2particle->GetResults( "pseudotop_had" );
+   
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_had_delta_R" )->Fill(   pseudotop_had.delta_R, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_had_delta_pt" )->Fill(  pseudotop_had.delta_pT / GeV, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_had_delta_rapidity" )->Fill( pseudotop_had.delta_rapidity, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_had_delta_phi" )->Fill( pseudotop_had.delta_phi, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudotop_had_delta_m" )->Fill(   pseudotop_had.delta_m / GeV, weight );
+   
+   PhysicsHelperFunctions::PseudoTopMatching::MatchingResult pseudottbar = m_pseudotop_matching_reco2particle->GetResults( "pseudottbar" );
+   
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudottbar_delta_R" )->Fill(   pseudottbar.delta_R, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudottbar_delta_pt" )->Fill(  pseudottbar.delta_pT / GeV, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudottbar_delta_rapidity" )->Fill( pseudottbar.delta_rapidity, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudottbar_delta_phi" )->Fill( pseudottbar.delta_phi, weight );
+   m_hm->GetHistogram( "matching/matching_reco2particle_4j2b_pseudottbar_delta_m" )->Fill(   pseudottbar.delta_m / GeV, weight );
+}
+
+void CutFlowTTbarResolved::FillHistogramsMatchingReco2Parton( double weight )
+{
+      
+}
+  
+ void CutFlowTTbarResolved::FillHistogramsMatchingParticle2Parton( double weight )
+ {
+      
+ }
+  
+ /////////////////////
+ // response matrices
+ 
 void CutFlowTTbarResolved::FillHistogramsPseudotopResponse( EventData * ed, const double weight) 
 {
     // reco level 

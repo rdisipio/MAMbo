@@ -45,6 +45,45 @@ namespace PhysicsHelperFunctions {
   };
 
   
+  /////////////////////////////////////////
+  // Pseudo Top Matching
+  /////////////////////////////////////////
+  
+  class PseudoTopMatching
+  {
+  public:
+      enum MatchingType { kUnspecifiedMatching, kRecoToParticle, kRecoToParton, kParticleToParton };
+      
+      struct MatchingResult {
+          double delta_R;
+          double delta_pT;
+          double delta_eta;
+          double delta_rapidity;
+          double delta_phi;
+          double delta_m;
+      };
+      typedef map< string, MatchingResult > MatchingResultCollection_t;
+      
+      PseudoTopMatching( MatchingType type = kUnspecifiedMatching );
+      virtual ~PseudoTopMatching();
+      
+      void SetEventData( EventData * ed );
+      
+      void DoMatching( unsigned int i1, unsigned int i2, const string& label = "" );
+      
+      inline void SetDeltaR( double dR )               { m_dR_max = dR; };
+      inline void SetMatchingType( MatchingType type ) { m_matching_type = type; };
+      
+      inline const MatchingResult& GetResults( const string& label ) const { return m_results.at( label ); };
+      
+  protected:
+      MatchingType m_matching_type;
+      EventData * m_p_ed;
+      MatchingResultCollection_t m_results;
+      double m_dR_max;
+  };
+  
+  
   //////////////////////////////////
 
   template< class T >

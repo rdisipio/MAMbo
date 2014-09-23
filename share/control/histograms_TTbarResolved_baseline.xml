@@ -139,6 +139,30 @@
   <TH1F name="parton/parton_h_4j2b_pseudottbar_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
   <TH1F name="parton/parton_h_4j2b_pseudottbar_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
 
+
+<!-- top matching -->
+
+<!-- reco > particle -->
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_lep_delta_R"  title="Matching #Delta R "     nbins="20" xmin="-5." xmax="5." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_lep_delta_pt" title="Matching #Delta p_{T}"  nbins="20" xmin="-200." xmax="200." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_lep_delta_rapidity" title="Matching #Delta Y"  nbins="20" xmin="-2." xmax="2." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_lep_delta_phi" title="Matching #Delta #phi"  nbins="20" xmin="-2." xmax="2." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_lep_delta_m" title="Matching #Delta m"       nbins="20" xmin="-200." xmax="200." />
+
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_had_delta_R"  title="Matching #Delta R "     nbins="20" xmin="-5." xmax="5." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_had_delta_pt" title="Matching #Delta p_{T}"  nbins="20" xmin="-200." xmax="200." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_had_delta_rapidity" title="Matching #Delta Y"  nbins="20" xmin="-2." xmax="2." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_had_delta_phi" title="Matching #Delta #phi"  nbins="20" xmin="-2." xmax="2." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudotop_had_delta_m" title="Matching #Delta m"       nbins="20" xmin="-200." xmax="200." />
+
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudottbar_delta_R"  title="Matching #Delta R "     nbins="20" xmin="-5." xmax="5." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudottbar_delta_pt" title="Matching #Delta p_{T}"  nbins="20" xmin="-200." xmax="200." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudottbar_delta_rapidity" title="Matching #Delta Y"  nbins="20" xmin="-2." xmax="2." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudottbar_delta_phi" title="Matching #Delta #phi"  nbins="20" xmin="-2." xmax="2." />
+  <TH1F name="matching/matching_reco2particle_4j2b_pseudottbar_delta_m" title="Matching #Delta m"       nbins="20" xmin="-200." xmax="200." />
+
+
+
 <!-- migration matrices -->
 
 <!-- reco > particle -->
