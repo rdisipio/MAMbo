@@ -373,7 +373,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
         m_pseudotop_particle->Run();
 
-        FillHistogramsPseudotopParticle(ed, weight_reco_level);
+        FillHistogramsPseudotopParticle( ed, weight_particle_level );
         
         FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level);
         FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
