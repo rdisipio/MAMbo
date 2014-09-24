@@ -21,6 +21,7 @@ class CutFlowTTbarResolved : public CutFlow
   bool PassedCutFlowParticle( EventData * ed );
 
   void FillHistogramsControlPlotsReco( EventData * ed, const double weight = 1. );
+  void FillHistogramsControlPlotsParticle( EventData * ed, const double weight = 1. );
   
   void FillHistogramsPseudotopReco(      EventData * ed, const double weight = 1. );
   void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1. );

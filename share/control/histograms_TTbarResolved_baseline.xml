@@ -77,6 +77,9 @@
   <TH1F name="particle/particle_h_4j2b_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="500." />
   <TH1F name="particle/particle_h_4j2b_jet_m"   title="Jet mass [GeV]"            nbins="200" xmin="0."   xmax="500." />
 
+  <TH1F name="particle/particle_h_4j2b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
+  <TH1F name="particle/particle_h_4j2b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
+
 <!-- pseudo tops -->
 
 <!-- reco level -->

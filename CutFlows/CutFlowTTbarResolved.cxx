@@ -105,7 +105,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     int isMCSignal = (int) m_config->custom_params["isMCSignal"];
 
-    double weight_reco_level = ed->info.mcWeight;
+    double weight_reco_level     = ed->info.mcWeight;
     double weight_particle_level = ed->info.mcWeight;
 
     const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
@@ -467,6 +467,8 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "COMBINED", "particle_unweight" );
     PassedCut( "COMBINED", "particle_weighted", weight );
     
+    FillHistogramsControlPlotsParticle( ed, weight );
+    
     return passed;
 }
 
@@ -476,8 +478,96 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
 void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( EventData * ed, const double weight )
 {
     const int cut = GetLastPassedCut( "COMBINED", "reco_weighted" );
+    static string pattern = "@CUT@";
     
-    char buf[128];
+    static string alias[9] = {
+        "c0", "trig", "pvtx", "lept", "met30", "mtw35", "4j", "4j1b", "4j2b"
+    };
+    
+    double lep_pt  = ed->lepton.pT;
+    double lep_eta = ed->lepton.eta;
+    double lep_phi = ed->lepton.phi;
+    double lep_E   = ed->lepton.E;
+    double lep_q   = ed->lepton.q;
+    int    jet_n   = ed->jets.n;
+    int    bjet_n  = ed->bjets.n;
+    double ETmiss  = ed->MET.et;
+    double mwt     = ed->MET.mwt;
+    
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_lep_eta", pattern, alias[cut]) )->Fill( lep_eta, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_lep_pt", pattern, alias[cut]) )->Fill( lep_pt / GeV, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_lep_phi", pattern, alias[cut]) )->Fill( lep_phi, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_lep_E", pattern, alias[cut]) )->Fill( lep_E / GeV, weight );
+    
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_met_pt", pattern, alias[cut]) )->Fill( ETmiss / GeV, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_mtw", pattern, alias[cut]) )->Fill( mwt  / GeV, weight );
+    
+
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_jet_n", pattern, alias[cut]) )->Fill( jet_n, weight );
+    
+    for (int j = 0; j < jet_n; ++j) {
+        double jet_pt  = ed->jets.pT.at(j);
+        double jet_eta = ed->jets.eta.at(j);
+        double jet_phi = ed->jets.phi.at(j);
+        double jet_E   = ed->jets.E.at(j);
+        double jet_m   = ed->jets.m.at(j);
+
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_jet_eta", pattern, alias[cut]) )->Fill( jet_eta, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_jet_pt", pattern, alias[cut]) )->Fill( jet_pt / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_jet_phi", pattern, alias[cut]) )->Fill( jet_phi, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_jet_E", pattern, alias[cut]) )->Fill( jet_E / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_h_@CUT@_jet_m", pattern, alias[cut]) )->Fill(jet_m / GeV, weight );
+    }
+}
+
+
+/////////////////////////////////////////
+
+
+void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( EventData * ed, const double weight )
+{
+    static string pattern = "@CUT@";
+    
+    static string alias[10] = {
+        "c0", "trig", "pvtx", "lept", "met30", "mtw35", "2j", "4j", "4j1b", "4j2b"
+    };
+    
+    const int cut = GetLastPassedCut( "COMBINED", "particle_weighted" ) - 1;
+    
+    double lep_pt  = ed->truth_lepton.pT;
+    double lep_eta = ed->truth_lepton.eta;
+    double lep_phi = ed->truth_lepton.phi;
+    double lep_E   = ed->truth_lepton.E;
+    double lep_q   = ed->truth_lepton.q;
+    int    jet_n   = ed->truth_jets.n;
+    int    bjet_n  = ed->truth_bjets.n;
+    double ETmiss  = ed->MET_truth.et;
+    double mwt     = ed->MET_truth.mwt;
+    
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_lep_eta", pattern, alias[cut]) )->Fill( lep_eta, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_lep_pt",  pattern, alias[cut]) )->Fill( lep_pt / GeV, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_lep_phi", pattern, alias[cut]) )->Fill( lep_phi, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_lep_E",   pattern, alias[cut]) )->Fill( lep_E / GeV, weight );
+    
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_met_pt",  pattern, alias[cut]) )->Fill( ETmiss / GeV, weight );
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_mtw",     pattern, alias[cut]) )->Fill( mwt  / GeV, weight );
+    
+
+    m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_jet_n",   pattern, alias[cut]) )->Fill( jet_n, weight );
+    
+    for (int j = 0; j < jet_n; ++j) {
+        double jet_pt  = ed->truth_jets.pT.at(j);
+        double jet_eta = ed->truth_jets.eta.at(j);
+        double jet_phi = ed->truth_jets.phi.at(j);
+        double jet_E   = ed->truth_jets.E.at(j);
+        double jet_m   = ed->truth_jets.m.at(j);
+
+        m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_jet_eta", pattern, alias[cut]) )->Fill( jet_eta, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_jet_pt",  pattern, alias[cut]) )->Fill( jet_pt / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_jet_phi", pattern, alias[cut]) )->Fill( jet_phi, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_jet_E",   pattern, alias[cut]) )->Fill( jet_E / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_h_@CUT@_jet_m",   pattern, alias[cut]) )->Fill( jet_m / GeV, weight );
+    }
 }
 
 

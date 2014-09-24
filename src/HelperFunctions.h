@@ -21,6 +21,8 @@
 namespace HelperFunctions {
   size_t Tokenize( const string& str, StringVector_t& tokens, const string& delimiters = "," );
 
+  string Replace( const string& base, const string& from, const string& to );
+  
   int    ListDirectory( string dir, vector<string> &files );
 
   int    FindFatJets( EventData * ed, const double fjet_ptmin = 300.*GeV, fastjet::JetAlgorithm alg = fastjet::antikt_algorithm, double R = 1.0 );

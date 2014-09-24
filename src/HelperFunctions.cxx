@@ -21,7 +21,22 @@ namespace HelperFunctions {
     return tokens.size();
   }
   
+  
+  //////////////////////////////////////////////////////
 
+  
+  std::string Replace( const std::string& base, const std::string& from, const std::string& to) 
+  {
+    std::string SecureCopy = base;
+
+    for (size_t start_pos = SecureCopy.find(from); start_pos != std::string::npos; start_pos = SecureCopy.find(from,start_pos))
+    {
+        SecureCopy.replace(start_pos, from.length(), to);
+    }
+
+    return SecureCopy;
+}
+  
   //////////////////////////////////////////////////////
 
   
