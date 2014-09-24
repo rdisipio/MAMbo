@@ -97,8 +97,8 @@ bool NtupleWrapperTopMini::MakeEventMET( EventData * ed )
 //  ed->MET.etx   = 0.;
 //  ed->MET.ety   = 0.;
   ed->MET.sumet = GET_VALUE( met_sumet  );
-
-  SET_PROPERTY( mwt );
+  ed->MET.mwt   = GET_VALUE( mwt );
+//  SET_PROPERTY( mwt );
 
   return success;
 }

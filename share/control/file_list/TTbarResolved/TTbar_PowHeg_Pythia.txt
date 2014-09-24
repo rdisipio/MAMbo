@@ -1,1 +1,1 @@
-/gpfs_data/local/atlas/mromano/minituples-20121112/el/nominal/TTbar_PowHeg_Pythia.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/mc12_8TeV.117050.PowhegPythia_P2011C/el.root

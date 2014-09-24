@@ -145,7 +145,7 @@ TH2F * HistogramManager::Book2DHistogram( TH2F * h, const string& path )
   if( m_sumw2 ) m_histograms[path]->Sumw2();
 
   m_h2_names.push_back( path );
-  cout << "DEBUG: Created histogram " << path << endl;
+  //cout << "DEBUG: Created histogram " << path << endl;
 
   return (TH2F*)m_histograms[path];
 }

@@ -81,33 +81,33 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     int isMCSignal = (int) m_config->custom_params["isMCSignal"];
 
-    int jet_n = ed->jets.n;
-    double weight = 1.0; // ed->info.mcWeight;
+    double weight = ed->info.mcWeight;
 
-    const double scaleFactor_PILEUP = ed->property["scaleFactor_PILEUP"];
-    const double scaleFactor_ELE = ed->property["scaleFactor_ELE"];
-    const double scaleFactor_MUON = ed->property["scaleFactor_MUON"];
-    const double scaleFactor_BTAG = ed->property["scaleFactor_BTAG"];
-    const double scaleFactor_TRIGGER = ed->property["scaleFactor_TRIGGER"];
-    const double scaleFactor_WJETSNORM = ed->property["scaleFactor_WJETSNORM"];
+    const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
+    const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
+    const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
+    const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
+    const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
+    const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
     const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
-    const double scaleFactor_JVFSF = ed->property["scaleFactor_JVFSF"];
-    const double scaleFactor_ZVERTEX = ed->property["scaleFactor_ZVERTEX"];
+    const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"];
+    const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
 
     weight *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
-            scaleFactor_ELE * scaleFactor_MUON *
+            //scaleFactor_ELE *scaleFactor_MUON *
             scaleFactor_BTAG *
             scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE;
 
     if (fabs(weight) > 5.) printf("WARNING: event %i has large weight w = %f\n", ed->info.eventNumber, weight);
 
     // temporary hack
-    weight = 1.0;
+    //weight = 1.0;
 
     // event-wise quantities
     double ETmiss = ed->MET.et;
-    double mwt = ed->property["mwt"];
+    double mwt    = ed->MET.mwt; //ed->property["mwt"];
+    int jet_n     = ed->jets.n;
 
     PassedCut("ALL", "weighted", weight);
     PassedCut("ALL", "unweight");
@@ -360,17 +360,17 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     bool passed = true;
 
-    int jet_n = ed->jets.n;
-    int bjet_n = ed->bjets.n;
+    int    jet_n  = ed->jets.n;
+    int    bjet_n = ed->bjets.n;
     double ETmiss = ed->MET.et;
-    double mwt = ed->property["mwt"];
-    double lep_pt = ed->electrons.pT.at(0);
+    double mwt    = ed->MET.mwt;
+    double lep_pt = ed->lepton.pT;
 
     if (lep_pt < 25 * GeV) return !passed;
     if (ETmiss < 30 * GeV) return !passed;
-    if (mwt < 35 * GeV) return !passed;
-    if (jet_n < 4) return !passed;
-    if (bjet_n < 2) return !passed;
+    if (mwt < 35 * GeV)    return !passed;
+    if (jet_n < 4)         return !passed;
+    if (bjet_n < 2)        return !passed;
 
     return passed;
 }
@@ -378,6 +378,18 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     bool passed = true;
 
+    int    jet_n  = ed->truth_jets.n;
+    int    bjet_n = ed->truth_bjets.n;
+    double ETmiss = ed->MET_truth.et;
+    double mwt    = ed->MET_truth.mwt;
+    double lep_pt = ed->truth_lepton.pT;
+
+    if (lep_pt < 25 * GeV) return !passed;
+    if (ETmiss < 30 * GeV) return !passed;
+    if (mwt < 35 * GeV)    return !passed;
+    if (jet_n < 4)         return !passed;
+    if (bjet_n < 2)        return !passed; 
+    
     return passed;
 }
 
