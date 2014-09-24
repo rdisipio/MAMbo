@@ -23,7 +23,7 @@ class CutFlow
 
  protected:
    virtual void PassedCut( const string& channelName, const string& counterName, const double weight = 1. );
-
+   
    virtual void AddChannel( const string& name );
    virtual void AddCounterName( const string& channelName, const string& counterName, unsigned int ncuts = 0 );
 
@@ -32,7 +32,9 @@ class CutFlow
    virtual void SetCutName( const string& channelName, const string& counterName, int n, const char * cutName );
 
    virtual bool IncreaseCount( const string& histName, unsigned int cut, double weight = 1., double * new_value = NULL );
-
+   
+   int GetLastPassedCut( const string& channelName, const string& counterName ) const;
+   
  protected:
    vector< string > m_channelName;
    string m_name;

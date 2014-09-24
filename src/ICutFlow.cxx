@@ -140,6 +140,18 @@ void CutFlow::PassedCut( const string& channelName, const string& counterName, c
 ///////////////////////////////////////
 
 
+int CutFlow::GetLastPassedCut( const string& channelName, const string& counterName ) const
+{
+    stringstream histName;
+    histName << channelName << "_cutflow_" << counterName;
+  
+    return m_lastCutPassed.at( histName.str() );
+}
+
+
+///////////////////////////////////////
+
+
 void CutFlow::PrintOutStats()
 {
   for( vector< string >::const_iterator itrCh = m_channelName.begin() ; itrCh != m_channelName.end() ; ++itrCh ) {

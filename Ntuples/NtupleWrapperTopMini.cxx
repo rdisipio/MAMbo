@@ -303,7 +303,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     }
     else if( ( apid == 12 ) || ( apid == 14 ) || ( apid == 16 ) ) {
       if( status != 1 ) continue;
-      if( barcode > 20 ) continue;
+      //if( barcode > 20 ) continue;
       
       TLorentzVector neutrino;
       neutrino.SetPtEtaPhiM(
@@ -335,10 +335,14 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
   else {
       cout << "WARNING: no top quarks found in event " << ed->info.eventNumber << endl; 
   }
+  
+  ed->MET_truth.et = etmiss.Pt();
+  
   // truth M_T^W
   //TLorentzVector Wlep = neutrino + dressed_lepton;
   const double dPhi_lv = dressed_lepton.DeltaPhi( etmiss );
   ed->MET_truth.mwt = sqrt( 2. * etmiss.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
+  //cout << "DEBUG: ETmiss = " << ed->MET_truth.et / GeV << " GeV ; mtw = " << ed->MET_truth.mwt / 1000. << " GeV ; lep_pT = " << dressed_lepton.Pt() /GeV << endl;
  
   // truth jets (narrow)
   ed->truth_jets.n  = 0;
