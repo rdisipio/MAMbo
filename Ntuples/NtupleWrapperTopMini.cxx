@@ -153,32 +153,73 @@ bool NtupleWrapperTopMini::MakeEventMuons( EventData * ed )
 
 bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
 {
-  bool success = true;
+    bool success = true;
 
-  //const int alljets_n = 
-  ed->jets.n = GET_VALUE( jet_n );
-  for( int i = 0 ; i < ed->jets.n ; ++i ) {
+    size_t alljet_n = GET_VALUE( jet_n );
+    //size_t goodjet_n = 0;
+    //size_t bjet_n = 0;
+    //size_t ljet_n = 0;
+    ed->jets.n  = 0;
+    ed->bjets.n = 0;
+    ed->ljets.n = 0;
+    ed->fjets.n = 0;
+    
+    for( int j = 0; j < alljet_n; ++j ) {
+        const double jet_pT   = GET_VALUE_ARRAY( jet_pt, j );
+        const double jet_eta  = GET_VALUE_ARRAY( jet_eta, j );
+        const double jet_phi  = GET_VALUE_ARRAY( jet_phi, j );
+        const double jet_E    = GET_VALUE_ARRAY( jet_E, j );
 
-    ed->jets.index.push_back( i );
+        if( jet_pT > 25 * GeV && ( fabs(jet_eta) < 2.5) ) {
+            
+            ed->jets.n++;
 
-    ed->jets.pT.push_back(  m_ntuple->jet_pt[i]  );
-    ed->jets.eta.push_back( m_ntuple->jet_eta[i] );
-    ed->jets.phi.push_back( m_ntuple->jet_phi[i] );
-    ed->jets.E.push_back(   m_ntuple->jet_E[i]   );
+            ed->jets.index.push_back( j );
+ 
+            ed->jets.pT.push_back(  jet_pT );
+            ed->jets.eta.push_back( jet_eta );
+            ed->jets.phi.push_back( jet_phi );
+            ed->jets.E.push_back(   jet_E );
+            
+            const double jet_m = PhysicsHelperFunctions::Mass( ed->jets, j );
+            ed->jets.m.push_back( jet_m );
 
-    ed->jets.property["jvf"].push_back(           GET_VALUE_ARRAY( jet_jvf, i           ) );
-    ed->jets.property["trueflav"].push_back(      GET_VALUE_ARRAY( jet_trueflav, i      ) );
-    ed->jets.property["truthMatched"].push_back(  GET_VALUE_ARRAY( jet_truthMatched, i  ) );
-    ed->jets.property["SV0"].push_back(           GET_VALUE_ARRAY( jet_SV0, i           ) );
-    ed->jets.property["COMBNN"].push_back(        GET_VALUE_ARRAY( jet_COMBNN, i        ) );
-    ed->jets.property["MV1"].push_back(           GET_VALUE_ARRAY( jet_MV1, i           ) );
-    ed->jets.property["MV1c"].push_back(          GET_VALUE_ARRAY( jet_MV1c, i          ) );
-    ed->jets.property["isSemilep"].push_back(     GET_VALUE_ARRAY( jet_isSemilep, i     ) );
-    // ed->jets.property["BadMediumBCH"].push_back(  GET_VALUE_ARRAY( jet_BadMediumBCH, i  ) );
-    //ed->jets.property["BadTightBCH"].push_back(   GET_VALUE_ARRAY( jet_BadTightBCH, i   ) );
-    //ed->jets.property["emfrac"].push_back(        GET_VALUE_ARRAY( jet_emfrac, i        ) );
-    // ed->jets.property["BCH_CORR_CELL"].push_back( GET_VALUE_ARRAY( jet_BCH_CORR_CELL, i ) );
-  }
+            ed->jets.property["jvf"].push_back(          GET_VALUE_ARRAY(jet_jvf, j)          );
+            ed->jets.property["trueflav"].push_back(     GET_VALUE_ARRAY(jet_trueflav, j)     );
+            ed->jets.property["truthMatched"].push_back( GET_VALUE_ARRAY(jet_truthMatched, j) );
+            ed->jets.property["SV0"].push_back(          GET_VALUE_ARRAY(jet_SV0, j)          );
+            ed->jets.property["COMBNN"].push_back(       GET_VALUE_ARRAY(jet_COMBNN, j)       );
+            ed->jets.property["MV1"].push_back(          GET_VALUE_ARRAY(jet_MV1, j)          );
+            ed->jets.property["MV1c"].push_back(         GET_VALUE_ARRAY(jet_MV1c, j)         );
+            ed->jets.property["isSemilep"].push_back(    GET_VALUE_ARRAY(jet_isSemilep, j)    );
+
+            const double mv1 = GET_VALUE_ARRAY(jet_MV1, j);
+            
+            if( mv1 > 0.7892 ) {
+                ed->bjets.n++;
+
+                ed->bjets.pT.push_back( jet_pT );
+                ed->bjets.eta.push_back( jet_eta );
+                ed->bjets.phi.push_back( jet_phi );
+                ed->bjets.E.push_back( jet_E );
+                ed->bjets.m.push_back( jet_m );
+                ed->bjets.index.push_back( j );
+                ed->bjets.property["MV1"].push_back(mv1);
+            } else {
+                ed->ljets.n++;
+
+                ed->ljets.pT.push_back( jet_pT );
+                ed->ljets.eta.push_back( jet_eta );
+                ed->ljets.phi.push_back( jet_phi );
+                ed->ljets.E.push_back( jet_E );
+                ed->ljets.m.push_back( jet_m );
+                ed->ljets.index.push_back( j );
+                ed->ljets.property["MV1"].push_back(mv1);
+            }
+        }
+
+    }
+   
 
   // not needed at the moment.
   /*

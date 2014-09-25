@@ -99,6 +99,21 @@ namespace PhysicsHelperFunctions {
   }
 
 
+  //////////////////////////////////
+
+  template< class T >
+  double Mass( const T& coll, const int i )
+  {
+     const double pT  = coll.pT.at( i );
+     const double eta = coll.eta.at( i );
+     const double pz  = pT * sinh( eta );
+     const double E   = coll.E.at( i );
+     const double m2  = E*E - pT*pT - pz*pz;
+     
+     return ( m2 >= 0 ) ? sqrt(m2) : -1.*sqrt(-m2);
+  }
+  
+  
   /////////////////////////////////////////////////
 
   double Phi_mphi_phi( double x ) {
