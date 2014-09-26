@@ -1,0 +1,1 @@
+/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/mc12_8TeV.117050.PowhegPythia_P2011C/mu.root

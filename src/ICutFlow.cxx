@@ -175,7 +175,7 @@ void CutFlow::PrintOutStats()
       const int ncuts = p_h_cf->GetNbinsX();
 
       cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-      cout << " * Cut flow: " << p_h_cf->GetTitle() << endl << endl;
+      cout << " * " << p_h_cf->GetTitle() << endl << endl;
 
       for( int nc = 0 ; nc < ncuts ; ++nc ) {
 	printf( "%2i) %-20s %10.0f\n", nc, p_h_cf->GetXaxis()->GetBinLabel(nc+1), p_h_cf->GetBinContent(nc+1) );
