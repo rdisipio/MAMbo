@@ -91,12 +91,14 @@
   <TH1F name="reco/reco_4j2b_pseudotop_reco_lep_eta" title="Pseudo-top (leptonic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_lep_phi" title="Pseudo-top (leptonic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_lep_E"   title="Pseudo-top (leptonic) energy [GeV]"     	    nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="reco/reco_4j2b_pseudotop_reco_lep_m"   title="Pseudo-top (leptonic) mass [GeV]"     	    nbins="50" xmin="0." xmax="600." />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="25" xmin="-0" xmax="2.5" />
 
   <TH1F name="reco/reco_4j2b_pseudotop_reco_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_had_eta" title="Pseudo-top (hadronic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_had_phi" title="Pseudo-top (hadronic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_had_E"   title="Pseudo-top (hadronic) energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="reco/reco_4j2b_pseudotop_reco_had_m"   title="Pseudo-top (hadronic) mass [GeV]"          nbins="50" xmin="0." xmax="600." />
   <TH1F name="reco/reco_4j2b_pseudotop_reco_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
 
   <TH1F name="reco/reco_4j2b_pseudottbar_reco_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="5" edges="0,25,50,85,125,500" />
@@ -111,12 +113,14 @@
   <TH1F name="particle/particle_4j2b_pseudotop_lep_eta" title="Pseudo-top (leptonic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="particle/particle_4j2b_pseudotop_lep_phi" title="Pseudo-top (leptonic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/particle_4j2b_pseudotop_lep_E"   title="Pseudo-top (leptonic) energy [GeV]"                nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="particle/particle_4j2b_pseudotop_lep_m"   title="Pseudo-top (leptonic) mass [GeV]"                nbins="50" xmin="0." xmax="600." />
   <TH1F name="particle/particle_4j2b_pseudotop_lep_absrap" title="Pseudo-top (leptonic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
 
   <TH1F name="particle/particle_4j2b_pseudotop_had_pt"  title="Pseudo-top (hadronic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
   <TH1F name="particle/particle_4j2b_pseudotop_had_eta" title="Pseudo-top (hadronic) pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="particle/particle_4j2b_pseudotop_had_phi" title="Pseudo-top (hadronic) azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/particle_4j2b_pseudotop_had_E"   title="Pseudo-top (hadronic) energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
+  <TH1F name="particle/particle_4j2b_pseudotop_had_m"   title="Pseudo-top (hadronic) mass [GeV]"          nbins="50" xmin="0." xmax="600." />
   <TH1F name="particle/particle_4j2b_pseudotop_had_absrap" title="Pseudo-top (hadronic) abs rapidity |y_{t}|"   nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" />
 
   <TH1F name="particle/particle_4j2b_pseudottbar_pt"  title="Pseudo-t#bar{t} p_{T} [GeV]"           nbins="5" edges="0,25,50,85,125,500" />

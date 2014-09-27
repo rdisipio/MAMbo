@@ -1,5 +1,6 @@
 #include "PhysicsHelperFunctions.h"
 
+#include <exception>
 
 namespace PhysicsHelperFunctions {
 
@@ -51,7 +52,8 @@ namespace PhysicsHelperFunctions {
 
     m_W_lep = m_neutrino + m_lepton;
 
- 
+    //    cout << "Size of bjets A: " << m_p_ed->bjets.n << endl;
+
     TLorentzVector bj1 = ( m_target == kReco ) ? 
       HelperFunctions::MakeFourMomentum( m_p_ed->bjets, 0 ) :
       HelperFunctions::MakeFourMomentum( m_p_ed->truth_bjets, 0 );
@@ -119,6 +121,30 @@ namespace PhysicsHelperFunctions {
     m_p_ed->reco.pdgId.push_back( top_lep_pid );
     m_p_ed->reco.pdgId.push_back( top_had_pid );
     m_p_ed->reco.pdgId.push_back( ttbar_pid );
+
+    string prefix = ( m_target == kReco ) ? "reco_" : "ptcl_";
+    m_p_ed->iproperty[prefix + "pseudotop_had_jet_1_index"] = Wj1_index;
+    m_p_ed->iproperty[prefix + "pseudotop_had_jet_2_index"] = Wj2_index;
+    m_p_ed->iproperty[prefix + "pseudotop_had_bjet_index"] = bj1_index;
+    m_p_ed->iproperty[prefix + "pseudotop_lep_bjet_index"] = bj2_index;
+
+    if ( m_target == kReco ) {
+      m_p_ed->lepton.pT = m_lepton.Pt();
+      m_p_ed->lepton.eta = m_lepton.Eta();
+      m_p_ed->lepton.phi = m_lepton.Phi();
+      m_p_ed->lepton.E = m_lepton.E();
+      m_p_ed->lepton.m = m_lepton.M();
+      m_p_ed->lepton.q = 0; // ?
+    } else {
+      m_p_ed->truth_lepton.pT = m_lepton.Pt();
+      m_p_ed->truth_lepton.eta = m_lepton.Eta();
+      m_p_ed->truth_lepton.phi = m_lepton.Phi();
+      m_p_ed->truth_lepton.E = m_lepton.E();
+      m_p_ed->truth_lepton.m = m_lepton.M();
+      m_p_ed->truth_lepton.q = 0; // ?
+    }
+
+    //    cout << "Size of bjets B: " << m_p_ed->bjets.n << endl;
    
   }
 
@@ -247,6 +273,107 @@ namespace PhysicsHelperFunctions {
       m_p_ed = ed;
   }
   
+
+  void PseudoTopMatching::DoObjectsMatching( int debug )
+  {
+
+
+
+      // jk:
+    if (debug) {
+      cout << "SIZES: " 
+	   << m_p_ed->jets.n << ","
+	   << m_p_ed->truth_jets.n << " "
+	   << m_p_ed->bjets.n << ","
+	   << m_p_ed->truth_bjets.n << ""
+	   << endl;
+      cout <<  "INDICES: " 
+	   << m_p_ed->iproperty["reco_pseudotop_had_jet_1_index"] << ","
+	   << m_p_ed->iproperty["ptcl_pseudotop_had_jet_1_index"] << " "
+	   << m_p_ed->iproperty["reco_pseudotop_had_jet_2_index"] << ","
+	   << m_p_ed->iproperty["ptcl_pseudotop_had_jet_2_index"] << " "
+	   << m_p_ed->iproperty["reco_pseudotop_had_bjet_index"] << ","
+	   << m_p_ed->iproperty["ptcl_pseudotop_had_bjet_index"] << " "
+	   << m_p_ed->iproperty["reco_pseudotop_lep_bjet_index"] << ","
+	   << m_p_ed->iproperty["ptcl_pseudotop_lep_bjet_index"] << " "
+	   << endl;
+    }
+
+      try {
+
+	// reco-level:
+	string prefix = "reco_";
+	TLorentzVector r_jet1 = HelperFunctions::MakeFourMomentum(m_p_ed->jets, m_p_ed->iproperty[prefix + "pseudotop_had_jet_1_index"]);
+	TLorentzVector r_jet2 = HelperFunctions::MakeFourMomentum(m_p_ed->jets, m_p_ed->iproperty[prefix + "pseudotop_had_jet_2_index"]);
+	TLorentzVector r_had_bjet = HelperFunctions::MakeFourMomentum(m_p_ed->jets, m_p_ed->iproperty[prefix + "pseudotop_had_bjet_index"]);
+	TLorentzVector r_lep_bjet = HelperFunctions::MakeFourMomentum(m_p_ed->jets, m_p_ed->iproperty[prefix + "pseudotop_lep_bjet_index"]);
+	TLorentzVector r_lep = HelperFunctions::MakeFourMomentum(m_p_ed->lepton);
+	
+	// particle level:
+	prefix = "ptcl_";
+	TLorentzVector p_jet1 = HelperFunctions::MakeFourMomentum(m_p_ed->truth_jets, m_p_ed->iproperty[prefix + "pseudotop_had_jet_1_index"]);
+	TLorentzVector p_jet2 = HelperFunctions::MakeFourMomentum(m_p_ed->truth_jets, m_p_ed->iproperty[prefix + "pseudotop_had_jet_2_index"]);
+	TLorentzVector p_had_bjet = HelperFunctions::MakeFourMomentum(m_p_ed->truth_jets, m_p_ed->iproperty[prefix + "pseudotop_had_bjet_index"]);
+	TLorentzVector p_lep_bjet = HelperFunctions::MakeFourMomentum(m_p_ed->truth_jets, m_p_ed->iproperty[prefix + "pseudotop_lep_bjet_index"]);
+	TLorentzVector p_lep = HelperFunctions::MakeFourMomentum(m_p_ed->truth_lepton);
+
+	if (debug) {
+	  cout << "Reco jets: ";
+	  HelperFunctions::ShortPrintFourvec(r_jet1, " | ");
+	  HelperFunctions::ShortPrintFourvec(r_jet2, " | ");
+	  HelperFunctions::ShortPrintFourvec(r_had_bjet, " | ");
+	  HelperFunctions::ShortPrintFourvec(r_lep_bjet);
+	  cout << "Ptcl jets: ";
+	  HelperFunctions::ShortPrintFourvec(p_jet1, " | ");
+	  HelperFunctions::ShortPrintFourvec(p_jet2, " | ");
+	  HelperFunctions::ShortPrintFourvec(p_had_bjet, " | ");
+	  HelperFunctions::ShortPrintFourvec(p_lep_bjet);
+	}
+
+	bool passedJetDR_std = HelperFunctions::ComputeJetsDR(r_jet1, r_jet2, r_had_bjet, r_lep_bjet,
+							      p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
+	// try had_bjet instead of light one:
+	bool passedJetDR_bhj1 = HelperFunctions::ComputeJetsDR(r_had_bjet, r_jet2, r_jet1, r_lep_bjet,
+							       p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
+	bool passedJetDR_bhj2 = HelperFunctions::ComputeJetsDR(r_jet1, r_had_bjet, r_jet2, r_lep_bjet,
+							       p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
+	// try lep_bjet instead of light one:
+	bool passedJetDR_blj1 = HelperFunctions::ComputeJetsDR(r_lep_bjet, r_jet2, r_had_bjet, r_jet1,
+							       p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
+	bool passedJetDR_blj2 = HelperFunctions::ComputeJetsDR(r_jet1, r_lep_bjet, r_had_bjet, r_jet2,
+							       p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
+	// try swapping bjets:
+	bool passedJetDR_bs = HelperFunctions::ComputeJetsDR(r_jet1, r_jet2, r_lep_bjet, r_had_bjet,
+							     p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
+	
+	if (debug) {
+	  cout << "Match results: "
+	       << " std:" << passedJetDR_std
+	       << " bhj:" << passedJetDR_bhj1
+	       << " bhj:" << passedJetDR_bhj2
+	       << " blj:" << passedJetDR_blj1
+	       << " blj:" << passedJetDR_blj2
+	       << " bs:" << passedJetDR_bs
+	       << endl;
+	}
+
+	bool allObjectsMatched = passedJetDR_std;
+	// tighter for leptons:
+	allObjectsMatched = allObjectsMatched && r_lep.DeltaR( p_lep ) < 0.02;
+	if (debug) cout << "MATCHED: " <<   allObjectsMatched << endl;
+	if (debug) cout << endl;
+
+	/*	
+		MatchingResult res;
+		res.DRmatched = allObjectsMatched;
+	*/
+      }
+      catch(...) {
+	cerr << "  ERROR in jet indices!" << endl;
+      }
+
+
+  }
   
   void PseudoTopMatching::DoMatching( unsigned int i1, unsigned int i2, const string& label )
   {
@@ -254,6 +381,7 @@ namespace PhysicsHelperFunctions {
       
       if( m_matching_type == kUnspecifiedMatching ) throw runtime_error( "PseudoTopMatching: unspecified matching type." );
       
+      // pseudotop 4-vecs:
       TLorentzVector p1;
       TLorentzVector p2; 
       

@@ -27,13 +27,34 @@ namespace HelperFunctions {
 
   int    FindFatJets( EventData * ed, const double fjet_ptmin = 300.*GeV, fastjet::JetAlgorithm alg = fastjet::antikt_algorithm, double R = 1.0 );
 
+  bool ComputeJetsDR(const TLorentzVector& r_jet1, const TLorentzVector& r_jet2, const TLorentzVector& r_had_bjet, const TLorentzVector& r_lep_bjet,
+		     const TLorentzVector& p_jet1, const TLorentzVector& p_jet2, const TLorentzVector& p_had_bjet, const TLorentzVector& p_lep_bjet,
+		     int debug = 0);
+
+  // for jets:
   template< class T > 
   TLorentzVector MakeFourMomentum( const T& coll, int i ) {
      TLorentzVector p;
-
+     //     if (i < coll.n && i >= 0)
      p.SetPtEtaPhiE( coll.pT.at(i), coll.eta.at(i), coll.phi.at(i), coll.E.at(i) );
      
      return p;
+  }
+
+  // for leptons:
+  template< class T > 
+  TLorentzVector MakeFourMomentum( const T& coll ) {
+     TLorentzVector p;
+     p.SetPtEtaPhiE( coll.pT, coll.eta, coll.phi, coll.E );
+     
+     return p;
+  }
+
+  template< class T > 
+  void ShortPrintFourvec(const T& vec, string last = "\n")
+  {
+    string line = Form("%3.0f:%+1.2f,%+1.2f",  vec.Pt()/1000.,vec.Eta(), vec.Phi() );
+    cout << line.c_str() << last.c_str();
   }
 
  

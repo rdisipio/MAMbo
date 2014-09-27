@@ -105,5 +105,47 @@ namespace HelperFunctions {
 
   //////////////////////////////////////////////////////
 
+  
+  bool ComputeJetsDR(const TLorentzVector& r_jet1, const TLorentzVector& r_jet2, const TLorentzVector& r_had_bjet, const TLorentzVector& r_lep_bjet,
+		     const TLorentzVector& p_jet1, const TLorentzVector& p_jet2, const TLorentzVector& p_had_bjet, const TLorentzVector& p_lep_bjet,
+		     int debug)
+  {
+
+    vector< double > DRs;
+
+    // don't care about swap within jets forming Whad:
+    double dr1 = r_jet1.DeltaR( p_jet1 );
+    double dr2 = r_jet2.DeltaR( p_jet2 );
+    double dr1swap = r_jet2.DeltaR( p_jet1 );
+    double dr2swap = r_jet1.DeltaR( p_jet2 );
+    if (dr1 + dr2 < dr1swap + dr2swap) {
+      DRs.push_back( dr1 );
+      DRs.push_back( dr2 );
+    } else {
+      DRs.push_back( dr1swap );
+      DRs.push_back( dr2swap );	  
+    }
+    DRs.push_back(r_had_bjet.DeltaR( p_had_bjet ) );
+    DRs.push_back(r_lep_bjet.DeltaR( p_lep_bjet ) );
+    
+    bool allObjectsMatched = true;
+    if (debug) cout << "  DRs: ";
+    if (debug) cout << "  Whad: " << dr1 << "," << dr2 << " " << dr1swap << "," << dr2swap;
+    if (debug) cout << "  Choice: ";
+    for (auto vector< double >::iterator it = DRs.begin(); it != DRs.end(); ++it) {
+      if (debug) cout << "   " << (*it) << " ";
+      if ( (*it) >= 0.35) {
+	allObjectsMatched = false;
+	if (!debug) 
+	  break;
+      }
+    }
+    if (debug) cout << endl;
+
+    return allObjectsMatched;
+
+  }
+
+  //////////////////////////////////////////////////////
 
 };

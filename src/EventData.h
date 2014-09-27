@@ -22,6 +22,7 @@ struct EventData
 
   struct Lepton_t { 
     int    n;
+
     double pT;
     double eta;
     double phi;
@@ -33,6 +34,7 @@ struct EventData
 
   struct Electrons_t { 
     int     n;
+
     array_d pT;
     array_d eta;
     array_d phi;
@@ -44,6 +46,7 @@ struct EventData
 
   struct Muons_t { 
     int n;
+
     array_d pT;
     array_d eta;
     array_d phi;
@@ -55,6 +58,7 @@ struct EventData
 
   struct Jets_t { 
     int     n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -67,6 +71,7 @@ struct EventData
 
   struct bJets_t { 
     int     n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -78,6 +83,7 @@ struct EventData
 
   struct lJets_t {
     int     n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -90,6 +96,7 @@ struct EventData
 
   struct fJet_t { 
     int    n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -106,6 +113,7 @@ struct EventData
 
   struct TruthJets_t {
     int     n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -118,6 +126,7 @@ struct EventData
 
   struct TruthFJets_t {
     int     n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -130,6 +139,7 @@ struct EventData
 
   struct TruthBJets_t {
     int     n;
+
     array_ui index;
     array_d pT;
     array_d eta;
@@ -243,9 +253,10 @@ struct EventData
     double mwt;
   } MET_truth;
 
+  // combined (reconstructed) objects:
   struct Reco_t {
     int     n;
-    
+
     array_ui pdgId;
     array_ui status;
     array_ui barcode;
@@ -262,6 +273,7 @@ struct EventData
 
   map< string, int > trigger;
   map< string, double > property;
+  map< string, int > iproperty;
 };
 
 #endif /** __EVENTDATA_H__ */

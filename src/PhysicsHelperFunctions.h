@@ -61,6 +61,7 @@ namespace PhysicsHelperFunctions {
           double delta_rapidity;
           double delta_phi;
           double delta_m;
+	  bool DRmatched;
       };
       typedef map< string, MatchingResult > MatchingResultCollection_t;
       
@@ -69,6 +70,7 @@ namespace PhysicsHelperFunctions {
       
       void SetEventData( EventData * ed );
       
+      void DoObjectsMatching( int debug = 0 );
       void DoMatching( unsigned int i1, unsigned int i2, const string& label = "" );
       
       inline void SetDeltaR( double dR )               { m_dR_max = dR; };
