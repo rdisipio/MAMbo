@@ -76,7 +76,7 @@ int main( int argc, char ** argv )
   INtupleWrapper * wrapper = NW_Factory->Create( analysisParams.ntupleName, 
 						 globalArgs.listFileName, 
 						 analysisParams.branchFileName.c_str(), 
-						 analysisParams.treeName.c_str() ); 
+						 analysisParams.treeName.c_str()); 
 
   if( !wrapper->AddCutFlow( analysisParams.cutflowName ) )
     throw runtime_error( "Cannot add cutflow\n" );

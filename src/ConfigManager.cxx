@@ -26,6 +26,16 @@ bool ConfigManager::Configure( const char * configFileName, AnalysisParams_t& an
       analysisParams.branchFileName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
 	//string( (const char*) nodeParam->children->name );
     }
+    else if( xmlStrEqual( nodeParam->name, BAD_CAST "channel" ) ) {
+        string ch = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );                
+        if (ch == "electron" || ch == "kElectron") {
+            analysisParams.channel = kElectron;
+	}
+        else if (ch == "muon" || ch == "kMuon") {
+            analysisParams.channel = kMuon;
+	}
+        cout<< "Analysing channel: " << analysisParams.channel<< endl;
+    }
     else if( xmlStrEqual( nodeParam->name, BAD_CAST "ntuple" ) ) {
       analysisParams.ntupleName = (const char*)xmlNodeListGetString( doc, nodeParam->xmlChildrenNode, 1 );
     }

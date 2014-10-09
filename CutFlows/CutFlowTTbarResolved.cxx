@@ -141,7 +141,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     m_pseudotop_reco->SetEventData(ed);
     m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
-    m_pseudotop_reco->SetChargedLepton(kElectron, 0);
+    
+    m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
     m_pseudotop_reco->Run();
 
     // dumped indices:
@@ -153,14 +154,6 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     if( !isMCSignal) return success;
     
-    // this part is about Monte Carlo. Only for ttbar signal atm
-    
-//    const int mc_overlap = ed->property["mc_overlap"];
-//                if (mc_overlap) {
-//                    cout << "INFO: event is vetoed at MC particle level due to overlap" << endl;
-//                    return success;
-//                }
-
     // there is always a parton-level top
     FillHistogramsPseudotopParton(ed, weight_particle_level);
     FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
@@ -173,7 +166,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     m_pseudotop_particle->SetEventData(ed);
     m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
-    m_pseudotop_particle->SetChargedLepton(kElectron, 0);
+    m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
 
     try {
         m_pseudotop_particle->Run();

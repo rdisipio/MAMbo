@@ -14,7 +14,7 @@ INtupleWrapper * CreateNtuple( const char * fileListName, const char * branchLis
 }
 
 
-typedef INtupleWrapper * (*fp_CreateNtuple)( const char * fileListName, const char * branchListName, const char * treeName );
+typedef INtupleWrapper * (*fp_CreateNtuple)( const char * fileListName, const char * branchListName, const char * treeName  );
 typedef map< string, fp_CreateNtuple > NtupleConfiguratorsCollection_t;
 
 class NtupleWrapperFactory
@@ -23,7 +23,7 @@ public:
   static NtupleWrapperFactory * GetHandle() { static NtupleWrapperFactory instance; return &instance; };
   virtual ~NtupleWrapperFactory() {};
   
-  INtupleWrapper * Create( const string& name, const char * fileListName, const char * branchListName, const char * treeName  ) {
+  INtupleWrapper * Create( const string& name, const char * fileListName, const char * branchListName, const char * treeName ) {
     INtupleWrapper * nw = m_configurators[name]( fileListName, branchListName, treeName );
     return nw;
   };
@@ -73,7 +73,7 @@ class INtupleWrapperPluginFactory {
    INtupleWrapperPluginFactory( const string& name ) : m_name( name ) {};
    virtual ~INtupleWrapperPluginFactory() {};
 
-   virtual INtupleWrapper * Create( const char * fileListName, const char * branchListName, const char * treeName )   = 0;
+   virtual INtupleWrapper * Create( const char * fileListName, const char * branchListName, const char * treeName)   = 0;
    virtual bool      Register() = 0;
 
  protected:

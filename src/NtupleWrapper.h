@@ -18,10 +18,11 @@ class NtupleWrapper : public INtupleWrapper
  public:
 
   NtupleWrapper( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" ) :
-    INtupleWrapper( fileListName, branchListName, treeName ), m_ntuple(NULL)
+    INtupleWrapper( fileListName, branchListName, treeName), m_ntuple(NULL)
     {
       m_ntuple = new NTUPLE();
       m_config = ConfigManager::GetHandle()->GetConfiguration();
+      m_channel = m_config->channel;
 
       if( !LoadChain( fileListName, treeName ) ) throw runtime_error( "Cannot load file chain\n" );
 	

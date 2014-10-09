@@ -1,8 +1,10 @@
-include Makefile.inc
+MKDIR=mkdir
+CP=cp
+CCADMIN=CCadmin
 
 DIRS = src Ntuples CutFlows
 
-all: install
+all: install 
 
 core:
 	@$(MAKE) $(MFLAGS) -C src 
@@ -13,15 +15,14 @@ ntuples:
 cutflows:
 	@$(MAKE) $(MFLAGS) -C CutFlows
 
-install: core ntuples cutflows environment
-	@ln -sf $(PWD)/src/libMAMbo.so   $(PWD)/lib/
-	@ln -sf $(PWD)/Ntuples/*.so      $(PWD)/lib/
-	@ln -sf $(PWD)/CutFlows/*.so     $(PWD)/lib/
-	@ln -sf $(PWD)/share/control/    $(PWD)/run/
+install: core ntuples cutflows environment 
+	@ln -sf $(PWD)/src/libMAMbo.so   ./lib/
+	@ln -sf $(PWD)/Ntuples/*.so      ./lib/
+	@ln -sf $(PWD)/CutFlows/*.so     ./lib/
+	@ln -sf $(PWD)/share/control/    ./run/
+	@ln -sf $(PWD)/src/$(EXE)        ./bin/
 
-	@ln -sf $(PWD)/src/$(EXE)        $(PWD)/bin/
-
-environment: $(PWD)/bin/MAMbo-setenv.sh.template
+environment: ./bin/MAMbo-setenv.sh.template
 	@sed "s!@PREFIX@!$(PWD)!g" $(PWD)/bin/MAMbo-setenv.sh.template  > $(PWD)/bin/MAMbo-setenv.sh
 	@ln -sf $(PWD)/bin/MAMbo-setenv.sh $(PWD)/run/MAMbo-setenv.sh
 	@ln -sf $(PWD)/bin/MAMbo-submit.sh $(PWD)/run/MAMbo-submit.sh
@@ -33,3 +34,13 @@ clean:
 
 force_look:
 	@true
+
+# run tests
+build-tests: 
+	@$(MAKE) $(MFLAGS) -C tests 
+		
+# run tests
+test: 
+	@$(MAKE) $(MFLAGS) -C tests 
+	
+include Makefile.inc

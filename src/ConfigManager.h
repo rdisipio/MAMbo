@@ -19,6 +19,7 @@ struct AnalysisParams_t {
   string branchFileName;
   string ntupleName;
   map< string, double > custom_params;
+  LeptonFlavor channel;
 };
 
 

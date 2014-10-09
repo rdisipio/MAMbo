@@ -49,6 +49,8 @@ class INtupleWrapper
    EventData        * m_thisEvent;
 
    CutFlowCollection_t m_cutFlows;
+   
+   LeptonFlavor        m_channel;
 };
 
 

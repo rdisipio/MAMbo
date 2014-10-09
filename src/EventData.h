@@ -173,7 +173,7 @@ struct EventData
     int status;
     int barcode;
 
-    double pT;
+    double pT;    
     double eta;
     double phi;
     double E;

@@ -108,7 +108,7 @@ namespace HelperFunctions {
   
   bool ComputeJetsDR(const TLorentzVector& r_jet1, const TLorentzVector& r_jet2, const TLorentzVector& r_had_bjet, const TLorentzVector& r_lep_bjet,
 		     const TLorentzVector& p_jet1, const TLorentzVector& p_jet2, const TLorentzVector& p_had_bjet, const TLorentzVector& p_lep_bjet,
-		     int debug)
+		     int debug) 
   {
 
     vector< double > DRs;
@@ -132,7 +132,7 @@ namespace HelperFunctions {
     if (debug) cout << "  DRs: ";
     if (debug) cout << "  Whad: " << dr1 << "," << dr2 << " " << dr1swap << "," << dr2swap;
     if (debug) cout << "  Choice: ";
-    for (auto vector< double >::iterator it = DRs.begin(); it != DRs.end(); ++it) {
+    for (vector< double >::iterator it = DRs.begin(); it != DRs.end(); ++it) {
       if (debug) cout << "   " << (*it) << " ";
       if ( (*it) >= 0.35) {
 	allObjectsMatched = false;

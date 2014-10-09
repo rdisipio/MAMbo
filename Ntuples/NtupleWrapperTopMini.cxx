@@ -5,6 +5,7 @@
 NtupleWrapperTopMini::NtupleWrapperTopMini( const char * fileListName, const char * branchListName, const char * treeName ) : 
   NtupleWrapper< TopMini >( fileListName, branchListName, treeName )
 {
+    
 }
 
 /////////////////////////////////////////////
@@ -138,11 +139,14 @@ bool NtupleWrapperTopMini::MakeEventMuons( EventData * ed )
 {
   bool success = true;
 
-/*
-   Float_t         mptcone30;
-   Float_t         metcone20;
-   Float_t         mminiIso10_4;
-*/
+  ed->muons.n = 1;
+  ed->muons.pT.push_back( GET_VALUE( lep_pt ) );
+  ed->muons.eta.push_back( GET_VALUE( lep_eta ) );
+  ed->muons.phi.push_back( GET_VALUE( lep_phi ) );
+  ed->muons.E.push_back( GET_VALUE( lep_E ) );
+  ed->muons.q.push_back( GET_VALUE( lep_charge ) );
+
+  ed->muons.property["charge"].push_back( GET_VALUE( lep_charge ) );
 
   return success;
 }
@@ -378,6 +382,9 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
   }
   
   ed->MET_truth.et = etmiss.Pt();
+  ed->MET_truth.etx = etmiss.Px();
+  ed->MET_truth.ety = etmiss.Py();
+  ed->MET_truth.etz = etmiss.Pz();  
   
   // truth M_T^W
   //TLorentzVector Wlep = neutrino + dressed_lepton;
@@ -471,7 +478,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       }
   }
   ed->property["mc_overlap"] = mc_overlap;
-
+  
   return success;
 }
 
