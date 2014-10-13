@@ -8,23 +8,20 @@
 
 #include "Commons.h"
 
-
 /////////////////////////////
-
 
 struct AnalysisParams_t {
-  string histoFileName;
-  string cutflowName;
-  string treeName;
-  string branchFileName;
-  string ntupleName;
-  map< string, double > custom_params;
-  LeptonFlavor channel;
+    string fileListName;
+    string histoFileName;
+    string cutflowName;
+    string treeName;
+    string branchFileName;
+    string ntupleName;
+    map< string, double > custom_params;
+    LeptonFlavor channel;
 };
 
-
 /////////////////////////////
-
 
 class ConfigManager
 {

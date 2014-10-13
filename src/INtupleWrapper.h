@@ -9,7 +9,7 @@
 class INtupleWrapper 
 {
  public:
-   INtupleWrapper( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" );
+   INtupleWrapper( const AnalysisParams_t analysisParameters );
    virtual ~INtupleWrapper();
 
  public:
@@ -26,15 +26,14 @@ class INtupleWrapper
 
  protected:
    bool                SetupTools();
-   virtual bool        LoadChain( const char * fileListName, const char * treeName = "physics" ) = 0;
-   virtual UInt_t      SetActiveBranches( const char * listFileName = "branch_list.txt" )        = 0;
+   virtual bool        LoadChain( const string fileListName, const string treeName = "physics" ) = 0;
+   virtual UInt_t      SetActiveBranches( const string listFileName = "branch_list.txt" )        = 0;
 
    virtual EventData  * NextEvent();
 
    virtual bool         MakeEventInfo( EventData * ed )      = 0;
    virtual bool         MakeEventMET( EventData * ed )       = 0;
-   virtual bool         MakeEventElectrons( EventData * ed ) = 0;
-   virtual bool         MakeEventMuons( EventData * ed )     = 0;
+   virtual bool         MakeEventLeptons( EventData * ed )   = 0;
    virtual bool         MakeEventJets( EventData * ed )      = 0;
    virtual bool         MakeEventTruth( EventData * ed )     = 0;
   
@@ -49,8 +48,8 @@ class INtupleWrapper
    EventData        * m_thisEvent;
 
    CutFlowCollection_t m_cutFlows;
-   
-   LeptonFlavor        m_channel;
+   AnalysisParams_t    m_config;
+
 };
 
 

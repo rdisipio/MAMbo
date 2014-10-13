@@ -1,7 +1,7 @@
 #include "NtupleWrapperHWWtth.h"
 
-NtupleWrapperHWWtth::NtupleWrapperHWWtth( const char * fileListName, const char * branchListName, const char * treeName ) : 
-  NtupleWrapper< HWWtth >( fileListName, branchListName, treeName )
+NtupleWrapperHWWtth::NtupleWrapperHWWtth( const AnalysisParams_t analysisParameters ) : 
+  NtupleWrapper< HWWtth >( analysisParameters )
 {
 }
 

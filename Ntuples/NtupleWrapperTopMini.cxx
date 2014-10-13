@@ -2,8 +2,8 @@
 
 #include "PhysicsHelperFunctions.h"
 
-NtupleWrapperTopMini::NtupleWrapperTopMini( const char * fileListName, const char * branchListName, const char * treeName ) : 
-  NtupleWrapper< TopMini >( fileListName, branchListName, treeName )
+NtupleWrapperTopMini::NtupleWrapperTopMini( const AnalysisParams_t analysisParameters ) : 
+  NtupleWrapper< TopMini >( analysisParameters )
 {
     
 }
@@ -258,7 +258,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
   TLorentzVector etmiss;
   TLorentzVector top, antitop, thad, tlep, ttbar;
 
-  int isMCSignal = (int)m_config->custom_params["isMCSignal"];  
+  int isMCSignal = (int)m_config.custom_params["isMCSignal"];  
   if( !isMCSignal ) return success;
 
   int ntops = 0;

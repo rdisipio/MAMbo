@@ -8,13 +8,13 @@
 class INtupleWrapper;
 
 template <class T>
-INtupleWrapper * CreateNtuple( const char * fileListName, const char * branchListName, const char * treeName ) {
-  INtupleWrapper * nw = new T( fileListName, branchListName, treeName );
+INtupleWrapper * CreateNtuple( AnalysisParams_t analysisParameters ) {
+  INtupleWrapper * nw = new T( analysisParameters );
   return nw;
 }
 
 
-typedef INtupleWrapper * (*fp_CreateNtuple)( const char * fileListName, const char * branchListName, const char * treeName  );
+typedef INtupleWrapper * (*fp_CreateNtuple)( const AnalysisParams_t analysisParameters );
 typedef map< string, fp_CreateNtuple > NtupleConfiguratorsCollection_t;
 
 class NtupleWrapperFactory
@@ -23,8 +23,8 @@ public:
   static NtupleWrapperFactory * GetHandle() { static NtupleWrapperFactory instance; return &instance; };
   virtual ~NtupleWrapperFactory() {};
   
-  INtupleWrapper * Create( const string& name, const char * fileListName, const char * branchListName, const char * treeName ) {
-    INtupleWrapper * nw = m_configurators[name]( fileListName, branchListName, treeName );
+  INtupleWrapper * Create( const AnalysisParams_t analysisParameters ) {
+    INtupleWrapper * nw = m_configurators[analysisParameters.ntupleName]( analysisParameters );
     return nw;
   };
 
@@ -73,7 +73,7 @@ class INtupleWrapperPluginFactory {
    INtupleWrapperPluginFactory( const string& name ) : m_name( name ) {};
    virtual ~INtupleWrapperPluginFactory() {};
 
-   virtual INtupleWrapper * Create( const char * fileListName, const char * branchListName, const char * treeName)   = 0;
+   virtual INtupleWrapper * Create( const AnalysisParams_t analysisParameters)   = 0;
    virtual bool      Register() = 0;
 
  protected:
@@ -89,8 +89,8 @@ class NtupleWrapperPluginFactory : public INtupleWrapperPluginFactory {
     NtupleWrapperPluginFactory( const string& name ) : INtupleWrapperPluginFactory( name ) {};
     virtual ~NtupleWrapperPluginFactory() {};
  
-    virtual INtupleWrapper * Create( const char * fileListName, const char * branchListName, const char * treeName ) { 
-      return new T( fileListName, branchListName, treeName); 
+    virtual INtupleWrapper * Create( const AnalysisParams_t analysisParameters ) { 
+      return new T( analysisParameters); 
     };
 
     virtual bool      Register() { 

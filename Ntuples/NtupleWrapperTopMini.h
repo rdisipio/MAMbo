@@ -11,7 +11,7 @@
 class NtupleWrapperTopMini : public NtupleWrapper< TopMini > 
 {
  public:
-  NtupleWrapperTopMini( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" );
+  NtupleWrapperTopMini( const AnalysisParams_t analysisParameters );
   virtual ~NtupleWrapperTopMini();
 
 

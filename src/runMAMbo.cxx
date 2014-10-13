@@ -58,6 +58,7 @@ int main( int argc, char ** argv )
 
   // XML config
   AnalysisParams_t analysisParams;
+  analysisParams.fileListName = globalArgs.listFileName;
   ConfigManager * configManager = ConfigManager::GetHandle();
   configManager->Configure( globalArgs.paramsFileName, analysisParams );
   // XML config
@@ -73,10 +74,7 @@ int main( int argc, char ** argv )
   NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
   NW_Factory->Dump();
 
-  INtupleWrapper * wrapper = NW_Factory->Create( analysisParams.ntupleName, 
-						 globalArgs.listFileName, 
-						 analysisParams.branchFileName.c_str(), 
-						 analysisParams.treeName.c_str()); 
+  INtupleWrapper * wrapper = NW_Factory->Create( analysisParams ); 
 
   if( !wrapper->AddCutFlow( analysisParams.cutflowName ) )
     throw runtime_error( "Cannot add cutflow\n" );

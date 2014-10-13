@@ -1,7 +1,7 @@
 #include "NtupleWrapperD3PDTruth.h"
 
-NtupleWrapperD3PDTruth::NtupleWrapperD3PDTruth( const char * fileListName, const char * branchListName, const char * treeName ) : 
-  NtupleWrapper< D3PDTruth >( fileListName, branchListName, treeName )
+NtupleWrapperD3PDTruth::NtupleWrapperD3PDTruth( const AnalysisParams_t* analysisParameters ) : 
+  NtupleWrapper< D3PDTruth >( analysisParameters )
 {
 }
 

@@ -1,8 +1,8 @@
 #include "INtupleWrapper.h"
 
-INtupleWrapper::INtupleWrapper( const char * fileListName, const char * branchListName, const char * treeName ) : 
+INtupleWrapper::INtupleWrapper( const AnalysisParams_t analysisParameters ) : 
   m_hm(NULL),
-  m_treeName( treeName ), m_thisEvent(NULL), m_thisEventNumber(-1), m_maxEvents(-1)
+  m_treeName( analysisParameters.treeName.c_str() ), m_thisEvent(NULL), m_thisEventNumber(-1), m_maxEvents(-1)
 {
   if( !SetupTools() ) throw runtime_error( "Cannot setup wrapper tools\n" );
 }

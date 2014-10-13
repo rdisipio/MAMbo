@@ -8,7 +8,7 @@
 class NtupleWrapperHWWtth : public NtupleWrapper< HWWtth > 
 {
  public:
-  NtupleWrapperHWWtth( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" );
+  NtupleWrapperHWWtth( const AnalysisParams_t analysisParameters );
   virtual ~NtupleWrapperHWWtth();
 
 

@@ -17,16 +17,15 @@ class NtupleWrapper : public INtupleWrapper
 {
  public:
 
-  NtupleWrapper( const char * fileListName, const char * branchListName = "branch_list.txt", const char * treeName = "physics" ) :
-    INtupleWrapper( fileListName, branchListName, treeName), m_ntuple(NULL)
+  NtupleWrapper( const AnalysisParams_t analysisParameters ) :
+    INtupleWrapper( analysisParameters ), m_ntuple(NULL)
     {
       m_ntuple = new NTUPLE();
-      m_config = ConfigManager::GetHandle()->GetConfiguration();
-      m_channel = m_config->channel;
+      m_config = analysisParameters;
 
-      if( !LoadChain( fileListName, treeName ) ) throw runtime_error( "Cannot load file chain\n" );
+      if( !LoadChain( m_config.fileListName, m_config.treeName ) ) throw runtime_error( "Cannot load file chain\n" );
 	
-      SetActiveBranches( branchListName );
+      SetActiveBranches( m_config.branchFileName );
     };
 
     virtual ~NtupleWrapper()
@@ -47,13 +46,13 @@ class NtupleWrapper : public INtupleWrapper
     // virtual CutFlow * AddCutFlow( const string& name );
 
  protected:
-    bool          LoadChain( const char * fileListName, const char * treeName = "physics" )
+    bool LoadChain( const string fileListName, const string treeName = "physics" )
     {
       bool success = true;
 
       TChain * chain = new TChain( m_treeName );
 
-      ifstream input( fileListName, ios_base::in );
+      ifstream input( fileListName.c_str(), ios_base::in );
       string fName;
       while( std::getline( input, fName ) ) {
 	if( fName.empty() ) continue;
@@ -69,7 +68,7 @@ class NtupleWrapper : public INtupleWrapper
       return success;
     };
 
-    UInt_t        SetActiveBranches( const char * listFileName = "branch_list.txt" )
+    UInt_t        SetActiveBranches( const string listFileName = "branch_list.txt" )
     {  
       if( !m_ntuple->fChain ) throw runtime_error( "Ntuple chain has not been created\n" );
 
@@ -92,7 +91,6 @@ class NtupleWrapper : public INtupleWrapper
       Nbranches = m_activeBranches.size();
       cout << "DEBUG: No. of active branches = " << Nbranches << endl;
 
- //     if( Nbranches == 0 ) throw runtime_error( "No active branch\n" );
       if( Nbranches == 0 ) {
 	 cout << "WARNING: no active branch define. All switched on, this could be SLOW!" << endl;
 	 m_ntuple->fChain->SetBranchStatus( "*", 1 );
@@ -100,8 +98,7 @@ class NtupleWrapper : public INtupleWrapper
 
       return Nbranches;
     };
-
-      
+     
     virtual EventData * MakeEvent( Long64_t i ) {
       EventData * ed = new EventData();
 
@@ -112,35 +109,34 @@ class NtupleWrapper : public INtupleWrapper
       m_ntuple->GetEntry( i );
 
       // pass global parameters
-      ed->property = m_config->custom_params;
+      ed->property = m_config.custom_params;
   
       MAKE_OBJECT( Info, ed );
       MAKE_OBJECT( Truth, ed );    
       MAKE_OBJECT( Trigger, ed );
       MAKE_OBJECT( MET, ed );
       MAKE_OBJECT( Electrons, ed );
-      MAKE_OBJECT( Muons, ed );
-      MAKE_OBJECT( Jets, ed );
+      MAKE_OBJECT( Leptons, ed );
 
       return ed;
-
     };
-
       
     virtual bool MakeEventInfo( EventData * ed )      { return true; };
     virtual bool MakeEventTruth( EventData * ed )     { return true; };      
     virtual bool MakeEventTrigger( EventData * ed )   { return true; };
     virtual bool MakeEventMET( EventData * ed )       { return true; };
+    virtual bool MakeEventJets( EventData * ed )      { return true; };
     virtual bool MakeEventElectrons( EventData * ed ) { return true; };
     virtual bool MakeEventMuons( EventData * ed )     { return true; };
-    virtual bool MakeEventJets( EventData * ed )      { return true; };
 
-    // virtual EventData   * NextEvent();
-
+    virtual bool MakeEventLeptons( EventData * ed )   { 
+        MakeEventMuons(ed); 
+        MakeEventElectrons(ed);
+        return true;
+    };
 
  protected:
     NTUPLE            * m_ntuple;
-    AnalysisParams_t  * m_config;
 };
 
 
