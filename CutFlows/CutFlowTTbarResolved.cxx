@@ -104,28 +104,34 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     CutFlow::Start();
 
     int isMCSignal = (int) m_config->custom_params["isMCSignal"];
+    int isRealData = (int) m_config->custom_params["isRealData"];
 
-    double weight_reco_level     = ed->info.mcWeight;
-    double weight_particle_level = ed->info.mcWeight;
+    double weight_reco_level     = 1.;
+    double weight_particle_level = 1.;
 
-    const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
-    const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
-    const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
-    const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
-    const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
-    const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
-    const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
-    const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"];
-    const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
+    if( !isRealData ) {
+   	 weight_reco_level     = ed->info.mcWeight;
+         weight_particle_level = ed->info.mcWeight;
 
-    weight_reco_level *=
+         const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
+         const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
+         const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
+         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
+         const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
+         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
+         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
+         const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"];
+         const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
+
+         weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
             //scaleFactor_ELE *scaleFactor_MUON *
             scaleFactor_BTAG *
             scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE;
     
-    weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
-    
+         weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
+    }
+
     ed->property["weight_particle_level"] = weight_particle_level;
     ed->property["weight_reco_level"]     = weight_reco_level;
 
@@ -168,6 +174,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
     m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
 
+    /*
     try {
         m_pseudotop_particle->Run();
     }
@@ -176,7 +183,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         cout << "jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
         return success;
     }
-    
+    */
+    m_pseudotop_particle->Run();    
+
     FillHistogramsPseudotopParticle(ed, weight_particle_level);
 
     FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level);
