@@ -1,0 +1,14 @@
+<analysis name="TTbarResolved">
+  <ntuple>TopMini</ntuple>
+  <branches>control/branch_list_TopMini.txt</branches>
+  <tree>physics</tree>
+  <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
+  <cutflow>TTbarResolved</cutflow>
+  <channel>electron</channel>
+  <parameters>
+    <param name="pTmin" value="20." />
+    <param name="etaMax" value="2.5" />
+    <param name="isMCSignal" value="0" />
+    <param name="isRealData" value="1" />
+  </parameters>
+</analysis>
