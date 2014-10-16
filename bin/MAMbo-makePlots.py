@@ -2,6 +2,7 @@
 
 import os, sys
 import optparse
+from distutils.dir_util import mkpath
 
 sys.path.append( os.environ['MAMBODIR'] + "/python" )
 
@@ -281,7 +282,7 @@ def DoPlot( plot ):
 if __name__ == "__main__":
    
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
-   parser.add_option( "-b", "--batch", help="Batch mode [%default]", dest="batch", default=False )
+   parser.add_option( "-b", "--batch", help="Batch mode [%default]", dest="batch", default=True )
    (opts, args) = parser.parse_args()
  
    if opts.batch:
@@ -291,6 +292,9 @@ if __name__ == "__main__":
 
    plots_configuration, samples_configuration, input_files = ReadConfiguration( configFileName )
   
+   for ext in [ 'png', 'eps', 'C' ]:
+      mkpath( "./img/%s" % ext )   
+
    c, pad0, pad1 = MakeCanvas()
 
    for key, plot in plots_configuration.iteritems():
