@@ -112,6 +112,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     if( !isRealData ) {
    	 weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
+ 
+         if( fabs(weight_reco_level) < 1e-5 ) weight_reco_level /= fabs(weight_reco_level);
+         if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
 
          const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
          const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];

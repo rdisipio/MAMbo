@@ -233,11 +233,13 @@ def DoPlot( plot ):
     SetHistogramsStyle( histograms )
 
     a = histograms['data'].Integral("width")
-    Normalize( histograms['ttbar_ljets'], 0.9*a, "width" )
-    Normalize( histograms['singletop'],   0.1*a, "width" )
+#    Normalize( histograms['ttbar_ljets'], 0.9*a, "width" )
+#    Normalize( histograms['singletop'],   0.1*a, "width" )
+    histograms['ttbar_ljets'].Scale( iLumi )
+    histograms['singletop'].Scale( iLumi )
     Normalize( histograms['uncertainty'],     a, "width" )
 
-    hmax = 1.4 if plot.scale == PlotScale.linear else 10.
+    hmax = 1.4 if plot.scale == PlotScale.linear else 15.
     SetMaximum( histograms, 'data', hmax )
 
     histograms['data'].GetYaxis().SetTitle( plot.ytitle )
@@ -306,6 +308,8 @@ if __name__ == "__main__":
       mkpath( "./img/%s" % ext )   
 
    c, pad0, pad1 = MakeCanvas()
+
+   iLumi = 21000.
 
    for key, plot in plots_configuration.iteritems():
       DoPlot( plot )
