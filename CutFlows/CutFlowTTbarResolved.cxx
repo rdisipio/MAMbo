@@ -357,7 +357,8 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( EventData * ed, const
     double lep_E   = ed->lepton.E;
     //double lep_q   = ed->lepton.q;
     int    jet_n   = ed->jets.n;
-    int    bjet_n  = ed->bjets.n;
+    int    bjet_n  = ed->bjets.n; 
+    int    fjet_n  = ed->fjets.n;
     double ETmiss  = ed->MET.et;
     double mwt     = ed->MET.mwt;
     
@@ -371,7 +372,6 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( EventData * ed, const
     
 
     m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_n", pattern, alias[cut]) )->Fill( jet_n, weight );
-    
     for (int j = 0; j < jet_n; ++j) {
         double jet_pt  = ed->jets.pT.at(j);
         double jet_eta = ed->jets.eta.at(j);
@@ -380,12 +380,29 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( EventData * ed, const
         double jet_m   = ed->jets.m.at(j);
 
         m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_eta", pattern, alias[cut]) )->Fill( jet_eta, weight );
-        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_pt", pattern, alias[cut]) )->Fill( jet_pt / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_pt",  pattern, alias[cut]) )->Fill( jet_pt / GeV, weight );
         m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_phi", pattern, alias[cut]) )->Fill( jet_phi, weight );
-        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_E", pattern, alias[cut]) )->Fill( jet_E / GeV, weight );
-        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_m", pattern, alias[cut]) )->Fill(jet_m / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_E",   pattern, alias[cut]) )->Fill( jet_E / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_jet_m",   pattern, alias[cut]) )->Fill( jet_m / GeV, weight );
     }
-}
+
+    m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_fjet_n", pattern, alias[cut]) )->Fill( fjet_n, weight );
+    for (int j = 0; j < fjet_n; ++j) {
+        double fjet_pt  = ed->fjets.pT.at(j);
+        double fjet_eta = ed->fjets.eta.at(j);
+        double fjet_phi = ed->fjets.phi.at(j);
+        double fjet_E   = ed->fjets.E.at(j);
+        double fjet_m   = ed->fjets.m.at(j);
+
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_fjet_eta", pattern, alias[cut]) )->Fill( fjet_eta, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_fjet_pt",  pattern, alias[cut]) )->Fill( fjet_pt / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_fjet_phi", pattern, alias[cut]) )->Fill( fjet_phi, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_fjet_E",   pattern, alias[cut]) )->Fill( fjet_E / GeV, weight );
+        m_hm->GetHistogram( HelperFunctions::Replace("reco/reco_@CUT@_fjet_m",   pattern, alias[cut]) )->Fill( fjet_m / GeV, weight );
+    }
+
+   
+} 
 
 
 /////////////////////////////////////////

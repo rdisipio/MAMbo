@@ -225,23 +225,39 @@ bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
     }
    
 
-  // not needed at the moment.
-  /*
-  ed->fjets.n = GET_VALUE( fjet_n );
-  for( int i = 0 ; i < ed->fjets.n ; ++i ) {
-    ed->fjets.index.push_back( i );
+  // fat jet collection
+  size_t allfjet_n = GET_VALUE( fjet_n );
 
-    ed->fjets.pT.push_back(  m_ntuple->fjet_pt[i]  );
-    ed->fjets.eta.push_back( m_ntuple->fjet_eta[i] );
-    ed->fjets.phi.push_back( m_ntuple->fjet_phi[i] );
-    ed->fjets.E.push_back(   m_ntuple->fjet_E[i]   );
-    ed->fjets.m.push_back(   m_ntuple->fjet_m[i]   );
+  for( int i = 0 ; i < allfjet_n ; ++i ) {
+     const double fjet_pT      = GET_VALUE_ARRAY( fjet_pt, i );
+     const double fjet_eta     = GET_VALUE_ARRAY( fjet_eta, i );
+     const double fjet_phi     = GET_VALUE_ARRAY( fjet_phi, i );
+     const double fjet_E       = GET_VALUE_ARRAY( fjet_E, i );
+     const double fjet_m       = GET_VALUE_ARRAY( fjet_m, i );
+     const double fjet_d12     = GET_VALUE_ARRAY( fjet_d12, i );
+     const double fjet_dPhi_lj = GET_VALUE_ARRAY( fjet_DeltaPhi_Lap_FatJet, i );
+     const double dR_lj        = GET_VALUE_ARRAY( fjet_DeltaR_LapJet_Fatjet, i );
 
-    ed->fjets.d12.push_back( m_ntuple->fjet_d12[i] );
-    ed->fjets.dPhi_lj.push_back( m_ntuple->fjet_DeltaPhi_Lap_FatJet[i] );
-    ed->fjets.dR_lj.push_back( m_ntuple->fjet_DeltaR_LapJet_Fatjet[i] );
+     if( fjet_E <=  0. )        continue; // correctedE ?
+     if( fjet_pT <= 300.*GeV )  continue;
+     if( fjet_m  <= 100.*GeV )  continue;
+     if( fjet_d12 <= 40.*GeV )  continue;
+     if( fabs(fjet_eta) >= 2. ) continue;  
+
+     ed->fjets.n++;  
+     ed->fjets.index.push_back( i );
+
+     ed->fjets.pT.push_back(  fjet_pT  );
+     ed->fjets.eta.push_back( fjet_eta );
+     ed->fjets.phi.push_back( fjet_phi );
+     ed->fjets.E.push_back(   fjet_E   );
+     ed->fjets.m.push_back(   fjet_m   );
+
+     ed->fjets.d12.push_back(     fjet_d12     );
+     ed->fjets.dPhi_lj.push_back( fjet_dPhi_lj );
+     ed->fjets.dR_lj.push_back(   dR_lj        );
+ 
   }
-  */
 
   return success;
 }

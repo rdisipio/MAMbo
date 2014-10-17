@@ -78,7 +78,7 @@ class NtupleWrapper : public INtupleWrapper
 
       cout << "DEBUG: list of active branches from " << listFileName << endl;
 
-      ifstream input( listFileName, ios_base::in );
+      ifstream input( listFileName.c_str(), ios_base::in );
       string bName;
       while( std::getline( input, bName ) ) {
 	m_activeBranches.insert( bName );
@@ -117,6 +117,7 @@ class NtupleWrapper : public INtupleWrapper
       MAKE_OBJECT( MET, ed );
       MAKE_OBJECT( Electrons, ed );
       MAKE_OBJECT( Leptons, ed );
+      MAKE_OBJECT( Jets, ed );
 
       return ed;
     };

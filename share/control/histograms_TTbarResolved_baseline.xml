@@ -18,6 +18,14 @@
   <TH1F name="reco/reco_c0_jet_m"   title="Jet mass [GeV]"            nbins="20" xmin="0."   xmax="100." />
   <TH1F name="reco/reco_c0_jet1_pt"  title="Leading Jet p_{T} [GeV]"           nbins="200" xmin="0."   xmax="500." />
 
+  <TH1F name="reco/reco_c0_fjet_n"   title="No. of Fat Jets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="reco/reco_c0_fjet_pt"  title="Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="reco/reco_c0_fjet_eta" title="Fat Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="reco/reco_c0_fjet_phi" title="Fat Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="reco/reco_c0_fjet_E"   title="Fat Jet energy [GeV]"          nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="reco/reco_c0_fjet_m"   title="Fat Jet mass [GeV]"            nbins="20" xmin="0."   xmax="400." />
+  <TH1F name="reco/reco_c0_fjet1_pt"  title="Leading Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+
   <TH1F name="reco/reco_c0_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
   <TH1F name="reco/reco_c0_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
@@ -32,6 +40,14 @@
   <TH1F name="particle/particle_c0_jet_phi" title="Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/particle_c0_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="500." />
   <TH1F name="particle/particle_c0_jet_m"   title="Jet mass [GeV]"            nbins="20" xmin="0."   xmax="100." />
+
+  <TH1F name="particle/particle_c0_fjet_n"   title="No. of Fat Jets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="particle/particle_c0_fjet_pt"  title="Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="particle/particle_c0_fjet_eta" title="Fat Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="particle/particle_c0_fjet_phi" title="Fat Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="particle/particle_c0_fjet_E"   title="Fat Jet energy [GeV]"          nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="particle/particle_c0_fjet_m"   title="Fat Jet mass [GeV]"            nbins="20" xmin="0."   xmax="400." />
+  <TH1F name="particle/particle_c0_fjet1_pt"  title="Leading Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
 
   <TH1F name="particle/particle_c0_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
   <TH1F name="particle/particle_c0_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
@@ -50,6 +66,14 @@
   <TH1F name="reco/reco_4j1b_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="500." />
   <TH1F name="reco/reco_4j1b_jet_m"   title="Jet mass [GeV]"            nbins="20" xmin="0."    xmax="100." />
 
+  <TH1F name="reco/reco_4j1b_fjet_n"   title="No. of Fat Jets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="reco/reco_4j1b_fjet_pt"  title="Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="reco/reco_4j1b_fjet_eta" title="Fat Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="reco/reco_4j1b_fjet_phi" title="Fat Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="reco/reco_4j1b_fjet_E"   title="Fat Jet energy [GeV]"          nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="reco/reco_4j1b_fjet_m"   title="Fat Jet mass [GeV]"            nbins="20" xmin="0."   xmax="400." />
+  <TH1F name="reco/reco_4j1b_fjet1_pt"  title="Leading Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+
   <TH1F name="reco/reco_4j1b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
   <TH1F name="reco/reco_4j1b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
@@ -66,6 +90,14 @@
   <TH1F name="reco/reco_4j2b_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="500." />
   <TH1F name="reco/reco_4j2b_jet_m"   title="Jet mass [GeV]"            nbins="20" xmin="0."    xmax="100." />
 
+  <TH1F name="reco/reco_4j2b_fjet_n"   title="No. of Fat Jets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="reco/reco_4j2b_fjet_pt"  title="Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="reco/reco_4j2b_fjet_eta" title="Fat Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="reco/reco_4j2b_fjet_phi" title="Fat Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="reco/reco_4j2b_fjet_E"   title="Fat Jet energy [GeV]"          nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="reco/reco_4j2b_fjet_m"   title="Fat Jet mass [GeV]"            nbins="20" xmin="0."   xmax="400." />
+  <TH1F name="reco/reco_4j2b_fjet1_pt"  title="Leading Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+
   <TH1F name="reco/reco_4j2b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
   <TH1F name="reco/reco_4j2b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
@@ -80,6 +112,14 @@
   <TH1F name="particle/particle_4j2b_jet_phi" title="Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/particle_4j2b_jet_E"   title="Jet energy [GeV]"          nbins="200" xmin="0."   xmax="500." />
   <TH1F name="particle/particle_4j2b_jet_m"   title="Jet mass [GeV]"            nbins="20" xmin="0."    xmax="100." />
+
+  <TH1F name="particle/particle_4j2b_fjet_n"   title="No. of Fat Jets" nbins="4"  xmin="-0.5" xmax="3.5" />
+  <TH1F name="particle/particle_4j2b_fjet_pt"  title="Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="particle/particle_4j2b_fjet_eta" title="Fat Jet pseudorapidity #eta"   nbins="50" xmin="-2.5"  xmax="2.5" />
+  <TH1F name="particle/particle_4j2b_fjet_phi" title="Fat Jet azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
+  <TH1F name="particle/particle_4j2b_fjet_E"   title="Fat Jet energy [GeV]"          nbins="50" xmin="0."   xmax="1500." />
+  <TH1F name="particle/particle_4j2b_fjet_m"   title="Fat Jet mass [GeV]"            nbins="20" xmin="0."   xmax="400." />
+  <TH1F name="particle/particle_4j2b_fjet1_pt"  title="Leading Fat Jet p_{T} [GeV]"           nbins="50" xmin="0."   xmax="1500." />
 
   <TH1F name="particle/particle_4j2b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
   <TH1F name="particle/particle_4j2b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />

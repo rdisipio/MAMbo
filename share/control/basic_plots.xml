@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <plots>
+  <plot hpath="reco/reco_4j2b_jet_pt" 	       	     xtitle="AntiKt4 jet transverse momentum [GeV]"  ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/reco_4j2b_fjet_pt"               xtitle="Fat jet transverse momentum [GeV]"  ytitle="Events / GeV"  scale="log" />
   <plot hpath="reco/reco_4j2b_met_pt"                xtitle="Missing transverse energy [GeV]"  ytitle="Events / GeV"  scale="log" />
   <plot	hpath="reco/reco_4j2b_mtw"                   xtitle="W boson transverse mass [GeV]"    ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_had_m"  xtitle="Reconstructed hadronic pseudo-top mass [GeV]" ytitle="Events / GeV"  scale="linear" />
@@ -22,11 +24,11 @@
 </samples>
 <inputfiles>
   <file sample="data"         path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.data.egamma.el.histograms.root" />
-  <file sample="ttbar_ljets"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.117050.PowhegPythia_P2011C_ttbar.el.histograms.root" />
+  <file sample="ttbar_ljets"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root" />
 <!--  <file sample="ttbar_dilep"  path="" /> -->
   <file	sample="singletop"    path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.singletop.el.histograms.root" />
 <!--  <file	sample="wjets"        path="" /> -->
 <!--  <file	sample="other"        path="" /> -->
-  <file	sample="uncertainty"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.117050.PowhegPythia_P2011C_ttbar.el.histograms.root" />
+  <file	sample="uncertainty"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root" />
 </inputfiles>
 </document>

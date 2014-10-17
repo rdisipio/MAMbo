@@ -34,7 +34,7 @@ class PlotScale:
    def ToString( self, scale ):
       if scale   == self.linear: return "linear"
       elif scale == self.log:    return "log"
-      elif scale == self.bilog:  return "bi-log"
+      elif scale == self.bilog:  return "bilog"
       else:                      return "unknown"
 
 
@@ -139,6 +139,9 @@ def FetchHistograms():
            print "WARNING: invalid input file for sample", sample
            continue
        newname = "%s_%s" % ( sample, plot.hname )
+       h = input_files[sample].Get( plot.hpath )
+       if h == None:
+          print "ERROR: invalid histogram for sample", sample, "in file", input_files[sample]
        histograms[sample] = input_files[sample].Get( plot.hpath ).Clone( newname )
 
     return histograms
@@ -234,13 +237,16 @@ def DoPlot( plot ):
     Normalize( histograms['singletop'],   0.1*a, "width" )
     Normalize( histograms['uncertainty'],     a, "width" )
 
-    SetMaximum( histograms, 'data', 1.4 )
+    hmax = 1.4 if plot.scale == PlotScale.linear else 10.
+    SetMaximum( histograms, 'data', hmax )
 
     histograms['data'].GetYaxis().SetTitle( plot.ytitle )
 
     ## draw top pad
 
     pad0.cd()
+    gPad.SetLogy(False)
+    gPad.SetLogx(False)
 
     hstack = MakeStackedHistogram( histograms )
 
@@ -250,7 +256,11 @@ def DoPlot( plot ):
     histograms['uncertainty'].Draw( 'e2 same' )
     histograms['data'].Draw("e p same" )
 
-  
+    if plot.scale == PlotScale.log: gPad.SetLogy(True)
+    if plot.scale == PlotScale.bilog: 
+       gPad.SetLogy(True)
+       gPad.SetLogx(True)  
+
     lparams = {
         'xoffset' : 0.63,
         'yoffset' : 0.92,
