@@ -21,16 +21,43 @@ def Normalize( h, sf = 1.0, opt = "width" ):
 #########################################################
 
 
+def DivideByBinWidth_histogram( h ):
+    nb = h.GetNbinsX()
+    for i in range(nb):
+       y = h.GetBinContent( i+1 )
+       u = h.GetBinError( i+1 )
+       bw = h.GetBinWidth( i+1 )
+
+       h.SetBinContent( i+1, y/bw )
+       h.SetBinError( i+1, u/bw )
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+def DivideByBinWidth_graph( g ):
+    nb = g.GetN()
+    x  = Double()
+    y  = Double()
+    
+    for i in range(nb):
+        g.GetPoint( i, x, y )
+        bw  = g.GetErrorXlow(i) + g.GetErrorXhigh(i)
+        eyl = g.GetErrorYlow(i)
+        eyh = g.GetErrorYhigh(i)
+  
+        g.SetPoint( i, x, y / bw )
+        g.SetPointError( i, bw/2., bw/2., eyl/bw, eyh/bw )
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 def DivideByBinWidth( hlist ):
     for sample, h in hlist.iteritems():
-        nb = h.GetNbinsX()
-        for i in range(nb):
-           y = h.GetBinContent( i+1 )
-           u = h.GetBinError( i+1 )
-           bw = h.GetBinWidth( i+1 )
 
-           h.SetBinContent( i+1, y/bw )
-           h.SetBinError( i+1, u/bw )
+        if h.Class() in [ TH1F.Class(), TH1D.Class(), TH1I.Class() ]:
+           DivideByBinWidth_histogram( h )
+        elif h.Class() in [ TGraph.Class(), TGraphErrors.Class(), TGraphAsymmErrors.Class() ]: 
+           DivideByBinWidth_graph( h )
+        else:
+           print "ERROR: cannot divide by bin widht. Object", h.GetName(), "is of an unknown class"
 
 
 #########################################################

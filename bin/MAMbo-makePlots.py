@@ -13,6 +13,8 @@ from MAMboPlottingToolkit import *
 
 gROOT.Macro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
 gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
+gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/graph_scale.C" )
+from ROOT import ScaleGraph
 
 ####################################################
 
@@ -138,14 +140,29 @@ def FetchHistograms():
        if infile == None:
            print "WARNING: invalid input file for sample", sample
            continue
+
        newname = "%s_%s" % ( sample, plot.hname )
        h = input_files[sample].Get( plot.hpath )
        if h == None:
           print "ERROR: invalid histogram for sample", sample, "in file", input_files[sample]
-       histograms[sample] = input_files[sample].Get( plot.hpath ).Clone( newname )
+
+       histograms[sample] = h.Clone( newname )
 
     return histograms
   
+
+####################################################
+
+
+def ScaleToIntegratedLuminosity( histograms, iLumi = 1. ):
+
+   for sample in samples_configuration:
+      if samples_configuration[sample].type == SampleType.data: continue
+      if samples_configuration[sample].type == SampleType.uncertainty:
+         ScaleGraph( histograms[sample], iLumi ) 
+      else:
+         histograms[sample].Scale( iLumi )
+
 
 ####################################################
 
@@ -172,7 +189,7 @@ def SetHistogramsStyle( hlist ):
 
 
 def PrintLegend( lparams, histograms ):
-
+    # todo: font must be helvetica (42?)
     leg = MakeLegend( lparams )
 
     leg.AddEntry( histograms['data'], samples_configuration['data'].description, "lep" )
@@ -222,22 +239,17 @@ def MakeStackedHistogram( histograms ):
 ####################################################
 
 
-def DoPlot( plot ):
+def DoPlot( plot, iLumi = 1. ):
 
     print "INFO: plotting %s with %s scale" % ( plot.hname, PlotScale.ToString(plot.scale) )
 
     histograms = FetchHistograms()
 
+    ScaleToIntegratedLuminosity( histograms, iLumi )
+
     DivideByBinWidth( histograms )
 
     SetHistogramsStyle( histograms )
-
-    a = histograms['data'].Integral("width")
-#    Normalize( histograms['ttbar_ljets'], 0.9*a, "width" )
-#    Normalize( histograms['singletop'],   0.1*a, "width" )
-    histograms['ttbar_ljets'].Scale( iLumi )
-    histograms['singletop'].Scale( iLumi )
-    Normalize( histograms['uncertainty'],     a, "width" )
 
     hmax = 1.4 if plot.scale == PlotScale.linear else 15.
     SetMaximum( histograms, 'data', hmax )
@@ -295,6 +307,7 @@ if __name__ == "__main__":
    
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-b", "--batch", help="Batch mode [%default]", dest="batch", default=True )
+   parser.add_option( "-l", "--lumi",  help="Integrated luminosity [%default]", dest="ilumi", default=21000 )
    (opts, args) = parser.parse_args()
  
    if opts.batch:
@@ -309,7 +322,7 @@ if __name__ == "__main__":
 
    c, pad0, pad1 = MakeCanvas()
 
-   iLumi = 21000.
+   iLumi = float( opts.ilumi )
 
    for key, plot in plots_configuration.iteritems():
-      DoPlot( plot )
+      DoPlot( plot, iLumi )
