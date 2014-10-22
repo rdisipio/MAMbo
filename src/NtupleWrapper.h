@@ -114,10 +114,9 @@ class NtupleWrapper : public INtupleWrapper
       MAKE_OBJECT( Info, ed );
       MAKE_OBJECT( Truth, ed );    
       MAKE_OBJECT( Trigger, ed );
-      MAKE_OBJECT( MET, ed );
-      MAKE_OBJECT( Electrons, ed );
       MAKE_OBJECT( Leptons, ed );
       MAKE_OBJECT( Jets, ed );
+      MAKE_OBJECT( MET, ed );
 
       return ed;
     };

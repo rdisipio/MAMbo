@@ -121,7 +121,7 @@ public :
    Bool_t          EF_j240_a10tc_EFFS;
    Int_t           OrigNumOfEventsInFile;
    Float_t         PUweight;
-   Float_t         PUweightDe;
+   //Float_t         PUweightDe;
    Float_t         ZVxpWeight;
    Float_t         XSection;
    Float_t         KFactor;
@@ -289,7 +289,7 @@ public :
    TBranch        *b_EF_j240_a10tc_EFFS;   //!
    TBranch        *b_OrigNumOfEventsInFile;   //!
    TBranch        *b_PUweight;   //!
-   TBranch        *b_PUweightDe;   //!
+   //TBranch        *b_PUweightDe;   //!
    TBranch        *b_ZVxpWeight;   //!
    TBranch        *b_XSection;   //!
    TBranch        *b_KFactor;   //!
@@ -579,7 +579,7 @@ void TopMini::Init(TTree *tree)
    fChain->SetBranchAddress("EF_j240_a10tc_EFFS", &EF_j240_a10tc_EFFS, &b_EF_j240_a10tc_EFFS);
    fChain->SetBranchAddress("OrigNumOfEventsInFile", &OrigNumOfEventsInFile, &b_OrigNumOfEventsInFile);
    fChain->SetBranchAddress("PUweight", &PUweight, &b_PUweight);
-   fChain->SetBranchAddress("PUweightDe", &PUweightDe, &b_PUweightDe);
+   //fChain->SetBranchAddress("PUweightDe", &PUweightDe, &b_PUweightDe);
    fChain->SetBranchAddress("ZVxpWeight", &ZVxpWeight, &b_ZVxpWeight);
    fChain->SetBranchAddress("XSection", &XSection, &b_XSection);
    fChain->SetBranchAddress("KFactor", &KFactor, &b_KFactor);

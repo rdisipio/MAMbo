@@ -89,8 +89,8 @@ EventData * INtupleWrapper::NextEvent()
    try {
      m_thisEvent = MakeEvent( (++m_thisEventNumber-1) ); // must be implemented at some point downstream
    }
-   catch( ... ) {
-     printf( "ERROR: could not process event %i\n", (++m_thisEventNumber-1) );
+   catch( runtime_error & err ) {
+     printf( "ERROR: could not process event %i due to %s\n", (++m_thisEventNumber-1), err.what() );
    }
 
    if( ( m_maxEvents < 10 ) || ( m_thisEventNumber % int(m_maxEvents/10) ) == 0 ) {

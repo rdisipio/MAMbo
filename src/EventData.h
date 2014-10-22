@@ -183,6 +183,24 @@ struct EventData
     PropertyCollection_t property; // see src/Commons.h
   } truth_lepton;
 
+  struct TruthLeptons_t {
+    int     n;
+
+    array_ui pdgId;
+    array_ui status;
+    array_ui barcode;
+
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_d q;
+
+    PropertyCollection_t property;
+  } truth_leptons;
+
+
   struct TruthElectrons_t {
     int     n;
 

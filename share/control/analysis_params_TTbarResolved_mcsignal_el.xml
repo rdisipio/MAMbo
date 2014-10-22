@@ -9,5 +9,6 @@
     <param name="pTmin" value="20." />
     <param name="etaMax" value="2.5" />
     <param name="isMCSignal" value="1" />
+    <param name="isRealData" value="0" />
   </parameters>
 </analysis>

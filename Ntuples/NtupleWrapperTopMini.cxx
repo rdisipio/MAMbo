@@ -270,7 +270,6 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 {
   bool success = true;
 
-  TLorentzVector dressed_lepton;
   TLorentzVector etmiss;
   TLorentzVector top, antitop, thad, tlep, ttbar;
 
@@ -327,6 +326,9 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     }
     else if( ( apid == 11 ) || ( apid == 13 ) ) {
       // dressed FS leptons
+
+      TLorentzVector dressed_lepton;
+
       if( status != 1 ) continue;
       
       if( PhysicsHelperFunctions::IsFromHadronicDecay( i, &m_ntuple->mc_parent_index->at(i), m_ntuple->mc_pdgId ) ) continue;
@@ -344,22 +346,13 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 							    m_ntuple->mc_pdgId, m_ntuple->mc_status, m_ntuple->mc_parent_index,
 							    m_ntuple->mc_pt, m_ntuple->mc_eta, m_ntuple->mc_phi, m_ntuple->mc_m );
 
-      ed->truth_lepton.pT  = dressed_lepton.Pt();
-      ed->truth_lepton.eta = dressed_lepton.Eta();
-      ed->truth_lepton.phi = dressed_lepton.Phi();
-      ed->truth_lepton.E   = dressed_lepton.E();
-      ed->truth_lepton.m   = dressed_lepton.M();
-      ed->truth_lepton.q   = ( pid >= 0 ) ? -1 : 1;
-      ed->truth_lepton.pdgId = pid;
+      HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_leptons );
 
       if( apid == 11 ) {
 	HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_electrons );
       }
       else if( apid == 13 ) {
 	HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_muons );
-      }
-      else if( apid == 15 ) {
-	HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_taus );
       }
     }
     else if( ( apid == 12 ) || ( apid == 14 ) || ( apid == 16 ) ) {
@@ -375,15 +368,6 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 			    );
 
       etmiss += neutrino;
-
-      /*
-      ed->MET_truth.et  = neutrino.Pt();
-      ed->MET_truth.etx = neutrino.Px();
-      ed->MET_truth.ety = neutrino.Py();
-      ed->MET_truth.phi = neutrino.Phi();
-      ed->MET_truth.etz = neutrino.Pz();
-      ed->MET_truth.sumet = -1.;
-      */
     }
   } // end loop over MC particles
 
@@ -397,17 +381,49 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
       cout << "WARNING: no top quarks found in event " << ed->info.eventNumber << endl; 
   }
   
-  ed->MET_truth.et = etmiss.Pt();
+  //assert( etmiss.Pt() > 0 );
+  ed->MET_truth.et  = etmiss.Pt();
   ed->MET_truth.etx = etmiss.Px();
   ed->MET_truth.ety = etmiss.Py();
   ed->MET_truth.etz = etmiss.Pz();  
+  ed->MET_truth.phi = etmiss.Phi();
+
+  TLorentzVector dressed_lepton;
+  bool           dressed_lepton_found = false; 
+  if( m_config.channel == kElectron ) {
+     if( ed->truth_electrons.n > 0 ) {
+       dressed_lepton = HelperFunctions::MakeFourMomentum( ed->truth_electrons, 0 );
+       dressed_lepton_found = true;
+     }
+  }
+  else if( m_config.channel == kMuon ) {
+     if( ed->truth_muons.n > 0 ) {
+        dressed_lepton = HelperFunctions::MakeFourMomentum( ed->truth_muons, 0 );
+        dressed_lepton_found = true;
+     }
+  } 
+  else throw runtime_error( "TopMini wrapper: MakeEventTruth(): invalid lepton channel, cannot choose a dressed lepton" );
+
   
-  // truth M_T^W
-  //TLorentzVector Wlep = neutrino + dressed_lepton;
-  const double dPhi_lv = dressed_lepton.DeltaPhi( etmiss );
-  ed->MET_truth.mwt = sqrt( 2. * etmiss.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
-  //cout << "DEBUG: ETmiss = " << ed->MET_truth.et / GeV << " GeV ; mtw = " << ed->MET_truth.mwt / 1000. << " GeV ; lep_pT = " << dressed_lepton.Pt() /GeV << endl;
- 
+  // if there is at least one dressed lepton we can build mTW
+  if( dressed_lepton_found ) { 
+     assert( dressed_lepton.Pt() > 0. );
+
+     ed->truth_lepton.pT  = dressed_lepton.Pt();
+     ed->truth_lepton.eta = dressed_lepton.Eta();
+     ed->truth_lepton.phi = dressed_lepton.Phi();
+     ed->truth_lepton.E   = dressed_lepton.E();
+     ed->truth_lepton.m   = dressed_lepton.M();
+//  ed->truth_lepton.q   = ( pid >= 0 ) ? -1 : 1;
+//  ed->truth_lepton.pdgId = pid;
+
+     // truth M_T^W
+     const double dPhi_lv = dressed_lepton.DeltaPhi( etmiss );
+     ed->MET_truth.mwt = sqrt( 2. * etmiss.Pt() * dressed_lepton.Pt() * ( 1. - cos( dPhi_lv ) ) );
+     //cout << "DEBUG: ETmiss = " << ed->MET_truth.et / GeV << " GeV ; mtw = " << ed->MET_truth.mwt / 1000. << " GeV ; lep_pT = " << dressed_lepton.Pt() /GeV << endl;
+  }
+
+
   // truth jets (narrow)
   ed->truth_jets.n  = 0;
   ed->truth_bjets.n = 0;
@@ -453,20 +469,6 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
     }
   }
 
-  // not needed now
-  /*
-  ed->truth_fjets.n = GET_VALUE( mc_jet_AntiKt10Truth_n );
-  for( int i = 0 ; i < ed->truth_fjets.n ; ++i ) {
-
-    ed->truth_fjets.index.push_back( i );
-
-    ed->truth_fjets.pT.push_back(  m_ntuple->mc_jet_AntiKt10Truth_pt->at(i)  );
-    ed->truth_fjets.eta.push_back( m_ntuple->mc_jet_AntiKt10Truth_eta->at(i) );
-    ed->truth_fjets.phi.push_back( m_ntuple->mc_jet_AntiKt10Truth_phi->at(i) );
-    ed->truth_fjets.E.push_back(   m_ntuple->mc_jet_AntiKt10Truth_E->at(i)   );
-    ed->truth_fjets.m.push_back(   m_ntuple->mc_jet_AntiKt10Truth_m->at(i)   );
-  }
-  */
 
   bool mc_overlap = false;
   // overlap removal

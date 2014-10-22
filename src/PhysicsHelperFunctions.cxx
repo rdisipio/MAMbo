@@ -195,12 +195,14 @@ namespace PhysicsHelperFunctions {
     if( m_target == kReco ) {
       
       if( m_channel == kElectron ) {
+        if( m_p_ed->electrons.n == 0 ) throw runtime_error( "ERROR: PseudoTopReconstruction::MakeChargedLepton(): no reco electrons" );
 	l_pT  = m_p_ed->electrons.pT.at( m_lepton_index );
 	l_eta = m_p_ed->electrons.eta.at( m_lepton_index );
 	l_phi = m_p_ed->electrons.phi.at( m_lepton_index );
 	l_E   = m_p_ed->electrons.E.at( m_lepton_index );
       }
       else if( m_channel == kMuon ) {
+        if( m_p_ed->muons.n == 0 ) throw runtime_error( "ERROR: PseudoTopReconstruction::MakeChargedLepton(): no reco muons" );
 	l_pT  = m_p_ed->muons.pT.at( m_lepton_index );
 	l_eta = m_p_ed->muons.eta.at( m_lepton_index );
 	l_phi = m_p_ed->muons.phi.at( m_lepton_index );
@@ -212,12 +214,16 @@ namespace PhysicsHelperFunctions {
     }
     else {
         if( m_channel == kElectron ) {
+        if( m_p_ed->truth_electrons.n == 0 ) throw runtime_error( "ERROR: PseudoTopReconstruction::MakeChargedLepton(): no particle electrons" );
+//    cout << "DEBUG: lepton i=" << m_lepton_index << " el coll size = " << m_p_ed->truth_electrons.pT.size() << endl;
 	l_pT  = m_p_ed->truth_electrons.pT.at( m_lepton_index );
 	l_eta = m_p_ed->truth_electrons.eta.at( m_lepton_index );
 	l_phi = m_p_ed->truth_electrons.phi.at( m_lepton_index );
 	l_E   = m_p_ed->truth_electrons.E.at( m_lepton_index );
       }
       else if( m_channel == kMuon ) {
+        if( m_p_ed->truth_muons.n == 0 ) throw runtime_error( "ERROR: PseudoTopReconstruction::MakeChargedLepton(): no particle muons" );
+// cout << "DEBUG: lepton i=" << m_lepton_index << " mu coll size = " << m_p_ed->truth_electrons.pT.size() << endl;
 	l_pT  = m_p_ed->truth_muons.pT.at( m_lepton_index );
 	l_eta = m_p_ed->truth_muons.eta.at( m_lepton_index );
 	l_phi = m_p_ed->truth_muons.phi.at( m_lepton_index );
