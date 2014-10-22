@@ -57,7 +57,8 @@ def ReadConfiguration( configFileName ):
       samples_configuration[name].kfact       = float( node.attrib.get('kfact' ) )
       samples_configuration[name].genevt      = float( node.attrib.get('genevt' ) )
 
-   input_files = {}
+
+   input_files = {} 
    for node in tree.iter( "file" ):
       sample = node.attrib.get('sample')
 

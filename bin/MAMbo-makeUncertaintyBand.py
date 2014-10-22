@@ -58,7 +58,10 @@ def GatherHistograms( hname, hpath ):
 
     for sample in samples_configuration:
 
-        hsource = samples_configuration[sample].file.Get( hpath )
+        f = samples_configuration[sample].file
+        if f == None:
+            print "ERROR: invalid input file for sample", sample
+        hsource = f.Get( hpath )
 
         if hsource == None:
             print "ERORR: invalid histogram", hpath, "for sample", sample
@@ -74,7 +77,6 @@ def GatherHistograms( hname, hpath ):
 
 def CreateROOTPath( path ):
     tokens = path.split( '/' )
-    print tokens
     if len( tokens ) == 1:
         return gDirectory.GetDirectory(".")
     else:
@@ -112,7 +114,6 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
           if graph == None:
 
              newdir = CreateROOTPath( hpath )
-             gDirectory.pwd()
 
              nbins = h.GetNbinsX()
              title = h.GetTitle()
