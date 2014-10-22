@@ -124,6 +124,11 @@
   <TH1F name="particle/particle_4j2b_met_pt"  title="Missing Transverse Energy [GeV]" nbins="100" xmin="0." xmax="200." />
   <TH1F name="particle/particle_4j2b_mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]" nbins="100" xmin="0" xmax="200" />
 
+  <!-- extra pltos: m_{lb} etc. -->
+  <TH1F name="reco/reco_4j2b_mlb"           title="Reco (b,l) invariant mass [GeV]"      nbins="50" xmin="0." xmax="300." />
+  <TH1F name="particle/particle_4j2b_mlb"   title="Particle (b,l) invariant mass [GeV]"  nbins="50" xmin="0." xmax="300." />
+
+
 <!-- pseudo tops -->
 
 <!-- reco level -->
@@ -145,8 +150,9 @@
   <TH1F	name="reco/reco_4j2b_pseudottbar_reco_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="reco/reco_4j2b_pseudottbar_reco_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="reco/reco_4j2b_pseudottbar_reco_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="reco/reco_4j2b_pseudottbar_reco_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" /> 
+  <TH1F name="reco/reco_4j2b_pseudottbar_reco_m"   title="Pseudo-t#bar{t} invariant mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" /> 
   <TH1F name="reco/reco_4j2b_pseudottbar_reco_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
+
 
 <!-- particle level -->
   <TH1F name="particle/particle_4j2b_pseudotop_lep_pt"  title="Pseudo-top (leptonic) p_{T} [GeV]"           nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
@@ -167,7 +173,7 @@
   <TH1F name="particle/particle_4j2b_pseudottbar_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="particle/particle_4j2b_pseudottbar_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="particle/particle_4j2b_pseudottbar_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="particle/particle_4j2b_pseudottbar_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
+  <TH1F name="particle/particle_4j2b_pseudottbar_m"   title="Pseudo-t#bar{t} invariant mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
   <TH1F name="particle/particle_4j2b_pseudottbar_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
 
 <!-- parton level -->
@@ -187,7 +193,7 @@
   <TH1F name="parton/parton_4j2b_pseudottbar_eta" title="Pseudo-t#bar{t} pseudorapidity #eta"   nbins="25" xmin="-2.5" xmax="2.5" />
   <TH1F name="parton/parton_4j2b_pseudottbar_phi" title="Pseudo-t#bar{t} azimuthal angle #phi"  nbins="16" xmin="-3.2"   xmax="3.2" />
   <TH1F name="parton/parton_4j2b_pseudottbar_E"   title="Pseudo-t#bar{t} energy [GeV]"          nbins="20" xmin="0." xmax="1500." />
-  <TH1F name="parton/parton_4j2b_pseudottbar_m"   title="Pseudo-t#bar{t} Invariant Mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
+  <TH1F name="parton/parton_4j2b_pseudottbar_m"   title="Pseudo-t#bar{t} invariant mass [GeV]"  nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" />
   <TH1F name="parton/parton_4j2b_pseudottbar_absrap" title="Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" />
 
 
@@ -243,7 +249,7 @@
   <TH2F name="response/response_reco2particle_4j2b_pseudottbar_eta" title="Response matrix Pseudo-t#bar{t} pseudorapidity #eta"   nbinsx="25" xmin="-2.5" xmax="2.5" nbinsy="25" ymin="-2.5" ymax="2.5" />
   <TH2F name="response/response_reco2particle_4j2b_pseudottbar_phi" title="Response matrix Pseudo-t#bar{t} azimuthal angle #phi"  nbinsx="16" xmin="-3.2"   xmax="3.2" nbinsy="16" ymin="-3.2"   ymax="3.2" />
   <TH2F name="response/response_reco2particle_4j2b_pseudottbar_E"   title="Response matrix Pseudo-t#bar{t} energy [GeV]"          nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
-  <TH2F name="response/response_reco2particle_4j2b_pseudottbar_m"   title="Response matrix Pseudo-t#bar{t} Invariant Mass [GeV]" 
+  <TH2F name="response/response_reco2particle_4j2b_pseudottbar_m"   title="Response matrix Pseudo-t#bar{t} invariant mass [GeV]" 
         nbinsx="8" xedges="225,400,500,600,700,850,1000,1250,2500"
         nbinsy="8" yedges="225,400,500,600,700,850,1000,1250,2500" />
   <TH2F name="response/response_reco2particle_4j2b_pseudottbar_absrap" title="Response matrix Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|"
@@ -277,7 +283,7 @@
   <TH2F name="response/response_reco2parton_4j2b_pseudottbar_eta" title="Response matrix Pseudo-t#bar{t} pseudorapidity #eta"   nbinsx="25" xmin="-2.5" xmax="2.5" nbinsy="25" ymin="-2.5" ymax="2.5" />
   <TH2F name="response/response_reco2parton_4j2b_pseudottbar_phi" title="Response matrix Pseudo-t#bar{t} azimuthal angle #phi"  nbinsx="16" xmin="-3.2"   xmax="3.2" nbinsy="16" ymin="-3.2"   ymax="3.2" />
   <TH2F name="response/response_reco2parton_4j2b_pseudottbar_E"   title="Response matrix Pseudo-t#bar{t} energy [GeV]"          nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
-  <TH2F name="response/response_reco2parton_4j2b_pseudottbar_m"   title="Response matrix Pseudo-t#bar{t} Invariant Mass [GeV]" 
+  <TH2F name="response/response_reco2parton_4j2b_pseudottbar_m"   title="Response matrix Pseudo-t#bar{t} invariant mass [GeV]" 
         nbinsx="8" xedges="225,400,500,600,700,850,1000,1250,2500"
         nbinsy="8" yedges="225,400,500,600,700,850,1000,1250,2500" />
   <TH2F name="response/response_reco2parton_4j2b_pseudottbar_absrap" title="Response matrix Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|"
@@ -312,7 +318,7 @@
   <TH2F name="response/response_particle2parton_4j2b_pseudottbar_eta" title="Response matrix Pseudo-t#bar{t} pseudorapidity #eta"   nbinsx="25" xmin="-2.5" xmax="2.5" nbinsy="25" ymin="-2.5" ymax="2.5" />
   <TH2F name="response/response_particle2parton_4j2b_pseudottbar_phi" title="Response matrix Pseudo-t#bar{t} azimuthal angle #phi"  nbinsx="16" xmin="-3.2"   xmax="3.2" nbinsy="16" ymin="-3.2"   ymax="3.2" />
   <TH2F name="response/response_particle2parton_4j2b_pseudottbar_E"   title="Response matrix Pseudo-t#bar{t} energy [GeV]"          nbinsx="20" xmin="0." xmax="1500." nbinsy="20" ymin="0." ymax="1500." />
-  <TH2F name="response/response_particle2parton_4j2b_pseudottbar_m"   title="Response matrix Pseudo-t#bar{t} Invariant Mass [GeV]" 
+  <TH2F name="response/response_particle2parton_4j2b_pseudottbar_m"   title="Response matrix Pseudo-t#bar{t} invariant mass [GeV]" 
         nbinsx="8" xedges="225,400,500,600,700,850,1000,1250,2500"
         nbinsy="8" yedges="225,400,500,600,700,850,1000,1250,2500" />
   <TH2F name="response/response_particle2parton_4j2b_pseudottbar_absrap" title="Response matrix Pseudo-t#bar{t} abs rapidity |y_{t#bar{t}}|"

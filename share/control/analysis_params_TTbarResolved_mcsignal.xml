@@ -4,6 +4,7 @@
   <tree>physics</tree>
   <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolved</cutflow>
+  <channel>electron</channel>
   <parameters>
     <param name="pTmin" value="20." />
     <param name="etaMax" value="2.5" />

@@ -79,8 +79,14 @@ namespace PhysicsHelperFunctions {
     int Wj2_index = -1;
     int bj1_index = ( m_target == kReco ) ? m_p_ed->bjets.index.at(0) : m_p_ed->truth_bjets.index.at(0);
     int bj2_index = ( m_target == kReco ) ? m_p_ed->bjets.index.at(1) : m_p_ed->truth_bjets.index.at(1);
-    for( int j = 0 ; j < m_p_ed->jets.n ; ++j ) {
-      const int jindex = m_p_ed->jets.index.at(j);
+
+    int Njets = ( m_target == kReco ) ? m_p_ed->jets.n : m_p_ed->truth_jets.n;
+
+    for( int j = 0 ; j < Njets ; ++j ) {
+
+      const int jindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(j) : m_p_ed->truth_jets.index.at(j);
+
+      //      printf( "DEBUG:  hadW indicesL %i,  %i\n",  Wj1_index, Wj2_index );
 
       if( jindex == bj1_index ) continue;
       if( jindex == bj2_index )	continue;
@@ -96,13 +102,15 @@ namespace PhysicsHelperFunctions {
 	}
     }
 
+    //    printf( "  DEBUG: bjets = j%i, j%i ; hadW = j%i + j%i\n", bj1_index, bj2_index, Wj1_index, Wj2_index );
+
     TLorentzVector Wj1 = ( m_target == kReco ) ?
       HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj1_index ) :
       HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj1_index );
     TLorentzVector Wj2 = ( m_target == kReco ) ?
       HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj2_index ) :
       HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj2_index );
-    // printf( "DEBUG: bjets = j%i, j%i ; hadW = j%i + j%i\n", bj1_index, bj2_index, Wj1_index, Wj2_index );
+    
     m_W_had   = Wj1 + Wj2;
     m_top_had = bj_had + m_W_had;
 
@@ -148,6 +156,30 @@ namespace PhysicsHelperFunctions {
    
   }
 
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  void PseudoTopReconstruction::MakeDummyPseudotops() {
+    
+    const int top_lep_pid = 6;
+    const int top_had_pid = -6;
+    const int ttbar_pid   = 611;  // ttbar "meson"
+
+    // sooooo dummyyy...
+    m_top_lep.SetPtEtaPhiE(1000, 0, 0, 2000);
+    m_top_had.SetPtEtaPhiE(1000, 0, -3.14, 2000);
+    m_ttbar =  m_top_had + m_top_lep;
+
+    // dump to event data
+    const size_t top_lep_index = HelperFunctions::DumpParticleToEventData( m_top_lep, &m_p_ed->reco );
+    const size_t top_had_index = HelperFunctions::DumpParticleToEventData( m_top_had, &m_p_ed->reco );
+    const size_t ttbar_index   = HelperFunctions::DumpParticleToEventData( m_ttbar,   &m_p_ed->reco );
+
+    m_p_ed->reco.pdgId.push_back( top_lep_pid );
+    m_p_ed->reco.pdgId.push_back( top_had_pid );
+    m_p_ed->reco.pdgId.push_back( ttbar_pid );
+
+
+  }
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -274,10 +306,8 @@ namespace PhysicsHelperFunctions {
   }
   
 
-  void PseudoTopMatching::DoObjectsMatching( int debug )
+  bool PseudoTopMatching::DoObjectsMatching( int debug )
   {
-
-
 
       // jk:
     if (debug) {
@@ -345,7 +375,6 @@ namespace PhysicsHelperFunctions {
 	// try swapping bjets:
 	bool passedJetDR_bs = HelperFunctions::ComputeJetsDR(r_jet1, r_jet2, r_lep_bjet, r_had_bjet,
 							     p_jet1, p_jet2, p_had_bjet, p_lep_bjet);
-	
 	if (debug) {
 	  cout << "Match results: "
 	       << " std:" << passedJetDR_std
@@ -362,16 +391,19 @@ namespace PhysicsHelperFunctions {
 	allObjectsMatched = allObjectsMatched && r_lep.DeltaR( p_lep ) < 0.02;
 	if (debug) cout << "MATCHED: " <<   allObjectsMatched << endl;
 	if (debug) cout << endl;
+	
+	MatchingResult res;
+	res.DRmatched = allObjectsMatched;
+	return allObjectsMatched;
 
-	/*	
-		MatchingResult res;
-		res.DRmatched = allObjectsMatched;
-	*/
       }
       catch(...) {
 	cerr << "  ERROR in jet indices!" << endl;
       }
 
+
+      return false;
+      
 
   }
   

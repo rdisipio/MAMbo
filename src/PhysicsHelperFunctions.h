@@ -23,6 +23,7 @@ namespace PhysicsHelperFunctions {
     void SetChargedLepton( const LeptonFlavor channel = kElectron, const int index = 0 );
     void SetEventData( EventData * p_ed ) { m_p_ed = p_ed; };
     int Run( );
+    void MakeDummyPseudotops();
 
   protected:
     int MakeChargedLepton();
@@ -70,7 +71,7 @@ namespace PhysicsHelperFunctions {
       
       void SetEventData( EventData * ed );
       
-      void DoObjectsMatching( int debug = 0 );
+      bool DoObjectsMatching( int debug = 0 );
       void DoMatching( unsigned int i1, unsigned int i2, const string& label = "" );
       
       inline void SetDeltaR( double dR )               { m_dR_max = dR; };

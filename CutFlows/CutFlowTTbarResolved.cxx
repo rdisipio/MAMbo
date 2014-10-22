@@ -144,65 +144,146 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     const bool passedRecoSelection     = PassedCutFlowReco( ed );
     const bool passedParticleSelection = PassedCutFlowParticle( ed );
 
+   
+    int Debug = 0;
+    if (Debug) cout << "Passed Reco: " << passedRecoSelection << " Particle: " << passedParticleSelection << endl;
+
+    if (!passedParticleSelection && !passedRecoSelection)
+      return success;
+
+
     // Have fun with pseudo tops!
 
-    if( !passedRecoSelection ) return success;
+    if (Debug) cout << "  Here1" << endl;
 
+    // yup, needs to be here:
     m_pseudotop_reco->SetEventData(ed);
-    m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
-    
-    m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
-    m_pseudotop_reco->Run();
+    if( passedRecoSelection ) {
+     
+      m_pseudotop_reco->SetEventData(ed);
+      m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
+      
+      m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
+      m_pseudotop_reco->Run();
+      
+      // dumped indices:
+      // reco                : 0=t_lep 1=t_had 2=ttbar
+      // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
+      // truth (parton lvl)  : 6=t_lep 7=t_had 8=ttbar
+      
+      FillHistogramsPseudotopReco(ed, weight_reco_level);
 
-    // dumped indices:
-    // reco                : 0=t_lep 1=t_had 2=ttbar
-    // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
-    // truth (parton lvl)  : 6=t_lep 7=t_had 8=ttbar
+      if (Debug) cout << "  Here2" << endl;
 
-    FillHistogramsPseudotopReco(ed, weight_reco_level);
+    } else {
+      // due to pseudotop indices in ed:
+      // reco: 0,1; particle is 2,3
+      m_pseudotop_reco->MakeDummyPseudotops();
+    }
 
-    if( !isMCSignal) return success;
-    
+    if( !isMCSignal)
+      return success;
+
     // there is always a parton-level top
-    FillHistogramsPseudotopParton(ed, weight_particle_level);
-    FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
-    FillHistogramsMatchingRecoToParton(weight_reco_level);
+    if(passedRecoSelection) {
 
+      // NOW: we should think whether we want to fill this only when passed reco, I'd think so? JK
+      FillHistogramsPseudotopParton(ed, weight_particle_level);
+      if (Debug) cout << "  Here3" << endl;
+
+      // makes sense only when passed reco:
+      FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
+      FillHistogramsMatchingRecoToParton(weight_reco_level);
+      if (Debug) cout << "  Here4" << endl;
+
+    }
     
     // nb: events could NOT pass the particle-level selection
     //     but you could still be able to reconstruct pseudotops (i.e. 1l4j2b)
-    if( !passedParticleSelection ) return success;
 
-    m_pseudotop_particle->SetEventData(ed);
-    m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
-    m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
+    if (Debug) cout << "  Here4" << endl;
 
-    /*
-    try {
+    if( !passedParticleSelection ) {
+      // need to fill histograms binned in reco quantities,
+      // standing for passed: reco!part
+      // TODO!
+      if(passedRecoSelection) {
+	
+      }
+      return success;
+      
+    } else { // passed particle
+
+      if (Debug) cout << "  Here5" << endl;
+
+      m_pseudotop_particle->SetEventData(ed);
+      m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
+      m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
+
+      if (Debug) {
+	cout << "  Here6" << endl;
+	cout << "    jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
+	cout << "    truth_jet_n=" << ed->truth_jets.n << " truth_bjets_n=" << ed->truth_bjets.n << endl;
+      }
+
+      /*
+	try {
         m_pseudotop_particle->Run();
-    }
-    catch( ... ) {
+	}
+	catch( ... ) {
         cout << "WARNING: pseudotop reconstruction at particle level failed" << endl;
-        cout << "jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
+        cout << "  jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
+	cout << "  truth_jet_n=" << ed->truth_jets.n << " truth_bjets_n=" << ed->truth_bjets.n << endl;
         return success;
-    }
-    */
-    m_pseudotop_particle->Run();    
+	}
+      */
+      m_pseudotop_particle->Run();    
+      if (Debug) cout << "  Here6.5" << endl;
+      // this is redundant:      if (passedParticleSelection)
+      //      if(passedRecoSelection) // this if should be removed, but avoids crash in next line...TODO!!!
+      FillHistogramsPseudotopParticle(ed, weight_particle_level);
+      if (Debug) cout << "  Here7" << endl;
 
-    FillHistogramsPseudotopParticle(ed, weight_particle_level);
 
-    FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level);
-    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
+      // if in addition passed also reco, we can fill response matrices:
+      if(passedParticleSelection && passedRecoSelection) { // this is slightly over-ifed;-)
 
-    m_pseudotop_matching_reco2particle->SetEventData(ed);
-    m_pseudotop_matching_reco2particle->DoMatching(0, 3, "pseudotop_lep");
-    m_pseudotop_matching_reco2particle->DoMatching(1, 4, "pseudotop_had");
-    m_pseudotop_matching_reco2particle->DoMatching(2, 5, "pseudottbar");
-    // jk:
-    m_pseudotop_matching_reco2particle->DoObjectsMatching( 0 ); // debug
+	if (Debug) cout << "  Here8" << endl;
 
-    FillHistogramsMatchingRecoToParticle(weight_reco_level);
-    FillHistogramsMatchingParticleToParton(weight_particle_level);
+      
+	// rds:
+	m_pseudotop_matching_reco2particle->SetEventData(ed);
+	m_pseudotop_matching_reco2particle->DoMatching(0, 3, "pseudotop_lep");
+	m_pseudotop_matching_reco2particle->DoMatching(1, 4, "pseudotop_had");
+	m_pseudotop_matching_reco2particle->DoMatching(2, 5, "pseudottbar");
+	if (Debug) cout << "  Here8.5" << endl;
+	// matching:
+	FillHistogramsMatchingRecoToParticle(weight_reco_level);
+	FillHistogramsMatchingParticleToParton(weight_particle_level);
+
+	// jk:
+	bool passedDRMatching = m_pseudotop_matching_reco2particle->DoObjectsMatching(0); // 0 = no debug
+	if (Debug) cout << "  Here9" << endl;
+
+
+      if (Debug) cout << "  Here10" << endl;
+	// fill response matrix:
+	FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
+	FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
+      if (Debug) cout << "  Here11" << endl;
+
+
+	// fill reco && particle for the denumerator of the f_'missassign':
+	// TODO!
+
+	// TODO! fill numerator for the matching eff (f_'missassign')
+	// reco && particle && matched:
+	if(passedDRMatching) {
+
+	}
+
+      } // passed particle and reco
+    } // passed particle
 
     return success;
 }
@@ -430,7 +511,7 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( EventData * ed, c
     int    bjet_n  = ed->truth_bjets.n;
     double ETmiss  = ed->MET_truth.et;
     double mwt     = ed->MET_truth.mwt;
-    
+
     m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_@CUT@_lep_eta", pattern, alias[cut]) )->Fill( lep_eta, weight );
     m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_@CUT@_lep_pt",  pattern, alias[cut]) )->Fill( lep_pt / GeV, weight );
     m_hm->GetHistogram( HelperFunctions::Replace("particle/particle_@CUT@_lep_phi", pattern, alias[cut]) )->Fill( lep_phi, weight );
@@ -503,6 +584,12 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     m_hm->GetHistogram("reco/reco_4j2b_pseudottbar_reco_E")->Fill(ttbar_E / GeV, weight);
     m_hm->GetHistogram("reco/reco_4j2b_pseudottbar_reco_m")->Fill(ttbar_m / GeV, weight);
     m_hm->GetHistogram("reco/reco_4j2b_pseudottbar_reco_absrap")->Fill(fabs(ttbar_y), weight);
+
+    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
+    TLorentzVector lep = HelperFunctions::MakeFourMomentum(ed->lepton);
+    TLorentzVector lb = lep + lep_bjet;
+    m_hm->GetHistogram( "reco/reco_4j2b_mlb" )->Fill( lb.M()  / GeV, weight );
+
 }
 
 
@@ -550,6 +637,13 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     m_hm->GetHistogram("particle/particle_4j2b_pseudottbar_E")->Fill(ttbar_E / GeV, weight);
     m_hm->GetHistogram("particle/particle_4j2b_pseudottbar_m")->Fill(ttbar_m / GeV, weight);
     m_hm->GetHistogram("particle/particle_4j2b_pseudottbar_absrap")->Fill(fabs(ttbar_y), weight);
+
+    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
+    TLorentzVector lep = HelperFunctions::MakeFourMomentum(ed->truth_lepton);
+    TLorentzVector lb = lep + lep_bjet;
+    m_hm->GetHistogram( "particle/particle_4j2b_mlb" )->Fill( lb.M()  / GeV, weight );
+
+
 }
 
 
