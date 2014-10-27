@@ -5,7 +5,7 @@ include ../Makefile.inc
 #NTUPLES   = HWWtth
 #NTUPLES  = MiniSLBoost MiniML NTUPTOP HWWtth TopMini
 
-NTUPLES   = TopMini HWWtth
+NTUPLES   = TopMiniSLResolved TopMiniSLBoosted
 
 # do not change what follows unless you know what you're doing
 

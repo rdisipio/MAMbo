@@ -12,8 +12,6 @@
 #include "EventDumperJets.h"
 #include "EventDumperMCTruth.h"
 
-//template<class NTUPLE> class EventDumperEventInfo<TopMini>;
-
 class NtupleWrapperTopMini : public NtupleWrapper< TopMini >
 {
  public:
@@ -30,7 +28,6 @@ class NtupleWrapperTopMini : public NtupleWrapper< TopMini >
   virtual bool MakeEventTruth( EventData * ed );
 
  private:
-//   EventDumperBoostedMiniSL * m_dumper; 
    EventDumperEventInfo        * m_dumper_info;
    EventDumperLeptons          * m_dumper_leptons;
    EventDumperJets             * m_dumper_jets;

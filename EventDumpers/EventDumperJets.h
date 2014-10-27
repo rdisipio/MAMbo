@@ -3,9 +3,8 @@
 
 #include "IEventDumper.h"
 
-//#include "TopMini.h"
-
-class EventDumperJets : public IEventDumper< TopMini >
+template< class NTUPLE >
+class EventDumperJets : public IEventDumper< NTUPLE >
 {
  public:
     EventDumperJets() {};

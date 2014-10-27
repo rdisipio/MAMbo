@@ -1,14 +1,14 @@
-#define MiniSLBoost_cxx
-#include "MiniSLBoost.h"
+#define TopMiniSLResolved_cxx
+#include "TopMiniSLResolved.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 
-void MiniSLBoost::Loop()
+void TopMiniSLResolved::Loop()
 {
 //   In a ROOT session, you can do:
-//      Root > .L MiniSLBoost.C
-//      Root > MiniSLBoost t
+//      Root > .L TopMiniSLResolved.C
+//      Root > TopMiniSLResolved t
 //      Root > t.GetEntry(12); // Fill t data members with entry number 12
 //      Root > t.Show();       // Show values of entry 12
 //      Root > t.Show(16);     // Read and show values of entry 16

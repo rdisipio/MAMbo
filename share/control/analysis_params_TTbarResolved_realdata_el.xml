@@ -1,6 +1,6 @@
 <analysis name="TTbarResolved">
-  <ntuple>TopMini</ntuple>
-  <branches>control/branch_list_TopMini.txt</branches>
+  <ntuple>TopMiniSLBoosted</ntuple>
+  <branches>control/branch_list_TopMiniSLBoosted.txt</branches>
   <tree>physics</tree>
   <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolved</cutflow>

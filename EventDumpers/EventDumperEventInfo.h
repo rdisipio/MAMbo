@@ -3,7 +3,8 @@
 
 #include "IEventDumper.h"
 
-class EventDumperEventInfo : public IEventDumper< TopMini >
+template< class NTUPLE >
+class EventDumperEventInfo : public IEventDumper< NTUPLE >
 {
  public:
     EventDumperEventInfo() {};

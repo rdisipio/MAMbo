@@ -1,21 +1,21 @@
-#include "NtupleWrapperTopMini.h"
+#include "NtupleWrapperTopMiniSLBoosted.h"
 
-NtupleWrapperTopMini::NtupleWrapperTopMini( const AnalysisParams_t analysisParameters ) : 
-  NtupleWrapper< TopMini >( analysisParameters )
+NtupleWrapperTopMiniSLBoosted::NtupleWrapperTopMiniSLBoosted( const AnalysisParams_t analysisParameters ) : 
+  NtupleWrapper< TopMiniSLBoosted >( analysisParameters )
 {
-   m_dumper_info = new EventDumperEventInfo();
+   m_dumper_info = new EventDumperEventInfo<TopMiniSLBoosted>();
    m_dumper_info->SetNtuple( m_ntuple );
    m_dumper_info->SetAnalysisParameters( analysisParameters );
  
-   m_dumper_leptons = new EventDumperLeptons();
+   m_dumper_leptons = new EventDumperLeptons<TopMiniSLBoosted>();
    m_dumper_leptons->SetNtuple( m_ntuple );
    m_dumper_leptons->SetAnalysisParameters( analysisParameters );
 
-   m_dumper_jets = new EventDumperJets();
+   m_dumper_jets = new EventDumperJets<TopMiniSLBoosted>();
    m_dumper_jets->SetNtuple( m_ntuple );
    m_dumper_jets->SetAnalysisParameters( analysisParameters );
 
-   m_dumper_mctruth = new EventDumperMCTruth<TopMini>();
+   m_dumper_mctruth = new EventDumperMCTruth<TopMiniSLBoosted>();
    m_dumper_mctruth->SetNtuple( m_ntuple );
    m_dumper_mctruth->SetAnalysisParameters( analysisParameters );
 
@@ -24,7 +24,7 @@ NtupleWrapperTopMini::NtupleWrapperTopMini( const AnalysisParams_t analysisParam
 /////////////////////////////////////////////
 
 
-NtupleWrapperTopMini::~NtupleWrapperTopMini()
+NtupleWrapperTopMiniSLBoosted::~NtupleWrapperTopMiniSLBoosted()
 {
    if( m_dumper_leptons ) delete m_dumper_leptons;
    if( m_dumper_jets    ) delete m_dumper_jets;
@@ -34,7 +34,7 @@ NtupleWrapperTopMini::~NtupleWrapperTopMini()
 /////////////////////////////////////////////
 
 
-bool NtupleWrapperTopMini::MakeEventInfo( EventData * ed )
+bool NtupleWrapperTopMiniSLBoosted::MakeEventInfo( EventData * ed )
 {
   return m_dumper_info->DumpEventInfo( ed );
 }
@@ -43,7 +43,7 @@ bool NtupleWrapperTopMini::MakeEventInfo( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapperTopMini::MakeEventTrigger( EventData * ed )
+bool NtupleWrapperTopMiniSLBoosted::MakeEventTrigger( EventData * ed )
 { 
   return m_dumper_info->DumpEventTrigger( ed );
 }
@@ -52,7 +52,7 @@ bool NtupleWrapperTopMini::MakeEventTrigger( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapperTopMini::MakeEventMET( EventData * ed )
+bool NtupleWrapperTopMiniSLBoosted::MakeEventMET( EventData * ed )
 {
   return m_dumper_info->DumpEventMET( ed );
 }
@@ -61,7 +61,7 @@ bool NtupleWrapperTopMini::MakeEventMET( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapperTopMini::MakeEventLeptons( EventData * ed )
+bool NtupleWrapperTopMiniSLBoosted::MakeEventLeptons( EventData * ed )
 { 
   return m_dumper_leptons->DumpEventLeptons( ed );
 }
@@ -70,7 +70,7 @@ bool NtupleWrapperTopMini::MakeEventLeptons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
+bool NtupleWrapperTopMiniSLBoosted::MakeEventJets( EventData * ed )
 {
    return m_dumper_jets->DumpEventJets( ed );
 }
@@ -79,7 +79,7 @@ bool NtupleWrapperTopMini::MakeEventJets( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
+bool NtupleWrapperTopMiniSLBoosted::MakeEventTruth( EventData * ed )
 {
   return m_dumper_mctruth->DumpEventMCTruth( ed );
 }
@@ -89,7 +89,7 @@ bool NtupleWrapperTopMini::MakeEventTruth( EventData * ed )
 // Plugin
 
 extern "C" {
-  NtupleWrapperPluginFactory_TopMini * MakeNtupleWrapperPlugin() {
-    return new NtupleWrapperPluginFactory_TopMini( "TopMini" );
+  NtupleWrapperPluginFactory_TopMiniSLBoosted * MakeNtupleWrapperPlugin() {
+    return new NtupleWrapperPluginFactory_TopMiniSLBoosted( "TopMiniSLBoosted" );
   };
 }
