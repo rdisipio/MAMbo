@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <plots>
+  <plot hpath="reco/reco_4j2b_lep_pt"                xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/reco_4j2b_lep_eta"               xtitle="Lepton pseudorapidity"                         ytitle="Events / Pseudorapidity" scale="linear" />
   <plot hpath="reco/reco_4j2b_jet_pt" 	       	     xtitle="AntiKt4 jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/reco_4j2b_jet_eta"        	     xtitle="AntiKt4 jet pseudorapidity"   	       	       	     ytitle="Events / Pseudorapidity" scale="linear" />
   <plot hpath="reco/reco_4j2b_fjet_pt"               xtitle="Fat jet transverse momentum [GeV]"             ytitle="Events / GeV"  scale="log" />
-  <plot hpath="reco/reco_4j2b_met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/reco_4j2b_met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
   <plot	hpath="reco/reco_4j2b_mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_had_m"  xtitle="Reconstructed hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_had_pt" xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="log" />

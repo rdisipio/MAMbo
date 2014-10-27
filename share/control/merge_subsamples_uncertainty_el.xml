@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <histograms>
+  <histogram hpath="reco/reco_4j2b_lep_pt" />
+  <histogram hpath="reco/reco_4j2b_lep_eta" />
   <histogram hpath="reco/reco_4j2b_jet_pt" />
+  <histogram hpath="reco/reco_4j2b_jet_eta" />
   <histogram hpath="reco/reco_4j2b_fjet_pt" />
   <histogram hpath="reco/reco_4j2b_met_pt" />
   <histogram hpath="reco/reco_4j2b_mtw" />
@@ -12,6 +15,15 @@
   <histogram hpath="reco/reco_4j2b_pseudottbar_reco_m" />
   <histogram hpath="reco/reco_4j2b_pseudottbar_reco_pt" />
   <histogram hpath="reco/reco_4j2b_pseudottbar_reco_absrap" />
+  <histogram hpath="particle/particle_4j2b_jet_pt" />
+  <histogram hpath="particle/particle_4j2b_jet_eta" />
+  <histogram hpath="particle/particle_4j2b_pseudotop_had_m" />
+  <histogram hpath="particle/particle_4j2b_pseudotop_had_pt" />
+  <histogram hpath="particle/particle_4j2b_pseudotop_lep_m" />
+  <histogram hpath="particle/particle_4j2b_pseudotop_lep_pt" />
+  <histogram hpath="particle/particle_4j2b_pseudottbar_m" />
+  <histogram hpath="particle/particle_4j2b_pseudottbar_pt" />
+  <histogram hpath="particle/particle_4j2b_pseudottbar_absrap" />
 </histograms>
 <samples>
   <sample name="ttbar"     file="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.scaled.histograms.root" />

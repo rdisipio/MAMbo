@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 TOOLS   = PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager HEPTopTagger #HEPTopTaggerHelperFunctions
-SRCS    = INtupleWrapper.cxx ICutFlow.cxx $(TOOLS:=.cxx) 
+SRCS    = INtupleWrapper.cxx ICutFlow.cxx $(TOOLS:=.cxx)
 OBJS    = ${SRCS:.cxx=.o}
 
 SOLIB   = lib$(PROJECT).so
