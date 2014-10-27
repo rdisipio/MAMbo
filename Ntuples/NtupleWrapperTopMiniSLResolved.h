@@ -5,6 +5,13 @@
 
 #include "TopMiniSLResolved.h"
 
+#include "EventDumperEventInfo.h"
+#include "EventDumperLeptons.h"
+#include "EventDumperJets.h"
+#include "EventDumperMCTruth.h"
+
+#define DUMP_RESOLVED
+
 class NtupleWrapperTopMiniSLResolved : public NtupleWrapper< TopMiniSLResolved > 
 {
  public:
@@ -20,6 +27,12 @@ class NtupleWrapperTopMiniSLResolved : public NtupleWrapper< TopMiniSLResolved >
   virtual bool MakeEventMuons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
   virtual bool MakeEventTruth( EventData * ed );
+
+ private:
+   EventDumperEventInfo<TopMiniSLResolved>   * m_dumper_info;
+   EventDumperLeptons<TopMiniSLResolved>     * m_dumper_leptons;
+   EventDumperJets<TopMiniSLResolved>        * m_dumper_jets;
+//   EventDumperMCTruth<TopMiniSLResolved>     * m_dumper_mctruth;
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperTopMiniSLResolved > NtupleWrapperPluginFactory_TopMiniSLResolved;

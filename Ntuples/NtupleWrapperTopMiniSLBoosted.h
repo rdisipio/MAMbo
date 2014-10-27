@@ -12,6 +12,8 @@
 #include "EventDumperJets.h"
 #include "EventDumperMCTruth.h"
 
+#define DUMP_FATJETS
+
 class NtupleWrapperTopMiniSLBoosted : public NtupleWrapper< TopMiniSLBoosted >
 {
  public:

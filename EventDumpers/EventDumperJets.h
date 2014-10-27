@@ -81,6 +81,7 @@ class EventDumperJets : public IEventDumper< NTUPLE >
     }
 
   // fat jet collection
+  #ifdef DUMP_FATJETS
   size_t allfjet_n = GET_VALUE( fjet_n );
 
   for( int i = 0 ; i < allfjet_n ; ++i ) {
@@ -113,6 +114,7 @@ class EventDumperJets : public IEventDumper< NTUPLE >
      ed->fjets.dR_lj.push_back(   dR_lj        );
 
   }
+  #endif
 
   return success;
 

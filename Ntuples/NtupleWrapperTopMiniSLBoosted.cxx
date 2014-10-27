@@ -26,6 +26,7 @@ NtupleWrapperTopMiniSLBoosted::NtupleWrapperTopMiniSLBoosted( const AnalysisPara
 
 NtupleWrapperTopMiniSLBoosted::~NtupleWrapperTopMiniSLBoosted()
 {
+   if( m_dumper_info    ) delete m_dumper_info;
    if( m_dumper_leptons ) delete m_dumper_leptons;
    if( m_dumper_jets    ) delete m_dumper_jets;
    if( m_dumper_mctruth ) delete m_dumper_mctruth;

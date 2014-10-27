@@ -30,7 +30,7 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
   ed->electrons.property["el_cl_eta"].push_back( GET_VALUE( el_cl_eta ) );
   ed->electrons.property["eptcone30"].push_back( GET_VALUE( eptcone30 ) );
   ed->electrons.property["eetcone20"].push_back( GET_VALUE( eetcone20 ) );
-  ed->electrons.property["eminiIso10_4"].push_back( GET_VALUE( m_eminiIso10_4 ) );
+//  ed->electrons.property["eminiIso10_4"].push_back( GET_VALUE( m_eminiIso10_4 ) );
 
 
   // Muons
