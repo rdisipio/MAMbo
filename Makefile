@@ -31,7 +31,6 @@ clean:
 	@cd src      ; $(MAKE) $(MFLAGS) clean
 	@cd Ntuples  ; $(MAKE) $(MFLAGS) clean
 	@cd CutFlows ; $(MAKE) $(MFLAGS) clean
-	@cd EventDumpers ; $(MAKE) $(MFLAGS) clean
 
 force_look:
 	@true

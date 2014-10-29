@@ -7,10 +7,14 @@ template< class NTUPLE >
 class EventDumperMCTruth : public IEventDumper<NTUPLE>
 {
  public:
-    EventDumperMCTruth() {};
+    EventDumperMCTruth() : m_truth_ntuple(NULL) {};
     virtual ~EventDumperMCTruth() {};
 
  public: 
+    virtual void SetTruthNtuple( NTUPLE * ntuple ) { 
+         m_truth_ntuple = ntuple; 
+    };
+
     virtual bool DumpEventInfo( EventData * ed ) {};
     virtual bool DumpEventTrigger( EventData * ed ) {};
     virtual bool DumpEventMET( EventData * ed ) {};
@@ -19,6 +23,8 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
  
     virtual bool DumpEventMCTruth( EventData * ed ) 
     { 
+       if( m_truth_ntuple == NULL ) this->m_truth_ntuple = this->m_ntuple;
+
   bool success = true;
 
   TLorentzVector etmiss;
@@ -29,27 +35,29 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
 
   int ntops = 0;
 
-  for( int i = 0 ; i < this->m_ntuple->mc_n ; ++i ) {
-    const int barcode = this->m_ntuple->mc_barcode->at(i);
-    const int pid     = this->m_ntuple->mc_pdgId->at(i);
+  for( int i = 0 ; i < this->m_truth_ntuple->mc_n ; ++i ) {
+    const int barcode = this->m_truth_ntuple->mc_barcode->at(i);
+    const int pid     = this->m_truth_ntuple->mc_pdgId->at(i);
     const int apid    = abs(pid);
-    const int status  = this->m_ntuple->mc_status->at(i);
+    const int status  = this->m_truth_ntuple->mc_status->at(i);
     const double q    = ( pid >= 0 ) ? 1 : -1;
+
+    if( barcode > 2e5 ) continue; //skip GEANT particles
 
     if( apid == 6 ) {
 /*
-      printf( "INFO: branch mc_pt %i for event %i\n", m_ntuple->mc_pt, m_ntuple->eventNumber );
-      if( !m_ntuple->mc_pt ) {
-          printf( "ERROR: branch mc_pt %i for event %i\n", m_ntuple->mc_pt, m_ntuple->eventNumber );
-          TChain * ch = (TChain*)m_ntuple->fChain;
+      printf( "INFO: branch mc_pt %i for event %i\n", m_truth_ntuple->mc_pt, m_truth_ntuple->eventNumber );
+      if( !m_truth_ntuple->mc_pt ) {
+          printf( "ERROR: branch mc_pt %i for event %i\n", m_truth_ntuple->mc_pt, m_truth_ntuple->eventNumber );
+          TChain * ch = (TChain*)m_truth_ntuple->fChain;
           printf( "ERROR: file name: %s\n", ch->GetFile()->GetName() );
           throw runtime_error( "mc pt not allocated\n" );
       }
 */
-      const double t_pT  = this->m_ntuple->mc_pt->at(i);
-      const double t_eta = this->m_ntuple->mc_eta->at(i);
-      const double t_phi = this->m_ntuple->mc_phi->at(i);
-      const double t_m   = this->m_ntuple->mc_m->at(i);
+      const double t_pT  = this->m_truth_ntuple->mc_pt->at(i);
+      const double t_eta = this->m_truth_ntuple->mc_eta->at(i);
+      const double t_phi = this->m_truth_ntuple->mc_phi->at(i);
+      const double t_m   = this->m_truth_ntuple->mc_m->at(i);
       const double t_pz  = t_pT * sinh( t_eta );
       const double t_E   = sqrt( t_pT*t_pT + t_pz*t_pz + t_m*t_m );
 
@@ -60,7 +68,7 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
       HelperFunctions::DumpTruthParticleToEventData( tquark, pid, status, barcode, q, &ed->mctruth );
 
       const PhysicsHelperFunctions::TOP_QUARK_DECAY_CLASS topdecay =
-        PhysicsHelperFunctions::ClassifyTopDecay( i, this->m_ntuple->mc_child_index, this->m_ntuple->mc_pdgId );
+        PhysicsHelperFunctions::ClassifyTopDecay( i, this->m_truth_ntuple->mc_child_index, this->m_truth_ntuple->mc_pdgId );
       const bool isHadronic = ( topdecay == PhysicsHelperFunctions::kTopDecayHadronic );
       ed->mctruth.property["isHadronic"].push_back( isHadronic );
 
@@ -81,20 +89,20 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
 
       if( status != 1 ) continue;
 
-      if( PhysicsHelperFunctions::IsFromHadronicDecay( i, &this->m_ntuple->mc_parent_index->at(i), this->m_ntuple->mc_pdgId ) ) continue;
+      if( PhysicsHelperFunctions::IsFromHadronicDecay( i, &this->m_truth_ntuple->mc_parent_index->at(i), this->m_truth_ntuple->mc_pdgId ) ) continue;
 
       TLorentzVector naked_lepton;
       naked_lepton.SetPtEtaPhiM(
-                                  this->m_ntuple->mc_pt->at(i),
-                                  this->m_ntuple->mc_eta->at(i),
-                                  this->m_ntuple->mc_phi->at(i),
-                                  this->m_ntuple->mc_m->at(i)
+                                  this->m_truth_ntuple->mc_pt->at(i),
+                                  this->m_truth_ntuple->mc_eta->at(i),
+                                  this->m_truth_ntuple->mc_phi->at(i),
+                                  this->m_truth_ntuple->mc_m->at(i)
                            );
 
       // now dress the lepton with a cone of fixed aperture 0.1
-      dressed_lepton = PhysicsHelperFunctions::MakeDressedLepton( naked_lepton, 0.1, this->m_ntuple->mc_n,
-                                                            this->m_ntuple->mc_pdgId, this->m_ntuple->mc_status, this->m_ntuple->mc_parent_index,
-                                                            this->m_ntuple->mc_pt, this->m_ntuple->mc_eta, this->m_ntuple->mc_phi, this->m_ntuple->mc_m );
+      dressed_lepton = PhysicsHelperFunctions::MakeDressedLepton( naked_lepton, 0.1, this->m_truth_ntuple->mc_n,
+                                                            this->m_truth_ntuple->mc_pdgId, this->m_truth_ntuple->mc_status, this->m_truth_ntuple->mc_parent_index,
+                                                            this->m_truth_ntuple->mc_pt, this->m_truth_ntuple->mc_eta, this->m_truth_ntuple->mc_phi, this->m_truth_ntuple->mc_m );
 
       HelperFunctions::DumpTruthParticleToEventData( dressed_lepton, pid, status, barcode, q, &ed->truth_leptons );
 
@@ -111,9 +119,9 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
 
       TLorentzVector neutrino;
       neutrino.SetPtEtaPhiM(
-                            this->m_ntuple->mc_pt->at(i),
-                            this->m_ntuple->mc_eta->at(i),
-                            this->m_ntuple->mc_phi->at(i),
+                            this->m_truth_ntuple->mc_pt->at(i),
+                            this->m_truth_ntuple->mc_eta->at(i),
+                            this->m_truth_ntuple->mc_phi->at(i),
                             0.
                             );
 
@@ -175,16 +183,16 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
   // truth jets (narrow)
   ed->truth_jets.n  = 0;
   ed->truth_bjets.n = 0;
-  const int alljets_n = this->m_ntuple->mc_jet_AntiKt4Truth_n;
+  const int alljets_n = this->m_truth_ntuple->mc_jet_AntiKt4Truth_n;
   int goodj_i = 0;
   int goodbj_i = 0;
   for( int i = 0 ; i < alljets_n ; ++i ) {
 
-    const double jet_pt  = this->m_ntuple->mc_jet_AntiKt4Truth_pt->at(i);
-    const double jet_eta = this->m_ntuple->mc_jet_AntiKt4Truth_eta->at(i);
-    const double jet_phi = this->m_ntuple->mc_jet_AntiKt4Truth_phi->at(i);
-    const double jet_E   = this->m_ntuple->mc_jet_AntiKt4Truth_E->at(i);
-    const double jet_m   = this->m_ntuple->mc_jet_AntiKt4Truth_m->at(i);
+    const double jet_pt  = this->m_truth_ntuple->mc_jet_AntiKt4Truth_pt->at(i);
+    const double jet_eta = this->m_truth_ntuple->mc_jet_AntiKt4Truth_eta->at(i);
+    const double jet_phi = this->m_truth_ntuple->mc_jet_AntiKt4Truth_phi->at(i);
+    const double jet_E   = this->m_truth_ntuple->mc_jet_AntiKt4Truth_E->at(i);
+    const double jet_m   = this->m_truth_ntuple->mc_jet_AntiKt4Truth_m->at(i);
 
     if( jet_pt < 25 * GeV ) continue;
     if( fabs(jet_eta) > 2.5 ) continue;
@@ -200,7 +208,7 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
 
     goodj_i++;
 
-    const JetTag tag = (JetTag)this->m_ntuple->mc_jet_AntiKt4Truth_flavor_truth_trueflav->at(i);
+    const JetTag tag = (JetTag)this->m_truth_ntuple->mc_jet_AntiKt4Truth_flavor_truth_trueflav->at(i);
     ed->truth_jets.tag.push_back( tag  );
 
     if( tag == kBTagged ) {
@@ -250,7 +258,7 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
     }
 
  protected:
-
+      NTUPLE * m_truth_ntuple;     
 };
 
 

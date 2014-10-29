@@ -32,6 +32,23 @@ struct EventData
     PropertyCollection_t property; // see src/Commons.h
   } lepton;
 
+
+  struct Leptons_t {
+    int     n;
+
+    array_ui pdgId;
+
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    array_d q;
+
+    PropertyCollection_t property;
+  } leptons;
+
+
   struct Electrons_t { 
     int     n;
 

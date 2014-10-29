@@ -295,7 +295,7 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     int    bjet_n = ed->bjets.n;
     double ETmiss = ed->MET.et;
     double mwt    = ed->MET.mwt;
-    double lep_pt = ed->lepton.pT;
+    double lep_pt = ( ed->leptons.n > 0 ) ? ed->leptons.pT.at(0) : 0.;
     
     const double weight = ed->property["weight_reco_level"];
     
@@ -374,7 +374,7 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     const int    bjet_n = ed->truth_bjets.n;
     const double ETmiss = ed->MET_truth.et;
     const double mwt    = ed->MET_truth.mwt;
-    const double lep_pt = ed->truth_lepton.pT;
+    const double lep_pt = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.pT.at(0) : 0.;
    
       
   
@@ -438,11 +438,11 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( EventData * ed, const
         "c0", "trig", "pvtx", "lept", "met30", "mtw35", "2j", "4j", "4j1b", "4j2b"
     };
     
-    double lep_pt  = ed->lepton.pT;
-    double lep_eta = ed->lepton.eta;
-    double lep_phi = ed->lepton.phi;
-    double lep_E   = ed->lepton.E;
-    //double lep_q   = ed->lepton.q;
+    double lep_pt  = ed->leptons.pT.at(0);
+    double lep_eta = ed->leptons.eta.at(0);
+    double lep_phi = ed->leptons.phi.at(0);
+    double lep_E   = ed->leptons.E.at(0);
+    //double lep_q   = ed->leptons.q.at(0);
     int    jet_n   = ed->jets.n;
     int    bjet_n  = ed->bjets.n; 
     int    fjet_n  = ed->fjets.n;
@@ -505,11 +505,11 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( EventData * ed, c
     
     const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) - 1;
     
-    double lep_pt  = ed->truth_lepton.pT;
-    double lep_eta = ed->truth_lepton.eta;
-    double lep_phi = ed->truth_lepton.phi;
-    double lep_E   = ed->truth_lepton.E;
-    double lep_q   = ed->truth_lepton.q;
+    double lep_pt  = ( ed->truth_leptons.n > 0 ) ? ed->truth_leptons.pT.at(0)  : -1.;
+    double lep_eta = ( ed->truth_leptons.n > 0 ) ? ed->truth_leptons.eta.at(0) : 100000;
+    double lep_phi = ( ed->truth_leptons.n > 0 ) ? ed->truth_leptons.phi.at(0) : 100000;
+    double lep_E   = ( ed->truth_leptons.n > 0 ) ? ed->truth_leptons.E.at(0)   : -1.;
+    double lep_q   = ( ed->truth_leptons.n > 0 ) ? ed->truth_leptons.q.at(0)   : 100000;
     int    jet_n   = ed->truth_jets.n;
     int    bjet_n  = ed->truth_bjets.n;
     double ETmiss  = ed->MET_truth.et;
@@ -589,7 +589,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     m_hm->GetHistogram("reco/reco_4j2b_pseudottbar_reco_absrap")->Fill(fabs(ttbar_y), weight);
 
     TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
-    TLorentzVector lep = HelperFunctions::MakeFourMomentum(ed->lepton);
+    TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->leptons, 0 );
     TLorentzVector lb = lep + lep_bjet;
     m_hm->GetHistogram( "reco/reco_4j2b_mlb" )->Fill( lb.M()  / GeV, weight );
 
@@ -642,7 +642,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     m_hm->GetHistogram("particle/particle_4j2b_pseudottbar_absrap")->Fill(fabs(ttbar_y), weight);
 
     TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
-    TLorentzVector lep = HelperFunctions::MakeFourMomentum(ed->truth_lepton);
+    TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );
     TLorentzVector lb = lep + lep_bjet;
     m_hm->GetHistogram( "particle/particle_4j2b_mlb" )->Fill( lb.M()  / GeV, weight );
 

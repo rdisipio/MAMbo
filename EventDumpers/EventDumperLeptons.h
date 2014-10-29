@@ -15,6 +15,15 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
     { 
         bool success = true;
 
+  // All leptons
+  ed->leptons.n = 1;
+  ed->leptons.pT.push_back( GET_VALUE( lep_pt ) );
+  ed->leptons.eta.push_back( GET_VALUE( lep_eta ) );
+  ed->leptons.phi.push_back( GET_VALUE( lep_phi ) );
+  ed->leptons.E.push_back( GET_VALUE( lep_E ) );
+  ed->leptons.q.push_back( GET_VALUE( lep_charge ) );
+
+
   // Electrons
   ed->electrons.n = 1;
   ed->electrons.pT.push_back( GET_VALUE( lep_pt ) );
