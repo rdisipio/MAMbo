@@ -10,12 +10,12 @@ CutFlowTTbarResolved::CutFlowTTbarResolved() {
 }
 
 CutFlowTTbarResolved::~CutFlowTTbarResolved() {
-    delete m_pseudotop_reco;
-    delete m_pseudotop_particle;
+    SAFE_DELETE( m_pseudotop_reco )
+    SAFE_DELETE( m_pseudotop_particle )
     
-    delete m_pseudotop_matching_reco2particle;
-    delete m_pseudotop_matching_reco2parton;
-    delete m_pseudotop_matching_particle2parton;
+    SAFE_DELETE( m_pseudotop_matching_reco2particle )
+    SAFE_DELETE( m_pseudotop_matching_reco2parton )
+    SAFE_DELETE( m_pseudotop_matching_particle2parton )
 }
 
 
@@ -24,21 +24,24 @@ CutFlowTTbarResolved::~CutFlowTTbarResolved() {
 bool CutFlowTTbarResolved::Initialize() {
     bool success = true;
 
-    // AddChannel( "EL" );
-    // AddCounter( "EL", "reco_weighted", 3 );
-    // AddCounter( "EL", "reco_unweight", 3 );
-
-    // SetCutName( "EL", "reco_weighted", 0, "AllEvents" );
-    // SetCutName( "EL", "reco_weighted", 1, "Trigger" );
-    // SetCutName( "EL", "reco_weighted", 2, "Prim. Vtx" );
-    // SetCutName( "EL", "reco_weighted", 3, "single electron" );   
+//    int isMCSignal = (int) m_config->custom_params["isMCSignal"];
+    int isRealData = (int) m_config->custom_params["isRealData"];
 
     AddChannel("LPLUSJETS");
-    AddCounterName("LPLUSJETS", "reco_weighted", 9);
-    AddCounterName("LPLUSJETS", "reco_unweight", 9);
-    AddCounterName("LPLUSJETS", "particle_weighted", 9);
-    AddCounterName("LPLUSJETS", "particle_unweight", 9);
 
+    AddCounterName("LPLUSJETS", "reco_unweight", 9);
+    SetCutName("LPLUSJETS", "reco_unweight", 0, "All Events");
+    SetCutName("LPLUSJETS", "reco_unweight", 1, "Trigger");
+    SetCutName("LPLUSJETS", "reco_unweight", 2, "Prim. Vtx");
+    SetCutName("LPLUSJETS", "reco_unweight", 3, "SingleLepton");
+    SetCutName("LPLUSJETS", "reco_unweight", 4, "ETmiss > 30 GeV");
+    SetCutName("LPLUSJETS", "reco_unweight", 5, "mTW > 35 GeV");
+    SetCutName("LPLUSJETS", "reco_unweight", 6, "NJets >= 2");
+    SetCutName("LPLUSJETS", "reco_unweight", 7, "NJets >= 4");
+    SetCutName("LPLUSJETS", "reco_unweight", 8, "Nbtags >= 1");
+    SetCutName("LPLUSJETS", "reco_unweight", 9, "Nbtags >= 2");
+
+    AddCounterName("LPLUSJETS", "reco_weighted", 9);
     SetCutName("LPLUSJETS", "reco_weighted", 0, "All Events");
     SetCutName("LPLUSJETS", "reco_weighted", 1, "Trigger");
     SetCutName("LPLUSJETS", "reco_weighted", 2, "Prim. Vtx");
@@ -50,17 +53,21 @@ bool CutFlowTTbarResolved::Initialize() {
     SetCutName("LPLUSJETS", "reco_weighted", 8, "Nbtags >= 1");
     SetCutName("LPLUSJETS", "reco_weighted", 9, "Nbtags >= 2");
 
-    SetCutName("LPLUSJETS", "reco_unweight", 0, "All Events");
-    SetCutName("LPLUSJETS", "reco_unweight", 1, "Trigger");
-    SetCutName("LPLUSJETS", "reco_unweight", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "reco_unweight", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "reco_unweight", 4, "ETmiss > 30 GeV");
-    SetCutName("LPLUSJETS", "reco_unweight", 5, "mTW > 35 GeV");
-    SetCutName("LPLUSJETS", "reco_unweight", 6, "NJets >= 2");
-    SetCutName("LPLUSJETS", "reco_unweight", 7, "NJets >= 4");
-    SetCutName("LPLUSJETS", "reco_unweight", 8, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "reco_unweight", 9, "Nbtags >= 2");
-    
+    if( isRealData ) return success;
+
+    AddCounterName("LPLUSJETS", "particle_unweight", 9);
+    SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events");
+    SetCutName("LPLUSJETS", "particle_unweight", 1, "Trigger");
+    SetCutName("LPLUSJETS", "particle_unweight", 2, "Prim. Vtx");
+    SetCutName("LPLUSJETS", "particle_unweight", 3, "SingleLepton");
+    SetCutName("LPLUSJETS", "particle_unweight", 4, "ETmiss > 30 GeV");
+    SetCutName("LPLUSJETS", "particle_unweight", 5, "mTW > 35 GeV");
+    SetCutName("LPLUSJETS", "particle_unweight", 6, "NJets >= 2");
+    SetCutName("LPLUSJETS", "particle_unweight", 7, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_unweight", 8, "Nbtags >= 1");
+    SetCutName("LPLUSJETS", "particle_unweight", 9, "Nbtags >= 2");
+
+    AddCounterName("LPLUSJETS", "particle_weighted", 9);    
     SetCutName("LPLUSJETS", "particle_weighted", 0, "All Events");
     SetCutName("LPLUSJETS", "particle_weighted", 1, "Trigger");
     SetCutName("LPLUSJETS", "particle_weighted", 2, "Prim. Vtx");
@@ -72,16 +79,6 @@ bool CutFlowTTbarResolved::Initialize() {
     SetCutName("LPLUSJETS", "particle_weighted", 8, "Nbtags >= 1");
     SetCutName("LPLUSJETS", "particle_weighted", 9, "Nbtags >= 2");
 
-    SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events");
-    SetCutName("LPLUSJETS", "particle_unweight", 1, "Trigger");
-    SetCutName("LPLUSJETS", "particle_unweight", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "particle_unweight", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "particle_unweight", 4, "ETmiss > 30 GeV");
-    SetCutName("LPLUSJETS", "particle_unweight", 5, "mTW > 35 GeV");
-    SetCutName("LPLUSJETS", "particle_unweight", 6, "NJets >= 2");
-    SetCutName("LPLUSJETS", "particle_unweight", 7, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_unweight", 8, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_unweight", 9, "Nbtags >= 2");
 
     return success;
 }
@@ -142,7 +139,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     // Apply selections and fill control histograms (pt, eta, etc..)
     const bool passedRecoSelection     = PassedCutFlowReco( ed );
-    const bool passedParticleSelection = PassedCutFlowParticle( ed );
+    const bool passedParticleSelection = isRealData ? false : PassedCutFlowParticle( ed );
 
    
     int Debug = 0;
