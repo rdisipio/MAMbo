@@ -34,9 +34,9 @@
   <sample name="singletop_Wtchannel"        dsid="110140" xsec="20.461" kfact="1.0933" genevt="999692"  generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="singletop_tchannel_top"     path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110090.singletop.el.histograms.root" />
-  <file	sample="singletop_tchannel_antitop" path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110091.singletop.el.histograms.root" />
-  <file sample="singletop_schannel"         path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110119.singletop.el.histograms.root" />
-  <file sample="singletop_Wtchannel"        path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110140.singletop.el.histograms.root" />
+  <file sample="singletop_tchannel_top"     path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110090.singletop.mu.histograms.root" />
+  <file	sample="singletop_tchannel_antitop" path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110091.singletop.mu.histograms.root" />
+  <file sample="singletop_schannel"         path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110119.singletop.mu.histograms.root" />
+  <file sample="singletop_Wtchannel"        path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.110140.singletop.mu.histograms.root" />
 </files>
 </document>

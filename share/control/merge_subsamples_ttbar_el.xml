@@ -10,8 +10,10 @@
   <histogram hpath="reco/reco_4j2b_mtw" />
   <histogram hpath="reco/reco_4j2b_pseudotop_reco_had_m" />
   <histogram hpath="reco/reco_4j2b_pseudotop_reco_had_pt" />
+  <histogram hpath="reco/reco_4j2b_pseudotop_reco_had_absrap" />
   <histogram hpath="reco/reco_4j2b_pseudotop_reco_lep_m" />
   <histogram hpath="reco/reco_4j2b_pseudotop_reco_lep_pt" />
+  <histogram hpath="reco/reco_4j2b_pseudotop_reco_lep_absrap" />
   <histogram hpath="reco/reco_4j2b_pseudottbar_reco_m" />  
   <histogram hpath="reco/reco_4j2b_pseudottbar_reco_pt" />
   <histogram hpath="reco/reco_4j2b_pseudottbar_reco_absrap" />

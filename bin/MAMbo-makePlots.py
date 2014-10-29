@@ -46,7 +46,7 @@ class PlotWrapper:
    xtitle = ""
    ytitle = ""
    scale  = PlotScale.linear
-
+   tag    = ""
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -91,16 +91,21 @@ def ReadConfiguration( configFileName ):
 
    plots_configuration = {}
 
+   for node in tree.iter( "plots" ):
+     plot_tag    = node.attrib.get('tag')
+     channel_tag = node.attrib.get('latex')
+
    for node in tree.iter( "plot" ):
 
       hpath = node.attrib.get('hpath')
-      hname = hpath.split('/')[-1]   
+      hname = plot_tag + "_" + hpath.split('/')[-1]   
 
       plots_configuration[hname] = PlotWrapper()
       plots_configuration[hname].hname  = hname
       plots_configuration[hname].hpath  = hpath
       plots_configuration[hname].xtitle = node.attrib.get('xtitle')
       plots_configuration[hname].ytitle = node.attrib.get('ytitle')
+      plots_configuration[hname].tag    = channel_tag
 
       scale  = node.attrib.get('scale')
       plots_configuration[hname].scale  = PlotScale.ToScale( scale )
@@ -117,6 +122,8 @@ def ReadConfiguration( configFileName ):
       samples_configuration[name].color       = int( node.attrib.get('color') )
       samples_configuration[name].fillstyle   = int( node.attrib.get('fillstyle') )
       samples_configuration[name].linewidth   = int( node.attrib.get('linewidth') )
+
+      if samples_configuration[name].type == SampleType.data: samples_configuration[name].description += " " + channel_tag
       i += 1
 
    input_files = {}
@@ -283,7 +290,7 @@ def DoPlot( plot, iLumi = 1. ):
         }
     legend = PrintLegend( lparams, histograms )
 
-    MakeATLASLabel( 0.18, 0.87, "Internal", "21", "8" )
+    MakeATLASLabel( 0.18, 0.87, "Internal", "20.3", "8" )
 
     ## make data/prediction ratio
 
@@ -307,7 +314,7 @@ if __name__ == "__main__":
    
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-b", "--batch", help="Batch mode [%default]", dest="batch", default=True )
-   parser.add_option( "-l", "--lumi",  help="Integrated luminosity [%default]", dest="ilumi", default=21000 )
+   parser.add_option( "-l", "--lumi",  help="Integrated luminosity [%default]", dest="ilumi", default=20300 )
    (opts, args) = parser.parse_args()
  
    if opts.batch:

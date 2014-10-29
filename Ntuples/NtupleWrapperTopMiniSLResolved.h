@@ -23,8 +23,7 @@ class NtupleWrapperTopMiniSLResolved : public NtupleWrapper< TopMiniSLResolved >
   virtual bool MakeEventInfo( EventData * ed );
   virtual bool MakeEventTrigger( EventData * ed );
   virtual bool MakeEventMET( EventData * ed );
-  virtual bool MakeEventElectrons( EventData * ed );
-  virtual bool MakeEventMuons( EventData * ed );
+  virtual bool MakeEventLeptons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
   virtual bool MakeEventTruth( EventData * ed );
 

@@ -53,6 +53,7 @@ typedef map< string, vector< double > > PropertyCollection_t;
 
 /////////////////////////////////////////////
 
+#define SAFE_DELETE(X) if(X) delete (X);
 
 #define GET_VALUE(X) this->m_ntuple-> X
 #define GET_VALUE_VECTOR(X,N) this->m_ntuple-> X ->at( N )
