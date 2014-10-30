@@ -30,7 +30,7 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
   TLorentzVector etmiss;
   TLorentzVector top, antitop, thad, tlep, ttbar;
 
-  int isMCSignal = (int)( this->m_config.custom_params["isMCSignal"] );
+  unsigned long isMCSignal = this->m_config.custom_params_flag["isMCSignal"];
   if( !isMCSignal ) return success;
 
   int ntops = 0;

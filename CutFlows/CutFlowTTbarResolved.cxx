@@ -25,7 +25,7 @@ bool CutFlowTTbarResolved::Initialize() {
     bool success = true;
 
 //    int isMCSignal = (int) m_config->custom_params["isMCSignal"];
-    int isRealData = (int) m_config->custom_params["isRealData"];
+    unsigned long isRealData = m_config->custom_params_flag["isRealData"];
 
     AddChannel("LPLUSJETS");
 
@@ -100,8 +100,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     CutFlow::Start();
 
-    int isMCSignal = (int) m_config->custom_params["isMCSignal"];
-    int isRealData = (int) m_config->custom_params["isRealData"];
+    unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
+    unsigned long isRealData = m_config->custom_params_flag["isRealData"];
 
     double weight_reco_level     = 1.;
     double weight_particle_level = 1.;

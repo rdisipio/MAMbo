@@ -111,7 +111,7 @@ class NtupleWrapper : public INtupleWrapper
       m_ntuple->GetEntry( i );
 
       // pass global parameters
-      ed->property = m_config.custom_params;
+      ed->property = m_config.custom_params_numeric; // what about the others (flag, string)?
   
       MAKE_OBJECT( Info, ed );
       MAKE_OBJECT( Truth, ed );    

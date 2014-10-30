@@ -46,6 +46,7 @@ class PlotWrapper:
    xtitle = ""
    ytitle = ""
    scale  = PlotScale.linear
+   rebin  = 1
    tag    = ""
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,6 +111,8 @@ def ReadConfiguration( configFileName ):
       scale  = node.attrib.get('scale')
       plots_configuration[hname].scale  = PlotScale.ToScale( scale )
 
+      if 'rebin' in node.attrib: plots_configuration[hname].rebin = int( node.attrib.get('rebin') )
+
    samples_configuration = {}
    i = 0
    for node in tree.iter( "sample" ):
@@ -154,6 +157,7 @@ def FetchHistograms():
           print "ERROR: invalid histogram for sample", sample, "in file", input_files[sample]
 
        histograms[sample] = h.Clone( newname )
+#       histograms[sample].Rebin( plots_configuration[plot.hname].rebin )
 
     return histograms
   

@@ -46,42 +46,43 @@ bool ConfigManager::Configure( const char * configFileName, AnalysisParams_t& an
       for( int inode = 0 ; inode < xpathObj->nodesetval->nodeNr ; ++inode ) {
 	xmlNode *node = xpathObj->nodesetval->nodeTab[inode];
       
-	string name;
-	double value = 0;
+	string name = "unset";
+        string type = "unknown";
 
 	xmlAttr *attr = node->properties;
 	while ( attr ){
 	  if( xmlStrEqual( attr->name, BAD_CAST "name" ) )  name  = (const char*) attr->children->content;
-	  if( xmlStrEqual( attr->name, BAD_CAST "value" ) ) value = atof( (const char*)attr->children->content );
 
-	  // std::cout << "Attribute name: " << attr->name << "  value: " << attr->children->content << std::endl;
+          if( xmlStrEqual( attr->name, BAD_CAST "type" ) )  type = (const char*) attr->children->content;
+          
+	  if( xmlStrEqual( attr->name, BAD_CAST "value" ) ) {
+              if( type == "numeric" ) {
+                  double value = atof( (const char*)attr->children->content );
+		  analysisParams.custom_params_numeric[name] = value;
+		  cout << "INFO: numeric parameter " << name << " value = " << analysisParams.custom_params_numeric[name] << endl;
+	      }	      
+	      else if( type == "flag" ) {
+		unsigned long value = atol( (const char*)attr->children->content );
+		analysisParams.custom_params_flag[name] = value;
+		cout << "INFO: flag parameter " << name << " value = " << analysisParams.custom_params_flag[name] << endl;
+	      }
+              else if( type == "string"  ) {
+		string value( (const char*) attr->children->content );
+		cout << name << ": " << value << endl;
+		analysisParams.custom_params_string[name] = value;
+		cout << "INFO: string parameter " << name << " value = " << analysisParams.custom_params_string.at(name) << endl;
+              }
+	      else throw runtime_error( "Invalid paramter type. Select numeric|flag|string" );
+          }
+
 	  attr = attr->next;
+          
 	}
-	analysisParams.custom_params[name] = value;
-
-	cout << "INFO: parameter " << name << " values = " << analysisParams.custom_params[name] << endl;
       }
 
       xmlXPathFreeObject( xpathObj );
       xmlXPathFreeContext( xpathCtx );
     }
-    /*
-    else if(  xmlStrEqual( nodeParam->name, BAD_CAST "parameters" ) ) {
-      xmlNodePtr nodeCustomParams = nodeParam->children;
-
-      cout << "INFO: found some parameters" << endl;
-
-      for( xmlNodePtr aCustomParam = nodeCustomParams->children ; aCustomParam != NULL ; aCustomParam = aCustomParam->next ) {
-
-	string name( (const char *)xmlGetProp( aCustomParam, BAD_CAST "name" ) );
-	double val = atof( (const char*)xmlGetProp( aCustomParam, BAD_CAST "value" ) );
-
-	analysisParams.custom_params[name] = val;
-
-	cout << "INFO: parameter " << name << " values = " << analysisParams.custom_params[name] << endl;
-      }
-    }
-    */
   }
   xmlFreeDoc( doc );
   xmlCleanupParser();

@@ -50,8 +50,10 @@ void * PluginManager::LoadPlugin( const string& name )
 
   cout << "INFO: loading plugin " << name << endl;
   void * handle = dlopen( name.c_str(), RTLD_LAZY );
-  if( !handle ) throw runtime_error( "Cannot load plugin\n" );
-
+  if( !handle ) {
+     fprintf( stderr, "dlopen failed: %s\n", dlerror() );
+     throw runtime_error( "Cannot load plugin. Invalid handler from dlopen\n" );
+  }
   cout << "INFO: Loaded plugin: " << name << endl;
   
   return handle;

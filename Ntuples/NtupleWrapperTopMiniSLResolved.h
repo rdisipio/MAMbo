@@ -4,11 +4,13 @@
 #include "NtupleWrapper.h"
 
 #include "TopMiniSLResolved.h"
+#include "TopMiniSLResolvedParticles.h"
+#include "TopMiniSLResolvedPartons.h"
 
 #include "EventDumperEventInfo.h"
 #include "EventDumperLeptons.h"
 #include "EventDumperJets.h"
-#include "EventDumperMCTruth.h"
+#include "EventDumperMCTruthTopMiniSLResolved.h"
 
 #define DUMP_RESOLVED
 
@@ -31,7 +33,11 @@ class NtupleWrapperTopMiniSLResolved : public NtupleWrapper< TopMiniSLResolved >
    EventDumperEventInfo<TopMiniSLResolved>   * m_dumper_info;
    EventDumperLeptons<TopMiniSLResolved>     * m_dumper_leptons;
    EventDumperJets<TopMiniSLResolved>        * m_dumper_jets;
-//   EventDumperMCTruth<TopMiniSLResolved>     * m_dumper_mctruth;
+   EventDumperMCTruthTopMiniSLResolved<TopMiniSLResolvedParticles, TopMiniSLResolvedPartons>  * m_dumper_mctruth;
+
+   TFile                      * m_mcfile;
+   TopMiniSLResolvedParticles * m_ntuple_particle;
+   TopMiniSLResolvedPartons   * m_ntuple_parton;
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperTopMiniSLResolved > NtupleWrapperPluginFactory_TopMiniSLResolved;
