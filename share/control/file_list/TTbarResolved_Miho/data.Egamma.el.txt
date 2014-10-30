@@ -1,0 +1,10 @@
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodA.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405020501.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodB.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405020714.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodC.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405020715.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodD.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405020717.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodE.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405051348.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodG.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405020721.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodH.physics_Egamma.PhysCont.NTUP_TOPEL.p1400_p1401.1405041413.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodI.physics_Egamma.PhysCont.NTUP_TOPEL.p1595_p1596.1405020727.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodJ.physics_Egamma.PhysCont.NTUP_TOPEL.p1595_p1596.1405020731.el.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Egamma/user.ssuzuki.data12_8TeV.periodL.physics_Egamma.PhysCont.NTUP_TOPEL.p1595_p1596.1405020737.el.merged.root

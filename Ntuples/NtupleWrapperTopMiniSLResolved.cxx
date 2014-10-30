@@ -12,6 +12,9 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
    m_dumper_jets->SetNtuple( m_ntuple );
    m_dumper_jets->SetAnalysisParameters( analysisParameters );
 
+   unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
+   if( !isMCSignal ) return;
+
    // open truth ntuples
    const string mcfilename        = m_config.custom_params_string["mcfile"];
    const string treename_particle = m_config.custom_params_string["treename_particle"];
@@ -39,15 +42,17 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
 
 NtupleWrapperTopMiniSLResolved::~NtupleWrapperTopMiniSLResolved()
 {
-   m_mcfile->Close();
-   SAFE_DELETE( m_mcfile );
-  
+   if( m_mcfile ) {
+     m_mcfile->Close();
+     SAFE_DELETE( m_mcfile );
+     SAFE_DELETE( m_dumper_mctruth );
+     SAFE_DELETE( m_ntuple_particle );
+     SAFE_DELETE( m_ntuple_parton );
+   }
+
    SAFE_DELETE( m_dumper_leptons );
    SAFE_DELETE( m_dumper_jets );
-   SAFE_DELETE( m_dumper_mctruth );
 
-   SAFE_DELETE( m_ntuple_particle );
-   SAFE_DELETE( m_ntuple_parton );
 }
 
 /////////////////////////////////////////////
@@ -141,6 +146,9 @@ bool NtupleWrapperTopMiniSLResolved::MakeEventJets( EventData * ed )
 bool NtupleWrapperTopMiniSLResolved::MakeEventTruth( EventData * ed )
 {
   bool success = true;
+
+  unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
+  if( !isMCSignal ) return success;
 
   m_dumper_mctruth->DumpEventLeptons( ed );
   m_dumper_mctruth->DumpEventMET( ed );

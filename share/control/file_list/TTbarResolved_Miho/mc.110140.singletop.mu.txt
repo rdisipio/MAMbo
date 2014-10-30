@@ -1,0 +1,2 @@
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/SingleTop/user.ssuzuki.mc12_8TeV.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.merge.NTUP_TOP.p1635.1405050523.mu.merged.root
+

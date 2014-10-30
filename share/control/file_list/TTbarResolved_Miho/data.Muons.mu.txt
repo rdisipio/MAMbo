@@ -1,0 +1,10 @@
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodA.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041528.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodB.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041532.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodC.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041536.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodD.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041541.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodE.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041546.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodG.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041551.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodH.physics_Muons.PhysCont.NTUP_TOPMU.p1400_p1401.1405041556.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodI.physics_Muons.PhysCont.NTUP_TOPMU.p1595_p1596.1405041600.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodJ.physics_Muons.PhysCont.NTUP_TOPMU.p1595_p1596.1405041605.mu.merged.root
+/home/ATLAS/disipio/LOCAL_DISK/minituples/minintuples-shota/Data/Muons/user.ssuzuki.data12_8TeV.periodL.physics_Muons.PhysCont.NTUP_TOPMU.p1595_p1596.1405041611.mu.merged.root
