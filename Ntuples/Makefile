@@ -3,8 +3,6 @@ include ../Makefile.inc
 # modify the following line NTUPLES = ... according to your needs
 # to add more ntuples, lauch bin/MAMbo-NtupleWrapperWizard.py -t treeName -w outputWrapperName FILE.root
 #NTUPLES   = HWWtth
-#NTUPLES  = MiniSLBoost MiniML NTUPTOP HWWtth TopMini
-
 NTUPLES   = TopMiniSLResolved TopMiniSLBoosted
 
 # do not change what follows unless you know what you're doing
