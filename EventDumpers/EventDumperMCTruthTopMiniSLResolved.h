@@ -26,6 +26,10 @@ class EventDumperMCTruthTopMiniSLResolved
         m_ntuple_parton->fChain->BuildIndex( "eventNumber" );
     };
 
+    void GetEntryWithIndex( unsigned long major, unsigned long minor = 0 ) { 
+        m_ntuple_particle->fChain->GetEntryWithIndex( major, minor );
+        m_ntuple_parton->fChain->GetEntryWithIndex( major, minor );
+    };
 
     ///////////////////////////////////////////////
 
@@ -34,23 +38,27 @@ class EventDumperMCTruthTopMiniSLResolved
     {
        const int el_n = this->m_ntuple_particle->part_el_n;
        for( int i = 0 ; i < el_n ; ++i ) {
-         ed->truth_electrons.pT.push_back( this->m_ntuple_particle->part_el_pt[i] );
-         ed->truth_electrons.eta.push_back( this->m_ntuple_particle->part_el_eta[i] );
-         ed->truth_electrons.phi.push_back( this->m_ntuple_particle->part_el_phi[i] );
-         ed->truth_electrons.E.push_back( this->m_ntuple_particle->part_el_E[i] );
-         ed->truth_electrons.m.push_back( 0 );  
+	 TLorentzVector el;
+	 el.SetPtEtaPhiE( this->m_ntuple_particle->part_el_pt[i],
+			  this->m_ntuple_particle->part_el_eta[i],
+			  this->m_ntuple_particle->part_el_phi[i],
+			  this->m_ntuple_particle->part_el_E[i] );
+	 HelperFunctions::DumpParticleToEventData( el, &ed->truth_electrons );
        }
 
        const int mu_n = this->m_ntuple_particle->part_mu_n;
        for( int i = 0 ; i < mu_n ; ++i ) {
-         ed->truth_muons.pT.push_back( this->m_ntuple_particle->part_mu_pt[i] );
-         ed->truth_muons.eta.push_back( this->m_ntuple_particle->part_mu_eta[i] );
-         ed->truth_muons.phi.push_back( this->m_ntuple_particle->part_mu_phi[i] );
-         ed->truth_muons.E.push_back( this->m_ntuple_particle->part_mu_E[i] );
-         ed->truth_muons.m.push_back( 0 );
+         TLorentzVector	mu;
+         mu.SetPtEtaPhiE( this->m_ntuple_particle->part_mu_pt[i],
+                          this->m_ntuple_particle->part_mu_eta[i],
+                          this->m_ntuple_particle->part_mu_phi[i],
+                          this->m_ntuple_particle->part_mu_E[i]	);
+         HelperFunctions::DumpParticleToEventData( mu, &ed->truth_muons );
        }
-
     };
+
+
+    /////////////////////////////////////////////////////////////////////////
 
 
     virtual bool DumpEventMET( EventData * ed )   
@@ -64,7 +72,6 @@ class EventDumperMCTruthTopMiniSLResolved
 	   nu.SetPtEtaPhiM( nu_pt, nu_eta, nu_phi, 0 );
            etmiss += nu;
        }
-
        ed->MET_truth.et  = etmiss.Pt();
        ed->MET_truth.etx = etmiss.Px();
        ed->MET_truth.ety = etmiss.Py();
@@ -101,11 +108,21 @@ class EventDumperMCTruthTopMiniSLResolved
     {
        const int jet_n = this->m_ntuple_particle->part_jet_n;
        for( int i = 0 ; i < jet_n ; ++i ) {
-         ed->truth_jets.pT.push_back( this->m_ntuple_particle->part_jet_pt[i] );
-         ed->truth_jets.eta.push_back( this->m_ntuple_particle->part_jet_eta[i] );
-         ed->truth_jets.phi.push_back( this->m_ntuple_particle->part_jet_phi[i] );
-         ed->truth_jets.E.push_back( this->m_ntuple_particle->part_jet_E[i] );
-         ed->truth_jets.m.push_back( 0 );
+//	 ed->truth_jets.n++;
+         ed->truth_jets.index.push_back( i );
+
+	 TLorentzVector jet;
+	 jet.SetPtEtaPhiE( this->m_ntuple_particle->part_jet_pt[i],
+			   this->m_ntuple_particle->part_jet_eta[i],
+			   this->m_ntuple_particle->part_jet_phi[i],
+			   this->m_ntuple_particle->part_jet_E[i] );
+	 HelperFunctions::DumpParticleToEventData( jet, &ed->truth_jets );
+
+	 const int flavor = this->m_ntuple_particle->part_jet_flavour_pdgId[i];
+	 if( abs(flavor) == 5 ) { 
+	    HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );
+	    ed->truth_bjets.index.push_back( i );
+         }
        }
     };
 
@@ -115,7 +132,36 @@ class EventDumperMCTruthTopMiniSLResolved
 
     virtual bool DumpEventMCTruth( EventData * ed )
     {
-        return true;
+       TLorentzVector t1, t2, ttbar;
+
+       for( int i = 0 ; i < this->m_ntuple_parton->parton_topQuark_n ; ++i ) {
+	  const double t_pT  = this->m_ntuple_parton->parton_topQuark_pt[i];
+	  const double t_eta = this->m_ntuple_parton->parton_topQuark_eta[i];
+	  const double t_phi = this->m_ntuple_parton->parton_topQuark_phi[i];
+	  // const double t_E   = sqrt( t_pT*t_pT + t_pz*t_pz + t_m*t_m );
+	  const double t_m   = 172.5 * GeV;
+
+	  const int pid     = this->m_ntuple_parton->parton_topQuark_pdgId[i];
+	  const int status  = this->m_ntuple_parton->parton_topQuark_status[i];
+	  const int barcode = 0;
+	  const float t_q   = ( pid >= 0 ) ? 1 : -1;
+
+          TLorentzVector t;
+	  t.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
+	  HelperFunctions::DumpTruthParticleToEventData( t, pid, status, barcode, t_q, &ed->mctruth );	
+
+	  bool isHadronic = false;
+          if( pid > 0 ) {
+		t1 = t;
+          }
+          else {
+	        t2 = t;
+          }
+	  ed->mctruth.property["isHadronic"].push_back( isHadronic );
+
+       }
+       ttbar = t1 + t2;
+       HelperFunctions::DumpTruthParticleToEventData( ttbar, 166, 2, 0, 0, &ed->mctruth );
     };
 };
 

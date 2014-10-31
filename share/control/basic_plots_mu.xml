@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<plots tag="mu" latex="#mu+jets">
-  <plot hpath="reco/reco_4j2b_lep_pt"                xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="log" rebin="2" />
+<plots tag="mu" latex="#mu+jets" >
+  <plot hpath="reco/reco_4j2b_lep_pt"                xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="log" rebin="2"/>
   <plot hpath="reco/reco_4j2b_lep_eta"               xtitle="Lepton pseudorapidity"                         ytitle="Events / Pseudorapidity" scale="linear" />
   <plot hpath="reco/reco_4j2b_jet_pt" 	       	     xtitle="AntiKt4 jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="log" rebin="2" />
   <plot hpath="reco/reco_4j2b_jet_eta"        	     xtitle="AntiKt4 jet pseudorapidity"   	       	       	     ytitle="Events / Pseudorapidity" scale="linear" />
@@ -20,20 +20,20 @@
 </plots>
 <samples>
   <sample name="data"        type="data"        description="Data"                color="1"     fillstyle="0"    linewidth="0" />
-  <sample name="ttbar_ljets" type="signal"      description="t#bar{t} (l+jets)"   color="32"    fillstyle="1001" linewidth="2" />
-<!--   <sample name="ttbar_dilep" type="background"  description="t#bar{t} (dilepton)" color="64"    fillstyle="1001" linewidth="2" /> -->
+  <sample name="ttbar_ljets" type="signal"      description="t#bar{t} (non full-had)"   color="32"    fillstyle="1001" linewidth="2" />
   <sample name="singletop"   type="background"  description="Single top"          color="4"     fillstyle="1001" linewidth="2" />
-<!--   <sample name="wjets"       type="background"  description="W+jets"              color="801"   fillstyle="1001" linewidth="2" /> -->
-<!--   <sample name="other"       type="background"  description="Other"               color="874"   fillstyle="1001" linewidth="2" />  -->        
+  <sample name="wjets"       type="background"  description="W+jets"              color="801"   fillstyle="1001" linewidth="2" /> 
   <sample name="uncertainty" type="uncertainty" description="Stat + sys. uncert." color="1"     fillstyle="3004" linewidth="2" />  -->
 </samples>
 <inputfiles>
-  <file sample="data"         path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.data.muons.mu.histograms.root" />
-  <file sample="ttbar_ljets"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.mu.scaled.histograms.root" />
-<!--  <file sample="ttbar_dilep"  path="" /> -->
-  <file	sample="singletop"    path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.singletop.mu.histograms.root" />
-<!--  <file	sample="wjets"        path="" /> -->
-<!--  <file	sample="other"        path="" /> -->
-  <file	sample="uncertainty"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.uncertainty.mu.histograms.root" />
+<!--  <file sample="data"         path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.data.Muons.mu.histograms.root" /> -->
+<!--  <file sample="ttbar_ljets"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.mu.scaled.histograms.root" /> -->
+<!--    <file sample="singletop"    path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.singletop.mu.histograms.root" /> -->
+<!--  <file	sample="uncertainty"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.uncertainty.mu.histograms.root" /> -->
+  <file sample="data"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.data.Muons.mu.histograms.root" />
+  <file sample="ttbar  	      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.DoTop.mu.histograms.root" />
+  <file	sample="singletop"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.SingleTop.mu.histograms.root" />
+  <file sample="wjets"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.Wjets.mu.histograms.root" />
+  <file	sample="uncertainty"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.uncertainty.mu.histograms.root" />
 </inputfiles>
 </document>
