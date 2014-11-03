@@ -28,9 +28,9 @@
   <histogram hpath="particle/particle_4j2b_pseudottbar_absrap" />
 </histograms>
 <samples>
-  <sample name="ttbar"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.DiTop.el.histograms.root" />
-  <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.SingleTop.el.histograms.root" />       
-  <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.Wjets.el.histograms.root" />
+  <sample name="ttbar"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.mc.DiTop.el.histograms.root" />
+  <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.mc.SingleTop.el.histograms.root" />       
+  <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.mc.Wjets.el.histograms.root" />
 </samples>
 </document>
 

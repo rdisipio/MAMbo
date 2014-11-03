@@ -28,30 +28,30 @@
   <histogram hpath="particle/particle_4j2b_pseudottbar_absrap" />
 </histograms>
 <samples>
-  <sample name="WenuNp0"           dsid="147025" xsec="8127.3" kfact="1.1330" genevt="29434220"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp1"           dsid="147026" xsec="1792.7" kfact="1.1330" genevt="48155904"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp2"           dsid="147027" xsec="542.18" kfact="1.1330" genevt="17554347"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp3"           dsid="147028" xsec="147.65" kfact="1.1330" genevt="4855289"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp4"           dsid="147029" xsec="37.736" kfact="1.1330" genevt="2468793"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp5incl"       dsid="147030" xsec="11.962" kfact="1.1330" genevt="799192"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp0"          dsid="147033" xsec="8127.1" kfact="1.1330" genevt="31965655"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp1"          dsid="147034" xsec="1792.9" kfact="1.1330" genevt="43677615"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp2"          dsid="147035" xsec="542.24" kfact="1.1330" genevt="17611454"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp3"          dsid="147036" xsec="147.66" kfact="1.1330" genevt="4956077"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp4"          dsid="147037" xsec="37.745" kfact="1.1330" genevt="2546595"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp5incl"      dsid="147038" xsec="11.970" kfact="1.1330" genevt="788898"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp0"         dsid="147041" xsec="8127.1" kfact="1.1330" genevt="31902157"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp1"         dsid="147042" xsec="1792.2" kfact="1.1330" genevt="48255178"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp2"         dsid="147043" xsec="542.27" kfact="1.1330" genevt="17581943"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp3"         dsid="147044" xsec="147.64" kfact="1.1330" genevt="4977982"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp4"         dsid="147045" xsec="37.781" kfact="1.1330" genevt="2548295"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp5incl"     dsid="147046" xsec="11.959" kfact="1.1330" genevt="789096"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WcNp3"         	   dsid="200059" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WcNp4incl"         dsid="200060" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WbbNp0"            dsid="200256" xsec="52.237" kfact="1.1330" genevt="1599997"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WbbNp1"            dsid="200257" xsec="45.628" kfact="1.1330" genevt="1398396"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WbbNp2"            dsid="200258" xsec="23.955" kfact="1.1330" genevt="699398"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WbbNp3incl"        dsid="200259" xsec="13.633" kfact="1.1330" genevt="398397"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp0"           dsid="147025" sf="0.96" xsec="8127.3" kfact="1.1330" genevt="29434220"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp1"           dsid="147026" sf="0.96" xsec="1792.7" kfact="1.1330" genevt="48155904"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp2"           dsid="147027" sf="0.96" xsec="542.18" kfact="1.1330" genevt="17554347"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp3"           dsid="147028" sf="0.96" xsec="147.65" kfact="1.1330" genevt="4855289"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp4"           dsid="147029" sf="0.96" xsec="37.736" kfact="1.1330" genevt="2468793"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp5incl"       dsid="147030" sf="0.96" xsec="11.962" kfact="1.1330" genevt="799192"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp0"          dsid="147033" sf="0.96" xsec="8127.1" kfact="1.1330" genevt="31965655"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp1"          dsid="147034" sf="0.96" xsec="1792.9" kfact="1.1330" genevt="43677615"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp2"          dsid="147035" sf="0.96" xsec="542.24" kfact="1.1330" genevt="17611454"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp3"          dsid="147036" sf="0.96" xsec="147.66" kfact="1.1330" genevt="4956077"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp4"          dsid="147037" sf="0.96" xsec="37.745" kfact="1.1330" genevt="2546595"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp5incl"      dsid="147038" sf="0.96" xsec="11.970" kfact="1.1330" genevt="788898"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp0"         dsid="147041" sf="0.96" xsec="8127.1" kfact="1.1330" genevt="31902157"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp1"         dsid="147042" sf="0.96" xsec="1792.2" kfact="1.1330" genevt="48255178"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp2"         dsid="147043" sf="0.96" xsec="542.27" kfact="1.1330" genevt="17581943"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp3"         dsid="147044" sf="0.96" xsec="147.64" kfact="1.1330" genevt="4977982"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp4"         dsid="147045" sf="0.96" xsec="37.781" kfact="1.1330" genevt="2548295"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp5incl"     dsid="147046" sf="0.96" xsec="11.959" kfact="1.1330" genevt="789096"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp3"         	   dsid="200059" sf="0.74" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp4incl"         dsid="200060" sf="0.74" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp0"            dsid="200256" sf="1.30" xsec="52.237" kfact="1.1330" genevt="1599997"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp1"            dsid="200257" sf="1.30" xsec="45.628" kfact="1.1330" genevt="1398396"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp2"            dsid="200258" sf="1.30" xsec="23.955" kfact="1.1330" genevt="699398"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp3incl"        dsid="200259" sf="1.30" xsec="13.633" kfact="1.1330" genevt="398397"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
   <file sample="WenuNp0"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.147025.Wjets.mu.histograms.root" />"

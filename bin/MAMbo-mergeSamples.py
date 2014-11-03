@@ -26,6 +26,7 @@ class SampleWrapper:
    simulation  = Simulations.unknown
    xsec        = 0.
    kfact       = 0.
+   sf          = 1.
    genevt      = 0
 
 
@@ -55,6 +56,7 @@ def ReadConfiguration( configFileName ):
       samples_configuration[name].simulation  = node.attrib.get('simulation')
       samples_configuration[name].xsec        = float( node.attrib.get('xsec') )
       samples_configuration[name].kfact       = float( node.attrib.get('kfact' ) )
+      if 'sf' in node.attrib: samples_configuration[name].sf = float( node.attrib.get('sf') )
       samples_configuration[name].genevt      = float( node.attrib.get('genevt' ) )
 
 
@@ -127,7 +129,8 @@ def CreateMergedHistograms():
             genevt = samples_configuration[sample].genevt
             xsec   = samples_configuration[sample].xsec
             kfact  = samples_configuration[sample].kfact
-            sf     = xsec * kfact / genevt
+            sf     = samples_configuration[sample].sf
+            norm   = xsec * kfact * sf / genevt
             
             if hsum == None:
 
@@ -137,7 +140,7 @@ def CreateMergedHistograms():
 
                 hsum.Reset( "ICES" )
                 hsum.SetDirectory( newdir )
-            hsum.Add( h, sf )
+            hsum.Add( h, norm )
 
         hsum.Write()
 

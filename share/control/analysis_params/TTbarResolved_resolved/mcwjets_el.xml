@@ -4,15 +4,12 @@
   <tree>mini</tree>
   <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolved</cutflow>
-  <channel>muon</channel>
+  <channel>electron</channel>
   <parameters>
     <param name="pTmin"             type="numeric" value="20." />
     <param name="etaMax"            type="numeric" value="2.5" />
-    <param name="isMCSignal"        type="flag"    value="1" />
+    <param name="isMCSignal"        type="flag"    value="0" />
     <param name="isRealData"        type="flag"    value="0" />
-    <param name="isWjets"      	    type="flag"    value="0" />
-    <param name="mcfile"            type="string"  value="/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/mc.root" />
-    <param name="treename_particle" type="string"  value="particles" />
-    <param name="treename_parton"   type="string"  value="partons"   />
+    <param name="isWjets"           type="flag"    value="1" />
   </parameters>
 </analysis>
