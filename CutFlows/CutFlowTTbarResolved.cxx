@@ -235,8 +235,6 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       */
       m_pseudotop_particle->Run();    
       if (Debug) cout << "  Here6.5" << endl;
-      // this is redundant:      if (passedParticleSelection)
-      //      if(passedRecoSelection) // this if should be removed, but avoids crash in next line...TODO!!!
       FillHistogramsPseudotopParticle(ed, weight_particle_level);
       if (Debug) cout << "  Here7" << endl;
 
@@ -643,11 +641,13 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     m_hm->GetHistogram("particle/particle_4j2b_pseudottbar_m")->Fill(ttbar_m / GeV, weight);
     m_hm->GetHistogram("particle/particle_4j2b_pseudottbar_absrap")->Fill(fabs(ttbar_y), weight);
 
-    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
-    TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );
-    TLorentzVector lb = lep + lep_bjet;
-    m_hm->GetHistogram( "particle/particle_4j2b_mlb" )->Fill( lb.M()  / GeV, weight );
-
+    if (ed->truth_leptons.n > 0) {
+      
+      TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
+      TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );
+      TLorentzVector lb = lep + lep_bjet;
+      m_hm->GetHistogram( "particle/particle_4j2b_mlb" )->Fill( lb.M()  / GeV, weight );
+    }
 
 }
 
