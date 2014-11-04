@@ -3,7 +3,7 @@
 HistogramManager::HistogramManager() :
   m_sumw2( true )
 {
-
+    pathNames = new vector<vector<XMLLevel*>>();
 }
 
 
@@ -46,194 +46,217 @@ TFile * HistogramManager::SetOutFileName( const char * name )
   return m_outFile;
 }
 
-
-/////////////////////////////////////////
-
-
-TH1F * HistogramManager::Book1DHistogram( TH1F * h, const string& path )
+void HistogramManager::MoveHistogramtToFolder( TH1* h, const string fullPath )
 {
-  TDirectory * hdir = CreatePath( path, true );
+    //cout << "DEBUG: create h: "<< h->GetName() << " in dir " << gDirectory->GetPath() << endl;
+    if( m_sumw2 ) h->Sumw2();
+    h->SetDirectory( currentDir );
+    m_histograms[fullPath].push_back(h);  
+}
 
-  hdir->cd();
-  //cout << "DEBUG: create h: current dir " << gDirectory->GetPath() << endl;
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  m_histograms[path] = (TH1F*)h->Clone();
-  m_histograms[path]->SetDirectory( hdir );
 
-  if( m_sumw2 ) m_histograms[path]->Sumw2();
-
-  m_h1_names.push_back( path );
-  //cout << "DEBUG: Created histogram " << path << endl;
-
-  return (TH1F*)m_histograms[path];
+TH1F* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax )
+{
+    return new TH1F( name.c_str(), title.c_str(), nbins, xmin, xmax );
 }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-TH1F * HistogramManager::Book1DHistogram( const string& path, const string& title, int nbins, Double_t xmin, Double_t xmax )
+TH1F* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, const vector<double> xedges )
 {
-  size_t found      = path.find_last_of("/");
-  const string name = path.substr( found+1 );
-
-  TH1F h( name.c_str(), title.c_str(), nbins, xmin, xmax );
-
-  return Book1DHistogram( &h, path );
+    return new TH1F( name.c_str(), title.c_str(), nbins, &xedges[0] );
 }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-TH1F * HistogramManager::Book1DHistogram( const string& path, const string& title, int nbins, const Double_t* xedges )
-{
-  size_t found      = path.find_last_of("/");
-  const string name = path.substr( found+1 );
 
-  TH1F h( name.c_str(), title.c_str(), nbins, xedges );
 
-  return Book1DHistogram( &h, path );
+void HistogramManager::BookHistograms( const xmlNodePtr xml )
+{  
+    for (XMLLevel* path1 : pathNames->at(0)){        
+        for (XMLLevel* path2 : pathNames->at(1)){
+            if (path2->inFolder.empty() || path2->inFolder.compare(path1->name) == 0) {
+                for (XMLLevel* path3 : pathNames->at(2)){
+                    if (path3->inFolder.empty() || path3->inFolder.compare(path2->name) == 0) {                    
+                        string path = path1->name + "/" + path2->name + "/" + path3->name;                        
+                        currentDir = CreatePath( path );                        
+                        
+                        if( xmlStrEqual( xml->name, BAD_CAST "TH1F" ) ) {
+                            Book1DHistogram(path, xml);
+                        }
+                        else if( xmlStrEqual( xml->name, BAD_CAST "TH2F" ) ) {
+                            Book2DHistogram(path, xml );
+                        }
+                        else if( xmlStrEqual( xml->name, BAD_CAST "Matrix" ) ) {
+                            BookMatrices(path, xml );
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-TH1F * HistogramManager::Book1DHistogram( const xmlNodePtr xml )
+void HistogramManager::Book1DHistogram( const string path, const xmlNodePtr xml )
 {
-  const char * path  = (const char*) xmlGetProp( xml, BAD_CAST "name" );
-  const char * title = (const char*) xmlGetProp( xml, BAD_CAST "title" );
-  const int    nbins = atoi( (const char*) xmlGetProp( xml, BAD_CAST "nbins" ) );
+    const string variableName = string((const char*) xmlGetProp( xml, BAD_CAST "variable" ));
 
-  if( xmlHasProp( xml, BAD_CAST "edges" ) ) {
+    for (XMLVariable* variable : variables){
+        if (VariableNameAndFolderCondition(variable, variableName, path)){
+            vector<XMLBin*> bins = variable->GetBinsInPath(path); 
+            for (XMLBin* bin : bins){
+                //cout<<"Booking histo: " << path << "/" << variable->name << endl;
+                
+                string plotName = variable->name;
+                if (bins.size() > 1) {
+                    plotName += "_" + std::to_string(bin->id);
+                }
+                
+                TH1F* h;
+                if (bin->edges.size() > 0){
+                    h = Book1DHistogram( plotName, variable->title, bin->nBins, bin->edges);
+                }
+                else {
+                    h = Book1DHistogram( plotName, variable->title, bin->nBins, bin->min, bin->max);
+                }
+                
+                MoveHistogramtToFolder(h, path+"/"+variable->name);
+            }            
+        }
+    }    
+}
+
+bool HistogramManager::VariableNameAndFolderCondition(XMLVariable* variable, string variableName, string path){
+    bool nameCondition = variable->name.compare(variableName) == 0 ;
+    bool folderCondition = variable->folders.size() == 0 || FolderCondition(variable->folders, path);
+    return nameCondition && folderCondition;
+}
+
+bool HistogramManager::FolderCondition(vector<string> folders, string path){
+    for (string folder : folders){
+        if (path.find(folder)==string::npos){
+            return false;
+        }
+    }
+    return true;
+}
+
+void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
+{
+    const int binIdX = atoi( (const char*) xmlGetProp( xml, BAD_CAST "binIdX" ) );
+    const int binIdY = atoi( (const char*) xmlGetProp( xml, BAD_CAST "binIdY" ) );
+    const string variableNameX = string((const char*) xmlGetProp( xml, BAD_CAST "variableX" ));
+    const string variableNameY = string((const char*) xmlGetProp( xml, BAD_CAST "variableY" ));
+        
+    string plotName =  variableNameY + "_vs_" + variableNameX;
+    string plotTitle =  variableNameY + " vs "+  variableNameX;
+
+    XMLBin *binX, *binY;
+    bool useEdges;
     
-    string s( (const char*)xmlGetProp( xml, BAD_CAST "edges" ) );
-    StringVector_t tokens;
-    size_t Nedges = HelperFunctions::Tokenize( s, tokens, "," );
-
-    Double_t edges[Nedges+1];
-    for( int n = 0 ; n < Nedges ; ++n ) {
-      edges[n] = atof( tokens.at(n).c_str() );
-    }
-
-    return Book1DHistogram( path, title, nbins, edges );
-  }
-  else {
-    Double_t xmin = atof( (const char*) xmlGetProp( xml, BAD_CAST "xmin" ) );
-    Double_t xmax = atof( (const char*) xmlGetProp( xml, BAD_CAST "xmax" ) );
-
-    return Book1DHistogram( path, title, nbins, xmin, xmax );
-  }
-
-}
-
-
-/////////////////////////////////////////
-
-
-TH2F * HistogramManager::Book2DHistogram( TH2F * h, const string& path )
-{
-  TDirectory * hdir = CreatePath( path, true );
-
-  hdir->cd();
-  //cout << "DEBUG: create h: current dir " << gDirectory->GetPath() << endl;
-
-  m_histograms[path] = (TH2F*)h->Clone();
-  m_histograms[path]->SetDirectory( hdir );
-
-  if( m_sumw2 ) m_histograms[path]->Sumw2();
-
-  m_h2_names.push_back( path );
-  //cout << "DEBUG: Created histogram " << path << endl;
-
-  return (TH2F*)m_histograms[path];
-}
-
-
-/////////////////////////////////////////
-
-
-TH2F * HistogramManager::Book2DHistogram( const xmlNodePtr xml )
-{
-  const char * path  = (const char*) xmlGetProp( xml, BAD_CAST "name" );
-  const char * title = (const char*) xmlGetProp( xml, BAD_CAST "title" );
-  const int    nbinsx = atoi( (const char*) xmlGetProp( xml, BAD_CAST "nbinsx" ) );
-  const int    nbinsy = atoi( (const char*) xmlGetProp( xml, BAD_CAST "nbinsy" ) );
-
-  if( xmlHasProp( xml, BAD_CAST "xedges" ) ) {
+    for (XMLVariable* variable : variables){
+        if (VariableNameAndFolderCondition(variable, variableNameX, path)){
+            binX = variable->GetBinByIdInPath(binIdX, path);
+            if (binX->edges.size() > 0){
+                useEdges = true;
+            }
+        }
+        if (VariableNameAndFolderCondition(variable, variableNameY, path)){
+            binY = variable->GetBinByIdInPath(binIdY, path);
+        }
+    }    
     
-    string sx( (const char*)xmlGetProp( xml, BAD_CAST "xedges" ) );
-    StringVector_t xtokens;
-    size_t Nxedges = HelperFunctions::Tokenize( sx, xtokens, "," );
+    string plotNameWithBin = plotName;
+    if (binX->id > 0 || binY->id > 0) {
+       plotNameWithBin += "_" + std::to_string(binX->id) + "_" + std::to_string(binY->id);
+    }   
 
-    Double_t xedges[Nxedges+1];
-    for( int n = 0 ; n < Nxedges ; ++n ) {
-      xedges[n] = atof( xtokens.at(n).c_str() );
+    TH2F*  h;
+    if (useEdges && binX != NULL && binY != NULL){
+        h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->edges, binY->nBins, binY->edges);
     }
-
-    string sy( (const char*)xmlGetProp( xml, BAD_CAST "yedges" ) );
-    StringVector_t ytokens;
-    size_t Nyedges = HelperFunctions::Tokenize( sy, ytokens, "," );
-
-    Double_t yedges[Nyedges+1];
-    for( int n = 0 ; n < Nyedges ; ++n ) {
-      yedges[n] = atof( ytokens.at(n).c_str() );
+    else {
+        h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->min, binX->max , binY->nBins, binY->min, binY->max );
     }
-
-    return Book2DHistogram( path, title, nbinsx, xedges, nbinsy, yedges );
-  }
-  else {
-    Double_t xmin = atof( (const char*) xmlGetProp( xml, BAD_CAST "xmin" ) );
-    Double_t xmax = atof( (const char*) xmlGetProp( xml, BAD_CAST "xmax" ) );
-    Double_t ymin = atof( (const char*) xmlGetProp( xml, BAD_CAST "ymin" ) );
-    Double_t ymax = atof( (const char*) xmlGetProp( xml, BAD_CAST "ymax" ) );
-
-    return Book2DHistogram( path, title, nbinsx, xmin, xmax, nbinsy, ymin, ymax );
-  }
+    
+    MoveHistogramtToFolder(h, path+"/"+plotName);
 }
 
-
-/////////////////////////////////////////
-
-
-TH2F * HistogramManager::Book2DHistogram( const string& path, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax )
+void HistogramManager::BookMatrices(const string path, const xmlNodePtr xml )
 {
-  size_t found      = path.find_last_of("/");
-  const string name = path.substr( found+1 );
+    const string variableName = string((const char*) xmlGetProp( xml, BAD_CAST "variable" ));
 
-  TH2F h( name.c_str(), title.c_str(), nbinsx, xmin, xmax, nbinsy, ymin, ymax );
-
-  return Book2DHistogram( &h, path );
+    for (XMLVariable* variable : variables){
+        if (VariableNameAndFolderCondition(variable, variableName, path)){
+            vector<XMLBin*> bins = variable->GetBinsInPath(path);
+            for (XMLBin* bin : bins){
+                CreateAllMatricesForVariableAndBin(path, variable, bin);
+            }
+        }
+    }    
 }
 
+void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin){
+    StringVector_t dirs;
+    HelperFunctions::Tokenize( path, dirs, "/" );
+  
+    string currentLevel = dirs[0];
+  
+    for (XMLLevel* level : pathNames->at(0)) {
+        if (level->name.compare(currentLevel) != 0){
+            string matrixName = "Matrix_" + currentLevel + "_" + level->name + "_" + variable->name;
+            string matrixTitle = "Matrix " + currentLevel + "/" + level->name + " " + variable->title;
+
+            string matrixNameWithBin = matrixName;
+            if (bin->id > 0) {
+                matrixNameWithBin += "_" + std::to_string(bin->id);
+            }            
+
+            TH2F* h;
+            if (bin->edges.size() > 0){
+                h = Book2DHistogram( matrixNameWithBin, matrixTitle, bin->nBins, bin->edges, bin->nBins, bin->edges);
+            }
+            else {
+                h = Book2DHistogram( matrixNameWithBin, matrixTitle, bin->nBins, bin->min, bin->max, bin->nBins, bin->min, bin->max);
+            }
+            
+            MoveHistogramtToFolder(h, path+"/"+matrixName);
+        }
+    }
+}
 
 /////////////////////////////////////////
 
 
-TH2F * HistogramManager::Book2DHistogram( const string& path, const string& title, int nbinsx, const Double_t* xedges, int nbinsy, Double_t* yedges )
+TH2F* HistogramManager::Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax )
 {
-  size_t found      = path.find_last_of("/");
-  const string name = path.substr( found+1 );
-
-  TH2F h( name.c_str(), title.c_str(), nbinsx, xedges, nbinsy, yedges );
-
-  return Book2DHistogram( &h, path );
+    return new TH2F( name.c_str(), title.c_str(), nbinsx, xmin, xmax, nbinsy, ymin, ymax );
 }
 
 
 /////////////////////////////////////////
 
 
-TDirectory * HistogramManager::CreatePath( const string& path, bool lastIsHistogramName )
+TH2F* HistogramManager::Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges )
+{
+    return new TH2F( name.c_str(), title.c_str(), nbinsx, &xedges[0], nbinsy, &yedges[0] );
+}
+
+
+/////////////////////////////////////////
+
+
+TDirectory * HistogramManager::CreatePath( const string& path )
 {
   StringVector_t dirs;
   HelperFunctions::Tokenize( path, dirs, "/" );
   
-  if( lastIsHistogramName ) {
-    dirs.erase( dirs.end() ); 
-  }
-
   m_outFile->cd();
 
   for( StringVector_t::const_iterator itr = dirs.begin() ; itr != dirs.end() ; ++itr ) {
@@ -270,29 +293,80 @@ void HistogramManager::WriteToFile()
 
 bool HistogramManager::ConfigureFromXML( const string& fileName )
 {
+  cout<<"Open Histogram configuration file " << fileName << endl;
+    
   bool success = true;
 
-  xmlDocPtr doc;
-  xmlNodePtr nodeRoot;
-  xmlNodePtr nodeHisto;
+  xmlDocPtr doc = xmlParseFile( fileName.c_str() );
 
-  //unsigned int N1DHistograms = 0;
-  //unsigned int N2DHistograms = 0;
-
-  doc = xmlParseFile( fileName.c_str() );
-
-  for( nodeRoot = doc->children; nodeRoot != NULL; nodeRoot = nodeRoot->next) {
-    for( nodeHisto = nodeRoot->children; nodeHisto != NULL; nodeHisto = nodeHisto->next ) {
-      if( xmlStrEqual( nodeHisto->name, BAD_CAST "TH1F" ) ) {
-	Book1DHistogram( nodeHisto );
+  for( xmlNodePtr nodeRoot = doc->children; nodeRoot != NULL; nodeRoot = nodeRoot->next) {
+      for( xmlNodePtr nodeLevel = nodeRoot->children; nodeLevel != NULL; nodeLevel = nodeLevel->next ) {
+        if (xmlStrEqual( nodeLevel->name, BAD_CAST "Level" )) {
+            pathNames->push_back(FillLevelNames(nodeLevel));
+        }      
+        else if (xmlStrEqual( nodeLevel->name, BAD_CAST "Variables" )) {
+            for( xmlNodePtr nodeVariable = nodeLevel->children; nodeVariable != NULL; nodeVariable = nodeVariable->next ) {
+                if( xmlStrEqual( nodeVariable->name, BAD_CAST "Variable" ) ) {
+                    XMLVariable* variable = new XMLVariable(nodeVariable);    
+                    variables.push_back(variable);
+                    //cout<<"Variables filled: "<< variables[variables.size() -1]->name << " " << variable->title << endl;
+                }          
+            }            
+        }      
+        else if (xmlStrEqual( nodeLevel->name, BAD_CAST "Histos" )) {
+            for( xmlNodePtr nodeHisto = nodeLevel->children; nodeHisto != NULL; nodeHisto = nodeHisto->next ) {
+                BookHistograms(nodeHisto);
+            }          
+        }      
+        else continue;
       }
-      else if( xmlStrEqual( nodeHisto->name, BAD_CAST "TH2F" ) ) {
-	Book2DHistogram( nodeHisto );
-      }
-      else continue;
-    }
   }
 
   xmlFreeDoc( doc );
   return success;
+}
+
+vector<XMLLevel*> HistogramManager::FillLevelNames(xmlNodePtr nodeLevel){
+    vector<XMLLevel*> v;
+    for( xmlNodePtr nodeType = nodeLevel->children; nodeType != NULL; nodeType = nodeType->next ) {
+        if( xmlStrEqual( nodeType->name, BAD_CAST "Type" ) ) {
+            v.push_back(new XMLLevel(nodeType));
+        }   
+    }
+    
+    return v;
+}
+
+void HistogramManager::FillHistograms(string fullPath, double value, double weight){
+    for (TH1* h : m_histograms[fullPath]){
+        if (h != NULL){
+            h->Fill( value, weight );
+        }
+        else{
+            cout<< "WARNING: histogram in path: " << fullPath << " was NULL" << endl;
+        }
+    }
+    if (m_histograms[fullPath].size() == 0){
+        cout<< "WARNING: no histogram for path: " << fullPath << " was NULL" << endl;        
+    }
+}
+
+void HistogramManager::FillMatrices(string fullPath, double valuex, double valuey, double weight){
+    for (TH1* h : m_histograms[fullPath]){
+        if (h != NULL){
+            ((TH2F*) h)->Fill( valuex, valuey, weight );
+        }
+        else{
+            cout<< "WARNING: histogram in path: " << fullPath << " was NULL" << endl;
+        }
+    }
+    if (m_histograms[fullPath].size() == 0){
+        cout<< "WARNING: no histogram for path: " << fullPath << " was NULL" << endl;        
+    }
+}
+
+void HistogramManager::Book1DHistogramInFolder(string path, const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax ){
+    currentDir = CreatePath( path );
+    currentDir->cd();
+    Book1DHistogram(name, title, nbins, xmin, xmax);
 }

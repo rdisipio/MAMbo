@@ -47,7 +47,7 @@ typedef vector< double >       array_d;
 typedef vector< LeptonFlavor > array_fl;
 typedef vector< JetTag >       array_tag;
 
-typedef map< string, TH1* > HistogramCollection_t;
+typedef map< string,  vector<TH1*> > HistogramCollection_t;
 
 typedef map< string, vector< double > > PropertyCollection_t;
 

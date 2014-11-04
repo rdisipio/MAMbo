@@ -13,6 +13,9 @@
 #include <TDirectory.h>
 
 #include "HelperFunctions.h"
+#include "XMLVariable.h"
+#include "XMLLevel.h"
+#include <vector>
 
 class HistogramManager 
 {
@@ -22,30 +25,37 @@ class HistogramManager
   static HistogramManager * GetHandle();
 
  public:
-  TH1F * Book1DHistogram( TH1F * h, const string& path = "" );
-  TH1F * Book1DHistogram( const string& path, const string& title, int nbins, Double_t xmin, Double_t xmax );
-  TH1F * Book1DHistogram( const string& path, const string& title, int nbins, const Double_t* xedges );
-  TH1F * Book1DHistogram( const xmlNodePtr xml );
+  void BookHistograms( const xmlNodePtr xml );
+  void Book1DHistogram( const string path, const xmlNodePtr xml );
+  void Book2DHistogram( const string path, const xmlNodePtr xml );
+  void BookMatrices( const string path, const xmlNodePtr xml );
+  void MoveHistogramtToFolder( TH1* h, const string fullPath );
 
-  TH2F * Book2DHistogram( TH2F * h, const string& path = "" );
-  TH2F * Book2DHistogram( const xmlNodePtr xml );
-  TH2F * Book2DHistogram( const string& path, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax );
-  TH2F * Book2DHistogram( const string& path, const string& title, int nbinsx, const Double_t* xedges, int nbinsy, Double_t* yedges );
+  void CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin);
+
+  TH1F* Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
+  TH1F* Book1DHistogram( const string& name, const string& title, int nbins, const vector<double>  xedges );
+  
+  TH2F* Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax );
+  TH2F* Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges );
 
   TFile * SetOutFileName( const char * name );
 
   bool   ConfigureFromXML( const string& fileName );
 
-  TDirectory * CreatePath( const string& path, bool lastIsHistogramName = false );
+  TDirectory * CreatePath( const string& path);
 
   inline TH1 * GetHistogram( const string& name ) { return (TH1*)m_outFile->Get( name.c_str() ); };
   inline TH2F * Get2DHistogram( const string& name ) { return (TH2F*)m_outFile->Get( name.c_str() ); };
-
   inline void  ToggleSumW2() { m_sumw2 = !m_sumw2; };
 
-  void WriteToFile();
+  void WriteToFile();  
+  void FillHistograms(string fullPath, double value, double weight);
+  void FillMatrices(string fullPath, double valuex, double valuey, double weight);
+  
+  void Book1DHistogramInFolder(string path, const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
 
- public:
+public:
   inline TH1 * operator[]( const string& name ) { return GetHistogram( name ); };
 
    
@@ -57,8 +67,15 @@ class HistogramManager
   StringVector_t           m_h1_names;
   StringVector_t           m_h2_names;
   HistogramCollection_t    m_histograms;
-
+  vector<XMLVariable*>     variables;
+  vector<vector<XMLLevel*> > *pathNames;
+  TDirectory*              currentDir;
   bool                     m_sumw2;
+  
+private :
+  vector<XMLLevel*> FillLevelNames(xmlNodePtr nodeType);
+  bool VariableNameAndFolderCondition(XMLVariable* variable, string variableName, string path);
+  bool FolderCondition(vector<string> folders, string path);
 };
 
 

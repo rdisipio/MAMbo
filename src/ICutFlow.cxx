@@ -80,9 +80,10 @@ void CutFlow::AddCounterName( const string& channelName, const string& counterNa
 
   stringstream histTitle;
   histTitle << "Cutflow " << channelName << " " << counterName;
+  
+  m_hm->Book1DHistogramInFolder( "", histName.str(), histTitle.str(), nbins, -0.5, nbins-0.5 );
 
-  m_hm->Book1DHistogram( histName.str(), histTitle.str(), nbins, -0.5, nbins-0.5 );
-
+  //cout << "DEBUG: Histo created in base folder with name " << histName.str() << endl;
   SetCutName( channelName, counterName, 0, "AllEvents" );  
   char buf[32];
   for( unsigned int nc = 1 ; nc <= ncuts ; ++nc ) {
@@ -200,14 +201,17 @@ void CutFlow::SetCutName( const string& channelName, const string& counterName, 
   stringstream histName;
   histName << channelName << "_cutflow_" << counterName;
 
+  //cout<< "DEBUG: histName: "<<histName.str()<< " From: "<<channelName << " " <<counterName << endl;
+  
   TH1 * p_h_cf = m_hm->GetHistogram( histName.str() );
   if( !p_h_cf ) {
     histName.str("");
     histName << channelName << "_" << counterName;
+    //cout<< "DEBUG: First name failed, now trying name: "<<histName.str()<<endl;
     p_h_cf = m_hm->GetHistogram( histName.str() );
   }
   if( !p_h_cf ) {
-    cout << "WARNING: no cut flow histogram defined with name " << histName << endl;
+    cout << "WARNING: no cut flow histogram defined with name " << histName.str() << endl;
     return;
   } 
 

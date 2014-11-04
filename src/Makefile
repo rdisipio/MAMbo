@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-TOOLS   = PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager HEPTopTagger #HEPTopTaggerHelperFunctions
+TOOLS   = PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager HEPTopTagger XMLBin XMLVariable XMLLevel ControlPlotValues JetValues Particle #HEPTopTaggerHelperFunctions
 SRCS    = IHistogramFiller.cxx INtupleWrapper.cxx ICutFlow.cxx $(TOOLS:=.cxx)
 OBJS    = ${SRCS:.cxx=.o}
 
