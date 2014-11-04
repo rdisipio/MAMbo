@@ -138,8 +138,7 @@ class EventDumperMCTruthTopMiniSLResolved
 	  const double t_pT  = this->m_ntuple_parton->parton_topQuark_pt[i];
 	  const double t_eta = this->m_ntuple_parton->parton_topQuark_eta[i];
 	  const double t_phi = this->m_ntuple_parton->parton_topQuark_phi[i];
-	  // const double t_E   = sqrt( t_pT*t_pT + t_pz*t_pz + t_m*t_m );
-	  const double t_m   = 172.5 * GeV;
+	  const double t_m   = this->m_ntuple_parton->parton_topQuark_m[i];
 
 	  const int pid     = this->m_ntuple_parton->parton_topQuark_pdgId[i];
 	  const int status  = this->m_ntuple_parton->parton_topQuark_status[i];
@@ -151,7 +150,7 @@ class EventDumperMCTruthTopMiniSLResolved
 	  HelperFunctions::DumpTruthParticleToEventData( t, pid, status, barcode, t_q, &ed->mctruth );	
 
 	  bool isHadronic = false;
-          if( pid > 0 ) {
+          if( this->m_ntuple_parton->parton_topQuark_isHadronic[i] ) {
 		t1 = t;
           }
           else {

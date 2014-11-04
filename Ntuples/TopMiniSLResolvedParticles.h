@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed Oct 29 11:18:04 2014 by ROOT version 5.34/04
+// Tue Nov  4 14:38:03 2014 by ROOT version 5.34/19
 // from TTree particles/Particle objects and associated decision
-// found on file: /gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/mc.root
+// found on file: /home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.8.0/grid/examples_mc/mc.root
 //////////////////////////////////////////////////////////
 
 #ifndef TopMiniSLResolvedParticles_h
@@ -16,7 +16,6 @@
 // Header file for the classes stored in the TTree if any.
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
-using namespace std;
 
 class TopMiniSLResolvedParticles {
 public :
@@ -115,7 +114,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-  // virtual void     Loop();
+//   virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
@@ -128,9 +127,9 @@ TopMiniSLResolvedParticles::TopMiniSLResolvedParticles(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/mc.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.8.0/grid/examples_mc/mc.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/mc.root");
+         f = new TFile("/home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.8.0/grid/examples_mc/mc.root");
       }
       f->GetObject("particles",tree);
 
