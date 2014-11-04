@@ -1,16 +1,16 @@
 include ../Makefile.inc
 
 # modify the following line HFILLERS = ... according to your needs
-# to add more ntuples, lauch bin/MAMbo-HistogramFillersWizard.py [params]
+# to add more ntuples, lauch bin/MAMbo-HistogramFillersWizard.py [name]
 HFILLERS   = FinalStateObjects
 
 
 # do not change what follows unless you know what you're doing
 
-HFSRC = $(foreach HF, $(HFILLERS), HF$(HF).cxx)
+HFSRC = $(foreach HF, $(HFILLERS), HistogramFiller$(HF).cxx)
 HFOBJ = $(HFSRC:.cxx=.o)
 
-HF%.o: HF%.cxx
+HistogramFiller%.o: HistogramFiller%.cxx
 	@echo Compiling histogram filler $<
 	$(LD) $(DEBUG) $(SOFLAGS) -I${MAMBODIR}/src -c $<	
 
