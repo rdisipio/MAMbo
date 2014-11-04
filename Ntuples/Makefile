@@ -17,6 +17,8 @@ NtupleWrapper%.o: NtupleWrapper%.cxx
 	$(LD) $(DEBUG) $(SOFLAGS) -I${MAMBODIR}/src -I${MAMBODIR}/EventDumpers -c $<
 
 libNtupleWrapper%.so: NtupleWrapper%.o %.o
+	@echo
+	@echo Creating ntuple wrapper library $@
 	$(LD) $(SOFLAGS) -Wl,-export-dynamic $< $(subst NtupleWrapper,,$<) -ldl -o $@
 
 clean:

@@ -48,13 +48,13 @@ void * PluginManager::LoadPlugin( const string& name )
 {
   if( name.empty() ) throw runtime_error( "Please specify plugin name\n" );
 
-  cout << "INFO: loading plugin " << name << endl;
+  cout << "INFO: Loading plugin " << name << " ... ";
   void * handle = dlopen( name.c_str(), RTLD_LAZY );
   if( !handle ) {
      fprintf( stderr, "dlopen failed: %s\n", dlerror() );
      throw runtime_error( "Cannot load plugin. Invalid handler from dlopen\n" );
   }
-  cout << "INFO: Loaded plugin: " << name << endl;
+  cout << "Ok." << endl;
   
   return handle;
 }
@@ -104,7 +104,7 @@ bool PluginManager::LoadCutFlowPlugin( const string& name, const string& path )
   ICutFlowPluginFactory * pluginFactory     = NULL;
 
   fp_MakeCutFlowPlugin    MakeCutFlowPlugin = (fp_MakeCutFlowPlugin)dlsym( handle, "MakeCutFlowPlugin" );
-  if( !MakeCutFlowPlugin ) throw runtime_error( "Invalid pointer to function to create cut flow plugin\n" );
+  if( !MakeCutFlowPlugin ) throw runtime_error( dlerror() );
 
   pluginFactory = MakeCutFlowPlugin();
 
@@ -156,7 +156,7 @@ bool PluginManager::LoadNtupleWrapperPlugin( const string& name, const string& p
   INtupleWrapperPluginFactory * pluginFactory     = NULL;
 
   fp_MakeNtupleWrapperPlugin    MakeNtupleWrapperPlugin = (fp_MakeNtupleWrapperPlugin)dlsym( handle, "MakeNtupleWrapperPlugin" );
-  if( !MakeNtupleWrapperPlugin ) throw runtime_error( "Invalid pointer to function to create ntuple wrapper plugin\n" );
+  if( !MakeNtupleWrapperPlugin ) throw runtime_error( dlerror() );
 
   pluginFactory = MakeNtupleWrapperPlugin();
 
@@ -165,3 +165,53 @@ bool PluginManager::LoadNtupleWrapperPlugin( const string& name, const string& p
   return success;
 }
 
+
+///////////////////////////////////////
+
+
+int PluginManager::LoadAllHistogramFillers()
+{
+  IHistogramFillerPluginFactory * pluginFactory     = NULL;
+
+  int n_plugins_found = 0;
+
+  const string pwd = string( getenv( "PWD" ) );
+  n_plugins_found += FindPlugins( pwd, "HistogramFillers", m_hfillers );
+
+  const string mambodir = string( getenv( "MAMBODIR" ) ) + "/lib/";
+  n_plugins_found += FindPlugins( mambodir, "HistogramFiller", m_hfillers );
+
+  if( n_plugins_found == 0 ) {
+    cout << "WARNING: No histogram filler plugin found" << endl;
+    return 0;
+  }
+  else cout << "INFO: Found " << n_plugins_found << " histogram fillers" << endl;
+
+  int loaded = 0;
+  for( PluginMap::const_iterator pair = m_hfillers.begin() ; pair != m_hfillers.end() ; ++pair ) {
+    if( LoadHistogramFillerPlugin( (*pair).first, (*pair).second ) ) ++loaded;
+  }
+
+  return loaded;
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+bool PluginManager::LoadHistogramFillerPlugin( const string& name, const string& path )
+{
+  bool success = true;
+
+  void* handle = LoadPlugin( path );
+
+  IHistogramFillerPluginFactory * pluginFactory     = NULL;
+
+  pf_MakeHistogramFillerPlugin    MakeHistogramFillerPlugin = (pf_MakeHistogramFillerPlugin)dlsym( handle, "MakeHistogramFillerPlugin" );
+  if( !MakeHistogramFillerPlugin ) throw runtime_error( dlerror() );
+  pluginFactory = MakeHistogramFillerPlugin();
+
+  pluginFactory->Register();
+
+  return success;
+}

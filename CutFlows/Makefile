@@ -17,7 +17,7 @@ CutFlow%.o: CutFlow%.cxx
 	$(LD) $(DEBUG) $(SOFLAGS) -I../src -c $<
 
 libCutFlow%.so: CutFlow%.o
-	@ echo Compiling library $@
+	@echo Compiling cutflow library $@
 	$(LD) $(SOFLAGS) -Wl,-export-dynamic $< -ldl -o $@
 
 clean:

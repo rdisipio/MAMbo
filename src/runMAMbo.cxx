@@ -65,12 +65,15 @@ int main( int argc, char ** argv )
   
   PluginManager * pluginManager = PluginManager::GetHandle();
   pluginManager->LoadAllCutFlows();
+  pluginManager->LoadAllHistogramFillers();
   pluginManager->LoadAllNtupleWrappers();
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
   CF_Factory->Dump();
+
+  HistogramFillersFactory * HF_Factory = HistogramFillersFactory::GetHandle();
+  HF_Factory->Dump();
  
-//  pluginManager->LoadNtupleWrapperPlugin( analysisParams.ntupleName );
   NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
   NW_Factory->Dump();
 

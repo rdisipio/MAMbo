@@ -15,12 +15,17 @@ ntuples:
 cutflows:
 	@$(MAKE) $(MFLAGS) -C CutFlows
 
-install: core ntuples cutflows environment 
+hfillers:
+	@$(MAKE) $(MFLAGS) -C HistogramFillers
+
+
+install: core hfillers ntuples cutflows environment 
 	@ln -sf $(PWD)/src/libMAMbo.so   ./lib/
 	@ln -sf $(PWD)/Ntuples/*.so      ./lib/
 	@ln -sf $(PWD)/CutFlows/*.so     ./lib/
 	@ln -sf $(PWD)/share/control/    ./run/
 	@ln -sf $(PWD)/src/$(EXE)        ./bin/
+	@ln -sf $(PWD)/HistogramFillers/*.so	 ./lib/
 
 environment: ./bin/MAMbo-setenv.sh.template
 	@sed "s!@PREFIX@!$(PWD)!g" $(PWD)/bin/MAMbo-setenv.sh.template  > $(PWD)/bin/MAMbo-setenv.sh
@@ -31,6 +36,7 @@ clean:
 	@cd src      ; $(MAKE) $(MFLAGS) clean
 	@cd Ntuples  ; $(MAKE) $(MFLAGS) clean
 	@cd CutFlows ; $(MAKE) $(MFLAGS) clean
+	@cd HistogramFillers ; $(MAKE) $(MFLAGS) clean
 
 force_look:
 	@true
