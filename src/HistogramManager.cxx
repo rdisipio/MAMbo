@@ -3,7 +3,7 @@
 HistogramManager::HistogramManager() :
   m_sumw2( true )
 {
-    pathNames = new vector<vector<XMLLevel*>>();
+    pathNames = new vector< vector< XMLLevel* > >();
 }
 
 

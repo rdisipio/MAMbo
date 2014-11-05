@@ -1,6 +1,6 @@
 CC=g++
 LD=g++
-CFLAGS  = -fPIC -g 
+CFLAGS  = -fPIC -std=c++11 
 
 #DEBUG = -O3
 DEBUG = -g

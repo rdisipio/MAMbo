@@ -9,10 +9,10 @@
   <plot hpath="reco/reco_4j2b_met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
   <plot	hpath="reco/reco_4j2b_mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_had_m"  xtitle="Reconstructed hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_had_pt" xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/reco_4j2b_pseudotop_reco_had_pt" xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_had_absrap" xtitle="Reconstructed hadronic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_m"  xtitle="Reconstructed leptonic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_pt" xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_pt" xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_absrap" xtitle="Reconstructed leptonic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
   <plot hpath="reco/reco_4j2b_pseudottbar_reco_m"   xtitle="Reconstructed m_{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="log"    /> 
   <plot hpath="reco/reco_4j2b_pseudottbar_reco_pt"  xtitle="Reconstructed p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="log"    />

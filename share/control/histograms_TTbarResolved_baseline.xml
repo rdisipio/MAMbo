@@ -42,7 +42,7 @@
         </Variable>
         <Variable name="absrap" title="abs rapidity |y_{t}|" folder="4j2b" > 
             <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/>
-            <Bin id="1" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5"/>
+	    <Bin id="1" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
         </Variable>
         <Variable name="mlb" title="Reco (b,l) invariant mass [GeV]" folder="4j2b" >
             <Bin nbins="50" xmin="0." xmax="300." />

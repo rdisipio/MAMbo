@@ -24,6 +24,7 @@ jobdir=${WORKDIR}/jobs
 logdir=${WORKDIR}/logs
 outdir=${WORKDIR}/output
 queue=T3_BO
+dryrun=0
 
 jobname=MAMboJob_${SUBMISSION_TIMESTAMP}
 paramsfile=UNSET
@@ -40,6 +41,7 @@ case $1 in
     -o) outfilename=$2         ; shift 2;;
     -q) queue=$2               ; shift 2;;
     -j) jobname=$2             ; shift 2;;
+    -d) dryrun=$2              ; shift 2;;
     -h) print_help             ; shift 2;;
     *)                           shift 1;;
 esac
@@ -84,4 +86,9 @@ EOF
 
 chmod +x $jobfile
 
-bsub -q $queue -oe -oo $logfile -J $jobname $jobfile
+if [[ "${dryrun}" == "0" ]] 
+then
+  bsub -q $queue -oe -oo $logfile -J $jobname $jobfile
+else
+  echo "Dry run. See ${jobfile}"
+fi
