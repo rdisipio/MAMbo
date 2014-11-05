@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <plots tag="el" latex="e+jets" >
-  <plot hpath="reco/reco_4j2b_lep_pt"                xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="log" rebin="2"/>
-  <plot hpath="reco/reco_4j2b_lep_eta"               xtitle="Lepton pseudorapidity"                         ytitle="Events / Pseudorapidity" scale="linear" />
-  <plot hpath="reco/reco_4j2b_jet_pt" 	       	     xtitle="AntiKt4 jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="log" rebin="2" />
-  <plot hpath="reco/reco_4j2b_jet_eta"        	     xtitle="AntiKt4 jet pseudorapidity"   	       	       	     ytitle="Events / Pseudorapidity" scale="linear" />
-  <plot hpath="reco/reco_4j2b_fjet_pt"               xtitle="Fat jet transverse momentum [GeV]"             ytitle="Events / GeV"  scale="log" />
-  <plot hpath="reco/reco_4j2b_met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
-  <plot	hpath="reco/reco_4j2b_mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_had_m"  xtitle="Reconstructed hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_had_pt" xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_had_absrap" xtitle="Reconstructed hadronic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_m"  xtitle="Reconstructed leptonic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_pt" xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudotop_reco_lep_absrap" xtitle="Reconstructed leptonic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
-  <plot hpath="reco/reco_4j2b_pseudottbar_reco_m"   xtitle="Reconstructed m_{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="log"    /> 
-  <plot hpath="reco/reco_4j2b_pseudottbar_reco_pt"  xtitle="Reconstructed p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="log"    />
-  <plot hpath="reco/reco_4j2b_pseudottbar_reco_absrap" xtitle="Reconstructed |y_{t#bar{t}}|"                ytitle="Events / Rapidity" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/lep_pt"        xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="log" rebin="2"/>
+  <plot hpath="reco/cutflow/afterCuts/lep_eta"               xtitle="Lepton pseudorapidity"                         ytitle="Events / Pseudorapidity" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_pt" 	       	     xtitle="AntiKt4 jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="log" rebin="2" />
+  <plot hpath="reco/cutflow/afterCuts/jet_eta"        	     xtitle="AntiKt4 jet pseudorapidity"   	       	       	     ytitle="Events / Pseudorapidity" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/fjet_pt"               xtitle="Fat jet transverse momentum [GeV]"             ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/cutflow/afterCuts/met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
+  <plot	hpath="reco/cutflow/afterCuts/mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/m"              		     xtitle="Reconstructed hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/pt_0"			     xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/absrap"			     xtitle="Reconstructed hadronic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/m"			     xtitle="Reconstructed leptonic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/pt_0" 			xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/absrap"			xtitle="Reconstructed leptonic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/tt/m"			xtitle="Reconstructed m_{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="log"    />
+  <plot hpath="reco/4j2b/tt/pt"			xtitle="Reconstructed p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="log"    />
+  <plot hpath="reco/4j2b/tt/absrap"		xtitle="Reconstructed |y_{t#bar{t}}|"                ytitle="Events / Rapidity" scale="linear" />
 </plots>
 <samples>
   <sample name="data"        type="data"        description="Data"                color="1"     fillstyle="0"    linewidth="0" />
-  <sample name="ttbar"       type="signal"      description="t#bar{t} (non full-had)"   color="32"    fillstyle="1001" linewidth="2" />
-  <sample name="singletop"   type="background"  description="Single top"          color="4"     fillstyle="1001" linewidth="2" />
-  <sample name="wjets"       type="background"  description="W+jets"              color="801"   fillstyle="1001" linewidth="2" /> 
+  <sample name="DiTop"       type="signal"      description="t#bar{t} (non full-had)"   color="32"    fillstyle="1001" linewidth="2" />
+  <sample name="SingleTop"   type="background"  description="Single top"          color="4"     fillstyle="1001" linewidth="2" />
+  <sample name="Wjets"       type="background"  description="W+jets"              color="801"   fillstyle="1001" linewidth="2" /> 
   <sample name="uncertainty" type="uncertainty" description="Stat + sys. uncert." color="1"     fillstyle="3004" linewidth="2" />  -->
 </samples>
 <inputfiles>
-<!--  <file sample="data"         path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.data.egamma.el.histograms.root" /> -->
-<!--   <sample name="ttbar"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.DiTop.el.histograms.root" /> -->
-<!--  <file	sample="singletop"    path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.singletop.el.histograms.root" /> -->
-<!--  <file	sample="uncertainty"  path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.uncertainty.el.histograms.root" /> -->
-  <file sample="data"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.data.Egamma.el.histograms.root" />
-  <file sample="ttbar         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.DoTop.el.histograms.root" />
-  <file sample="singletop"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.SingleTop.el.histograms.root" />
-  <file sample="wjets"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.Wjets.el.histograms.root" />
-  <file	sample="uncertainty"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_Miho/tt_diffxs_8TeV_resolved_Miho.uncertainty.el.histograms.root" />
-
+  <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_boosted/tt_diffxs_8TeV.data.Egamma.el.histograms.root"    />
+  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_boosted/tt_diffxs_8TeV.mc.DiTop.el.histograms.root"       />
+  <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_boosted/tt_diffxs_8TeV.mc.SingleTop.el.histograms.root"   />
+  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_boosted/tt_diffxs_8TeV.mc.Wjets.el.histograms.root"       />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_boosted/tt_diffxs_8TeV.mc.Uncertainty.el.histograms.root" />
 </inputfiles>
 </document>

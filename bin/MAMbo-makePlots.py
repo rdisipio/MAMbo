@@ -99,7 +99,7 @@ def ReadConfiguration( configFileName ):
    for node in tree.iter( "plot" ):
 
       hpath = node.attrib.get('hpath')
-      hname = plot_tag + "_" + hpath.split('/')[-1]   
+      hname = plot_tag + "_" + hpath.replace('/', '_')   
 
       plots_configuration[hname] = PlotWrapper()
       plots_configuration[hname].hname  = hname
