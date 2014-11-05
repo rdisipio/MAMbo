@@ -11,10 +11,9 @@
         <Type name="matching" inFolder="reco"/>
     </Level>
     <Level> <!--Particle-->
-        <Type name="topL" />
-        <Type name="topH" />
-        <Type name="tt" />
-        <Type name="global" />
+        <Type name="topL" inFolder="4j2b,matching"/>
+        <Type name="topH" inFolder="4j2b,matching"/>
+        <Type name="tt" inFolder="4j2b,matching"/>
         <Type name="beforeCuts" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
         <Type name="afterCuts" inFolder="cutflow"/>

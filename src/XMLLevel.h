@@ -12,6 +12,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include "Commons.h"
+#include "HelperFunctions.h"
 
 class XMLLevel {
 public:
@@ -21,7 +22,7 @@ public:
     virtual ~XMLLevel();
     
     string name;
-    string inFolder;
+    vector<string> inFolder;
     
 private:
 

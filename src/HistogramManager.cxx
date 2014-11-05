@@ -74,16 +74,23 @@ TH1F* HistogramManager::Book1DHistogram( const string& name, const string& title
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
+bool IsParentInFolderList(string parentName, vector<string> list){
+    for (string s : list ){
+        if( s.compare(parentName) == 0){
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 void HistogramManager::BookHistograms( const xmlNodePtr xml )
 {  
     for (XMLLevel* path1 : pathNames->at(0)){        
         for (XMLLevel* path2 : pathNames->at(1)){
-            if (path2->inFolder.empty() || path2->inFolder.compare(path1->name) == 0) {
+            if (path2->inFolder.empty() || IsParentInFolderList(path1->name, path2->inFolder)) {
                 for (XMLLevel* path3 : pathNames->at(2)){
-                    if (path3->inFolder.empty() || path3->inFolder.compare(path2->name) == 0) {                    
+                    if (path3->inFolder.empty() || IsParentInFolderList(path2->name, path3->inFolder)) {                    
                         string path = path1->name + "/" + path2->name + "/" + path3->name;                        
                         currentDir = CreatePath( path );                        
                         

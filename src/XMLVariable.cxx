@@ -6,7 +6,6 @@
  */
 
 #include "XMLVariable.h"
-#include "Commons.h"
 
 template<class XMLBin>
 class HasElement {

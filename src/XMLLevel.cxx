@@ -7,7 +7,6 @@
 
 #include "XMLLevel.h"
 
-
 XMLLevel::XMLLevel() {
 }
 
@@ -16,9 +15,9 @@ XMLLevel::XMLLevel(xmlNodePtr nodeType) {
 
     const char* parentFolder = (const char*)xmlGetProp( nodeType, BAD_CAST "inFolder" );
     if(parentFolder != NULL){
-        inFolder = (string)(parentFolder);
-    }
-    
+        string allfolders = string(parentFolder); 
+        HelperFunctions::Tokenize( allfolders, inFolder, "," );
+    } 
 }
 
 XMLLevel::XMLLevel(const XMLLevel& orig) {
