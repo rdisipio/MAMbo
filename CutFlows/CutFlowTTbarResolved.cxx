@@ -578,11 +578,15 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
 /////////////////////////////////////////
 
 void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, const double weight) {
+
+
+  if (ed->truth_leptons.n > 0) {
     TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
     TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );
     TLorentzVector lb = lep + lep_bjet;
-
     FillHistogramsPseudoTop(ed->reco, 3, "particle", "topL", weight, lb.M());
+  }
+
     FillHistogramsPseudoTop(ed->reco, 4, "particle", "topH", weight);
     FillHistogramsPseudoTop(ed->reco, 5, "particle", "tt", weight);
 }
