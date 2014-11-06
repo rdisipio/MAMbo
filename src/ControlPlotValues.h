@@ -29,8 +29,8 @@ public:
     int    fjet_n;
     double ETmiss;  
     double mwt;     
-    vector<JetValues> jets;
-    vector<JetValues> fatJets;
+    vector<JetValues*> jets;
+    vector<JetValues*> fatJets;
     
 private:
 

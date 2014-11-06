@@ -310,21 +310,21 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     values.ETmiss  = ed->MET.et;
     values.mwt     = ed->MET.mwt;
     for (int j = 0; j < ed->jets.n; ++j) {
-        JetValues jet;
-        jet.pt  = ed->jets.pT.at(j);
-        jet.eta = ed->jets.eta.at(j);
-        jet.phi = ed->jets.phi.at(j);
-        jet.E   = ed->jets.E.at(j);
-        jet.m   = ed->jets.m.at(j);
+        JetValues* jet = new JetValues();
+        jet->pt  = ed->jets.pT.at(j);
+        jet->eta = ed->jets.eta.at(j);
+        jet->phi = ed->jets.phi.at(j);
+        jet->E   = ed->jets.E.at(j);
+        jet->m   = ed->jets.m.at(j);
         values.jets.push_back(jet);
     }
     for (int fj = 0; fj < ed->fjets.n; ++fj) {
-        JetValues jet;
-        jet.pt  = ed->fjets.pT.at(fj);
-        jet.eta = ed->fjets.eta.at(fj);
-        jet.phi = ed->fjets.phi.at(fj);
-        jet.E   = ed->fjets.E.at(fj);
-        jet.m   = ed->fjets.m.at(fj);
+        JetValues* jet = new JetValues();
+        jet->pt  = ed->fjets.pT.at(fj);
+        jet->eta = ed->fjets.eta.at(fj);
+        jet->phi = ed->fjets.phi.at(fj);
+        jet->E   = ed->fjets.E.at(fj);
+        jet->m   = ed->fjets.m.at(fj);
         values.fatJets.push_back(jet);
     }   
     // 0 all events
@@ -420,7 +420,7 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
         jet.phi = ed->truth_jets.phi.at(j);
         jet.E   = ed->truth_jets.E.at(j);
         jet.m   = ed->truth_jets.m.at(j);
-        values.jets.push_back(jet);
+        values.jets.push_back(&jet);
     }
     for (int fj = 0; fj < ed->truth_fjets.n; ++fj) {
         JetValues jet;
@@ -429,7 +429,7 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
         jet.phi = ed->truth_fjets.phi.at(fj);
         jet.E   = ed->truth_fjets.E.at(fj);
         jet.m   = ed->truth_fjets.m.at(fj);
-        values.fatJets.push_back(jet);
+        values.fatJets.push_back(&jet);
     }
     
     // 0 All events
@@ -515,22 +515,22 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
 
     m_hm->FillHistograms( path + "jet_n",  values.jet_n, values.weight );
     for (int j = 0; j < values.jets.size(); ++j) {
-        JetValues jet = values.jets.at(j);
-        m_hm->FillHistograms( path + "jet_eta" ,  jet.eta, values.weight );
-        m_hm->FillHistograms( path + "jet_pt",  jet.pt / GeV, values.weight );
-        m_hm->FillHistograms( path + "jet_phi" , jet.phi, values.weight );
-        m_hm->FillHistograms( path + "jet_E", jet.E / GeV, values.weight );
-        m_hm->FillHistograms( path + "jet_m" ,  jet.m / GeV, values.weight );
+        JetValues* jet = values.jets.at(j);
+        m_hm->FillHistograms( path + "jet_eta" ,  jet->eta, values.weight );
+        m_hm->FillHistograms( path + "jet_pt",  jet->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "jet_phi" , jet->phi, values.weight );
+        m_hm->FillHistograms( path + "jet_E", jet->E / GeV, values.weight );
+        m_hm->FillHistograms( path + "jet_m" ,  jet->m / GeV, values.weight );
     }
 
     m_hm->FillHistograms( path + "fjet_n", values.fjet_n, values.weight );
     for (int fj = 0; fj < values.fatJets.size(); ++fj) {
-        JetValues jet = values.fatJets.at(fj);
-        m_hm->FillHistograms( path + "fjet_eta",  jet.eta, values.weight );
-        m_hm->FillHistograms( path + "fjet_pt",  jet.pt / GeV, values.weight );
-        m_hm->FillHistograms( path + "fjet_phi",  jet.phi, values.weight );
-        m_hm->FillHistograms( path + "fjet_E",  jet.E / GeV, values.weight );
-        m_hm->FillHistograms( path + "fjet_m",  jet.m / GeV, values.weight );
+        JetValues* jet = values.fatJets.at(fj);
+        m_hm->FillHistograms( path + "fjet_eta",  jet->eta, values.weight );
+        m_hm->FillHistograms( path + "fjet_pt",  jet->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "fjet_phi",  jet->phi, values.weight );
+        m_hm->FillHistograms( path + "fjet_E",  jet->E / GeV, values.weight );
+        m_hm->FillHistograms( path + "fjet_m",  jet->m / GeV, values.weight );
     }
 }
 

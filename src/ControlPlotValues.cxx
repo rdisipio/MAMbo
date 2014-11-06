@@ -14,5 +14,6 @@ ControlPlotValues::ControlPlotValues(const ControlPlotValues& orig) {
 }
 
 ControlPlotValues::~ControlPlotValues() {
+
 }
 
