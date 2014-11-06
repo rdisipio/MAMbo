@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms>
+  <histogram hpath="reco/cutflow/afterCuts/lep_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/lep_eta" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_eta" />
+  <histogram hpath="reco/cutflow/afterCuts/met_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/mtw" />
+  <histogram hpath="reco/cutflow/afterCuts/fjet_pt" />
+  <histogram hpath="reco/4j2b/topH/m" />
+  <histogram hpath="reco/4j2b/topH/pt_0" />
+  <histogram hpath="reco/4j2b/topH/absrap" />
+  <histogram hpath="reco/4j2b/topL/m" />
+  <histogram hpath="reco/4j2b/topL/pt_0" />
+  <histogram hpath="reco/4j2b/topL/absrap" />
+  <histogram hpath="reco/4j2b/tt/m" />
+  <histogram hpath="reco/4j2b/tt/pt" />
+  <histogram hpath="reco/4j2b/tt/absrap" />
+</histograms>
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_01"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_02"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_03"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_04"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_05"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_06"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_07"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_08"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.04" />
+  <file sample="ttbar_nofullhad_05" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.05" />
+  <file sample="ttbar_nofullhad_06" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.06" />
+  <file sample="ttbar_nofullhad_07" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.07" />
+  <file sample="ttbar_nofullhad_08" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.el.histograms.root.08" />
+</files>
+</document>
