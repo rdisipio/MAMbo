@@ -35,7 +35,8 @@ class NtupleWrapperTopMiniSLResolved : public NtupleWrapper< TopMiniSLResolved >
    EventDumperJets<TopMiniSLResolved>        * m_dumper_jets;
    EventDumperMCTruthTopMiniSLResolved<TopMiniSLResolvedParticles, TopMiniSLResolvedPartons>  * m_dumper_mctruth;
 
-   TFile                      * m_mcfile;
+   TChain                     * m_particles;
+   TChain                     * m_partons;
    TopMiniSLResolvedParticles * m_ntuple_particle;
    TopMiniSLResolvedPartons   * m_ntuple_parton;
 };

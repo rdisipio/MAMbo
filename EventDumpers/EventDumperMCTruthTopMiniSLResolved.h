@@ -18,11 +18,14 @@ class EventDumperMCTruthTopMiniSLResolved
  public: 
     void SetNtupleParticle( NTUP_PARTICLE * ntuple ) { 
         m_ntuple_particle = ntuple; 
- 	m_ntuple_particle->fChain->BuildIndex( "eventNumber" );
+	cout << "INFO: building index for particles chain..." << endl;
+ 	int res = m_ntuple_particle->fChain->BuildIndex( "eventNumber" );
+	cout << "INFO: returned value: " << res << endl;
     };
     
     void SetNtupleParton( NTUP_PARTON * ntuple ) {
         m_ntuple_parton = ntuple;
+ 	cout << "INFO: building index for partons chain..." << endl;
         m_ntuple_parton->fChain->BuildIndex( "eventNumber" );
     };
 

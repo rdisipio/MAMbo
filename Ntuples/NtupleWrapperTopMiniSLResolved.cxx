@@ -2,7 +2,7 @@
 
 NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisParams_t analysisParameters ) :
   NtupleWrapper< TopMiniSLResolved >( analysisParameters ), 
-  m_mcfile(NULL), m_ntuple_particle(NULL), m_ntuple_parton(NULL)
+  m_particles(NULL), m_partons(NULL), m_ntuple_particle(NULL), m_ntuple_parton(NULL)
 {
    m_dumper_leptons = new EventDumperLeptons<TopMiniSLResolved>();
    m_dumper_leptons->SetNtuple( m_ntuple );
@@ -22,14 +22,25 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
 
    cout << "INFO: MC tree read from " << mcfilename << endl;
 
-   m_mcfile = TFile::Open( mcfilename.c_str() ); 
-   if( !m_mcfile ) throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid MC file" );
+   m_particles = new TChain( treename_particle.c_str() );  
+   m_partons   = new TChain( treename_parton.c_str() );
 
-   m_ntuple_particle = new TopMiniSLResolvedParticles( (TTree*)m_mcfile->Get(treename_particle.c_str()) );
-   m_ntuple_parton   = new TopMiniSLResolvedPartons( (TTree*)m_mcfile->Get(treename_parton.c_str()) );
+   ifstream input( mcfilename.c_str(), ios_base::in );
+   string fName;
+   while( std::getline( input, fName ) ) {
+      if( fName.empty() ) continue;
+      cout << "INFO: Input file: " << fName << '\n';
+      m_particles->AddFile( fName.c_str() );
+      m_partons->AddFile( fName.c_str() );
+   }
+   input.close();
 
-   if( !m_ntuple_particle ) throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid particle tree." );
-   if( !m_ntuple_parton )   throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid parton tree." );
+
+   m_ntuple_particle = new TopMiniSLResolvedParticles( m_particles );
+   m_ntuple_parton   = new TopMiniSLResolvedPartons( m_partons );
+
+   if( !m_ntuple_particle ) throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid particles ROOT tree." );
+   if( !m_ntuple_parton )   throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid partons ROOT tree." );
 
    m_dumper_mctruth = new EventDumperMCTruthTopMiniSLResolved<TopMiniSLResolvedParticles, TopMiniSLResolvedPartons>(); 
    m_dumper_mctruth->SetNtupleParticle( m_ntuple_particle ); 
@@ -42,13 +53,11 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
 
 NtupleWrapperTopMiniSLResolved::~NtupleWrapperTopMiniSLResolved()
 {
-   if( m_mcfile ) {
-     m_mcfile->Close();
-     SAFE_DELETE( m_mcfile );
-     SAFE_DELETE( m_dumper_mctruth );
-     SAFE_DELETE( m_ntuple_particle );
-     SAFE_DELETE( m_ntuple_parton );
-   }
+   SAFE_DELETE( m_particles );
+   SAFE_DELETE( m_partons );    
+   SAFE_DELETE( m_dumper_mctruth );
+   SAFE_DELETE( m_ntuple_particle );
+   SAFE_DELETE( m_ntuple_parton );
 
    SAFE_DELETE( m_dumper_leptons );
    SAFE_DELETE( m_dumper_jets );
