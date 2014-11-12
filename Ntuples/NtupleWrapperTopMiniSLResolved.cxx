@@ -159,7 +159,7 @@ bool NtupleWrapperTopMiniSLResolved::MakeEventTruth( EventData * ed )
   unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
   if( !isMCSignal ) return success;
   
-  m_dumper_mctruth->GetEntryWithIndex( ed->info.eventNumber );
+  m_dumper_mctruth->GetEntryWithIndex( ed->info.runNumber, ed->info.eventNumber );
 
   m_dumper_mctruth->DumpEventLeptons( ed );
   m_dumper_mctruth->DumpEventMET( ed );
