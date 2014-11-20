@@ -74,7 +74,7 @@ TH1F* HistogramManager::Book1DHistogram( const string& name, const string& title
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-bool IsParentInFolderList(string parentName, vector<string> list){
+bool HistogramManager::IsParentInFolderList(string parentName, vector<string> list){
     for (string s : list ){
         if( s.compare(parentName) == 0){
             return true;
@@ -203,13 +203,18 @@ void HistogramManager::BookMatrices(const string path, const xmlNodePtr xml )
         if (VariableNameAndFolderCondition(variable, variableName, path)){
             vector<XMLBin*> bins = variable->GetBinsInPath(path);
             for (XMLBin* bin : bins){
-                CreateAllMatricesForVariableAndBin(path, variable, bin);
+                string matrixNameSuffix = "";
+                if (bins.size() > 1) {
+                    matrixNameSuffix += "_" + std::to_string(bin->id);
+                }  
+                                
+                CreateAllMatricesForVariableAndBin(path, variable, bin, matrixNameSuffix);
             }
         }
     }    
 }
 
-void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin){
+void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin, string matrixNameSuffix){
     StringVector_t dirs;
     HelperFunctions::Tokenize( path, dirs, "/" );
   
@@ -220,10 +225,7 @@ void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XML
             string matrixName = "Matrix_" + currentLevel + "_" + level->name + "_" + variable->name;
             string matrixTitle = "Matrix " + currentLevel + "/" + level->name + " " + variable->title;
 
-            string matrixNameWithBin = matrixName;
-            if (bin->id > 0) {
-                matrixNameWithBin += "_" + std::to_string(bin->id);
-            }            
+            string matrixNameWithBin = matrixName + matrixNameSuffix;
 
             TH2F* h;
             if (bin->edges.size() > 0){

@@ -11,6 +11,7 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <iostream>
 
 // Header file for the classes stored in the TTree if any.
 
@@ -177,7 +178,8 @@ TopMiniSLResolved::TopMiniSLResolved(TTree *tree) : fChain(0)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
-   if (tree == 0) {
+/*
+ *    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root");
       if (!f || !f->IsOpen()) {
          f = new TFile("/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root");
@@ -185,7 +187,9 @@ TopMiniSLResolved::TopMiniSLResolved(TTree *tree) : fChain(0)
       f->GetObject("mini",tree);
 
    }
+   //cout <<"Tree name is " << tree->GetName() << endl;
    Init(tree);
+ * */
 }
 
 TopMiniSLResolved::~TopMiniSLResolved()

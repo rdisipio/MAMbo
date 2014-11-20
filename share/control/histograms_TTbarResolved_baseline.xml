@@ -37,7 +37,8 @@
         </Variable>
         <Variable name="m"      title="mass [GeV]" folder="4j2b" > 
             <Bin id="0" nbins="50" xmin="0." xmax="600." particle="top"/>
-            <Bin id="1" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" />
+            <Bin id="1" nbins="50" xmin="160." xmax="185." particle="top"/> 
+            <Bin id="2" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" />
         </Variable>
         <Variable name="absrap" title="abs rapidity |y_{t}|" folder="4j2b" > 
             <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/>

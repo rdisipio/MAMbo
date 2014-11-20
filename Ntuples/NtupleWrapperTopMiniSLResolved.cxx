@@ -42,6 +42,8 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
    if( !m_ntuple_particle ) throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid particles ROOT tree." );
    if( !m_ntuple_parton )   throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid partons ROOT tree." );
 
+   cout<<"Event Number "<<m_ntuple_particle->eventNumber<<endl;
+   
    m_dumper_mctruth = new EventDumperMCTruthTopMiniSLResolved<TopMiniSLResolvedParticles, TopMiniSLResolvedPartons>(); 
    m_dumper_mctruth->SetNtupleParticle( m_ntuple_particle ); 
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 

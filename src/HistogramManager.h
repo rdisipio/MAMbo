@@ -31,7 +31,7 @@ class HistogramManager
   void BookMatrices( const string path, const xmlNodePtr xml );
   void MoveHistogramtToFolder( TH1* h, const string fullPath );
 
-  void CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin);
+  void CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin, string matrixNameSuffix);
 
   TH1F* Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
   TH1F* Book1DHistogram( const string& name, const string& title, int nbins, const vector<double>  xedges );
@@ -76,6 +76,7 @@ private :
   vector<XMLLevel*> FillLevelNames(xmlNodePtr nodeType);
   bool VariableNameAndFolderCondition(XMLVariable* variable, string variableName, string path);
   bool FolderCondition(vector<string> folders, string path);
+  bool IsParentInFolderList(string parentName, vector<string> list);
 };
 
 

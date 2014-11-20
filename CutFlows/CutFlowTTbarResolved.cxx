@@ -678,7 +678,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     m_hm->FillMatrices( path + "_pt", px.pt / GeV, py.pt / GeV, weight);
     m_hm->FillMatrices( path + "_eta", px.eta, py.eta, weight);
     m_hm->FillMatrices( path + "_phi", px.phi, py.phi, weight);
-    m_hm->FillMatrices( path + "_m", px.m, py.m, weight);
+    m_hm->FillMatrices( path + "_m", px.m  / GeV, py.m  / GeV, weight);
     m_hm->FillMatrices( path + "_absrap", fabs(px.y), fabs(py.y), weight);
     m_hm->FillMatrices( path + "_E", px.E / GeV, py.E / GeV, weight);
   }
