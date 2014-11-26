@@ -247,7 +247,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 	if (Debug) cout << "  Here8" << endl;
 
-      
+       
 	// rds:
 	m_pseudotop_matching_reco2particle->SetEventData(ed);
 	m_pseudotop_matching_reco2particle->DoMatching(0, 3, "pseudotop_lep");
@@ -666,6 +666,8 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     Particle particleTopH(ed->reco, 4);
     Particle particleTT(ed->reco, 5);
 
+    m_hm->FillHistograms("reco/difference/topH/ptdiff", (recoTopH.pt - particleTopH.pt) / GeV, weight);
+    
     FillMatrix("reco/4j2b/topL/Matrix_reco_particle", recoTopL, particleTopL, weight);
     FillMatrix("reco/4j2b/topH/Matrix_reco_particle", recoTopH, particleTopH, weight);
     FillMatrix("reco/4j2b/tt/Matrix_reco_particle", recoTT, particleTT, weight);     

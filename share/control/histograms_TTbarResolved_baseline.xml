@@ -9,14 +9,15 @@
         <Type name="4j2b" />
         <Type name="cutflow" />
         <Type name="matching" inFolder="reco"/>
+        <Type name="difference" inFolder="reco"/>
     </Level>
     <Level> <!--Particle-->
-        <Type name="topL" inFolder="4j2b,matching"/>
-        <Type name="topH" inFolder="4j2b,matching"/>
-        <Type name="tt" inFolder="4j2b,matching"/>
+        <Type name="topL" inFolder="4j2b,matching,difference"/>
+        <Type name="topH" inFolder="4j2b,matching,difference"/>
+        <Type name="tt" inFolder="4j2b,matching,difference"/>
         <Type name="beforeCuts" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
-        <Type name="afterCuts" inFolder="cutflow"/>
+        <Type name="afterCuts" inFolder="cutflow"/>        
     </Level>
     <Variables>
         <Variable name="pt" title="p_{T} [GeV]" >
@@ -26,6 +27,9 @@
             <Bin id="3" nbins="9"  edges="0,50,100,140,180,220,260,300,350,1000" particle="top"/>            
             <Bin id="4" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>
         </Variable>
+        <Variables name="ptdiff" title="p_{t} difference [GeV]" folder="difference">
+            <Bin id="0" nbins="200" xmin="-100" xmax="100" />
+        </Variables>
         <Variable name="eta" title="pseudorapidity #eta" folder="4j2b" > 
             <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
         </Variable>
@@ -124,6 +128,7 @@
         </Variable>
   </Variables>        
   <Histos>
+        <TH1F variable="ptdiff"/>
         <TH1F variable="pt" />
         <TH1F variable="eta" binId="0"/>
         <TH1F variable="phi" binId="0"/>
