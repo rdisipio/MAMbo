@@ -2,7 +2,7 @@
 // This class has been automatically generated on
 // Mon Oct 27 15:16:11 2014 by ROOT version 5.34/04
 // from TTree mini/4-vectors + variables required for scaling factors
-// found on file: /gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root
+
 //////////////////////////////////////////////////////////
 
 #ifndef TopMiniSLResolved_h
@@ -180,9 +180,16 @@ TopMiniSLResolved::TopMiniSLResolved(TTree *tree) : fChain(0)
 // used to generate this class and read the Tree.
 /*
  *    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root");
+     // TString fname = "/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root";
+     // test by jiri:
+     //TString fname = "/afs/cern.ch/user/q/qitek/qitek/TopResolved8TeV_trees/$ hadd mc.root";
+     // marino's file: 
+     //     TString fname = "/afs/cern.ch/user/m/mromano/public/user.mromano.4336192._000011.mc.root";
+     TString fname = "/afs/cern.ch/work/j/jpacalt/TopResolved8TeV_trees/110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_mc.root";
+
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fname);
       if (!f || !f->IsOpen()) {
-         f = new TFile("/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root");
+         f = new TFile(fname);
       }
       f->GetObject("mini",tree);
 

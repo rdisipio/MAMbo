@@ -28,6 +28,7 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
    ifstream input( mcfilename.c_str(), ios_base::in );
    string fName;
    while( std::getline( input, fName ) ) {
+     //     cout << "INFO: File list: " << mcfilename.c_str() << endl;
       if( fName.empty() ) continue;
       cout << "INFO: Input file: " << fName << '\n';
       m_particles->AddFile( fName.c_str() );

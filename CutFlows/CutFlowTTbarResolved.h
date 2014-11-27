@@ -26,8 +26,8 @@ class CutFlowTTbarResolved : public CutFlow
   void FillHistogramsControlPlotsReco( ControlPlotValues& values );
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
   
-  void FillHistogramsPseudotopReco(      EventData * ed, const double weight = 1. );
-  void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopReco(      EventData * ed, const double weight = 1., string level = "reco" );
+  void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1., string level = "particle" );
   void FillHistogramsPseudotopParton(    EventData * ed, const double weight = 1. );
   
   void FillHistogramsPseudotopResponseRecoToParticle(    EventData * ed, const double weight = 1. );
@@ -43,6 +43,8 @@ class CutFlowTTbarResolved : public CutFlow
   
   void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mbl = 0);
   void FillHistogramsPseudoTopTrue(EventData::Truth_t& particle, int index, string level, string topType, const double weight);
+  void FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
+
 
  protected:
     PseudoTopReconstruction * m_pseudotop_reco;

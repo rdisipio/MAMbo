@@ -11,6 +11,7 @@
 #include "EventData.h"
 #include "PhysicsHelperFunctions.h"
 #include "Commons.h"
+#include "TLorentzVector.h"
 
 class Particle {
 public:
@@ -20,6 +21,8 @@ public:
     Particle(const Particle& orig);
     virtual ~Particle();
     
+    TLorentzVector MakeLorentz();
+
     double pt;
     double eta;
     double phi;

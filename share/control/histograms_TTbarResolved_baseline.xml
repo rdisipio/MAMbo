@@ -3,18 +3,20 @@
         <Type name="reco" />
         <Type name="particle" />
         <Type name="parton" />
+        <Type name="particleNOTreco" />
+        <Type name="recoNOTparticle" />
     </Level>
     <Level> <!--Region-->
         <!--Type name="4j1b" /-->
         <Type name="4j2b" />
         <Type name="cutflow" />
         <Type name="matching" inFolder="reco"/>
-        <Type name="difference" inFolder="reco"/>
     </Level>
     <Level> <!--Particle-->
-        <Type name="topL" inFolder="4j2b,matching,difference"/>
-        <Type name="topH" inFolder="4j2b,matching,difference"/>
-        <Type name="tt" inFolder="4j2b,matching,difference"/>
+        <Type name="topL" inFolder="4j2b,matching"/>
+        <Type name="topH" inFolder="4j2b,matching"/>
+        <Type name="tt" inFolder="4j2b,matching"/>
+        <Type name="difference" inFolder="4j2b"/>
         <Type name="beforeCuts" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
         <Type name="afterCuts" inFolder="cutflow"/>        
@@ -27,9 +29,11 @@
             <Bin id="3" nbins="9"  edges="0,50,100,140,180,220,260,300,350,1000" particle="top"/>            
             <Bin id="4" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>
         </Variable>
+
         <Variables name="ptdiff" title="p_{t} difference [GeV]" folder="difference">
             <Bin id="0" nbins="200" xmin="-100" xmax="100" />
         </Variables>
+
         <Variable name="eta" title="pseudorapidity #eta" folder="4j2b" > 
             <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
         </Variable>
@@ -126,6 +130,39 @@
         <Variable name="delta_m" title="Matching #Delta m" folder="matching">
             <Bin nbins="20" xmin="-200." xmax="200." />
         </Variable>
+
+
+	<!-- JK top pair distributions -->
+        <Variable name="z_ttbar" title="z_{t#bar{t}}" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="0." xmax="3." />
+        </Variable>
+        <Variable name="Pout" title="p_{out}" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="-300." xmax="300." />
+        </Variable>
+        <Variable name="Chi_ttbar" title="#chi_{out}" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="14." xmax="3." />
+        </Variable>
+	<Variable name="Yboost" title="y_{boost}" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="0." xmax="2." />
+        </Variable>
+	<Variable name="topLCosThetaStar" title="leptonic top cos #theta^{*};cos #theta*;" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="-1." xmax="1." />
+        </Variable>
+	<Variable name="topHCosThetaStar" title="hadronic top cos #theta^{*};cos #theta*;" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="-1." xmax="1." />
+        </Variable>
+	<Variable name="TopCosOpeningAngle" title="Tops cos #theta_{12};Top's cos #theta_{12};" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="-1." xmax="1." />
+        </Variable>
+	<Variable name="Salam_ttbar" title="SalamDelta;[3*p_{T}^{(1)}-p_{T}^{(2)}] / H_{T}" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="-1." xmax="3." />
+        </Variable>
+	<Variable name="dPhi_ttbar" title="DeltaPhi_ttbar;#Delta#phi_{t#bar{t}}" folder="4j2b" particle="difference" >
+            <Bin nbins="100" xmin="0." xmax="3.14159" />
+        </Variable>
+
+
+
   </Variables>        
   <Histos>
         <TH1F variable="ptdiff"/>
@@ -167,6 +204,22 @@
         <Matrix variable="E" binId="0"/>
         <Matrix variable="m" binId="0"/>
         <Matrix variable="absrap" binId="0"/>
+
+ 
+	<!-- JK top pair distributions -->
+        <TH1F variable="z_ttbar" binId="0"/>
+        <TH1F variable="Pout"  binId="0"/>
+        <TH1F variable="Chi_ttbar"  binId="0"/>
+	<TH1F variable="Yboost"  binId="0"/>
+	<TH1F variable="topLCosThetaStar"  binId="0"/>
+	<TH1F variable="topHCosThetaStar"  binId="0"/>
+	<TH1F variable="TopCosOpeningAngle"  binId="0"/>
+        <TH1F variable="Salam_ttbar"  binId="0"/>
+	<TH1F variable="dPhi_ttbar"  binId="0"/>
+        
+      
+
+
     </Histos>    
     
   <!--TH1F name="vxp_nTracks"   title="No. of tracks per pv" nbins="20"  xmin="0" xmax="20" /-->

@@ -33,3 +33,11 @@ Particle::Particle(const Particle& orig) {
 
 Particle::~Particle() {
 }
+
+TLorentzVector Particle::MakeLorentz() {
+
+  TLorentzVector vec;
+  vec.SetPtEtaPhiM(pt, eta, phi, m);
+  return vec;
+
+}

@@ -223,7 +223,7 @@ void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XML
     for (XMLLevel* level : pathNames->at(0)) {
         if (level->name.compare(currentLevel) != 0){
             string matrixName = "Matrix_" + currentLevel + "_" + level->name + "_" + variable->name;
-            string matrixTitle = "Matrix " + currentLevel + "/" + level->name + " " + variable->title;
+            string matrixTitle = "Matrix " + currentLevel + "/" + level->name + " " + variable->title + ";" + currentLevel + " " + variable->title + ";" + level->name + " " + variable->title; // JK
 
             string matrixNameWithBin = matrixName + matrixNameSuffix;
 
@@ -359,6 +359,7 @@ void HistogramManager::FillHistograms(string fullPath, double value, double weig
         cout<< "WARNING: no histogram for path: " << fullPath << " was NULL" << endl;        
     }
 }
+
 
 void HistogramManager::FillMatrices(string fullPath, double valuex, double valuey, double weight){
     for (TH1* h : m_histograms[fullPath]){
