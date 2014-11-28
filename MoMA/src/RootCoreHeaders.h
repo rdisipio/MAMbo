@@ -22,8 +22,9 @@
 
 ////////////////////////
 // Top quark
-#include "TopD3PDCorrections/QCDMMScale.h"
+#include "FakesMacros/FakesWeights.h"
 
+#include "TopD3PDCorrections/QCDMMScale.h"
 #include <TopD3PDCorrections/StandardTtCorrections.h>
 
 #endif /** __ROOTCORE_HEADERS_H__ */

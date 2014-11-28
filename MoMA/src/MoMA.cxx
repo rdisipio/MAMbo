@@ -1,15 +1,19 @@
 #include "MoMA.h"
 
 MoMATool::MoMATool() :
-  m_qcd_mm(NULL)
+  m_fakes_weighter( NULL )
 {
-  const char * dataDir = "";
-  m_qcd_mm = new QCDMMScale( NOMINAL, dataDir );
+   m_fakes_weighter = new FakesWeights();
+
+   // nominal 
+   string dataDir;
+   m_fakes_weighter->SetDataPath( dataDir + "data/FakesMacros" );
+   m_fakes_weighter->SetupWeighterDefault( FakesWeights::MUJETS );
 }
 
 MoMATool::~MoMATool()
 {
-  delete m_qcd_mm;
+  delete m_fakes_weighter;
 }
 
 

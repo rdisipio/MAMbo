@@ -13,7 +13,8 @@ class MoMATool
  private:
 	MoMATool();
 
-	QCDMMScale * m_qcd_mm;
+        FakesWeights * m_fakes_weighter;
+//	QCDMMScale * m_qcd_mm;
 };
 
 #endif
