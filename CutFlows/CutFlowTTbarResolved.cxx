@@ -207,7 +207,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       // standing for passed: reco!part
       
       if(passedRecoSelection) {
-	FillHistogramsPseudotopReco(ed, weight_reco_level, "recoNOTparticle");
+	FillHistogramsPseudotopReco(ed, weight_reco_level, "Reco_NOT_Particle");
       }
       return success;
       
@@ -276,7 +276,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	// TODO! fill numerator for the matching eff (f_'missassign')
 	// reco && particle && matched:
 	if(passedDRMatching) {
-
+	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "Matched");
 	}
 
       } // passed particle and reco
@@ -284,7 +284,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     if (passedParticleSelection && !passedRecoSelection) {
       // did not pass reco, so let's fill particle!reco for eff:
-      FillHistogramsPseudotopParticle(ed, weight_particle_level, "particleNOTreco");
+      FillHistogramsPseudotopParticle(ed, weight_particle_level, "Particle_NOT_Reco");
     }
 
     return success;
@@ -558,6 +558,95 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
     }
 }
 
+/////////////////////////////////////////
+void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, const double weight){
+   
+   // Pout, two entries per event:
+   TVector3 zUnit(0., 0., 1.);
+   TVector3 top1 = topL.Vect();
+   TVector3 top2 = topH.Vect();
+   if (top1.Mag() > 0.) {
+     TVector3 perp = zUnit.Cross(top1);
+     double pout = top2.Dot(perp) / perp.Mag();
+     m_hm->FillHistograms(path + "Pout", pout / GeV, weight);
+     //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
+   }
+   if (top2.Mag() > 0.) {
+     TVector3 perp = zUnit.Cross(top2);	
+    double pout = top1.Dot(perp) / perp.Mag();
+    m_hm->FillHistograms(path + "Pout", pout / GeV, weight);
+    //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
+   }
+   
+   // top quark pT ratio, two entries per event:
+   // z = pTop1 / pTop2
+   if (topH.Pt() > 0.) {
+     double z = topL.Pt() / topH.Pt();
+     m_hm->FillHistograms(path + "z_ttbar", z, weight);
+   }
+   if (topL.Pt() > 0.) {
+     double z = topH.Pt() / topL.Pt();
+     m_hm->FillHistograms(path + "z_ttbar", z, weight);
+   }
+   
+   // TODO: top pT dPt as function of pT average
+   
+
+   // chi = exp |y1-y2|
+   double chittbar = exp(TMath::Abs(topL.Rapidity() - topH.Rapidity()));
+   m_hm->FillHistograms(path + "Chi_ttbar", chittbar , weight);
+   //  if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsChittbar", chittbar, ttSystem.Pt());
+  
+   // y_boost
+   double yboost = 0.5*(TMath::Abs(topL.Rapidity() + topH.Rapidity()));
+   m_hm->FillHistograms(path + "Yboost", yboost , weight);
+   // if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsYboost", yboost, ttSystem.Pt());
+
+   // ttbar cos theta *
+   TVector3 SystemVec = ttSystem.Vect(); // need this for the boost
+   TLorentzVector TopLCMS;
+   TopLCMS.SetPtEtaPhiE(topL.Pt(), topL.Eta(), topL.Phi(), topL.E());
+   TLorentzVector TopHCMS;
+   TopHCMS.SetPtEtaPhiE(topH.Pt(), topH.Eta(), topH.Phi(), topH.E());
+
+   // w.r.t. beam axis:
+   TVector3 boostVec = - (ttSystem.BoostVector()); // boost back to the original frame
+   TopLCMS.Boost(0., 0., boostVec.Z());
+   TopHCMS.Boost(0., 0., boostVec.Z());
+   double TopLCosThetaStar = cos(TopLCMS.Theta());
+   double TopHCosThetaStar = cos(TopHCMS.Theta());
+   // JK: fill just one of these? Should be complements to Pi, anyway...
+   m_hm->FillHistograms(path + "topLCosThetaStar", TopLCosThetaStar, weight);
+   m_hm->FillHistograms(path + "topHCosThetaStar", TopHCosThetaStar, weight);
+
+   // opening angle in lab:
+   TVector3 TopLVec = topL.Vect();
+   TVector3 TopHVec = topH.Vect();
+   double TopCosAngle = TopLVec.Dot(TopHVec) / ((TopHVec.Mag())*(TopLVec.Mag()));
+   m_hm->FillHistograms(path + "TopCosOpeningAngle", TopCosAngle, weight);
+
+
+   // variables by Gavin Salam:
+   double pt1 = topL.Pt();
+   double pt2 = topH.Pt();
+   double HT = pt1 + pt2;
+   double Delta1 = (3*pt1 - pt2) / HT;
+   double Delta2 = (3*pt2 - pt1) / HT;
+   double DeltaPhi = TMath::Abs(topL.DeltaPhi(topH));
+  
+   /*
+   // TODO!
+   m_hm->FillMatrices(path + "SalamDeltaVsDeltaPhi", DeltaPhi, Delta1, weight);
+   m_hm->FillMatrices(path + "SalamDeltaVsDeltaPhi", DeltaPhi, Delta2, weight);
+   */
+
+   m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
+   m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
+   m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
+
+ }
+
+/////////////////////////////////////////
 void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, const double weight){
 
   Particle ptopL(particle, indexL);
@@ -570,93 +659,14 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& parti
   
   string path = level + "/4j2b/difference/";
 
-  // Pout, two entries per event:
-  TVector3 zUnit(0., 0., 1.);
-  TVector3 top1 = topL.Vect();
-  TVector3 top2 = topH.Vect();
-  if (top1.Mag() > 0.) {
-    TVector3 perp = zUnit.Cross(top1);
-    double pout = top2.Dot(perp) / perp.Mag();
-    m_hm->FillHistograms(path + "Pout", pout / GeV, weight);
-    //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
-  }
-  if (top2.Mag() > 0.) {
-    TVector3 perp = zUnit.Cross(top2);	
-    double pout = top1.Dot(perp) / perp.Mag();
-    m_hm->FillHistograms(path + "Pout", pout / GeV, weight);
-    //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
-  }
+  FillHistogramsTopPairs(path, topL, topH, ttSystem, weight);
 
-  // top quark pT ratio, two entries per event:
-  // z = pTop1 / pTop2
-  if (topH.Pt() > 0.) {
-    double z = topL.Pt() / topH.Pt();
-    m_hm->FillHistograms(path + "z_ttbar", z, weight);
-  }
-  if (topL.Pt() > 0.) {
-    double z = topH.Pt() / topL.Pt();
-    m_hm->FillHistograms(path + "z_ttbar", z, weight);
-  }
-
-  // TODO: top pT dPt as function of pT average
-
-
-  // chi = exp |y1-y2|
-  double chittbar = exp(TMath::Abs(topL.Rapidity() - topH.Rapidity()));
-  m_hm->FillHistograms(path + "Chi_ttbar", chittbar , weight);
-  //  if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsChittbar", chittbar, ttSystem.Pt());
-  
-  // y_boost
-  double yboost = 0.5*(TMath::Abs(topL.Rapidity() + topH.Rapidity()));
-  m_hm->FillHistograms(path + "Yboost", yboost , weight);
-  // if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsYboost", yboost, ttSystem.Pt());
-
-  // ttbar cos theta *
-  TVector3 SystemVec = ttSystem.Vect(); // need this for the boost
-  TLorentzVector TopLCMS;
-  TopLCMS.SetPtEtaPhiE(topL.Pt(), topL.Eta(), topL.Phi(), topL.E());
-  TLorentzVector TopHCMS;
-  TopHCMS.SetPtEtaPhiE(topH.Pt(), topH.Eta(), topH.Phi(), topH.E());
-
-  // w.r.t. beam axis:
-  TVector3 boostVec = - (ttSystem.BoostVector()); // boost back to the original frame
-  TopLCMS.Boost(0., 0., boostVec.Z());
-  TopHCMS.Boost(0., 0., boostVec.Z());
-  double TopLCosThetaStar = cos(TopLCMS.Theta());
-  double TopHCosThetaStar = cos(TopHCMS.Theta());
-  // JK: fill just one of these? Should be complements to Pi, anyway...
-  m_hm->FillHistograms(path + "topLCosThetaStar", TopLCosThetaStar, weight);
-  m_hm->FillHistograms(path + "topHCosThetaStar", TopHCosThetaStar, weight);
-
-  // opening angle in lab:
-  TVector3 TopLVec = topL.Vect();
-  TVector3 TopHVec = topH.Vect();
-  double TopCosAngle = TopLVec.Dot(TopHVec) / ((TopHVec.Mag())*(TopLVec.Mag()));
-  m_hm->FillHistograms(path + "TopCosOpeningAngle", TopCosAngle, weight);
-
-
-  // variables by Gavin Salam:
-  double pt1 = topL.Pt();
-  double pt2 = topH.Pt();
-  double HT = pt1 + pt2;
-  double Delta1 = (3*pt1 - pt2) / HT;
-  double Delta2 = (3*pt2 - pt1) / HT;
-  double DeltaPhi = TMath::Abs(topL.DeltaPhi(topH));
-  
-  /*
-  // TODO!
-  m_hm->FillMatrices(path + "SalamDeltaVsDeltaPhi", DeltaPhi, Delta1, weight);
-  m_hm->FillMatrices(path + "SalamDeltaVsDeltaPhi", DeltaPhi, Delta2, weight);
-  */
-
-  m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
-  m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
-  m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
+ 
   
 
 }
-
-void CutFlowTTbarResolved::FillHistogramsPseudoTopTrue(EventData::Truth_t& particle, int index, string level, string topType, const double weight){   
+/////////////////////////////////////////
+void CutFlowTTbarResolved::FillHistogramsPartonTop(EventData::Truth_t& particle, int index, string level, string topType, const double weight){   
   Particle p(particle, index);
   m_hm->FillHistograms(level + "/4j2b/" + topType + "/pt", p.pt / GeV, weight);
   m_hm->FillHistograms(level + "/4j2b/" + topType + "/eta", p.eta, weight);
@@ -667,6 +677,21 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTopTrue(EventData::Truth_t& parti
 }
 
 
+void CutFlowTTbarResolved::FillHistogramsPartonTopPairs(EventData::Truth_t& particle, int indexL, int indexH, int indextt, string level, const double weight){   
+  Particle ptopL(particle, indexL);
+  Particle ptopH(particle, indexH);
+  Particle pttSystem(particle, indextt);
+
+  TLorentzVector topL = ptopL.MakeLorentz();
+  TLorentzVector topH = ptopH.MakeLorentz();
+  TLorentzVector ttSystem = pttSystem.MakeLorentz();
+
+  string path = level + "/4j2b/difference/";
+  FillHistogramsTopPairs(path, topL, topH, ttSystem, weight);
+
+}
+
+/////////////////////////////////////////
 void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const double weight, string level) {
     TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
     TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->leptons, 0 );
@@ -716,9 +741,10 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const 
         ilep = 0;
     }
     
-    FillHistogramsPseudoTopTrue(ed->mctruth, ilep, "parton", "topL", weight);
-    FillHistogramsPseudoTopTrue(ed->mctruth, ihad, "parton", "topH", weight);
-    FillHistogramsPseudoTopTrue(ed->mctruth, itt, "parton", "tt", weight);   
+    FillHistogramsPartonTop(ed->mctruth, ilep, "parton", "topL", weight);
+    FillHistogramsPartonTop(ed->mctruth, ihad, "parton", "topH", weight);
+    FillHistogramsPartonTop(ed->mctruth, itt, "parton", "tt", weight);   
+    FillHistogramsPartonTopPairs(ed->mctruth, ilep, ihad, itt, "parton", weight);   
 
     // TODO: sth like:
     //    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, "reco", weight);
