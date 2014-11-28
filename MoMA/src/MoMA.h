@@ -12,6 +12,8 @@ class MoMATool
 
  private:
 	MoMATool();
+
+	QCDMMScale * m_qcd_mm;
 };
 
 #endif

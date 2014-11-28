@@ -2,6 +2,9 @@ CC=g++
 LD=g++
 CFLAGS  = -fPIC -std=c++11 
 
+# fix this
+ARCH=x86_64-slc6-gcc47-opt
+
 #DEBUG = -O3
 DEBUG = -g
 CFLAGS += $(DEBUG)

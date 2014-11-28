@@ -20,13 +20,14 @@ class EventDumperMCTruthTopMiniSLResolved
         m_ntuple_particle = ntuple; 
 	cout << "INFO: building index for particles chain..." << endl;
  	int res = m_ntuple_particle->fChain->BuildIndex( "runNumber", "eventNumber" );
-	cout << "INFO: returned value: " << res << endl;
+	cout << "INFO: particles tree index: returned value: " << res << endl;
     };
     
     void SetNtupleParton( NTUP_PARTON * ntuple ) {
         m_ntuple_parton = ntuple;
  	cout << "INFO: building index for partons chain..." << endl;
-        m_ntuple_parton->fChain->BuildIndex( "runNumber", "eventNumber" );
+        int res = m_ntuple_parton->fChain->BuildIndex( "runNumber", "eventNumber" );
+	cout << "INFO: partons tree index: returned value: " << res << endl;
     };
 
     void GetEntryWithIndex( unsigned long major, unsigned long minor = 0 ) { 
