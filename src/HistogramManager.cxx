@@ -57,18 +57,18 @@ void HistogramManager::MoveHistogramtToFolder( TH1* h, const string fullPath )
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-TH1F* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax )
+ROOT_TH1_t* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax )
 {
-    return new TH1F( name.c_str(), title.c_str(), nbins, xmin, xmax );
+    return new ROOT_TH1_t( name.c_str(), title.c_str(), nbins, xmin, xmax );
 }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-TH1F* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, const vector<double> xedges )
+ROOT_TH1_t* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, const vector<double> xedges )
 {
-    return new TH1F( name.c_str(), title.c_str(), nbins, &xedges[0] );
+    return new ROOT_TH1_t( name.c_str(), title.c_str(), nbins, &xedges[0] );
 }
 
 
@@ -125,7 +125,7 @@ void HistogramManager::Book1DHistogram( const string path, const xmlNodePtr xml 
                     plotName += "_" + std::to_string(bin->id);
                 }
                 
-                TH1F* h;
+                ROOT_TH1_t* h;
                 if (bin->edges.size() > 0){
                     h = Book1DHistogram( plotName, variable->title, bin->nBins, bin->edges);
                 }
@@ -184,7 +184,7 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
        plotNameWithBin += "_" + std::to_string(binX->id) + "_" + std::to_string(binY->id);
     }   
 
-    TH2F*  h;
+    ROOT_TH2_t*  h;
     if (useEdges && binX != NULL && binY != NULL){
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->edges, binY->nBins, binY->edges);
     }
@@ -227,7 +227,7 @@ void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XML
 
             string matrixNameWithBin = matrixName + matrixNameSuffix;
 
-            TH2F* h;
+            ROOT_TH2_t* h;
             if (bin->edges.size() > 0){
                 h = Book2DHistogram( matrixNameWithBin, matrixTitle, bin->nBins, bin->edges, bin->nBins, bin->edges);
             }
@@ -243,18 +243,18 @@ void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XML
 /////////////////////////////////////////
 
 
-TH2F* HistogramManager::Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax )
+ROOT_TH2_t* HistogramManager::Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax )
 {
-    return new TH2F( name.c_str(), title.c_str(), nbinsx, xmin, xmax, nbinsy, ymin, ymax );
+    return new ROOT_TH2_t( name.c_str(), title.c_str(), nbinsx, xmin, xmax, nbinsy, ymin, ymax );
 }
 
 
 /////////////////////////////////////////
 
 
-TH2F* HistogramManager::Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges )
+ROOT_TH2_t* HistogramManager::Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges )
 {
-    return new TH2F( name.c_str(), title.c_str(), nbinsx, &xedges[0], nbinsy, &yedges[0] );
+    return new ROOT_TH2_t( name.c_str(), title.c_str(), nbinsx, &xedges[0], nbinsy, &yedges[0] );
 }
 
 
@@ -364,7 +364,7 @@ void HistogramManager::FillHistograms(string fullPath, double value, double weig
 void HistogramManager::FillMatrices(string fullPath, double valuex, double valuey, double weight){
     for (TH1* h : m_histograms[fullPath]){
         if (h != NULL){
-            ((TH2F*) h)->Fill( valuex, valuey, weight );
+            ((ROOT_TH2_t*) h)->Fill( valuex, valuey, weight );
         }
         else{
             cout<< "WARNING: histogram in path: " << fullPath << " was NULL" << endl;

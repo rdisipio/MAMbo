@@ -8,6 +8,10 @@
 #include "EventData.h"
 #include "Particle.h"
 
+#ifdef __MOMA__
+#include "MoMA/MoMA.h"
+#endif 
+
 using namespace PhysicsHelperFunctions;
 
 class CutFlowTTbarResolved : public CutFlow

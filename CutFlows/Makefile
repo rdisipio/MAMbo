@@ -14,7 +14,7 @@ CUTFLOWLIBS  = $(foreach CF, $(CUTFLOWS), lib$(CF).so)
 all: $(foreach CF, $(CUTFLOWS), libCutFlow$(CF).so)
 
 CutFlow%.o: CutFlow%.cxx
-	$(LD) $(DEBUG) $(SOFLAGS) -I../src -c $<
+	$(CC) $(DEBUG) $(CFLAGS) -I../src -c $<
 
 libCutFlow%.so: CutFlow%.o
 	@echo Compiling cutflow library $@

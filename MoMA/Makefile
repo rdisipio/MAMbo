@@ -1,24 +1,21 @@
 include Makefile_MoMA.inc
 
-DIRS = src
+TOOLS = MoMA
+SRCS = $(TOOLS:=.cxx)
+OBJS = ${SRCS:.cxx=.o}
 
-all: checkenv install
+all: $(MOMA_SOLIB) install
 
-checkenv:
-ifndef MAMBODIR
-@$(error MAMbo not set)
-endif
 
-ifndef ROOTCOREDIR
-@$(error ATLAS RootCore not set)
-endif
+$(MOMA_SOLIB): $(OBJS)
+	@echo Linking shared library
+	@$(LD) $(DEBUG) $(SOFLAGS) $(OBJS) -o ../lib/$@
 
 install:
-	$(info MAMbo installed in $(MAMBODIR) )
-	$(info ATLAS RootCore installed in $(ROOTCOREDIR) )
+#	$(info MAMbo installed in $(MAMBODIR) )
+#	$(info ATLAS RootCore installed in $(ROOTCOREDIR) )
 	@echo
 
-	@$(MAKE) $(MFLAGS) -C src
 	@ln -sf $(PWD)/lib/$(MOMALIB) $(MAMBODIR)/lib/
 
 clean:

@@ -11,12 +11,12 @@ ROOTCORETOOLS += PileupReweighting
 ROOTCORETOOLS += GoodRunsLists
 ROOTCORELDFLAGS = -L$(ROOTCORELIBS) $(foreach tool,$(ROOTCORETOOLS),-l$(tool))
 
-.cxx.o:
-	@echo Compiling $<
-	$(CC) $(CFLAGS) -c -I$(ROOTCOREINCS) $(ROOTCORELDFLAGS) $<
+#.cxx.o:
+#	@echo Compiling $<
+#	$(CC) $(CFLAGS) -c -I$(ROOTCOREINCS) $(ROOTCORELDFLAGS) $<
 
 MOMA_TAG   = MoMA
 MOMA_SOLIB = lib$(MOMA_TAG).so
 
-LDFLAGS += -I$(ROOTCOREINCS)
-SOFLAGS += $(ROOTCORELDFLAGS)
+CFLAGS += -I$(ROOTCOREINCS) -I$(MAMBODIR)/MoMA
+LIBS   += $(ROOTCORELDFLAGS)

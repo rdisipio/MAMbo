@@ -5,8 +5,8 @@
 /////////////////////////////////////////////
 
 
-#define GeV 1000.
-
+//#define GeV 1000.
+static const double GeV = 1.e+3;
 
 /////////////////////////////////////////////
 
@@ -37,6 +37,8 @@ using namespace std;
 
 /////////////////////////////////////////////
 
+typedef TH1D ROOT_TH1_t;
+typedef TH2D ROOT_TH2_t;
 
 enum LeptonFlavor { kElectron, kMuon, kTau, kNeutrino };
 enum JetTag       { kLight = 0, kCTagged = 4, kBTagged = 5, kTauTagged = 15, kGTagged = 21 };
@@ -47,7 +49,7 @@ typedef vector< double >       array_d;
 typedef vector< LeptonFlavor > array_fl;
 typedef vector< JetTag >       array_tag;
 
-typedef map< string,  vector<TH1*> > HistogramCollection_t;
+typedef map< string,  vector< TH1* > > HistogramCollection_t;
 
 typedef map< string, vector< double > > PropertyCollection_t;
 

@@ -8,8 +8,6 @@
 #include <libxml/tree.h>
 
 #include <TFile.h>
-#include <TH1F.h>
-#include <TH2F.h>
 #include <TDirectory.h>
 
 #include "HelperFunctions.h"
@@ -33,11 +31,11 @@ class HistogramManager
 
   void CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin, string matrixNameSuffix);
 
-  TH1F* Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
-  TH1F* Book1DHistogram( const string& name, const string& title, int nbins, const vector<double>  xedges );
+  ROOT_TH1_t* Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
+  ROOT_TH1_t* Book1DHistogram( const string& name, const string& title, int nbins, const vector<double>  xedges );
   
-  TH2F* Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax );
-  TH2F* Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges );
+  ROOT_TH2_t* Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax );
+  ROOT_TH2_t* Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges );
 
   TFile * SetOutFileName( const char * name );
 
@@ -45,8 +43,13 @@ class HistogramManager
 
   TDirectory * CreatePath( const string& path);
 
-  inline TH1 * GetHistogram( const string& name ) { return (TH1*)m_outFile->Get( name.c_str() ); };
-  inline TH2F * Get2DHistogram( const string& name ) { return (TH2F*)m_outFile->Get( name.c_str() ); };
+/*
+  template< class H > inline H* GetHistogram( const string& name ) { return (H*)m_outFile->Get( name.c_str() ); };
+  template< class H > inline H*	Get2DHistogram( const string& name ) { return (H*)m_outFile->Get( name.c_str() ); };
+ */
+  inline ROOT_TH1_t * GetHistogram( const string& name ) { return (ROOT_TH1_t*)m_outFile->Get( name.c_str() ); };
+  inline ROOT_TH2_t * Get2DHistogram( const string& name ) { return (ROOT_TH2_t*)m_outFile->Get( name.c_str() ); };
+
   inline void  ToggleSumW2() { m_sumw2 = !m_sumw2; };
 
   void WriteToFile();  
