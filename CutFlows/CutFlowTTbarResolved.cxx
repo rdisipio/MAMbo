@@ -207,7 +207,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       // standing for passed: reco!part
       
       if(passedRecoSelection) {
-	FillHistogramsPseudotopReco(ed, weight_reco_level, "Reco_NOT_Particle");
+	FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_not_particle");
       }
       return success;
       
@@ -263,28 +263,28 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	if (Debug) cout << "  Here9" << endl;
 
 
-      if (Debug) cout << "  Here10" << endl;
+        if (Debug) cout << "  Here10" << endl;
 	// fill response matrix:
 	FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
 	FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
-      if (Debug) cout << "  Here11" << endl;
-
-
+	if (Debug) cout << "  Here11" << endl;
+	
+	
 	// fill reco && particle for the denumerator of the f_'missassign':
-	// TODO!
-
-	// TODO! fill numerator for the matching eff (f_'missassign')
+	FillHistogramsPseudotopParticle(ed, weight_particle_level, "reco_and_particle");
+	
+	//  fill numerator for the matching eff (f_'missassign')
 	// reco && particle && matched:
 	if(passedDRMatching) {
-	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "Matched");
+	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "matched");
 	}
-
+	
       } // passed particle and reco
     } // passed particle
 
     if (passedParticleSelection && !passedRecoSelection) {
       // did not pass reco, so let's fill particle!reco for eff:
-      FillHistogramsPseudotopParticle(ed, weight_particle_level, "Particle_NOT_Reco");
+      FillHistogramsPseudotopParticle(ed, weight_particle_level, "particle_not_reco");
     }
 
     return success;

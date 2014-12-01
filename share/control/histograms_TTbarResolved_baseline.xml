@@ -3,8 +3,10 @@
         <Type name="reco" />
         <Type name="particle" />
         <Type name="parton" />
-        <Type name="particleNOTreco" />
-        <Type name="recoNOTparticle" />
+        <Type name="particle_not_reco" />
+        <Type name="reco_particle" />
+        <Type name="reco_not_particle" />
+        <Type name="matched" />
     </Level>
     <Level> <!--Region-->
         <!--Type name="4j1b" /-->

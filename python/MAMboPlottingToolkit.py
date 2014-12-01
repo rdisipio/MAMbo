@@ -261,6 +261,8 @@ def MakeRatio( data, prediction ):
         x_data = data.GetBinCenter( n+1 )
         y_data = data.GetBinContent( n+1 )
         
+        #print '    setting point %i: %f' % (i,y_data/y_mc,)
+
         ratio.SetPoint( i, x_data, y_data/y_mc )
         
         bw = data.GetBinWidth( n+1 ) 
