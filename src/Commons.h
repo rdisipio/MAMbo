@@ -29,8 +29,8 @@ using namespace std;
 
 #include <TROOT.h>
 #include <TFile.h>
-#include <TH1F.h>
-#include <TH2F.h>
+#include <TH1D.h>
+#include <TH2D.h>
 #include <TDirectory.h>
 #include <TChain.h>
 #include <TLorentzVector.h>

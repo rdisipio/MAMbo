@@ -4,7 +4,7 @@
         <Type name="particle" />
         <Type name="parton" />
         <Type name="particle_not_reco" />
-        <Type name="reco_particle" />
+        <Type name="reco_and_particle" /> 
         <Type name="reco_not_particle" />
         <Type name="matched" />
     </Level>
