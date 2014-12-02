@@ -553,7 +553,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/m", p.m / GeV, weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/absrap", fabs(p.y), weight);
 
-    if (index %3 == 0){
+    if (index %3 == 0 and mbl > 0.){
         m_hm->FillHistograms(level + "/4j2b/" + topType + "/mlb", mbl, weight );
     }
 }
@@ -716,8 +716,9 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );
     TLorentzVector lb = lep + lep_bjet;
     FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, lb.M());
+  } else {
+    FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, -1);
   }
-
     FillHistogramsPseudoTop(ed->reco, 4, level, "topH", weight);
     FillHistogramsPseudoTop(ed->reco, 5, level, "tt", weight);
 
