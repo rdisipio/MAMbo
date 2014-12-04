@@ -380,3 +380,25 @@ void HistogramManager::Book1DHistogramInFolder(string path, const string& name, 
     currentDir->cd();
     Book1DHistogram(name, title, nbins, xmin, xmax);
 }
+
+void HistogramManager::WriteHistosToXML(string outputFileName){
+    string xml;
+    xml = "<histograms>\n";
+    for (auto& pair : m_histograms){
+        string histoLineBase = "<histogram hpath=\"" + pair.first + "/";
+        for(auto& h : pair.second) {            
+            string histoLine = histoLineBase;
+            // The key contains an additional "path" that is used to loop over same type histos which do not exists and need to be removed.
+            int pos = histoLine.find(((TH1*)h)->GetDirectory()->GetName()); 
+            histoLine.erase(pos + strlen(((TH1*)h)->GetDirectory()->GetName()) + 1 , histoLine.size()); // +1 to keep the last / 
+            histoLine += ((TH1*)h)->GetName();
+            histoLine += "\" />\n";
+            xml += histoLine;
+        }
+    }
+    xml += "</histograms>";
+    
+    std::ofstream out(outputFileName);
+    out << xml;
+    out.close();
+}

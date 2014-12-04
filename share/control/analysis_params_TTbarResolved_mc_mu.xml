@@ -10,5 +10,7 @@
     <param name="etaMax"            type="numeric" value="2.5" />
     <param name="isMCSignal"        type="flag"    value="1" />
     <param name="isRealData"        type="flag"    value="0" />
+    <param name="writeHistosToXML"  type="flag"    value="1" />
+    <param name="histoXMLOutput"    type="string"  value="histoList.xml" />
   </parameters>
 </analysis>

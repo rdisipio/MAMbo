@@ -97,6 +97,11 @@ int main( int argc, char ** argv )
 
   wrapper->Loop( globalArgs.eventMax );
   wrapper->Finalize();
+  
+  if(analysisParams.custom_params_flag["writeHistosToXML"]){
+      cout << "INFO: Writing file with histogram list " << analysisParams.custom_params_string["histoXMLOutput"] << endl;
+      hm->WriteHistosToXML(analysisParams.custom_params_string["histoXMLOutput"]);
+  }
 
   hm->WriteToFile();
 

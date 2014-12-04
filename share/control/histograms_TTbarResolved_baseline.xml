@@ -24,7 +24,7 @@
         <Type name="afterCuts" inFolder="cutflow"/>        
     </Level>
     <Variables>
-        <Variable name="pt" title="p_{T} [GeV]" >
+        <Variable name="pt" title="p_{T} [GeV]" folder="4j2b" >
             <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="top"/>
             <Bin id="1" nbins="11" edges="0,40,80,100,120,150,180,200,260,300,350,1000" particle="top"/>
             <Bin id="2" nbins="12" edges="0,40,75,90,110,135,160,180,220,260,300,350,1000" particle="top"/>

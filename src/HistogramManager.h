@@ -57,6 +57,7 @@ class HistogramManager
   void FillMatrices(string fullPath, double valuex, double valuey, double weight);
   
   void Book1DHistogramInFolder(string path, const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
+  void WriteHistosToXML(string outputFileName);
 
 public:
   inline TH1 * operator[]( const string& name ) { return GetHistogram( name ); };
