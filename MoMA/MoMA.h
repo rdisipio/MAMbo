@@ -1,8 +1,11 @@
 #ifndef __MOMA_H__
 #define __MOMA_H__
 
-#ifdef __MOMA__
+#include "Commons.h"
+
 #include "RootCoreHeaders.h"
+
+using namespace std;
 
 class MoMATool
 {
@@ -11,16 +14,15 @@ class MoMATool
 
 	static MoMATool * GetHandle();
 
+ public:
+        double GetFakesWeight( int channel, const MMEvent& event, const MMLepton& lepton, bool tight );
+
  private:
 	MoMATool();
 
-        FakesWeights * m_fakes_weighter;
-//	QCDMMScale * m_qcd_mm;
-
-
+        FakesWeights * m_fakes_weighter_el;
+        FakesWeights * m_fakes_weighter_mu;
 };
-
-#endif /** __MOMA__ */
 
 #endif /** __MOMA_H__ */
 

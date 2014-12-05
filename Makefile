@@ -27,7 +27,8 @@ hfillers:
 
 moma:
 	@if  [ -z "$(ROOTCOREDIR)" ]; then echo "ATLAS ROOTCORE not found" ; exit 0 ; \
-	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; $(MAKE) $(MFLAGS) -C MoMA ; fi
+	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; fi
+#	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; $(MAKE) $(MFLAGS) -C MoMA ; fi
 
 environment: ./bin/MAMbo-setenv.sh.template
 	@sed "s!@PREFIX@!$(PWD)!g" $(PWD)/bin/MAMbo-setenv.sh.template  > $(PWD)/bin/MAMbo-setenv.sh

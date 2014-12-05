@@ -27,6 +27,8 @@ class CutFlowTTbarResolved : public CutFlow
   bool PassedCutFlowReco(     EventData * ed );
   bool PassedCutFlowParticle( EventData * ed );
 
+  double GetFakesWeight( EventData * ed );
+
   void FillHistogramsControlPlotsReco( ControlPlotValues& values );
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
   
@@ -61,6 +63,10 @@ class CutFlowTTbarResolved : public CutFlow
     PseudoTopMatching       * m_pseudotop_matching_reco2particle;
     PseudoTopMatching       * m_pseudotop_matching_reco2parton;
     PseudoTopMatching       * m_pseudotop_matching_particle2parton;
+
+#ifdef __MOMA__
+    MoMATool                * m_moma;
+#endif
     
 private:
 

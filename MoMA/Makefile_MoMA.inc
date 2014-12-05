@@ -1,19 +1,9 @@
 include $(MAMBODIR)/Makefile.inc
 
-ROOTCOREINCS = $(ROOTCOREDIR)/include
-ROOTCORELIBS = $(ROOTCOREDIR)/lib/$(ARCH)
-
-ROOTCORETOOLS += egammaAnalysisUtils egammaEvent
-ROOTCORETOOLS += MissingETUtility
-ROOTCORETOOLS += MuonEfficiencyCorrections MuonMomentumCorrections 
-ROOTCORETOOLS += ApplyJetCalibration ApplyJetResolutionSmearing JetEffiProvider JetResolution JetUncertainties
-ROOTCORETOOLS += PileupReweighting 
-ROOTCORETOOLS += GoodRunsLists
-ROOTCORELDFLAGS = -L$(ROOTCORELIBS) $(foreach tool,$(ROOTCORETOOLS),-l$(tool))
-
-#.cxx.o:
-#	@echo Compiling $<
-#	$(CC) $(CFLAGS) -c -I$(ROOTCOREINCS) $(ROOTCORELDFLAGS) $<
+ifdef ROOTCOREDIR
+CFLAGS += -D__MOMA__
+include Makefile.rootcore.inc
+endif
 
 MOMA_TAG   = MoMA
 MOMA_SOLIB = lib$(MOMA_TAG).so

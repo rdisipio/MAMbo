@@ -23,7 +23,6 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
   ed->leptons.E.push_back( GET_VALUE( lep_E ) );
   ed->leptons.q.push_back( GET_VALUE( lep_charge ) );
 
-
   // Electrons
   ed->electrons.n = 1;
   ed->electrons.pT.push_back( GET_VALUE( lep_pt ) );
@@ -33,7 +32,6 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
   ed->electrons.q.push_back( GET_VALUE( lep_charge ) );
 
   ed->electrons.property["charge"].push_back( GET_VALUE( lep_charge ) );
-  //ed->electrons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
 
   //ed->electrons.property["tight"].push_back( GET_VALUE( tight ) );
   ed->electrons.property["el_cl_eta"].push_back( GET_VALUE( el_cl_eta ) );
@@ -52,6 +50,26 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
 
   ed->muons.property["charge"].push_back( GET_VALUE( lep_charge ) );
 
+
+  // TRIGGER MATCHING
+
+#ifdef TopMiniSLResolved_h
+  ed->leptons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
+  ed->electrons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
+  ed->muons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
+#endif
+#ifdef TopMiniSLBoosted_h
+#endif
+
+
+  // TIGHT SELECTION?
+#ifdef TopMiniSLResolved_h
+  ed->electrons.property["tight"].push_back( GET_VALUE(tight) );
+  bool tight = ( GET_VALUE(mminiIso10_4)/GET_VALUE(lep_pt) < 0.05 ) ? true : false;
+  ed->muons.property["tight"].push_back( tight );
+#endif
+#ifdef TopMiniSLBoosted_h
+#endif
 
   return success;
     }

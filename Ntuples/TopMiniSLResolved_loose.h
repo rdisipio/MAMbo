@@ -1,17 +1,16 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon Oct 27 15:16:11 2014 by ROOT version 5.34/04
+// Fri Dec  5 18:56:19 2014 by ROOT version 5.34/19
 // from TTree mini/4-vectors + variables required for scaling factors
-
+// found on file: /gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-october-resolved/user.vscarfon.periodL.Egamma.grp14_v01_p1562.DATA_RESOLVED_2014_11_03_el_loose.root/user.vscarfon.4357076._000001.el_loose.root
 //////////////////////////////////////////////////////////
 
-#ifndef TopMiniSLResolved_h
-#define TopMiniSLResolved_h
+#ifndef TopMiniSLResolved_loose_h
+#define TopMiniSLResolved_loose_h
 
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
-#include <iostream>
 
 // Header file for the classes stored in the TTree if any.
 
@@ -19,7 +18,7 @@
 
 using namespace std;
 
-class TopMiniSLResolved {
+class TopMiniSLResolved_loose {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -35,23 +34,6 @@ public :
    Int_t           pvxp_n;
    Int_t           hfor;
    Float_t         vxp_z;
-   Float_t         mc_vxp_z;
-   Double_t        mcevt_pdf1;
-   Double_t        mcevt_pdf2;
-   Int_t           mcevt_pdf_id1;
-   Int_t           mcevt_pdf_id2;
-   Double_t        mcevt_pdf_scale;
-   Double_t        mcevt_pdf_x1;
-   Double_t        mcevt_pdf_x2;
-   Float_t         scaleFactor_PILEUP;
-   Float_t         scaleFactor_ELE;
-   Float_t         scaleFactor_MUON;
-   Float_t         scaleFactor_BTAG;
-   Float_t         scaleFactor_TRIGGER;
-   Float_t         scaleFactor_WJETSNORM;
-   Float_t         scaleFactor_WJETSSHAPE;
-   Float_t         scaleFactor_JVFSF;
-   Float_t         scaleFactor_ZVERTEX;
    Float_t         lep_pt;
    Float_t         lep_eta;
    Float_t         lep_phi;
@@ -73,24 +55,22 @@ public :
    Float_t         mwt;
    UInt_t          jet_n;
    UInt_t          alljet_n;
-   Float_t         jet_pt[11];   //[alljet_n]
-   Float_t         jet_eta[11];   //[alljet_n]
-   Float_t         jet_phi[11];   //[alljet_n]
-   Float_t         jet_E[11];   //[alljet_n]
-   Float_t         jet_jvf[11];   //[alljet_n]
-   Int_t           jet_trueflav[11];   //[alljet_n]
-   Int_t           jet_truthMatched[11];   //[alljet_n]
-   Float_t         jet_SV0[11];   //[alljet_n]
-   Float_t         jet_COMBNN[11];   //[alljet_n]
-   Float_t         jet_MV1[11];   //[alljet_n]
-   Float_t         jet_MV1c[11];   //[alljet_n]
-   Int_t           jet_isSemilep[11];   //[alljet_n]
-   Bool_t          jet_BadMediumBCH[11];   //[alljet_n]
-   Bool_t          jet_BadTightBCH[11];   //[alljet_n]
-   Float_t         jet_emfrac[11];   //[alljet_n]
-   Float_t         jet_BCH_CORR_CELL[11];   //[alljet_n]
-   Bool_t          pass_evt_sel;
-   Bool_t          pass_corrections;
+   Float_t         jet_pt[1];   //[alljet_n]
+   Float_t         jet_eta[1];   //[alljet_n]
+   Float_t         jet_phi[1];   //[alljet_n]
+   Float_t         jet_E[1];   //[alljet_n]
+   Float_t         jet_jvf[1];   //[alljet_n]
+   Int_t           jet_trueflav[1];   //[alljet_n]
+   Int_t           jet_truthMatched[1];   //[alljet_n]
+   Float_t         jet_SV0[1];   //[alljet_n]
+   Float_t         jet_COMBNN[1];   //[alljet_n]
+   Float_t         jet_MV1[1];   //[alljet_n]
+   Float_t         jet_MV1c[1];   //[alljet_n]
+   Int_t           jet_isSemilep[1];   //[alljet_n]
+   Bool_t          jet_BadMediumBCH[1];   //[alljet_n]
+   Bool_t          jet_BadTightBCH[1];   //[alljet_n]
+   Float_t         jet_emfrac[1];   //[alljet_n]
+   Float_t         jet_BCH_CORR_CELL[1];   //[alljet_n]
    Bool_t          tight;
 
    // List of branches
@@ -104,23 +84,6 @@ public :
    TBranch        *b_pvxp_n;   //!
    TBranch        *b_hfor;   //!
    TBranch        *b_vxp_z;   //!
-   TBranch        *b_mc_vxp_z;   //!
-   TBranch        *b_mcevt_pdf1;   //!
-   TBranch        *b_mcevt_pdf2;   //!
-   TBranch        *b_mcevt_pdf_id1;   //!
-   TBranch        *b_mcevt_pdf_id2;   //!
-   TBranch        *b_mcevt_pdf_scale;   //!
-   TBranch        *b_mcevt_pdf_x1;   //!
-   TBranch        *b_mcevt_pdf_x2;   //!
-   TBranch        *b_m_scaleFactor_PILEUP;   //!
-   TBranch        *b_m_scaleFactor_ELE;   //!
-   TBranch        *b_m_scaleFactor_MUON;   //!
-   TBranch        *b_m_scaleFactor_BTAG;   //!
-   TBranch        *b_m_scaleFactor_TRIGGER;   //!
-   TBranch        *b_m_scaleFactor_WJETSNORM;   //!
-   TBranch        *b_m_scaleFactor_WJETSSHAPE;   //!
-   TBranch        *b_m_scaleFactor_JVFSF;   //!
-   TBranch        *b_m_scaleFactor_ZVERTEX;   //!
    TBranch        *b_lep_pt;   //!
    TBranch        *b_lep_eta;   //!
    TBranch        *b_lep_phi;   //!
@@ -158,12 +121,10 @@ public :
    TBranch        *b_jet_BadTightBCH;   //!
    TBranch        *b_jet_emfrac;   //!
    TBranch        *b_jet_BCH_CORR_CELL;   //!
-   TBranch        *b_pass_evt_sel;   //!
-   TBranch        *b_pass_corrections;   //!
    TBranch        *b_tight;   //!
 
-   TopMiniSLResolved(TTree *tree=0);
-   virtual ~TopMiniSLResolved();
+   TopMiniSLResolved_loose(TTree *tree=0);
+   virtual ~TopMiniSLResolved_loose();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -175,45 +136,35 @@ public :
 
 #endif
 
-#ifdef TopMiniSLResolved_cxx
-TopMiniSLResolved::TopMiniSLResolved(TTree *tree) : fChain(0) 
+#ifdef TopMiniSLResolved_loose_cxx
+TopMiniSLResolved_loose::TopMiniSLResolved_loose(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
-/*
- *    if (tree == 0) {
-     // TString fname = "/gpfs_data/local/atlas/disipio/minituples/TTbarResolved8TeV/examples_mc/el.root";
-     // test by jiri:
-     //TString fname = "/afs/cern.ch/user/q/qitek/qitek/TopResolved8TeV_trees/$ hadd mc.root";
-     // marino's file: 
-     //     TString fname = "/afs/cern.ch/user/m/mromano/public/user.mromano.4336192._000011.mc.root";
-     TString fname = "/afs/cern.ch/work/j/jpacalt/TopResolved8TeV_trees/110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_mc.root";
-
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fname);
+   if (tree == 0) {
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-october-resolved/user.vscarfon.periodL.Egamma.grp14_v01_p1562.DATA_RESOLVED_2014_11_03_el_loose.root/user.vscarfon.4357076._000001.el_loose.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile(fname);
+         f = new TFile("/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-october-resolved/user.vscarfon.periodL.Egamma.grp14_v01_p1562.DATA_RESOLVED_2014_11_03_el_loose.root/user.vscarfon.4357076._000001.el_loose.root");
       }
       f->GetObject("mini",tree);
 
    }
-   //cout <<"Tree name is " << tree->GetName() << endl;
    Init(tree);
- * */
 }
 
-TopMiniSLResolved::~TopMiniSLResolved()
+TopMiniSLResolved_loose::~TopMiniSLResolved_loose()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t TopMiniSLResolved::GetEntry(Long64_t entry)
+Int_t TopMiniSLResolved_loose::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t TopMiniSLResolved::LoadTree(Long64_t entry)
+Long64_t TopMiniSLResolved_loose::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -226,7 +177,7 @@ Long64_t TopMiniSLResolved::LoadTree(Long64_t entry)
    return centry;
 }
 
-void TopMiniSLResolved::Init(TTree *tree)
+void TopMiniSLResolved_loose::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -252,23 +203,6 @@ void TopMiniSLResolved::Init(TTree *tree)
    fChain->SetBranchAddress("pvxp_n", &pvxp_n, &b_pvxp_n);
    fChain->SetBranchAddress("hfor", &hfor, &b_hfor);
    fChain->SetBranchAddress("vxp_z", &vxp_z, &b_vxp_z);
-   fChain->SetBranchAddress("mc_vxp_z", &mc_vxp_z, &b_mc_vxp_z);
-   fChain->SetBranchAddress("mcevt_pdf1", &mcevt_pdf1, &b_mcevt_pdf1);
-   fChain->SetBranchAddress("mcevt_pdf2", &mcevt_pdf2, &b_mcevt_pdf2);
-   fChain->SetBranchAddress("mcevt_pdf_id1", &mcevt_pdf_id1, &b_mcevt_pdf_id1);
-   fChain->SetBranchAddress("mcevt_pdf_id2", &mcevt_pdf_id2, &b_mcevt_pdf_id2);
-   fChain->SetBranchAddress("mcevt_pdf_scale", &mcevt_pdf_scale, &b_mcevt_pdf_scale);
-   fChain->SetBranchAddress("mcevt_pdf_x1", &mcevt_pdf_x1, &b_mcevt_pdf_x1);
-   fChain->SetBranchAddress("mcevt_pdf_x2", &mcevt_pdf_x2, &b_mcevt_pdf_x2);
-   fChain->SetBranchAddress("scaleFactor_PILEUP", &scaleFactor_PILEUP, &b_m_scaleFactor_PILEUP);
-   fChain->SetBranchAddress("scaleFactor_ELE", &scaleFactor_ELE, &b_m_scaleFactor_ELE);
-   fChain->SetBranchAddress("scaleFactor_MUON", &scaleFactor_MUON, &b_m_scaleFactor_MUON);
-   fChain->SetBranchAddress("scaleFactor_BTAG", &scaleFactor_BTAG, &b_m_scaleFactor_BTAG);
-   fChain->SetBranchAddress("scaleFactor_TRIGGER", &scaleFactor_TRIGGER, &b_m_scaleFactor_TRIGGER);
-   fChain->SetBranchAddress("scaleFactor_WJETSNORM", &scaleFactor_WJETSNORM, &b_m_scaleFactor_WJETSNORM);
-   fChain->SetBranchAddress("scaleFactor_WJETSSHAPE", &scaleFactor_WJETSSHAPE, &b_m_scaleFactor_WJETSSHAPE);
-   fChain->SetBranchAddress("scaleFactor_JVFSF", &scaleFactor_JVFSF, &b_m_scaleFactor_JVFSF);
-   fChain->SetBranchAddress("scaleFactor_ZVERTEX", &scaleFactor_ZVERTEX, &b_m_scaleFactor_ZVERTEX);
    fChain->SetBranchAddress("lep_pt", &lep_pt, &b_lep_pt);
    fChain->SetBranchAddress("lep_eta", &lep_eta, &b_lep_eta);
    fChain->SetBranchAddress("lep_phi", &lep_phi, &b_lep_phi);
@@ -290,30 +224,27 @@ void TopMiniSLResolved::Init(TTree *tree)
    fChain->SetBranchAddress("mwt", &mwt, &b_mwt);
    fChain->SetBranchAddress("jet_n", &jet_n, &b_jet_n);
    fChain->SetBranchAddress("alljet_n", &alljet_n, &b_alljet_n);
-   fChain->SetBranchAddress("jet_pt", jet_pt, &b_jet_pt);
-   fChain->SetBranchAddress("jet_eta", jet_eta, &b_jet_eta);
-   fChain->SetBranchAddress("jet_phi", jet_phi, &b_jet_phi);
-   fChain->SetBranchAddress("jet_E", jet_E, &b_jet_E);
-   fChain->SetBranchAddress("jet_jvf", jet_jvf, &b_jet_jvf);
-   fChain->SetBranchAddress("jet_trueflav", jet_trueflav, &b_jet_trueflav);
-   fChain->SetBranchAddress("jet_truthMatched", jet_truthMatched, &b_jet_truthMatched);
-   fChain->SetBranchAddress("jet_SV0", jet_SV0, &b_jet_SV0);
-   fChain->SetBranchAddress("jet_COMBNN", jet_COMBNN, &b_jet_COMBNN);
-   fChain->SetBranchAddress("jet_MV1", jet_MV1, &b_jet_MV1);
-   fChain->SetBranchAddress("jet_MV1c", jet_MV1c, &b_jet_MV1c);
-   fChain->SetBranchAddress("jet_isSemilep", jet_isSemilep, &b_jet_isSemilep);
-   fChain->SetBranchAddress("jet_BadMediumBCH", jet_BadMediumBCH, &b_jet_BadMediumBCH);
-   fChain->SetBranchAddress("jet_BadTightBCH", jet_BadTightBCH, &b_jet_BadTightBCH);
-   fChain->SetBranchAddress("jet_emfrac", jet_emfrac, &b_jet_emfrac);
-   fChain->SetBranchAddress("jet_BCH_CORR_CELL", jet_BCH_CORR_CELL, &b_jet_BCH_CORR_CELL);
-   fChain->SetBranchAddress("pass_evt_sel", &pass_evt_sel, &b_pass_evt_sel);
-   fChain->SetBranchAddress("pass_corrections", &pass_corrections, &b_pass_corrections);
+   fChain->SetBranchAddress("jet_pt", &jet_pt, &b_jet_pt);
+   fChain->SetBranchAddress("jet_eta", &jet_eta, &b_jet_eta);
+   fChain->SetBranchAddress("jet_phi", &jet_phi, &b_jet_phi);
+   fChain->SetBranchAddress("jet_E", &jet_E, &b_jet_E);
+   fChain->SetBranchAddress("jet_jvf", &jet_jvf, &b_jet_jvf);
+   fChain->SetBranchAddress("jet_trueflav", &jet_trueflav, &b_jet_trueflav);
+   fChain->SetBranchAddress("jet_truthMatched", &jet_truthMatched, &b_jet_truthMatched);
+   fChain->SetBranchAddress("jet_SV0", &jet_SV0, &b_jet_SV0);
+   fChain->SetBranchAddress("jet_COMBNN", &jet_COMBNN, &b_jet_COMBNN);
+   fChain->SetBranchAddress("jet_MV1", &jet_MV1, &b_jet_MV1);
+   fChain->SetBranchAddress("jet_MV1c", &jet_MV1c, &b_jet_MV1c);
+   fChain->SetBranchAddress("jet_isSemilep", &jet_isSemilep, &b_jet_isSemilep);
+   fChain->SetBranchAddress("jet_BadMediumBCH", &jet_BadMediumBCH, &b_jet_BadMediumBCH);
+   fChain->SetBranchAddress("jet_BadTightBCH", &jet_BadTightBCH, &b_jet_BadTightBCH);
+   fChain->SetBranchAddress("jet_emfrac", &jet_emfrac, &b_jet_emfrac);
+   fChain->SetBranchAddress("jet_BCH_CORR_CELL", &jet_BCH_CORR_CELL, &b_jet_BCH_CORR_CELL);
    fChain->SetBranchAddress("tight", &tight, &b_tight);
-
    Notify();
 }
 
-Bool_t TopMiniSLResolved::Notify()
+Bool_t TopMiniSLResolved_loose::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -324,18 +255,18 @@ Bool_t TopMiniSLResolved::Notify()
    return kTRUE;
 }
 
-void TopMiniSLResolved::Show(Long64_t entry)
+void TopMiniSLResolved_loose::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t TopMiniSLResolved::Cut(Long64_t entry)
+Int_t TopMiniSLResolved_loose::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef TopMiniSLResolved_cxx
+#endif // #ifdef TopMiniSLResolved_loose_cxx

@@ -27,11 +27,6 @@ FASTJETLIBS = $(shell fastjet-config --libs)
 # finally
 LIBS = $(ROOTLIBS) $(XMLLIBS) $(FASTJETLIBS)
 
-ifdef ROOTCOREDIR
-CFLAGS += -D__MOMA__
-include $(MAMBODIR)/Makefile.rootcore.inc
-endif
-
 # compile directives
 
 .SUFFIXES:
@@ -39,3 +34,10 @@ endif
 
 .cxx.o:
 	$(CC) $(CFLAGS) -c $<
+
+ifdef ROOTCOREDIR
+CFLAGS += -D__MOMA__
+include $(MAMBODIR)/MoMA/Makefile.rootcore.inc
+CFLAGS += -I$(MAMBODIR)/MoMA
+LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA
+endif

@@ -1,6 +1,7 @@
 #include "CutFlowTTbarResolved.h"
 
-CutFlowTTbarResolved::CutFlowTTbarResolved() {
+CutFlowTTbarResolved::CutFlowTTbarResolved() 
+{
     m_pseudotop_reco = new PseudoTopReconstruction();
     m_pseudotop_particle = new PseudoTopReconstruction();
     
@@ -11,6 +12,12 @@ CutFlowTTbarResolved::CutFlowTTbarResolved() {
     alias = {
         "beforeCuts", "trig", "pvtx", "lept", "met30", "mtw35", "2j", "4j", "4j1b", "afterCuts"
     };
+
+#ifdef __MOMA__
+   m_moma = MoMATool::GetHandle();
+   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
+#endif
+   
 }
 
 CutFlowTTbarResolved::~CutFlowTTbarResolved() {
@@ -20,6 +27,11 @@ CutFlowTTbarResolved::~CutFlowTTbarResolved() {
     SAFE_DELETE( m_pseudotop_matching_reco2particle )
     SAFE_DELETE( m_pseudotop_matching_reco2parton )
     SAFE_DELETE( m_pseudotop_matching_particle2parton )
+
+#ifdef __MOMA__
+    SAFE_DELETE( m_moma );
+#endif
+
 }
 
 /////////////////////////////////////////
@@ -29,6 +41,8 @@ bool CutFlowTTbarResolved::Initialize() {
 
 //    int isMCSignal = (int) m_config->custom_params["isMCSignal"];
     unsigned long isRealData = m_config->custom_params_flag["isRealData"];
+    unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
+    unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
     AddChannel("LPLUSJETS");
 
@@ -56,7 +70,7 @@ bool CutFlowTTbarResolved::Initialize() {
     SetCutName("LPLUSJETS", "reco_weighted", 8, "Nbtags >= 1");
     SetCutName("LPLUSJETS", "reco_weighted", 9, "Nbtags >= 2");
 
-    if( isRealData ) return success;
+    if( isRealData || isWjets || isQCD ) return success;
 
     AddCounterName("LPLUSJETS", "particle_unweight", 9);
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events");
@@ -104,11 +118,13 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
     unsigned long isRealData = m_config->custom_params_flag["isRealData"];
+    unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
+    unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
     double weight_reco_level     = 1.;
     double weight_particle_level = 1.;
 
-    if( !isRealData ) {
+    if( !isRealData && !isWjets && !isQCD ) {
    	 weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
  
@@ -134,6 +150,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
     }
 
+    //if( isWjets ) { }
+
+    if( isQCD ) {
+      const double qcd_weight = GetFakesWeight( ed );
+      weight_reco_level     *= qcd_weight;
+      weight_particle_level *= qcd_weight; // should we?
+    }
+
     ed->property["weight_particle_level"] = weight_particle_level;
     ed->property["weight_reco_level"]     = weight_reco_level;
 
@@ -141,7 +165,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     // Apply selections and fill control histograms (pt, eta, etc..)
     const bool passedRecoSelection     = PassedCutFlowReco( ed );
-    const bool passedParticleSelection = isRealData ? false : PassedCutFlowParticle( ed );
+    const bool passedParticleSelection = ( isRealData || isWjets || isQCD ) ? false : PassedCutFlowParticle( ed );
 
    
     int Debug = 0;
@@ -495,6 +519,52 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
 }
 
 /////////////////////////////////////////
+
+double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
+
+    double qcd_weight = 1.;
+ 
+#ifndef __MOMA__
+
+    cout << "WARNING: Cannot assign fake weights without ATLAS ROOTCORE. Please setup ROOTCORE and compile the MoMA extension." << endl;
+
+#else
+    int rc_channel = m_config->channel;
+
+    MMEvent  rc_event;
+    MMLepton rc_lepton;
+
+    rc_event.njets = ed->jets.n;;
+    rc_event.ntag  = ed->bjets.n;;
+    rc_event.jetpt = ed->jets.pT.at(0) / GeV ; // leading jet (used only by electrons)
+
+    rc_lepton.pt   = ed->leptons.pT.at(0) / GeV;
+    rc_lepton.eta  = ed->leptons.eta.at(0);
+
+    double dR_lj_min = 1e10; // distance between the electron and the closest jet
+    for( size_t j = 0 ; j < ed->jets.n ; ++j ) {
+        double dR_lj = PhysicsHelperFunctions::DeltaR( ed->leptons, 0, ed->jets, j );
+        if( dR_lj > dR_lj_min ) continue;
+        
+        dR_lj_min = dR_lj;
+    }
+
+    double dPhi_met   = Phi_mphi_phi( ed->leptons.phi.at(0) - ed->MET.phi );
+
+    int trigger = ed->leptons.property["trigMatch"].at(0); // which trigger the lepton is mathced to, and it's value should be (use lep_trigMatch in MiniSL)
+
+    bool tight = ( rc_channel == FakesWeights::EJETS ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
+
+    rc_lepton.dR      = dR_lj_min;  // distance between the electron and the closest jet
+    rc_lepton.dPhi    = dPhi_met;  // delta phi between electron and MET (used only by electrons)
+    rc_lepton.trigger = trigger;    // 1,2 or 3, or even adding the info on the prescaled trigger (so +4)
+
+    qcd_weight = m_moma->GetFakesWeight( rc_channel, rc_event, rc_lepton, tight );
+#endif  
+
+    return qcd_weight;
+}
+
 
 void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( ControlPlotValues& values )
 {
