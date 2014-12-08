@@ -3,6 +3,13 @@
 
 #include "ICutFlow.h"
 
+#include "PhysicsHelperFunctions.h"
+#include "ControlPlotValues.h"
+#include "EventData.h"
+#include "Particle.h"
+
+using namespace PhysicsHelperFunctions;
+
 class CutFlowTTbarResolvedParticleLevel : public CutFlow
 {
  public:
@@ -13,7 +20,36 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
   virtual bool Apply( EventData * ed );
 
  protected:
+  bool PassedCutFlowParticle( EventData * ed );
 
+  void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
+
+  void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1., string level = "particle" );
+  void FillHistogramsPseudotopParton(    EventData * ed, const double weight = 1. );
+
+  void FillHistogramsPseudotopResponseParticleToParton(  EventData * ed, const double weight = 1. );
+
+  void FillHistogramsMatchingParticleToParton( double weight = 1. );
+
+  void FillHistograms(string path, ControlPlotValues& values);
+  void FillMatrix(string path, Particle& px, Particle& py, double weight);
+
+  void FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, const double weight);
+
+  void FillHistogramsPartonTop(EventData::Truth_t& particle, int index, string level, string topType, const double weight);
+  void FillHistogramsPartonTopPairs(EventData::Truth_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
+
+  void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mbl = 0);
+  void FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
+
+
+ protected:
+  PseudoTopReconstruction * m_pseudotop_particle;
+
+  PseudoTopMatching       * m_pseudotop_matching_particle2parton;
+
+ private:
+   vector<string> alias;
 };
 
 typedef CutFlowPluginFactory< CutFlowTTbarResolvedParticleLevel > CutFlowPluginFactory_TTbarResolvedParticleLevel;

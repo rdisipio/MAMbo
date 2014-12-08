@@ -45,7 +45,7 @@ clean:
 	@cd Ntuples  ; $(MAKE) $(MFLAGS) clean
 	@cd CutFlows ; $(MAKE) $(MFLAGS) clean
 	@cd HistogramFillers ; $(MAKE) $(MFLAGS) clean
-	@cd MoMA     ; $(MAKE) $(MFLAGS) clean
+#	@cd MoMA     ; $(MAKE) $(MFLAGS) clean
 
 force_look:
 	@true

@@ -164,10 +164,10 @@ bool NtupleWrapperTopMiniSLResolved::MakeEventTruth( EventData * ed )
   
   m_dumper_mctruth->GetEntryWithIndex( ed->info.runNumber, ed->info.eventNumber );
 
-  m_dumper_mctruth->DumpEventLeptons( ed );
-  m_dumper_mctruth->DumpEventMET( ed );
-  m_dumper_mctruth->DumpEventJets( ed );
-  m_dumper_mctruth->DumpEventMCTruth( ed );
+  m_dumper_mctruth->DumpEventLeptons( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventMET( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventJets( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_particle, ed );
 
   return success;
 }

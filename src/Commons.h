@@ -40,7 +40,7 @@ using namespace std;
 typedef TH1D ROOT_TH1_t;
 typedef TH2D ROOT_TH2_t;
 
-enum LeptonFlavor { kElectron, kMuon, kTau, kNeutrino };
+enum LeptonFlavor { kElectron, kMuon, kTau, kNeutrino, kUnknown };
 enum JetTag       { kLight = 0, kCTagged = 4, kBTagged = 5, kTauTagged = 15, kGTagged = 21 };
 
 typedef vector< string >       StringVector_t;

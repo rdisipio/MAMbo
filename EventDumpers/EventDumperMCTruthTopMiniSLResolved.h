@@ -16,47 +16,54 @@ class EventDumperMCTruthTopMiniSLResolved
     NTUP_PARTON      * m_ntuple_parton;
 
  public: 
-    void SetNtupleParticle( NTUP_PARTICLE * ntuple ) { 
+    void SetNtupleParticle( NTUP_PARTICLE * ntuple, bool buildIndex = true ) { 
         m_ntuple_particle = ntuple; 
+
+        if( !buildIndex ) return ;
+
 	cout << "INFO: building index for particles chain..." << endl;
  	int res = m_ntuple_particle->fChain->BuildIndex( "runNumber", "eventNumber" );
 	cout << "INFO: particles tree index: returned value: " << res << endl;
     };
     
-    void SetNtupleParton( NTUP_PARTON * ntuple ) {
+    void SetNtupleParton( NTUP_PARTON * ntuple, bool buildIndex = true ) {
         m_ntuple_parton = ntuple;
+
+        if( !buildIndex	) return ;
+
  	cout << "INFO: building index for partons chain..." << endl;
         int res = m_ntuple_parton->fChain->BuildIndex( "runNumber", "eventNumber" );
 	cout << "INFO: partons tree index: returned value: " << res << endl;
     };
 
     void GetEntryWithIndex( unsigned long major, unsigned long minor = 0 ) { 
-        m_ntuple_particle->fChain->GetEntryWithIndex( major, minor );
-        m_ntuple_parton->fChain->GetEntryWithIndex( major, minor );
+        if( m_ntuple_particle ) m_ntuple_particle->fChain->GetEntryWithIndex( major, minor );
+        if( m_ntuple_parton )   m_ntuple_parton->fChain->GetEntryWithIndex( major, minor );
     };
+
 
     ///////////////////////////////////////////////
 
-
-    virtual bool DumpEventLeptons( EventData * ed )
+    template< class T > 
+    bool DumpEventLeptons( const T * ntuple, EventData * ed )
     {
-       const int el_n = this->m_ntuple_particle->part_el_n;
+       const int el_n = ntuple->part_el_n;
        for( int i = 0 ; i < el_n ; ++i ) {
 	 TLorentzVector el;
-	 el.SetPtEtaPhiE( this->m_ntuple_particle->part_el_pt[i],
-			  this->m_ntuple_particle->part_el_eta[i],
-			  this->m_ntuple_particle->part_el_phi[i],
-			  this->m_ntuple_particle->part_el_E[i] );
+	 el.SetPtEtaPhiE( ntuple->part_el_pt[i],
+			  ntuple->part_el_eta[i],
+			  ntuple->part_el_phi[i],
+			  ntuple->part_el_E[i] );
 	 HelperFunctions::DumpParticleToEventData( el, &ed->truth_electrons );
        }
 
-       const int mu_n = this->m_ntuple_particle->part_mu_n;
+       const int mu_n = ntuple->part_mu_n;
        for( int i = 0 ; i < mu_n ; ++i ) {
          TLorentzVector	mu;
-         mu.SetPtEtaPhiE( this->m_ntuple_particle->part_mu_pt[i],
-                          this->m_ntuple_particle->part_mu_eta[i],
-                          this->m_ntuple_particle->part_mu_phi[i],
-                          this->m_ntuple_particle->part_mu_E[i]	);
+         mu.SetPtEtaPhiE( ntuple->part_mu_pt[i],
+                          ntuple->part_mu_eta[i],
+                          ntuple->part_mu_phi[i],
+                          ntuple->part_mu_E[i]	);
          HelperFunctions::DumpParticleToEventData( mu, &ed->truth_muons );
        }
     };
@@ -65,14 +72,15 @@ class EventDumperMCTruthTopMiniSLResolved
     /////////////////////////////////////////////////////////////////////////
 
 
-    virtual bool DumpEventMET( EventData * ed )   
+    template< class T >
+    bool DumpEventMET( const T * ntuple, EventData * ed )   
     {
        TLorentzVector etmiss;
-       for( int i = 0 ; i < this->m_ntuple_particle->part_nu_n ; ++i ) {
+       for( int i = 0 ; i < ntuple->part_nu_n ; ++i ) {
            TLorentzVector nu;
-	   const double nu_pt  = this->m_ntuple_particle->part_nu_pt[i];
-	   const double	nu_eta = this->m_ntuple_particle->part_nu_eta[i];
-           const double nu_phi = this->m_ntuple_particle->part_nu_phi[i]; 
+	   const double nu_pt  = ntuple->part_nu_pt[i];
+	   const double	nu_eta = ntuple->part_nu_eta[i];
+           const double nu_phi = ntuple->part_nu_phi[i]; 
 	   nu.SetPtEtaPhiM( nu_pt, nu_eta, nu_phi, 0 );
            etmiss += nu;
        }
@@ -108,21 +116,22 @@ class EventDumperMCTruthTopMiniSLResolved
     ///////////////////////////////////////////////
 
 
-    virtual bool DumpEventJets( EventData * ed )
+    template< class T >
+    bool DumpEventJets( const T * ntuple, EventData * ed )
     {
-       const int jet_n = this->m_ntuple_particle->part_jet_n;
+       const int jet_n = ntuple->part_jet_n;
        for( int i = 0 ; i < jet_n ; ++i ) {
 //	 ed->truth_jets.n++;
          ed->truth_jets.index.push_back( i );
 
 	 TLorentzVector jet;
-	 jet.SetPtEtaPhiE( this->m_ntuple_particle->part_jet_pt[i],
-			   this->m_ntuple_particle->part_jet_eta[i],
-			   this->m_ntuple_particle->part_jet_phi[i],
-			   this->m_ntuple_particle->part_jet_E[i] );
+	 jet.SetPtEtaPhiE( ntuple->part_jet_pt[i],
+			   ntuple->part_jet_eta[i],
+			   ntuple->part_jet_phi[i],
+			   ntuple->part_jet_E[i] );
 	 HelperFunctions::DumpParticleToEventData( jet, &ed->truth_jets );
 
-	 const int flavor = this->m_ntuple_particle->part_jet_flavour_pdgId[i];
+	 const int flavor = ntuple->part_jet_flavour_pdgId[i];
 	 if( abs(flavor) == 5 ) { 
 	    HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );
 	    ed->truth_bjets.index.push_back( i );
@@ -134,18 +143,19 @@ class EventDumperMCTruthTopMiniSLResolved
     ///////////////////////////////////////////////
 
 
-    virtual bool DumpEventMCTruth( EventData * ed )
+    template< class T >
+    bool DumpEventMCTruth( const T * ntuple_partons, EventData * ed )
     {
        TLorentzVector t1, t2, ttbar;
 
-       for( int i = 0 ; i < this->m_ntuple_parton->parton_topQuark_n ; ++i ) {
-	  const double t_pT  = this->m_ntuple_parton->parton_topQuark_pt[i];
-	  const double t_eta = this->m_ntuple_parton->parton_topQuark_eta[i];
-	  const double t_phi = this->m_ntuple_parton->parton_topQuark_phi[i];
-	  const double t_m   = this->m_ntuple_parton->parton_topQuark_m[i];
+       for( int i = 0 ; i < ntuple_partons->parton_topQuark_n ; ++i ) {
+	  const double t_pT  = ntuple_partons->parton_topQuark_pt[i];
+	  const double t_eta = ntuple_partons->parton_topQuark_eta[i];
+	  const double t_phi = ntuple_partons->parton_topQuark_phi[i];
+	  const double t_m   = ntuple_partons->parton_topQuark_m[i];
 
-	  const int pid     = this->m_ntuple_parton->parton_topQuark_pdgId[i];
-	  const int status  = this->m_ntuple_parton->parton_topQuark_status[i];
+	  const int pid     = ntuple_partons->parton_topQuark_pdgId[i];
+	  const int status  = ntuple_partons->parton_topQuark_status[i];
 	  const int barcode = 0;
 	  const float t_q   = ( pid >= 0 ) ? 1 : -1;
 
@@ -154,7 +164,7 @@ class EventDumperMCTruthTopMiniSLResolved
 	  HelperFunctions::DumpTruthParticleToEventData( t, pid, status, barcode, t_q, &ed->mctruth );	
 
 	  bool isHadronic = false;
-          if( this->m_ntuple_parton->parton_topQuark_isHadronic[i] ) {
+          if( ntuple_partons->parton_topQuark_isHadronic[i] ) {
 		t1 = t;
           }
           else {

@@ -275,9 +275,9 @@ namespace PhysicsHelperFunctions {
 
     const double a = l_E*l_E - l_pz*l_pz;
     const double b = -2. * l_pz * ( mdiff + pT_vl );
-    //    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*mdiff*pT_vl;
-    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*pT_vl;
-    
+//    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*mdiff*pT_vl;
+    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*pT_vl;   // typo in ATL-COM-PHYS-2013-208 L148
+  
     const double delta = b*b - 4.*a*c;
     
     double v_pz = 0.;

@@ -34,6 +34,9 @@ bool ConfigManager::Configure( const char * configFileName, AnalysisParams_t& an
         else if (ch == "muon" || ch == "kMuon") {
             analysisParams.channel = kMuon;
 	}
+        else {
+	    analysisParams.channel = kUnknown;
+        } 
         cout<< "Analysing channel: " << analysisParams.channel<< endl;
     }
     else if( xmlStrEqual( nodeParam->name, BAD_CAST "ntuple" ) ) {
