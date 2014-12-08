@@ -26,9 +26,11 @@
     <Variables>
         <Variable name="pt" title="p_{T} [GeV]" folder="4j2b" >
             <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="top"/>
-            <Bin id="1" nbins="11" edges="0,40,80,100,120,150,180,200,260,300,350,1000" particle="top"/>
+            <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="top"/>
+<!-- Not necessary:           <Bin id="1" nbins="11" edges="0,40,80,100,120,150,180,200,260,300,350,1000" particle="top"/>
             <Bin id="2" nbins="12" edges="0,40,75,90,110,135,160,180,220,260,300,350,1000" particle="top"/>
             <Bin id="3" nbins="9"  edges="0,50,100,140,180,220,260,300,350,1000" particle="top"/>            
+-->
             <Bin id="4" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>
         </Variable>
 
@@ -48,11 +50,21 @@
         <Variable name="m"      title="mass [GeV]" folder="4j2b" > 
             <Bin id="0" nbins="50" xmin="0." xmax="600." particle="top"/>
             <Bin id="1" nbins="50" xmin="160." xmax="185." particle="top"/> 
-            <Bin id="2" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" />
+            <Bin id="2" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" /> 
+            <!-- JK: <Bin id="2" nbins="50" xmin="225." xmax="2500." particle="tt" /> -->
+
         </Variable>
         <Variable name="absrap" title="abs rapidity |y_{t}|" folder="4j2b" > 
             <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/>
 	    <Bin id="1" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
+<!-- JK:
+            <Bin id="0" nbins="50" xmin="0." xmax="2.5" particle="top"/>
+	    <Bin id="1" nbins="50" xmin="0." xmax="2.5" particle="tt"/>
+-->
+        </Variable>
+        <Variable name="rapidity" title="rapidity y_{t}" folder="4j2b" > 
+            <Bin id="0" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0.,0.4,0.8,1.1, 1.4,1.8,2.5" particle="top"/>
+	    <Bin id="1" nbins="20" edges="-2.5,-1.6,-1.2,-1.0,-0.8,-0.7,-0.6,-0.4,-0.2,-0.1,0.,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
         </Variable>
         <Variable name="mlb" title="Reco (b,l) invariant mass [GeV]" folder="4j2b" >
             <Bin nbins="50" xmin="0." xmax="300." />
@@ -174,6 +186,7 @@
         <TH1F variable="E" binId="0"/>
         <TH1F variable="m" binId="0"/>
         <TH1F variable="absrap" binId="0"/>
+        <TH1F variable="rapidity" binId="0"/>
         <TH1F variable="mlb" binId="0"/>
         <!--TH2F variableX="pt" binIdX="0" variableY="lep_pt" binIdY="0" /-->
         <TH1F variable="lep_pt" binId="0"/>
@@ -206,6 +219,7 @@
         <Matrix variable="E" binId="0"/>
         <Matrix variable="m" binId="0"/>
         <Matrix variable="absrap" binId="0"/>
+        <Matrix variable="rapidity" binId="0"/>
 
  
 	<!-- JK top pair distributions -->

@@ -1,6 +1,8 @@
 #ifndef __CF_TTbarResolved_H__
 #define __CF_TTbarResolved_H__
 
+#include "TRandom3.h"
+
 #include "ICutFlow.h"
 
 #include "PhysicsHelperFunctions.h"
@@ -71,7 +73,9 @@ class CutFlowTTbarResolved : public CutFlow
 private:
 
     vector<string> alias;
+    TRandom3 *m_rand;
     
+
 };
 
 typedef CutFlowPluginFactory< CutFlowTTbarResolved > CutFlowPluginFactory_TTbarResolved;

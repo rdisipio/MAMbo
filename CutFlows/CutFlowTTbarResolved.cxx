@@ -44,6 +44,8 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
+    m_rand = new TRandom3(12345);
+
     AddChannel("LPLUSJETS");
 
     AddCounterName("LPLUSJETS", "reco_unweight", 9);
@@ -177,10 +179,20 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     // Have fun with pseudo tops!
 
-    if (Debug) cout << "  Here1" << endl;
-
-    // yup, needs to be here:
+    // yup, this line really needs to be here:
     m_pseudotop_reco->SetEventData(ed);
+
+
+
+    bool fillHistos = true;
+    bool fillCorrections = true;
+    bool splitSample = true; // HACK!
+    if (splitSample) {
+      fillHistos = not (m_rand -> Integer(2));
+      fillCorrections = not fillHistos;
+    }
+
+
     if( passedRecoSelection ) {
      
       m_pseudotop_reco->SetEventData(ed);
@@ -193,10 +205,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       // reco                : 0=t_lep 1=t_had 2=ttbar
       // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
       // truth (parton lvl)  : 6=t_lep 7=t_had 8=ttbar
-      
-      FillHistogramsPseudotopReco(ed, weight_reco_level);
-
-      if (Debug) cout << "  Here2" << endl;
+      if (fillHistos)
+	FillHistogramsPseudotopReco(ed, weight_reco_level);
 
     } else {
       // ugly hack, due to pseudotop indices in ed required to be
@@ -210,41 +220,38 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     // there is always a parton-level top
     if(passedRecoSelection) {
 
-      // NOW: we should think whether we want to fill this only when passed reco, I'd think so? JK
-      FillHistogramsPseudotopParton(ed, weight_particle_level);
-      if (Debug) cout << "  Here3" << endl;
-
+      if (fillHistos) {
+	// NOW: we should think whether we want to fill this only when passed reco, I'd think so? JK
+	FillHistogramsPseudotopParton(ed, weight_particle_level);
+	FillHistogramsMatchingRecoToParton(weight_reco_level);
+      }
       // makes sense only when passed reco:
+      if (fillCorrections)
       FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
-      FillHistogramsMatchingRecoToParton(weight_reco_level);
-      if (Debug) cout << "  Here4" << endl;
+
+
 
     } 
     
     // nb: events could NOT pass the particle-level selection
     //     but you could still be able to reconstruct pseudotops (i.e. 1l4j2b)
 
-    if (Debug) cout << "  Here4" << endl;
-
     if( !passedParticleSelection ) {
       // need to fill histograms binned in reco quantities,
       // standing for passed: reco!part
       
-      if(passedRecoSelection) {
+      if(passedRecoSelection and fillHistos) {
 	FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_not_particle");
       }
       return success;
       
     } else { // passed particle
 
-      if (Debug) cout << "  Here5" << endl;
-
       m_pseudotop_particle->SetEventData(ed);
       m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
       m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
 
       if (Debug) {
-	cout << "  Here6" << endl;
 	cout << "    jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
 	cout << "    truth_jet_n=" << ed->truth_jets.n << " truth_bjets_n=" << ed->truth_bjets.n << endl;
       }
@@ -261,52 +268,48 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	}
       */
       m_pseudotop_particle->Run();    
-      if (Debug) cout << "  Here6.5" << endl;
-      FillHistogramsPseudotopParticle(ed, weight_particle_level);
-      if (Debug) cout << "  Here7" << endl;
-
+      if (fillHistos) {
+	FillHistogramsPseudotopParticle(ed, weight_particle_level);
+      }
 
       // if in addition passed also reco, we can fill response matrices:
       if(passedParticleSelection && passedRecoSelection) { // this is slightly over-ifed;-)
-
-	if (Debug) cout << "  Here8" << endl;
-
        
 	// rds:
 	m_pseudotop_matching_reco2particle->SetEventData(ed);
 	m_pseudotop_matching_reco2particle->DoMatching(0, 3, "pseudotop_lep");
 	m_pseudotop_matching_reco2particle->DoMatching(1, 4, "pseudotop_had");
 	m_pseudotop_matching_reco2particle->DoMatching(2, 5, "pseudottbar");
-	if (Debug) cout << "  Here8.5" << endl;
+
 	// matching:
 	FillHistogramsMatchingRecoToParticle(weight_reco_level);
 	FillHistogramsMatchingParticleToParton(weight_particle_level);
 
 	// JK:
 	bool passedDRMatching = m_pseudotop_matching_reco2particle->DoObjectsMatching(0); // 0 = no debug
-	if (Debug) cout << "  Here9" << endl;
 
-
-        if (Debug) cout << "  Here10" << endl;
 	// fill response matrix:
-	FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
-	FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
-	if (Debug) cout << "  Here11" << endl;
-	
+	// NEW: added here the matching condition!!! JK 3.12.2014
+	if (passedDRMatching and fillCorrections) {
+	  FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
+	  FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
+	}
 	
 	// fill reco && particle for the denumerator of the f_'missassign':
-	FillHistogramsPseudotopParticle(ed, weight_particle_level, "reco_and_particle");
-	
+	if (fillCorrections) {
+	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "reco_and_particle");
+	}
+
 	//  fill numerator for the matching eff (f_'missassign')
 	// reco && particle && matched:
-	if(passedDRMatching) {
+	if(passedDRMatching && fillCorrections) {
 	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "matched");
 	}
 	
       } // passed particle and reco
     } // passed particle
 
-    if (passedParticleSelection && !passedRecoSelection) {
+    if (passedParticleSelection && !passedRecoSelection && fillCorrections) {
       // did not pass reco, so let's fill particle!reco for eff:
       FillHistogramsPseudotopParticle(ed, weight_particle_level, "particle_not_reco");
     }
@@ -622,6 +625,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/E", p.E / GeV, weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/m", p.m / GeV, weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/absrap", fabs(p.y), weight);
+    m_hm->FillHistograms(level + "/4j2b/" + topType + "/rapidity", p.y, weight);
 
     if (index %3 == 0 and mbl > 0.){
         m_hm->FillHistograms(level + "/4j2b/" + topType + "/mlb", mbl, weight );
@@ -744,6 +748,7 @@ void CutFlowTTbarResolved::FillHistogramsPartonTop(EventData::Truth_t& particle,
   m_hm->FillHistograms(level + "/4j2b/" + topType + "/E", p.E / GeV, weight);
   m_hm->FillHistograms(level + "/4j2b/" + topType + "/m", p.m / GeV, weight);
   m_hm->FillHistograms(level + "/4j2b/" + topType + "/absrap", fabs(p.y), weight);
+  m_hm->FillHistograms(level + "/4j2b/" + topType + "/rapidity", p.y, weight);
 }
 
 
@@ -892,6 +897,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     m_hm->FillMatrices( path + "_phi", px.phi, py.phi, weight);
     m_hm->FillMatrices( path + "_m", px.m  / GeV, py.m  / GeV, weight);
     m_hm->FillMatrices( path + "_absrap", fabs(px.y), fabs(py.y), weight);
+    m_hm->FillMatrices( path + "_rapidity", px.y, py.y, weight);
     m_hm->FillMatrices( path + "_E", px.E / GeV, py.E / GeV, weight);
   }
  

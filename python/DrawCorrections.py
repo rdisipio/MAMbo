@@ -64,7 +64,8 @@ def GetCorrection(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath =
     print '  RMS: %f %f' % (h_part.GetRMS(), h_pnr.GetRMS())
 
     eff = MakeRatio( h_part,  h_pnr)
-    acc = MakeRatio( h_rnp, h_reco)
+    # acc = MakeRatio( h_rnp, h_reco)
+    acc = MakeRatio( h_rp, h_reco)
     match = MakeRatio( h_match,  h_rp)
 
     if icorr == 0: return eff
@@ -97,16 +98,17 @@ def DrawCorrection(ll, rfile, objname = 'topH', varname = 'pt_0', icorr = 0, bas
 
     corr.Draw('P')
     _corrs.append(corr)
-    can.Print(canname + '.eps')
-    can.Print(canname + '.png')
+    can.Print('eps/' + canname + '.eps')
+    can.Print('png/' + canname + '.png')
 
 ####################################################
 
-ljets = [ 'el', 'mu']
+ljets = [ 'll', 'el', 'mu']
 
 for ll in ljets:
 
-    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s.root' % (ll,), 'read')
+    #rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_noMatchInMigra.root' % (ll,), 'read')
+    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_MatchInMigra.root' % (ll,), 'read')
     _files.append(rfile)
     print 'Opened file %s' % (rfile.GetName(),)
 
