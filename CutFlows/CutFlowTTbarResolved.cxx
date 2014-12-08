@@ -186,7 +186,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     bool fillHistos = true;
     bool fillCorrections = true;
-    bool splitSample = true; // HACK!
+    bool splitSample = false; // HACK!
     if (splitSample) {
       fillHistos = not (m_rand -> Integer(2));
       fillCorrections = not fillHistos;
