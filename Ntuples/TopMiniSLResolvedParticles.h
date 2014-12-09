@@ -1,13 +1,12 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Nov  4 14:38:03 2014 by ROOT version 5.34/19
+// Mon Dec  8 20:05:25 2014 by ROOT version 5.34/19
 // from TTree particles/Particle objects and associated decision
-// found on file: /home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.8.0/grid/examples_mc/mc.root
+// found on file: /home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/user.mromano.110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_tmn120122m_2014_11_12_mc.root/user.mromano.4391081.mc.root
 //////////////////////////////////////////////////////////
 
 #ifndef TopMiniSLResolvedParticles_h
 #define TopMiniSLResolvedParticles_h
-//#define TopMiniSLResolvedParticles_cxx
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -16,6 +15,8 @@
 // Header file for the classes stored in the TTree if any.
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
+
+using namespace std;
 
 class TopMiniSLResolvedParticles {
 public :
@@ -47,16 +48,16 @@ public :
    Float_t         part_mwt_el[2];   //[part_el_n]
    Float_t         part_mwt_mu[2];   //[part_mu_n]
    Int_t           part_jet_n;
-   Float_t         part_jet_pt[11];   //[part_jet_n]
-   Float_t         part_jet_eta[11];   //[part_jet_n]
-   Float_t         part_jet_phi[11];   //[part_jet_n]
-   Float_t         part_jet_E[11];   //[part_jet_n]
+   Float_t         part_jet_pt[18];   //[part_jet_n]
+   Float_t         part_jet_eta[18];   //[part_jet_n]
+   Float_t         part_jet_phi[18];   //[part_jet_n]
+   Float_t         part_jet_E[18];   //[part_jet_n]
    Int_t           part_jet_ntags;
-   Bool_t          part_jet_tagged[11];   //[part_jet_n]
-   Bool_t          part_jet_from_top[11];   //[part_jet_n]
-   Int_t           part_jet_flavour_pdgId[11];   //[part_jet_n]
-   Float_t         part_jet_muE[11];   //[part_jet_n]
-   Float_t         part_jet_nuE[11];   //[part_jet_n]
+   Bool_t          part_jet_tagged[18];   //[part_jet_n]
+   Bool_t          part_jet_from_top[18];   //[part_jet_n]
+   Int_t           part_jet_flavour_pdgId[18];   //[part_jet_n]
+   Float_t         part_jet_muE[18];   //[part_jet_n]
+   Float_t         part_jet_nuE[18];   //[part_jet_n]
    Int_t           part_nu_n;
    Float_t         part_nu_pt[6];   //[part_nu_n]
    Float_t         part_nu_eta[6];   //[part_nu_n]
@@ -127,9 +128,9 @@ TopMiniSLResolvedParticles::TopMiniSLResolvedParticles(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.8.0/grid/examples_mc/mc.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/user.mromano.110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_tmn120122m_2014_11_12_mc.root/user.mromano.4391081.mc.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("/home/ATLAS-T3/mromano/testarea/unversioned/Resolved8TeV/AnalysisTop-1.8.0/grid/examples_mc/mc.root");
+         f = new TFile("/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/user.mromano.110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_tmn120122m_2014_11_12_mc.root/user.mromano.4391081.mc.root");
       }
       f->GetObject("particles",tree);
 

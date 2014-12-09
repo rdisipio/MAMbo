@@ -167,7 +167,7 @@ bool NtupleWrapperTopMiniSLResolved::MakeEventTruth( EventData * ed )
   m_dumper_mctruth->DumpEventLeptons( this->m_ntuple_particle, ed );
   m_dumper_mctruth->DumpEventMET( this->m_ntuple_particle, ed );
   m_dumper_mctruth->DumpEventJets( this->m_ntuple_particle, ed );
-  m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
 
   return success;
 }
