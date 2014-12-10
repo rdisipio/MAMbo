@@ -7,6 +7,7 @@
 
 #ifndef TopMiniSLResolvedParticles_h
 #define TopMiniSLResolvedParticles_h
+//#define TopMiniSLResolvedParticles_cxx
 
 #include <TROOT.h>
 #include <TChain.h>
