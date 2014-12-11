@@ -292,7 +292,8 @@ namespace PhysicsHelperFunctions {
     else {
       const double v_pz_1 = 0.5 * ( -b - sqrt(delta) ) / a;
       const double v_pz_2 = 0.5 * ( -b + sqrt(delta) ) / a;
-      v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_1 : v_pz_2;
+      // BUGGY: v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_1 : v_pz_2;
+      v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_2 : v_pz_1;
     }
 
     const double v_E  = sqrt( v_pT*v_pT + v_pz*v_pz ); // of course, massless
