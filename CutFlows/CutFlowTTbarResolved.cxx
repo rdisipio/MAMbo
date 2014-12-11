@@ -145,7 +145,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
          weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
-            //scaleFactor_ELE *scaleFactor_MUON *
+            scaleFactor_ELE *scaleFactor_MUON *
             scaleFactor_BTAG *
             scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE;
     
