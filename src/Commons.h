@@ -24,6 +24,7 @@ static const double GeV = 1.e+3;
 #include <map>
 
 #include <stdexcept>
+#include <assert.h>
 
 using namespace std;
 

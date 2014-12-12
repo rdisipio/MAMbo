@@ -59,7 +59,7 @@ namespace HelperFunctions {
 
    //////////////////////////////////////////////////////
 
-
+#ifdef __USE_FASTJET__
   int FindFatJets( EventData * ed, const double fjet_ptmin, fastjet::JetAlgorithm alg, double R )
   {
     vector< fastjet::PseudoJet > pseudoJets;
@@ -101,7 +101,7 @@ namespace HelperFunctions {
 
     return ed->fjets.n;
   }
-
+#endif 
 
   //////////////////////////////////////////////////////
 

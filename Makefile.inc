@@ -14,18 +14,16 @@ CFLAGS += $(DEBUG)
 
 ROOTCFLAGS    = $(shell root-config --cflags)
 XMLCFLAGS     = $(shell xml2-config --cflags)
-FASTJETCFLAGS = $(shell fastjet-config --cxxflags)
 
-CFLAGS += $(ROOTCFLAGS) $(XMLCFLAGS) $(FASTJETCFLAGS)
+CFLAGS += $(ROOTCFLAGS) $(XMLCFLAGS)
 
-SOFLAGS = -fPIC -shared $(ROOTCFLAGS) $(XMLCFLAGS) $(FASTJETCFLAGS)
+SOFLAGS = -fPIC -shared $(ROOTCFLAGS) $(XMLCFLAGS)
 
 ROOTLIBS    = $(shell root-config --libs) 
 XMLLIBS     = $(shell xml2-config --libs)
-FASTJETLIBS = $(shell fastjet-config --libs) 
 
 # finally
-LIBS = $(ROOTLIBS) $(XMLLIBS) $(FASTJETLIBS)
+LIBS = $(ROOTLIBS) $(XMLLIBS)
 
 # compile directives
 
@@ -40,4 +38,14 @@ CFLAGS += -D__MOMA__
 include $(MAMBODIR)/MoMA/Makefile.rootcore.inc
 CFLAGS += -I$(MAMBODIR)/MoMA
 LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA
+endif
+
+
+ifdef FASTJETLOCATION
+CFLAGS += -D__USE_FASTJET__
+FASTJETCFLAGS = $(shell fastjet-config --cxxflags)
+FASTJETLIBS = $(shell fastjet-config --libs)
+CFLAGS  += $(FASTJETCFLAGS)
+SOFLAGS += $(FASTJETCFLAGS)
+LIBS    += $(FASTJETLIBS)
 endif

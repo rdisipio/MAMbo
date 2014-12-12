@@ -7,15 +7,18 @@
 #include <dirent.h>
 #include <errno.h>
 
+#ifdef __USE_FASTJET__
 #include "fastjet/JetDefinition.hh"
 #include "fastjet/AreaDefinition.hh"
 #include "fastjet/ClusterSequence.hh"
 #include "fastjet/ClusterSequenceArea.hh"
 #include "fastjet/PseudoJet.hh"
 
+#include "HEPTopTagger.h"
+#endif
+
 #include "TLorentzVector.h"
 
-#include "HEPTopTagger.h"
 #include "EventData.h"
 
 namespace HelperFunctions {
@@ -25,7 +28,9 @@ namespace HelperFunctions {
   
   int    ListDirectory( string dir, vector<string> &files );
 
+#ifdef __USE_FASTJET__
   int    FindFatJets( EventData * ed, const double fjet_ptmin = 300.*GeV, fastjet::JetAlgorithm alg = fastjet::antikt_algorithm, double R = 1.0 );
+#endif
 
   bool ComputeJetsDR(const TLorentzVector& r_jet1, const TLorentzVector& r_jet2, const TLorentzVector& r_had_bjet, const TLorentzVector& r_lep_bjet,
 		     const TLorentzVector& p_jet1, const TLorentzVector& p_jet2, const TLorentzVector& p_had_bjet, const TLorentzVector& p_lep_bjet,
