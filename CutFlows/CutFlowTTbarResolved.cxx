@@ -568,6 +568,9 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
 
     // Finally..
     qcd_weight = m_moma->GetFakesWeight( rc_channel, rc_event, rc_lepton, tight );
+//    qcd_weight = m_moma->GetFakesWeight( rc_channel, tight, rc_lepton.pt, rc_lepton.eta, fabs(rc_lepton.eta), rc_lepton.dR, rc_lepton.dRpt, rc_event.jetpt, rc_event.njets, rc_event.ntag, rc_lepton.trigger );
+
+
 //      qcd_weight = m_moma->GetFakesWeight( rc_channel, tight, lep_pt, lep_eta, fabs(lep_eta), dR_lj_min, dRpt , jet_pt0, ed->jets.n, ed->bjets.n, trigger);
 
 //    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " SumET = " << rc_event.sumet << " QCD_w = " << qcd_weight << endl;
