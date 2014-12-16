@@ -12,7 +12,7 @@ MoMATool::MoMATool() :
    m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
 
    m_fakes_weighter_mu->SetDataPath( dataDir + "/data/FakesMacros" );
-   m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "", "" );
+   m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
 }
 
 MoMATool::~MoMATool()
