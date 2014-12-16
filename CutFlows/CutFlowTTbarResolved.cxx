@@ -535,46 +535,42 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
     int rc_channel = m_config->channel;
 
     MMEvent  rc_event;
-    MMLepton rc_lepton;
-
-    rc_event.njets = ed->jets.n;;
-    rc_event.ntag  = ed->bjets.n;;
+    rc_event.njets = ed->jets.n;
+    rc_event.ntag  = ed->bjets.n;
     rc_event.jetpt = ed->jets.pT.at(0) / GeV ; // leading jet (used only by electrons)
 
-    rc_lepton.pt   = ed->leptons.pT.at(0) / GeV;
-    rc_lepton.eta  = fabs( ed->leptons.eta.at(0) );
-
+    MMLepton rc_lepton;
+    rc_lepton.pt  = ed->leptons.pT.at(0) / GeV;
+    rc_lepton.eta = ( rc_channel == FakesWeights::EJETS ) ? ed->electrons.property["el_cl_eta"].at(0) : ed->muons.eta.at(0);
+    rc_lepton.eta = fabs( rc_lepton.eta ); 
+    
     double dR_lj_min = 1e10; // distance between the electron and the closest jet
+    double pTdR_lj_min  = 0.; //pT/dR (lepton-closest jet)
     for( size_t j = 0 ; j < ed->jets.n ; ++j ) {
-/*
-        double dR_lj = ( rc_channel == FakesWeights::EJETS ) ? 
-			PhysicsHelperFunctions::DeltaR( ed->electrons, 0, ed->jets, j ) :
-			PhysicsHelperFunctions::DeltaR( ed->muons,     0, ed->jets, j );
-*/
-	double dR_lj = PhysicsHelperFunctions::DeltaR( ed->leptons, 0, ed->jets, j );
-
-//	if( dR_lj == 0. ) continue;
+        double dR_lj = PhysicsHelperFunctions::DeltaR( ed->leptons, 0, ed->jets, j );
 
         //cout << "Nj = " << ed->jets.n  << " j_ind = " << j << " dR_lj = " << dR_lj << " dR_lj_min = " << dR_lj_min << endl;
 
-        if( dR_lj < dR_lj_min ) dR_lj_min = dR_lj;
-    }
+        if( dR_lj < dR_lj_min ) {
+          dR_lj_min = dR_lj;
 
-    double dPhi_met   = ( rc_channel == FakesWeights::EJETS ) ? 
-			Phi_mphi_phi( ed->electrons.phi.at(0) - ed->MET.phi ) :
-			Phi_mphi_phi( ed->muons.phi.at(0) - ed->MET.phi );
+          const double pT_jet = ed->jets.pT.at(j) / GeV;
+          pTdR_lj_min = pT_jet / dR_lj;
+        }
+    }
+    rc_lepton.dR      = dR_lj_min;
+    rc_lepton.dRpt    = pTdR_lj_min; 
 
     int trigger = ed->leptons.property["trigMatch"].at(0); // which trigger the lepton is mathced to, and it's value should be (use lep_trigMatch in MiniSL)
+    rc_lepton.trigger = trigger;    // 1,2 or 3, or even adding the info on the prescaled trigger (so +4)
 
     bool tight = ( rc_channel == FakesWeights::EJETS ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
 
-    rc_lepton.dR      = dR_lj_min;  // distance between the electron and the closest jet
-    rc_lepton.dPhi    = dPhi_met;  // delta phi between electron and MET (used only by electrons)
-    rc_lepton.trigger = trigger;    // 1,2 or 3, or even adding the info on the prescaled trigger (so +4)
-
+    // Finally..
     qcd_weight = m_moma->GetFakesWeight( rc_channel, rc_event, rc_lepton, tight );
+//      qcd_weight = m_moma->GetFakesWeight( rc_channel, tight, lep_pt, lep_eta, fabs(lep_eta), dR_lj_min, dRpt , jet_pt0, ed->jets.n, ed->bjets.n, trigger);
 
-//    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " QCD_w = " << qcd_weight << endl;
+//    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " SumET = " << rc_event.sumet << " QCD_w = " << qcd_weight << endl;
 #endif  
 
     return qcd_weight;

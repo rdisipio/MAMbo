@@ -59,7 +59,7 @@ class NtupleWrapper : public INtupleWrapper
       while( std::getline( input, fName ) ) {
 	if( fName.empty() ) continue;
 
-	cout << "INFO: Input file: " << fName << '\n';
+//	cout << "INFO: Input file: " << fName << '\n';
 	chain->AddFile( fName.c_str() );
       }
 

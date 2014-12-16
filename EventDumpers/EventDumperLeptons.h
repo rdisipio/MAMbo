@@ -51,8 +51,17 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
   ed->muons.property["charge"].push_back( GET_VALUE( lep_charge ) );
 
 
-  // TRIGGER MATCHING
+  // TRACK SIGNIFICANCE
+#ifdef TopMiniSLResolved_h
+   const double trackd0 = GET_VALUE( lep_trackd0pvunbiased );
+   const double tracksigd0 = GET_VALUE( lep_tracksigd0pvunbiased );
+   const double d0sig = trackd0pv / tracksigd0pv;
+   ed->leptons.property["trackd0"].push_back( trackd0 );
+   ed->leptons.property["tracksigd0"].push_back( tracksigd0pv );
+   ed->leptons.property["d0sig"].push_back( d0sig );
+#endif
 
+  // TRIGGER MATCHING
 #ifdef TopMiniSLResolved_h
   ed->leptons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );
   ed->electrons.property["trigMatch"].push_back( GET_VALUE( lep_trigMatch ) );

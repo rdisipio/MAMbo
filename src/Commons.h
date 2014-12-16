@@ -29,6 +29,7 @@ static const double GeV = 1.e+3;
 using namespace std;
 
 #include <TROOT.h>
+#include <TError.h>
 #include <TFile.h>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -36,7 +37,9 @@ using namespace std;
 #include <TChain.h>
 #include <TLorentzVector.h>
 
+
 /////////////////////////////////////////////
+
 
 typedef TH1D ROOT_TH1_t;
 typedef TH2D ROOT_TH2_t;

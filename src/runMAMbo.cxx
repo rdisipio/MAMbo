@@ -3,10 +3,13 @@
 
 using namespace std;
 
+#include "Commons.h"
 #include "HistogramManager.h"
 #include "CutFlowFactory.hpp"
 #include "PluginManager.h"
 #include "ConfigManager.h"
+
+#include <TError.h>
 
 /////////////////////////////
 
@@ -27,6 +30,10 @@ static const char * options = "p:o:f:b:t:n:vh?";
 int main( int argc, char ** argv )
 {
   int status = 0;
+
+// hack to show only INFO printouts by ROOT
+//gErrorIgnoreLevel = kInfo;
+  gErrorIgnoreLevel = 5000;
 
   globalArgs.listFileName    = new char[1024]; strcpy( globalArgs.listFileName,   "control/file_list.txt" );
   globalArgs.paramsFileName  = new char[1024]; strcpy( globalArgs.paramsFileName, "control/analysis_params.xml" );

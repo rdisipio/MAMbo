@@ -16,7 +16,8 @@ class MoMATool
 
  public:
         double GetFakesWeight( int channel, const MMEvent& event, const MMLepton& lepton, bool tight );
-
+        double GetFakesWeight( int channel, bool tight, double lep_pt, double lep_eta, double el_cl_eta, double dR_lj_min, 
+                                   double pTdR_lj_min, double jet_pt0, int jet_n, int nJet_tagged, int trigger);
  private:
 	MoMATool();
 
