@@ -542,17 +542,27 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
     rc_event.jetpt = ed->jets.pT.at(0) / GeV ; // leading jet (used only by electrons)
 
     rc_lepton.pt   = ed->leptons.pT.at(0) / GeV;
-    rc_lepton.eta  = ed->leptons.eta.at(0);
+    rc_lepton.eta  = fabs( ed->leptons.eta.at(0) );
 
     double dR_lj_min = 1e10; // distance between the electron and the closest jet
     for( size_t j = 0 ; j < ed->jets.n ; ++j ) {
-        double dR_lj = PhysicsHelperFunctions::DeltaR( ed->leptons, 0, ed->jets, j );
-        if( dR_lj > dR_lj_min ) continue;
-        
-        dR_lj_min = dR_lj;
+/*
+        double dR_lj = ( rc_channel == FakesWeights::EJETS ) ? 
+			PhysicsHelperFunctions::DeltaR( ed->electrons, 0, ed->jets, j ) :
+			PhysicsHelperFunctions::DeltaR( ed->muons,     0, ed->jets, j );
+*/
+	double dR_lj = PhysicsHelperFunctions::DeltaR( ed->leptons, 0, ed->jets, j );
+
+//	if( dR_lj == 0. ) continue;
+
+        //cout << "Nj = " << ed->jets.n  << " j_ind = " << j << " dR_lj = " << dR_lj << " dR_lj_min = " << dR_lj_min << endl;
+
+        if( dR_lj < dR_lj_min ) dR_lj_min = dR_lj;
     }
 
-    double dPhi_met   = Phi_mphi_phi( ed->leptons.phi.at(0) - ed->MET.phi );
+    double dPhi_met   = ( rc_channel == FakesWeights::EJETS ) ? 
+			Phi_mphi_phi( ed->electrons.phi.at(0) - ed->MET.phi ) :
+			Phi_mphi_phi( ed->muons.phi.at(0) - ed->MET.phi );
 
     int trigger = ed->leptons.property["trigMatch"].at(0); // which trigger the lepton is mathced to, and it's value should be (use lep_trigMatch in MiniSL)
 
@@ -563,6 +573,8 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
     rc_lepton.trigger = trigger;    // 1,2 or 3, or even adding the info on the prescaled trigger (so +4)
 
     qcd_weight = m_moma->GetFakesWeight( rc_channel, rc_event, rc_lepton, tight );
+
+//    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " QCD_w = " << qcd_weight << endl;
 #endif  
 
     return qcd_weight;

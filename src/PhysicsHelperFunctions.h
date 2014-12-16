@@ -127,8 +127,9 @@ namespace PhysicsHelperFunctions {
   template< class T >
   double DeltaR( const T& coll, const int i, const int j ) {
       const double eta1 = coll.eta[i];
-      const double eta2 = coll.eta[j];
       const double phi1 = coll.phi[i];
+
+      const double eta2 = coll.eta[j];
       const double phi2 = coll.phi[j];
       
       const double dEta = eta1 - eta2;
@@ -146,8 +147,9 @@ namespace PhysicsHelperFunctions {
   template< class T1, class T2 >
   double DeltaR( const T1& coll1, const int i, const T2& coll2, const int j ) {
       const double eta1 = coll1.eta[i];
-      const double eta2 = coll1.eta[j];
-      const double phi1 = coll2.phi[i];
+      const double phi1 = coll1.phi[i];
+
+      const double eta2 = coll2.eta[j];
       const double phi2 = coll2.phi[j];
 
       const double dEta = eta1 - eta2;
