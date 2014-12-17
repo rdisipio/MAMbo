@@ -1,0 +1,4 @@
+/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000001.mu.root
+/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000002.mu.root
+/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000005.mu.root
+/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000006.mu.root

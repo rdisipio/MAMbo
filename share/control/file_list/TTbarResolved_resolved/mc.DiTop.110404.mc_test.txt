@@ -1,0 +1,1 @@
+/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/user.mromano.110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_tmn120122m_2014_11_12_mc.root/user.mromano.4391081.mc.root
