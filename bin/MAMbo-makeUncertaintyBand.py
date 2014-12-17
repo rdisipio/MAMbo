@@ -101,7 +101,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
 	
        hname = hpath.split('/')[-1]
 
-       print "INFO: merging histogram", hpath
+       print "INFO: merging histogram", hpath, " hname =", hname
 
        hlist = GatherHistograms( hname, hpath )
 
@@ -139,7 +139,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
              graph.SetPoint( i, x, y )
              graph.SetPointError( i, bw/2, bw/2, eyl, eyh )
 
-          graph.Write()
+       graph.Write()
 
 
 ########################################################################
