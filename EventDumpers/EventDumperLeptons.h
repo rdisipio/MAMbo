@@ -55,9 +55,9 @@ class EventDumperLeptons : public IEventDumper< NTUPLE >
 #ifdef TopMiniSLResolved_h
    const double trackd0 = GET_VALUE( lep_trackd0pvunbiased );
    const double tracksigd0 = GET_VALUE( lep_tracksigd0pvunbiased );
-   const double d0sig = trackd0pv / tracksigd0pv;
+   const double d0sig = trackd0 / tracksigd0;
    ed->leptons.property["trackd0"].push_back( trackd0 );
-   ed->leptons.property["tracksigd0"].push_back( tracksigd0pv );
+   ed->leptons.property["tracksigd0"].push_back( tracksigd0 );
    ed->leptons.property["d0sig"].push_back( d0sig );
 #endif
 
