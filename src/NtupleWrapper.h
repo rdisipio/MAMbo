@@ -52,15 +52,31 @@ class NtupleWrapper : public INtupleWrapper
     {
       bool success = true;
 
+      static string sep = "/";
+
       TChain * chain = new TChain( m_treeName );
 
       ifstream input( fileListName.c_str(), ios_base::in );
-      string fName;
-      while( std::getline( input, fName ) ) {
-	if( fName.empty() ) continue;
+      string txt, fName;
+      while( std::getline( input, txt ) ) {
+	if( txt.empty() ) continue;
 
-//	cout << "INFO: Input file: " << fName << '\n';
+	if( txt.find_first_of( sep ) == 0 ) { 
+	   // absolute path. take it as-is
+	   fName = txt;
+	}
+	else {
+	   string basedir = getenv( "MAMBONTUPLEDIR" );
+	   if( basedir.empty() ) {
+	      // relative path from working directory
+	      fName = txt;
+	   }
+	   else {
+	      fName = basedir + sep + txt;
+	   }
+	}
 	chain->AddFile( fName.c_str() );
+	cout << "INFO: Input file: " << fName << '\n';
       }
 
       m_ntuple->Init( chain );

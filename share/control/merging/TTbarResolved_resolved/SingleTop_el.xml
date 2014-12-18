@@ -8,10 +8,10 @@
   <histogram hpath="reco/cutflow/afterCuts/met_pt" />
   <histogram hpath="reco/cutflow/afterCuts/mtw" />
   <histogram hpath="reco/cutflow/afterCuts/fjet_pt" />
-  <histogram hpath="reco/4j2b/topH/m" />
+  <histogram hpath="reco/4j2b/topH/m_0" />
   <histogram hpath="reco/4j2b/topH/pt_0" />
   <histogram hpath="reco/4j2b/topH/absrap" />
-  <histogram hpath="reco/4j2b/topL/m" />
+  <histogram hpath="reco/4j2b/topL/m_0" />
   <histogram hpath="reco/4j2b/topL/pt_0" />
   <histogram hpath="reco/4j2b/topL/absrap" />
   <histogram hpath="reco/4j2b/tt/m" />
@@ -25,9 +25,9 @@
   <sample name="singletop_Wtchannel"        dsid="110140" xsec="20.461" kfact="1.0933" genevt="999692"  generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="singletop_tchannel_top"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.SingleTop.110090.el.histograms.root" />
-  <file	sample="singletop_tchannel_antitop" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.SingleTop.110091.el.histograms.root" />
-  <file sample="singletop_schannel"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.SingleTop.110119.el.histograms.root" />
-  <file sample="singletop_Wtchannel"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.SingleTop.110140.el.histograms.root" />
+  <file sample="singletop_tchannel_top"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110090.el.histograms.root" />
+  <file	sample="singletop_tchannel_antitop" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110091.el.histograms.root" />
+  <file sample="singletop_schannel"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110119.el.histograms.root" />
+  <file sample="singletop_Wtchannel"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110140.el.histograms.root" />
 </files>
 </document>

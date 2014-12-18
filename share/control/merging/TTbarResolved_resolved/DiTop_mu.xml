@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <histograms>
-  <histogram hpath="reco/reco_4j2b_lep_pt" />
-  <histogram hpath="reco/reco_4j2b_lep_eta" />
-  <histogram hpath="reco/reco_4j2b_jet_pt" />
-  <histogram hpath="reco/reco_4j2b_jet_eta" />
-  <histogram hpath="reco/reco_4j2b_fjet_pt" />
-  <histogram hpath="reco/reco_4j2b_met_pt" />
-  <histogram hpath="reco/reco_4j2b_mtw" />
-  <histogram hpath="reco/reco_4j2b_pseudotop_reco_had_m" />
-  <histogram hpath="reco/reco_4j2b_pseudotop_reco_had_pt" />
-  <histogram hpath="reco/reco_4j2b_pseudotop_reco_had_absrap" />
-  <histogram hpath="reco/reco_4j2b_pseudotop_reco_lep_m" />
-  <histogram hpath="reco/reco_4j2b_pseudotop_reco_lep_pt" />
-  <histogram hpath="reco/reco_4j2b_pseudotop_reco_lep_absrap" />
-  <histogram hpath="reco/reco_4j2b_pseudottbar_reco_m" />  
-  <histogram hpath="reco/reco_4j2b_pseudottbar_reco_pt" />
-  <histogram hpath="reco/reco_4j2b_pseudottbar_reco_absrap" />
-  <histogram hpath="particle/particle_4j2b_jet_pt" />
-  <histogram hpath="particle/particle_4j2b_jet_eta" />
-  <histogram hpath="particle/particle_4j2b_pseudotop_had_m" />
-  <histogram hpath="particle/particle_4j2b_pseudotop_had_pt" />
-  <histogram hpath="particle/particle_4j2b_pseudotop_lep_m" />
-  <histogram hpath="particle/particle_4j2b_pseudotop_lep_pt" />
-  <histogram hpath="particle/particle_4j2b_pseudottbar_m" />
-  <histogram hpath="particle/particle_4j2b_pseudottbar_pt" />
-  <histogram hpath="particle/particle_4j2b_pseudottbar_absrap" />
+  <histogram hpath="reco/cutflow/afterCuts/lep_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/lep_eta" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_eta" />
+  <histogram hpath="reco/cutflow/afterCuts/met_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/mtw" />
+  <histogram hpath="reco/cutflow/afterCuts/fjet_pt" />
+  <histogram hpath="reco/4j2b/topH/m_0" />
+  <histogram hpath="reco/4j2b/topH/pt_0" />
+  <histogram hpath="reco/4j2b/topH/absrap" />
+  <histogram hpath="reco/4j2b/topL/m_0" />
+  <histogram hpath="reco/4j2b/topL/pt_0" />
+  <histogram hpath="reco/4j2b/topL/absrap" />
+  <histogram hpath="reco/4j2b/tt/m" />
+  <histogram hpath="reco/4j2b/tt/pt" />
+  <histogram hpath="reco/4j2b/tt/absrap" />
 </histograms>
 <samples>
-  <sample name="ttbar_ljets"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_00"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_01"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_02"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_03"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_04"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_05"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_06"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_07"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_08"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_09"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="ttbar_ljets" path="/home/ATLAS/disipio/development/MAMbo/run/output/tt_diffxs_8TeV.mc.117050.PowhegPythia_P2011C_ttbar.mu.histograms.root" />
+  <file sample="ttbar_nofullhad_00" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.04" />
+  <file sample="ttbar_nofullhad_05" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.05" />
+  <file sample="ttbar_nofullhad_06" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.06" />
+  <file sample="ttbar_nofullhad_07" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.07" />
+  <file sample="ttbar_nofullhad_08" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.08" />
+  <file sample="ttbar_nofullhad_09" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.09" />
 </files>
 </document>

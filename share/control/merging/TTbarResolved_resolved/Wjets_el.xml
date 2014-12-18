@@ -8,10 +8,10 @@
   <histogram hpath="reco/cutflow/afterCuts/met_pt" />
   <histogram hpath="reco/cutflow/afterCuts/mtw" />
   <histogram hpath="reco/cutflow/afterCuts/fjet_pt" />
-  <histogram hpath="reco/4j2b/topH/m" />
+  <histogram hpath="reco/4j2b/topH/m_0" />
   <histogram hpath="reco/4j2b/topH/pt_0" />
   <histogram hpath="reco/4j2b/topH/absrap" />
-  <histogram hpath="reco/4j2b/topL/m" />
+  <histogram hpath="reco/4j2b/topL/m_0" />
   <histogram hpath="reco/4j2b/topL/pt_0" />
   <histogram hpath="reco/4j2b/topL/absrap" />
   <histogram hpath="reco/4j2b/tt/m" />  
@@ -19,7 +19,7 @@
   <histogram hpath="reco/4j2b/tt/absrap" />
 </histograms>
 <samples>
-  <sample name="WenuNp0"           dsid="147025" sf="1.07" xsec="8127.3" kfact="1.1330" genevt="29434220"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+<!--  <sample name="WenuNp0"           dsid="147025" sf="1.07" xsec="8127.3" kfact="1.1330" genevt="29434220"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" /> -->
   <sample name="WenuNp1"           dsid="147026" sf="1.07" xsec="1792.7" kfact="1.1330" genevt="48155904"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp2"           dsid="147027" sf="1.07" xsec="542.18" kfact="1.1330" genevt="17554347"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp3"           dsid="147028" sf="1.07" xsec="147.65" kfact="1.1330" genevt="4855289"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
@@ -27,7 +27,7 @@
   <sample name="WenuNp5incl"       dsid="147030" sf="1.07" xsec="11.962" kfact="1.1330" genevt="799192"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WmunuNp0"          dsid="147033" sf="1.07" xsec="8127.1" kfact="1.1330" genevt="31965655" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WmunuNp1"          dsid="147034" sf="1.07" xsec="1792.9" kfact="1.1330" genevt="43677615" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WmunuNp2"          dsid="147035" sf="1.07" xsec="542.24" kfact="1.1330" genevt="17611454" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+<!--  <sample name="WmunuNp2"          dsid="147035" sf="1.07" xsec="542.24" kfact="1.1330" genevt="17611454" generator="AlpgenPythia_Auto_P2011C" simulation="Full" /> -->
   <sample name="WmunuNp3"          dsid="147036" sf="1.07" xsec="147.66" kfact="1.1330" genevt="4956077"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WmunuNp4"          dsid="147037" sf="1.07" xsec="37.745" kfact="1.1330" genevt="2546595"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WmunuNp5incl"      dsid="147038" sf="1.07" xsec="11.970" kfact="1.1330" genevt="788898"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
@@ -52,7 +52,7 @@
   <sample name="WbbNp3incl"        dsid="200259" sf="0.89" xsec="13.633" kfact="1.1330" genevt="398397"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="WenuNp0"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147025.el.histograms.root" />"
+<!--  <file sample="WenuNp0"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147025.el.histograms.root" />" -->
   <file sample="WenuNp1"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147026.el.histograms.root" />"
   <file sample="WenuNp2"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147027.el.histograms.root" />"
   <file sample="WenuNp3"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147028.el.histograms.root" />
@@ -60,7 +60,7 @@
   <file	sample="WenuNp5incl"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147030.el.histograms.root" />
   <file	sample="WmunuNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147033.el.histograms.root" />
   <file	sample="WmunuNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147034.el.histograms.root" />
-  <file	sample="WmunuNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147035.el.histograms.root" />
+<!--  <file	sample="WmunuNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147035.el.histograms.root" /> -->
   <file	sample="WmunuNp3"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147036.el.histograms.root" />
   <file	sample="WmunuNp4"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147037.el.histograms.root" />
   <file	sample="WmunuNp5incl"   path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Wjets.147038.el.histograms.root" />

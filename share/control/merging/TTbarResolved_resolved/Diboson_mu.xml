@@ -24,8 +24,8 @@
   <sample name="WZ" dsid="105987" xsec="3.6706"  kfact="1.9011" genevt="1999995" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
 </samples>
 <files>
-  <file sample="WW" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.Diboson.105985.mu.histograms.root" />
-  <file	sample="ZZ" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.Diboson.105986.mu.histograms.root" />
-  <file	sample="WZ" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV_resolved.Diboson.105987.mu.histograms.root" />
+  <file sample="WW" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Diboson.105985.mu.histograms.root" />
+  <file	sample="ZZ" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Diboson.105986.mu.histograms.root" />
+  <file	sample="WZ" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Diboson.105987.mu.histograms.root" />
 </files>
 </document>

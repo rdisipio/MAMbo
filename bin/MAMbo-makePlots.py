@@ -169,6 +169,7 @@ def ScaleToIntegratedLuminosity( histograms, iLumi = 1. ):
 
    for sample in samples_configuration:
       if samples_configuration[sample].type == SampleType.data: continue
+      if samples_configuration[sample].type == SampleType.datadriven: continue
       if samples_configuration[sample].type == SampleType.uncertainty:
          ScaleGraph( histograms[sample], iLumi ) 
       else:

@@ -8,10 +8,10 @@
   <histogram hpath="reco/cutflow/afterCuts/met_pt" />
   <histogram hpath="reco/cutflow/afterCuts/mtw" />
   <histogram hpath="reco/cutflow/afterCuts/fjet_pt" />
-  <histogram hpath="reco/4j2b/topH/m" />
+  <histogram hpath="reco/4j2b/topH/m_0" />
   <histogram hpath="reco/4j2b/topH/pt_0" />
   <histogram hpath="reco/4j2b/topH/absrap" />
-  <histogram hpath="reco/4j2b/topL/m" />
+  <histogram hpath="reco/4j2b/topL/m_0" />
   <histogram hpath="reco/4j2b/topL/pt_0" />
   <histogram hpath="reco/4j2b/topL/absrap" />
   <histogram hpath="reco/4j2b/tt/m" />
@@ -22,5 +22,7 @@
   <sample name="DiTop"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.el.histograms.root" />
   <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.SingleTop.el.histograms.root" />
   <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Wjets.el.histograms.root" />
+  <sample name="Diboson"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Diboson.el.histograms.root" />
+  <sample name="Fakes"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.qcd.Egamma.el.histograms.root" />
 </samples>
 </document>
