@@ -130,7 +130,7 @@ def CreateMergedHistograms():
             xsec   = samples_configuration[sample].xsec
             kfact  = samples_configuration[sample].kfact
             sf     = samples_configuration[sample].sf
-            norm   = xsec * kfact * sf / genevt
+            norm   = iLumi * xsec * kfact * sf / genevt
             
             if hsum == None:
 
@@ -153,6 +153,7 @@ if __name__ == "__main__":
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-c", "--config", help="Configuration files",         dest="config", default="" )
    parser.add_option( "-o", "--output", help="Output file name [%default]", dest="output", default="merged.histograms.root" )
+   parser.add_option( "-l", "--iLumi",  help="Target integrated luminosity [%default]", dest="iLumi", default=1. )
    (opts, args) = parser.parse_args()
 
    configFileName = opts.config
@@ -163,6 +164,8 @@ if __name__ == "__main__":
    outFileName = opts.output
    print "INFO: Output file name:", outFileName
  
+   iLumi = float( opts.iLumi )
+
    histograms_configuration, samples_configuration, input_files = ReadConfiguration( configFileName )
   
    outfile = TFile.Open( outFileName, "RECREATE" )

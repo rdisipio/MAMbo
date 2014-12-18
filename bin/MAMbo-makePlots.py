@@ -257,7 +257,7 @@ def DoPlot( plot, iLumi = 1. ):
 
     histograms = FetchHistograms()
 
-    ScaleToIntegratedLuminosity( histograms, iLumi )
+    #ScaleToIntegratedLuminosity( histograms, iLumi )
 
     DivideByBinWidth( histograms )
 
