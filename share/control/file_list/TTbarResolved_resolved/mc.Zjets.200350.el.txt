@@ -1,1 +1,1 @@
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano:user.mromano.200350.AlpgenPythia_Auto_P2011C_ZtautaubbNp2.MC_RESOLVED_at180_2014_12_08_el.root/user.mromano.4535544._000001.el.root
+user.mromano:user.mromano.200350.AlpgenPythia_Auto_P2011C_ZtautaubbNp2.MC_RESOLVED_at180_2014_12_08_el.root/user.mromano.4535544._000001.el.root
