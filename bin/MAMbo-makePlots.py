@@ -204,6 +204,8 @@ def PrintLegend( lparams, histograms ):
     # todo: font must be helvetica (42?)
     leg = MakeLegend( lparams )
 
+    leg.SetTextFont( 42 )
+
     leg.AddEntry( histograms['data'], samples_configuration['data'].description, "lep" )
 
     ordered_samples = [ "" for i in range( len(histograms) ) ]
@@ -263,8 +265,9 @@ def DoPlot( plot, iLumi = 1. ):
 
     SetHistogramsStyle( histograms )
 
-    hmax = 1.4 if plot.scale == PlotScale.linear else 15.
-    SetMaximum( histograms, 'data', hmax )
+    sfmax = 1.4 if plot.scale == PlotScale.linear else 30.
+    sfmin = 0.0 if plot.scale == PlotScale.linear else 1e-4
+    SetMaximum( histograms, 'data', sfmax, sfmin )
 
     histograms['data'].GetYaxis().SetTitle( plot.ytitle )
 
@@ -282,13 +285,14 @@ def DoPlot( plot, iLumi = 1. ):
     histograms['uncertainty'].Draw( 'e2 same' )
     histograms['data'].Draw("e p same" )
 
-    if plot.scale == PlotScale.log: gPad.SetLogy(True)
+    if plot.scale == PlotScale.log: 
+       gPad.SetLogy(True)
     if plot.scale == PlotScale.bilog: 
        gPad.SetLogy(True)
        gPad.SetLogx(True)  
 
     lparams = {
-        'xoffset' : 0.63,
+        'xoffset' : 0.67,
         'yoffset' : 0.92,
         'width'   : 0.3,
         'height'  : 0.048

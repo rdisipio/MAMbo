@@ -148,10 +148,13 @@ def SetAxesStyle( hlist ):
 #########################################################
 
 
-def SetMaximum( histograms, key = 'data', sf = 1.3 ):
-    hmax = sf * histograms[key].GetMaximum()
+def SetMaximum( histograms, key = 'data', sfmax = 1.3, sfmin = 0. ):
+    hmax = sfmax * histograms[key].GetMaximum()
+    hmin = sfmin * histograms[key].GetMinimum()
 
-    for h in histograms.values(): h.SetMaximum( hmax )
+    for h in histograms.values(): 
+       h.SetMaximum( hmax )
+       h.SetMinimum( hmin )
 
 
 #########################################################

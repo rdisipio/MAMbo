@@ -19,16 +19,16 @@
   <histogram hpath="reco/4j2b/tt/absrap" />
 </histograms>
 <samples>
-  <sample name="ttbar_nofullhad_00"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_01"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_02"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_03"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_04"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_05"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_06"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_07"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_08"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
-  <sample name="ttbar_nofullhad_09"  dsid="110404" xsec="114.49" kfact="1.1994" genevt="15000000" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_00"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_01"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_02"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_03"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_04"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_05"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_06"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_07"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_08"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_09"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="14999817" generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
   <file sample="ttbar_nofullhad_00" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.110404.mu.histograms.root.00" />

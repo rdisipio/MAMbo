@@ -22,6 +22,7 @@
   <sample name="DiTop"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.el.histograms.root" />
   <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.SingleTop.el.histograms.root" />
   <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Wjets.el.histograms.root" />
+  <sample name="Zjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Zjets.el.histograms.root" />
   <sample name="Diboson"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Diboson.el.histograms.root" />
   <sample name="Fakes"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.qcd.Egamma.el.histograms.root" />
 </samples>

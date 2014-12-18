@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms>
+  <histogram hpath="reco/cutflow/afterCuts/lep_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/lep_eta" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_eta" />
+  <histogram hpath="reco/cutflow/afterCuts/met_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/mtw" />
+  <histogram hpath="reco/cutflow/afterCuts/fjet_pt" />
+  <histogram hpath="reco/4j2b/topH/m_0" />
+  <histogram hpath="reco/4j2b/topH/pt_0" />
+  <histogram hpath="reco/4j2b/topH/absrap" />
+  <histogram hpath="reco/4j2b/topL/m_0" />
+  <histogram hpath="reco/4j2b/topL/pt_0" />
+  <histogram hpath="reco/4j2b/topL/absrap" />
+  <histogram hpath="reco/4j2b/tt/m" />  
+  <histogram hpath="reco/4j2b/tt/pt" />
+  <histogram hpath="reco/4j2b/tt/absrap" />
+</histograms>
+<samples>
+  <sample name="ZeeNp0"           dsid="147105" xsec="718.97" kfact="1.1800" genevt="6298988"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeNp1"           dsid="147106" xsec="175.70" kfact="1.1800" genevt="8184476"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeNp2"           dsid="147107" xsec="58.875" kfact="1.1800" genevt="3175991"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeNp3"           dsid="147108" xsec="15.636" kfact="1.1800" genevt="894995"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeNp4"           dsid="147109" xsec="4.0116" kfact="1.1800" genevt="398597"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeNp5incl"       dsid="147110" xsec="1.2592" kfact="1.1800" genevt="229700"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumuNp0"          dsid="147113" xsec="719.16" kfact="1.1800" genevt="6298796" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumuNp1"          dsid="147114" xsec="175.74" kfact="1.1800" genevt="8193384" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumuNp2"          dsid="147115" xsec="58.882" kfact="1.1800" genevt="3175488" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumuNp3"          dsid="147116" xsec="15.673" kfact="1.1800" genevt="894799"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <sample name="ZmumuNp4"          dsid="147117" xsec="4.0057" kfact="1.1800" genevt="393200"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumuNp5incl"      dsid="147118" xsec="1.2544" kfact="1.1800" genevt="229200"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp0"          dsid="147121" xsec="718.87" kfact="1.1800" genevt="19202764" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp1"          dsid="147122" xsec="175.76" kfact="1.1800" genevt="10674582" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp2"          dsid="147123" xsec="58.856" kfact="1.1800" genevt="3765893" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp3"          dsid="147124" xsec="15.667" kfact="1.1800" genevt="1096994"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp4"          dsid="147125" xsec="4.0121" kfact="1.1800" genevt="398798"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp5incl"      dsid="147126" xsec="1.2560" kfact="1.1800" genevt="229799"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp0"           dsid="200332" xsec="6.5083" kfact="1.1800" genevt="1799992"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp1"           dsid="200333" xsec="3.2948" kfact="1.1800" genevt="999896"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp2"           dsid="200334" xsec="1.2546" kfact="1.1800" genevt="994594"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp3incl"           dsid="200335" xsec="0.61800" kfact="1.1800" genevt="885392"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp0"           dsid="200340" xsec="6.5056" kfact="1.1800" genevt="1799797"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp1"           dsid="200341" xsec="3.2909" kfact="1.1800" genevt="999897"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp2"           dsid="200342" xsec="1.2585" kfact="1.1800" genevt="999395"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp3incl"           dsid="200343" xsec="0.61808" kfact="1.1800" genevt="880894"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautaubbNp0"           dsid="200348" xsec="6.5062" kfact="1.1800" genevt="300000"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <sample name="ZtautaubbNp1"           dsid="200349" xsec="3.2935" kfact="1.1800" genevt="100000"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" /> 
+  <sample name="ZtautaubbNp2"           dsid="200350" xsec="1.2485" kfact="1.1800" genevt="50000"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautaubbNp3incl"           dsid="200351" xsec="0.61363" kfact="1.1800" genevt="49800"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeccNp0"           dsid="200432" xsec="11.763" kfact="1.1800" genevt="284999"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeccNp1"           dsid="200433" xsec="7.1249" kfact="1.1800" genevt="499500"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeccNp2"           dsid="200434" xsec="3.3656" kfact="1.1800" genevt="498997"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeeccNp3incl"           dsid="200435" xsec="1.7010" kfact="1.1800" genevt="443697"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumuccNp0"           dsid="200440" xsec="11.795" kfact="1.1800" genevt="298998"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <sample name="ZmumuccNp1"           dsid="200441" xsec="7.1254" kfact="1.1800" genevt="499799"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <sample name="ZmumuccNp2"           dsid="200442" xsec="3.3694" kfact="1.1800" genevt="499500"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <sample name="ZmumuccNp3incl"           dsid="200443" xsec="1.7003" kfact="1.1800" genevt="443999"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />   
+  <sample name="ZtautauccNp0"           dsid="200448" xsec="11.760" kfact="1.1800" genevt="299000"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauccNp1"           dsid="200449" xsec="7.1410" kfact="1.1800" genevt="199998"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauccNp2"           dsid="200450" xsec="3.3582" kfact="1.1800" genevt="99800"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <sample name="ZtautauccNp3incl"           dsid="200451" xsec="1.7046" kfact="1.1800" genevt="49400"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="ZeeNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147105.el.histograms.root" />
+  <file sample="ZeeNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147106.el.histograms.root" />
+  <file sample="ZeeNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147107.el.histograms.root" />
+  <file sample="ZeeNp3"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147108.el.histograms.root" />  
+  <file sample="ZeeNp4"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147109.el.histograms.root" />  
+  <file sample="ZeeNp5incl"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147110.el.histograms.root" />
+  <file sample="ZmumuNp0"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147113.el.histograms.root" />   
+  <file sample="ZmumuNp1"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147114.el.histograms.root" />
+  <file sample="ZmumuNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147115.el.histograms.root" />
+  <file sample="ZmumuNp3"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147116.el.histograms.root" />
+  <file sample="ZmumuNp4"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147117.el.histograms.root" />
+  <file sample="ZmumuNp5incl"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147118.el.histograms.root" />
+  <file sample="ZtautauNp0"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147121.el.histograms.root" />
+  <file sample="ZtautauNp1"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147122.el.histograms.root" />
+  <file sample="ZtautauNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147123.el.histograms.root" />
+  <file sample="ZtautauNp3"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147124.el.histograms.root" />
+  <file sample="ZtautauNp4"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147125.el.histograms.root" />
+  <file sample="ZtautauNp5incl"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.147126.el.histograms.root" />
+  <file sample="ZeebbNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200332.el.histograms.root" />
+  <file sample="ZeebbNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200333.el.histograms.root" />
+  <file sample="ZeebbNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200334.el.histograms.root" />   
+  <file sample="ZeebbNp3incl"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200335.el.histograms.root" />   
+  <file sample="ZmumubbNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200340.el.histograms.root" />   
+  <file sample="ZmumubbNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200341.el.histograms.root" />
+  <file sample="ZmumubbNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200342.el.histograms.root" />   
+  <file sample="ZmumubbNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200343.el.histograms.root" />   
+  <file sample="ZtautaubbNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200348.el.histograms.root" />  
+  <file sample="ZtautaubbNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200349.el.histograms.root" /> 
+  <file sample="ZtautaubbNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200350.el.histograms.root" /> 
+  <file sample="ZtautaubbNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200351.el.histograms.root" />
+  <file sample="ZeeccNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200432.el.histograms.root" />
+  <file sample="ZeeccNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200433.el.histograms.root" />
+  <file sample="ZeeccNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200434.el.histograms.root" />   
+  <file sample="ZeeccNp3incl"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200435.el.histograms.root" />   
+  <file sample="ZmumuccNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200440.el.histograms.root" />   
+  <file sample="ZmumuccNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200441.el.histograms.root" />
+  <file sample="ZmumuccNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200442.el.histograms.root" />   
+  <file sample="ZmumuccNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200443.el.histograms.root" />  
+  <file sample="ZtautauccNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200448.el.histograms.root" />  
+  <file sample="ZtautauccNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200449.el.histograms.root" /> 
+  <file sample="ZtautauccNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200450.el.histograms.root" /> 
+  <file sample="ZtautauccNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.Zjets.200451.el.histograms.root" /> 
+</files>
+</document>
+
