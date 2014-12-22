@@ -1,2 +1,2 @@
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.MC_RESOLVED_at180_2014_11_04_mu.root/user.mromano.4348827._000001.mu.root
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-november/user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.MC_RESOLVED_at180_2014_11_04_mu.root/user.mromano.4348827._000002.mu.root
+user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.MC_RESOLVED_at180_2014_11_04_mu.root/user.mromano.4348827._000001.mu.root
+user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.MC_RESOLVED_at180_2014_11_04_mu.root/user.mromano.4348827._000002.mu.root
