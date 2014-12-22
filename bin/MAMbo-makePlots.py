@@ -23,12 +23,14 @@ class PlotScale:
    unknown = 0
    linear  = 1
    log     = 2
-   bilog   = 3
+   logx    = 3
+   bilog   = 4
 
    @classmethod
    def ToScale( self, txt ): 
       if   txt.lower() == "linear": return self.linear
       elif txt.lower() == "log":    return self.log
+      elif txt.lower() == "logx":   return self.logx
       elif txt.lower() == "bilog":  return self.bilog
       else:                         return self.unknown
 
@@ -36,6 +38,7 @@ class PlotScale:
    def ToString( self, scale ):
       if scale   == self.linear: return "linear"
       elif scale == self.log:    return "log"
+      elif scale == self.logx:   return "logx"
       elif scale == self.bilog:  return "bilog"
       else:                      return "unknown"
 
@@ -265,8 +268,8 @@ def DoPlot( plot, iLumi = 1. ):
 
     SetHistogramsStyle( histograms )
 
-    sfmax = 1.4 if plot.scale == PlotScale.linear else 30.
-    sfmin = 0.0 if plot.scale == PlotScale.linear else 1e-4
+    sfmax = 1.4 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 100.
+    sfmin = 0.0 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 1e-4
     SetMaximum( histograms, 'data', sfmax, sfmin )
 
     histograms['data'].GetYaxis().SetTitle( plot.ytitle )
@@ -274,8 +277,9 @@ def DoPlot( plot, iLumi = 1. ):
     ## draw top pad
 
     pad0.cd()
-    gPad.SetLogy(False)
-    gPad.SetLogx(False)
+    pad1.SetLogy(False)
+    pad1.SetLogx(False)
+    pad1.SetLogx(False)
 
     hstack = MakeStackedHistogram( histograms )
 
@@ -285,11 +289,18 @@ def DoPlot( plot, iLumi = 1. ):
     histograms['uncertainty'].Draw( 'e2 same' )
     histograms['data'].Draw("e p same" )
 
+    if plot.scale == PlotScale.linear:
+       pad1.SetLogy(False)
+       pad0.SetLogx(False)
     if plot.scale == PlotScale.log: 
-       gPad.SetLogy(True)
+       pad1.SetLogy(True)
+       pad0.SetLogx(False)
+    if plot.scale == PlotScale.logx:
+       pad1.SetLogy(False)
+       pad0.SetLogx(True)
     if plot.scale == PlotScale.bilog: 
-       gPad.SetLogy(True)
-       gPad.SetLogx(True)  
+       pad1.SetLogy(True)
+       pad0.SetLogx(True)  
 
     lparams = {
         'xoffset' : 0.67,
@@ -306,7 +317,10 @@ def DoPlot( plot, iLumi = 1. ):
     pad1.cd()
 
     frame, tot_unc, ratio = DrawRatio( histograms['data'], histograms['uncertainty'], plot.xtitle )    
-    
+
+    if plot.scale in [ PlotScale.bilog, PlotScale.logx ]: 
+       pad1.SetLogx(1)
+       frame.GetXaxis().SetMoreLogLabels(1)
 
     ## save image
 

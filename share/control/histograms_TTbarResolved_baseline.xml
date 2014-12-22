@@ -70,7 +70,8 @@
             <Bin nbins="50" xmin="0." xmax="300." />
         </Variable>
         <Variable name="lep_pt"  title="Lepton p_{T} [GeV]" folder="cutflow"> 
-            <Bin id="0" nbins="100" xmin="0."   xmax="500." />
+	    <Bin id="0" nbins="14" edges="25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,80.0,90.0,100.0,125.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
         </Variable>
         <Variable name="lep_eta" title="Lepton pseudorapidity #eta" folder="cutflow">
             <Bin id="0" nbins="25" xmin="-2.5"  xmax="2.5" />
@@ -85,10 +86,12 @@
             <Bin  nbins="15" xmin="-0.5" xmax="14.5" />
         </Variable>
         <Variable name="jet_pt"  title="Jet p_{T} [GeV]" folder="cutflow">
-            <Bin nbins="200" xmin="0."   xmax="500." />
+	    <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
         </Variable>
         <Variable name="jet1_pt"  title="Leading Jet p_{T} [GeV]" folder="cutflow">
-            <Bin nbins="200" xmin="0."   xmax="500." />
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
         </Variable>
         <Variable name="jet_eta" title="Jet pseudorapidity #eta" folder="cutflow">
             <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
@@ -124,10 +127,12 @@
             <Bin nbins="50" xmin="0."   xmax="1500." />
         </Variable>
         <Variable name="met_pt"  title="Missing Transverse Energy [GeV]"  folder="cutflow">
-            <Bin nbins="100" xmin="0." xmax="200." />
+            <Bin id="0" nbins="20" edges="0,32,36,40,44,46,50,54,56,60,64,68,72,78,84,90,98,108,120,142,200" />
+            <Bin id="1" nbins="100" xmin="0." xmax="200." />
         </Variable>
         <Variable name="mtw"     title="W boson Transverse Mass m_{T}^{W} [GeV]"  folder="cutflow">
-            <Bin nbins="100" xmin="0" xmax="200" />
+            <Bin id="0" nbins="20" edges="0,40,46,50,56,60,62,66,70,72,76,78,82,86,88,92,98,104,112,128,200" />
+            <Bin id="1" nbins="100" xmin="0" xmax="200" />
         </Variable>
         <Variable name="delta_R"  title="Matching #Delta R " folder="matching">
             <Bin nbins="20" xmin="0" xmax="5." />
@@ -189,25 +194,25 @@
         <TH1F variable="rapidity" binId="0"/>
         <TH1F variable="mlb" binId="0"/>
         <!--TH2F variableX="pt" binIdX="0" variableY="lep_pt" binIdY="0" /-->
-        <TH1F variable="lep_pt" binId="0"/>
+        <TH1F variable="lep_pt" binId="1"/>
         <TH1F variable="lep_eta" binId="0"/>
         <TH1F variable="lep_phi" binId="0"/>                
         <TH1F variable="lep_E" binId="0"/>
         <TH1F variable="jet_n" binId="0"/>
-        <TH1F variable="jet_pt" binId="0"/>
+        <TH1F variable="jet_pt" binId="1"/>
         <TH1F variable="jet_eta" binId="0"/>
         <TH1F variable="jet_phi" binId="0"/>                
         <TH1F variable="jet_E" binId="0"/>
         <TH1F variable="jet_m" binId="0"/>
-        <TH1F variable="jet1_pt" binId="0"/>
+        <TH1F variable="jet1_pt" binId="1"/>
         <TH1F variable="fjet_n" binId="0"/>
         <TH1F variable="fjet_pt" binId="0"/>
         <TH1F variable="fjet_eta" binId="0"/>
         <TH1F variable="fjet_phi" binId="0"/>                
         <TH1F variable="fjet_E" binId="0"/>
         <TH1F variable="fjet_m" binId="0"/>
-        <TH1F variable="met_pt" binId="0"/>
-        <TH1F variable="mtw" binId="0"/>
+        <TH1F variable="met_pt" binId="1"/>
+        <TH1F variable="mtw" binId="1"/>
         <TH1F variable="delta_R" binId="0"/>
         <TH1F variable="delta_pt" binId="0"/>
         <TH1F variable="delta_rapidity" binId="0"/>
