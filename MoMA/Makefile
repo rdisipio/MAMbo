@@ -12,7 +12,7 @@ all: $(MOMA_SOLIB) install
 
 $(MOMA_SOLIB): $(OBJS)
 	@echo Linking shared library
-	$(LD) $(DEBUG) $(SOFLAGS) $(OBJS) -o lib/$@
+	$(LD) $(DEBUG) $(SOFLAGS) $(ROOTCORELDFLAGS) $(OBJS) -o lib/$@
 
 install: $(MOMA_SOLIB)
 	$(info ATLAS RootCore installed in $(ROOTCOREDIR) )

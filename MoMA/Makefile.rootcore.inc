@@ -1,8 +1,10 @@
 ROOTCOREINCS = -I$(ROOTCOREDIR)/include
 ROOTCORELIBS = $(ROOTCOREDIR)/lib/$(ARCH)
 
-#ROOTCORETOOLS += egammaAnalysisUtils egammaEvent
 ROOTCORETOOLS += FakesMacros 
+ROOTCORETOOLS += CalibrationDataInterface 
+
+#ROOTCORETOOLS += egammaAnalysisUtils egammaEvent
 #ROOTCORETOOLS += FakesTriggerUtils
 #ROOTCORETOOLS += MissingETUtility METAnalysisCommon METSystematics METTrackUtil
 #ROOTCORETOOLS += MuonEfficiencyCorrections MuonMomentumCorrections 
