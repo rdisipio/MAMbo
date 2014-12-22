@@ -277,8 +277,9 @@ def DoPlot( plot, iLumi = 1. ):
     ## draw top pad
 
     pad0.cd()
+    pad0.SetLogy(False)
+    pad0.SetLogx(False)
     pad1.SetLogy(False)
-    pad1.SetLogx(False)
     pad1.SetLogx(False)
 
     hstack = MakeStackedHistogram( histograms )
@@ -293,14 +294,14 @@ def DoPlot( plot, iLumi = 1. ):
        pad1.SetLogy(False)
        pad0.SetLogx(False)
     if plot.scale == PlotScale.log: 
-       pad1.SetLogy(True)
-       pad0.SetLogx(False)
+       pad0.SetLogy(True)
     if plot.scale == PlotScale.logx:
-       pad1.SetLogy(False)
        pad0.SetLogx(True)
+       pad1.SetLogy(False)
     if plot.scale == PlotScale.bilog: 
-       pad1.SetLogy(True)
+       pad0.SetLogy(True)
        pad0.SetLogx(True)  
+       pad1.SetLogy(True)
 
     lparams = {
         'xoffset' : 0.67,
@@ -320,8 +321,8 @@ def DoPlot( plot, iLumi = 1. ):
 
     if plot.scale in [ PlotScale.bilog, PlotScale.logx ]: 
        pad1.SetLogx(1)
-       frame.GetXaxis().SetMoreLogLabels(1)
-
+       frame.GetXaxis().SetMoreLogLabels(True)
+       frame.GetXaxis().SetNoExponent(True)
     ## save image
 
     c.cd()

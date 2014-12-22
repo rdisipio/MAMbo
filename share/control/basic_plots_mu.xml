@@ -2,11 +2,11 @@
 <document>
 <plots tag="mu" latex="#mu+jets" >
   <plot hpath="LPLUSJETS_cutflow_reco_weighted"      xtitle="Cut Number" ytitle="Events" scale="linear" />
-  <plot hpath="reco/cutflow/afterCuts/lep_pt_0"        xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="linear" rebin="5"/>
+  <plot hpath="reco/cutflow/afterCuts/lep_pt_0"        xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
   <plot hpath="reco/cutflow/afterCuts/lep_eta"               xtitle="Lepton pseudorapidity"                         ytitle="Events / Pseudorapidity" scale="linear" />
   <plot hpath="reco/cutflow/afterCuts/jet_pt_0" 	       	     xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
   <plot hpath="reco/cutflow/afterCuts/jet_eta"        	     xtitle="Jet pseudorapidity"   	       	       	     ytitle="Events / Pseudorapidity" scale="linear" />
-  <plot hpath="reco/cutflow/afterCuts/jet_m"                 xtitle="Jet mass [GeV]"  ytitle="Events/GeV"     scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_m"                 xtitle="Jet mass [GeV]"  ytitle="Events/GeV"     scale="log" />
   <plot hpath="reco/cutflow/afterCuts/jet_n"                 xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
   <plot hpath="reco/cutflow/afterCuts/jet1_pt_0"                      xtitle="Leading jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="linear" rebin="5" />
   <plot hpath="reco/cutflow/afterCuts/met_pt_0"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
