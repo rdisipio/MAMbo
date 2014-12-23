@@ -151,25 +151,25 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     double weight_reco_level     = 1.;
     double weight_particle_level = 1.;
 
-    if( !isRealData && !isWjets && !isQCD ) {
+    if( !isRealData && !isQCD ) {
    	 weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
  
-         if( fabs(weight_reco_level) < 1e-5 ) weight_reco_level /= fabs(weight_reco_level);
-         if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
+ //        if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
+ //        if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
 
          const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
          const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
          const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
          const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
-         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
-         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
+//         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
+//         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
          const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"];
          const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
 
 #ifdef __MOMA__
-         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
          const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed ); 
+//         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else 
          const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
@@ -177,12 +177,13 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
          weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
-            scaleFactor_ELE *scaleFactor_MUON *
-            scaleFactor_BTAG *
-            scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE;
+            scaleFactor_ELE * scaleFactor_MUON *
+            scaleFactor_BTAG;
 
-    
-         weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
+//            scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE; // ==1 anyway..
+
+   	 // as boosted guys do
+         // weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
     }
 
     //if( isWjets ) { }
