@@ -217,12 +217,11 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     m_pseudotop_reco->SetEventData(ed);
 
 
-
     bool fillHistos = true;
     bool fillCorrections = true;
     bool splitSample = false; // HACK!
-    if (splitSample) {
-      fillHistos = not (m_rand -> Integer(2));
+    if (isMCSignal and splitSample) {
+      fillHistos =  not (m_rand -> Integer(2));
       fillCorrections = not fillHistos;
     }
 
@@ -245,6 +244,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     } else {
       // ugly hack, due to pseudotop indices in ed required to be
       // reco: 0,1; particle is 2,3
+      // needed later for passed particle not reco
       m_pseudotop_reco->MakeDummyPseudotops();
     }
 
@@ -262,9 +262,6 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       // makes sense only when passed reco:
       if (fillCorrections)
       FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
-
-
-
     } 
     
     // nb: events could NOT pass the particle-level selection
@@ -324,21 +321,21 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 	// fill response matrix:
 	// NEW: added here the matching condition!!! JK 3.12.2014
-	if (passedDRMatching and fillCorrections) {
-	  FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
-	  FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
-	}
-	
-	// fill reco && particle for the denumerator of the f_'missassign':
+
 	if (fillCorrections) {
+
+	  // fill reco && particle for the denumerator of the f_'missassign' and numerator for f_{r!p} (acceptance)
 	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "reco_and_particle");
+
+	  if (passedDRMatching) {
+	    FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
+	    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
+	    //  fill numerator for the matching eff (f_'missassign')
+	    // reco && particle && matched:
+	    FillHistogramsPseudotopParticle(ed, weight_particle_level, "matched");
+	  }
 	}
 
-	//  fill numerator for the matching eff (f_'missassign')
-	// reco && particle && matched:
-	if(passedDRMatching && fillCorrections) {
-	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "matched");
-	}
 	
       } // passed particle and reco
     } // passed particle
@@ -687,7 +684,7 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
 
 
 /////////////////////////////////////////
-void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mbl){   
+void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mlb){   
     Particle p(particle, index);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/pt", p.pt / GeV, weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/eta", p.eta, weight);
@@ -697,8 +694,8 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/absrap", fabs(p.y), weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/rapidity", p.y, weight);
 
-    if (index %3 == 0 and mbl > 0.){
-        m_hm->FillHistograms(level + "/4j2b/" + topType + "/mlb", mbl, weight );
+    if ( (index == 3 || index == 0) && mlb >= 0.){
+        m_hm->FillHistograms(level + "/4j2b/" + topType + "/mlb", mlb / GeV , weight );
     }
 }
 
@@ -734,7 +731,7 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &t
    }
    
    // TODO: top pT dPt as function of pT average
-   
+
 
    // chi = exp |y1-y2|
    double chittbar = exp(TMath::Abs(topL.Rapidity() - topH.Rapidity()));
@@ -838,11 +835,23 @@ void CutFlowTTbarResolved::FillHistogramsPartonTopPairs(EventData::Truth_t& part
 
 /////////////////////////////////////////
 void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const double weight, string level) {
-    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
-    TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->leptons, 0 );
+
+  if ( ((m_config->channel == kElectron and ed->electrons.n > 0) or (m_config->channel == kMuon and ed->muons.n > 0))
+       and ed->bjets.n > ed->iproperty["reco_pseudotop_lep_bjet_index"]) {
+    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->bjets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
+    TLorentzVector lep;
+    if (m_config->channel == kElectron)
+      lep = HelperFunctions::MakeFourMomentum( ed->electrons, 0 );
+    else
+      lep = HelperFunctions::MakeFourMomentum( ed->muons, 0 );
     TLorentzVector lb = lep + lep_bjet;
-    
+    // fill mbl = m_{bl}
+    //    cout << " RECO mlb: " << lb.M() << endl;
     FillHistogramsPseudoTop(ed->reco, 0, level, "topL", weight, lb.M());
+  } else {
+    cout << " CAN'T FILL RECO mlb!" << endl;
+    FillHistogramsPseudoTop(ed->reco, 0, level, "topL", weight, -1);
+  }
     FillHistogramsPseudoTop(ed->reco, 1, level, "topH", weight);
     FillHistogramsPseudoTop(ed->reco, 2, level, "tt", weight);
 
@@ -856,12 +865,23 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
 void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, const double weight, string level) {
 
 
-  if (ed->truth_leptons.n > 0) {
-    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
-    TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );
+  if ( ( (m_config->channel == kMuon and ed->truth_muons.n > 0) or (m_config->channel == kElectron and ed->truth_electrons.n > 0))
+       and ed->truth_bjets.n > ed->iproperty["ptcl_pseudotop_lep_bjet_index"])
+    {
+    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->truth_bjets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
+    TLorentzVector lep;
+    if (m_config->channel == kElectron) {
+      if (ed->truth_electrons.n > 0)
+	lep = HelperFunctions::MakeFourMomentum(ed->truth_electrons, 0);
+    } else {
+      if (ed->truth_muons.n > 0)
+	lep = HelperFunctions::MakeFourMomentum(ed->truth_muons, 0);
+    }
     TLorentzVector lb = lep + lep_bjet;
+    //    cout << " PTCL mlb: " << lb.M() << endl;
     FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, lb.M());
   } else {
+    cout << " CAN'T FILL PTCL mlb!" << endl;
     FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, -1);
   }
     FillHistogramsPseudoTop(ed->reco, 4, level, "topH", weight);

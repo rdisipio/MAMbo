@@ -54,7 +54,7 @@ class CutFlowTTbarResolved : public CutFlow
   void FillHistogramsPartonTop(EventData::Truth_t& particle, int index, string level, string topType, const double weight);
   void FillHistogramsPartonTopPairs(EventData::Truth_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
 
-  void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mbl = 0);
+  void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mlb = -1);
   void FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
 
 
