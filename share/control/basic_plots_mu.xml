@@ -20,16 +20,16 @@
   <plot hpath="reco/4j2b/tt/m"			xtitle="Reconstructed m_{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="linear"    />
   <plot hpath="reco/4j2b/tt/pt"			xtitle="Reconstructed p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="linear"    />
   <plot hpath="reco/4j2b/tt/absrap"		xtitle="Reconstructed |y_{t#bar{t}}|"                ytitle="Events / Rapidity" scale="linear" />
- <plot hpath="reco/4j2b/topL/mlb"                       xtitle="(l,b) invariant mass" ytitle="Events / GeV" scale="linear" />
-  <plot hpath="reco/4j2b/difference/z_ttbar"             xtitle="z_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/Pout"                xtitle="P_{out}"	   ytitle="Events" scale="linear" />    
-<!--  <plot hpath="reco/4j2b/difference/Chi_ttbar"           xtitle="#chi_{t#bar{t}}" ytitle="Events" scale="linear" /> -->
-  <plot hpath="reco/4j2b/difference/Yboost"              xtitle="Y_{boost}" ytitle="Events" scale="linear" />    
-  <plot hpath="reco/4j2b/difference/topLCosThetaStar"    xtitle="Leptonic top cos #theta^{*}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/topHCosThetaStar"    xtitle="Hadronic top cos #theta^{*}" ytitle="Events" scale="linear" />    
-  <plot hpath="reco/4j2b/difference/TopCosOpeningAngle"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" />  
-  <plot hpath="reco/4j2b/difference/Salam_ttbar"         xtitle="Salam #Delta_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi (t, #bar{t} )" ytitle="Events" scale="linear" /> 
+  <plot hpath="reco/4j2b/topL/mlb"                       xtitle="(l,b) invariant mass" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/4j2b/difference/z_ttbar_0"             xtitle="z_{t#bar{t}}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/Pout_0"                xtitle="P_{out}"      ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/Chi_ttbar_0"           xtitle="#chi_{t#bar{t}}" ytitle="Events" scale="linear" />    
+  <plot hpath="reco/4j2b/difference/Yboost_0"              xtitle="Y_{boost}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/topLCosThetaStar_0"    xtitle="Leptonic top cos #theta^{*}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/topHCosThetaStar_0"    xtitle="Hadronic top cos #theta^{*}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/TopCosOpeningAngle_0"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/Salam_ttbar_0"         xtitle="Salam #Delta_{t#bar{t}}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/dPhi_ttbar_0"          xtitle="#Delta #phi (t, #bar{t} )" ytitle="Events" scale="linear" />
 </plots>
 <samples>
   <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
