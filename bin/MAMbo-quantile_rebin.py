@@ -64,7 +64,7 @@ def RebinHistogram( h, nq, xq, yq ):
     print "New histogram bin edges (%i):" % (len(edges)-1)
 
     s = ""
-    for n in edges: s += "%.1f," % n
+    for n in edges: s += "%.2f," % n
     print s
 
     hq = h.Rebin( nq, h.GetName() + "_rebinned", edges )

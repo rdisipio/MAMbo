@@ -19,14 +19,14 @@
   <histogram hpath="reco/4j2b/tt/pt" />
   <histogram hpath="reco/4j2b/tt/absrap" />
   <histogram hpath="reco/4j2b/topL/mlb" />
-  <histogram hpath="reco/4j2b/difference/z_ttbar" />
-  <histogram hpath="reco/4j2b/difference/Pout" />
-  <histogram hpath="reco/4j2b/difference/Chi_ttbar" />
-  <histogram hpath="reco/4j2b/difference/Yboost" />
-  <histogram hpath="reco/4j2b/difference/topLCosThetaStar" />
-  <histogram hpath="reco/4j2b/difference/topHCosThetaStar" />
-  <histogram hpath="reco/4j2b/difference/TopCosOpeningAngle" />
-  <histogram hpath="reco/4j2b/difference/Salam_ttbar" />
-  <histogram hpath="reco/4j2b/difference/dPhi_ttbar" />
+  <histogram hpath="reco/4j2b/difference/z_ttbar_0" />
+  <histogram hpath="reco/4j2b/difference/Pout_0" />
+  <histogram hpath="reco/4j2b/difference/Chi_ttbar_0" />
+  <histogram hpath="reco/4j2b/difference/Yboost_0" />
+  <histogram hpath="reco/4j2b/difference/topLCosThetaStar_0" />
+  <histogram hpath="reco/4j2b/difference/topHCosThetaStar_0" />
+  <histogram hpath="reco/4j2b/difference/TopCosOpeningAngle_0" />
+  <histogram hpath="reco/4j2b/difference/Salam_ttbar_0" />
+  <histogram hpath="reco/4j2b/difference/dPhi_ttbar_0" />
 </histograms>
 

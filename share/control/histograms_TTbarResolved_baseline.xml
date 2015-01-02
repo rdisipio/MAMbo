@@ -153,31 +153,40 @@
 
 	<!-- JK top pair distributions -->
         <Variable name="z_ttbar" title="z_{t#bar{t}}" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="0." xmax="3." />
+            <Bin id="0" nbins="10" edges="0.00,0.60,0.75,0.84,0.90,0.99,1.05,1.14,1.26,1.50,3.00" />
+            <Bin id="1" nbins="100" xmin="0." xmax="3." />
         </Variable>
         <Variable name="Pout" title="p_{out}" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="-300." xmax="300." />
+	    <Bin id="0" nbins="10" edges="-300.00,-48.00,-30.00,-18.00,-12.00,-6.00,6.00,12.00,24.00,42.00,300.00" />
+            <Bin id="1" nbins="100" xmin="-300." xmax="300." />
         </Variable>
         <Variable name="Chi_ttbar" title="#chi_{out}" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="14." xmax="3." />
+            <Bin id="0" nbins="10" xmin="0." xmax="20." />
+            <Bin id="1" nbins="100" xmin="0." xmax="20." />
         </Variable>
 	<Variable name="Yboost" title="y_{boost}" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="0." xmax="2." />
+            <Bin id="0" nbins="10" edges="-1.00,-0.82,-0.62,-0.42,-0.22,0.00,0.22,0.42,0.62,0.82,1.00" />
+            <Bin id="1" nbins="100" xmin="0." xmax="2." />
         </Variable>
 	<Variable name="topLCosThetaStar" title="leptonic top cos #theta^{*};cos #theta*;" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="-1." xmax="1." />
+            <Bin id="0" nbins="10" edges="-1.00,-0.82,-0.62,-0.42,-0.22,0.00,0.22,0.42,0.62,0.82,1.00" />
+            <Bin id="1" nbins="100" xmin="-1." xmax="1." />
         </Variable>
 	<Variable name="topHCosThetaStar" title="hadronic top cos #theta^{*};cos #theta*;" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="-1." xmax="1." />
+            <Bin id="0" nbins="10" edges="-1.00,-0.82,-0.62,-0.42,-0.22,0.00,0.22,0.42,0.62,0.82,1.00" />
+            <Bin id="1" nbins="100" xmin="-1." xmax="1." />
         </Variable>
 	<Variable name="TopCosOpeningAngle" title="Tops cos #theta_{12};Top's cos #theta_{12};" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="-1." xmax="1." />
+            <Bin id="0" nbins="10" edges="-1.00,-0.98,-0.90,-0.78,-0.60,-0.36,-0.08,0.20,0.50,0.76,1.00" />
+            <Bin id="1" nbins="100" xmin="-1." xmax="1." />
         </Variable>
 	<Variable name="Salam_ttbar" title="SalamDelta;[3*p_{T}^{(1)}-p_{T}^{(2)}] / H_{T}" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="-1." xmax="3." />
+            <Bin id="0" nbins="10" edges="-1.00,0.52,0.72,0.84,0.92,1.00,1.04,1.12,1.24,1.44,3.00" />
+            <Bin id="1" nbins="100" xmin="-1." xmax="3." />
         </Variable>
 	<Variable name="dPhi_ttbar" title="DeltaPhi_ttbar;#Delta#phi_{t#bar{t}}" folder="4j2b" particle="difference" >
-            <Bin nbins="100" xmin="0." xmax="3.14159" />
+            <Bin id="0" nbins="10" edges="0.00,2.29,2.61,2.76,2.86,2.92,2.98,3.02,3.05,3.08,3.14" />
+            <Bin id="1" nbins="100" xmin="0." xmax="3.14159" />
         </Variable>
 
 
