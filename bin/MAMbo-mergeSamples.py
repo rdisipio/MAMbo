@@ -33,18 +33,38 @@ class SampleWrapper:
 ########################################
 
 
-def ReadConfiguration( configFileName ):
+def ReadFromExternalFile( hfilename ):
+   hlist = []
+
+   with open( hfilename, 'rt') as f:
+      tree = ElementTree.parse( f )
+
+   for node in tree.iter( "histogram" ):
+      hlist += [ node.attrib.get('hpath') ]
+   
+   return hlist
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+def ReadConfiguration( configFileName ): 
    with open( configFileName, 'rt') as f:
       tree = ElementTree.parse(f)
-
+ 
    if tree == None:
       print "ERROR: cannot parse input file", configFileName
       exit(1)
 
    histograms_configuration = []
-   for node in tree.iter( "histogram" ):
-#       name = node.attrib.get('name')
-       histograms_configuration += [ node.attrib.get('hpath') ]
+   for node in tree.iter( "histograms" ):
+       if "file" in node.attrib:
+          hfilename = node.attrib.get('file')
+          print "INFO: histograms defined in external file", hfilename
+          histograms_configuration = ReadFromExternalFile( hfilename )
+       else:
+          for node in tree.iter( "histogram" ):
+             histograms_configuration += [ node.attrib.get('hpath') ]
 
    samples_configuration = {}
    for node in tree.iter( "sample" ):

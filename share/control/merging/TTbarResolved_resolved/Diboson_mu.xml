@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms>
-  <histogram hpath="LPLUSJETS_cutflow_reco_weighted" />
-  <histogram hpath="reco/cutflow/afterCuts/lep_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/lep_eta" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_n" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_eta" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_m" />
-  <histogram hpath="reco/cutflow/afterCuts/jet1_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/met_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/mtw_0" />
-  <histogram hpath="reco/4j2b/topH/m_0" />
-  <histogram hpath="reco/4j2b/topH/pt_0" />
-  <histogram hpath="reco/4j2b/topH/absrap" />
-  <histogram hpath="reco/4j2b/topL/m_0" />
-  <histogram hpath="reco/4j2b/topL/pt_0" />
-  <histogram hpath="reco/4j2b/topL/absrap" />
-  <histogram hpath="reco/4j2b/tt/m" />
-  <histogram hpath="reco/4j2b/tt/pt" />
-  <histogram hpath="reco/4j2b/tt/absrap" />
-</histograms>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
   <sample name="WW" dsid="105985" xsec="12.416"  kfact="1.6833" genevt="2499890" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
   <sample name="ZZ" dsid="105986" xsec="0.99081" kfact="1.5496" genevt="494999"  generator="Herwig_AUET2CTEQ6L1" simulation="Full" />

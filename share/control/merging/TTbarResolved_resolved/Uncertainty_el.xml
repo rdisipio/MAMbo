@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms>
-  <histogram hpath="LPLUSJETS_cutflow_reco_weighted" />
-  <histogram hpath="reco/cutflow/afterCuts/lep_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/lep_eta" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_n" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_eta" />
-  <histogram hpath="reco/cutflow/afterCuts/jet_m" />
-  <histogram hpath="reco/cutflow/afterCuts/jet1_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/met_pt_0" />
-  <histogram hpath="reco/cutflow/afterCuts/mtw_0" />
-  <histogram hpath="reco/4j2b/topH/m_0" />
-  <histogram hpath="reco/4j2b/topH/pt_0" />
-  <histogram hpath="reco/4j2b/topH/absrap" />
-  <histogram hpath="reco/4j2b/topL/m_0" />
-  <histogram hpath="reco/4j2b/topL/pt_0" />
-  <histogram hpath="reco/4j2b/topL/absrap" />
-  <histogram hpath="reco/4j2b/tt/m" />
-  <histogram hpath="reco/4j2b/tt/pt" />
-  <histogram hpath="reco/4j2b/tt/absrap" />
-</histograms>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
   <sample name="DiTop"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.el.histograms.root" />
   <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.SingleTop.el.histograms.root" />
