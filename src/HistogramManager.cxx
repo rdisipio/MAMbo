@@ -98,7 +98,7 @@ void HistogramManager::BookHistograms( const xmlNodePtr xml )
                             Book1DHistogram(path, xml);
                         }
                         else if( xmlStrEqual( xml->name, BAD_CAST "TH2F" ) ) {
-			  cout << "Booking 2D histos for path " << path.c_str() << endl;
+			  // cout << "Booking 2D histos for path " << path.c_str() << endl;
 			  Book2DHistogram(path, xml );
                         }
                         else if( xmlStrEqual( xml->name, BAD_CAST "Matrix" ) ) {
@@ -171,16 +171,16 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
     for (XMLVariable* variable : variables){
         if (VariableNameAndFolderCondition(variable, variableNameX, path)){
             binX = variable->GetBinByIdInPath(binIdX, path);
-	    cout << "  HistogramManager::Book2DHistogram got binX @ " << binX  << endl;
-	    cout << "  HistogramManager::Book2DHistogram got binX n=" << binX->edges.size() << endl;
+	    //	    cout << "  HistogramManager::Book2DHistogram got binX @ " << binX  << endl;
+	    //	    cout << "  HistogramManager::Book2DHistogram got binX n=" << binX->edges.size() << endl;
             if (binX->edges.size() > 0){
                 useEdges = true;
             }
         }
         if (VariableNameAndFolderCondition(variable, variableNameY, path)){
             binY = variable->GetBinByIdInPath(binIdY, path);
-	    cout << "  HistogramManager::Book2DHistogram got binY @ " << binY  << endl;
-	    cout << "  HistogramManager::Book2DHistogram got binY n=" << binY->edges.size() << endl;
+	    //	    cout << "  HistogramManager::Book2DHistogram got binY @ " << binY  << endl;
+	    //	    cout << "  HistogramManager::Book2DHistogram got binY n=" << binY->edges.size() << endl;
         }
     }    
     
@@ -190,15 +190,15 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
     }   
 
     ROOT_TH2_t*  h;
-    cout << "  HistogramManager::Book2DHistogram: Booking " << plotNameWithBin.c_str() << endl;
+    //    cout << "  HistogramManager::Book2DHistogram: Booking " << plotNameWithBin.c_str() << endl;
     if (binX != NULL && binY != NULL) {
       if (useEdges)
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->edges, binY->nBins, binY->edges);
       else 
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->min, binX->max , binY->nBins, binY->min, binY->max );
-      cout << "  HistogramManager::Book2DHistogram: Booked!" << endl;
+      //      cout << "  HistogramManager::Book2DHistogram: Booked!" << endl;
       MoveHistogramtToFolder(h, path+"/"+plotName);
-      cout << "  HistogramManager::Book2DHistogram: Moved!" << endl;
+      //      cout << "  HistogramManager::Book2DHistogram: Moved!" << endl;
     }
 }
 
