@@ -275,24 +275,17 @@ namespace PhysicsHelperFunctions {
 
     const double a = l_E*l_E - l_pz*l_pz;
     const double b = -2. * l_pz * ( mdiff + pT_vl );
-
-   // typo in ATL-COM-PHYS-2013-208 L148:
-   //    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*mdiff*pT_vl; 
-   // removed by JK, corrected to:
     const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*pT_vl; 
   
     const double delta = b*b - 4.*a*c;
     
     double v_pz = 0.;
     if( delta <= 0. ) {
-      //  Wrong    v_pz = 0.5*b/a;
-      // JK: 
       v_pz = -0.5*b/a;
     }
     else {
       const double v_pz_1 = 0.5 * ( -b - sqrt(delta) ) / a;
       const double v_pz_2 = 0.5 * ( -b + sqrt(delta) ) / a;
-      // BUGGY: v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_1 : v_pz_2;
       v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_2 : v_pz_1;
     }
 

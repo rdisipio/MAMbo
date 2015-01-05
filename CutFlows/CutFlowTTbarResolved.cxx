@@ -837,8 +837,8 @@ void CutFlowTTbarResolved::FillHistogramsPartonTopPairs(EventData::Truth_t& part
 void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const double weight, string level) {
 
   if ( ((m_config->channel == kElectron and ed->electrons.n > 0) or (m_config->channel == kMuon and ed->muons.n > 0))
-       and ed->bjets.n > ed->iproperty["reco_pseudotop_lep_bjet_index"]) {
-    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->bjets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
+       and ed->jets.n > ed->iproperty["reco_pseudotop_lep_bjet_index"]) {
+    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["reco_pseudotop_lep_bjet_index"]);
     TLorentzVector lep;
     if (m_config->channel == kElectron)
       lep = HelperFunctions::MakeFourMomentum( ed->electrons, 0 );
@@ -849,7 +849,10 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     //    cout << " RECO mlb: " << lb.M() << endl;
     FillHistogramsPseudoTop(ed->reco, 0, level, "topL", weight, lb.M());
   } else {
-    cout << " CAN'T FILL RECO mlb!" << endl;
+    cout << " CAN'T FILL RECO mlb! n_el: " << ed->electrons.n << " n_mu: " <<  ed->muons.n 
+	 << " n_bjets: " <<  ed->bjets.n 
+	 << " b_index: " << ed->iproperty["reco_pseudotop_lep_bjet_index"]
+	 << endl;
     FillHistogramsPseudoTop(ed->reco, 0, level, "topL", weight, -1);
   }
     FillHistogramsPseudoTop(ed->reco, 1, level, "topH", weight);
@@ -866,9 +869,9 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
 
 
   if ( ( (m_config->channel == kMuon and ed->truth_muons.n > 0) or (m_config->channel == kElectron and ed->truth_electrons.n > 0))
-       and ed->truth_bjets.n > ed->iproperty["ptcl_pseudotop_lep_bjet_index"])
+       and ed->truth_jets.n > ed->iproperty["ptcl_pseudotop_lep_bjet_index"])
     {
-    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->truth_bjets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
+    TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->truth_jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
     TLorentzVector lep;
     if (m_config->channel == kElectron) {
       if (ed->truth_electrons.n > 0)
@@ -881,7 +884,11 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     //    cout << " PTCL mlb: " << lb.M() << endl;
     FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, lb.M());
   } else {
-    cout << " CAN'T FILL PTCL mlb!" << endl;
+    cout << " CAN'T FILL PTCL mlb! n_el: " << ed->truth_electrons.n << " n_mu: " <<  ed->truth_muons.n 
+	 << " n_bjets: " <<  ed->truth_bjets.n
+	 << " b_index: " << ed->iproperty["ptcl_pseudotop_lep_bjet_index"]
+	 << endl;
+    
     FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, -1);
   }
     FillHistogramsPseudoTop(ed->reco, 4, level, "topH", weight);
