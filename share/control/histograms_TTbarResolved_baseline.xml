@@ -1,12 +1,11 @@
 <histograms>
     <Level> <!--Level-->
-        <Type name="reco" />
-        <Type name="particle" />
+        <Type name="reco" />                 <!-- Passed: reco-->
+        <Type name="particle" />             <!-- Passed: particle-->
         <Type name="parton" />
-        <Type name="particle_not_reco" />
-        <Type name="reco_and_particle" /> 
-        <Type name="reco_not_particle" />
-        <Type name="matched" />
+        <Type name="reco_and_particle" />    <!-- Passed: reco && particle-->
+        <Type name="reco_not_particle" />    <!-- Passed: reco && !particle -->
+        <Type name="matched" />              <!-- Passed: reco && particle && matched-->
     </Level>
     <Level> <!--Region-->
         <!--Type name="4j1b" /-->
@@ -27,11 +26,13 @@
         <Variable name="pt" title="p_{T} [GeV]" folder="4j2b" >
             <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="top"/>
             <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="top"/>
-<!-- Not necessary:           <Bin id="1" nbins="11" edges="0,40,80,100,120,150,180,200,260,300,350,1000" particle="top"/>
+            <Bin id="0" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>
+            <Bin id="1" nbins="50" xmin="0" xmax="500"  particle="tt"/>
+<!-- Not necessary: 
+           <Bin id="1" nbins="11" edges="0,40,80,100,120,150,180,200,260,300,350,1000" particle="top"/>
             <Bin id="2" nbins="12" edges="0,40,75,90,110,135,160,180,220,260,300,350,1000" particle="top"/>
             <Bin id="3" nbins="9"  edges="0,50,100,140,180,220,260,300,350,1000" particle="top"/>            
 -->
-            <Bin id="4" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>
         </Variable>
 
         <Variables name="ptdiff" title="p_{t} difference [GeV]" folder="difference">
@@ -49,18 +50,15 @@
         </Variable>
         <Variable name="m"      title="mass [GeV]" folder="4j2b" > 
             <Bin id="0" nbins="50" xmin="0." xmax="600." particle="top"/>
-            <Bin id="1" nbins="50" xmin="160." xmax="185." particle="top"/> 
-            <Bin id="2" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" /> 
-            <!-- JK: <Bin id="2" nbins="50" xmin="225." xmax="2500." particle="tt" /> -->
-
+            <!-- <Bin id="1" nbins="50" xmin="160." xmax="185." particle="top"/> -->
+            <Bin id="0" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" /> 
+ 	    <Bin id="1" nbins="50" xmin="225." xmax="2500." particle="tt" /> 
         </Variable>
         <Variable name="absrap" title="abs rapidity |y_{t}|" folder="4j2b" > 
-            <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/>
-	    <Bin id="1" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
-<!-- JK:
-            <Bin id="0" nbins="50" xmin="0." xmax="2.5" particle="top"/>
-	    <Bin id="1" nbins="50" xmin="0." xmax="2.5" particle="tt"/>
--->
+          <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/>
+          <Bin id="1" nbins="50" xmin="0." xmax="2.5" particle="top"/>
+	  <Bin id="0" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
+          <Bin id="1" nbins="50" xmin="0." xmax="2.5" particle="tt"/>
         </Variable>
         <Variable name="rapidity" title="rapidity y_{t}" folder="4j2b" > 
             <Bin id="0" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0.,0.4,0.8,1.1, 1.4,1.8,2.5" particle="top"/>
@@ -151,13 +149,13 @@
         </Variable>
 
 
-	<!-- JK top pair distributions -->
+	<!-- top pair distributions -->
         <Variable name="z_ttbar" title="z_{t#bar{t}}" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" edges="0.00,0.60,0.75,0.84,0.90,0.99,1.05,1.14,1.26,1.50,3.00" />
             <Bin id="1" nbins="100" xmin="0." xmax="3." />
         </Variable>
         <Variable name="Pout" title="p_{out}" folder="4j2b" particle="difference" >
-	    <Bin id="0" nbins="10" edges="-300.00,-48.00,-30.00,-18.00,-12.00,-6.00,6.00,12.00,24.00,42.00,300.00" />
+	    <Bin id="0" nbins="10" edges="-300.00,-50.00,-24.00,-12.00,-6.00,0.0,6.00,12.00,24.00,50.00,300.00" />
             <Bin id="1" nbins="100" xmin="-300." xmax="300." />
         </Variable>
         <Variable name="Chi_ttbar" title="#chi_{out}" folder="4j2b" particle="difference" >
@@ -165,7 +163,7 @@
             <Bin id="1" nbins="100" xmin="0." xmax="20." />
         </Variable>
 	<Variable name="Yboost" title="y_{boost}" folder="4j2b" particle="difference" >
-            <Bin id="0" nbins="10" edges="-1.00,-0.82,-0.62,-0.42,-0.22,0.00,0.22,0.42,0.62,0.82,1.00" />
+            <Bin id="0" nbins="7" edges="0.0,0.2,0.4,0.6,0.8,1.1,1.40,2." />
             <Bin id="1" nbins="100" xmin="0." xmax="2." />
         </Variable>
 	<Variable name="topLCosThetaStar" title="leptonic top cos #theta^{*};cos #theta*;" folder="4j2b" particle="difference" >
@@ -185,14 +183,45 @@
             <Bin id="1" nbins="100" xmin="-1." xmax="3." />
         </Variable>
 	<Variable name="dPhi_ttbar" title="DeltaPhi_ttbar;#Delta#phi_{t#bar{t}}" folder="4j2b" particle="difference" >
-            <Bin id="0" nbins="10" edges="0.00,2.29,2.61,2.76,2.86,2.92,2.98,3.02,3.05,3.08,3.14" />
-            <Bin id="1" nbins="100" xmin="0." xmax="3.14159" />
+            <Bin id="0" nbins="10" edges="0.00,2.29,2.61,2.76,2.86,2.92,2.98,3.02,3.05,3.08,3.1416" />
+            <Bin id="1" nbins="100" xmin="0." xmax="3.1416" />
+        </Variable>
+        <Variable name="AverTopPt" title="Average p_{T}^{t} [GeV]" folder="4j2b" particle="difference" >
+  	    <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+            <Bin id="1" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="TopLPt" title="Average p_{T}^{t} [GeV]" folder="4j2b" particle="difference" >
+  	    <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+            <Bin id="1" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="TopHPt" title="Average p_{T}^{t} [GeV]" folder="4j2b" particle="difference" >
+  	    <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
+            <Bin id="1" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="dTopPt" title="Difference in p_{T}^{t} [GeV]" folder="4j2b" particle="difference" >
+  	    <Bin id="0" nbins="18" edges="-600,-400,-200,-100,-80,-60,-40,-20,-10,0,10,20,40,60,80,100,200,400,600" />
+            <Bin id="1" nbins="100" xmin="-600" xmax="600" />
+        </Variable>
+        <Variable name="dTopPtLH" title="Difference in p_{T}^{t} [GeV]" folder="4j2b" particle="difference" >
+  	    <Bin id="0" nbins="18" edges="-600,-400,-200,-100,-80,-60,-40,-20,-10,0,10,20,40,60,80,100,200,400,600" />
+            <Bin id="1" nbins="100" xmin="-600" xmax="600" />
         </Variable>
 
-
-
   </Variables>        
+
+
   <Histos>
+
+        <!--TH2F variableX="pt" binIdX="0" variableY="lep_pt" binIdY="0" /-->
+        <TH2F variableX="dPhi_ttbar" binIdX="0" variableY="Salam_ttbar" binIdY="0" folder="4j2b" particle="difference" /> 
+        <TH2F variableX="dPhi_ttbar" binIdX="1" variableY="Salam_ttbar" binIdY="1" folder="4j2b" particle="difference" />
+	<TH2F variableX="AverTopPt" binIdX="0" variableY="dTopPt" binIdY="0" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="AverTopPt" binIdX="1" variableY="dTopPt" binIdY="1" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="AverTopPt" binIdX="0" variableY="dTopPtLH" binIdY="0" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="AverTopPt" binIdX="1" variableY="dTopPtLH" binIdY="1" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="TopLPt" binIdX="1" variableY="dTopPtLH" binIdY="1" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="TopHPt" binIdX="1" variableY="dTopPtLH" binIdY="1" folder="4j2b" particle="difference" /> 
+
         <TH1F variable="ptdiff"/>
         <TH1F variable="pt" />
         <TH1F variable="eta" binId="0"/>
@@ -202,7 +231,6 @@
         <TH1F variable="absrap" binId="0"/>
         <TH1F variable="rapidity" binId="0"/>
         <TH1F variable="mlb" binId="0"/>
-        <!--TH2F variableX="pt" binIdX="0" variableY="lep_pt" binIdY="0" /-->
         <TH1F variable="lep_pt" binId="1"/>
         <TH1F variable="lep_eta" binId="0"/>
         <TH1F variable="lep_phi" binId="0"/>                
@@ -227,6 +255,7 @@
         <TH1F variable="delta_rapidity" binId="0"/>
         <TH1F variable="delta_phi" binId="0"/>
         <TH1F variable="delta_m" binId="0"/>
+
         <Matrix variable="pt" binId="0"/>
         <Matrix variable="eta" binId="0"/>
         <Matrix variable="phi" binId="0"/>
@@ -235,8 +264,7 @@
         <Matrix variable="absrap" binId="0"/>
         <Matrix variable="rapidity" binId="0"/>
 
- 
-	<!-- JK top pair distributions -->
+ 	<!-- top pair distributions -->
         <TH1F variable="z_ttbar" binId="0"/>
         <TH1F variable="Pout"  binId="0"/>
         <TH1F variable="Chi_ttbar"  binId="0"/>
@@ -246,8 +274,6 @@
 	<TH1F variable="TopCosOpeningAngle"  binId="0"/>
         <TH1F variable="Salam_ttbar"  binId="0"/>
 	<TH1F variable="dPhi_ttbar"  binId="0"/>
-        
-      
 
 
     </Histos>    

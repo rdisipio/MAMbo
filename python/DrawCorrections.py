@@ -12,9 +12,11 @@ _h = []
 
 Paths = ['particle', 'reco', 'particle_not_reco', 'reco_not_particle', 'matched', 'reco_and_particle']
 
-ObjNames = { 'topL' : 'leptonic top','topH' : 'hadronic top','tt' : 't#bar{t}' }
-
-CorrNames = {'eff' : 'Efficiency correction', 'match' : 'Misassignment correction', 'acc' : 'Acceptance correction'}
+ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
+             'topL' : '#hat{t}_{l}','topH' : '#hat{t}_{h}',
+             'tt' : '#hat{t}_{l}#hat{t}_{h}' }
+TitleNames = { 'pt' : 'p_{T}', 'm' : 'm', 'absrap' : '|y|', 'rapidity' : 'y'}
+CorrNames = {'eff' : 'Efficiency correction: f_{p!r}', 'match' : 'Misassignment correction f_{match}', 'acc' : 'Acceptance correction f_{r!p}'}
 
 #################
 def GetTag(objname, varname):
@@ -23,7 +25,7 @@ def GetTag(objname, varname):
     #if objname.find('tt') >= 0 and varname == "pt": tag = '_5'
     return tag
 
-def next_tmp(xmin, xmax, title = 'tmp', ymin=0., ymax=1.,):
+def next_tmp(xmin, xmax, title = 'tmp', ymin=0., ymax=1.1,):
     print xmin, xmax
     h = TH2D("tmp%i" % (len(_h),), title, 100, xmin, xmax, 100, ymin, ymax) 
     h.SetStats(0)
@@ -65,8 +67,8 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     # from now on, access reco file:
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
-    print '        %s' %(Paths[2] + path)
-    h_pnr = rfile.Get(Paths[2] + path)
+    #print '        %s' %(Paths[2] + path)
+    #h_pnr = rfile.Get(Paths[2] + path)
     print '        %s' %(Paths[3] + path)
     h_rnp = rfile.Get(Paths[3] + path)
     print '        %s' %(Paths[4] + path)
@@ -78,11 +80,13 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
 #    ytitle=h_rp.GetYaxis().GetTitle()
 
     PrintBinContent(h_part)
-    PrintBinContent(h_pnr)
+    #PrintBinContent(h_pnr)
 
     print '  Making eff...'
-    print '  RMS check: %f %f' % (h_part.GetRMS(), h_rp.GetRMS())
-    eff = MakeRatio( h_part,  h_pnr)
+    print '  RMS check: %f' % (h_part.GetRMS(),)
+    print '  RMS check: %f' % ( h_rp.GetRMS(),)
+    eff = MakeRatio( h_part,  h_match)
+    #eff = MakeRatio( h_part,  h_pnr)
     print '  Making acc...'
     print '  RMS check: %f %f' % (h_reco.GetRMS(), h_rp.GetRMS())
     acc = MakeRatio( h_rp, h_reco)
@@ -118,15 +122,12 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     xmin = GetMin(rfile, objname, varname, icorr, basepath)
     xmax = GetMax(rfile, objname, varname, icorr, basepath)
 
-    
-
-
-    xtitle = ObjNames[objname] + ' ' + varname
+    xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
     ytitle = ''
 
     title=CorrNames[tag] + ';' + xtitle + ';' + ytitle
     if icorr == 0:
-        next_tmp(xmin, xmax, title, 0., 10.)
+        next_tmp(xmin, xmax, title, 0., 24.)
     else:
         next_tmp(xmin, xmax, title)
     corr.Draw('P')
@@ -138,23 +139,22 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 ####################################################
 
-ljets = [ 'll' ]#, 'el', 'mu']
+ljets = [ 'll', 'el', 'mu']
 #ljets = [ 'el' ]
 
 for ll in ljets:
 
-    #rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_noMatchInMigra.root' % (ll,), 'read')
-    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_halves.root' % (ll,), 'read')
+    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_fixed.root' % (ll,), 'read')
+#    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_halves.root' % (ll,), 'read')
     _files.append(rfile)
     print 'Opened file %s' % (rfile.GetName(),)
 
-    # yes, always the ll file;)
-    pfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_ll_particle.root', 'read')
+    pfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_particle.root' % (ll,), 'read')
     _files.append(pfile)
     print 'Opened file %s' % (pfile.GetName(),)
 
     Obj = ['topH', 'topL', 'tt']
-    Var = ['pt', 'pt', 'm', 'absrap']
+    Var = ['pt', 'm', 'absrap']
 
     for obj in Obj:
         for var in Var:

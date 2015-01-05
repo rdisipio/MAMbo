@@ -325,9 +325,11 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	if (fillCorrections) {
 
 	  // fill reco && particle for the denumerator of the f_'missassign' and numerator for f_{r!p} (acceptance)
+	  // this is WITHOUT the matching condition!
 	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "reco_and_particle");
 
 	  if (passedDRMatching) {
+	    // N.B.: migration matrices for unfolding filled only when also the matching passed!!!
 	    FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
 	    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
 	    //  fill numerator for the matching eff (f_'missassign')
@@ -341,8 +343,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     } // passed particle
 
     if (passedParticleSelection && !passedRecoSelection && fillCorrections) {
-      // did not pass reco, so let's fill particle!reco for eff:
-      FillHistogramsPseudotopParticle(ed, weight_particle_level, "particle_not_reco");
+      // did not pass reco
+      //      FillHistogramsPseudotopParticle(ed, weight_particle_level, "particle_not_reco");
     }
 
     return success;
@@ -729,10 +731,14 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &t
      double z = topH.Pt() / topL.Pt();
      m_hm->FillHistograms(path + "z_ttbar", z, weight);
    }
-   
-   // TODO: top pT dPt as function of pT average
 
-
+   // top pT dPt as function of pT average:
+   m_hm->FillMatrices(path + "dTopPt_vs_AverTopPt", 0.5*(topH.Pt() + topL.Pt()) / GeV, (topH.Pt() - topL.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPt_vs_AverTopPt", 0.5*(topH.Pt() + topL.Pt()) / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPtLH_vs_AverTopPt", 0.5*(topH.Pt() + topL.Pt()) / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPtLH_vs_TopLPt", topL.Pt() / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPtLH_vs_TopHPt", topH.Pt() / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+ 
    // chi = exp |y1-y2|
    double chittbar = exp(TMath::Abs(topL.Rapidity() - topH.Rapidity()));
    m_hm->FillHistograms(path + "Chi_ttbar", chittbar , weight);
@@ -774,16 +780,15 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &t
    double Delta1 = (3*pt1 - pt2) / HT;
    double Delta2 = (3*pt2 - pt1) / HT;
    double DeltaPhi = TMath::Abs(topL.DeltaPhi(topH));
-  
-   /*
-   // TODO!
-   m_hm->FillMatrices(path + "SalamDeltaVsDeltaPhi", DeltaPhi, Delta1, weight);
-   m_hm->FillMatrices(path + "SalamDeltaVsDeltaPhi", DeltaPhi, Delta2, weight);
-   */
 
    m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
+   // two entries per event:
+   m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta1, weight);
+   m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta2, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
+
+
 
  }
 

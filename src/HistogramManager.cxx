@@ -93,12 +93,13 @@ void HistogramManager::BookHistograms( const xmlNodePtr xml )
                     if (path3->inFolder.empty() || IsParentInFolderList(path2->name, path3->inFolder)) {                    
                         string path = path1->name + "/" + path2->name + "/" + path3->name;                        
                         currentDir = CreatePath( path );                        
-                        
+                       
                         if( xmlStrEqual( xml->name, BAD_CAST "TH1F" ) ) {
                             Book1DHistogram(path, xml);
                         }
                         else if( xmlStrEqual( xml->name, BAD_CAST "TH2F" ) ) {
-                            Book2DHistogram(path, xml );
+			  cout << "Booking 2D histos for path " << path.c_str() << endl;
+			  Book2DHistogram(path, xml );
                         }
                         else if( xmlStrEqual( xml->name, BAD_CAST "Matrix" ) ) {
                             BookMatrices(path, xml );
@@ -121,7 +122,7 @@ void HistogramManager::Book1DHistogram( const string path, const xmlNodePtr xml 
                 //cout<<"Booking histo: " << path << "/" << variable->name << endl;
                 
                 string plotName = variable->name;
-                if (bins.size() > 1) {
+		if (bins.size() > 1 && bin->id > 0) {
                     plotName += "_" + std::to_string(bin->id);
                 }
                 
@@ -170,29 +171,35 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
     for (XMLVariable* variable : variables){
         if (VariableNameAndFolderCondition(variable, variableNameX, path)){
             binX = variable->GetBinByIdInPath(binIdX, path);
+	    cout << "  HistogramManager::Book2DHistogram got binX @ " << binX  << endl;
+	    cout << "  HistogramManager::Book2DHistogram got binX n=" << binX->edges.size() << endl;
             if (binX->edges.size() > 0){
                 useEdges = true;
             }
         }
         if (VariableNameAndFolderCondition(variable, variableNameY, path)){
             binY = variable->GetBinByIdInPath(binIdY, path);
+	    cout << "  HistogramManager::Book2DHistogram got binY @ " << binY  << endl;
+	    cout << "  HistogramManager::Book2DHistogram got binY n=" << binY->edges.size() << endl;
         }
     }    
     
     string plotNameWithBin = plotName;
-    if (binX->id > 0 || binY->id > 0) {
+    if ( (binX != NULL && binX->id > 0) || (binY != NULL && binY->id > 0) ) {
        plotNameWithBin += "_" + std::to_string(binX->id) + "_" + std::to_string(binY->id);
     }   
 
     ROOT_TH2_t*  h;
-    if (useEdges && binX != NULL && binY != NULL){
+    cout << "  HistogramManager::Book2DHistogram: Booking " << plotNameWithBin.c_str() << endl;
+    if (binX != NULL && binY != NULL) {
+      if (useEdges)
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->edges, binY->nBins, binY->edges);
-    }
-    else {
+      else 
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->min, binX->max , binY->nBins, binY->min, binY->max );
+      cout << "  HistogramManager::Book2DHistogram: Booked!" << endl;
+      MoveHistogramtToFolder(h, path+"/"+plotName);
+      cout << "  HistogramManager::Book2DHistogram: Moved!" << endl;
     }
-    
-    MoveHistogramtToFolder(h, path+"/"+plotName);
 }
 
 void HistogramManager::BookMatrices(const string path, const xmlNodePtr xml )
@@ -204,7 +211,7 @@ void HistogramManager::BookMatrices(const string path, const xmlNodePtr xml )
             vector<XMLBin*> bins = variable->GetBinsInPath(path);
             for (XMLBin* bin : bins){
                 string matrixNameSuffix = "";
-                if (bins.size() > 1) {
+                if (bins.size() > 1 && bin->id > 0) {
                     matrixNameSuffix += "_" + std::to_string(bin->id);
                 }  
                                 
