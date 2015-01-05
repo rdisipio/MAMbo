@@ -1,4 +1,4 @@
-user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000001.mu.root
-user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000002.mu.root
-user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000005.mu.root
-user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.MC_RESOLVED_at180_2014_11_05_mu.root/user.mromano.4355540._000006.mu.root
+user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586531._000001.mu.root
+user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586531._000002.mu.root
+user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586531._000003.mu.root
+user.mromano.200158.AlpgenPythia_Auto_P2011C_WccNp2.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586531._000004.mu.root
