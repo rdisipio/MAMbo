@@ -165,7 +165,7 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
     string plotName =  variableNameY + "_vs_" + variableNameX;
     string plotTitle =  variableNameY + " vs "+  variableNameX;
 
-    XMLBin *binX, *binY;
+    XMLBin *binX = 0, *binY = 0;
     bool useEdges;
     
     for (XMLVariable* variable : variables){
