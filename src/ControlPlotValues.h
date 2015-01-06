@@ -18,8 +18,10 @@ public:
     ControlPlotValues();
     ControlPlotValues(const ControlPlotValues& orig);
     virtual ~ControlPlotValues();
-
     double weight;
+    double mu;
+    double pvxp_n;
+    double vxp_z;
     double lep_pt; 
     double lep_eta; 
     double lep_phi; 
@@ -30,6 +32,8 @@ public:
     double ETmiss;  
     double mwt;     
     vector<JetValues*> jets;
+    vector<JetValues*> bJets;
+    vector<JetValues*> lJets;
     vector<JetValues*> fatJets;
     
 private:

@@ -30,6 +30,7 @@ XMLVariable::XMLVariable(xmlNodePtr nodeVariable) {
     for(xmlNodePtr nodeBin = nodeVariable->children; nodeBin != NULL; nodeBin = nodeBin->next ) {
         if( xmlStrEqual( nodeBin->name, BAD_CAST "Bin" ) ) { 
             bins.push_back(new XMLBin(nodeBin));
+//	    cout << "DEBUG: variable " << name << " has a new binning defined:" << bins.back()->id << endl;
         }
      }
 }

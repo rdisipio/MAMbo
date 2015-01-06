@@ -79,6 +79,15 @@
         <Variable name="mlb" title="Reco (b,l) invariant mass [GeV]" folder="4j2b" >
             <Bin nbins="50" xmin="0." xmax="300." />
         </Variable>
+        <Variable name="mu" title="Avg. no. of interactions per b.c." folder="cutflow">
+            <Bin id="0" nbins="20" xmin="0." xmax="40." />
+        </Variable>
+        <Variable name="pvxp_n" title="No. of primary vertices" folder="cutflow">
+            <Bin id="0" nbins="10" xmin="0." xmax="20." />
+        </Variable>
+        <Variable name="vxp_z"	title="Primary vertex p_{z}" folder="cutflow">
+            <Bin id="0" nbins="20" xmin="-300." xmax="300." />
+       	</Variable>
         <Variable name="lep_pt"  title="Lepton p_{T} [GeV]" folder="cutflow"> 
 	    <Bin id="0" nbins="14" edges="25.0,30.0,35.0,40.0,45.0,50.0,55.0,60.0,65.0,70.0,80.0,90.0,100.0,125.0,500.0" />
             <Bin id="1" nbins="100" xmin="0."   xmax="500." />
@@ -115,26 +124,28 @@
         <Variable name="jet_m"   title="Jet mass [GeV]" folder="cutflow">
             <Bin nbins="20" xmin="0."   xmax="100." />
         </Variable>
-        <Variable name="fjet_n"   title="No. of Fat Jets" folder="cutflow">
-            <Bin nbins="4" xmin="-0.5" xmax="3.5" />
+        <Variable name="bjet_n"   title="No. of b-Tagged Jets" folder="cutflow">
+            <Bin nbins="5" xmin="-0.5" xmax="4.5" />
         </Variable>
-        <Variable name="fjet_pt"  title="Fat Jet p_{T} [GeV]" folder="cutflow">
-            <Bin nbins="50" xmin="0."   xmax="1500." />
+        <Variable name="bjet_pt"  title="b-Jet p_{T} [GeV]" folder="cutflow">
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
         </Variable>
-        <Variable name="fjet_eta" title="Fat Jet pseudorapidity #eta" folder="cutflow">
+        <Variable name="bjet1_pt"  title="Leading b-Jet p_{T} [GeV]" folder="cutflow">
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
+        </Variable>
+        <Variable name="bjet_eta" title="b-Jet pseudorapidity #eta" folder="cutflow">
             <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
         </Variable>
-        <Variable name="fjet_phi" title="Fat Jet azimuthal angle #phi" folder="cutflow">
+        <Variable name="bjet_phi" title="b-Jet azimuthal angle #phi" folder="cutflow">
             <Bin nbins="16" xmin="-3.1416"   xmax="3.1416" />
         </Variable>
-        <Variable name="fjet_E"   title="Fat Jet energy [GeV]" folder="cutflow">
-            <Bin nbins="50" xmin="0."   xmax="1500." />
+        <Variable name="bjet_E"   title="b-Jet energy [GeV]" folder="cutflow">
+            <Bin nbins="200" xmin="0."   xmax="500." />
         </Variable>
-        <Variable name="fjet_m"   title="Fat Jet mass [GeV]" folder="cutflow">
-            <Bin nbins="20" xmin="0."   xmax="400." />
-        </Variable>
-        <Variable name="fjet1_pt"  title="Leading Fat Jet p_{T} [GeV]" folder="cutflow">
-            <Bin nbins="50" xmin="0."   xmax="1500." />
+        <Variable name="bjet_m"   title="b-Jet mass [GeV]" folder="cutflow">
+            <Bin nbins="20" xmin="0."   xmax="100." />
         </Variable>
         <Variable name="met_pt"  title="Missing Transverse Energy [GeV]"  folder="cutflow">
             <Bin id="0" nbins="20" edges="0,32,36,40,44,46,50,54,56,60,64,68,72,78,84,90,98,108,120,142,200" />
@@ -226,7 +237,7 @@
 
         <!--TH2F variableX="pt" binIdX="0" variableY="lep_pt" binIdY="0" /-->
         <TH2F variableX="dPhi_ttbar" binIdX="0" variableY="Salam_ttbar" binIdY="0" folder="4j2b" particle="difference" /> 
-        <TH2F variableX="dPhi_ttbar" binIdX="1" variableY="Salam_ttbar" binIdY="1" folder="4j2b" particle="difference" />
+        <TH2F variableX="dPhi_ttbar" binIdX="1" variableY="Salam_ttbar" binIdY="1" folder="4j2b" particle="difference" /> 
 	<TH2F variableX="AverTopPt" binIdX="0" variableY="dTopPt" binIdY="0" folder="4j2b" particle="difference" /> 
 	<TH2F variableX="AverTopPt" binIdX="1" variableY="dTopPt" binIdY="1" folder="4j2b" particle="difference" /> 
 	<TH2F variableX="AverTopPt" binIdX="0" variableY="dTopPtLH" binIdY="0" folder="4j2b" particle="difference" /> 
@@ -243,6 +254,9 @@
         <TH1F variable="absrap" binId="0"/>
         <TH1F variable="rapidity" binId="0"/>
         <TH1F variable="mlb" binId="0"/>
+        <TH1F variable="mu" binId="0"/>
+        <TH1F variable="pvxp_n" binId="0"/>
+        <TH1F variable="vxp_z" binId="0"/>
         <TH1F variable="lep_pt" binId="1"/>
         <TH1F variable="lep_eta" binId="0"/>
         <TH1F variable="lep_phi" binId="0"/>                
@@ -253,13 +267,16 @@
         <TH1F variable="jet_phi" binId="0"/>                
         <TH1F variable="jet_E" binId="0"/>
         <TH1F variable="jet_m" binId="0"/>
+        <TH1F variable="jet1_pt" binId="0"/>
         <TH1F variable="jet1_pt" binId="1"/>
-        <TH1F variable="fjet_n" binId="0"/>
-        <TH1F variable="fjet_pt" binId="0"/>
-        <TH1F variable="fjet_eta" binId="0"/>
-        <TH1F variable="fjet_phi" binId="0"/>                
-        <TH1F variable="fjet_E" binId="0"/>
-        <TH1F variable="fjet_m" binId="0"/>
+        <TH1F variable="bjet_n" binId="0"/>
+        <TH1F variable="bjet_pt" binId="0"/>
+        <TH1F variable="bjet_eta" binId="0"/>
+        <TH1F variable="bjet_phi" binId="0"/>                
+        <TH1F variable="bjet_E" binId="0"/>
+        <TH1F variable="bjet_m" binId="0"/>
+        <TH1F variable="bjet1_pt" binId="0"/>
+        <TH1F variable="bjet1_pt" binId="1"/>
         <TH1F variable="met_pt" binId="1"/>
         <TH1F variable="mtw" binId="1"/>
         <TH1F variable="delta_R" binId="0"/>

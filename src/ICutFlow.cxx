@@ -179,7 +179,7 @@ void CutFlow::PrintOutStats()
       cout << " * " << p_h_cf->GetTitle() << endl << endl;
 
       for( int nc = 0 ; nc < ncuts ; ++nc ) {
-	printf( "%2i) %-20s %10.0f\n", nc, p_h_cf->GetXaxis()->GetBinLabel(nc+1), p_h_cf->GetBinContent(nc+1) );
+	printf( "%2i) %-30s %10.0f\n", nc, p_h_cf->GetXaxis()->GetBinLabel(nc+1), p_h_cf->GetBinContent(nc+1) );
       } 
 
       cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;

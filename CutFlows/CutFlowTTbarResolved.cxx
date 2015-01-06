@@ -112,12 +112,12 @@ bool CutFlowTTbarResolved::Initialize() {
     SetCutName("LPLUSJETS", "particle_weighted", 3, "SingleLepton");
     SetCutName("LPLUSJETS", "particle_weighted", 4, "Lep pT > 25 GeV" );
     if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW > 30 GeV");
+       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 30 GeV");
+       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW > 30 GeV");
     }
     else {
-       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW + ETmiss > 60 GeV");
+       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 20 GeV");
+       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW + ETmiss > 60 GeV");
     }
     SetCutName("LPLUSJETS", "particle_weighted", 7, "NJets >= 4");
     SetCutName("LPLUSJETS", "particle_weighted", 8, "Nbtags >= 1");
@@ -154,9 +154,10 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     if( !isRealData && !isQCD ) {
    	 weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
- 
- //        if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
- //        if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
+
+	 // some Single Top samples have buggy mc weight 
+         if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
+         if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
 
          const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
          const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
@@ -164,9 +165,11 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
 //         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
-         const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"];
+         const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
          const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
-
+         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
+ 
+/*
 #ifdef __MOMA__
          const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
@@ -174,13 +177,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 #else 
          const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
 #endif
+  */
+         
+//      cout << "DEBUG: sf: " << scaleFactor_PILEUP << " " << scaleFactor_ELE << " " << scaleFactor_MUON << " " << scaleFactor_TRIGGER << " " << scaleFactor_JVFSF << " " << scaleFactor_ZVERTEX << " " << scaleFactor_BTAG << endl;
 
-         weight_reco_level *=
+       weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
             scaleFactor_ELE * scaleFactor_MUON *
             scaleFactor_BTAG;
-
-//            scaleFactor_WJETSNORM * scaleFactor_WJETSSHAPE; // ==1 anyway..
 
    	 // as boosted guys do
          // weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
@@ -373,6 +377,9 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
  
     ControlPlotValues values;
     values.weight = weight;
+    values.mu      = ed->property["mu"];
+    values.pvxp_n  = ed->property["pvxp_n"];
+    values.vxp_z   = ed->property["vxp_z"];
     values.lep_pt  = ed->leptons.pT.at(0);
     values.lep_eta = ed->leptons.eta.at(0);
     values.lep_phi = ed->leptons.phi.at(0);
@@ -391,14 +398,14 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
         jet->m   = ed->jets.m.at(j);
         values.jets.push_back(jet);
     }
-    for (int fj = 0; fj < ed->fjets.n; ++fj) {
+    for (int bj = 0; bj < ed->bjets.n; ++bj) {
         JetValues* jet = new JetValues();
-        jet->pt  = ed->fjets.pT.at(fj);
-        jet->eta = ed->fjets.eta.at(fj);
-        jet->phi = ed->fjets.phi.at(fj);
-        jet->E   = ed->fjets.E.at(fj);
-        jet->m   = ed->fjets.m.at(fj);
-        values.fatJets.push_back(jet);
+        jet->pt  = ed->bjets.pT.at(bj);
+        jet->eta = ed->bjets.eta.at(bj);
+        jet->phi = ed->bjets.phi.at(bj);
+        jet->E   = ed->bjets.E.at(bj);
+        jet->m   = ed->bjets.m.at(bj);
+        values.bJets.push_back(jet);
     }   
     // 0 all events
     PassedCut( "LPLUSJETS", "reco_weighted", weight );
@@ -501,14 +508,14 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
         jet.m   = ed->truth_jets.m.at(j);
         values.jets.push_back(&jet);
     }
-    for (int fj = 0; fj < ed->truth_fjets.n; ++fj) {
+    for (int bj = 0; bj < ed->truth_bjets.n; ++bj) {
         JetValues jet;
-        jet.pt  = ed->truth_fjets.pT.at(fj);
-        jet.eta = ed->truth_fjets.eta.at(fj);
-        jet.phi = ed->truth_fjets.phi.at(fj);
-        jet.E   = ed->truth_fjets.E.at(fj);
-        jet.m   = ed->truth_fjets.m.at(fj);
-        values.fatJets.push_back(&jet);
+        jet.pt  = ed->truth_bjets.pT.at(bj);
+        jet.eta = ed->truth_bjets.eta.at(bj);
+        jet.phi = ed->truth_bjets.phi.at(bj);
+        jet.E   = ed->truth_bjets.E.at(bj);
+        jet.m   = ed->truth_bjets.m.at(bj);
+        values.bJets.push_back(&jet);
     }
     
     // 0 All events
@@ -661,6 +668,11 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( ControlPlotValues
 }
 
 void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values ){
+
+    m_hm->FillHistograms( path + "mu",     values.mu,     values.weight );
+    m_hm->FillHistograms( path + "pvxp_n", values.pvxp_n, values.weight );
+    m_hm->FillHistograms( path + "vxp_z",  values.vxp_z,  values.weight );
+
     m_hm->FillHistograms( path + "lep_pt" , values.lep_pt / GeV, values.weight );
     m_hm->FillHistograms( path + "lep_eta", values.lep_eta, values.weight);
     m_hm->FillHistograms( path + "lep_phi", values.lep_phi,      values.weight );
@@ -677,16 +689,18 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
         m_hm->FillHistograms( path + "jet_E", jet->E / GeV, values.weight );
         m_hm->FillHistograms( path + "jet_m" ,  jet->m / GeV, values.weight );
     }
+    if( values.jets.size() > 0 ) m_hm->FillHistograms( path + "jet1_pt",  values.jets.at(0)->pt / GeV, values.weight );
 
-    m_hm->FillHistograms( path + "fjet_n", values.fjet_n, values.weight );
-    for (int fj = 0; fj < values.fatJets.size(); ++fj) {
-        JetValues* jet = values.fatJets.at(fj);
-        m_hm->FillHistograms( path + "fjet_eta",  jet->eta, values.weight );
-        m_hm->FillHistograms( path + "fjet_pt",  jet->pt / GeV, values.weight );
-        m_hm->FillHistograms( path + "fjet_phi",  jet->phi, values.weight );
-        m_hm->FillHistograms( path + "fjet_E",  jet->E / GeV, values.weight );
-        m_hm->FillHistograms( path + "fjet_m",  jet->m / GeV, values.weight );
+    m_hm->FillHistograms( path + "bjet_n", values.bjet_n, values.weight );
+    for (int bj = 0; bj < values.bJets.size(); ++bj) {
+        JetValues* jet = values.bJets.at(bj);
+        m_hm->FillHistograms( path + "bjet_eta",  jet->eta, values.weight );
+        m_hm->FillHistograms( path + "bjet_pt",  jet->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "bjet_phi",  jet->phi, values.weight );
+        m_hm->FillHistograms( path + "bjet_E",  jet->E / GeV, values.weight );
+        m_hm->FillHistograms( path + "bjet_m",  jet->m / GeV, values.weight );
     }
+    if(	values.bJets.size() > 0 ) m_hm->FillHistograms( path + "bjet1_pt",  values.bJets.at(0)->pt / GeV, values.weight );
 }
 
 /////////////////////////////////////////
