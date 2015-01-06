@@ -228,22 +228,29 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     if( passedRecoSelection ) {
      
-      m_pseudotop_reco->SetEventData(ed);
+      // no need to repeat... m_pseudotop_reco->SetEventData(ed);
       m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
       
       m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
       m_pseudotop_reco->Run();
-      
-      // dumped indices:
+
+      // OLD, w/o W's:
       // reco                : 0=t_lep 1=t_had 2=ttbar
       // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
       // truth (parton lvl)  : 6=t_lep 7=t_had 8=ttbar
+
+      // NEW:
+      // dumped indices:
+      // reco                : 0=t_lep 1=t_had 2=ttbar 3=W_lep 4=W_had
+      // truth (particle lvl): 5=t_lep 6=t_had 7=ttbar 8=W_lep 9=W_had
+      // truth (parton lvl)  : 10=t_lep 11=t_had 12=ttbar
+
       if (fillHistos)
 	FillHistogramsPseudotopReco(ed, weight_reco_level);
 
     } else {
-      // ugly hack, due to pseudotop indices in ed required to be
-      // reco: 0,1; particle is 2,3
+      // ugly hack, due to pseudotop indices in ed required to be, e.g.,
+      // reco: 0,1; particle is 5,6
       // needed later for passed particle not reco
       m_pseudotop_reco->MakeDummyPseudotops();
     }
@@ -252,6 +259,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       return success;
 
     // there is always a parton-level top
+    // but fill it only when also passed the reco so that to have reco to parton migration
     if(passedRecoSelection) {
 
       if (fillHistos) {
@@ -308,9 +316,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
        
 	// rds:
 	m_pseudotop_matching_reco2particle->SetEventData(ed);
-	m_pseudotop_matching_reco2particle->DoMatching(0, 3, "pseudotop_lep");
-	m_pseudotop_matching_reco2particle->DoMatching(1, 4, "pseudotop_had");
-	m_pseudotop_matching_reco2particle->DoMatching(2, 5, "pseudottbar");
+	m_pseudotop_matching_reco2particle->DoMatching(0, 5, "pseudotop_lep");
+	m_pseudotop_matching_reco2particle->DoMatching(1, 6, "pseudotop_had");
+	m_pseudotop_matching_reco2particle->DoMatching(2, 7, "pseudottbar");
 
 	// matching:
 	FillHistogramsMatchingRecoToParticle(weight_reco_level);
@@ -319,14 +327,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	// JK:
 	bool passedDRMatching = m_pseudotop_matching_reco2particle->DoObjectsMatching(0); // 0 = no debug
 
-	// fill response matrix:
-	// NEW: added here the matching condition!!! JK 3.12.2014
-
 	if (fillCorrections) {
 
 	  // fill reco && particle for the denumerator of the f_'missassign' and numerator for f_{r!p} (acceptance)
 	  // this is WITHOUT the matching condition!
-	  FillHistogramsPseudotopParticle(ed, weight_particle_level, "reco_and_particle");
+	  FillHistogramsPseudotopParticle(ed, weight_reco_level, "reco_and_particle"); // YES, with reco weight!
+
+	  // fill response matrix:
+	  // NEW: added here the matching condition!!! JK 3.12.2014
 
 	  if (passedDRMatching) {
 	    // N.B.: migration matrices for unfolding filled only when also the matching passed!!!
@@ -334,7 +342,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
 	    //  fill numerator for the matching eff (f_'missassign')
 	    // reco && particle && matched:
-	    FillHistogramsPseudotopParticle(ed, weight_particle_level, "matched");
+	    FillHistogramsPseudotopParticle(ed, weight_reco_level, "matched"); // YES, with reco weight!
 	  }
 	}
 
@@ -696,7 +704,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/absrap", fabs(p.y), weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/rapidity", p.y, weight);
 
-    if ( (index == 3 || index == 0) && mlb >= 0.){
+    if ( (index == 5 || index == 0) && mlb >= 0.){
         m_hm->FillHistograms(level + "/4j2b/" + topType + "/mlb", mlb / GeV , weight );
     }
 }
@@ -862,6 +870,8 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
   }
     FillHistogramsPseudoTop(ed->reco, 1, level, "topH", weight);
     FillHistogramsPseudoTop(ed->reco, 2, level, "tt", weight);
+    FillHistogramsPseudoTop(ed->reco, 3, level, "WL", weight);
+    FillHistogramsPseudoTop(ed->reco, 4, level, "WH", weight);
 
     FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, weight);
 
@@ -894,12 +904,15 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
 	 << " b_index: " << ed->iproperty["ptcl_pseudotop_lep_bjet_index"]
 	 << endl;
     
-    FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, -1);
+    FillHistogramsPseudoTop(ed->reco, 5, level, "topL", weight, -1);
   }
-    FillHistogramsPseudoTop(ed->reco, 4, level, "topH", weight);
-    FillHistogramsPseudoTop(ed->reco, 5, level, "tt", weight);
+    FillHistogramsPseudoTop(ed->reco, 6, level, "topH", weight);
+    FillHistogramsPseudoTop(ed->reco, 7, level, "tt", weight);
+    FillHistogramsPseudoTop(ed->reco, 8, level, "WL", weight);
+    FillHistogramsPseudoTop(ed->reco, 9, level, "WH", weight);
 
-    FillHistogramsPseudoTopPairs(ed->reco, 3, 4, 5, level, weight);
+
+    FillHistogramsPseudoTopPairs(ed->reco, 5, 6, 7, level, weight);
 
 }
 
@@ -923,9 +936,6 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const 
     FillHistogramsPartonTop(ed->mctruth, ihad, "parton", "topH", weight);
     FillHistogramsPartonTop(ed->mctruth, itt, "parton", "tt", weight);   
     FillHistogramsPartonTopPairs(ed->mctruth, ilep, ihad, itt, "parton", weight);   
-
-    // TODO: sth like:
-    //    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, "reco", weight);
 
 }
 

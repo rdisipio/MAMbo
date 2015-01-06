@@ -17,6 +17,8 @@
         <Type name="topL" inFolder="4j2b,matching"/>
         <Type name="topH" inFolder="4j2b,matching"/>
         <Type name="tt" inFolder="4j2b,matching"/>
+        <Type name="WL" inFolder="4j2b,matching"/>
+        <Type name="WH" inFolder="4j2b,matching"/>
         <Type name="difference" inFolder="4j2b"/>
         <Type name="beforeCuts" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
@@ -28,6 +30,8 @@
             <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="top"/>
             <Bin id="0" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>
             <Bin id="1" nbins="50" xmin="0" xmax="500"  particle="tt"/>
+	    <Bin id="1" nbins="50" xmin="0" xmax="600" particle="WL"/>
+	    <Bin id="1" nbins="50" xmin="0" xmax="600" particle="WH"/>
 <!-- Not necessary: 
            <Bin id="1" nbins="11" edges="0,40,80,100,120,150,180,200,260,300,350,1000" particle="top"/>
             <Bin id="2" nbins="12" edges="0,40,75,90,110,135,160,180,220,260,300,350,1000" particle="top"/>
@@ -43,7 +47,7 @@
             <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
         </Variable>
         <Variable name="phi"    title="azimuthal angle #phi" folder="4j2b" > 
-            <Bin id="0" nbins="16" xmin="-3.2"   xmax="3.2"/>
+            <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416"/>
         </Variable>
         <Variable name="E"      title="energy [GeV]" folder="4j2b" > 
             <Bin id="0" nbins="20" xmin="0." xmax="1500."/>
@@ -53,16 +57,24 @@
             <!-- <Bin id="1" nbins="50" xmin="160." xmax="185." particle="top"/> -->
             <Bin id="0" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt" /> 
  	    <Bin id="1" nbins="50" xmin="225." xmax="2500." particle="tt" /> 
+            <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WL"/>
+            <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WH"/>
         </Variable>
         <Variable name="absrap" title="abs rapidity |y_{t}|" folder="4j2b" > 
           <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/>
           <Bin id="1" nbins="50" xmin="0." xmax="2.5" particle="top"/>
 	  <Bin id="0" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
-          <Bin id="1" nbins="50" xmin="0." xmax="2.5" particle="tt"/>
+          <Bin id="1" nbins="25" xmin="0." xmax="2.5" particle="tt"/>
+	  <Bin id="0" nbins="25" xmin="0." xmax="2.5" particle="WL"/>
+	  <Bin id="0" nbins="25" xmin="0." xmax="2.5" particle="WH"/>
         </Variable>
         <Variable name="rapidity" title="rapidity y_{t}" folder="4j2b" > 
             <Bin id="0" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0.,0.4,0.8,1.1, 1.4,1.8,2.5" particle="top"/>
-	    <Bin id="1" nbins="20" edges="-2.5,-1.6,-1.2,-1.0,-0.8,-0.7,-0.6,-0.4,-0.2,-0.1,0.,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
+	    <Bin id="0" nbins="20" edges="-2.5,-1.6,-1.2,-1.0,-0.8,-0.7,-0.6,-0.4,-0.2,-0.1,0.,0.1,0.2,0.4,0.6,0.7,0.8,1.0,1.2,1.6,2.5" particle="tt"/>
+  	    <Bin id="1" nbins="50" xmin="-2.5" xmax="2.5" particle="top"/>
+	    <Bin id="1" nbins="50" xmin="-2.5" xmax="2.5" particle="tt"/>
+  	    <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" particle="WL"/>
+	    <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" particle="WH"/>
         </Variable>
         <Variable name="mlb" title="Reco (b,l) invariant mass [GeV]" folder="4j2b" >
             <Bin nbins="50" xmin="0." xmax="300." />
@@ -95,7 +107,7 @@
             <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
         </Variable>
         <Variable name="jet_phi" title="Jet azimuthal angle #phi" folder="cutflow">
-            <Bin nbins="16" xmin="-3.2"   xmax="3.2" />
+            <Bin nbins="16" xmin="-3.1416"   xmax="3.1416" />
         </Variable>
         <Variable name="jet_E"   title="Jet energy [GeV]" folder="cutflow">
             <Bin nbins="200" xmin="0."   xmax="500." />
@@ -113,7 +125,7 @@
             <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
         </Variable>
         <Variable name="fjet_phi" title="Fat Jet azimuthal angle #phi" folder="cutflow">
-            <Bin nbins="16" xmin="-3.2"   xmax="3.2" />
+            <Bin nbins="16" xmin="-3.1416"   xmax="3.1416" />
         </Variable>
         <Variable name="fjet_E"   title="Fat Jet energy [GeV]" folder="cutflow">
             <Bin nbins="50" xmin="0."   xmax="1500." />

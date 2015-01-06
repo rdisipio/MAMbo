@@ -13,10 +13,16 @@ _h = []
 Paths = ['particle', 'reco', 'particle_not_reco', 'reco_not_particle', 'matched', 'reco_and_particle']
 
 ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
-             'topL' : '#hat{t}_{l}','topH' : '#hat{t}_{h}',
+             'topL' : '#hat{t}_{l}',
+             'topH' : '#hat{t}_{h}',
              'tt' : '#hat{t}_{l}#hat{t}_{h}' }
-TitleNames = { 'pt' : 'p_{T}', 'm' : 'm', 'absrap' : '|y|', 'rapidity' : 'y'}
-CorrNames = {'eff' : 'Efficiency correction: f_{p!r}', 'match' : 'Misassignment correction f_{match}', 'acc' : 'Acceptance correction f_{r!p}'}
+TitleNames = { 'pt' : 'p_{T}', 
+               'm' : 'm', 
+               'absrap' : '|y|', 
+               'rapidity' : 'y' }
+CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}', 
+              'match' : 'Misassignment correction f_{match}', 
+              'acc' : 'Acceptance correction f_{r!p}' }
 
 #################
 def GetTag(objname, varname):
@@ -65,14 +71,18 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     h_part = pfile.Get(Paths[0] + path)
 
     # from now on, access reco file:
+
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
+
     #print '        %s' %(Paths[2] + path)
     #h_pnr = rfile.Get(Paths[2] + path)
-    print '        %s' %(Paths[3] + path)
-    h_rnp = rfile.Get(Paths[3] + path)
+    #print '        %s' %(Paths[3] + path)
+    #h_rnp = rfile.Get(Paths[3] + path)
+
     print '        %s' %(Paths[4] + path)
     h_match = rfile.Get(Paths[4] + path)
+
     print '        %s' %(Paths[5] + path)
     h_rp = rfile.Get(Paths[5] + path)
     
@@ -140,11 +150,14 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 
 ljets = [ 'll', 'el', 'mu']
-#ljets = [ 'el' ]
+# ljets = [ 'el', 'mu']
+# ljets = [ 'el' ]
+
+ftag='_Jan2015'
 
 for ll in ljets:
 
-    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_fixed.root' % (ll,), 'read')
+    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s%s.root' % (ll,ftag), 'read')
 #    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_halves.root' % (ll,), 'read')
     _files.append(rfile)
     print 'Opened file %s' % (rfile.GetName(),)

@@ -125,16 +125,23 @@ namespace PhysicsHelperFunctions {
     const int top_lep_pid = ( m_p_ed->lepton.q > 0 ) ? 6 : -6;
     const int top_had_pid = -1 * top_lep_pid;
     const int ttbar_pid   = 611;  // ttbar "meson"
+    const int W_lep_pid = ( m_p_ed->lepton.q > 0 ) ? 24 : -24;
+    const int W_had_pid = -1 * W_lep_pid;
 	
 
     // dump to event data
     const size_t top_lep_index = HelperFunctions::DumpParticleToEventData( m_top_lep, &m_p_ed->reco );
     const size_t top_had_index = HelperFunctions::DumpParticleToEventData( m_top_had, &m_p_ed->reco );
     const size_t ttbar_index   = HelperFunctions::DumpParticleToEventData( m_ttbar,   &m_p_ed->reco );
+    const size_t W_lep_index = HelperFunctions::DumpParticleToEventData( m_W_lep, &m_p_ed->reco );
+    const size_t W_had_index = HelperFunctions::DumpParticleToEventData( m_W_had, &m_p_ed->reco );
 
     m_p_ed->reco.pdgId.push_back( top_lep_pid );
     m_p_ed->reco.pdgId.push_back( top_had_pid );
     m_p_ed->reco.pdgId.push_back( ttbar_pid );
+    m_p_ed->reco.pdgId.push_back( W_lep_pid );
+    m_p_ed->reco.pdgId.push_back( W_had_pid );
+
 
     string prefix = ( m_target == kReco ) ? "reco_" : "ptcl_";
     m_p_ed->iproperty[prefix + "pseudotop_had_jet_1_index"] = Wj1_index;
@@ -169,20 +176,30 @@ namespace PhysicsHelperFunctions {
     const int top_lep_pid = 6;
     const int top_had_pid = -6;
     const int ttbar_pid   = 611;  // ttbar "meson"
+    const int W_lep_pid = 24;
+    const int W_had_pid = -24;
 
     // sooooo dummyyy...
     m_top_lep.SetPtEtaPhiE(1000, 0, 0, 2000);
     m_top_had.SetPtEtaPhiE(1000, 0, -3.14, 2000);
     m_ttbar =  m_top_had + m_top_lep;
+    m_W_lep.SetPtEtaPhiE(500, 0, 0, 1000);
+    m_W_had.SetPtEtaPhiE(500, 0, -3.14, 1000);
+
 
     // dump to event data
     const size_t top_lep_index = HelperFunctions::DumpParticleToEventData( m_top_lep, &m_p_ed->reco );
     const size_t top_had_index = HelperFunctions::DumpParticleToEventData( m_top_had, &m_p_ed->reco );
     const size_t ttbar_index   = HelperFunctions::DumpParticleToEventData( m_ttbar,   &m_p_ed->reco );
+    const size_t W_lep_index = HelperFunctions::DumpParticleToEventData( m_W_lep, &m_p_ed->reco );
+    const size_t W_had_index = HelperFunctions::DumpParticleToEventData( m_W_had, &m_p_ed->reco );
+
 
     m_p_ed->reco.pdgId.push_back( top_lep_pid );
     m_p_ed->reco.pdgId.push_back( top_had_pid );
     m_p_ed->reco.pdgId.push_back( ttbar_pid );
+    m_p_ed->reco.pdgId.push_back( W_lep_pid );
+    m_p_ed->reco.pdgId.push_back( W_had_pid );
 
 
   }
