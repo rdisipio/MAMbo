@@ -2,7 +2,8 @@
 
 import os, sys
 from ROOT import *
-
+from array import array
+ 
 from MAMboPlottingToolkit import *
 _cans = []
 _files = []
@@ -25,6 +26,17 @@ CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}',
               'acc' : 'Acceptance correction f_{r!p}' }
 
 #################
+def CheckAcc(acc,name):
+    #vals = array('d', [0.,0.])
+    x = Double(0.) # ROOT.Double
+    eff = Double(0.)
+    for i in range(0,acc.GetN()):
+        #acc.GetPoint(i,vals[0],vals[1])
+        acc.GetPoint(i,x,eff)
+        if eff > 1.:
+            print '  ERROR: acceptance=%4.2f in bin %i of %s!' % (eff,i,name)
+    return
+
 def GetTag(objname, varname):
     tag = ''
     #if objname.find('top') >= 0 and varname != "absrap": tag = '_0'
@@ -100,6 +112,7 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '  Making acc...'
     print '  RMS check: %f %f' % (h_reco.GetRMS(), h_rp.GetRMS())
     acc = MakeRatio( h_rp, h_reco)
+    CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
     print '  Making match...'
     print '  RMS check: %f %f' % (h_match.GetRMS(), h_rp.GetRMS())
     match = MakeRatio( h_match,  h_rp)
@@ -150,8 +163,10 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 
 ljets = [ 'll', 'el', 'mu']
-# ljets = [ 'el', 'mu']
-# ljets = [ 'el' ]
+#ljets = [ 'el', 'mu']
+#ljets = [ 'el' ]
+#ljets = [ 'mu' ]
+#ljets = [ 'll' ]
 
 ftag='_Jan2015'
 

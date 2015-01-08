@@ -232,7 +232,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     if( passedRecoSelection ) {
      
-      // no need to repeat... m_pseudotop_reco->SetEventData(ed);
+      //     need to repeat... ???
+      m_pseudotop_reco->SetEventData(ed);
       m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
       
       m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
@@ -911,7 +912,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     }
     TLorentzVector lb = lep + lep_bjet;
     //    cout << " PTCL mlb: " << lb.M() << endl;
-    FillHistogramsPseudoTop(ed->reco, 3, level, "topL", weight, lb.M());
+    FillHistogramsPseudoTop(ed->reco, 5, level, "topL", weight, lb.M());
   } else {
     cout << " CAN'T FILL PTCL mlb! n_el: " << ed->truth_electrons.n << " n_mu: " <<  ed->truth_muons.n 
 	 << " n_bjets: " <<  ed->truth_bjets.n
@@ -1003,9 +1004,9 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     Particle recoTopH(ed->reco, 1);
     Particle recoTT(ed->reco, 2);
 
-    Particle particleTopL(ed->reco, 3);
-    Particle particleTopH(ed->reco, 4);
-    Particle particleTT(ed->reco, 5);
+    Particle particleTopL(ed->reco, 5);
+    Particle particleTopH(ed->reco, 6);
+    Particle particleTT(ed->reco, 7);
 
     //    m_hm->FillHistograms("reco/4j2b/difference/topH/ptdiff", (recoTopH.pt - particleTopH.pt) / GeV, weight);
     
@@ -1064,9 +1065,9 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
   void CutFlowTTbarResolved::FillHistogramsPseudotopResponseParticleToParton(  EventData * ed, const double weight )
   {
     // particle level
-    Particle particleTopL(ed->reco, 3);
-    Particle particleTopH(ed->reco, 4);
-    Particle particleTT(ed->reco, 5);
+    Particle particleTopL(ed->reco, 5);
+    Particle particleTopH(ed->reco, 6);
+    Particle particleTT(ed->reco, 7);
 
     // parton level
     int ilep, ihad;
