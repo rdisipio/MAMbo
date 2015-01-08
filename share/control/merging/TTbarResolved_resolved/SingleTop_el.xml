@@ -8,9 +8,9 @@
   <sample name="singletop_Wtchannel"        dsid="110140" xsec="20.461" kfact="1.0933" genevt="999692"  generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="singletop_tchannel_top"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110090.el.histograms.root" />
-  <file	sample="singletop_tchannel_antitop" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110091.el.histograms.root" />
-  <file sample="singletop_schannel"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110119.el.histograms.root" />
-  <file sample="singletop_Wtchannel"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.SingleTop.110140.el.histograms.root" />
+  <file sample="singletop_tchannel_top"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.SingleTop.110090.el.nominal.histograms.root" />
+  <file	sample="singletop_tchannel_antitop" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.SingleTop.110091.el.nominal.histograms.root" />
+  <file sample="singletop_schannel"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.SingleTop.110119.el.nominal.histograms.root" />
+  <file sample="singletop_Wtchannel"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.SingleTop.110140.el.nominal.histograms.root" />
 </files>
 </document>

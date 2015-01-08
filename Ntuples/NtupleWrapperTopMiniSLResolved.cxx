@@ -97,8 +97,6 @@ bool NtupleWrapperTopMiniSLResolved::MakeEventInfo( EventData * ed )
   ed->property["scaleFactor_JVFSF"]	 = GET_VALUE( scaleFactor_JVFSF      );
   ed->property["scaleFactor_ZVERTEX"]    = GET_VALUE( scaleFactor_ZVERTEX    );
 
-  // truth switched on? get event by index here.
-
   return success;
 }
 

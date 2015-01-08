@@ -1,6 +1,7 @@
 <histograms>
   <histogram hpath="LPLUSJETS_cutflow_reco_weighted" />
   <histogram hpath="reco/cutflow/beforeCuts/mu" />
+<!--  <histogram hpath="reco/cutflow/beforeCuts/mu_1" /> -->
   <histogram hpath="reco/cutflow/beforeCuts/pvxp_n" />
   <histogram hpath="reco/cutflow/beforeCuts/vxp_z" />
   <histogram hpath="reco/cutflow/beforeCuts/lep_pt" />
@@ -19,6 +20,7 @@
   <histogram hpath="reco/cutflow/beforeCuts/mtw" />
  
   <histogram hpath="reco/cutflow/4j1b/mu" />
+<!--  <histogram hpath="reco/cutflow/4j1b/mu_1" /> -->
   <histogram hpath="reco/cutflow/4j1b/pvxp_n" />
   <histogram hpath="reco/cutflow/4j1b/vxp_z" />
   <histogram hpath="reco/cutflow/4j1b/lep_pt" />
@@ -37,6 +39,7 @@
   <histogram hpath="reco/cutflow/4j1b/mtw" />
 
   <histogram hpath="reco/cutflow/afterCuts/mu"	/>
+<!--  <histogram hpath="reco/cutflow/afterCuts/mu_1" /> -->
   <histogram hpath="reco/cutflow/afterCuts/pvxp_n" />
   <histogram hpath="reco/cutflow/afterCuts/vxp_z" />  
   <histogram hpath="reco/cutflow/afterCuts/lep_pt" />

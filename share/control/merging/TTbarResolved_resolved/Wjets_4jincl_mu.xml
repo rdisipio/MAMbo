@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_4jincl.xml" />
 <samples>
   <sample name="WenuNp0"           dsid="147025" sf="0.854" xsec="8127.3" kfact="1.1330" genevt="29434220"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp1"           dsid="147026" sf="0.854" xsec="1792.7" kfact="1.1330" genevt="48155904"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />

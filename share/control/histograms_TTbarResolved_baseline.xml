@@ -80,7 +80,8 @@
             <Bin nbins="50" xmin="0." xmax="300." />
         </Variable>
         <Variable name="mu" title="Avg. no. of interactions per b.c." folder="cutflow">
-            <Bin id="0" nbins="20" xmin="0." xmax="40." />
+            <Bin id="0" nbins="10" xmin="-0.5" xmax="49.5" />
+            <Bin id="1" nbins="50" xmin="-0.5" xmax="49.5" />
         </Variable>
         <Variable name="pvxp_n" title="No. of primary vertices" folder="cutflow">
             <Bin id="0" nbins="10" xmin="0." xmax="20." />

@@ -4,6 +4,7 @@
   <plot hpath="LPLUSJETS_cutflow_reco_weighted"      xtitle="Cut Number" ytitle="Events" scale="linear" />
  
   <plot hpath="reco/cutflow/beforeCuts/mu"      	     xtitle="Mean Interactions per BX"	ytitle="Events"	scale="linear" />
+<!--  <plot hpath="reco/cutflow/beforeCuts/mu_1"                   xtitle="Mean Interactions per BX"  ytitle="Events" scale="linear" /> -->
   <plot hpath="reco/cutflow/beforeCuts/pvxp_n"  	     xtitle="No. of tracks per primary vtx"    	ytitle="Events" scale="linear" />
   <plot hpath="reco/cutflow/beforeCuts/vxp_z"   	     xtitle="Primary vertex p_{z} [GeV]"       	      ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/beforeCuts/lep_pt"               xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
@@ -22,6 +23,7 @@
   <plot hpath="reco/cutflow/beforeCuts/mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
 
   <plot hpath="reco/cutflow/4j1b/mu"                   xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" />
+<!--  <plot hpath="reco/cutflow/4j1b/mu_1"                   xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" /> -->
   <plot hpath="reco/cutflow/4j1b/pvxp_n"               xtitle="No. of tracks per primary vtx"     ytitle="Events" scale="linear" />
   <plot hpath="reco/cutflow/4j1b/vxp_z"                xtitle="Primary vertex p_{z} [GeV]"              ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/4j1b/lep_pt"               xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
@@ -40,6 +42,7 @@
   <plot hpath="reco/cutflow/4j1b/mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
 
   <plot hpath="reco/cutflow/afterCuts/mu"                    xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" />
+<!--  <plot hpath="reco/cutflow/afterCuts/mu_1"                    xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" /> -->
   <plot hpath="reco/cutflow/afterCuts/pvxp_n"                xtitle="No. of tracks per primary vtx"     ytitle="Events"	scale="linear" />
   <plot hpath="reco/cutflow/afterCuts/vxp_z"                 xtitle="Primary vertex p_{z} [GeV]"              ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/afterCuts/lep_pt"                xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
@@ -104,13 +107,13 @@
   <sample name="uncertainty" type="uncertainty" description="Stat.  uncert." 		color="1"     fillstyle="3004" linewidth="2" /> 
 </samples>
 <inputfiles>
-  <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.data.Muons.mu.histograms.root"    />
-  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.DiTop.mu.histograms.root"       />
-  <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.SingleTop.mu.histograms.root"   />
-  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Wjets.mu.histograms.root"       />
-  <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Zjets.mu.histograms.root" 	/>
-  <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Diboson.mu.histograms.root"	/>
-  <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.qcd.Muons.mu.histograms.root"    />
-  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/tt_diffxs_8TeV.mc.Uncertainty.mu.histograms.root" />
+  <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Muons.mu.histograms.root"    />
+  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.mu.nominal.histograms.root"       />
+  <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root"   />
+  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root"       />
+  <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" 	/>
+  <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root"	/>
+  <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root"    />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty.mu.nominal.histograms.root" />
 </inputfiles>
 </document>

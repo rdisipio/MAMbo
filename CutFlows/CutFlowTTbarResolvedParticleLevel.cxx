@@ -155,14 +155,14 @@ values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;;
         jet.m   = ed->truth_jets.m.at(j);
         values.jets.push_back(&jet);
     }
-    for (int fj = 0; fj < ed->truth_fjets.n; ++fj) {
+    for (int bj = 0; bj < ed->truth_bjets.n; ++bj) {
         JetValues jet;
-        jet.pt  = ed->truth_fjets.pT.at(fj);
-        jet.eta = ed->truth_fjets.eta.at(fj);
-        jet.phi = ed->truth_fjets.phi.at(fj);
-        jet.E   = ed->truth_fjets.E.at(fj);
-        jet.m   = ed->truth_fjets.m.at(fj);
-        values.fatJets.push_back(&jet);
+        jet.pt  = ed->truth_bjets.pT.at(bj);
+        jet.eta = ed->truth_bjets.eta.at(bj);
+        jet.phi = ed->truth_bjets.phi.at(bj);
+        jet.E   = ed->truth_bjets.E.at(bj);
+        jet.m   = ed->truth_bjets.m.at(bj);
+        values.bJets.push_back(&jet);
     }
 // 0 All events
     PassedCut( "LPLUSJETS", "particle_unweight" );
@@ -253,14 +253,14 @@ void CutFlowTTbarResolvedParticleLevel::FillHistograms(string path, ControlPlotV
         m_hm->FillHistograms( path + "jet_m" ,  jet->m / GeV, values.weight );
     }
 
-    m_hm->FillHistograms( path + "fjet_n", values.fjet_n, values.weight );
-    for (int fj = 0; fj < values.fatJets.size(); ++fj) {
-        JetValues* jet = values.fatJets.at(fj);
-        m_hm->FillHistograms( path + "fjet_eta",  jet->eta, values.weight );
-        m_hm->FillHistograms( path + "fjet_pt",  jet->pt / GeV, values.weight );
-        m_hm->FillHistograms( path + "fjet_phi",  jet->phi, values.weight );
-        m_hm->FillHistograms( path + "fjet_E",  jet->E / GeV, values.weight );
-        m_hm->FillHistograms( path + "fjet_m",  jet->m / GeV, values.weight );
+    m_hm->FillHistograms( path + "bjet_n", values.bjet_n, values.weight );
+    for (int bj = 0; bj < values.bJets.size(); ++bj) {
+        JetValues* jet = values.bJets.at(bj);
+        m_hm->FillHistograms( path + "bjet_eta",  jet->eta, values.weight );
+        m_hm->FillHistograms( path + "bjet_pt",  jet->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "bjet_phi",  jet->phi, values.weight );
+        m_hm->FillHistograms( path + "bjet_E",  jet->E / GeV, values.weight );
+        m_hm->FillHistograms( path + "bjet_m",  jet->m / GeV, values.weight );
     }
 }
 
