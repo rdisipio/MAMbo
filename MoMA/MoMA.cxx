@@ -144,7 +144,7 @@ double MoMATool::GetFakesWeight( int channel, bool tight, double lep_pt, double 
 }
 
 
-double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut ) const
+double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut, SYSTEMATIC_TYPE syst_type ) const
 {
    if( !ed ) throw runtime_error( "MoMA::GetBTagWeight(): Invalid pointer to event data.\n" );
 
@@ -154,6 +154,7 @@ double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut ) const
    btag_vars.jetAuthor = "AntiKt4TopoLCJVF0_5";
 
    Analysis::Uncertainty u = Analysis::None;
+   if( syst_type==BTAGSFUP || syst_type==BTAGSFDOWN || syst_type==CTAUTAGSFUP || syst_type==CTAUTAGSFDOWN || syst_type==MISTAGSFUP || syst_type==MISTAGSFDOWN ) u = Analysis::Total;
    Analysis::CalibResult res;
 
    for( int j = 0 ; j < ed->jets.n ; ++j ) {
@@ -187,16 +188,43 @@ double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut ) const
      else {
        res = m_btag_weighter->getInefficiencyScaleFactor( btag_vars, m_CDIindex_SF[typeIndex], m_CDIindex_Eff[typeIndex], u ); //, varIndex );
      }
-
      double jetWeight = res.first;
-     if( jLabel == 15 && !tagged ) { // ugly tau inefficiency again
-         Analysis::CalibResult tempRes;
-         tempRes = m_btag_weighter->getScaleFactor( btag_vars, m_CDIindex_SF[typeIndex], m_CDIindex_Eff[typeIndex], u );
-         float tausf = tempRes.first;
-         tempRes = m_btag_weighter->getMCEfficiency( btag_vars, m_CDIindex_Eff[typeIndex], u );
-         float mceff = tempRes.first;
-         jetWeight = ( 1 - tausf*mceff ) / ( 1 - mceff );
-     } 
+
+     if( u==Analysis::Total ) {
+           if ( (syst_type==BTAGSFUP   && jLabel==5) ||
+                (syst_type==CTAUTAGSFUP   && jLabel==4) ||
+                (syst_type==CTAUTAGSFUP && jLabel==15) ||
+                (syst_type==MISTAGSFUP && jLabel==0 )) {
+              if (tagged) jetWeight=res.first+res.second;
+              else        jetWeight=res.first-res.second;
+           } // up type
+           if ( (syst_type==BTAGSFDOWN   && jLabel==5) ||
+                (syst_type==CTAUTAGSFDOWN   && jLabel==4) ||
+                (syst_type==CTAUTAGSFDOWN && jLabel==15) ||
+                (syst_type==MISTAGSFDOWN && jLabel==0) ) {
+              if (tagged) jetWeight=res.first-res.second;
+              else        jetWeight=res.first+res.second;
+           } // down type
+
+           //protecting SF for sys variations
+           Analysis::CalibResult eff;
+           if (tagged) eff = m_btag_weighter->getMCEfficiency( btag_vars, m_CDIindex_Eff[typeIndex], u);
+           else        eff = m_btag_weighter->getMCInefficiency( btag_vars, m_CDIindex_Eff[typeIndex], u);
+           double EffMC = eff.first;
+           if      (jetWeight*EffMC>1.) jetWeight = 1./EffMC;
+           else if (jetWeight*EffMC<0.) jetWeight = 0.;
+ 
+           if( jLabel == 15 && !tagged ) { // ugly tau inefficiency again
+             Analysis::CalibResult tempRes;
+             tempRes = m_btag_weighter->getScaleFactor( btag_vars, m_CDIindex_SF[typeIndex], m_CDIindex_Eff[typeIndex], u );
+            float tausf = tempRes.first;
+            tempRes = m_btag_weighter->getMCEfficiency( btag_vars, m_CDIindex_Eff[typeIndex], u );
+            float mceff = tempRes.first;
+            jetWeight = ( 1 - tausf*mceff ) / ( 1 - mceff );
+         } 
+
+
+     }
 
 
      weight *= jetWeight;

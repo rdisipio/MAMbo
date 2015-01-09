@@ -18,6 +18,11 @@ enum BTagType {
     MV1c_57
   };
 
+enum SYSTEMATIC_TYPE {
+   NOMINAL = 0,
+   BTAGSFUP, BTAGSFDOWN, CTAUTAGSFUP, CTAUTAGSFDOWN, MISTAGSFUP, MISTAGSFDOWN
+};
+
 
 class MoMATool
 {
@@ -33,7 +38,7 @@ class MoMATool
         double GetFakesWeight( int channel, bool tight, double lep_pt, double lep_eta, double el_cl_eta, double dR_lj_min, 
                                    double pTdR_lj_min, double jet_pt0, int jet_n, int nJet_tagged, int trigger);
 
-	double GetBTagWeight( EventData * ed, const double mv1_cut = 0.7892 ) const;
+	double GetBTagWeight( EventData * ed, const double mv1_cut = 0.7892, SYSTEMATIC_TYPE syst_type = NOMINAL ) const;
 
  private:
 	MoMATool();

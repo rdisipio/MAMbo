@@ -68,13 +68,13 @@ class CutFlowTTbarResolved : public CutFlow
 
 #ifdef __MOMA__
     MoMATool                * m_moma;
+    SYSTEMATIC_TYPE           m_syst_type;
 #endif
     
 private:
 
     vector<string> alias;
-    TRandom3 *m_rand;
-    
+    TRandom3 *m_rand;    
 
 };
 

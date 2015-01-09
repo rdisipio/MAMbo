@@ -22,6 +22,9 @@ class EventDumperMCTruthTopMiniSLResolved
         if( !buildIndex ) return ;
 
 	cout << "INFO: building index for particles chain..." << endl;
+        TTree * p_c = m_ntuple_particle->fChain;
+        if( !p_c ) throw runtime_error( "EventDumperMCTruthTopMiniSLResolved::SetNtupleParticle(): Invalid pointer to particle chain.\n" );
+
  	int res = m_ntuple_particle->fChain->BuildIndex( "runNumber", "eventNumber" );
 	cout << "INFO: particles tree index: returned value: " << res << endl;
     };

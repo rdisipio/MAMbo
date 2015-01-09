@@ -105,7 +105,7 @@
   <sample name="Zjets"       type="background"  description="Z+jets"              	color="95"    fillstyle="1001" linewidth="2" />
   <sample name="Diboson"     type="background"  description="WW/ZZ/WZ"            	color="5"     fillstyle="1001" linewidth="2" />
   <sample name="Fakes"       type="datadriven"  description="Fake lept."          	color="619"   fillstyle="1001" linewidth="2" />
-  <sample name="uncertainty" type="uncertainty" description="Stat.  uncert." 		color="1"     fillstyle="3004" linewidth="2" /> 
+  <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. uncertainty" 	color="1"     fillstyle="3004" linewidth="2" /> 
 </samples>
 <inputfiles>
   <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Egamma.el.histograms.root"    />

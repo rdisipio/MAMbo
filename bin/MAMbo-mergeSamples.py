@@ -138,7 +138,7 @@ def CreateMergedHistograms():
 	
         hname = hpath.split('/')[-1]
 
-        print "INFO: merging histogram", hpath
+#        print "INFO: merging histogram", hpath
 
         hlist = GatherHistograms( hname, hpath )
 

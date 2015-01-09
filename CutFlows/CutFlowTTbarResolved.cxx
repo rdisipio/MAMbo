@@ -44,6 +44,24 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
+#ifdef __MOMA__
+    m_syst_type = NOMINAL;
+
+    if( m_config->custom_params_string.count( "scale_syst" ) ) {
+        const string syst = m_config->custom_params_string["scale_syst"];
+
+        if( syst == "BTAGSFUP" )      m_syst_type = BTAGSFUP;
+        if( syst == "BTAGSFDOWN" )    m_syst_type = BTAGSFDOWN;
+        if( syst == "CTAUTAGSFUP" )   m_syst_type = CTAUTAGSFUP;
+        if( syst == "CTAUTAGSFDOWN" ) m_syst_type = CTAUTAGSFDOWN;    
+        if( syst == "MISTAGSFUP" )    m_syst_type = MISTAGSFUP;
+        if( syst == "MISTAGSFDOWN" )  m_syst_type = MISTAGSFDOWN;    
+
+        cout << "INFO: Scale factor systematic: " << syst << endl;
+    }    
+
+#endif
+
     m_rand = new TRandom3(12345);
 
     AddChannel("LPLUSJETS");
@@ -143,10 +161,10 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     CutFlow::Start();
 
-    unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
-    unsigned long isRealData = m_config->custom_params_flag["isRealData"];
-    unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
-    unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
+    const unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
+    const unsigned long isRealData = m_config->custom_params_flag["isRealData"];
+    const unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
+    const unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
     double weight_reco_level     = 1.;
     double weight_particle_level = 1.;
@@ -167,17 +185,16 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
          const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
          const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
-         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
+//         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
  
-/*
 #ifdef __MOMA__
-         const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed ); 
+         const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else 
          const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
 #endif
-  */
+
          
 //      cout << "DEBUG: sf: " << scaleFactor_PILEUP << " " << scaleFactor_ELE << " " << scaleFactor_MUON << " " << scaleFactor_TRIGGER << " " << scaleFactor_JVFSF << " " << scaleFactor_ZVERTEX << " " << scaleFactor_BTAG << endl;
 

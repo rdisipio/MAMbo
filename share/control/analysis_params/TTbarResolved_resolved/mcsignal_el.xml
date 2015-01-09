@@ -12,7 +12,7 @@
     <param name="isRealData"        type="flag"    value="0" />
     <param name="isWjets"      	    type="flag"    value="0" />
     <param name="isQCD"             type="flag"    value="0" />
-    <param name="mcfile"            type="string"  value="control/file_list/TTbarResolved_resolved/mc.DiTop.110404.mc_test.txt" />
+    <param name="mcfile"            type="string"  value="control/file_list/TTbarResolved_resolved/mc.DiTop.110404.mc.txt" />
     <param name="treename_particle" type="string"  value="particles" />
     <param name="treename_parton"   type="string"  value="partons"   />
   </parameters>
