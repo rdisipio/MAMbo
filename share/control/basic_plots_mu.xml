@@ -21,6 +21,9 @@
   <plot hpath="reco/cutflow/beforeCuts/bjet1_pt"               xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
   <plot hpath="reco/cutflow/beforeCuts/met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/cutflow/beforeCuts/mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/cutflow/beforeCuts/jet_ht"                xtitle="H_{T}^{jets} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/beforeCuts/ht"                    xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/beforeCuts/meff"                   xtitle="Effective Mass [GeV]" ytitle="Events / GeV" scale="linear" />
 
   <plot hpath="reco/cutflow/4j1b/mu"                   xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" />
 <!--  <plot hpath="reco/cutflow/4j1b/mu_1"                   xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" /> -->
@@ -40,6 +43,9 @@
   <plot hpath="reco/cutflow/4j1b/bjet1_pt"               xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
   <plot hpath="reco/cutflow/4j1b/met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/cutflow/4j1b/mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/cutflow/4j1b/jet_ht"                xtitle="H_{T}^{jets} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/4j1b/ht"                    xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/4j1b/meff"                   xtitle="Effective Mass [GeV]" ytitle="Events / GeV" scale="linear" />
 
   <plot hpath="reco/cutflow/afterCuts/mu"                    xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" />
 <!--  <plot hpath="reco/cutflow/afterCuts/mu_1"                    xtitle="Mean Interactions per BX" ytitle="Events" scale="linear" /> -->
@@ -59,6 +65,9 @@
   <plot hpath="reco/cutflow/afterCuts/bjet1_pt"               xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
   <plot hpath="reco/cutflow/afterCuts/met_pt"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
   <plot	hpath="reco/cutflow/afterCuts/mtw"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_ht"                xtitle="H_{T}^{jets} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/ht"                    xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/meff"                   xtitle="Effective Mass [GeV]" ytitle="Events / GeV" scale="linear" />
 
   <plot hpath="reco/4j2b/WH/m"                             xtitle="Reconstructed hadronic pseudo-W mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/4j2b/WH/pt"                            xtitle="Reconstructed hadronic pseudo-W p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
@@ -104,7 +113,7 @@
   <sample name="Zjets"       type="background"  description="Z+jets"              	color="95"    fillstyle="1001" linewidth="2" />
   <sample name="Diboson"     type="background"  description="WW/ZZ/WZ"            	color="5"     fillstyle="1001" linewidth="2" />
   <sample name="Fakes"       type="datadriven"  description="Fake lept."          	color="619"   fillstyle="1001" linewidth="2" />
-  <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. uncertainty" 	color="1"     fillstyle="3004" linewidth="2" /> 
+  <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. unc."  	color="1"     fillstyle="3004" linewidth="2" /> 
 </samples>
 <inputfiles>
   <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Muons.mu.histograms.root"    />

@@ -18,6 +18,9 @@
   <histogram hpath="reco/cutflow/beforeCuts/bjet1_pt" />
   <histogram hpath="reco/cutflow/beforeCuts/met_pt" />
   <histogram hpath="reco/cutflow/beforeCuts/mtw" />
+  <histogram hpath="reco/cutflow/beforeCuts/jet_ht" />
+  <histogram hpath="reco/cutflow/beforeCuts/ht" />
+  <histogram hpath="reco/cutflow/beforeCuts/meff" />
  
   <histogram hpath="reco/cutflow/4j1b/mu" />
 <!--  <histogram hpath="reco/cutflow/4j1b/mu_1" /> -->
@@ -35,6 +38,9 @@
   <histogram hpath="reco/cutflow/4j1b/bjet_eta" />
   <histogram hpath="reco/cutflow/4j1b/bjet_m" />
   <histogram hpath="reco/cutflow/4j1b/bjet1_pt" />
+  <histogram hpath="reco/cutflow/4j1b/jet_ht" />
+  <histogram hpath="reco/cutflow/4j1b/ht"	/>
+  <histogram hpath="reco/cutflow/4j1b/meff" />
   <histogram hpath="reco/cutflow/4j1b/met_pt" />
   <histogram hpath="reco/cutflow/4j1b/mtw" />
 
@@ -56,6 +62,9 @@
   <histogram hpath="reco/cutflow/afterCuts/bjet1_pt" />
   <histogram hpath="reco/cutflow/afterCuts/met_pt" />
   <histogram hpath="reco/cutflow/afterCuts/mtw" />
+  <histogram hpath="reco/cutflow/afterCuts/jet_ht" />
+  <histogram hpath="reco/cutflow/afterCuts/ht"	/>
+  <histogram hpath="reco/cutflow/afterCuts/meff" />
 
   <histogram hpath="reco/4j2b/WH/m" />
   <histogram hpath="reco/4j2b/WH/pt" />
