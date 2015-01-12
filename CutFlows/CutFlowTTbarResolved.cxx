@@ -242,7 +242,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     bool fillCorrections = true;
     bool splitSample = false; // HACK!
     if (isMCSignal and splitSample) {
-      fillHistos =  not (m_rand -> Integer(2));
+      fillHistos =  (m_rand -> Integer(2));
       fillCorrections = not fillHistos;
     }
 
@@ -353,7 +353,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 	  // fill reco && particle for the denumerator of the f_'missassign' and numerator for f_{r!p} (acceptance)
 	  // this is WITHOUT the matching condition!
-	  FillHistogramsPseudotopParticle(ed, weight_reco_level, "reco_and_particle"); // YES, with reco weight!
+	  FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_and_particle"); // YES, with reco weight!
 
 	  // fill response matrix:
 	  // NEW: added here the matching condition!!! JK 3.12.2014
@@ -364,7 +364,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
 	    //  fill numerator for the matching eff (f_'missassign')
 	    // reco && particle && matched:
-	    FillHistogramsPseudotopParticle(ed, weight_reco_level, "matched"); // YES, with reco weight!
+	    FillHistogramsPseudotopReco(ed, weight_reco_level, "matched"); // YES, with reco weight!
 	  }
 	}
 

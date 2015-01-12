@@ -77,13 +77,6 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   bool fillHistos = true;
   bool fillCorrections = true;
 
-/*
-  bool splitSample = true; // HACK!
-  if (splitSample) {
-    fillHistos = not (m_rand -> Integer(2));
-    fillCorrections = not fillHistos;
-  }
-*/
 
   // there is always a parton-level top  
   if (isMCSignal && fillHistos) {
@@ -277,7 +270,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudoTop(EventData::Reco_
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/absrap", fabs(p.y), weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/rapidity", p.y, weight);
 
-    if (index %3 == 0 and mbl > 0.){
+    if ( index %3 == 0 and mbl > 0.){
         m_hm->FillHistograms(level + "/4j2b/" + topType + "/mlb", mbl, weight );
     }
 }
@@ -428,6 +421,9 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParticle( EventDa
   }
     FillHistogramsPseudoTop(ed->reco, 1, level, "topH", weight);
     FillHistogramsPseudoTop(ed->reco, 2, level, "tt", weight);
+
+    FillHistogramsPseudoTop(ed->reco, 3, level, "WL", weight);
+    FillHistogramsPseudoTop(ed->reco, 4, level, "WH", weight);
 
     FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, weight);
 

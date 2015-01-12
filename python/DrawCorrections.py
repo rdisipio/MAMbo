@@ -16,6 +16,8 @@ Paths = ['particle', 'reco', 'particle_not_reco', 'reco_not_particle', 'matched'
 ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
              'topL' : '#hat{t}_{l}',
              'topH' : '#hat{t}_{h}',
+             'WL' : '#hat{W}_{l}',
+             'WH' : '#hat{W}_{h}',
              'tt' : '#hat{t}_{l}#hat{t}_{h}' }
 TitleNames = { 'pt' : 'p_{T}', 
                'm' : 'm', 
@@ -117,16 +119,16 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '  RMS check: %f %f' % (h_match.GetRMS(), h_rp.GetRMS())
     match = MakeRatio( h_match,  h_rp)
 
-    if icorr == 0: return eff#,xtitle,ytitle
-    if icorr == 1: return acc#,xtitle,ytitle
-    if icorr == 2: return match#,xtitle,ytitle
+    if icorr == 0: return eff,h_part,h_match
+    if icorr == 1: return acc,h_rp,h_reco
+    if icorr == 2: return match,h_match,h_rp
     return
 
 #################
 def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
     print '  Drawing %s/%s/%s' % (basepath,objname,varname)
 
-    corr = GetCorrection(rfile, pfile, objname, varname, icorr, basepath)
+    corr,h1,h2 = GetCorrection(rfile, pfile, objname, varname, icorr, basepath)
 
     tag = ''
     if icorr == 0: tag = 'eff'
@@ -135,7 +137,21 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
     can = TCanvas(canname, canname)
+    #can.Divide(2,1)
     _cans.append(can)
+
+    #can.cd(1)
+    #h1.SetMarkerColor(2)
+    #m1 = h1.GetMaximum()
+    #m2 = h2.GetMaximum()
+    #if m1 > m2:
+    #    h1.SetMaximum(m1)
+    #else:
+    #    h1.SetMaximum(m2)
+    #h1.Draw();
+    #h2.Draw("same");
+    
+    #can.cd(2)
     can.cd()
     corr.SetLineColor(2)
     corr.SetMarkerColor(2)
@@ -177,12 +193,18 @@ for ll in ljets:
     _files.append(rfile)
     print 'Opened file %s' % (rfile.GetName(),)
 
-    pfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_particle.root' % (ll,), 'read')
+    pfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_particle%s.root' % (ll,ftag), 'read')
     _files.append(pfile)
     print 'Opened file %s' % (pfile.GetName(),)
 
-    Obj = ['topH', 'topL', 'tt']
-    Var = ['pt', 'm', 'absrap']
+    Obj = ['topH', 'topL',
+           'WH', 
+           'WL',
+           'tt'
+       ]
+    Var = [
+        'pt', 'm', 
+           'absrap']
 
     for obj in Obj:
         for var in Var:
