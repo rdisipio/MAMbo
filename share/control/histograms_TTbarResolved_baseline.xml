@@ -148,6 +148,15 @@
         <Variable name="bjet_m"   title="b-Jet mass [GeV]" folder="cutflow">
             <Bin nbins="20" xmin="0."   xmax="100." />
         </Variable>
+        <Variable name="jet_ht"   title="Scalar sum of jet p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="20"  xmin="0." xmax="2000." />
+            <Bin id="1" nbins="200" xmin="0." xmax="2000." />
+        </Variable>
+        <Variable name="ht"   title="Scalar sum of final state objects p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="20"  xmin="0." xmax="2000." />
+            <Bin id="1" nbins="200" xmin="0." xmax="2000." />
+        </Variable>
+         
         <Variable name="met_pt"  title="Missing Transverse Energy [GeV]"  folder="cutflow">
             <Bin id="0" nbins="20" edges="0,32,36,40,44,46,50,54,56,60,64,68,72,78,84,90,98,108,120,142,200" />
             <Bin id="1" nbins="100" xmin="0." xmax="200." />
@@ -156,6 +165,11 @@
             <Bin id="0" nbins="20" edges="0,40,46,50,56,60,62,66,70,72,76,78,82,86,88,92,98,104,112,128,200" />
             <Bin id="1" nbins="100" xmin="0" xmax="200" />
         </Variable>
+        <Variable name="meff"   title="Effective mass [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="20"  xmin="0." xmax="2000." />
+     	    <Bin id="1" nbins="200" xmin="0." xmax="2000." />
+      	</Variable>
+
         <Variable name="delta_R"  title="Matching #Delta R " folder="matching">
             <Bin nbins="20" xmin="0" xmax="5." />
         </Variable>
@@ -278,8 +292,14 @@
         <TH1F variable="bjet_m" binId="0"/>
         <TH1F variable="bjet1_pt" binId="0"/>
         <TH1F variable="bjet1_pt" binId="1"/>
+        <TH1F variable="jet_ht" binId="0"/>
+        <TH1F variable="jet_ht"	binId="1"/>
         <TH1F variable="met_pt" binId="1"/>
         <TH1F variable="mtw" binId="1"/>
+        <TH1F variable="meff" binId="0" />
+        <TH1F variable="meff" binId="1" />
+        <TH1F variable="ht" binId="0" />
+        <TH1F variable="ht" binId="1" />
         <TH1F variable="delta_R" binId="0"/>
         <TH1F variable="delta_pt" binId="0"/>
         <TH1F variable="delta_rapidity" binId="0"/>

@@ -698,6 +698,9 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
     m_hm->FillHistograms( path + "met_pt" ,  values.ETmiss / GeV, values.weight );
     m_hm->FillHistograms( path + "mtw" , values.mwt  / GeV, values.weight );
 
+    double meff   = values.ETmiss + values.lep_pt;
+    double jet_ht = 0.;
+
     m_hm->FillHistograms( path + "jet_n",  values.jet_n, values.weight );
     for (int j = 0; j < values.jets.size(); ++j) {
         JetValues* jet = values.jets.at(j);
@@ -706,8 +709,17 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
         m_hm->FillHistograms( path + "jet_phi" , jet->phi, values.weight );
         m_hm->FillHistograms( path + "jet_E", jet->E / GeV, values.weight );
         m_hm->FillHistograms( path + "jet_m" ,  jet->m / GeV, values.weight );
+       
+        jet_ht += jet->pt;
+        if( j < 4 ) meff += jet->pt;
     }
+    double ht = values.ETmiss + values.lep_pt + jet_ht;
+
     if( values.jets.size() > 0 ) m_hm->FillHistograms( path + "jet1_pt",  values.jets.at(0)->pt / GeV, values.weight );
+
+    m_hm->FillHistograms( path + "jet_ht", jet_ht / GeV,   values.weight );
+    m_hm->FillHistograms( path + "meff",   meff / GeV,     values.weight );
+    m_hm->FillHistograms( path + "ht",     ht / GeV,       values.weight );
 
     m_hm->FillHistograms( path + "bjet_n", values.bjet_n, values.weight );
     for (int bj = 0; bj < values.bJets.size(); ++bj) {
