@@ -105,6 +105,7 @@ def GatherHistograms( hname, hpath ):
            for side, fname in flist.iteritems():
               hsource = fname.Get( hpath )
               newname = "%s_%s_%s_%s" % ( sample, hname, syst, side )
+              if hsource == None: print "ERROR: invalid histogram", sample, hname, syst, side
               hlist[newname] = hsource.Clone( newname )
 
     return hlist

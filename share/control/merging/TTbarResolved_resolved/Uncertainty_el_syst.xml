@@ -10,10 +10,12 @@
 
 <samples>
   <sample name="DiTop"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.el.nominal.histograms.root" >
+<!--
     <syst name="BJesUnc" type="two_sided" >
         <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/BJesUnc_up/tt_diffxs_8TeV.mc.DiTop.el.BJesUnc_up.histograms.root" />
         <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/BJesUnc_down/tt_diffxs_8TeV.mc.DiTop.el.BJesUnc_down.histograms.root" />
     </syst>
+-->
     <syst name="jvf" type="two_sided" >
         <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/jvf_up/tt_diffxs_8TeV.mc.DiTop.el.jvf_up.histograms.root" />
         <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/jvf_down/tt_diffxs_8TeV.mc.DiTop.el.jvf_down.histograms.root" />
@@ -33,6 +35,10 @@
     <syst name="JesEffectiveDet2" type="two_sided" >
         <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet2_up/tt_diffxs_8TeV.mc.DiTop.el.JesEffectiveDet2_up.histograms.root" />
         <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet2_down/tt_diffxs_8TeV.mc.DiTop.el.JesEffectiveDet2_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveDet3" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet3_up/tt_diffxs_8TeV.mc.DiTop.el.JesEffectiveDet3_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet3_down/tt_diffxs_8TeV.mc.DiTop.el.JesEffectiveDet3_down.histograms.root" />
     </syst>
     <syst name="JesEffectiveMix1" type="two_sided" >
         <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveMix1_up/tt_diffxs_8TeV.mc.DiTop.el.JesEffectiveMix1_up.histograms.root" />
