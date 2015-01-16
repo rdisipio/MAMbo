@@ -14,7 +14,7 @@
   <sample name="ZmumuNp3"          dsid="147116" xsec="15.673" kfact="1.1800" genevt="894799"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
   <sample name="ZmumuNp4"          dsid="147117" xsec="4.0057" kfact="1.1800" genevt="393200"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZmumuNp5incl"      dsid="147118" xsec="1.2544" kfact="1.1800" genevt="229200"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="ZtautauNp0"          dsid="147121" xsec="718.87" kfact="1.1800" genevt="19202764" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautauNp0"          dsid="147121" xsec="718.87" kfact="1.1800" genevt="18207767" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZtautauNp1"          dsid="147122" xsec="175.76" kfact="1.1800" genevt="10674582" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZtautauNp2"          dsid="147123" xsec="58.856" kfact="1.1800" genevt="3765893" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZtautauNp3"          dsid="147124" xsec="15.667" kfact="1.1800" genevt="1096994"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />

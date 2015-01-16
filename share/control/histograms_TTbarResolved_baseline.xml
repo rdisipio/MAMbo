@@ -20,7 +20,8 @@
         <Type name="WL" inFolder="4j2b,matching"/>
         <Type name="WH" inFolder="4j2b,matching"/>
         <Type name="difference" inFolder="4j2b"/>
-        <Type name="beforeCuts" inFolder="cutflow"/>
+        <Type name="3j0b" inFolder="cutflow"/>
+        <Type name="4j0b" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
         <Type name="afterCuts" inFolder="cutflow"/>        
     </Level>

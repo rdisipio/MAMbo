@@ -10,7 +10,7 @@ CutFlowTTbarResolved::CutFlowTTbarResolved()
     m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
     
     alias = {
-        "beforeCuts", "trig", "pvtx", "lept", "met30", "mtw30", "2j", "4j", "4j1b", "afterCuts"
+        "3j0b", "trig", "pvtx", "lept", "met30", "mtw30", "3j0b", "4j0b", "4j1b", "afterCuts"
     };
 
 #ifdef __MOMA__
@@ -469,6 +469,7 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     if ( jet_n < 4) return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
+    FillHistogramsControlPlotsReco( values );
 
     // 8 Nbtags >= 1
     if (bjet_n < 1) return !passed;
