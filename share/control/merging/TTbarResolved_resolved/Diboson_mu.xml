@@ -3,8 +3,8 @@
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
   <sample name="WW" dsid="105985" xsec="12.416"  kfact="1.6833" genevt="2499890" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
-  <sample name="ZZ" dsid="105986" xsec="0.99081" kfact="1.5496" genevt="494999"  generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
-  <sample name="WZ" dsid="105987" xsec="3.6706"  kfact="1.9011" genevt="1999995" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
+  <sample name="ZZ" dsid="105986" xsec="0.99081" kfact="1.5496" genevt="245000"  generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
+  <sample name="WZ" dsid="105987" xsec="3.6706"  kfact="1.9011" genevt="999998" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
 </samples>
 <files>
   <file sample="WW" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Diboson.105985.mu.nominal.histograms.root" />

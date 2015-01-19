@@ -151,6 +151,9 @@ def CreateMergedHistograms():
             kfact  = samples_configuration[sample].kfact
             sf     = samples_configuration[sample].sf
             norm   = iLumi * xsec * kfact * sf / genevt
+
+            # little hack for unweighted histograms ;)
+            if hname.find("unweight") > -1: norm = 1.
             
             if hsum == None:
 

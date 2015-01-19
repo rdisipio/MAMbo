@@ -1,4 +1,5 @@
 <histograms>
+  <histogram hpath="LPLUSJETS_cutflow_reco_unweight" />
   <histogram hpath="LPLUSJETS_cutflow_reco_weighted" />
   <histogram hpath="reco/cutflow/3j0b/mu_1" />
   <histogram hpath="reco/cutflow/3j0b/pvxp_n" />
@@ -25,7 +26,6 @@
   <histogram hpath="reco/cutflow/3j0b/ht_2" />
   <histogram hpath="reco/cutflow/3j0b/meff_2" />
 
-  <histogram hpath="LPLUSJETS_cutflow_reco_weighted" />
   <histogram hpath="reco/cutflow/4j0b/mu_1" />
   <histogram hpath="reco/cutflow/4j0b/pvxp_n" />
   <histogram hpath="reco/cutflow/4j0b/vxp_z" />

@@ -21,6 +21,37 @@ def Normalize( h, sf = 1.0, opt = "width" ):
 #########################################################
 
 
+def HasVariableBinWidths_TH1( h ):
+    hasVariableBinWidths = True
+    bw_glob = None
+    nbins = h.GetNbinsX()
+    for i in range(nbins):
+      bw = h.GetBinWidth( i+1 )
+      if bw_glob == None:
+         bw_glob = bw
+      if not bw == bw_glob:
+         return hasVariableBinWidths
+
+    return not hasVariableBinWidths
+
+
+def HasVariableBinWidths_graph( g ):
+    hasVariableBinWidths = True
+    bw_glob = None
+    nbins = g.GetN()
+    for i in range(nbins):
+      bw  = g.GetErrorXlow(i) + g.GetErrorXhigh(i)
+      if bw_glob == None:
+         bw_glob = bw
+      if not bw == bw_glob:
+         return hasVariableBinWidths
+
+    return not hasVariableBinWidths
+
+
+#########################################################
+
+
 def DivideByBinWidth_histogram( h ):
     nb = h.GetNbinsX()
     for i in range(nb):
@@ -53,8 +84,10 @@ def DivideByBinWidth( hlist ):
     for sample, h in hlist.iteritems():
 
         if h.Class() in [ TH1F.Class(), TH1D.Class(), TH1I.Class() ]:
+           if not HasVariableBinWidths_TH1(h): continue
            DivideByBinWidth_histogram( h )
         elif h.Class() in [ TGraph.Class(), TGraphErrors.Class(), TGraphAsymmErrors.Class() ]: 
+           if not HasVariableBinWidths_graph(h): continue
            DivideByBinWidth_graph( h )
         else:
            print "ERROR: cannot divide by bin widht. Object", h.GetName(), "is of an unknown class"
