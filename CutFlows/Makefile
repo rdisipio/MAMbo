@@ -12,6 +12,8 @@ CUTFLOWSSRCS = $(foreach CF, $(CUTFLOWS), CutFlow$(CF).cxx)
 CUTFLOWLIBS  = $(foreach CF, $(CUTFLOWS), lib$(CF).so)
 
 all: $(foreach CF, $(CUTFLOWS), libCutFlow$(CF).so)
+debug:   all
+release: all
 
 CutFlow%.o: CutFlow%.cxx
 	$(CC) $(DEBUG) $(CFLAGS) -I../src -c $<

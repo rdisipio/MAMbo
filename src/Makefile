@@ -14,6 +14,8 @@ OBJS    = ${SRCS:.cxx=.o}
 SOLIB   = lib$(PROJECT).so
 
 all: $(EXE) $(SOLIB)
+debug:   all
+release: all
 
 $(SOLIB): $(OBJS)
 	$(LD) $(DEBUG) $(SOFLAGS) $(OBJS) -o $@

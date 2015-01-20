@@ -8,7 +8,8 @@ SRCS = $(TOOLS:=.cxx)
 OBJS = ${SRCS:.cxx=.o}
 
 all: $(MOMA_SOLIB) install
-
+debug:   all
+release: all
 
 $(MOMA_SOLIB): $(OBJS)
 	@echo Linking shared library

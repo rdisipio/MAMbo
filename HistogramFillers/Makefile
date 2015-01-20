@@ -16,6 +16,8 @@ HistogramFiller%.o: HistogramFiller%.cxx
 
 
 all: libHistogramFillers
+debug:   all
+release: all
 
 libHistogramFillers: $(HFOBJ)
 	@echo

@@ -15,6 +15,8 @@ NTUPLEOBJ = $(NTUPLESRC:.cxx=.o)
 NTUPLELIB = $(foreach NTUPLE, $(NTUPLES), libNtupleWrapper$(NTUPLE).so )
 
 all: $(foreach NTUPLE, $(NTUPLES), libNtupleWrapper$(NTUPLE).so)
+debug:   all
+release: all
 
 NtupleWrapper%.o: NtupleWrapper%.cxx
 	@echo Compiling wrapper $<

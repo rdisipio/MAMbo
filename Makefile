@@ -6,29 +6,31 @@ CCADMIN=CCadmin
 
 DIRS = src Ntuples CutFlows
 
-all: install 
+all:     install 
+release: install
+debug:   install
+#	@echo "Compiling with debug symbols" 
 
 core:
-	@$(MAKE) $(MFLAGS) -C src 
+	@$(MAKE) $(MFLAGS) -C src $(MAKECMDGOALS)
 	@ln -sf $(PWD)/src/libMAMbo.so   ./lib/
 	@ln -sf $(PWD)/src/$(EXE)        ./bin/
 
 ntuples:
-	@$(MAKE) $(MFLAGS) -C Ntuples
+	@$(MAKE) $(MFLAGS) -C Ntuples $(MAKECMDGOALS)
 	@ln -sf $(PWD)/Ntuples/*.so      ./lib/
 
 cutflows:
-	@$(MAKE) $(MFLAGS) -C CutFlows
+	@$(MAKE) $(MFLAGS) -C CutFlows $(MAKECMDGOALS)
 	@ln -sf $(PWD)/CutFlows/*.so ./lib/
 
 hfillers:
-	@$(MAKE) $(MFLAGS) -C HistogramFillers
+	@$(MAKE) $(MFLAGS) -C HistogramFillers $(MAKECMDGOALS)
 	@ln -sf $(PWD)/HistogramFillers/*.so	 ./lib/
 
 moma:
 	@if  [ -z "$(ROOTCOREDIR)" ]; then echo "ATLAS ROOTCORE not found" ; exit 0 ; \
 	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; fi
-#	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; $(MAKE) $(MFLAGS) -C MoMA ; fi
 
 environment: ./bin/MAMbo-setenv.sh.template
 	@sed "s!@PREFIX@!$(PWD)!g" $(PWD)/bin/MAMbo-setenv.sh.template  > $(PWD)/bin/MAMbo-setenv.sh
@@ -57,5 +59,3 @@ build-tests:
 # run tests
 test: 
 	@$(MAKE) $(MFLAGS) -C tests 
-	
-#include Makefile.inc

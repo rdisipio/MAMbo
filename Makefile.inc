@@ -2,16 +2,22 @@ MAMBODIR = $(PWD)
 PROJECT = MAMbo
 EXE     = run$(PROJECT)
 
-CC=g++
-LD=g++
-CFLAGS  = -fPIC -std=c++11 -I$(MAMBODIR)
+CC = g++
+LD = g++
+CFLAGS       = -fPIC -std=c++11 -I$(MAMBODIR)
+DEBUGFLAGS   = -O0 -D_DEBUG_ -g
+RELEASEFLAGS = -O3 -D_RELEASE_
 
 # fix this
 ARCH=x86_64-slc6-gcc47-opt
 
-#DEBUG = -O3
-DEBUG = -g
-CFLAGS += $(DEBUG)
+# release or debug?
+debug:   CC += $(DEBUGFLAGS)
+debug:   LD += $(DEBUGFLAGS)
+debug:   MSG = Add debug symbols
+release: CC += $(RELEASEFLAGS)
+release: LD += $(RELEASEFLAGS)
+release: MSG = Level-3 optimization
 
 ROOTCFLAGS    = $(shell root-config --cflags)
 XMLCFLAGS     = $(shell xml2-config --cflags)
