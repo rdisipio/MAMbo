@@ -1,4 +1,4 @@
-include $(MAMBODIR)/Makefile.inc
+include Makefile.inc
 
 MKDIR=mkdir
 CP=cp
