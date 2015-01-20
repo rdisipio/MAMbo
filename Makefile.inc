@@ -1,3 +1,4 @@
+MAMBODIR = $(PWD)
 PROJECT = MAMbo
 EXE     = run$(PROJECT)
 
