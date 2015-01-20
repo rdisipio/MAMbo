@@ -6,7 +6,7 @@ CC = g++
 LD = g++
 CFLAGS       = -fPIC -std=c++11 -I$(MAMBODIR)
 DEBUGFLAGS   = -O0 -D_DEBUG_ -g
-RELEASEFLAGS = -O3 -D_RELEASE_
+RELEASEFLAGS = -O2 -D_RELEASE_
 
 # fix this
 ARCH=x86_64-slc6-gcc47-opt
