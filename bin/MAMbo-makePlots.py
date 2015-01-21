@@ -297,11 +297,13 @@ def DoPlot( plot, iLumi = 1. ):
        pad0.SetLogy(True)
     if plot.scale == PlotScale.logx:
        pad0.SetLogx(True)
+       pad1.SetLogx(True)
        pad1.SetLogy(False)
     if plot.scale == PlotScale.bilog: 
        pad0.SetLogy(True)
-       pad0.SetLogx(True)  
-       pad1.SetLogy(True)
+       pad0.SetLogx(True)
+       pad1.SetLogx(True)  
+       pad1.SetLogy(False)
 
     lparams = {
         'xoffset' : 0.67,

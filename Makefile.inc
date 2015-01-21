@@ -1,6 +1,9 @@
-MAMBODIR = $(PWD)
 PROJECT = MAMbo
 EXE     = run$(PROJECT)
+
+ifndef MAMBODIR
+MAMBODIR = $(PWD)
+endif
 
 CC = g++
 LD = g++

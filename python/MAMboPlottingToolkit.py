@@ -198,8 +198,9 @@ def DrawRatio( data, prediction, xtitle = "" ):
     
     xmin = data.GetXaxis().GetXmin()
     xmax = data.GetXaxis().GetXmax()
-    
-    frame = gPad.DrawFrame( xmin, 0.4, xmax, 1.6 )
+
+    # tt diffxs 7 TeV: [ 0.4, 1.6 ]    
+    frame = gPad.DrawFrame( xmin, 0.7, xmax, 1.3 )
     
     frame.GetXaxis().SetNdivisions(508)
     frame.GetYaxis().SetNdivisions(504)

@@ -7,7 +7,7 @@ CutFlowTTbarResolvedParticleLevel::CutFlowTTbarResolvedParticleLevel()
    m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
 
    alias = {
-	"beforeCuts", "trig", "pvtx", "lept", "met30", "mtw35", "2j", "4j", "4j1b", "afterCuts"
+	"beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
    };
 }
 
@@ -27,29 +27,43 @@ bool CutFlowTTbarResolvedParticleLevel::Initialize()
 
     AddChannel("LPLUSJETS");
 
-    AddCounterName("LPLUSJETS", "particle_unweight", 9);
+    AddCounterName("LPLUSJETS", "particle_unweight", 10 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events");
     SetCutName("LPLUSJETS", "particle_unweight", 1, "Trigger");
     SetCutName("LPLUSJETS", "particle_unweight", 2, "Prim. Vtx");
     SetCutName("LPLUSJETS", "particle_unweight", 3, "SingleLepton");
     SetCutName("LPLUSJETS", "particle_unweight", 4, "Lep pT > 25 GeV" );
-    SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 30 GeV");
-    SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW > 35 GeV");
-    SetCutName("LPLUSJETS", "particle_unweight", 7, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_unweight", 8, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_unweight", 9, "Nbtags >= 2");
+    if( m_config->channel == kElectron ) {
+       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 30 GeV");
+       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW > 30 GeV");
+    }
+    else {
+       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 20 GeV");
+       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW + ETmiss > 60 GeV");
+    }
+    SetCutName("LPLUSJETS", "particle_unweight", 7, "NJets >= 3");
+    SetCutName("LPLUSJETS", "particle_unweight", 8, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_unweight", 9, "Nbtags >= 1");
+    SetCutName("LPLUSJETS", "particle_unweight", 10, "Nbtags >= 2");
 
-    AddCounterName("LPLUSJETS", "particle_weighted", 9);
+    AddCounterName("LPLUSJETS", "particle_weighted", 10 );
     SetCutName("LPLUSJETS", "particle_weighted", 0, "All Events");
     SetCutName("LPLUSJETS", "particle_weighted", 1, "Trigger");
     SetCutName("LPLUSJETS", "particle_weighted", 2, "Prim. Vtx");
     SetCutName("LPLUSJETS", "particle_weighted", 3, "SingleLepton");
     SetCutName("LPLUSJETS", "particle_weighted", 4, "Lep pT > 25 GeV" );
-    SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 30 GeV");
-    SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW > 35 GeV");
-    SetCutName("LPLUSJETS", "particle_weighted", 7, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_weighted", 8, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_weighted", 9, "Nbtags >= 2");
+    if( m_config->channel == kElectron ) {
+       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 30 GeV");
+       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW > 30 GeV");
+    }
+    else {
+       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 20 GeV");
+       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW + ETmiss > 60 GeV");
+    }
+    SetCutName("LPLUSJETS", "particle_weighted", 7, "NJets >= 3");
+    SetCutName("LPLUSJETS", "particle_weighted", 8, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_weighted", 9, "Nbtags >= 1");
+    SetCutName("LPLUSJETS", "particle_weighted", 10, "Nbtags >= 2");
 
     return success;
 }
@@ -182,29 +196,41 @@ values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
 
-    // 5 ETmiss
-    if (ETmiss < 30 * GeV) return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
+    // 5 ETmiss cut
+    const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
+    if( ETmiss < met_cut ) return !passed;
+    PassedCut("LPLUSJETS", "particle_weighted", weight );
+    PassedCut("LPLUSJETS", "particle_unweight");
 
-    // 6 MTW
-    if (mwt < 35 * GeV)    return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
+    // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
+    if( m_config->channel == kElectron ) {
+       if( mwt < 30 * GeV) return !passed;
+    }
+    else {
+       if( (mwt + ETmiss) < 60 * GeV ) return !passed;
+    }
+    PassedCut("LPLUSJETS", "particle_weighted", weight );
+    PassedCut("LPLUSJETS", "particle_unweight");
 
-    // 7 Njets >= 4
+    // 7 Njets >= 3
+    if ( jet_n < 3 ) return !passed;
+    PassedCut("LPLUSJETS", "particle_weighted", weight );
+    PassedCut("LPLUSJETS", "particle_unweight");
+    FillHistogramsControlPlotsParticle( values );
+
+    // 8 Njets >= 4
     if (jet_n < 4)         return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
 
-    // 8 Nbjets >= 1
+    // 9 Nbjets >= 1
     if (bjet_n < 1)        return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
 
     FillHistogramsControlPlotsParticle( values );
 
-    // 9 Nbjets >= 2
+    // 10 Nbjets >= 2
     if (bjet_n < 2)        return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );

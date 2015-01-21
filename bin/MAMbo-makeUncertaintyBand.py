@@ -192,7 +192,8 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                     dy_max = max( [ -dy_u, dy_d	] )          
                     points[i]['d'] += pow( dy_max, 2 )
                  else:
-                    print "WARNING: unhandled case: sample", sample, "syst", systname, "bin", i, "dy_u =", dy_u, "dy_d =", dy_d
+                    pass
+#                    print "WARNING: unhandled case: sample", sample, "syst", systname, "bin", i, "dy_u =", dy_u, "dy_d =", dy_d
 
           for i in range(nbins):
              x  = h.GetBinCenter( i+1 )
