@@ -22,8 +22,16 @@ fi
 WORKDIR=${MAMBODIR}/run
 jobdir=${WORKDIR}/jobs
 logdir=${WORKDIR}/logs
-outdir=${WORKDIR}/output
+
+if [[ -z ${MAMBOOUTPUTDIR} ]]
+then
+   outdir=${PWD}/output
+else
+   outdir=${MAMBOOUTPUTDIR}
+fi
+
 queue=T3_BO
+backend=lsf #options are: lsf pbs
 dryrun=0
 
 jobname=MAMboJob_${SUBMISSION_TIMESTAMP}
@@ -32,9 +40,9 @@ filelist=UNSET
 nevtmax=-1
 outfilename=mambo.histograms.root
 
-
 while [ $# -gt 0 ] ; do
 case $1 in
+    -b) backend=$2             ; shift 2;;
     -p) paramsfile=$2          ; shift 2;;
     -f) filelist=$2            ; shift 2;;
     -n) nevtmax=$2             ; shift 2;;
@@ -59,6 +67,19 @@ then
     exit
 fi
 
+# determine which backend to use
+if [ "$backend" == "lsf" ]
+then
+   exe="bsub"
+   logopts="-oe -oo"
+   jobnameopts="-J"
+else
+   exe="qsub -V"
+   logopts="-j oe -o"
+   jobnameopts="-N"
+fi
+
+
 test -d $jobdir || mkdir -p $jobdir
 test -d $logdir || mkdir -p $logdir
 test -d $outdir || mkdir -p $outdir
@@ -68,8 +89,14 @@ logfile=$logdir/${jobname}.log
 
 rm -fr $logfile
 
-cat > $jobfile <<EOF
+
+## NOW CREATE ON-THE-FLY THE SCRIPT TO BE SUBMITTED
+echo job file: ${jobfile}
+
+cat > ${jobfile} <<EOF
 #!/bin/bash
+#PBS -l nodes=1:ppn=8,walltime=2:00:00
+#PBS -N $jobname
 echo Running on \$HOSTNAME
 date
 
@@ -84,11 +111,14 @@ date
 
 EOF
 
+
+# OK NOW SUBMIT THE JOB
+
 chmod +x $jobfile
 
 if [[ "${dryrun}" == "0" ]] 
 then
-  bsub -q $queue -oe -oo $logfile -J $jobname $jobfile
+  ${exe} -q $queue ${logopts} $logfile ${jobnameopts} $jobname $jobfile
 else
   echo "Dry run. See ${jobfile}"
 fi

@@ -1,15 +1,15 @@
-#ifndef __@NAME@_WRAPPER_H__
-#define __@NAME@_WRAPPER_H__
+#ifndef __LHEF_WRAPPER_H__
+#define __LHEF_WRAPPER_H__
 
 #include "NtupleWrapper.h"
 
-#include "@NAME@.h"
+#include "LHEF.h"
 
-class NtupleWrapper@NAME@ : public NtupleWrapper< @NAME@ > 
+class NtupleWrapperLHEF : public NtupleWrapper< LHEF > 
 {
  public:
-  NtupleWrapper@NAME@( const AnalysisParams_t analysisParameters );
-  virtual ~NtupleWrapper@NAME@();
+  NtupleWrapperLHEF( const AnalysisParams_t analysisParameters );
+  virtual ~NtupleWrapperLHEF();
 
 
  protected:
@@ -22,10 +22,10 @@ class NtupleWrapper@NAME@ : public NtupleWrapper< @NAME@ >
   virtual bool MakeEventTruth( EventData * ed );
 };
 
-typedef NtupleWrapperPluginFactory< NtupleWrapper@NAME@ > NtupleWrapperPluginFactory_@NAME@;
+typedef NtupleWrapperPluginFactory< NtupleWrapperLHEF > NtupleWrapperPluginFactory_LHEF;
 
 extern "C" {
-  NtupleWrapperPluginFactory_@NAME@ * MakeNtupleWrapperPlugin();
+  NtupleWrapperPluginFactory_LHEF * MakeNtupleWrapperPlugin();
 }
 
 #endif /** __MINISLBOOST_WRAPPER_H__ */

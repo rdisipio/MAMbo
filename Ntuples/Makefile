@@ -3,7 +3,7 @@ include ../Makefile.inc
 # modify the following line NTUPLES = ... according to your needs
 # to add more ntuples, lauch bin/MAMbo-NtupleWrapperWizard.py -t treeName -w outputWrapperName FILE.root
 #NTUPLES   = HWWtth
-NTUPLES   = TopMiniSLResolved TopMiniSLResolvedParticles TopMiniSLBoosted
+NTUPLES   = TopMiniSLResolved TopMiniSLResolvedParticles TopMiniSLBoosted LHEF
 
 # specify special dependency here. The pattern is DEPS_[NTUPLE] = list of objects
 DEPS_TopMiniSLResolved := TopMiniSLResolvedParticles.o TopMiniSLResolvedPartons.o

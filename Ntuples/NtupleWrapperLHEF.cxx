@@ -1,14 +1,14 @@
-#include "NtupleWrapper@NAME@.h"
+#include "NtupleWrapperLHEF.h"
 
-NtupleWrapper@NAME@::NtupleWrapper@NAME@( const AnalysisParams_t analysisParameters ):
-  NtupleWrapper< @NAME@ >( analysisParameters )
+NtupleWrapperLHEF::NtupleWrapperLHEF( const AnalysisParams_t analysisParameters ):
+  NtupleWrapper< LHEF >( analysisParameters )
 {
 }
 
 /////////////////////////////////////////////
 
 
-NtupleWrapper@NAME@::~NtupleWrapper@NAME@()
+NtupleWrapperLHEF::~NtupleWrapperLHEF()
 {
 
 }
@@ -16,7 +16,7 @@ NtupleWrapper@NAME@::~NtupleWrapper@NAME@()
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventInfo( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventInfo( EventData * ed )
 {
   bool success = true;
 
@@ -33,7 +33,7 @@ bool NtupleWrapper@NAME@::MakeEventInfo( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventTrigger( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventTrigger( EventData * ed )
 { 
   bool success = true;
 
@@ -46,7 +46,7 @@ bool NtupleWrapper@NAME@::MakeEventTrigger( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventMET( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventMET( EventData * ed )
 {
   bool success = true;
 
@@ -63,7 +63,7 @@ bool NtupleWrapper@NAME@::MakeEventMET( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventElectrons( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventElectrons( EventData * ed )
 {
   bool success = true;
 
@@ -87,7 +87,7 @@ bool NtupleWrapper@NAME@::MakeEventElectrons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventMuons( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventMuons( EventData * ed )
 {
   bool success = true;
 
@@ -98,7 +98,7 @@ bool NtupleWrapper@NAME@::MakeEventMuons( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventJets( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventJets( EventData * ed )
 {
   bool success = true;
 
@@ -129,7 +129,7 @@ bool NtupleWrapper@NAME@::MakeEventJets( EventData * ed )
 /////////////////////////////////////////////
 
 
-bool NtupleWrapper@NAME@::MakeEventTruth( EventData * ed )
+bool NtupleWrapperLHEF::MakeEventTruth( EventData * ed )
 {
   bool success = true;
 
@@ -141,7 +141,7 @@ bool NtupleWrapper@NAME@::MakeEventTruth( EventData * ed )
 // Plugin
 
 extern "C" {
-  NtupleWrapperPluginFactory_@NAME@ * MakeNtupleWrapperPlugin() {
-    return new NtupleWrapperPluginFactory_@NAME@( "@NAME@" );
+  NtupleWrapperPluginFactory_LHEF * MakeNtupleWrapperPlugin() {
+    return new NtupleWrapperPluginFactory_LHEF( "LHEF" );
   };
 }
