@@ -133,6 +133,39 @@ bool NtupleWrapperLHEF::MakeEventTruth( EventData * ed )
 {
   bool success = true;
 
+  const size_t np = GET_VALUE( Particle_size );
+  for( size_t ip = 0 ; ip < np ; ++ip ) {
+
+      const int barcode = GET_VALUE_ARRAY( Particle_fUniqueID, ip );
+      if( barcode > 2e5 ) continue; //skip GEANT particles
+
+      const int status = GET_VALUE_ARRAY( Particle_Status, ip );
+      const int    pid = GET_VALUE_ARRAY( Particle_PID, ip );
+      const int   apid = abs(pid);
+
+
+      if( (apid!=6) || (apid!=25) ) continue;
+
+      const double pT  = GET_VALUE_ARRAY( Particle_PT, ip );
+      const double eta = GET_VALUE_ARRAY( Particle_Eta, ip );
+      const double phi = GET_VALUE_ARRAY( Particle_Phi, ip );
+//      const double E   = GET_VALUE_ARRAY( Particle_E, ip );
+      const double m   = GET_VALUE_ARRAY( Particle_M, ip );
+
+      const int q = ( apid == 0 ) ? 0 : pid / apid;
+
+      TLorentzVector p;
+      p.SetPtEtaPhiM( pT, eta, phi, m );
+      HelperFunctions::DumpTruthParticleToEventData( p, pid, status, barcode, q, &ed->mctruth );
+
+/*
+      const PhysicsHelperFunctions::TOP_QUARK_DECAY_CLASS topdecay =
+        PhysicsHelperFunctions::ClassifyTopDecay( ip, this->m_truth_ntuple->mc_child_index, this->m_truth_ntuple->mc_pdgId );
+      const bool isHadronic = ( topdecay == PhysicsHelperFunctions::kTopDecayHadronic );
+      ed->mctruth.property["isHadronic"].push_back( isHadronic );
+*/
+  } 
+
   return success;
 }
 

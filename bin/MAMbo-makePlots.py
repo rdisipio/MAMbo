@@ -328,7 +328,7 @@ def DoPlot( plot, iLumi = 1. ):
     ## save image
 
     c.cd()
-    for ext in [ "png", "eps", "C" ]:
+    for ext in [ "png", "pdf", "C" ]:
        imgname = "img/%s/%s.%s" % ( ext, plot.hname, ext )
        c.SaveAs( imgname ) 
 
