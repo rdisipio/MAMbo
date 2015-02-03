@@ -14,7 +14,8 @@ from MAMboPlottingToolkit import *
 gROOT.Macro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
 gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
 gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/graph_scale.C" )
-from ROOT import ScaleGraph
+gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/DrawOverflow.C" )
+from ROOT import ScaleGraph, DrawOverflow
 
 ####################################################
 
@@ -145,6 +146,23 @@ def ReadConfiguration( configFileName ):
 ####################################################
 
 
+def AddOverflowToLastBin_TH1( h ):
+   N   = h.GetNbinsX()
+   yN  = h.GetBinContent( N )
+   yOF = h.GetBinContent( N+1 )
+   eN  = h.GetBinError( N )
+   eOF = h.GetBinError( N+1 )
+
+   yNew = yN + yOF
+   eNew = sqrt( eN*eN + eOF*eOF )
+  
+   h.SetBinContent( N, yNew )
+   h.SetBinError( N, eNew )
+
+
+####################################################
+
+
 def FetchHistograms():
     histograms = {}
 
@@ -159,8 +177,12 @@ def FetchHistograms():
        if h == None:
           print "ERROR: invalid histogram for sample", sample, "in file", input_files[sample]
 
+#       AddOverflowToLastBin( h ) ## DOESN'T WORK WIHT TGRAPH!
        histograms[sample] = h.Clone( newname )
-#       histograms[sample].Rebin( plots_configuration[plot.hname].rebin )
+   
+#       if samples_configuration[sample].type == SampleType.data:
+#         print "INFO: poissonize", newname
+#         histograms[sample] = Poissonize( histograms[sample] )
 
     return histograms
   
@@ -284,26 +306,29 @@ def DoPlot( plot, iLumi = 1. ):
 
     hstack = MakeStackedHistogram( histograms )
 
-    histograms['data'].Draw()
-    #histograms['ttbar_ljets'].Draw( 'hist same' )
-    hstack.Draw( 'hist same' )
+    if histograms['data'].Class() in [ TH1F.Class(), TH1D.Class() ]:
+       histograms['data'].Draw()
+       hstack.Draw( 'hist same' )
+    else:
+       hstack.Draw( 'hist' )
+
     histograms['uncertainty'].Draw( 'e2 same' )
     histograms['data'].Draw("e p same" )
 
     if plot.scale == PlotScale.linear:
-       pad1.SetLogy(False)
+#       pad1.SetLogy(False)
        pad0.SetLogx(False)
     if plot.scale == PlotScale.log: 
        pad0.SetLogy(True)
     if plot.scale == PlotScale.logx:
        pad0.SetLogx(True)
-       pad1.SetLogx(True)
-       pad1.SetLogy(False)
+#       pad1.SetLogx(True)
+#       pad1.SetLogy(False)
     if plot.scale == PlotScale.bilog: 
        pad0.SetLogy(True)
        pad0.SetLogx(True)
-       pad1.SetLogx(True)  
-       pad1.SetLogy(False)
+#       pad1.SetLogx(True)  
+#       pad1.SetLogy(False)
 
     lparams = {
         'xoffset' : 0.67,
@@ -322,9 +347,11 @@ def DoPlot( plot, iLumi = 1. ):
     frame, tot_unc, ratio = DrawRatio( histograms['data'], histograms['uncertainty'], plot.xtitle )    
 
     if plot.scale in [ PlotScale.bilog, PlotScale.logx ]: 
-       pad1.SetLogx(1)
+       pad1.SetLogx(True)
+       pad1.SetLogy(False)
        frame.GetXaxis().SetMoreLogLabels(True)
        frame.GetXaxis().SetNoExponent(True)
+
     ## save image
 
     c.cd()

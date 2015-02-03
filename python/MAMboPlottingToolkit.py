@@ -21,6 +21,47 @@ def Normalize( h, sf = 1.0, opt = "width" ):
 #########################################################
 
 
+def Poissonize( data ):
+    '''converts a TH1 representing real data into a TGraphAsymmErrors with poissonized uncertainties'''
+
+    chisq = TMath.ChisquareQuantile
+
+    nbins = data.GetNbinsX()
+
+    graph = TGraphAsymmErrors()
+    SetTH1FStyle( graph, color=data.GetMarkerColor(), markerstyle=data.GetMarkerStyle() )
+
+    for n in range( nbins ):
+        x = data.GetBinCenter( n+1 )
+        y = data.GetBinContent( n+1 )
+        bw = data.GetBinWidth( n+1 )
+
+        dy_u = 0.5 * chisq( 1. - 0.1586555, 2. * (y + 1) ) - y 
+        dy_d = y - 0.5 * chisq( 0.1586555, 2. * y )
+
+#        print "bin %i y = %f +%f -%f" % ( n, y, dy_u, dy_d )
+
+        graph.SetPoint( n, x, y )
+        graph.SetPointError( n, bw/2., bw/2., dy_d, dy_u )
+
+    return graph
+
+
+#########################################################
+
+
+def RemoveNegativeBins_TH1( h ):
+    nbins = h.GetNbinsX()
+    for i in range(nbins):
+       y = h.GetBinContent( i+1 )
+       if y >= 0.: continue
+
+       h.SetBinContent( i+1, 0. )
+
+
+#########################################################
+
+
 def HasVariableBinWidths_TH1( h ):
     hasVariableBinWidths = True
     bw_glob = None
@@ -196,8 +237,19 @@ def SetMaximum( histograms, key = 'data', sfmax = 1.3, sfmin = 0. ):
 def DrawRatio( data, prediction, xtitle = "" ):
     #global frame, tot_unc, ratio
     
-    xmin = data.GetXaxis().GetXmin()
-    xmax = data.GetXaxis().GetXmax()
+    if data.Class() in [ TGraph().Class(), TGraphErrors.Class(), TGraphAsymmErrors().Class() ]:
+       n = data.GetN()
+       x = Double()
+       y = Double()
+       data.GetPoint( 0, x, y )
+       exl = data.GetErrorXlow( 0 )
+       xmin = x - exl
+       data.GetPoint( n-1, x, y )
+       exh = data.GetErrorXhigh( n-1 )
+       xmax = x + exh
+    else:
+       xmin = data.GetXaxis().GetXmin()
+       xmax = data.GetXaxis().GetXmax()
 
     # tt diffxs 7 TeV: [ 0.4, 1.6 ]    
     frame = gPad.DrawFrame( xmin, 0.7, xmax, 1.3 )
@@ -282,10 +334,17 @@ def MakeRatio( data, prediction ):
     
     SetTH1FStyle( ratio, color=data.GetMarkerColor(), markerstyle=data.GetMarkerStyle() )
     
+    if data.Class() in [ TGraph().Class(), TGraphErrors.Class(), TGraphAsymmErrors().Class() ]:
+       nbins = data.GetN()
+    else:
+       nbins = data.GetNbinsX()
+
     i = 0
-    for n in range( data.GetNbinsX() ):
+    for n in range( nbins ):
         x_mc = Double()
         y_mc = Double()
+        x_data = Double()
+        y_data = Double()
 
         if prediction.Class() in [ TGraph().Class(), TGraphErrors.Class(), TGraphAsymmErrors().Class() ]:
            prediction.GetPoint( n, x_mc, y_mc )
@@ -294,17 +353,24 @@ def MakeRatio( data, prediction ):
            y_mc = prediction.GetBinContent( n+1 )   
      
         if y_mc == 0.: continue
-        
-        x_data = data.GetBinCenter( n+1 )
-        y_data = data.GetBinContent( n+1 )
+
+        if data.Class() in [ TGraph().Class(), TGraphErrors.Class(), TGraphAsymmErrors().Class() ]:
+           data.GetPoint( n, x_data, y_data )
+           bw = data.GetErrorXlow(n) + data.GetErrorXhigh(n)
+           dy_u = data.GetErrorYhigh(n)
+           dy_d = data.GetErrorYlow(n)
+        else:    
+           x_data = data.GetBinCenter( n+1 )
+           y_data = data.GetBinContent( n+1 )
+           bw = data.GetBinWidth( n+1 )
+           dy_u = data.GetBinError( n+1 )
+           dy_d = data.GetBinError( n+1 ) 
         
         #print '    setting point %i: %f' % (i,y_data/y_mc,)
 
         ratio.SetPoint( i, x_data, y_data/y_mc )
         
-        bw = data.GetBinWidth( n+1 ) 
-        
-        ratio.SetPointError( i, bw/2, bw/2, data.GetBinError( n+1 )/y_mc, data.GetBinError( n+1 )/y_mc )
+        ratio.SetPointError( i, bw/2, bw/2, dy_d/y_mc, dy_u/y_mc )
         
         i += 1
     return ratio

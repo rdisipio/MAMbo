@@ -118,6 +118,14 @@
         <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.el.MISTAGSFUP.histograms.root" />
         <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.el.MISTAGSFDOWN.histograms.root" />
     </syst> 
+    <syst name="ees" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/ees_up/tt_diffxs_8TeV.mc.DiTop.el.ees_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/ees_down/tt_diffxs_8TeV.mc.DiTop.el.ees_down.histograms.root" />
+    </syst>
+    <syst name="eer" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/eer_up/tt_diffxs_8TeV.mc.DiTop.el.eer_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/eer_down/tt_diffxs_8TeV.mc.DiTop.el.eer_down.histograms.root" />
+    </syst>
   </sample>
   <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" />
   <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root" />

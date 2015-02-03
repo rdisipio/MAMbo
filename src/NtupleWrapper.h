@@ -65,6 +65,9 @@ class NtupleWrapper : public INtupleWrapper
 	   // absolute path. take it as-is
 	   fName = txt;
 	}
+        if( txt.find_first_of( "root://" ) == 0 ) {
+           fName = txt;
+        }
 	else {
 	   string basedir = getenv( "MAMBONTUPLEDIR" );
 	   if( basedir.empty() ) {

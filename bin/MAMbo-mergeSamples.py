@@ -89,6 +89,19 @@ def ReadConfiguration( configFileName ):
 
    return histograms_configuration, samples_configuration, input_files
 
+
+####################################################
+
+
+def RemoveNegativeBins( h ):
+    nbins = h.GetNbinsX()
+    for i in range(nbins):
+       y = h.GetBinContent( i+1 )
+       if y >= 0.: continue
+
+       h.SetBinContent( i+1, 0. )
+
+
 ####################################################
 
 
@@ -104,6 +117,9 @@ def GatherHistograms( hname, hpath ):
 
         newname = "%s_%s" % ( sample, hname )
         hlist[sample] = hsource.Clone( newname )
+        if hlist[sample] == None:
+           print "ERROR: invalid histogram", newname
+        RemoveNegativeBins( hlist[sample] )
 
     return hlist
 

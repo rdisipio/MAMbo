@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+
+<!--
+<histograms>
+  <histogram hpath="reco/4j2b/tt/m" />
+</histograms>
+-->
+
+<samples>
+  <sample name="DiTop"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.co.nominal.histograms.root" >
+    <syst name="BJesUnc" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/BJesUnc_up/tt_diffxs_8TeV.mc.DiTop.co.BJesUnc_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/BJesUnc_down/tt_diffxs_8TeV.mc.DiTop.co.BJesUnc_down.histograms.root" />
+    </syst>
+    <syst name="jvf" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/jvf_up/tt_diffxs_8TeV.mc.DiTop.co.jvf_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/jvf_down/tt_diffxs_8TeV.mc.DiTop.co.jvf_down.histograms.root" />
+    </syst>
+    <syst name="flavor_comp" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/flavor_comp_up/tt_diffxs_8TeV.mc.DiTop.co.flavor_comp_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/flavor_comp_down/tt_diffxs_8TeV.mc.DiTop.co.flavor_comp_down.histograms.root" />
+    </syst>
+    <syst name="EtaIntercalibrationModel" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/EtaIntercalibrationModel_up/tt_diffxs_8TeV.mc.DiTop.co.EtaIntercalibrationModel_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/EtaIntercalibrationModel_down/tt_diffxs_8TeV.mc.DiTop.co.EtaIntercalibrationModel_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveDet1" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet1_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveDet1_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet1_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveDet1_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveDet2" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet2_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveDet2_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet2_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveDet2_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveDet3" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet3_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveDet3_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveDet3_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveDet3_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveMix1" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveMix1_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveMix1_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveMix1_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveMix1_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveMix2" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveMix2_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveMix2_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveMix2_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveMix2_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveModel1" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel1_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel1_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel1_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel1_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveModel2" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel2_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel2_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel2_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel2_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveModel3" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel3_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel3_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel3_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel3_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveModel4" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel4_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel4_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveModel4_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveModel4_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveStat1" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveStat1_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveStat1_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveStat1_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveStat1_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveStat2" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveStat2_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveStat2_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveStat2_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveStat2_down.histograms.root" />
+    </syst>
+    <syst name="JesEffectiveStat3" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveStat3_up/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveStat3_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/JesEffectiveStat3_down/tt_diffxs_8TeV.mc.DiTop.co.JesEffectiveStat3_down.histograms.root" />
+    </syst>
+    <syst name="Pileup_OffsetMu" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_OffsetMu_up/tt_diffxs_8TeV.mc.DiTop.co.Pileup_OffsetMu_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_OffsetMu_down/tt_diffxs_8TeV.mc.DiTop.co.Pileup_OffsetMu_down.histograms.root" />
+    </syst>
+    <syst name="Pileup_OffsetNPV" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_OffsetNPV_up/tt_diffxs_8TeV.mc.DiTop.co.Pileup_OffsetNPV_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_OffsetNPV_down/tt_diffxs_8TeV.mc.DiTop.co.Pileup_OffsetNPV_down.histograms.root" />
+    </syst>
+    <syst name="Pileup_Pt" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_Pt_up/tt_diffxs_8TeV.mc.DiTop.co.Pileup_Pt_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_Pt_down/tt_diffxs_8TeV.mc.DiTop.co.Pileup_Pt_down.histograms.root" />
+    </syst>
+    <syst name="Pileup_Rho" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_Rho_up/tt_diffxs_8TeV.mc.DiTop.co.Pileup_Rho_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/Pileup_Rho_down/tt_diffxs_8TeV.mc.DiTop.co.Pileup_Rho_down.histograms.root" />
+    </syst>
+    <syst name="PunchThrough" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/PunchThrough_up/tt_diffxs_8TeV.mc.DiTop.co.PunchThrough_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/PunchThrough_down/tt_diffxs_8TeV.mc.DiTop.co.PunchThrough_down.histograms.root" />
+    </syst>
+    <syst name="SinglePart" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/SinglePart_up/tt_diffxs_8TeV.mc.DiTop.co.SinglePart_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/SinglePart_down/tt_diffxs_8TeV.mc.DiTop.co.SinglePart_down.histograms.root" />
+    </syst>
+    <syst name="res_soft" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/res_soft_up/tt_diffxs_8TeV.mc.DiTop.co.res_soft_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/res_soft_down/tt_diffxs_8TeV.mc.DiTop.co.res_soft_down.histograms.root" />
+    </syst>
+    <syst name="sc_soft" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/sc_soft_up/tt_diffxs_8TeV.mc.DiTop.co.sc_soft_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/sc_soft_down/tt_diffxs_8TeV.mc.DiTop.co.sc_soft_down.histograms.root" />
+    </syst>
+    <syst name="BTAGSF" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/BTAGSFUP/tt_diffxs_8TeV.mc.DiTop.co.BTAGSFUP.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/BTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.co.BTAGSFDOWN.histograms.root" />
+    </syst>
+    <syst name="CTAUTAGSF" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/CTAUTAGSFUP/tt_diffxs_8TeV.mc.DiTop.co.CTAUTAGSFUP.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/CTAUTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.co.CTAUTAGSFDOWN.histograms.root" />
+    </syst>
+    <syst name="MISTAGSF" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.co.MISTAGSFUP.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.co.MISTAGSFDOWN.histograms.root" />
+    </syst> 
+  </sample>
+  <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.co.nominal.histograms.root" />
+  <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.co.nominal.histograms.root" />
+  <sample name="Zjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.co.nominal.histograms.root" />
+  <sample name="Diboson"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.co.nominal.histograms.root" />
+  <sample name="Fakes"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root" />
+</samples>
+</document>
+
+<!--
+    <syst name="@SYST@" type="two_sided" >
+        <shift side="up"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/@SYST@_up/tt_diffxs_8TeV.mc.DiTop.co.@SYST@_up.histograms.root" />
+        <shift side="down" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/@SYST@_down/tt_diffxs_8TeV.mc.DiTop.co.@SYST@_down.histograms.root" />
+    </syst>
+-->

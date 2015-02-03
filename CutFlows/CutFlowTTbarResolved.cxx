@@ -390,6 +390,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     bool passed = true;
+   
+//    const int hfor = int( ed->property["hfor"] );
 
     int    jet_n  = ed->jets.n;
     int    bjet_n = ed->bjets.n;
@@ -430,6 +432,14 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
         jet->m   = ed->bjets.m.at(bj);
         values.bJets.push_back(jet);
     }   
+
+/*
+    if( (hfor<0) || (hfor>3) ) {
+      cout << "discarded event: hfor = " << hfor << endl;
+      return passed; 
+    }
+*/
+
     // 0 all events
     PassedCut( "LPLUSJETS", "reco_weighted", weight );
     PassedCut( "LPLUSJETS", "reco_unweight");
@@ -505,6 +515,8 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
 
     const double weight = ed->property["weight_particle_level"];
 
+    // const int hfor = int( ed->property["hfor"] );
+
     const int    el_n  = ed->truth_electrons.n; 
     const int    mu_n  = ed->truth_muons.n; 
 
@@ -547,6 +559,8 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
         jet.m   = ed->truth_bjets.m.at(bj);
         values.bJets.push_back(&jet);
     }
+
+    // if( (hfor<0) || (hfor>3) ) return passed;
     
     // 0 All events
     PassedCut( "LPLUSJETS", "particle_unweight" );
