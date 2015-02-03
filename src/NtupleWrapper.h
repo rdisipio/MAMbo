@@ -78,8 +78,8 @@ class NtupleWrapper : public INtupleWrapper
 	      fName = basedir + sep + txt;
 	   }
 	}
-	chain->AddFile( fName.c_str() );
 	cout << "INFO: Input file: " << fName << '\n';
+	chain->AddFile( fName.c_str() );
       }
 
       m_ntuple->Init( chain );
