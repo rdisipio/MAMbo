@@ -3,12 +3,6 @@
 
 #include "NtupleWrapperTransient.h"
 
-//#include "XAOD.h"
-
-//#include "xAODRootAccess/Init.h"
-//#include "xAODRootAccess/TEvent.h"
-//#include "xAODRootAccess/TStore.h"
-
 // EDM include(s):
 #include "xAODEventInfo/EventInfo.h"
 #include "xAODMuon/MuonContainer.h"
@@ -49,15 +43,6 @@ class NtupleWrapperXAOD : public NtupleWrapperTransient
   virtual bool MakeEventMuons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
   virtual bool MakeEventTruth( EventData * ed );
-
-  const xAOD::MuonContainer*      m_muons;
-  const xAOD::ElectronContainer*  m_electrons;
-  const xAOD::TauJetContainer*    m_tauJets;
-  const xAOD::JetContainer*       m_akt4Jets;
-  const xAOD::JetContainer*       m_akt4TruthJets;
-  const xAOD::MissingETContainer* m_metFinals;
-  const xAOD::MissingETContainer* m_metTruths;
-
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperXAOD > NtupleWrapperPluginFactory_XAOD;

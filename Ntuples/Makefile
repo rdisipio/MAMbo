@@ -36,6 +36,12 @@ clean:
 
 .SECONDEXPANSION:
 
+libNtupleWrapperXAOD.so: NtupleWrapperXAOD.o $$(DEPS_$$*)
+	@echo
+	@echo Creating ntuple wrapper library $@ from $<
+	$(LD) $(SOFLAGS) -Wl,-export-dynamic $< $(DEPS_$(subst .so,,$(subst libNtupleWrapper,,$@))) -ldl -o $@
+	@echo
+
 libNtupleWrapper%.so: NtupleWrapper%.o %.o $$(DEPS_$$*)
 	@echo
 	@echo Creating ntuple wrapper library $@ from $<

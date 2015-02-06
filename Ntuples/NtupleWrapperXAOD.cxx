@@ -57,6 +57,15 @@ bool NtupleWrapperXAOD::MakeEventMET( EventData * ed )
 {
   bool success = true;
 
+  const xAOD::MissingETContainer* METFinals = 0;
+  if( !m_xAODevent->retrieve(METFinals, "MET_RefFinal") ) throw runtime_error( "Cannot retrieve MET_RefFinal container\n" );
+  
+  const xAOD::MissingET* metRefFinal = 0;
+  if( METFinals ) metRefFinal = (*METFinals)["Final"];
+
+  ed->MET.et    = metRefFinal->met();
+  ed->MET.sumet = metRefFinal->sumet();
+
 //  ed->MET.et    = GET_VALUE( met_et );
 //  ed->MET.phi   = GET_VALUE( met_phi );
 //  ed->MET.etx   = 0.;
