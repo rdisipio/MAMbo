@@ -1,14 +1,5 @@
-#ifndef __NTUP_TOP_WRAPPER_H__
-#define __NTUP_TOP_WRAPPER_H__
-
-/*
-#define GET_VALUE(X) m_ntuple-> X
-#define GET_VALUE_VECTOR(X,N) m_ntuple-> X ->at( N )
-#define GET_VALUE_ARRAY(X,N) m_ntuple-> X[N]
-#define CHECK_TRIGGER(T) if( GET_VALUE( T ) ) ed->trigger[ #T ] = 1
-#define MAKE_OBJECT(OBJ, ED) if( !MakeEvent##OBJ( ED ) ) throw runtime_error( "Cannot create " # OBJ )
-#define SET_PROPERTY(P) ed->property[ #P ] = GET_VALUE( P )
-*/
+#ifndef __NTUPLE_WRAPPER_H__
+#define __NTUPLE_WRAPPER_H__
 
 #include "INtupleWrapper.h"
 #include "NtupleWrapperFactory.hpp"
@@ -54,38 +45,10 @@ class NtupleWrapper : public INtupleWrapper
 
       static string sep = "/";
 
-      TChain * chain = new TChain( m_treeName );
-
-      ifstream input( fileListName.c_str(), ios_base::in );
-      string txt, fName;
-      while( std::getline( input, txt ) ) {
-	if( txt.empty() ) continue;
-
-	if( txt.find_first_of( sep ) == 0 ) { 
-	   // absolute path. take it as-is
-	   fName = txt;
-	}
-        if( txt.find_first_of( "root://" ) == 0 ) {
-           fName = txt;
-        }
-	else {
-	   string basedir = getenv( "MAMBONTUPLEDIR" );
-	   if( basedir.empty() ) {
-	      // relative path from working directory
-	      fName = txt;
-	   }
-	   else {
-	      fName = basedir + sep + txt;
-	   }
-	}
-	cout << "INFO: Input file: " << fName << '\n';
-	chain->AddFile( fName.c_str() );
-      }
+      TChain * chain = HelperFunctions::LoadChain( fileListName, m_treeName );
 
       m_ntuple->Init( chain );
        
-      input.close();
-
       return success;
     };
 

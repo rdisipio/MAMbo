@@ -28,6 +28,8 @@ namespace HelperFunctions {
   
   int    ListDirectory( string dir, vector<string> &files );
 
+  TChain * LoadChain( const string fileListName, const string& treeName = "physics" );
+
 #ifdef __USE_FASTJET__
   int    FindFatJets( EventData * ed, const double fjet_ptmin = 300.*GeV, fastjet::JetAlgorithm alg = fastjet::antikt_algorithm, double R = 1.0 );
 #endif

@@ -12,7 +12,7 @@ DEBUGFLAGS   = -O0 -D_DEBUG_ -g
 RELEASEFLAGS = -O2 -D_RELEASE_
 
 # fix this
-ARCH=x86_64-slc6-gcc47-opt
+ARCH=x86_64-slc6-gcc48-opt
 
 # release or debug?
 debug:   CC += $(DEBUGFLAGS)
@@ -43,13 +43,27 @@ LIBS = $(ROOTLIBS) $(XMLLIBS)
 .cxx.o:
 	$(CC) $(CFLAGS) -c $<
 
-ifdef ROOTCOREDIR
+ifdef USE_ANALYSISTOP
 CFLAGS += -D__MOMA__
 include $(MAMBODIR)/MoMA/Makefile.rootcore.inc
 CFLAGS += -I$(MAMBODIR)/MoMA
 LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA
 endif
 
+## Use xAOD format?
+#ifeq ($(shell $(MAMBODIR)/share/use_xAOD.sh),"USE_XAOD")
+ifdef USE_XAOD
+CFLAGS += -D_USE_XAOD_
+
+ROOTCOREINCS = -I$(ROOTCOREDIR)/include
+ROOTCORELIBS = $(ROOTCOREDIR)/lib/$(ARCH)
+XAODLIBS  = Base BTaggingEfficiency BTagging CaloEvent Core Egamma EventFormat EventInfo EventShape Jet 
+XAODLIBS += MissingET Muon PFlow RootAccess Tau Tracking Trigger Truth
+
+CFLAGS +=  $(ROOTCOREINCS)
+SOFLAGS += -L$(ROOTCORELIBS) $(foreach tool,$(XAODLIBS),-lxAOD$(tool)) $(foreach tool,$(XAODLIBS),-lxAOD$(tool)_Reflex)
+SOFLAGS += -lxAODPrimitives -lxAODRootAccessInterfaces
+endif
 
 ifdef FASTJETLOCATION
 CFLAGS += -D__USE_FASTJET__

@@ -1,5 +1,24 @@
-<histograms>
-  <TH1F name="jet_n" title="No. of Jets" nbins="15"  xmin="-0.5" xmax="14.5" />
-  <TH1F name="jet_pt" title="Jet p_{T}"  nbins="20" xmin="0."   xmax="1000." />
-  <TH1F name="fjet_pt" title="Fat Jet p_{T}"  nbins="10" edges="0.,300.,400.,500.,600.,700.,800.,900.,1000.,1100.,1500." />
+ <histograms>
+    <Level> <!--Level--> 
+        <Type name="reco" />                 <!-- Passed: reco-->
+    </Level>
+    <Level> <!--Region-->
+        <!--Type name="4j1b" /-->
+        <Type name="cutflow" />
+    </Level>
+    <Level> <!--Particle-->
+        <Type name="beforeCuts" inFolder="cutflow" />
+    </Level>
+    <Variables>
+        <Variable name="jet_pt" title="p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="jet_n"   title="No. of Jets" folder="cutflow">
+            <Bin id="0" nbins="20" xmin="-0.5" xmax="19.5" />
+        </Variable>
+    </Variables>
+    <Histos>
+       <TH1F variable="jet_n"  binId="0"/>
+       <TH1F variable="jet_pt" binId="0"/>
+    </Histos>
 </histograms>

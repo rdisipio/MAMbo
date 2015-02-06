@@ -57,7 +57,44 @@ namespace HelperFunctions {
   }
 
 
-   //////////////////////////////////////////////////////
+  TChain * LoadChain( const string fileListName, const string& treeName )
+  {
+     static string sep = "/";
+
+     TChain * chain = new TChain( treeName.c_str(), treeName.c_str() );
+
+     ifstream input( fileListName.c_str(), ios_base::in );
+     string txt, fName;
+     while( std::getline( input, txt ) ) {
+       if( txt.empty() ) continue;
+       if( txt.find_first_of( sep ) == 0 ) {
+          // absolute path. take it as-is
+          fName = txt;
+       }
+       if( txt.find_first_of( "root://" ) == 0 ) {
+          fName = txt;
+       }
+       else {
+          string basedir = getenv( "MAMBONTUPLEDIR" );
+           if( basedir.empty() ) {
+              // relative path from working directory
+              fName = txt;
+           }
+           else {
+              fName = basedir + sep + txt;
+           }
+       }
+	cout << "INFO: Input file: " << fName << '\n';
+        chain->AddFile( fName.c_str() );
+     }
+     input.close();
+
+     return chain;
+  }
+
+
+//////////////////////////////////////////////////////
+
 
 #ifdef __USE_FASTJET__
   int FindFatJets( EventData * ed, const double fjet_ptmin, fastjet::JetAlgorithm alg, double R )
