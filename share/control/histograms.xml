@@ -10,15 +10,79 @@
         <Type name="beforeCuts" inFolder="cutflow" />
     </Level>
     <Variables>
-        <Variable name="jet_pt" title="p_{T} [GeV]" folder="cutflow" >
+        <Variable name="el_pt" title="Electron p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="el_n"   title="No. of Electrons" folder="cutflow">
+            <Bin id="0" nbins="4" xmin="-0.5" xmax="3.5" />
+        </Variable>
+        <Variable name="el_eta" title="Electron pseudorapidity" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" />
+        </Variable>
+        <Variable name="el_phi" title="Electron azimuthal angle #phi" folder="cutflow">
+            <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
+        </Variable>
+        <Variable name="mu_pt" title="Muon p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="mu_n"   title="No. of Muons" folder="cutflow">
+            <Bin id="0" nbins="20" xmin="-0.5" xmax="19.5" />
+        </Variable>
+        <Variable name="mu_eta" title="Muon pseudorapidity" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" />
+       	</Variable>
+        <Variable name="mu_phi" title="Muon azimuthal angle #phi" folder="cutflow">
+            <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
+        </Variable>
+        <Variable name="jet_pt" title="Jet p_{T} [GeV]" folder="cutflow" >
             <Bin id="0" nbins="50" xmin="0" xmax="1000" />
         </Variable>
         <Variable name="jet_n"   title="No. of Jets" folder="cutflow">
             <Bin id="0" nbins="20" xmin="-0.5" xmax="19.5" />
         </Variable>
+        <Variable name="jet_eta" title="Jet pseudorapidity" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" />
+       	</Variable>
+        <Variable name="jet_phi" title="Jet azimuthal angle #phi" folder="cutflow">
+            <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
+        </Variable>    
+        <Variable name="jet_m" title="Jet mass [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="200" />
+        </Variable>
+        <Variable name="bjet_pt" title="b-Jet p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="bjet_n"   title="No. of b-Jets" folder="cutflow">
+            <Bin id="0" nbins="6" xmin="-0.5" xmax="5.5" />
+        </Variable>
+        <Variable name="bjet_eta" title="b-Jet pseudorapidity" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" />
+       	</Variable>
+        <Variable name="bjet_phi" title="b-Jet azimuthal angle #phi" folder="cutflow">
+            <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
+        </Variable>
+        <Variable name="bjet_m" title="b-Jet mass [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="200" />
+       	</Variable>
     </Variables>
     <Histos>
-       <TH1F variable="jet_n"  binId="0"/>
-       <TH1F variable="jet_pt" binId="0"/>
+       <TH1F variable="el_n"     binId="0"/>
+       <TH1F variable="el_pt"    binId="0"/>
+       <TH1F variable="el_eta"   binId="0"/>
+       <TH1F variable="el_phi"   binId="0"/>
+       <TH1F variable="mu_n"     binId="0"/>
+       <TH1F variable="mu_pt"    binId="0"/>
+       <TH1F variable="mu_eta"   binId="0"/>
+       <TH1F variable="mu_phi"   binId="0"/>
+       <TH1F variable="jet_n"    binId="0"/>
+       <TH1F variable="jet_pt"   binId="0"/>
+       <TH1F variable="jet_eta"  binId="0"/>
+       <TH1F variable="jet_phi"  binId="0"/>
+       <TH1F variable="jet_m"    binId="0"/>
+       <TH1F variable="bjet_n"   binId="0"/>
+       <TH1F variable="bjet_pt"  binId="0"/>
+       <TH1F variable="bjet_eta" binId="0"/>
+       <TH1F variable="bjet_phi" binId="0"/>
+       <TH1F variable="bjet_m"   binId="0"/>
     </Histos>
 </histograms>

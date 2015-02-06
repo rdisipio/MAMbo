@@ -1,4 +1,5 @@
 #include "NtupleWrapperXAOD.h"
+#include "PhysicsHelperFunctions.h"
 
 NtupleWrapperXAOD::NtupleWrapperXAOD( const AnalysisParams_t analysisParameters ):
   NtupleWrapperTransient( analysisParameters )
@@ -73,18 +74,24 @@ bool NtupleWrapperXAOD::MakeEventElectrons( EventData * ed )
 {
   bool success = true;
 
-//  ed->electrons.n = 1;
-//  ed->electrons.pT.push_back( GET_VALUE( lep_pt ) );
-//  ed->electrons.eta.push_back( GET_VALUE( lep_eta ) );
-//  ed->electrons.phi.push_back( GET_VALUE( lep_phi ) );
-//  ed->electrons.E.push_back( GET_VALUE( lep_E ) );
+  const xAOD::ElectronContainer* electrons;
+  if( !m_xAODevent->retrieve( electrons, "ElectronCollection" ) ) throw runtime_error( "No electrons collection" );
 
-  /*
-  ed->electrons.n = GET_VALUE( el_n );
-  for( int i = 0 ; i < ed->electrons.n ; ++i ) {
-    ed->electrons.pT.push_back( GET_VALUE_ARRAY( el_pt, i ) );
+  xAOD::ElectronContainer::const_iterator elItr  = electrons->begin();
+  xAOD::ElectronContainer::const_iterator elItrE = electrons->end();
+  for( ; elItr != elItrE ; ++elItr ) {
+      const double pT = (*elItr)->pt();
+      const double eta = (*elItr)->eta();
+
+      if( pT < 20*GeV ) continue;
+      if( fabs(eta) > 2.5 ) continue;
+
+      ed->electrons.pT.push_back(  pT );
+      ed->electrons.eta.push_back( eta );
+      ed->electrons.phi.push_back( (*elItr)->phi() );
+      ed->electrons.E.push_back(   (*elItr)->e() );
+      ed->electrons.n++;
   }
-  */
 
   return success;
 }
@@ -96,6 +103,25 @@ bool NtupleWrapperXAOD::MakeEventElectrons( EventData * ed )
 bool NtupleWrapperXAOD::MakeEventMuons( EventData * ed )
 {
   bool success = true;
+
+  const xAOD::MuonContainer* muons;
+  if( !m_xAODevent->retrieve( muons, "Muons" ) ) throw runtime_error( "No muons collection" );
+
+  xAOD::MuonContainer::const_iterator muItr  = muons->begin();
+  xAOD::MuonContainer::const_iterator muItrE = muons->end();
+  for( ; muItr != muItrE ; ++muItr ) {
+      const double pT = (*muItr)->pt();
+      const double eta = (*muItr)->eta();
+
+      if( pT < 20*GeV ) continue;
+      if( fabs(eta) > 2.5 ) continue;
+
+      ed->muons.pT.push_back(  pT );
+      ed->muons.eta.push_back( eta );
+      ed->muons.phi.push_back( (*muItr)->phi() );
+      ed->muons.E.push_back(   (*muItr)->e() );
+      ed->muons.n++;
+  }
 
   return success;
 }
@@ -116,15 +142,34 @@ bool NtupleWrapperXAOD::MakeEventJets( EventData * ed )
   for( ; jetItr != jetItrE ; ++jetItr ) {
       const double pT = (*jetItr)->pt();
       const double eta = (*jetItr)->eta();
+      const double phi = (*jetItr)->phi();
+      const double E   = (*jetItr)->e();
 
       if( pT < 25*GeV ) continue;
       if( fabs(eta) > 2.5 ) continue;
 
-      ed->jets.pT.push_back(  pT );
+      ed->jets.pT.push_back(  pT  );
       ed->jets.eta.push_back( eta );
-      ed->jets.phi.push_back( (*jetItr)->phi() );
-      ed->jets.E.push_back(   (*jetItr)->e() ); 
+      ed->jets.phi.push_back( phi );
+      ed->jets.E.push_back(   E   ); 
+
+      const double jet_m = PhysicsHelperFunctions::Mass( ed->jets, ed->jets.n );
+      ed->jets.m.push_back( jet_m );
       ed->jets.n++;
+
+      const xAOD::BTagging* btag =(*jetItr)->btagging();
+      const double mv1 = btag->MV1_discriminant();
+      ed->jets.property["MV1"].push_back( mv1 );      
+
+      if( mv1 > 0.7892 ) {
+          ed->bjets.n++;
+          ed->bjets.pT.push_back(  pT  );
+          ed->bjets.eta.push_back( eta );
+          ed->bjets.phi.push_back( phi );
+          ed->bjets.E.push_back(   E   );
+          ed->bjets.m.push_back(   jet_m );
+          ed->bjets.property["MV1"].push_back( mv1 );
+      }      
   }
 
   return success;
