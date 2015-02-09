@@ -6,7 +6,7 @@ CCADMIN=CCadmin
 
 DIRS = src Ntuples CutFlows
 
-all:     install 
+all:     install
 release: install
 debug:   install
 

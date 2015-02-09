@@ -47,7 +47,7 @@
             <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
         </Variable>    
         <Variable name="jet_m" title="Jet mass [GeV]" folder="cutflow" >
-            <Bin id="0" nbins="50" xmin="0" xmax="200" />
+            <Bin id="0" nbins="60" xmin="0" xmax="300" />
         </Variable>
         <Variable name="bjet_pt" title="b-Jet p_{T} [GeV]" folder="cutflow" >
             <Bin id="0" nbins="50" xmin="0" xmax="1000" />
@@ -62,8 +62,23 @@
             <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
         </Variable>
         <Variable name="bjet_m" title="b-Jet mass [GeV]" folder="cutflow" >
-            <Bin id="0" nbins="50" xmin="0" xmax="200" />
+            <Bin id="0" nbins="60" xmin="0" xmax="300" />
        	</Variable>
+        <Variable name="fjet_pt" title="Fat-Jet p_{T} [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="0" xmax="1000" />
+        </Variable>
+        <Variable name="fjet_n"   title="No. of Fat-Jets" folder="cutflow">
+            <Bin id="0" nbins="6" xmin="-0.5" xmax="5.5" />
+        </Variable>
+        <Variable name="fjet_eta" title="Fat-Jet pseudorapidity" folder="cutflow" >
+            <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" />
+        </Variable>
+        <Variable name="fjet_phi" title="Fat-Jet azimuthal angle #phi" folder="cutflow">
+            <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
+        </Variable>
+        <Variable name="fjet_m" title="Fat-Jet mass [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="60" xmin="0" xmax="300" />
+        </Variable>
     </Variables>
     <Histos>
        <TH1F variable="el_n"     binId="0"/>
@@ -84,5 +99,10 @@
        <TH1F variable="bjet_eta" binId="0"/>
        <TH1F variable="bjet_phi" binId="0"/>
        <TH1F variable="bjet_m"   binId="0"/>
+       <TH1F variable="fjet_n"   binId="0"/>
+       <TH1F variable="fjet_pt"  binId="0"/>
+       <TH1F variable="fjet_eta" binId="0"/>
+       <TH1F variable="fjet_phi" binId="0"/>
+       <TH1F variable="fjet_m"   binId="0"/>
     </Histos>
 </histograms>

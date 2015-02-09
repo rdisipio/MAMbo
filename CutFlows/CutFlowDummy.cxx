@@ -96,6 +96,19 @@ bool CutFlowDummy::Apply(EventData * ed) {
        m_hm->FillHistograms( "reco/cutflow/beforeCuts/bjet_m",     m, weight_reco_level );
     }
 
+    const int fjet_n = ed->fjets.n;
+    m_hm->FillHistograms( "reco/cutflow/beforeCuts/fjet_n", fjet_n, weight_reco_level );
+    for( int i = 0 ; i < fjet_n ; ++i ) {
+       const double pt  = ed->fjets.pT.at( i ) / GeV;
+       const double eta = ed->fjets.eta.at(i);
+       const double phi = ed->fjets.phi.at(i);
+       const double m   = ed->fjets.m.at(i) / GeV;
+
+       m_hm->FillHistograms( "reco/cutflow/beforeCuts/fjet_pt",   pt, weight_reco_level );
+       m_hm->FillHistograms( "reco/cutflow/beforeCuts/fjet_eta", eta, weight_reco_level );
+       m_hm->FillHistograms( "reco/cutflow/beforeCuts/fjet_phi", phi, weight_reco_level );
+       m_hm->FillHistograms( "reco/cutflow/beforeCuts/fjet_m",     m, weight_reco_level );
+    }
 
     return success;
 }

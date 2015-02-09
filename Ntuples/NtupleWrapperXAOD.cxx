@@ -166,12 +166,14 @@ bool NtupleWrapperXAOD::MakeEventJets( EventData * ed )
       ed->jets.m.push_back( jet_m );
       ed->jets.n++;
 
+      // b-tagged?
       const xAOD::BTagging* btag =(*jetItr)->btagging();
       const double mv1 = btag->MV1_discriminant();
       ed->jets.property["MV1"].push_back( mv1 );      
 
       if( mv1 > 0.7892 ) {
           ed->bjets.n++;
+
           ed->bjets.pT.push_back(  pT  );
           ed->bjets.eta.push_back( eta );
           ed->bjets.phi.push_back( phi );
@@ -182,6 +184,7 @@ bool NtupleWrapperXAOD::MakeEventJets( EventData * ed )
   }
 
 
+  // large-R (fat) jets
   const xAOD::JetContainer * akt10Jets;
   if( !m_xAODevent->retrieve( akt10Jets, "AntiKt10LCTopoJets" ) ) {
     cout << "WARNING: no akt10 jets collection found." << endl;
@@ -190,13 +193,13 @@ bool NtupleWrapperXAOD::MakeEventJets( EventData * ed )
   xAOD::JetContainer::const_iterator fjetItr  = akt10Jets->begin();
   xAOD::JetContainer::const_iterator fjetItrE = akt10Jets->end();
   for( ; fjetItr != fjetItrE ; ++fjetItr ) {
-      const double pT = (*fjetItr)->pt();
+      const double pT  = (*fjetItr)->pt();
       const double eta = (*fjetItr)->eta();
       const double phi = (*fjetItr)->phi();
       const double E   = (*fjetItr)->e();
 
-      if( pT < 25*GeV ) continue;
-      if( fabs(eta) > 2.5 ) continue;
+      if( pT < 250*GeV ) continue;
+      if( fabs(eta) > 2.0 ) continue;
 
       ed->fjets.pT.push_back(  pT  );
       ed->fjets.eta.push_back( eta );
@@ -205,6 +208,7 @@ bool NtupleWrapperXAOD::MakeEventJets( EventData * ed )
 
       const double fjet_m = PhysicsHelperFunctions::Mass( ed->fjets, ed->fjets.n );
       ed->fjets.m.push_back( fjet_m );
+
       ed->fjets.n++;
   }
 
