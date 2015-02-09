@@ -93,10 +93,12 @@ rm -fr $logfile
 ## NOW CREATE ON-THE-FLY THE SCRIPT TO BE SUBMITTED
 echo job file: ${jobfile}
 
-cat > ${jobfile} <<EOF
-#!/bin/bash
+# add to run on scinet ?
 #PBS -l nodes=1:ppn=8,walltime=2:00:00
 #PBS -N $jobname
+
+cat > ${jobfile} <<EOF
+#!/bin/bash
 echo Running on \$HOSTNAME
 date
 

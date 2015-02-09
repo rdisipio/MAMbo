@@ -119,10 +119,14 @@
   <histogram hpath="reco/4j2b/WL/absrap" />
   <histogram hpath="reco/4j2b/topH/m" />
   <histogram hpath="reco/4j2b/topH/pt" />
+  <histogram hpath="reco/4j2b/topH/pt_1" />
+  <histogram hpath="reco/4j2b/topH/pt_3" />
   <histogram hpath="reco/4j2b/topH/rapidity" />
   <histogram hpath="reco/4j2b/topH/absrap" />
   <histogram hpath="reco/4j2b/topL/m" />
   <histogram hpath="reco/4j2b/topL/pt" />
+  <histogram hpath="reco/4j2b/topL/pt_1" />
+  <histogram hpath="reco/4j2b/topL/pt_3" />
   <histogram hpath="reco/4j2b/topL/rapidity" />
   <histogram hpath="reco/4j2b/topL/absrap" />
   <histogram hpath="reco/4j2b/tt/m" />

@@ -11,9 +11,6 @@ CFLAGS       = -fPIC -std=c++11 -I$(MAMBODIR)
 DEBUGFLAGS   = -O0 -D_DEBUG_ -g
 RELEASEFLAGS = -O2 -D_RELEASE_
 
-# fix this
-ARCH=x86_64-slc6-gcc48-opt
-
 # release or debug?
 debug:   CC += $(DEBUGFLAGS)
 debug:   LD += $(DEBUGFLAGS)
@@ -43,17 +40,22 @@ LIBS = $(ROOTLIBS) $(XMLLIBS)
 .cxx.o:
 	$(CC) $(CFLAGS) -c $<
 
-ifdef USE_ANALYSISTOP
+ifdef MAMBO_USE_ANALYSISTOP
 CFLAGS += -D__MOMA__
 include $(MAMBODIR)/MoMA/Makefile.rootcore.inc
+
+ARCH=x86_64-slc6-gcc47-opt
+
 CFLAGS += -I$(MAMBODIR)/MoMA
 LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA
 endif
 
 ## Use xAOD format?
 #ifeq ($(shell $(MAMBODIR)/share/use_xAOD.sh),"USE_XAOD")
-ifdef USE_XAOD
+ifdef MAMBO_USE_XAOD
 CFLAGS += -D_USE_XAOD_
+
+ARCH=x86_64-slc6-gcc48-opt
 
 ROOTCOREINCS = -I$(ROOTCOREDIR)/include
 ROOTCORELIBS = $(ROOTCOREDIR)/lib/$(ARCH)

@@ -115,11 +115,15 @@
 
   <plot hpath="reco/4j2b/topH/m"              		     xtitle="Reconstructed hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/4j2b/topH/pt"			     xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/pt_1"                            xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/pt_3"                            xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="log" />
   <plot hpath="reco/4j2b/topH/rapidity"                      xtitle="Reconstructed hadronic pseudo-top rapidity" ytitle="Events / Rapidity"  scale="linear" /> 
   <plot hpath="reco/4j2b/topH/absrap"			     xtitle="Reconstructed hadronic pseudo-top |y|" ytitle="Events / Rapidity"  scale="linear" />
 
   <plot hpath="reco/4j2b/topL/m"			     xtitle="Reconstructed leptonic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/4j2b/topL/pt" 			xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/pt_1"                       xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/pt_3"                       xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="log" />
   <plot hpath="reco/4j2b/topL/rapidity"	       	      	     xtitle="Reconstructed leptonic pseudo-top rapidity" ytitle="Events / Rapidity"  scale="linear" />
   <plot hpath="reco/4j2b/topL/absrap"			xtitle="Reconstructed leptonic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
   <plot hpath="reco/4j2b/topL/mlb"                       xtitle="(l,b) invariant mass" ytitle="Events / GeV" scale="linear" />

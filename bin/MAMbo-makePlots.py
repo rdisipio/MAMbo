@@ -315,20 +315,24 @@ def DoPlot( plot, iLumi = 1. ):
     histograms['uncertainty'].Draw( 'e2 same' )
     histograms['data'].Draw("e p same" )
 
+    tag_scale = ""
     if plot.scale == PlotScale.linear:
 #       pad1.SetLogy(False)
        pad0.SetLogx(False)
     if plot.scale == PlotScale.log: 
        pad0.SetLogy(True)
+       tag_scale = "_log"
     if plot.scale == PlotScale.logx:
        pad0.SetLogx(True)
 #       pad1.SetLogx(True)
 #       pad1.SetLogy(False)
+       tag_scale = "_logx"
     if plot.scale == PlotScale.bilog: 
        pad0.SetLogy(True)
        pad0.SetLogx(True)
 #       pad1.SetLogx(True)  
 #       pad1.SetLogy(False)
+       tag_scale = "_bilog"
 
     lparams = {
         'xoffset' : 0.67,
@@ -356,7 +360,7 @@ def DoPlot( plot, iLumi = 1. ):
 
     c.cd()
     for ext in [ "png", "pdf", "C" ]:
-       imgname = "img/%s/%s.%s" % ( ext, plot.hname, ext )
+       imgname = "img/%s/%s%s.%s" % ( ext, plot.hname, tag_scale, ext )
        c.SaveAs( imgname ) 
 
 

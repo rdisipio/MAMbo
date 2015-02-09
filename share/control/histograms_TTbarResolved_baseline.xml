@@ -30,11 +30,17 @@
             <Bin id="0" nbins="15" edges="0,25,50,80,110,140,175,210,245,280,320,360,400,450,500,1000" particle="topH"/> <!--JP proposed binning-->
             <Bin id="0" nbins="11" edges="0,45,90,135,185,235,285,340,400,460,520,1000" particle="topL"/>
 	    <Bin id="0"	nbins="6"  edges="0,30,70,115,170,225,500" particle="tt"/>
-	    <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="top"/> <!--fine binning-->
-	    <Bin id="1" nbins="50" xmin="0" xmax="500" particle="tt"/> 
-	    <Bin id="2" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="top"/> <!--previously used binning-->
+	    <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="topH"/> <!--fine binning-->
+            <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="topL"/> <!--fine binning-->
+      	    <Bin id="1" nbins="50" xmin="0" xmax="500" particle="tt"/>
+            
+	    <Bin id="2" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="topH"/> <!--previously used binning-->
+            <Bin id="2" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="topL"/> <!--previously used binning-->
 	    <Bin id="2" nbins="5"  edges="0,25,50,85,125,500" particle="tt"/>            
-           
+   
+            <Bin id="3" nbins="16" edges="0,45,90,120,150,180,220,260,300,350,400,450,500,550,650,750,1200" particle="topH" />           
+            <Bin id="3"	nbins="16" edges="0,45,90,120,150,180,220,260,300,350,400,450,500,550,650,750,1200" particle="topL" />
+
 	    <Bin id="0" nbins="50" xmin="0" xmax="600" particle="WL"/>
 	    <Bin id="0" nbins="50" xmin="0" xmax="600" particle="WH"/>
 
