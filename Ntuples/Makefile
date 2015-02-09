@@ -3,7 +3,7 @@ include ../Makefile.inc
 # modify the following line NTUPLES = ... according to your needs
 # to add more ntuples, lauch bin/MAMbo-NtupleWrapperWizard.py -t treeName -w outputWrapperName FILE.root
 #NTUPLES   = HWWtth
-NTUPLES   = TopMiniSLResolved TopMiniSLResolvedParticles TopMiniSLBoosted LHEF 
+NTUPLES  += TopMiniSLResolved TopMiniSLResolvedParticles TopMiniSLBoosted LHEF 
 
 ifdef MAMBO_USE_XAOD
 NTUPLES += XAOD

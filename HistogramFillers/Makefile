@@ -2,7 +2,7 @@ include ../Makefile.inc
 
 # modify the following line HFILLERS = ... according to your needs
 # to add more ntuples, lauch bin/MAMbo-HistogramFillersWizard.py [name]
-HFILLERS   = FinalStateObjects
+HFILLERS  += FinalStateObjects
 
 
 # do not change what follows unless you know what you're doing
