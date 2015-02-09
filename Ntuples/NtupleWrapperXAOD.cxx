@@ -181,6 +181,33 @@ bool NtupleWrapperXAOD::MakeEventJets( EventData * ed )
       }      
   }
 
+
+  const xAOD::JetContainer * akt10Jets;
+  if( !m_xAODevent->retrieve( akt10Jets, "AntiKt10LCTopoJets" ) ) {
+    cout << "WARNING: no akt10 jets collection found." << endl;
+  }
+
+  xAOD::JetContainer::const_iterator fjetItr  = akt10Jets->begin();
+  xAOD::JetContainer::const_iterator fjetItrE = akt10Jets->end();
+  for( ; fjetItr != fjetItrE ; ++fjetItr ) {
+      const double pT = (*fjetItr)->pt();
+      const double eta = (*fjetItr)->eta();
+      const double phi = (*fjetItr)->phi();
+      const double E   = (*fjetItr)->e();
+
+      if( pT < 25*GeV ) continue;
+      if( fabs(eta) > 2.5 ) continue;
+
+      ed->fjets.pT.push_back(  pT  );
+      ed->fjets.eta.push_back( eta );
+      ed->fjets.phi.push_back( phi );
+      ed->fjets.E.push_back(   E   );
+
+      const double fjet_m = PhysicsHelperFunctions::Mass( ed->fjets, ed->fjets.n );
+      ed->fjets.m.push_back( fjet_m );
+      ed->fjets.n++;
+  }
+
   return success;
 }
 

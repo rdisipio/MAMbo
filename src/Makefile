@@ -18,8 +18,10 @@ debug:   all
 release: all
 
 $(SOLIB): $(OBJS)
-	$(LD) $(DEBUG) $(SOFLAGS) $(OBJS) -o $@
-
+	@echo
+	@echo Building $@
+	$(LD) $(DEBUG) $(SOFLAGS) $(LIBS) $(OBJS) -o $@
+	@echo
 
 $(EXE): $(EXE).o $(SOLIB)
 	$(LD) $(CFLAGS) $(LIBS) -L. -l$(PROJECT) $(EXE).o -o $@

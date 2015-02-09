@@ -62,8 +62,10 @@ ROOTCORELIBS = $(ROOTCOREDIR)/lib/$(ARCH)
 XAODLIBS  = Base BTaggingEfficiency BTagging CaloEvent Core Egamma EventFormat EventInfo EventShape Jet 
 XAODLIBS += MissingET Muon PFlow RootAccess Tau Tracking Trigger Truth
 
-CFLAGS +=  $(ROOTCOREINCS)
-SOFLAGS += -L$(ROOTCORELIBS) $(foreach tool,$(XAODLIBS),-lxAOD$(tool)) $(foreach tool,$(XAODLIBS),-lxAOD$(tool)_Reflex)
+CFLAGS  += $(ROOTCOREINCS)
+SOFLAGS += -L$(ROOTCORELIBS) 
+SOFLAGS += $(foreach tool,$(XAODLIBS),-lxAOD$(tool))
+SOFLAGS += $(foreach tool,$(XAODLIBS),-lxAOD$(tool)_Reflex)
 SOFLAGS += -lxAODPrimitives -lxAODRootAccessInterfaces
 endif
 

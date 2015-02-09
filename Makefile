@@ -9,7 +9,6 @@ DIRS = src Ntuples CutFlows
 all:     install 
 release: install
 debug:   install
-#	@echo "Compiling with debug symbols" 
 
 core:
 	@$(MAKE) $(MFLAGS) -C src $(MAKECMDGOALS)

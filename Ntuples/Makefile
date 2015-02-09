@@ -5,7 +5,7 @@ include ../Makefile.inc
 #NTUPLES   = HWWtth
 NTUPLES   = TopMiniSLResolved TopMiniSLResolvedParticles TopMiniSLBoosted LHEF 
 
-ifdef USE_XAOD
+ifdef MAMBO_USE_XAOD
 NTUPLES += XAOD
 endif 
 
