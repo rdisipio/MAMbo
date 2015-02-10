@@ -15,6 +15,8 @@ class CutFlowTTHBoosted : public CutFlow
  protected:
     bool PassedCutFlow_emu_2t( EventData * ed );
 
+    void FillHistograms( const EventData * ed );
+
  protected:
     vector< string > m_cutAlias;
 };

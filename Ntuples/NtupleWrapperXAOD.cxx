@@ -33,6 +33,8 @@ bool NtupleWrapperXAOD::MakeEventInfo( EventData * ed )
   ed->info.eventNumber  = ei->eventNumber();
   ed->info.runNumber    = ei->runNumber();
 
+  ed->info.mcWeight     = 1.;
+
   return success;
 }
 
