@@ -1,0 +1,12 @@
+<analysis name="TTbarResolved">
+  <ntuple>XAOD</ntuple>
+  <branches>control/branch_list_TopMiniSLResolved.txt</branches>
+  <tree>CollectionTree</tree>
+  <histograms>control/analysis_params/Zfjet/histograms.xml</histograms>
+  <cutflow>FakeRateZfjet</cutflow>
+  <channel>electron</channel>
+  <parameters>
+    <param name="pTmin"             type="numeric" value="20." />
+    <param name="etaMax"            type="numeric" value="2.5" />
+  </parameters>
+</analysis>

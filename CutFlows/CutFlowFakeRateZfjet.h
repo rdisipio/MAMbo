@@ -9,9 +9,14 @@ class CutFlowFakeRateZfjet : public CutFlow
   CutFlowFakeRateZfjet();
   virtual ~CutFlowFakeRateZfjet();
 
-  virtual bool Apply( EventData * ed, int * lastCutPassed = NULL );
+  virtual bool Initialize();
+  virtual bool Apply( EventData * ed );
 
  protected:
+    void FillHistograms( const EventData * ed );
+ 
+ protected:
+    vector< string > m_cutAlias;
 
 };
 
@@ -21,4 +26,4 @@ extern "C" {
   CutFlowPluginFactory_FakeRateZfjet * MakeCutFlowPlugin();
 }
 
-#endif /** __CF_FakeRateZjet_H__ */
+#endif /** __CF_FakeRateZfjet_H__ */

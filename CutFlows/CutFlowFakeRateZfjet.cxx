@@ -2,9 +2,11 @@
 
 CutFlowFakeRateZfjet::CutFlowFakeRateZfjet()
 {
-  SetCounterName( "cutflow" );
+//  cout << "DEBUG: ZpT min = " << m_config->cuts["ZpTmin"] << endl;
 
-  cout << "DEBUG: ZpT min = " << m_config->cuts["ZpTmin"] << endl;
+  m_cutAlias = {
+        "beforeCuts", "0el", "2mu", "Zm", "ZpT", "1fj", "dPhi_Zfj"
+    };
 }
 
 CutFlowFakeRateZfjet::~CutFlowFakeRateZfjet()
@@ -15,124 +17,209 @@ CutFlowFakeRateZfjet::~CutFlowFakeRateZfjet()
 /////////////////////////////////////////
 
 
-bool CutFlowFakeRateZfjet::Apply( EventData * ed, int * lastCutPassed )
+bool CutFlowFakeRateZfjet::Initialize()
+{
+   bool success = true;
+
+   static int n_cuts = 6;
+
+   AddChannel( "MU" );
+
+   AddCounterName( "MU", "unweight", n_cuts ); 
+   SetCutName( "MU", "unweight", 0, "All events" );
+   SetCutName( "MU", "unweight", 1, "0 electrons");
+   SetCutName( "MU", "unweight", 2, "2 muons");
+   SetCutName( "MU", "unweight", 3, "Z mass window" );
+   SetCutName( "MU", "unweight", 4, "Z pT > 200" ); 
+   SetCutName( "MU", "unweight", 5, "N akt10 jets >= 1");
+   SetCutName( "MU", "unweight", 6, "dPhi(Z,fj) > 2.5" );
+
+   AddCounterName( "MU", "weighted", n_cuts );
+   SetCutName( "MU", "weighted", 0, "All events" );
+   SetCutName( "MU", "weighted", 1, "0 electrons");
+   SetCutName( "MU", "weighted", 2, "2 muons");
+   SetCutName( "MU", "weighted", 3, "Z mass window" );
+   SetCutName( "MU", "weighted", 4, "Z pT > 200" ); 
+   SetCutName( "MU", "weighted", 5, "N akt10 jets >= 1");
+   SetCutName( "MU", "weighted", 6, "dPhi(Z,fj)	> 2.5" );
+
+
+   return success;
+}
+
+
+/////////////////////////////////////////
+
+
+bool CutFlowFakeRateZfjet::Apply( EventData * ed )
 {
   bool success = true;
 
   CutFlow::Start();
 
-  double weight = ed->info.eventWeight;
+  double weight = ed->info.mcWeight;
+  ed->property["weight"] = weight;
 
-  PassedCut( weight );
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
+  FillHistograms( ed );
 
-  int el_n  = ed->electrons.n;
-  int mu_n  = ed->muons.n;
-  int jet_n = ed->jets.n;
+  int el_n   = ed->electrons.n;
+  int mu_n   = ed->muons.n;
+  int jet_n  = ed->jets.n;
+  int fjet_n = ed->fjets.n;
 
   //////////////////////
   // init real cutflow
 
   if( el_n > 0 ) return success;
-  PassedCut( weight );
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
 
   if( mu_n < 2 ) return success;
-  PassedCut( weight );
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
 
-  if( jet_n == 0 ) return success;
-  PassedCut( weight );
+  TLorentzVector Z, l1, l2;
+  l1 = HelperFunctions::MakeFourMomentum( ed->muons, 0 );
+  l2 = HelperFunctions::MakeFourMomentum( ed->muons, 1 );
 
-  
-  const int fjet_n = HelperFunctions::FindFatJets( ed, 200*GeV, fastjet::cambridge_algorithm, 1.2 );
-
-  
-  m_hm->GetHistogram( "el_n" )->Fill( el_n, weight );
-  for( int j = 0 ; j < el_n ; ++j ) {
-    m_hm->GetHistogram( "el_pt" )->Fill( ed->electrons.pT.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "el_eta" )->Fill( ed->electrons.eta.at( j ), weight );
-    m_hm->GetHistogram( "el_phi" )->Fill( ed->electrons.phi.at( j ), weight );
-    m_hm->GetHistogram( "el_E" )->Fill( ed->electrons.E.at( j ) / GeV, weight );
-  }
-
-  
-  m_hm->GetHistogram( "mu_n" )->Fill( mu_n, weight );
-  for( int j = 0 ; j < mu_n ; ++j ) {
-    m_hm->GetHistogram( "mu_pt" )->Fill( ed->muons.pT.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "mu_eta" )->Fill( ed->muons.eta.at( j ), weight );
-    m_hm->GetHistogram( "mu_phi" )->Fill( ed->muons.phi.at( j ), weight );
-    m_hm->GetHistogram( "mu_E" )->Fill( ed->muons.E.at( j ) / GeV, weight );
-  }
-
-  
-  m_hm->GetHistogram( "jet_n" )->Fill( jet_n, weight );
-  for( int j = 0 ; j < jet_n ; ++j ) {
-    m_hm->GetHistogram( "jet_pt" )->Fill( ed->jets.pT.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "jet_eta" )->Fill( ed->jets.eta.at( j ), weight );
-    m_hm->GetHistogram( "jet_phi" )->Fill( ed->jets.phi.at( j ), weight );
-    m_hm->GetHistogram( "jet_E" )->Fill( ed->jets.E.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "jet_m" )->Fill( ed->jets.m.at( j ) / GeV, weight );
-  }
-  
-  m_hm->GetHistogram( "fjet_n" )->Fill( jet_n, weight );
-  for( int j = 0 ; j < fjet_n ; ++j ) {
-    m_hm->GetHistogram( "fjet_pt" )->Fill( ed->fjets.pT.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "fjet_eta" )->Fill( ed->fjets.eta.at( j ), weight );
-    m_hm->GetHistogram( "fjet_phi" )->Fill( ed->fjets.phi.at( j ), weight );
-    m_hm->GetHistogram( "fjet_E" )->Fill( ed->fjets.E.at( j ) / GeV, weight );
-    m_hm->GetHistogram( "fjet_m" )->Fill( ed->fjets.m.at( j ) / GeV, weight );
-  }
-  
-  
-  TLorentzVector Z, l1, l2, fj;
-  l1.SetPtEtaPhiE( ed->muons.pT.at( 0 ), ed->muons.eta.at( 0 ), ed->muons.phi.at( 0 ), ed->muons.E.at( 0 ) );
-  l2.SetPtEtaPhiE( ed->muons.pT.at( 1 ), ed->muons.eta.at( 1 ), ed->muons.phi.at( 1 ), ed->muons.E.at( 1 ) );
-
-  // Di-lepton Invariant mass
   Z = l1 + l2;
-  m_hm->GetHistogram( "m_ll" )->Fill( Z.M() / GeV, weight );
-  m_hm->GetHistogram( "m_ll_high" )->Fill( Z.M() / GeV, weight );
+  ed->property["Z_m"]  = Z.M();
+  ed->property["Z_pt"] = Z.Pt();
 
+  FillHistograms( ed );
+
+  // Z mass window
   if( fabs( Z.M() - 91.2*GeV ) > 10*GeV ) return success;
-  PassedCut( weight );
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
+  FillHistograms( ed );
 
   // Z Transverse momentum
-  double ZpT = Z.Pt();
-  m_hm->GetHistogram( "Z_pt" )->Fill( ZpT/GeV, weight );
-
-  if( ZpT < 200 * GeV ) return success;
-  PassedCut( weight );
+  if( Z.Pt() < 200 * GeV ) return success;
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
+  FillHistograms( ed );
 
   // No. of fat jets > 0
   if( fjet_n == 0 ) return success;
-  PassedCut( weight );
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
+  FillHistograms( ed );
 
-  fj.SetPtEtaPhiE( ed->fjets.pT.at( 0 ), ed->fjets.eta.at( 0 ), ed->fjets.phi.at( 0 ), ed->fjets.E.at( 0 ) );
+  TLorentzVector fj = HelperFunctions::MakeFourMomentum( ed->fjets, 0 );
 
   double dPhi = fabs( Z.DeltaPhi( fj ) );
+  ed->property["dPhi"] = dPhi;
+
+/*
   m_hm->GetHistogram( "dPhi_Zfj_allZ" )->Fill( dPhi, weight );
   m_hm->Get2DHistogram( "fjet_pt_vs_Z_pt" )->Fill( ZpT/GeV, fj.Pt()/GeV, weight );
   m_hm->Get2DHistogram( "dPhi_Zfj_vs_Z_pt" )->Fill( ZpT/GeV, dPhi, weight );
+*/
 
-  int tjet_n = 0;
-  for( int i = 0 ; i < fjet_n ; ++i ) {
-    if( ed->fjets.tag.at(i) == 1 ) {
-      ++tjet_n;
-
-      m_hm->GetHistogram( "hadt_m" )->Fill( ed->fjets.hadt_m.at(i) / GeV, weight );
-      m_hm->GetHistogram( "hadt_pt" )->Fill( ed->fjets.pT.at(i) / GeV, weight );
-      m_hm->GetHistogram( "hadt_pt_zoom" )->Fill( ed->fjets.pT.at(i) / GeV, weight );
-    }
-  }
-  m_hm->GetHistogram( "tjet_n" )->Fill( tjet_n, weight );
-  
   // dPhi( Z, fj ) ~ back to back 
-  m_hm->GetHistogram( "dPhi_Zfj_hiPtZ" )->Fill( dPhi, weight );
- 
-  m_hm->GetHistogram( "fjet_pt_hiPtZ" )->Fill( fj.Pt() / GeV, weight );
 
   if( dPhi < 2.5 ) return success;
-  PassedCut( weight );
+  PassedCut( "MU", "unweight" );
+  PassedCut( "MU", "weighted", weight );
+  FillHistograms( ed );
 
   return success;
+}
+
+
+///////////////////////////////////////////////
+
+
+void CutFlowFakeRateZfjet::FillHistograms( const EventData * ed )
+{ 
+    const int cut = GetLastPassedCut( "MU", "weighted" ) - 1;    
+    string path = "reco/cutflow/" + m_cutAlias[cut] + "/";    
+
+    const double weight = ed->property.at("weight");
+
+    const int electron_n = ed->electrons.n;
+    m_hm->FillHistograms( path + "el_n", electron_n, weight );
+    for( int i = 0 ; i < electron_n ; ++i ) {
+       const double pt  = ed->electrons.pT.at( i ) / GeV;
+       const double eta = ed->electrons.eta.at(i);
+       const double phi = ed->electrons.phi.at(i);
+
+       m_hm->FillHistograms( path + "el_pt",   pt, weight );
+       m_hm->FillHistograms( path + "el_eta", eta, weight );
+       m_hm->FillHistograms( path + "el_phi", phi, weight );
+    }
+
+    const int muon_n = ed->muons.n;
+    m_hm->FillHistograms( path + "mu_n", muon_n, weight );
+    for( int i = 0 ; i < muon_n ; ++i ) {
+       const double pt  = ed->muons.pT.at( i ) / GeV;
+       const double eta = ed->muons.eta.at(i);
+       const double phi = ed->muons.phi.at(i);
+
+       m_hm->FillHistograms( path + "mu_pt",   pt, weight );
+       m_hm->FillHistograms( path + "mu_eta", eta, weight );
+       m_hm->FillHistograms( path + "mu_phi", phi, weight );
+    }
+
+
+    const int jet_n = ed->jets.n;
+    m_hm->FillHistograms( path + "jet_n", jet_n, weight );
+    for( int i = 0 ; i < jet_n ; ++i ) {
+       const double pt = ed->jets.pT.at( i ) / GeV;
+       const double eta = ed->jets.eta.at(i);
+       const double phi = ed->jets.phi.at(i);
+       const double m   = ed->jets.m.at(i) / GeV;
+
+       m_hm->FillHistograms( path + "jet_pt",   pt, weight );
+       m_hm->FillHistograms( path + "jet_eta", eta, weight );
+       m_hm->FillHistograms( path + "jet_phi", phi, weight );
+       m_hm->FillHistograms( path + "jet_m",     m, weight );
+    }
+
+    const int bjet_n = ed->bjets.n;
+    m_hm->FillHistograms( path + "bjet_n", bjet_n, weight );
+    for( int i = 0 ; i < bjet_n ; ++i ) {
+       const double pt = ed->bjets.pT.at( i ) / GeV;
+       const double eta = ed->bjets.eta.at(i);
+       const double phi = ed->bjets.phi.at(i);
+       const double m   = ed->bjets.m.at(i) / GeV;
+
+       m_hm->FillHistograms( path + "bjet_pt",   pt, weight );
+       m_hm->FillHistograms( path + "bjet_eta", eta, weight );
+       m_hm->FillHistograms( path + "bjet_phi", phi, weight );
+       m_hm->FillHistograms( path + "bjet_m",     m, weight );
+    }
+
+    const int fjet_n = ed->fjets.n;
+    m_hm->FillHistograms( path + "fjet_n", fjet_n, weight );
+    for( int i = 0 ; i < fjet_n ; ++i ) {
+       const double pt = ed->fjets.pT.at( i ) / GeV;
+       const double eta = ed->fjets.eta.at(i);
+       const double phi = ed->fjets.phi.at(i);
+       const double m   = ed->fjets.m.at(i) / GeV;
+
+       m_hm->FillHistograms( path + "fjet_pt",   pt, weight );
+       m_hm->FillHistograms( path + "fjet_eta", eta, weight );
+       m_hm->FillHistograms( path + "fjet_phi", phi, weight );
+       m_hm->FillHistograms( path + "fjet_m",     m, weight );
+    }
+
+    if( HelperFunctions::HasProperty( "Z_m", ed ) ) {
+       const double Z_m  = ed->property.at("Z_m") / GeV;
+       const double Z_pt = ed->property.at("Z_pt") / GeV; 
+
+       m_hm->FillHistograms( path + "Z_m", Z_m, weight );
+       m_hm->FillHistograms( path + "Z_pt", Z_pt, weight );
+    }
+    if( HelperFunctions::HasProperty( "dPhi", ed ) ) {
+       const double dPhi = ed->property.at("dPhi");
+   
+       m_hm->FillHistograms( path + "dPhi", dPhi, weight );
+    }
+
 }
 
 

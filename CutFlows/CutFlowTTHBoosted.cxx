@@ -107,10 +107,12 @@ bool CutFlowTTHBoosted::PassedCutFlow_emu_2t( EventData * ed )
     // 5) 1 el && 1 mu
     if( el_n != 1 ) return !passed;
     if(	mu_n !=	1 ) return !passed;
-    const double el_pt = ed->electrons.pT.at(0);
-    const double mu_pt = ed->muons.pT.at(0);
-    if( el_pt < 25 * GeV ) return !passed;
-    if( mu_pt < 25 * GeV ) return !passed;
+//    const double el_pt = ed->electrons.pT.at(0);
+//    const double mu_pt = ed->muons.pT.at(0);
+//    const double pt_1 = max( el_pt, mu_pt );
+//    const double pt_2 = min( el_pt, mu_pt );
+//    if( el_pt < 25 * GeV ) return !passed;
+//    if( mu_pt < 25 * GeV ) return !passed;
     PassedCut("EMU", "weighted", weight );
     PassedCut("EMU", "unweight");
     FillHistograms( ed );

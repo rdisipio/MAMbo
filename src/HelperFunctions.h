@@ -120,6 +120,9 @@ namespace HelperFunctions {
       
       return new_index;
   }
+
+  
+  bool HasProperty( const string& name, const EventData * ed );
 };
 
 #endif /**  __HELPERFUNCTIONS_H__ */
