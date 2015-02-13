@@ -11,18 +11,26 @@ _corrs = []
 _h = []
 
 
-Paths = ['particle', 'reco', 'particle_not_reco', 'reco_not_particle', 'matched', 'reco_and_particle']
+Paths = ['particle', 'reco', 'matched_p', 'matched_r', 'reco_and_particle_r']
 
 ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
              'topL' : '#hat{t}_{l}',
              'topH' : '#hat{t}_{h}',
              'WL' : '#hat{W}_{l}',
              'WH' : '#hat{W}_{h}',
-             'tt' : '#hat{t}_{l}#hat{t}_{h}' }
+             'tt' : '#hat{t}_{l}#hat{t}_{h}',
+             'difference' : ''}
 TitleNames = { 'pt' : 'p_{T}', 
                'm' : 'm', 
                'absrap' : '|y|', 
-               'rapidity' : 'y' }
+               'rapidity' : 'y',
+               'Pout' : 'p_{out}',
+               'z_ttbar' : 'z_{#hat{t}_{l}#hat{t}_{h}}',
+               'Yboost' : 'y_{boost}',
+               'Chi_ttbar' : '#chi_{#hat{t}_{l}#hat{t}_{h}}',
+               'dPhi_ttbar' : '#Delta#phi_{#hat{t}_{l}#hat{t}_{h}}',
+               'Salam_ttbar' : 'S_{#hat{t}_{l}#hat{t}_{h}}'
+               }
 CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}', 
               'match' : 'Misassignment correction f_{match}', 
               'acc' : 'Acceptance correction f_{r!p}' }
@@ -89,16 +97,14 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
 
-    #print '        %s' %(Paths[2] + path)
-    #h_pnr = rfile.Get(Paths[2] + path)
-    #print '        %s' %(Paths[3] + path)
-    #h_rnp = rfile.Get(Paths[3] + path)
+    print '        %s' %(Paths[2] + path)
+    h_match_p = rfile.Get(Paths[2] + path)
+
+    print '        %s' %(Paths[3] + path)
+    h_match_r = rfile.Get(Paths[3] + path)
 
     print '        %s' %(Paths[4] + path)
-    h_match = rfile.Get(Paths[4] + path)
-
-    print '        %s' %(Paths[5] + path)
-    h_rp = rfile.Get(Paths[5] + path)
+    h_rp = rfile.Get(Paths[4] + path)
     
 #    xtitle=h_rp.GetXaxis().GetTitle()
 #    ytitle=h_rp.GetYaxis().GetTitle()
@@ -107,21 +113,21 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     #PrintBinContent(h_pnr)
 
     print '  Making eff...'
-    print '  RMS check: %f' % (h_part.GetRMS(),)
-    print '  RMS check: %f' % ( h_rp.GetRMS(),)
-    eff = MakeRatio( h_part,  h_match)
-    #eff = MakeRatio( h_part,  h_pnr)
+    print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
+    eff = MakeRatio( h_part,  h_match_p)
+
     print '  Making acc...'
-    print '  RMS check: %f %f' % (h_reco.GetRMS(), h_rp.GetRMS())
+    print '    RMS check: %f %f' % (h_rp.GetRMS(), h_reco.GetRMS())
     acc = MakeRatio( h_rp, h_reco)
     CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
-    print '  Making match...'
-    print '  RMS check: %f %f' % (h_match.GetRMS(), h_rp.GetRMS())
-    match = MakeRatio( h_match,  h_rp)
 
-    if icorr == 0: return eff,h_part,h_match
+    print '  Making match...'
+    print '    RMS check: %f %f' % (h_match_r.GetRMS(), h_rp.GetRMS())
+    match = MakeRatio( h_match_r,  h_rp)
+
+    if icorr == 0: return eff,h_part,h_match_p
     if icorr == 1: return acc,h_rp,h_reco
-    if icorr == 2: return match,h_match,h_rp
+    if icorr == 2: return match,h_match_r,h_rp
     return
 
 #################
@@ -173,6 +179,7 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     _corrs.append(corr)
     can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
+    can.Print('pdf/' + canname + '.pdf')
 
 ####################################################
 ####################################################
@@ -184,26 +191,32 @@ ljets = [ 'll', 'el', 'mu']
 #ljets = [ 'mu' ]
 #ljets = [ 'll' ]
 
-ftag='_Jan2015'
+ptag='_Feb2015'
+#ftag='_Fab12_matched_p_wp'
+ftag='_Feb12_matched_p_wr'
+
+
+os.system('mkdir png eps pdf')
+
+rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/'
+# 
 
 for ll in ljets:
 
-    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s%s.root' % (ll,ftag), 'read')
-#    rfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_halves.root' % (ll,), 'read')
+    rfile = TFile('%shistograms_PowHeg_%s%s.root' % (rpath, ll, ftag, ), 'read')
+#    rfile = TFile('%shistograms_PowHeg_%s_halves.root' % (rpath, ll, ), 'read')
     _files.append(rfile)
     print 'Opened file %s' % (rfile.GetName(),)
 
-    pfile = TFile('/afs/cern.ch/user/q/qitek/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/histograms_PowHeg_%s_particle%s.root' % (ll,ftag), 'read')
+    pfile = TFile('%shistograms_PowHeg_%s_particle%s.root' % (rpath, ll, ptag, ), 'read')
     _files.append(pfile)
     print 'Opened file %s' % (pfile.GetName(),)
 
     Obj = ['topH', 'topL',
            'WH', 
            'WL',
-           'tt'
-       ]
-    Var = [
-        'pt', 'm', 
+           'tt']
+    Var = ['pt', 'm', 
            'absrap']
 
     for obj in Obj:
@@ -211,7 +224,18 @@ for ll in ljets:
             DrawCorrection(ll, rfile, pfile, obj, var, 0)
             DrawCorrection(ll, rfile, pfile, obj, var, 1)
             DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            pass
 
+
+    SpecObj = ['difference' ]
+    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar']
+
+    for obj in SpecObj:
+        for var in SpecVar:
+            DrawCorrection(ll, rfile, pfile, obj, var, 0)
+            DrawCorrection(ll, rfile, pfile, obj, var, 1)
+            DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            pass
 
     
 #

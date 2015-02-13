@@ -307,7 +307,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       // standing for passed: reco!part
       
       if(passedRecoSelection and fillHistos) {
-	FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_not_particle");
+	//	FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_not_particle");
       }
       return success;
       
@@ -358,7 +358,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 	  // fill reco && particle for the denumerator of the f_'missassign' and numerator for f_{r!p} (acceptance)
 	  // this is WITHOUT the matching condition!
-	  FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_and_particle"); // YES, with reco weight!
+	  FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_and_particle_r"); // YES, with reco weight! _r as binned in reco
 
 	  // fill response matrix:
 	  // NEW: added here the matching condition!!! JK 3.12.2014
@@ -369,7 +369,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
 	    //  fill numerator for the matching eff (f_'missassign')
 	    // reco && particle && matched:
-	    FillHistogramsPseudotopReco(ed, weight_reco_level, "matched"); // YES, with reco weight!
+	    FillHistogramsPseudotopReco(ed, weight_reco_level, "matched_r"); // YES, binned in reco, and with reco weight! _r as binned in reco
+	    FillHistogramsPseudotopParticle(ed, weight_reco_level, "matched_p"); // YES, binned in particle, but weighted in reco! _p as binned in particle
 	  }
 	}
 
@@ -871,6 +872,7 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &t
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
 
+   // TODO: fill HT!
 
 
  }

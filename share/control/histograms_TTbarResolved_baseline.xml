@@ -1,11 +1,12 @@
 <histograms>
     <Level> <!--Level-->
-        <Type name="reco" />                 <!-- Passed: reco-->
-        <Type name="particle" />             <!-- Passed: particle-->
+        <Type name="reco" />                 <!-- Passed: reco, binned in reco-->
+        <Type name="particle" />             <!-- Passed: particle, binned in reco-->
         <Type name="parton" />
-        <Type name="reco_and_particle" />    <!-- Passed: reco && particle-->
-        <Type name="reco_not_particle" />    <!-- Passed: reco && !particle -->
-        <Type name="matched" />              <!-- Passed: reco && particle && matched-->
+        <Type name="reco_and_particle_r" />    <!-- Passed: reco && particle, binned in reco-->
+        <!-- <Type name="reco_not_particle" /> -->    <!-- Passed: reco && !particle, binned in reco, of course --> 
+        <Type name="matched_r" />              <!-- Passed: reco && particle && matched, binned in reco-->
+        <Type name="matched_p" />              <!-- Passed: reco && particle && matched, binned in particle-->
     </Level>
     <Level> <!--Region-->
         <!--Type name="4j1b" /-->
