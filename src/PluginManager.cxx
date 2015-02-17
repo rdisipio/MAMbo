@@ -215,3 +215,55 @@ bool PluginManager::LoadHistogramFillerPlugin( const string& name, const string&
 
   return success;
 }
+
+
+///////////////////////////////////////
+
+
+int PluginManager::LoadAllAnalysisCuts()
+{
+  IAnalysisCutPluginFactory * pluginFactory     = NULL;
+
+  int n_plugins_found = 0;
+
+  const string pwd = string( getenv( "PWD" ) );
+  n_plugins_found += FindPlugins( pwd, "AnalysisCuts", m_cuts );
+
+  const string mambodir = string( getenv( "MAMBODIR" ) ) + "/lib/";
+  n_plugins_found += FindPlugins( mambodir, "AnalysisCut", m_cuts );
+
+  if( n_plugins_found == 0 ) {
+    cout << "WARNING: No analysis cuts plugin found" << endl;
+    return 0;
+  }
+  else cout << "INFO: Found " << n_plugins_found << " analysis cuts libraries" << endl;
+
+  int loaded = 0;
+  for( PluginMap::const_iterator pair = m_cuts.begin() ; pair != m_cuts.end() ; ++pair ) {
+    if( LoadAnalysisCutPlugin( (*pair).first, (*pair).second ) ) ++loaded;
+  }
+
+  return loaded;
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+bool PluginManager::LoadAnalysisCutPlugin( const string& name, const string& path )
+{
+  bool success = true;
+
+  void* handle = LoadPlugin( path );
+
+  IAnalysisCutPluginFactory * pluginFactory     = NULL;
+
+  pf_MakeAnalysisCutPlugin    MakeAnalysisCutPlugin = (pf_MakeAnalysisCutPlugin)dlsym( handle, "MakeAnalysisCutPlugin" );
+  if( !MakeAnalysisCutPlugin ) throw runtime_error( dlerror() );
+  pluginFactory = MakeAnalysisCutPlugin();
+
+  pluginFactory->Register();
+
+  return success;
+}
+

@@ -27,6 +27,10 @@ hfillers:
 	@$(MAKE) $(MFLAGS) -C HistogramFillers $(MAKECMDGOALS)
 	@ln -sf $(PWD)/HistogramFillers/*.so	 ./lib/
 
+analysiscuts:
+	@$(MAKE) $(MFLAGS) -C AnalysisCuts $(MAKECMDGOALS)
+	@ln -sf $(PWD)/AnalysisCuts/*.so ./lib/
+
 moma:
 	@if  [ -z "$(ROOTCOREDIR)" ]; then echo "ATLAS ROOTCORE not found" ; exit 0 ; \
 	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; fi
@@ -37,7 +41,7 @@ environment: ./bin/MAMbo-setenv.sh.template
 	@ln -sf $(PWD)/bin/MAMbo-submit.sh $(PWD)/run/MAMbo-submit.sh
 
 
-install: moma core hfillers ntuples cutflows environment
+install: moma core hfillers ntuples cutflows analysiscuts environment
 	@ln -sf $(PWD)/share/control/    ./run/
 
 
@@ -46,6 +50,7 @@ clean:
 	@cd Ntuples  ; $(MAKE) $(MFLAGS) clean
 	@cd CutFlows ; $(MAKE) $(MFLAGS) clean
 	@cd HistogramFillers ; $(MAKE) $(MFLAGS) clean
+	@cd AnalysisCuts ; $(MAKE) $(MFLAGS) clean
 #	@cd MoMA     ; $(MAKE) $(MFLAGS) clean
 
 force_look:

@@ -8,7 +8,7 @@ TOOLS += HEPTopTagger
 #HEPTopTaggerHelperFunctions
 endif
 
-SRCS    = IHistogramFiller.cxx INtupleWrapper.cxx ICutFlow.cxx $(TOOLS:=.cxx)
+SRCS    = IHistogramFiller.cxx INtupleWrapper.cxx ICutFlow.cxx IAnalysisCut.cxx $(TOOLS:=.cxx)
 OBJS    = ${SRCS:.cxx=.o}
 
 SOLIB   = lib$(PROJECT).so

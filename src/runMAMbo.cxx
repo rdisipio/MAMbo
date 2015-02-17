@@ -6,6 +6,7 @@ using namespace std;
 #include "Commons.h"
 #include "HistogramManager.h"
 #include "CutFlowFactory.hpp"
+#include "AnalysisCutsFactory.hpp"
 #include "PluginManager.h"
 #include "ConfigManager.h"
 
@@ -73,6 +74,7 @@ int main( int argc, char ** argv )
   PluginManager * pluginManager = PluginManager::GetHandle();
   pluginManager->LoadAllCutFlows();
   pluginManager->LoadAllHistogramFillers();
+  pluginManager->LoadAllAnalysisCuts();
   pluginManager->LoadAllNtupleWrappers();
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
@@ -81,6 +83,9 @@ int main( int argc, char ** argv )
   HistogramFillersFactory * HF_Factory = HistogramFillersFactory::GetHandle();
   HF_Factory->Dump();
  
+  AnalysisCutsFactory * AC_Factory = AnalysisCutsFactory::GetHandle();
+  AC_Factory->Dump();
+
   NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
   NW_Factory->Dump();
 
