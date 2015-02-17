@@ -83,7 +83,9 @@ void CutFlow::AddCounterName( const string& channelName, const string& counterNa
   
   m_hm->Book1DHistogramInFolder( "", histName.str(), histTitle.str(), nbins, -0.5, nbins-0.5 );
 
-  m_cutAlias.insert( m_cutAlias.begin(), ncuts+1, "" );
+  stringstream cfName;
+  cfName << channelName << "_" << counterName;
+  m_cutAlias[cfName.str()] = StringVector_t( ncuts+1, "" );
 
   //cout << "DEBUG: Histo created in base folder with name " << histName.str() << endl;
   SetCutName( channelName, counterName, 0, "AllEvents" );  
@@ -92,6 +94,7 @@ void CutFlow::AddCounterName( const string& channelName, const string& counterNa
     sprintf( buf, "Cut %i", nc );
     SetCutName( channelName, counterName, nc, buf, buf );
   }
+
 
 };
 
@@ -186,12 +189,30 @@ void CutFlow::PrintOutStats()
 
       cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     }
-  }
-  
-
-  
- 
+  } 
    
+}
+
+
+///////////////////////////////////////
+
+
+void CutFlow::SetCutAlias( const string& channelName, const string& counterName, int n, const string& cutAlias )
+{
+   if( cutAlias.empty() ) return;
+
+   stringstream cfName;
+   cfName << channelName << "_" << counterName;
+
+   if( m_cutAlias.count( cfName.str() ) == 0 ) {
+     char buf[256]; 
+     sprintf( buf, "SetCutAlias(): Undefined cut flow %s\n", cfName.str().c_str() );
+     throw runtime_error( buf );
+   }
+
+   StringVector_t * p_cutAlias = &m_cutAlias.at( cfName.str() );
+
+   (*p_cutAlias)[n] = cutAlias;
 }
 
 
@@ -203,7 +224,7 @@ void CutFlow::SetCutName( const string& channelName, const string& counterName, 
   stringstream histName;
   histName << channelName << "_cutflow_" << counterName;
 
-  if( !cutAlias.empty() ) m_cutAlias[n+1] = cutAlias;
+  SetCutAlias( channelName, counterName, n, cutAlias );
   
   //cout<< "DEBUG: histName: "<<histName.str()<< " From: "<<channelName << " " <<counterName << endl;
   

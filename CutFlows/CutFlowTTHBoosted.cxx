@@ -2,10 +2,11 @@
 
 CutFlowTTHBoosted::CutFlowTTHBoosted()
 {
+/*
     m_cutAlias = {
         "beforeCuts", "trig", "pvtx", "2l", "xET30", "2l1fj", "2l2fj"
     };
-  
+*/  
 }
 
 CutFlowTTHBoosted::~CutFlowTTHBoosted()
@@ -25,22 +26,22 @@ bool CutFlowTTHBoosted::Initialize()
    AddChannel( "EMU" );
 
    AddCounterName( "EMU", "unweight", n_cuts ); 
-   SetCutName( "EMU", "unweight", 0, "All event" );
-   SetCutName( "EMU", "unweight", 1, "Trigger");
-   SetCutName( "EMU", "unweight", 2, "Prim. Vtx");
-   SetCutName( "EMU", "unweight", 3, "1e1mu pT > 25 GeV");
-   SetCutName( "EMU", "unweight", 4, "ETmiss > 30 GeV");
-   SetCutName( "EMU", "unweight", 5, "N akt10 jets >= 1");
-   SetCutName( "EMU", "unweight", 6, "N akt10 jets >= 2");
+   SetCutName( "EMU", "unweight", 0, "All events",        "beforeCuts" );
+   SetCutName( "EMU", "unweight", 1, "Trigger",           "tri" );
+   SetCutName( "EMU", "unweight", 2, "Prim. Vtx",         "ptx" );
+   SetCutName( "EMU", "unweight", 3, "1e1mu pT > 25 GeV", "2l" );
+   SetCutName( "EMU", "unweight", 4, "ETmiss > 30 GeV",   "xET30" );
+   SetCutName( "EMU", "unweight", 5, "N akt10 jets >= 1", "2l1fj" );
+   SetCutName( "EMU", "unweight", 6, "N akt10 jets >= 2", "2l2fj" );
 
    AddCounterName( "EMU", "weighted", n_cuts );
-   SetCutName( "EMU", "weighted", 0, "All event" );
-   SetCutName( "EMU", "weighted", 1, "Trigger");
-   SetCutName( "EMU", "weighted", 2, "Prim. Vtx");
-   SetCutName( "EMU", "weighted", 3, "1e1mu pT > 25 GeV");
-   SetCutName( "EMU", "weighted", 4, "ETmiss > 30 GeV");
-   SetCutName( "EMU", "weighted", 5, "N akt10 jets >= 1");
-   SetCutName( "EMU", "weighted", 6, "N akt10 jets >= 2"); 
+   SetCutName( "EMU", "weighted", 0, "All event",        "beforeCuts"  );
+   SetCutName( "EMU", "weighted", 1, "Trigger",           "tri"   );
+   SetCutName( "EMU", "weighted", 2, "Prim. Vtx",         "ptx"   );
+   SetCutName( "EMU", "weighted", 3, "1e1mu pT > 25 GeV", "2l"    );
+   SetCutName( "EMU", "weighted", 4, "ETmiss > 30 GeV",   "xET30" );
+   SetCutName( "EMU", "weighted", 5, "N akt10 jets >= 1", "2l1fj" );
+   SetCutName( "EMU", "weighted", 6, "N akt10 jets >= 2", "2l2fj" ); 
 
    return success;
 }
@@ -132,8 +133,9 @@ bool CutFlowTTHBoosted::PassedCutFlow_emu_2t( EventData * ed )
 
 void CutFlowTTHBoosted::FillHistograms( const EventData * ed )
 { 
-    const int cut = GetLastPassedCut( "EMU", "weighted" ) - 1;    
-    string path = "reco/cutflow/" + m_cutAlias[cut] + "/";    
+    const int cut = GetLastPassedCut( "EMU", "weighted" ) - 1;   
+    const string cutflow = "EMU_weighted"; 
+    string path = "reco/cutflow/" + m_cutAlias[cutflow][cut] + "/";    
 
     const double weight = ed->property.at("weight");
 

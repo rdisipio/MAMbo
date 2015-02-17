@@ -18,7 +18,7 @@ class CutFlowTTHBoosted : public CutFlow
     void FillHistograms( const EventData * ed );
 
  protected:
-    vector< string > m_cutAlias;
+
 };
 
 typedef CutFlowPluginFactory< CutFlowTTHBoosted > CutFlowPluginFactory_TTHBoosted;

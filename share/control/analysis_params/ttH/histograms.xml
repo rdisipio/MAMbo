@@ -31,7 +31,7 @@
             <Bin id="0" nbins="50" xmin="0" xmax="1000" />
         </Variable>
         <Variable name="mu_n"   title="No. of Muons" folder="cutflow">
-            <Bin id="0" nbins="20" xmin="-0.5" xmax="19.5" />
+            <Bin id="0" nbins="4" xmin="-0.5" xmax="3.5" />
         </Variable>
         <Variable name="mu_eta" title="Muon pseudorapidity" folder="cutflow" >
             <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" />
