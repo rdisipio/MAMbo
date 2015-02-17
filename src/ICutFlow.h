@@ -29,7 +29,7 @@ class CutFlow
 
    virtual bool Start();
    
-   virtual void SetCutName( const string& channelName, const string& counterName, int n, const char * cutName );
+   virtual void SetCutName( const string& channelName, const string& counterName, int n, const string& cutName, const string& cutAlias = "" );
 
    virtual bool IncreaseCount( const string& histName, unsigned int cut, double weight = 1., double * new_value = NULL );
    
@@ -41,6 +41,8 @@ class CutFlow
    map< string, string >           m_counter2channel;
    map< string, vector< string > > m_counterName;
    map< string, int >              m_lastCutPassed;
+
+   StringVector_t                  m_cutAlias;
 
    HistogramManager * m_hm;
    AnalysisParams_t * m_config;

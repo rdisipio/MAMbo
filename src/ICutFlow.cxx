@@ -83,12 +83,14 @@ void CutFlow::AddCounterName( const string& channelName, const string& counterNa
   
   m_hm->Book1DHistogramInFolder( "", histName.str(), histTitle.str(), nbins, -0.5, nbins-0.5 );
 
+  m_cutAlias.insert( m_cutAlias.begin(), ncuts+1, "" );
+
   //cout << "DEBUG: Histo created in base folder with name " << histName.str() << endl;
   SetCutName( channelName, counterName, 0, "AllEvents" );  
   char buf[32];
   for( unsigned int nc = 1 ; nc <= ncuts ; ++nc ) {
     sprintf( buf, "Cut %i", nc );
-    SetCutName( channelName, counterName, nc, buf );
+    SetCutName( channelName, counterName, nc, buf, buf );
   }
 
 };
@@ -196,11 +198,13 @@ void CutFlow::PrintOutStats()
 ///////////////////////////////////////
 
 
-void CutFlow::SetCutName( const string& channelName, const string& counterName, int n, const char * cutName )
+void CutFlow::SetCutName( const string& channelName, const string& counterName, int n, const string& cutName, const string& cutAlias )
 {
   stringstream histName;
   histName << channelName << "_cutflow_" << counterName;
 
+  if( !cutAlias.empty() ) m_cutAlias[n+1] = cutAlias;
+  
   //cout<< "DEBUG: histName: "<<histName.str()<< " From: "<<channelName << " " <<counterName << endl;
   
   TH1 * p_h_cf = m_hm->GetHistogram( histName.str() );
@@ -217,5 +221,5 @@ void CutFlow::SetCutName( const string& channelName, const string& counterName, 
 
   TAxis * p_x = (TAxis*)p_h_cf->GetXaxis();
   
-  p_x->SetBinLabel( n+1, cutName );
+  p_x->SetBinLabel( n+1, cutName.c_str() );
 }

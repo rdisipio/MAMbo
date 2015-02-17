@@ -17,8 +17,8 @@ bool CutFlow@NAME@::Initialize()
    bool success = true;
 
    // AddChannel( "EL" );
-   // AddCounter( "EL", "weighted", 3 );
-   // AddCounter( "EL", "unweight", 3 );
+   // AddCounterName( "EL", "weighted", 3 );
+   // AddCounterName( "EL", "unweight", 3 );
 
    // SetCutName( "EL", "weighted", 0, "AllEvents" );
    // SetCutName( "EL", "weighted", 1, "Trigger" );
