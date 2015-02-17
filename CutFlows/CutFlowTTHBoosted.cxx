@@ -3,7 +3,7 @@
 CutFlowTTHBoosted::CutFlowTTHBoosted()
 {
     m_cutAlias = {
-        "beforeCuts", "trig", "pvtx", "1fj", "2fj", "2fj2l", "afterCuts"
+        "beforeCuts", "trig", "pvtx", "2l", "xET30", "2l1fj", "2l2fj"
     };
   
 }
@@ -28,19 +28,19 @@ bool CutFlowTTHBoosted::Initialize()
    SetCutName( "EMU", "unweight", 0, "All event" );
    SetCutName( "EMU", "unweight", 1, "Trigger");
    SetCutName( "EMU", "unweight", 2, "Prim. Vtx");
-   SetCutName( "EMU", "unweight", 3, "N akt10 jets >= 1");
-   SetCutName( "EMU", "unweight", 4, "N akt10 jets >= 2");
-   SetCutName( "EMU", "unweight", 5, "1e1mu pT > 25 GeV");
-   SetCutName( "EMU", "unweight", 6, "ETmiss > 30 GeV");
+   SetCutName( "EMU", "unweight", 3, "1e1mu pT > 25 GeV");
+   SetCutName( "EMU", "unweight", 4, "ETmiss > 30 GeV");
+   SetCutName( "EMU", "unweight", 5, "N akt10 jets >= 1");
+   SetCutName( "EMU", "unweight", 6, "N akt10 jets >= 2");
 
    AddCounterName( "EMU", "weighted", n_cuts );
    SetCutName( "EMU", "weighted", 0, "All event" );
    SetCutName( "EMU", "weighted", 1, "Trigger");
    SetCutName( "EMU", "weighted", 2, "Prim. Vtx");
-   SetCutName( "EMU", "weighted", 3, "N akt10 jets >= 1");
-   SetCutName( "EMU", "weighted", 4, "N akt10 jets >= 2"); 
-   SetCutName( "EMU", "weighted", 5, "1e1mu pT > 25 GeV");
-   SetCutName( "EMU", "weighted", 6, "ETmiss > 30 GeV");
+   SetCutName( "EMU", "weighted", 3, "1e1mu pT > 25 GeV");
+   SetCutName( "EMU", "weighted", 4, "ETmiss > 30 GeV");
+   SetCutName( "EMU", "weighted", 5, "N akt10 jets >= 1");
+   SetCutName( "EMU", "weighted", 6, "N akt10 jets >= 2"); 
 
    return success;
 }
@@ -92,19 +92,7 @@ bool CutFlowTTHBoosted::PassedCutFlow_emu_2t( EventData * ed )
     PassedCut("EMU", "weighted", weight );
     PassedCut("EMU", "unweight");
 
-    // 3) N fat jets >= 1
-    if( fjet_n < 1 ) return !passed;
-    PassedCut("EMU", "weighted", weight );
-    PassedCut("EMU", "unweight");
-    FillHistograms( ed );
-
-    // 4) N fat jets >= 2
-    if(	fjet_n < 2 ) return !passed;
-    PassedCut("EMU", "weighted", weight );
-    PassedCut("EMU", "unweight");
-    FillHistograms( ed );
-
-    // 5) 1 el && 1 mu
+    // 3) 1 el && 1 mu
     if( el_n != 1 ) return !passed;
     if(	mu_n !=	1 ) return !passed;
 //    const double el_pt = ed->electrons.pT.at(0);
@@ -117,8 +105,20 @@ bool CutFlowTTHBoosted::PassedCutFlow_emu_2t( EventData * ed )
     PassedCut("EMU", "unweight");
     FillHistograms( ed );
 
-    // 6) ETmiss cut
+    // 4) ETmiss cut
     if( ETmiss < 20 * GeV ) return !passed;
+    PassedCut("EMU", "weighted", weight );
+    PassedCut("EMU", "unweight");
+    FillHistograms( ed );
+
+    // 5) N fat jets >= 1
+    if( fjet_n < 1 ) return !passed;
+    PassedCut("EMU", "weighted", weight );
+    PassedCut("EMU", "unweight");
+    FillHistograms( ed );
+
+    // 6) N fat jets >= 2
+    if(	fjet_n < 2 ) return !passed;
     PassedCut("EMU", "weighted", weight );
     PassedCut("EMU", "unweight");
     FillHistograms( ed );

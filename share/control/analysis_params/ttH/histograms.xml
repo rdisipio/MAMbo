@@ -8,9 +8,10 @@
     </Level>
     <Level> <!--Particle-->
         <Type name="beforeCuts" inFolder="cutflow" />
-        <Type name="1fj" inFolder="cutflow" />
-        <Type name="2fj" inFolder="cutflow" />
-        <Type name="2fj2l" inFolder="cutflow" />
+        <Type name="2l" inFolder="cutflow" />
+        <Type name="xET30" inFolder="cutflow" />
+        <Type name="2l1fj" inFolder="cutflow" />
+        <Type name="2l2fj" inFolder="cutflow" />
         <Type name="afterCuts" inFolder="cutflow" />
     </Level>
     <Variables>
