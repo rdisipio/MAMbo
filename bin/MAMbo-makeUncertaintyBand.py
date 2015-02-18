@@ -173,12 +173,19 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
              # syst. unc.
              for systname in samples_configuration[sample].systematics.keys():
                  hpattern = "%s_%s_%s_" % ( sample, hname, systname )
-                 h_u = hlist[hpattern+"up"]
-                 h_d = hlist[hpattern+"down"]
-     
-                 dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
-                 dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
+                 if (side == "up" || side == "down")
+                    h_u = hlist[hpattern+"up"]
+                    h_d = hlist[hpattern+"down"]
 
+                    dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
+                    dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
+
+                 elif (side == "single")
+                    h_sys = hlist[hpattern+"single"]
+
+                    dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
+                    dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
+		 
                  if dy_u > 0. and dy_d > 0.:
                     points[i]['u'] += pow( dy_u, 2 )
                     points[i]['d'] += pow( dy_d, 2 )
@@ -193,8 +200,8 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                     points[i]['d'] += pow( dy_max, 2 )
                  else:
                     pass
-#                    print "WARNING: unhandled case: sample", sample, "syst", systname, "bin", i, "dy_u =", dy_u, "dy_d =", dy_d
-
+	#                    print "WARNING: unhandled case: sample", sample, "syst", systname, "bin", i, "dy_u =", dy_u, "dy_d =", dy_d
+    
           for i in range(nbins):
              x  = h.GetBinCenter( i+1 )
              y  = points[i]['n']
