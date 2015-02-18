@@ -7,6 +7,7 @@ using namespace std;
 #include "HistogramManager.h"
 #include "CutFlowFactory.hpp"
 #include "AnalysisCutsFactory.hpp"
+#include "EventModifiersFactory.hpp"
 #include "PluginManager.h"
 #include "ConfigManager.h"
 
@@ -75,6 +76,7 @@ int main( int argc, char ** argv )
   pluginManager->LoadAllCutFlows();
   pluginManager->LoadAllHistogramFillers();
   pluginManager->LoadAllAnalysisCuts();
+  pluginManager->LoadAllEventModifiers();
   pluginManager->LoadAllNtupleWrappers();
 
   CutFlowFactory * CF_Factory = CutFlowFactory::GetHandle();
@@ -85,6 +87,9 @@ int main( int argc, char ** argv )
  
   AnalysisCutsFactory * AC_Factory = AnalysisCutsFactory::GetHandle();
   AC_Factory->Dump();
+
+  EventModifiersFactory * EM_Factory = EventModifiersFactory::GetHandle();
+  EM_Factory->Dump();
 
   NtupleWrapperFactory * NW_Factory = NtupleWrapperFactory::GetHandle();
   NW_Factory->Dump();

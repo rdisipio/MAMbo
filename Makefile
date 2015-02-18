@@ -31,6 +31,10 @@ analysiscuts:
 	@$(MAKE) $(MFLAGS) -C AnalysisCuts $(MAKECMDGOALS)
 	@ln -sf $(PWD)/AnalysisCuts/*.so ./lib/
 
+eventmodifiers:
+	@$(MAKE) $(MFLAGS) -C EventModifiers $(MAKECMDGOALS)
+	@ln -sf $(PWD)/EventModifiers/*.so ./lib/
+
 moma:
 	@if  [ -z "$(ROOTCOREDIR)" ]; then echo "ATLAS ROOTCORE not found" ; exit 0 ; \
 	else echo "ATLAS ROOTCORE installed in $(ROOTCOREDIR)" ; fi
@@ -41,7 +45,7 @@ environment: ./bin/MAMbo-setenv.sh.template
 	@ln -sf $(PWD)/bin/MAMbo-submit.sh $(PWD)/run/MAMbo-submit.sh
 
 
-install: moma core hfillers ntuples cutflows analysiscuts environment
+install: moma core hfillers ntuples cutflows analysiscuts eventmodifiers environment
 	@ln -sf $(PWD)/share/control/    ./run/
 
 

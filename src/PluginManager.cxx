@@ -267,3 +267,54 @@ bool PluginManager::LoadAnalysisCutPlugin( const string& name, const string& pat
   return success;
 }
 
+
+///////////////////////////////////////
+
+
+int PluginManager::LoadAllEventModifiers()
+{
+  IEventModifiersPluginFactory * pluginFactory     = NULL;
+
+  int n_plugins_found = 0;
+
+  const string pwd = string( getenv( "PWD" ) );
+  n_plugins_found += FindPlugins( pwd, "EventModifiers", m_eventmodifiers );
+
+  const string mambodir = string( getenv( "MAMBODIR" ) ) + "/lib/";
+  n_plugins_found += FindPlugins( mambodir, "EventModifier", m_eventmodifiers );
+
+  if( n_plugins_found == 0 ) {
+    cout << "WARNING: No event modifier plugin found" << endl;
+    return 0;
+  }
+  else cout << "INFO: Found " << n_plugins_found << " event modifier libraries" << endl;
+
+  int loaded = 0;
+  for( PluginMap::const_iterator pair = m_eventmodifiers.begin() ; pair != m_eventmodifiers.end() ; ++pair ) {
+    if( LoadEventModifierPlugin( (*pair).first, (*pair).second ) ) ++loaded;
+  }
+
+  return loaded;
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+bool PluginManager::LoadEventModifierPlugin( const string& name, const string& path )
+{
+  bool success = true;
+
+  void* handle = LoadPlugin( path );
+
+  IEventModifiersPluginFactory * pluginFactory     = NULL;
+
+  pf_MakeEventModifierPlugin    MakeEventModifierPlugin = (pf_MakeEventModifierPlugin)dlsym( handle, "MakeEventModifierPlugin" );
+  if( !MakeEventModifierPlugin ) throw runtime_error( dlerror() );
+  pluginFactory = MakeEventModifierPlugin();
+
+  pluginFactory->Register();
+
+  return success;
+}
+

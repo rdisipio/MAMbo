@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-TOOLS   = PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager 
+TOOLS  += PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager 
 TOOLS  += XMLBin XMLVariable XMLLevel ControlPlotValues JetValues Particle 
 
 ifdef FASTJETLOCATION
@@ -8,7 +8,8 @@ TOOLS += HEPTopTagger
 #HEPTopTaggerHelperFunctions
 endif
 
-SRCS    = IHistogramFiller.cxx INtupleWrapper.cxx ICutFlow.cxx IAnalysisCut.cxx $(TOOLS:=.cxx)
+SRCS    = IHistogramFiller.cxx INtupleWrapper.cxx ICutFlow.cxx IAnalysisCut.cxx IEventModifier.cxx
+SRCS   += $(TOOLS:=.cxx)
 OBJS    = ${SRCS:.cxx=.o}
 
 SOLIB   = lib$(PROJECT).so
