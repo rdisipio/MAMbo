@@ -130,6 +130,8 @@
   <histogram hpath="reco/4j2b/topL/rapidity" />
   <histogram hpath="reco/4j2b/topL/absrap" />
   <histogram hpath="reco/4j2b/tt/m" />
+  <histogram hpath="reco/4j2b/tt/m_1" />
+  <histogram hpath="reco/4j2b/tt/m_2" />
   <histogram hpath="reco/4j2b/tt/pt" />
   <histogram hpath="reco/4j2b/tt/rapidity" />
   <histogram hpath="reco/4j2b/tt/absrap" />
