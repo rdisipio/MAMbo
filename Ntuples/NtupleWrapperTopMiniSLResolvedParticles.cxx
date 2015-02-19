@@ -17,17 +17,7 @@ NtupleWrapperTopMiniSLResolvedParticles::NtupleWrapperTopMiniSLResolvedParticles
 
    cout << "INFO: MC tree read from " << mcfilename << endl;
 
-   m_partons   = new TChain( treename_parton.c_str() );
-
-   ifstream input( mcfilename.c_str(), ios_base::in );
-   string fName;
-   while( std::getline( input, fName ) ) {
-     //     cout << "INFO: File list: " << mcfilename.c_str() << endl;
-      if( fName.empty() ) continue;
-      cout << "INFO: Input file: " << fName << '\n';
-      m_partons->AddFile( fName.c_str() );
-   }
-   input.close();
+   m_partons = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() );
 
    m_ntuple_parton   = new TopMiniSLResolvedPartons( m_partons );
 

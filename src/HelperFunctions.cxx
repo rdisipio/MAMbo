@@ -57,9 +57,13 @@ namespace HelperFunctions {
   }
 
 
+  //////////////////////////////////////////////////////
+
+
   TChain * LoadChain( const string fileListName, const string& treeName )
   {
      static string sep = "/";
+     static string basedir = getenv( "MAMBONTUPLEDIR" );
 
      TChain * chain = new TChain( treeName.c_str(), treeName.c_str() );
 
@@ -67,25 +71,28 @@ namespace HelperFunctions {
      string txt, fName;
      while( std::getline( input, txt ) ) {
        if( txt.empty() ) continue;
+       if( txt.find_first_of( "#" ) == 0 ) continue;
+
        if( txt.find_first_of( sep ) == 0 ) {
           // absolute path. take it as-is
           fName = txt;
        }
-       if( txt.find_first_of( "root://" ) == 0 ) {
+       else if( txt.find_first_of( "root://" ) == 0 ) {
           fName = txt;
        }
        else {
-          string basedir = getenv( "MAMBONTUPLEDIR" );
            if( basedir.empty() ) {
               // relative path from working directory
               fName = txt;
            }
            else {
+	      // generate full path from basedir
               fName = basedir + sep + txt;
            }
        }
-	cout << "INFO: Input file: " << fName << '\n';
-        chain->AddFile( fName.c_str() );
+
+       cout << "INFO: Input file: " << fName << endl;
+       chain->AddFile( fName.c_str() );
      }
      input.close();
 

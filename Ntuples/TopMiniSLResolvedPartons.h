@@ -112,6 +112,7 @@ public :
 #ifdef TopMiniSLResolvedPartons_cxx
 TopMiniSLResolvedPartons::TopMiniSLResolvedPartons(TTree *tree) : fChain(0) 
 {
+/*
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
@@ -122,6 +123,7 @@ TopMiniSLResolvedPartons::TopMiniSLResolvedPartons(TTree *tree) : fChain(0)
       f->GetObject("partons",tree);
 
    }
+*/
    Init(tree);
 }
 

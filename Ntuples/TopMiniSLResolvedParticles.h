@@ -128,6 +128,7 @@ TopMiniSLResolvedParticles::TopMiniSLResolvedParticles(TTree *tree) : fChain(0)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
+/*
    if (tree == 0) {
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/ATLAS/disipio/LOCAL_DISK/minituples/TTbarResolved8TeV/user.mromano.110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_tmn120122m_2014_11_12_mc.root/user.mromano.4391081.mc.root");
       if (!f || !f->IsOpen()) {
@@ -136,6 +137,7 @@ TopMiniSLResolvedParticles::TopMiniSLResolvedParticles(TTree *tree) : fChain(0)
       f->GetObject("particles",tree);
 
    }
+*/
    Init(tree);
 }
 

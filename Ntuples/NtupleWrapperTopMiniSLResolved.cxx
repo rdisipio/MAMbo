@@ -20,31 +20,17 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
    const string treename_particle = m_config.custom_params_string["treename_particle"];
    const string	treename_parton   = m_config.custom_params_string["treename_parton"];
 
-   cout << "INFO: MC tree read from " << mcfilename << endl;
+   cout << "INFO: MC partons " << treename_parton << " tree read from " << mcfilename << endl;
+   m_partons   = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() );
+   cout << "INFO: MC partons tree has " << m_partons->GetEntries() << " entries" << endl;
 
-   m_particles = new TChain( treename_particle.c_str() );  
-   m_partons   = new TChain( treename_parton.c_str() );
-
-   ifstream input( mcfilename.c_str(), ios_base::in );
-   string fName;
-   while( std::getline( input, fName ) ) {
-     //     cout << "INFO: File list: " << mcfilename.c_str() << endl;
-      if( fName.empty() ) continue;
-      cout << "INFO: Input file: " << fName << '\n';
-      m_particles->AddFile( fName.c_str() );
-      m_partons->AddFile( fName.c_str() );
-   }
-   input.close();
-
+   cout << "INFO: MC particles " <<  treename_particle << " tree read from " << mcfilename << endl;
+   m_particles = HelperFunctions::LoadChain( mcfilename.c_str(), treename_particle.c_str() );
+   cout	<< "INFO: MC particles tree has " << m_particles->GetEntries() << " entries" << endl;
 
    m_ntuple_particle = new TopMiniSLResolvedParticles( m_particles );
    m_ntuple_parton   = new TopMiniSLResolvedPartons( m_partons );
 
-   if( !m_ntuple_particle ) throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid particles ROOT tree." );
-   if( !m_ntuple_parton )   throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolved: invalid partons ROOT tree." );
-
-   cout<<"Event Number "<<m_ntuple_particle->eventNumber<<endl;
-   
    m_dumper_mctruth = new EventDumperMCTruthTopMiniSLResolved<TopMiniSLResolvedParticles, TopMiniSLResolvedPartons>(); 
    m_dumper_mctruth->SetNtupleParticle( m_ntuple_particle ); 
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
