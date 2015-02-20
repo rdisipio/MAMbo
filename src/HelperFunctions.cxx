@@ -63,7 +63,10 @@ namespace HelperFunctions {
   TChain * LoadChain( const string fileListName, const string& treeName )
   {
      static string sep = "/";
-     static string basedir = getenv( "MAMBONTUPLEDIR" );
+
+     string basedir;
+     char * c_path = getenv( "MAMBONTUPLEDIR" );
+     if( c_path != NULL ) basedir = c_path;  
 
      TChain * chain = new TChain( treeName.c_str(), treeName.c_str() );
 
