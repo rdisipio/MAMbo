@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-import os, sys
+import os, sys, time
 import optparse
-
 sys.path.append( os.environ['MAMBODIR'] + "/python" )
+
+from ProgressBar import *
 
 from xml.etree import ElementTree
 
 from ROOT import *
-
 
 ########################################
 
@@ -101,7 +101,6 @@ def GatherHistograms( hname, hpath ):
         hlist[sample] = hsource.Clone( newname )
 
         for syst,flist in samples_configuration[sample].systematics.iteritems():
-           print sample, syst
            for side, fname in flist.iteritems():
               hsource = fname.Get( hpath )
               newname = "%s_%s_%s_%s" % ( sample, hname, syst, side )
@@ -135,12 +134,14 @@ def CreateROOTPath( path ):
 
 def CreateMergedHistograms( outputClass = OutputType.graph ):
 
+    progress = ProgressBar( 0, len(histograms_configuration), 77, mode='static', char="#" )
+
     for hpath in histograms_configuration:
        outfile.cd()
 	
        hname = hpath.split('/')[-1]
 
-       print "INFO: merging histogram", hpath
+       #print "INFO: merging histogram", hpath
 
        hlist = GatherHistograms( hname, hpath )
 
@@ -172,15 +173,22 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
 
              # syst. unc.
              for systname in samples_configuration[sample].systematics.keys():
+
                  hpattern = "%s_%s_%s_" % ( sample, hname, systname )
-                 if (side == "up" || side == "down")
+
+                 dy_u = 0.
+                 dy_d = 0.
+
+                 if samples_configuration[sample].systematics.has_key( "up" ):
+#                 if side in ["up", "down" ]:
                     h_u = hlist[hpattern+"up"]
                     h_d = hlist[hpattern+"down"]
 
                     dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
                     dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
 
-                 elif (side == "single")
+                 elif samples_configuration[sample].systematics.has_key( "single" ):
+#                 elif side == "single":
                     h_sys = hlist[hpattern+"single"]
 
                     dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
@@ -213,7 +221,11 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
              graph.SetPointError( i, bw/2, bw/2, eyl, eyh )
 
        graph.Write()
+       progress.increment_amount()
+       print progress, "\r",
+       #time.sleep(0.05)
 
+    print
 
 ########################################################################
 
