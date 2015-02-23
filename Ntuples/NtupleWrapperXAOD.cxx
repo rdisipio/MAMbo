@@ -93,9 +93,11 @@ bool NtupleWrapperXAOD::MakeEventElectrons( EventData * ed )
   for( ; elItr != elItrE ; ++elItr ) {
       const double pT = (*elItr)->pt();
       const double eta = (*elItr)->eta();
+      const double f_eta = fabs(eta);
 
-      if( pT < 20*GeV ) continue;
-      if( fabs(eta) > 2.5 ) continue;
+      if( pT < 15*GeV ) continue;
+      if( f_eta > 2.5 ) continue;
+      if( (f_eta>1.37) && (f_eta<1.52) ) continue; // remove crack electrons 
 
       ed->electrons.pT.push_back(  pT );
       ed->electrons.eta.push_back( eta );
@@ -124,7 +126,7 @@ bool NtupleWrapperXAOD::MakeEventMuons( EventData * ed )
       const double pT = (*muItr)->pt();
       const double eta = (*muItr)->eta();
 
-      if( pT < 20*GeV ) continue;
+//      if( pT < 15*GeV ) continue;
       if( fabs(eta) > 2.5 ) continue;
 
       ed->muons.pT.push_back(  pT );

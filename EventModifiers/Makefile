@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 # modify the following line EMS = ... according to your needs
-EMS  += Dummy
+EMS  += Dummy OverlapRemoval
 
 # do not change what follows unless you know what you're doing
 

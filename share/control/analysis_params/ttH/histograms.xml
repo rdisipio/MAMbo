@@ -82,7 +82,7 @@
             <Bin id="0" nbins="16" xmin="-3.1416"   xmax="3.1416" />
         </Variable>
         <Variable name="fjet_m" title="Fat-Jet mass [GeV]" folder="cutflow" >
-            <Bin id="0" nbins="60" xmin="0" xmax="300" />
+            <Bin id="0" nbins="30" xmin="0" xmax="300" />
         </Variable>
     </Variables>
     <Histos>

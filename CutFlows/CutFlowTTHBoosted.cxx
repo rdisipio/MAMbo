@@ -94,8 +94,14 @@ bool CutFlowTTHBoosted::PassedCutFlow_emu_2t( EventData * ed )
     PassedCut("EMU", "unweight");
 
     // 3) 1 el && 1 mu
-    if( el_n != 1 ) return !passed;
-    if(	mu_n !=	1 ) return !passed;
+    bool is_1el1mu = ( (el_n==1) && (mu_n==1) );
+    bool is_2el    = ( (el_n==2) && (mu_n==0) );
+    bool is_2mu    = ( (el_n==0) && (mu_n==2) );
+    bool good_channel = is_1el1mu || is_2el || is_2mu;
+
+    if( !good_channel ) return !passed;
+//    if( el_n != 1 ) return !passed;
+//    if(	mu_n !=	1 ) return !passed;
 //    const double el_pt = ed->electrons.pT.at(0);
 //    const double mu_pt = ed->muons.pT.at(0);
 //    const double pt_1 = max( el_pt, mu_pt );

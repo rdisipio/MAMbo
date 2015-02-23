@@ -1,6 +1,6 @@
 #include "EMDummy.h"
 
-EMDummy::EMDummy() : IEventModifier( "DummyEM" )
+EMDummy::EMDummy() : IEventModifier( "Dummy" )
 {
 }
 

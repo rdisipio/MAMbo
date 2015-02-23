@@ -196,8 +196,4 @@ namespace HelperFunctions {
   //////////////////////////////////////////////////////
 
 
-  bool HasProperty( const string& name, const EventData * ed ) {
-     return ed->property.count( name.c_str() );
-  }
-
 };
