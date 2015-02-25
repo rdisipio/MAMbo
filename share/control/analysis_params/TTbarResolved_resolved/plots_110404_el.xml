@@ -156,12 +156,12 @@
 </samples>
 <inputfiles>
   <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Egamma.el.histograms.root"    />
-  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110340.el.nominal.histograms.root"       />
+  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.histograms.root"       />
   <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root"   />
   <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root"       />
   <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" 	/>
   <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root"	/>
   <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root"    />
-  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110340.el.nominal.histograms.root" />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty.110404.el.nominal.histograms.root" />
 </inputfiles>
 </document>

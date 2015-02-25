@@ -150,6 +150,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
        nbins  = 0
        title  = ""
        for sample in samples_configuration.keys():
+  
           h = hlist[sample]	
 
           if graph == None:
@@ -179,7 +180,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                  dy_u = 0.
                  dy_d = 0.
 
-                 if samples_configuration[sample].systematics.has_key( "up" ):
+                 if samples_configuration[sample].systematics[systname].has_key( "up" ):
 #                 if side in ["up", "down" ]:
                     h_u = hlist[hpattern+"up"]
                     h_d = hlist[hpattern+"down"]
@@ -187,12 +188,15 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                     dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
                     dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
 
-                 elif samples_configuration[sample].systematics.has_key( "single" ):
+                 elif samples_configuration[sample].systematics[systname].has_key( "single" ):
 #                 elif side == "single":
                     h_sys = hlist[hpattern+"single"]
 
                     dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
                     dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
+                 else:
+                    print "ERROR: side is neither up, down or single"
+                    exit(1)
 		 
                  if dy_u > 0. and dy_d > 0.:
                     points[i]['u'] += pow( dy_u, 2 )

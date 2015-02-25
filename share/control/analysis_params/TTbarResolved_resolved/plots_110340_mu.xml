@@ -161,6 +161,6 @@
   <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" 	/>
   <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root"	/>
   <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root"    />
-  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty.mu.nominal.histograms.root" />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110340.mu.nominal.histograms.root" />
 </inputfiles>
 </document>
