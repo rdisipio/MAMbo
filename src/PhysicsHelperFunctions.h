@@ -27,7 +27,7 @@ namespace PhysicsHelperFunctions {
 
   protected:
     int MakeChargedLepton();
-    int MakeNeutrino( const double mW = 80.4*GeV );
+    int MakeNeutrino(double &v_pz, double &delta, int option = 0, const double mW = 80.4*GeV );
 
   protected:
     PseudoTopTarget       m_target;

@@ -212,19 +212,28 @@
 
 
 	<!-- top pair distributions -->
-        <Variable name="z_ttbar" title="z_{t#bar{t}}" folder="4j2b" particle="difference" >
+
+
+        <Variable name="neutrino_pz" title="p_{z}^{#nu};p_{z}^{#nu} [GeV];" folder="4j2b" particle="difference" >
+            <Bin id="0" nbins="250" xmin="-500." xmax="500." />
+        </Variable>
+        <Variable name="Discriminant" title="Signed #nu's D^{1/6};Signed #nu's D^{1/6} [GeV];" folder="4j2b" particle="difference" >
+            <Bin id="0" nbins="250" xmin="-500." xmax="500." />
+        </Variable>
+
+        <Variable name="z_ttbar" title="z_{t#bar{t}};z_{t#bar{t}};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" edges="0.00,0.60,0.75,0.84,0.90,0.99,1.05,1.14,1.26,1.50,3.00" />
             <Bin id="1" nbins="100" xmin="0." xmax="3." />
         </Variable>
-        <Variable name="Pout" title="p_{out}" folder="4j2b" particle="difference" >
+        <Variable name="Pout" title="p_{out};p_{out} [GeV];" folder="4j2b" particle="difference" >
 	    <Bin id="0" nbins="10" edges="-300.00,-50.00,-24.00,-12.00,-6.00,0.0,6.00,12.00,24.00,50.00,300.00" />
             <Bin id="1" nbins="100" xmin="-300." xmax="300." />
         </Variable>
-        <Variable name="Chi_ttbar" title="#chi_{out}" folder="4j2b" particle="difference" >
+        <Variable name="Chi_ttbar" title="#chi_{out};#chi_{out};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" xmin="0." xmax="20." />
             <Bin id="1" nbins="100" xmin="0." xmax="20." />
         </Variable>
-	<Variable name="Yboost" title="y_{boost}" folder="4j2b" particle="difference" >
+	<Variable name="Yboost" title="y_{boost};y_{boost};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="7" edges="0.0,0.2,0.4,0.6,0.8,1.1,1.40,2." />
             <Bin id="1" nbins="100" xmin="0." xmax="2." />
         </Variable>
@@ -341,6 +350,8 @@
  	<!-- top pair distributions -->
         <TH1F variable="z_ttbar" binId="0"/>
         <TH1F variable="Pout"  binId="0"/>
+        <TH1F variable="neutrino_pz"  binId="0"/>
+        <TH1F variable="Discriminant"  binId="0"/>
         <TH1F variable="Chi_ttbar"  binId="0"/>
 	<TH1F variable="Yboost"  binId="0"/>
 	<TH1F variable="topLCosThetaStar"  binId="0"/>

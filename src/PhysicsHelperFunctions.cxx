@@ -47,17 +47,18 @@ namespace PhysicsHelperFunctions {
 
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+  
   int PseudoTopReconstruction::Run()
   {
 //    printf( "DEBUG: Running pseudotop reconstruction on event %i\n", m_p_ed->info.eventNumber );
 
     MakeChargedLepton();
     
-    MakeNeutrino();
-
+    double v_pz, D;
+    MakeNeutrino(v_pz, D);
     m_W_lep = m_neutrino + m_lepton;
 
+    //    cout << " v_pz=" << v_pz/GeV << " sign*D^{1/6}=" <<  D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV << endl;
     //    cout << "Size of bjets A: " << m_p_ed->bjets.n << endl;
 
     TLorentzVector bj1 = ( m_target == kReco ) ? 
@@ -148,6 +149,9 @@ namespace PhysicsHelperFunctions {
     m_p_ed->iproperty[prefix + "pseudotop_had_jet_2_index"] = Wj2_index;
     m_p_ed->iproperty[prefix + "pseudotop_had_bjet_index"] = bj1_index;
     m_p_ed->iproperty[prefix + "pseudotop_lep_bjet_index"] = bj2_index;
+
+    m_p_ed->property[prefix + "v_pz"] = v_pz;
+    m_p_ed->property[prefix + "D"] = D; // discriminant of the v_pz solution
 
     if ( m_target == kReco ) {
       m_p_ed->lepton.pT = m_lepton.Pt();
@@ -267,14 +271,17 @@ namespace PhysicsHelperFunctions {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-  int PseudoTopReconstruction::MakeNeutrino( const double mW )
+  int PseudoTopReconstruction::MakeNeutrino(double &v_pz, double &delta, int option, const double mW )
   {
     int status = 0;
+
+    v_pz = -14.e6;
+    delta = -14.e6;
 
     if( m_target == kTruth ) {
       m_neutrino.SetXYZM( m_p_ed->MET_truth.etx, m_p_ed->MET_truth.ety, m_p_ed->MET_truth.etz, 0. );
 
-      return status;		
+      return status;
     }
 
     const double v_pT = m_p_ed->MET.et;
@@ -290,22 +297,32 @@ namespace PhysicsHelperFunctions {
     const double mdiff = 0.5 * ( mW*mW - l_m*l_m );
     const double pT_vl = v_px*l_px + v_py*l_py; // pT( v \cdot l )
 
-    const double a = l_E*l_E - l_pz*l_pz;
-    const double b = -2. * l_pz * ( mdiff + pT_vl );
-    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*pT_vl; 
+    const double a = l_E*l_E - l_pz*l_pz; // dimension: GeV^2
+    const double b = -2. * l_pz * ( mdiff + pT_vl ); // dimension : GeV^3
+    const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*pT_vl; // dimension: GeV^4
   
-    const double delta = b*b - 4.*a*c;
+    delta = b*b - 4.*a*c; // dimesion: GeV^6
     
-    double v_pz = 0.;
     if( delta <= 0. ) {
       v_pz = -0.5*b/a;
-    }
-    else {
+      // hm...maybe try fixing top mass to PDG or make t,lep mass same as t,had mass?
+    } else {
       const double v_pz_1 = 0.5 * ( -b - sqrt(delta) ) / a;
       const double v_pz_2 = 0.5 * ( -b + sqrt(delta) ) / a;
-      v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_2 : v_pz_1;
+      if (option == 1) {
+	// more central:
+	if (fabs(v_pz_1) < fabs(v_pz_2))
+	  v_pz = v_pz_1;
+      } else if (option == 2) {
+	// more forward:
+	if (fabs(v_pz_1) < fabs(v_pz_2))
+	  v_pz = v_pz_2;       
+      } else {
+	// default, more central neutrino preferred:
+	v_pz = ( fabs(v_pz_1) > fabs(v_pz_2) ) ? v_pz_2 : v_pz_1;
+      }
     }
-
+    
     const double v_E  = sqrt( v_pT*v_pT + v_pz*v_pz ); // of course, massless
 
     m_neutrino.SetPxPyPzE( v_px, v_py, v_pz, v_E );

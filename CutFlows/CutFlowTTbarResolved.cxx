@@ -247,7 +247,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     bool fillCorrections = true;
     bool splitSample = false; // HACK!
     if (isMCSignal and splitSample) {
-      fillHistos =  (m_rand -> Integer(2));
+      fillHistos =  (m_rand -> Integer(2)); // this or not;)
       fillCorrections = not fillHistos;
     }
 
@@ -333,7 +333,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         return success;
 	}
       */
-      m_pseudotop_particle->Run();    
+      m_pseudotop_particle->Run(); 
       if (fillHistos) {
 	FillHistogramsPseudotopParticle(ed, weight_particle_level);
       }
@@ -786,8 +786,15 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
 }
 
 /////////////////////////////////////////
-void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, const double weight){
+void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, double v_pz, double D, const double weight){
    
+  // neutrino and discriminant diagnostics:
+  if (v_pz > -13.9e6) {
+    //    cout << " v_pz=" << v_pz/GeV << " sign*D^{1/6}=" <<  D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV << endl;
+    m_hm->FillHistograms(path + "neutrino_pz", v_pz / GeV, weight);
+    m_hm->FillHistograms(path + "Discriminant", D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV, weight); // fill sixth-root of D, keep sign
+  }
+
    // Pout, two entries per event:
    TVector3 zUnit(0., 0., 1.);
    TVector3 top1 = topL.Vect();
@@ -878,7 +885,7 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &t
  }
 
 /////////////////////////////////////////
-void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, const double weight){
+void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, double v_pz, double D, const double weight){
 
   Particle ptopL(particle, indexL);
   Particle ptopH(particle, indexH);
@@ -890,7 +897,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& parti
   
   string path = level + "/4j2b/difference/";
 
-  FillHistogramsTopPairs(path, topL, topH, ttSystem, weight);
+  FillHistogramsTopPairs(path, topL, topH, ttSystem, v_pz, D, weight);
 
  
   
@@ -919,7 +926,8 @@ void CutFlowTTbarResolved::FillHistogramsPartonTopPairs(EventData::Truth_t& part
   TLorentzVector ttSystem = pttSystem.MakeLorentz();
 
   string path = level + "/4j2b/difference/";
-  FillHistogramsTopPairs(path, topL, topH, ttSystem, weight);
+  // dummy zeros for neutrino pz and discriminant...
+  FillHistogramsTopPairs(path, topL, topH, ttSystem, 0., 0., weight);
 
 }
 
@@ -950,7 +958,10 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     FillHistogramsPseudoTop(ed->reco, 3, level, "WL", weight);
     FillHistogramsPseudoTop(ed->reco, 4, level, "WH", weight);
 
-    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, weight);
+    double v_pz = ed->property["reco_v_pz"];
+    double D = ed->property["reco_D"];
+
+    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, v_pz, D, weight);
 
 }
 
@@ -988,8 +999,10 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     FillHistogramsPseudoTop(ed->reco, 8, level, "WL", weight);
     FillHistogramsPseudoTop(ed->reco, 9, level, "WH", weight);
 
+    double v_pz = ed->property["ptcl_v_pz"];
+    double D = ed->property["ptcl_D"];
 
-    FillHistogramsPseudoTopPairs(ed->reco, 5, 6, 7, level, weight);
+    FillHistogramsPseudoTopPairs(ed->reco, 5, 6, 7, level, v_pz, D, weight);
 
 }
 
