@@ -25,6 +25,18 @@
         <Type name="4j0b" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
         <Type name="afterCuts" inFolder="cutflow"/>        
+        <Type name="3j_incl_2b_incl" inFolder="cutflow"/>
+        <Type name="3j_incl_1b_incl" inFolder="cutflow"/>
+        <Type name="3j_incl_0b_incl" inFolder="cutflow"/>
+        <Type name="5j_incl_2b_incl" inFolder="cutflow"/>
+        <Type name="5j_incl_1b_incl" inFolder="cutflow"/>
+        <Type name="5j_incl_0b_incl" inFolder="cutflow"/>
+        <Type name="3j_excl_2b_incl" inFolder="cutflow"/>
+        <Type name="3j_excl_1b_excl" inFolder="cutflow"/>
+        <Type name="3j_excl_0b_excl" inFolder="cutflow"/>
+        <Type name="4j_excl_2b_incl" inFolder="cutflow"/>
+        <Type name="4j_excl_1b_excl" inFolder="cutflow"/>
+        <Type name="4j_excl_0b_excl" inFolder="cutflow"/>
     </Level>
     <Variables>
         <Variable name="pt" title="p_{T} [GeV]" folder="4j2b" >
@@ -132,7 +144,34 @@
             <Bin id="1" nbins="100" xmin="0."   xmax="500." />
             <Bin id="2" nbins="30" xmin="0." xmax="300." /> <!-- ATL-COM-PHYS-2013-1100 -->
         </Variable>
+        <Variable name="jet2_pt"  title="2nd Jet p_{T} [GeV]" folder="cutflow">
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
+            <Bin id="2" nbins="30" xmin="0." xmax="300." /> <!-- ATL-COM-PHYS-2013-1100 -->
+        </Variable>
+        <Variable name="jet3_pt"  title="3rd Jet p_{T} [GeV]" folder="cutflow">
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
+            <Bin id="2" nbins="30" xmin="0." xmax="300." /> <!-- ATL-COM-PHYS-2013-1100 -->
+        </Variable>
+        <Variable name="jet4_pt"  title="4th Jet p_{T} [GeV]" folder="cutflow">
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
+            <Bin id="2" nbins="30" xmin="0." xmax="300." /> <!-- ATL-COM-PHYS-2013-1100 -->
+        </Variable>
         <Variable name="jet_eta" title="Jet pseudorapidity #eta" folder="cutflow">
+            <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
+        </Variable>
+        <Variable name="jet1_eta" title="Leading Jet pseudorapidity #eta" folder="cutflow">
+            <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
+        </Variable>
+        <Variable name="jet2_eta" title="2nd Jet pseudorapidity #eta" folder="cutflow">
+            <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
+        </Variable>
+        <Variable name="jet3_eta" title="3rd Jet pseudorapidity #eta" folder="cutflow">
+            <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
+        </Variable>
+        <Variable name="jet4_eta" title="4th Jet pseudorapidity #eta" folder="cutflow">
             <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
         </Variable>
         <Variable name="jet_phi" title="Jet azimuthal angle #phi" folder="cutflow">
@@ -142,6 +181,18 @@
             <Bin nbins="200" xmin="0."   xmax="500." />
         </Variable>
         <Variable name="jet_m"   title="Jet mass [GeV]" folder="cutflow">
+            <Bin nbins="20" xmin="0."   xmax="100." />
+        </Variable>
+        <Variable name="jet1_m"   title="Leading Jet mass [GeV]" folder="cutflow">
+            <Bin nbins="20" xmin="0."   xmax="100." />
+        </Variable>
+        <Variable name="jet2_m"   title="2nd Jet mass [GeV]" folder="cutflow">
+            <Bin nbins="20" xmin="0."   xmax="100." />
+        </Variable>
+        <Variable name="jet3_m"   title="3rd Jet mass [GeV]" folder="cutflow">
+            <Bin nbins="20" xmin="0."   xmax="100." />
+        </Variable>
+        <Variable name="jet4_m"   title="4th Jet mass [GeV]" folder="cutflow">
             <Bin nbins="20" xmin="0."   xmax="100." />
         </Variable>
         <Variable name="bjet_n"   title="No. of b-Tagged Jets" folder="cutflow">
@@ -155,7 +206,17 @@
             <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
             <Bin id="1" nbins="100" xmin="0."   xmax="500." />
         </Variable>
+        <Variable name="bjet2_pt"  title="2nd b-Jet p_{T} [GeV]" folder="cutflow">
+            <Bin id="0" nbins="19" edges="25.0,27.5,30.0,35.0,37.5,40.0,42.5,47.5,50.0,55.0,60.0,65.0,70.0,75.0,82.5,92.5,105.0,122.5,155.0,500.0" />
+            <Bin id="1" nbins="100" xmin="0."   xmax="500." />
+        </Variable>
         <Variable name="bjet_eta" title="b-Jet pseudorapidity #eta" folder="cutflow">
+            <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
+        </Variable>
+        <Variable name="bjet1_eta" title="Leading b-Jet pseudorapidity #eta" folder="cutflow">
+            <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
+        </Variable>
+        <Variable name="bjet2_eta" title="2nd b-Jet pseudorapidity #eta" folder="cutflow">
             <Bin nbins="50" xmin="-2.5"  xmax="2.5" />
         </Variable>
         <Variable name="bjet_phi" title="b-Jet azimuthal angle #phi" folder="cutflow">
@@ -305,29 +366,52 @@
         <TH1F variable="mu" binId="0"/>
         <TH1F variable="pvxp_n" binId="0"/>
         <TH1F variable="vxp_z" binId="0"/>
+        <TH1F variable="lep_pt" binId="0"/>
         <TH1F variable="lep_pt" binId="1"/>
         <TH1F variable="lep_eta" binId="0"/>
         <TH1F variable="lep_phi" binId="0"/>                
         <TH1F variable="lep_E" binId="0"/>
         <TH1F variable="jet_n" binId="0"/>
-        <TH1F variable="jet_pt" binId="1"/>
+        <TH1F variable="jet_pt" binId="0"/>
+        <TH1F variable="jet_pt" binId="1"/>        
         <TH1F variable="jet_eta" binId="0"/>
+        <TH1F variable="jet1_eta" binId="0"/>
+        <TH1F variable="jet2_eta" binId="0"/>
+        <TH1F variable="jet3_eta" binId="0"/>
+        <TH1F variable="jet4_eta" binId="0"/>
         <TH1F variable="jet_phi" binId="0"/>                
         <TH1F variable="jet_E" binId="0"/>
         <TH1F variable="jet_m" binId="0"/>
+        <TH1F variable="jet1_m" binId="0"/>
+        <TH1F variable="jet2_m" binId="0"/>
+        <TH1F variable="jet3_m" binId="0"/>
+        <TH1F variable="jet4_m" binId="0"/>
         <TH1F variable="jet1_pt" binId="0"/>
         <TH1F variable="jet1_pt" binId="1"/>
+        <TH1F variable="jet2_pt" binId="0"/> 
+        <TH1F variable="jet2_pt" binId="1"/>
+        <TH1F variable="jet3_pt" binId="0"/>
+        <TH1F variable="jet3_pt" binId="1"/>
+        <TH1F variable="jet4_pt" binId="0"/>
+        <TH1F variable="jet4_pt" binId="1"/>
         <TH1F variable="bjet_n" binId="0"/>
         <TH1F variable="bjet_pt" binId="0"/>
+        <TH1F variable="bjet_pt" binId="1"/>
+        <TH1F variable="bjet1_pt" binId="0"/>
+        <TH1F variable="bjet1_pt" binId="1"/>
+        <TH1F variable="bjet2_pt" binId="0"/>
+        <TH1F variable="bjet2_pt" binId="1"/>
         <TH1F variable="bjet_eta" binId="0"/>
+        <TH1F variable="bjet1_eta" binId="0"/>
+        <TH1F variable="bjet2_eta" binId="0"/>
         <TH1F variable="bjet_phi" binId="0"/>                
         <TH1F variable="bjet_E" binId="0"/>
         <TH1F variable="bjet_m" binId="0"/>
-        <TH1F variable="bjet1_pt" binId="0"/>
-        <TH1F variable="bjet1_pt" binId="1"/>
         <TH1F variable="jet_ht" binId="0"/>
         <TH1F variable="jet_ht"	binId="1"/>
-        <TH1F variable="met_pt" binId="1"/>
+        <TH1F variable="met_pt" binId="0"/>
+        <TH1F variable="met_pt" binId="1"/>        
+        <TH1F variable="mtw" binId="0"/>
         <TH1F variable="mtw" binId="1"/>
         <TH1F variable="meff" binId="0" />
         <TH1F variable="meff" binId="1" />

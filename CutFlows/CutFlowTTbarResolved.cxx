@@ -1,5 +1,4 @@
 #include "CutFlowTTbarResolved.h"
-
 CutFlowTTbarResolved::CutFlowTTbarResolved() 
 {
     m_pseudotop_reco = new PseudoTopReconstruction();
@@ -487,6 +486,45 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_unweight");
     FillHistogramsControlPlotsReco( values );
 
+//VS More Control Regions
+    if (jet_n == 3 && bjet_n == 0) {
+    MoreCRFillHistogramsControlPlotsReco( "3j_excl_0b_excl", values );
+    }
+    
+    if (jet_n == 3 && bjet_n == 1) {
+    MoreCRFillHistogramsControlPlotsReco( "3j_excl_1b_excl", values );
+    }
+    
+    if (jet_n == 3 && bjet_n >= 2) {
+    MoreCRFillHistogramsControlPlotsReco( "3j_excl_2b_incl", values );
+    }
+
+
+    if (jet_n >= 3 && bjet_n >= 0) {
+    MoreCRFillHistogramsControlPlotsReco( "3j_incl_0b_incl", values );
+    }
+
+    if (jet_n >= 3 && bjet_n >= 1) {
+    MoreCRFillHistogramsControlPlotsReco( "3j_incl_1b_incl", values );
+    }
+
+    if (jet_n >= 3 && bjet_n >= 2) {
+    MoreCRFillHistogramsControlPlotsReco( "3j_incl_2b_incl", values );
+    }
+
+    
+    if (jet_n == 4 && bjet_n == 0) {
+    MoreCRFillHistogramsControlPlotsReco( "4j_excl_0b_excl", values );
+    }
+    
+    if (jet_n == 4 && bjet_n == 1) {
+    MoreCRFillHistogramsControlPlotsReco( "4j_excl_1b_excl", values );
+    }
+
+    if (jet_n == 4 && bjet_n >= 2) {
+    MoreCRFillHistogramsControlPlotsReco( "4j_excl_2b_incl", values );
+    }
+
     // 8 Njets >= 4    
     if ( jet_n < 4) return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
@@ -507,6 +545,18 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_unweight");
 
     FillHistogramsControlPlotsReco( values );
+
+    if (jet_n >= 5 && bjet_n >= 0) {
+    MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl", values );
+    }
+
+    if (jet_n >= 5 && bjet_n >= 1) {
+    MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl", values );
+    }
+
+    if (jet_n >= 5 && bjet_n >= 2) {
+    MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl", values );
+    }
 
     return passed;
 }
@@ -709,6 +759,13 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( ControlPlotValues& va
     string path = "reco/cutflow/" + alias[cut] + "/";    
     FillHistograms(path, values);   
 } 
+  
+//VS
+void CutFlowTTbarResolved::MoreCRFillHistogramsControlPlotsReco( string mystr, ControlPlotValues& values )
+{
+    string path = "reco/cutflow/" + mystr + "/";
+    FillHistograms(path, values);
+}
 
 void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {    
@@ -744,11 +801,40 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
        
         jet_ht += jet->pt;
         if( j < 4 ) meff += jet->pt;
+
+//VS Jets classification Filling histos
+        if (j==0){
+        JetValues* jet1 = values.jets.at(j);
+        m_hm->FillHistograms( path + "jet1_eta" ,  jet1->eta, values.weight );
+        m_hm->FillHistograms( path + "jet1_pt",  jet1->pt / GeV, values.weight );  
+        m_hm->FillHistograms( path + "jet1_m" ,  jet1->m / GeV, values.weight ); 
+        }
+        if (j==1){
+        JetValues* jet2 = values.jets.at(j);
+        m_hm->FillHistograms( path + "jet2_eta" ,  jet2->eta, values.weight );
+        m_hm->FillHistograms( path + "jet2_pt",  jet2->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "jet2_m" ,  jet2->m / GeV, values.weight );
+        }
+        if (j==2){
+        JetValues* jet3 = values.jets.at(j);
+        m_hm->FillHistograms( path + "jet3_eta" ,  jet3->eta, values.weight );
+        m_hm->FillHistograms( path + "jet3_pt",  jet3->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "jet3_m" ,  jet3->m / GeV, values.weight );
+        }
+        if (j==3){
+        JetValues* jet1 = values.jets.at(0);
+        JetValues* jet4 = values.jets.at(j);
+        if (jet4->pt == jet1->pt){
+        break;
+        }
+        m_hm->FillHistograms( path + "jet4_eta" ,  jet4->eta, values.weight );
+        m_hm->FillHistograms( path + "jet4_pt",  jet4->pt / GeV, values.weight );
+        m_hm->FillHistograms( path + "jet4_m" ,  jet4->m / GeV, values.weight ); 
+       }        
     }
     double ht = values.ETmiss + values.lep_pt + jet_ht;
 
-    if( values.jets.size() > 0 ) m_hm->FillHistograms( path + "jet1_pt",  values.jets.at(0)->pt / GeV, values.weight );
-
+//    if( values.jets.size() > 0 )    m_hm->FillHistograms( path + "jet1_pt",  values.jets.at(0)->pt / GeV, values.weight );
     m_hm->FillHistograms( path + "jet_ht", jet_ht / GeV,   values.weight );
     m_hm->FillHistograms( path + "meff",   meff / GeV,     values.weight );
     m_hm->FillHistograms( path + "ht",     ht / GeV,       values.weight );
@@ -761,8 +847,19 @@ void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values
         m_hm->FillHistograms( path + "bjet_phi",  jet->phi, values.weight );
         m_hm->FillHistograms( path + "bjet_E",  jet->E / GeV, values.weight );
         m_hm->FillHistograms( path + "bjet_m",  jet->m / GeV, values.weight );
-    }
-    if(	values.bJets.size() > 0 ) m_hm->FillHistograms( path + "bjet1_pt",  values.bJets.at(0)->pt / GeV, values.weight );
+        if (bj==0){
+        JetValues* jet1 = values.bJets.at(bj);
+        m_hm->FillHistograms( path + "bjet1_eta" ,  jet1->eta, values.weight );   
+        m_hm->FillHistograms( path + "bjet1_pt",  jet1->pt / GeV, values.weight );
+        }
+        if (bj==1){
+        JetValues* jet2 = values.bJets.at(bj);
+        m_hm->FillHistograms( path + "bjet2_eta" ,  jet2->eta, values.weight );
+        m_hm->FillHistograms( path + "bjet2_pt",  jet2->pt / GeV, values.weight );
+        }
+
+    }   
+//    if(	values.bJets.size() > 0 ) m_hm->FillHistograms( path + "bjet1_pt",  values.bJets.at(0)->pt / GeV, values.weight );
 }
 
 /////////////////////////////////////////

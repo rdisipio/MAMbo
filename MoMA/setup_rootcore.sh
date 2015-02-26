@@ -5,11 +5,14 @@ export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
 alias setupATLAS='source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh'
 setupATLAS
 
-if [ ${USER} == "disipio" ]
+if [ ${USER} == "vscarfon" ]
 then
-  RCDIR=$LOCALDISK/AnalysisTop-1.8.0
+  RCDIR=/afs/cern.ch/work/v/vscarfon/public/AnalysisTop-1.8.0
 fi
 
 cd ${RCDIR}
 source rcSetup.sh
-cd ${MOMADIR}
+
+export ROOTCOREDIR=$ROOTCOREBIN
+
+cd /afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo

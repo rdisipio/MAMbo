@@ -31,6 +31,7 @@ class CutFlowTTbarResolved : public CutFlow
 
   double GetFakesWeight( EventData * ed );
 
+  void MoreCRFillHistogramsControlPlotsReco( string mystr, ControlPlotValues& values );
   void FillHistogramsControlPlotsReco( ControlPlotValues& values );
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
   

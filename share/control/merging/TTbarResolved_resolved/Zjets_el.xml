@@ -37,7 +37,7 @@
   <sample name="ZeeccNp2"           dsid="200434" xsec="3.3656" kfact="1.1800" genevt="498997"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZeeccNp3incl"           dsid="200435" xsec="1.7010" kfact="1.1800" genevt="443697"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZmumuccNp0"           dsid="200440" xsec="11.795" kfact="1.1800" genevt="298998"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
-  <sample name="ZmumuccNp1"           dsid="200441" xsec="7.1254" kfact="1.1800" genevt="499799"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
+  <!--sample name="ZmumuccNp1"           dsid="200441" xsec="7.1254" kfact="1.1800" genevt="499799"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" /-->  
   <sample name="ZmumuccNp2"           dsid="200442" xsec="3.3694" kfact="1.1800" genevt="499500"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
   <sample name="ZmumuccNp3incl"           dsid="200443" xsec="1.7003" kfact="1.1800" genevt="443999"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />   
   <sample name="ZtautauccNp0"           dsid="200448" xsec="11.760" kfact="1.1800" genevt="299000"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
@@ -46,48 +46,48 @@
   <sample name="ZtautauccNp3incl"           dsid="200451" xsec="1.7046" kfact="1.1800" genevt="49400"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="ZeeNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147105.el.nominal.histograms.root" />
-  <file sample="ZeeNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147106.el.nominal.histograms.root" />
-  <file sample="ZeeNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147107.el.nominal.histograms.root" />
-  <file sample="ZeeNp3"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147108.el.nominal.histograms.root" />  
-  <file sample="ZeeNp4"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147109.el.nominal.histograms.root" />  
-  <file sample="ZeeNp5incl"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147110.el.nominal.histograms.root" />
-  <file sample="ZmumuNp0"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147113.el.nominal.histograms.root" />   
-  <file sample="ZmumuNp1"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147114.el.nominal.histograms.root" />
-  <file sample="ZmumuNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147115.el.nominal.histograms.root" />
-  <file sample="ZmumuNp3"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147116.el.nominal.histograms.root" />
-  <file sample="ZmumuNp4"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147117.el.nominal.histograms.root" />
-  <file sample="ZmumuNp5incl"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147118.el.nominal.histograms.root" />
-  <file sample="ZtautauNp0"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147121.el.nominal.histograms.root" />
-  <file sample="ZtautauNp1"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147122.el.nominal.histograms.root" />
-  <file sample="ZtautauNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147123.el.nominal.histograms.root" />
-  <file sample="ZtautauNp3"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147124.el.nominal.histograms.root" />
-  <file sample="ZtautauNp4"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147125.el.nominal.histograms.root" />
-  <file sample="ZtautauNp5incl"    path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.147126.el.nominal.histograms.root" />
-  <file sample="ZeebbNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200332.el.nominal.histograms.root" />
-  <file sample="ZeebbNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200333.el.nominal.histograms.root" />
-  <file sample="ZeebbNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200334.el.nominal.histograms.root" />   
-  <file sample="ZeebbNp3incl"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200335.el.nominal.histograms.root" />   
-  <file sample="ZmumubbNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200340.el.nominal.histograms.root" />   
-  <file sample="ZmumubbNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200341.el.nominal.histograms.root" />
-  <file sample="ZmumubbNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200342.el.nominal.histograms.root" />   
-  <file sample="ZmumubbNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200343.el.nominal.histograms.root" />   
-  <file sample="ZtautaubbNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200348.el.nominal.histograms.root" />  
-  <file sample="ZtautaubbNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200349.el.nominal.histograms.root" /> 
-  <file sample="ZtautaubbNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200350.el.nominal.histograms.root" /> 
-  <file sample="ZtautaubbNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200351.el.nominal.histograms.root" />
-  <file sample="ZeeccNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200432.el.nominal.histograms.root" />
-  <file sample="ZeeccNp1"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200433.el.nominal.histograms.root" />
-  <file sample="ZeeccNp2"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200434.el.nominal.histograms.root" />   
-  <file sample="ZeeccNp3incl"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200435.el.nominal.histograms.root" />   
-  <file sample="ZmumuccNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200440.el.nominal.histograms.root" />   
-  <file sample="ZmumuccNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200441.el.nominal.histograms.root" />
-  <file sample="ZmumuccNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200442.el.nominal.histograms.root" />   
-  <file sample="ZmumuccNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200443.el.nominal.histograms.root" />  
-  <file sample="ZtautauccNp0"       path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200448.el.nominal.histograms.root" />  
-  <file sample="ZtautauccNp1"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200449.el.nominal.histograms.root" /> 
-  <file sample="ZtautauccNp2"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200450.el.nominal.histograms.root" /> 
-  <file sample="ZtautauccNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Zjets.200451.el.nominal.histograms.root" /> 
+  <file sample="ZeeNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147105.el.root" />
+  <file sample="ZeeNp1"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147106.el.root" />
+  <file sample="ZeeNp2"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147107.el.root" />
+  <file sample="ZeeNp3"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147108.el.root" />  
+  <file sample="ZeeNp4"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147109.el.root" />  
+  <file sample="ZeeNp5incl"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147110.el.root" />
+  <file sample="ZmumuNp0"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147113.el.root" />   
+  <file sample="ZmumuNp1"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147114.el.root" />
+  <file sample="ZmumuNp2"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147115.el.root" />
+  <file sample="ZmumuNp3"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147116.el.root" />
+  <file sample="ZmumuNp4"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147117.el.root" />
+  <file sample="ZmumuNp5incl"    path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147118.el.root" />
+  <file sample="ZtautauNp0"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147121.el.root" />
+  <file sample="ZtautauNp1"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147122.el.root" />
+  <file sample="ZtautauNp2"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147123.el.root" />
+  <file sample="ZtautauNp3"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147124.el.root" />
+  <file sample="ZtautauNp4"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147125.el.root" />
+  <file sample="ZtautauNp5incl"    path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147126.el.root" />
+  <file sample="ZeebbNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200332.el.root" />
+  <file sample="ZeebbNp1"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200333.el.root" />
+  <file sample="ZeebbNp2"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200334.el.root" />   
+  <file sample="ZeebbNp3incl"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200335.el.root" />   
+  <file sample="ZmumubbNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200340.el.root" />   
+  <file sample="ZmumubbNp1"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200341.el.root" />
+  <file sample="ZmumubbNp2"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200342.el.root" />   
+  <file sample="ZmumubbNp3incl"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200343.el.root" />   
+  <file sample="ZtautaubbNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200348.el.root" />  
+  <file sample="ZtautaubbNp1"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200349.el.root" /> 
+  <file sample="ZtautaubbNp2"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200350.el.root" /> 
+  <file sample="ZtautaubbNp3incl"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200351.el.root" />
+  <file sample="ZeeccNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200432.el.root" />
+  <file sample="ZeeccNp1"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200433.el.root" />
+  <file sample="ZeeccNp2"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200434.el.root" />   
+  <file sample="ZeeccNp3incl"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200435.el.root" />   
+  <file sample="ZmumuccNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200440.el.root" />   
+  <!--file sample="ZmumuccNp1"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200441.el.root" /-->
+  <file sample="ZmumuccNp2"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200442.el.root" />   
+  <file sample="ZmumuccNp3incl"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200443.el.root" />  
+  <file sample="ZtautauccNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200448.el.root" />  
+  <file sample="ZtautauccNp1"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200449.el.root" /> 
+  <file sample="ZtautauccNp2"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200450.el.root" /> 
+  <file sample="ZtautauccNp3incl"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200451.el.root" />
 </files>
 </document>
 

@@ -7,8 +7,8 @@
   <sample name="WZ" dsid="105987" xsec="3.6706"  kfact="1.9011" genevt="999998" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
 </samples>
 <files>
-  <file sample="WW" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Diboson.105985.mu.nominal.histograms.root" />
-  <file	sample="ZZ" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Diboson.105986.mu.nominal.histograms.root" />
-  <file	sample="WZ" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Diboson.105987.mu.nominal.histograms.root" />
+  <file sample="WW" path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/105985.mu.root" />
+  <file	sample="ZZ" path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/105986.mu.root" />
+  <file	sample="WZ" path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/105987.mu.root" /> 
 </files>
 </document>
