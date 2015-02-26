@@ -883,13 +883,17 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTop(EventData::Reco_t& particle, 
 }
 
 /////////////////////////////////////////
-void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, double v_pz, double D, const double weight){
+void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, NuData nudata, const double weight){
    
   // neutrino and discriminant diagnostics:
-  if (v_pz > -13.9e6) {
+  if (nudata.v_pz > -KinemEdge) {
     //    cout << " v_pz=" << v_pz/GeV << " sign*D^{1/6}=" <<  D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV << endl;
-    m_hm->FillHistograms(path + "neutrino_pz", v_pz / GeV, weight);
-    m_hm->FillHistograms(path + "Discriminant", D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV, weight); // fill sixth-root of D, keep sign
+    m_hm->FillHistograms(path + "neutrino_pz", nudata.v_pz / GeV, weight);
+    m_hm->FillHistograms(path + "Discriminant", nudata.D/TMath::Abs(nudata.D)*pow(TMath::Abs(nudata.D),1/6.) / GeV, weight); // fill sixth-root of D, keep sign
+
+    if (nudata.v_pz_truth > -KinemEdge)
+      m_hm->FillMatrices(path + "neutrino_pz_vs_neutrino_pz_truth", nudata.v_pz_truth / GeV, nudata.v_pz / GeV, weight);
+    
   }
 
    // Pout, two entries per event:
@@ -982,7 +986,7 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string path, TLorentzVector &t
  }
 
 /////////////////////////////////////////
-void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, double v_pz, double D, const double weight){
+void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, NuData nudata, const double weight){
 
   Particle ptopL(particle, indexL);
   Particle ptopH(particle, indexH);
@@ -994,7 +998,7 @@ void CutFlowTTbarResolved::FillHistogramsPseudoTopPairs(EventData::Reco_t& parti
   
   string path = level + "/4j2b/difference/";
 
-  FillHistogramsTopPairs(path, topL, topH, ttSystem, v_pz, D, weight);
+  FillHistogramsTopPairs(path, topL, topH, ttSystem, nudata, weight);
 
  
   
@@ -1024,7 +1028,8 @@ void CutFlowTTbarResolved::FillHistogramsPartonTopPairs(EventData::Truth_t& part
 
   string path = level + "/4j2b/difference/";
   // dummy zeros for neutrino pz and discriminant...
-  FillHistogramsTopPairs(path, topL, topH, ttSystem, 0., 0., weight);
+  NuData nudata;
+  FillHistogramsTopPairs(path, topL, topH, ttSystem, nudata, weight);
 
 }
 
@@ -1055,10 +1060,13 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     FillHistogramsPseudoTop(ed->reco, 3, level, "WL", weight);
     FillHistogramsPseudoTop(ed->reco, 4, level, "WH", weight);
 
-    double v_pz = ed->property["reco_v_pz"];
-    double D = ed->property["reco_D"];
+    NuData nudata;
+    nudata.v_pz = ed->property["reco_v_pz"];
+    nudata.v_pz_1 = ed->property["reco_v_pz_1"];
+    nudata.v_pz_2 = ed->property["reco_v_pz_2"];
+    nudata.D = ed->property["reco_D"];
 
-    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, v_pz, D, weight);
+    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, nudata, weight);
 
 }
 
@@ -1096,10 +1104,22 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     FillHistogramsPseudoTop(ed->reco, 8, level, "WL", weight);
     FillHistogramsPseudoTop(ed->reco, 9, level, "WH", weight);
 
-    double v_pz = ed->property["ptcl_v_pz"];
-    double D = ed->property["ptcl_D"];
 
-    FillHistogramsPseudoTopPairs(ed->reco, 5, 6, 7, level, v_pz, D, weight);
+    NuData nudata;
+    nudata.v_pz = ed->property["ptcl_v_pz"];
+    nudata.v_pz_1 = ed->property["ptcl_v_pz_1"];
+    nudata.v_pz_2 = ed->property["ptcl_v_pz_2"];
+    nudata.v_pz_truth = ed->property["ptcl_v_pz_truth"];
+    nudata.D = ed->property["ptcl_D"];
+
+    /*
+      cout << "Particle: "
+      << " v_pz=" << v_pz
+      << " D=" << D
+      << endl;
+    */
+
+    FillHistogramsPseudoTopPairs(ed->reco, 5, 6, 7, level, nudata, weight);
 
 }
 

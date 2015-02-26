@@ -50,13 +50,13 @@ class CutFlowTTbarResolved : public CutFlow
   void FillHistograms(string path, ControlPlotValues& values);
   void FillMatrix(string path, Particle& px, Particle& py, double weight);
   
-  void FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, double v_pz, double D, const double weight);
+  void FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, NuData nudata, const double weight);
 
   void FillHistogramsPartonTop(EventData::Truth_t& particle, int index, string level, string topType, const double weight);
   void FillHistogramsPartonTopPairs(EventData::Truth_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
 
   void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mlb = -1);
-  void FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, double v_pz, double D, const double weight);
+  void FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, NuData nudata, const double weight);
 
 
  protected:

@@ -5,6 +5,14 @@
 
 namespace PhysicsHelperFunctions {
 
+  const double KinemEdge = 13.9e6;
+
+
+  struct NuData {
+    double v_pz = -KinemEdge, D = -KinemEdge, v_pz_truth = -KinemEdge;
+    double v_pz_1 = -KinemEdge, v_pz_2 = -KinemEdge;
+  };
+
   /////////////////////////////////////////
   // Pseudo Top Reconstruction
   /////////////////////////////////////////
@@ -27,7 +35,7 @@ namespace PhysicsHelperFunctions {
 
   protected:
     int MakeChargedLepton();
-    int MakeNeutrino(double &v_pz, double &delta, int option = 0, const double mW = 80.4*GeV );
+    int MakeNeutrino(NuData &nudata, bool FitAlsoParticle = true, int option = 0, const double mW = 80.399*GeV );
 
   protected:
     PseudoTopTarget       m_target;

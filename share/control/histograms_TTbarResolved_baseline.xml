@@ -278,9 +278,13 @@
         <Variable name="neutrino_pz" title="p_{z}^{#nu};p_{z}^{#nu} [GeV];" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="250" xmin="-500." xmax="500." />
         </Variable>
+        <Variable name="neutrino_pz_truth" title="p_{z}^{#nu, truth};p_{z}^{#nu, truth} [GeV];" folder="4j2b" particle="difference" >
+            <Bin id="0" nbins="250" xmin="-500." xmax="500." />
+        </Variable>
         <Variable name="Discriminant" title="Signed #nu's D^{1/6};Signed #nu's D^{1/6} [GeV];" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="250" xmin="-500." xmax="500." />
         </Variable>
+
 
         <Variable name="z_ttbar" title="z_{t#bar{t}};z_{t#bar{t}};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" edges="0.00,0.60,0.75,0.84,0.90,0.99,1.05,1.14,1.26,1.50,3.00" />
@@ -353,6 +357,7 @@
 	<TH2F variableX="AverTopPt" binIdX="1" variableY="dTopPtLH" binIdY="1" folder="4j2b" particle="difference" /> 
 	<TH2F variableX="TopLPt" binIdX="1" variableY="dTopPtLH" binIdY="1" folder="4j2b" particle="difference" /> 
 	<TH2F variableX="TopHPt" binIdX="1" variableY="dTopPtLH" binIdY="1" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="neutrino_pz_truth" binIdX="0" variableY="neutrino_pz" binIdY="0" folder="4j2b" particle="difference" /> 
 
         <TH1F variable="ptdiff"/>
         <TH1F variable="pt" />

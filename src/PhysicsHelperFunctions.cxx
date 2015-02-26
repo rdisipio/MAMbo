@@ -54,8 +54,14 @@ namespace PhysicsHelperFunctions {
 
     MakeChargedLepton();
     
-    double v_pz, D;
-    MakeNeutrino(v_pz, D);
+    double v_pz, D, v_pz_truth = 0;
+    NuData nudata;
+    MakeNeutrino(nudata);
+    v_pz = nudata.v_pz;
+    D = nudata.D;
+    if (m_target == kTruth) {
+      v_pz_truth = nudata.v_pz_truth;
+    }
     m_W_lep = m_neutrino + m_lepton;
 
     //    cout << " v_pz=" << v_pz/GeV << " sign*D^{1/6}=" <<  D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV << endl;
@@ -150,8 +156,11 @@ namespace PhysicsHelperFunctions {
     m_p_ed->iproperty[prefix + "pseudotop_had_bjet_index"] = bj1_index;
     m_p_ed->iproperty[prefix + "pseudotop_lep_bjet_index"] = bj2_index;
 
-    m_p_ed->property[prefix + "v_pz"] = v_pz;
-    m_p_ed->property[prefix + "D"] = D; // discriminant of the v_pz solution
+    m_p_ed->property[prefix + "v_pz"] = nudata.v_pz;
+    m_p_ed->property[prefix + "v_pz_1"] = nudata.v_pz_1;
+    m_p_ed->property[prefix + "v_pz_2"] = nudata.v_pz_2;
+    m_p_ed->property[prefix + "v_pz_truth"] = nudata.v_pz_truth;
+    m_p_ed->property[prefix + "D"] = nudata.D; // discriminant of the v_pz solution
 
     if ( m_target == kReco ) {
       m_p_ed->lepton.pT = m_lepton.Pt();
@@ -271,23 +280,33 @@ namespace PhysicsHelperFunctions {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-  int PseudoTopReconstruction::MakeNeutrino(double &v_pz, double &delta, int option, const double mW )
+  int PseudoTopReconstruction::MakeNeutrino( NuData &nudata, bool FitAlsoParticle, int option, const double mW )
   {
     int status = 0;
 
-    v_pz = -14.e6;
-    delta = -14.e6;
+    double v_pz = -KinemEdge;
+    double delta = -KinemEdge;
+    nudata.v_pz = v_pz;
+    nudata.D = delta;
 
-    if( m_target == kTruth ) {
-      m_neutrino.SetXYZM( m_p_ed->MET_truth.etx, m_p_ed->MET_truth.ety, m_p_ed->MET_truth.etz, 0. );
-
-      return status;
+    if(m_target == kTruth ) {
+      nudata.v_pz_truth = m_p_ed->MET_truth.etz;
+      if(!FitAlsoParticle) {
+	//cout << "Setting neutrino's p_z using truth" << endl;
+	m_neutrino.SetXYZM( m_p_ed->MET_truth.etx, m_p_ed->MET_truth.ety, m_p_ed->MET_truth.etz, 0. );
+	return status;
+      } else {
+	//cout << "OK, will run MW also in particle mode..." << endl;
+      }
+    } else {
+      nudata.v_pz_truth = v_pz;
     }
 
-    const double v_pT = m_p_ed->MET.et;
-    const double v_px = ( m_target == kReco ) ? v_pT * cos( m_p_ed->MET.phi ) : 0.;
-    const double v_py = ( m_target == kReco ) ? v_pT * sin( m_p_ed->MET.phi ) : 0.;
+    const double v_pT = ( m_target == kReco ) ? m_p_ed->MET.et : m_p_ed->MET_truth.et;
+    const double v_px = ( m_target == kReco ) ? v_pT * cos( m_p_ed->MET.phi ) : m_p_ed->MET_truth.etx;
+    const double v_py = ( m_target == kReco ) ? v_pT * sin( m_p_ed->MET.phi ) : m_p_ed->MET_truth.ety;
 
+    // lepton already made by reco or particle levels:
     const double l_px = m_lepton.Px();
     const double l_py = m_lepton.Py();
     const double l_pz = m_lepton.Pz();
@@ -305,10 +324,14 @@ namespace PhysicsHelperFunctions {
     
     if( delta <= 0. ) {
       v_pz = -0.5*b/a;
+      nudata.v_pz_1 = v_pz;
+      nudata.v_pz_2 = v_pz;
       // hm...maybe try fixing top mass to PDG or make t,lep mass same as t,had mass?
     } else {
       const double v_pz_1 = 0.5 * ( -b - sqrt(delta) ) / a;
       const double v_pz_2 = 0.5 * ( -b + sqrt(delta) ) / a;
+      nudata.v_pz_1 = v_pz_1;
+      nudata.v_pz_2 = v_pz_2;
       if (option == 1) {
 	// more central:
 	if (fabs(v_pz_1) < fabs(v_pz_2))
@@ -327,6 +350,8 @@ namespace PhysicsHelperFunctions {
 
     m_neutrino.SetPxPyPzE( v_px, v_py, v_pz, v_E );
     
+    nudata.v_pz = v_pz;
+    nudata.D = delta;
     return status;
   }
   
