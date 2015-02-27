@@ -32,6 +32,7 @@ namespace PhysicsHelperFunctions {
     void SetEventData( EventData * p_ed ) { m_p_ed = p_ed; };
     int Run( );
     void MakeDummyPseudotops();
+    double GetHt();
 
   protected:
     int MakeChargedLepton();
@@ -51,6 +52,7 @@ namespace PhysicsHelperFunctions {
     TLorentzVector m_W_had;
     TLorentzVector m_top_had;
     TLorentzVector m_ttbar;
+    double         m_ht;
   };
 
   

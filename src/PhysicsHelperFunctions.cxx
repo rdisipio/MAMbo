@@ -62,6 +62,9 @@ namespace PhysicsHelperFunctions {
     if (m_target == kTruth) {
       v_pz_truth = nudata.v_pz_truth;
     }
+    
+    m_ht=-1;
+    
     m_W_lep = m_neutrino + m_lepton;
 
     //    cout << " v_pz=" << v_pz/GeV << " sign*D^{1/6}=" <<  D/TMath::Abs(D)*pow(TMath::Abs(D),1/6.) / GeV << endl;
@@ -76,6 +79,8 @@ namespace PhysicsHelperFunctions {
 
     const double dR1 = m_lepton.DeltaR( bj1 );
     const double dR2 = m_lepton.DeltaR( bj2 );
+    
+    m_ht = m_neutrino.Pt()+m_lepton.Pt()+bj1.Pt()+bj2.Pt();
 
     TLorentzVector bj_had;
     if( dR1 < dR2 ) {
@@ -123,6 +128,8 @@ namespace PhysicsHelperFunctions {
     TLorentzVector Wj2 = ( m_target == kReco ) ?
       HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj2_index ) :
       HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj2_index );
+           
+    m_ht += Wj1.Pt()+Wj2.Pt();
     
     m_W_had   = Wj1 + Wj2;
     m_top_had = bj_had + m_W_had;
@@ -510,6 +517,11 @@ namespace PhysicsHelperFunctions {
       res.delta_m   = p1.M() - p2.M();
       
       m_results[label] = res;
+  }
+  
+  double PseudoTopReconstruction::GetHt()
+  {
+      return m_ht;
   }
   
 };

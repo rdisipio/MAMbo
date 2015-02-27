@@ -188,7 +188,6 @@ TopMiniSLResolved::TopMiniSLResolved(TTree *tree) : fChain(0)
      // marino's file: 
      //     TString fname = "/afs/cern.ch/user/m/mromano/public/user.mromano.4336192._000011.mc.root";
      TString fname = "/afs/cern.ch/work/j/jpacalt/TopResolved8TeV_trees/110404.PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.at180_mc.root";
-
       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fname);
       if (!f || !f->IsOpen()) {
          f = new TFile(fname);
