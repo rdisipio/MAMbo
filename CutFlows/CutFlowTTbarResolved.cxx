@@ -1249,6 +1249,15 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_particle_dPhi_ttbar",m_VarField[8],m_VarField[18],weight);
     m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_particle_HT_ttbar",m_VarField[9]/GeV,m_VarField[19]/GeV,weight);
     m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_particle_HT_sum",m_ht[0]/GeV,m_ht[1]/GeV,weight);
+    
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_Pout",m_VarField[10]/GeV,m_VarField[0]/GeV,weight);
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_Pout",m_VarField[11]/GeV,m_VarField[1]/GeV,weight);
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_z_ttbar",m_VarField[12],m_VarField[2],weight);
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_z_ttbar",m_VarField[13],m_VarField[3],weight);
+   // m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_particle_yboost",m_VarField[7],m_VarField[16],weight);
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_dPhi_ttbar",m_VarField[18],m_VarField[8],weight);
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_HT_ttbar",m_VarField[19]/GeV,m_VarField[9]/GeV,weight);
+    m_hm->FillMatrices("reco/4j2b/difference/Matrix_particle_reco_HT_sum",m_ht[1]/GeV,m_ht[0]/GeV,weight);
  }
  
   void CutFlowTTbarResolved::FillMatrix(string path, Particle& py, Particle& px, double weight){
@@ -1335,6 +1344,14 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
    // m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_particle_yboost",m_VarField[7],m_VarField[16],weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_dPhi_ttbar",m_VarField[28],m_VarField[18],weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_HT_ttbar",m_VarField[29]/GeV,m_VarField[19]/GeV,weight);
+    
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_particle_parton_Pout",m_VarField[10]/GeV,m_VarField[20]/GeV,weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_particle_parton_Pout",m_VarField[11]/GeV,m_VarField[21]/GeV,weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField[12],m_VarField[22],weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField[13],m_VarField[23],weight);
+   // m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_particle_yboost",m_VarField[7],m_VarField[16],weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_particle_parton_dPhi_ttbar",m_VarField[18],m_VarField[28],weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_particle_parton_HT_ttbar",m_VarField[19]/GeV,m_VarField[29]/GeV,weight);
 
   }
   
