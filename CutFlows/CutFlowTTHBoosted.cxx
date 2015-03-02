@@ -212,6 +212,13 @@ void CutFlowTTHBoosted::FillHistograms( const EventData * ed )
        m_hm->FillHistograms( path + "fjet_m",     m, weight );
     }
 
+    const int cl_n = ed->clusters.n; 
+    m_hm->FillHistograms( path + "cl_n", cl_n, weight );
+    for( int i = 0 ; i < cl_n ; ++i ) {
+       const double E   = ed->clusters.E.at(i) / GeV;
+
+       m_hm->FillHistograms( path + "cl_E",      E, weight );
+    }
 }
 
 

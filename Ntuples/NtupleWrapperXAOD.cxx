@@ -74,6 +74,21 @@ bool NtupleWrapperXAOD::MakeEventMET( EventData * ed )
 //  ed->MET.ety   = 0.;
 //  ed->MET.sumet = GET_VALUE( met_sumet  );
 
+  const xAOD::CaloClusterContainer* clusters = 0;
+  if( !m_xAODevent->retrieve( clusters, "CaloCalTopoCluster" ) ) throw runtime_error( "Cannot retrieve CaloCalTopoCluster container\n" );
+
+  for( const auto * cl : *clusters ) {
+    ed->clusters.pT.push_back( cl->pt() );
+    ed->clusters.eta.push_back( cl->eta() );
+    ed->clusters.phi.push_back(	cl->phi() );
+    ed->clusters.E.push_back( cl->e() );
+
+    const double m = PhysicsHelperFunctions::Mass( ed->clusters, ed->clusters.n );
+    ed->clusters.m.push_back( m );
+
+    ed->clusters.n++;
+  }
+
   return success;
 }
 

@@ -168,6 +168,19 @@ struct EventData
   } truth_bjets;
   
 
+  struct Clusters_t {
+    int     n;
+
+    array_ui index;
+    array_d pT;
+    array_d eta;
+    array_d phi;
+    array_d E;
+    array_d m;
+    PropertyCollection_t property;
+  } clusters;
+
+
   struct Truth_t {
     int     n;
 

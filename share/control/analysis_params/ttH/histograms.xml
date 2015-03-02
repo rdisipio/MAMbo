@@ -84,6 +84,12 @@
         <Variable name="fjet_m" title="Fat-Jet mass [GeV]" folder="cutflow" >
             <Bin id="0" nbins="30" xmin="0" xmax="300" />
         </Variable>
+        <Variable name="cl_n"   title="No. of Clusters" folder="cutflow">
+            <Bin id="0" nbins="50" xmin="-0.5" xmax="99.5" />
+        </Variable>
+        <Variable name="cl_E" title="Cluster Energy [GeV]" folder="cutflow" >
+            <Bin id="0" nbins="300" xmin="0" xmax="300" />
+        </Variable>
     </Variables>
     <Histos>
        <TH1F variable="el_n"     binId="0"/>
@@ -109,5 +115,7 @@
        <TH1F variable="fjet_eta" binId="0"/>
        <TH1F variable="fjet_phi" binId="0"/>
        <TH1F variable="fjet_m"   binId="0"/>
+       <TH1F variable="cl_n"     binId="0"/>
+       <TH1F variable="cl_E"   	 binId="0"/>
     </Histos>
 </histograms>
