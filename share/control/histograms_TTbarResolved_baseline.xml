@@ -349,7 +349,7 @@
 	    <Bin id="0" nbins="15" edges="0,90,145,200,260,325,395,470,545,625,705,790,875,960,1050,1500"/>
 	    <Bin id="1" nbins="100" xmin="0" xmax="1500"/>	
 	</Variable>
-	<Variable name="HT_sum" title="H_{T}^{pseudo} [GeV]" folder="4j2b" particle="difference ">
+	<Variable name="HT_pseudo" title="H_{T}^{pseudo} [GeV]" folder="4j2b" particle="difference ">
             <Bin id="0" nbins="15" edges="0,140,270,325,380,445,510,580,660,740,825,910,1000,1090,1180,1500"/>
             <Bin id="1" nbins="100" xmin="0" xmax="1500"/>
         </Variable>
@@ -449,11 +449,11 @@
         <Matrix variable="m" binId="0"/>
         <Matrix variable="absrap" binId="0"/>
         <Matrix variable="rapidity" binId="0"/>
-	<Matrix variable="Pout" binId="1"/>
-	<Matrix variable="z_ttbar" binId="1"/>
-	<Matrix variable="dPhi_ttbar" binId="1"/>
-	<Matrix variable="HT_ttbar" binId="1"/> 
-	<Matrix variable="HT_sum" binId="1"/>
+	<Matrix variable="Pout" binId="0"/>
+	<Matrix variable="z_ttbar" binId="0"/>
+	<Matrix variable="dPhi_ttbar" binId="0"/>
+	<Matrix variable="HT_ttbar" binId="0"/> 
+	<Matrix variable="HT_pseudo" binId="0"/>
 
  	<!-- top pair distributions -->
         <TH1F variable="z_ttbar" binId="0"/>
@@ -467,8 +467,8 @@
 	<TH1F variable="TopCosOpeningAngle"  binId="0"/>
         <TH1F variable="Salam_ttbar"  binId="0"/>
 	<TH1F variable="dPhi_ttbar"  binId="0"/>
-	<TH1F variable="HT_ttbar" binId="1"/>
-	<TH1F variable="HT_sum" binId="1"/>
+	<TH1F variable="HT_ttbar" binId="0"/>
+	<TH1F variable="HT_pseudo" binId="0"/>
 
 
     </Histos>    
