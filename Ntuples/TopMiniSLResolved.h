@@ -197,7 +197,7 @@ TopMiniSLResolved::TopMiniSLResolved(TTree *tree) : fChain(0)
    }
    //cout <<"Tree name is " << tree->GetName() << endl;
    Init(tree);
- * */
+ */
 }
 
 TopMiniSLResolved::~TopMiniSLResolved()

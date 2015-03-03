@@ -281,10 +281,9 @@
         <Variable name="neutrino_pz_truth" title="p_{z}^{#nu, truth};p_{z}^{#nu, truth} [GeV];" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="250" xmin="-500." xmax="500." />
         </Variable>
-        <Variable name="Discriminant" title="Signed #nu's D^{1/6};Signed #nu's D^{1/6} [GeV];" folder="4j2b" particle="difference" >
+        <Variable name="Discriminant" title="Signed #nu's |D|^{1/6};Signed #nu's |D|^{1/6} [GeV];" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="250" xmin="-500." xmax="500." />
         </Variable>
-
 
         <Variable name="z_ttbar" title="z_{t#bar{t}};z_{t#bar{t}};" folder="4j2b" particle="difference" >
 	    <Bin id="0" nbins="6" edges="0,0.35,0.65,0.90,1.15,1.6,3.00"/>
@@ -449,6 +448,7 @@
         <Matrix variable="m" binId="0"/>
         <Matrix variable="absrap" binId="0"/>
         <Matrix variable="rapidity" binId="0"/>
+	<Matrix variable="Discriminant" binId="0"/>
 	<Matrix variable="Pout" binId="0"/>
 	<Matrix variable="z_ttbar" binId="0"/>
 	<Matrix variable="dPhi_ttbar" binId="0"/>

@@ -5,7 +5,7 @@
 
 namespace PhysicsHelperFunctions {
 
-  const double KinemEdge = 13.9e6;
+  const double KinemEdge = 14e3*GeV; // 14 TeV should be a good limit enough;-)
 
 
   struct NuData {

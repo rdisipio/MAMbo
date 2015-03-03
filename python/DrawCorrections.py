@@ -113,7 +113,9 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     #PrintBinContent(h_pnr)
 
     print '  Making eff...'
-    print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
+    #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
+    print '    RMS check: %f ' % (h_part.GetRMS(),)
+    print '    RMS check: %f ' % (h_match_p.GetRMS(),)
     eff = MakeRatio( h_part,  h_match_p)
 
     print '  Making acc...'
@@ -185,15 +187,16 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 ####################################################
 
-ljets = [ 'll', 'el', 'mu']
+#ljets = [ 'll', 'el', 'mu']
 #ljets = [ 'el', 'mu']
-#ljets = [ 'el' ]
+ljets = [ 'el' ]
 #ljets = [ 'mu' ]
 #ljets = [ 'll' ]
 
-ptag='_Feb2015'
+ptag='_atlf'
 #ftag='_Fab12_matched_p_wp'
-ftag='_Feb12_matched_p_wr'
+#ftag='_Feb12_matched_p_wr'
+ftag='_new'
 
 
 os.system('mkdir png eps pdf')
