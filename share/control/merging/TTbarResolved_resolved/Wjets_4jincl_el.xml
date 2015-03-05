@@ -24,8 +24,7 @@
   <sample name="WcNp1"             dsid="200057" sf="0.731" xsec="274.47" kfact="1.5200" genevt="8198769"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WcNp2"             dsid="200058" sf="0.731" xsec="71.643" kfact="1.5200" genevt="2090290"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WcNp3"             dsid="200059" sf="0.731" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <!--sample name="WcNp4incl"         dsid="200060" sf="0.647" xsec="4.7824" kfact="1.5200" genevt="199499"    
-generator="AlpgenPythia_Auto_P2011C" simulation="Full" /-->
+  <sample name="WcNp4incl"         dsid="200060" sf="0.647" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WccNp0"            dsid="200156" sf="1.390" xsec="149.39" kfact="1.1330" genevt="4299592"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WccNp1"            dsid="200157" sf="1.390" xsec="143.90" kfact="1.1330" genevt="4137891"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WccNp2"            dsid="200158" sf="1.390" xsec="84.227" kfact="1.1330" genevt="2394394"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
@@ -36,35 +35,36 @@ generator="AlpgenPythia_Auto_P2011C" simulation="Full" /-->
   <sample name="WbbNp3incl"        dsid="200259" sf="1.390" xsec="13.633" kfact="1.1330" genevt="398397"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="WenuNp0"        path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147025.el.root" />
-  <file sample="WenuNp1"        path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147026.el.root" />
-  <file sample="WenuNp2"        path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147027.el.root" />
-  <file sample="WenuNp3"        path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147028.el.root" />
-  <file	sample="WenuNp4"        path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147029.el.root" />
-  <file	sample="WenuNp5incl"    path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147030.el.root" />
-  <file	sample="WmunuNp0"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147033.el.root" />
-  <file	sample="WmunuNp1"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147034.el.root" />
-  <file	sample="WmunuNp2"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147035.el.root" />
-  <file	sample="WmunuNp3"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147036.el.root" />
-  <file	sample="WmunuNp4"       path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147037.el.root" />
-  <file	sample="WmunuNp5incl"   path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147038.el.root" />
-  <file	sample="WtaunuNp0"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147041.el.root" />
-  <file	sample="WtaunuNp1"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147042.el.root" />
-  <file sample="WtaunuNp2"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147043.el.root" />
-  <file sample="WtaunuNp3"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147044.el.root" />
-  <file sample="WtaunuNp4"      path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147045.el.root" />
-  <file sample="WtaunuNp5incl"  path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/147046.el.root" />
-  <file sample="WcNp0"          path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200056.el.root" />
-  <file sample="WcNp1"          path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200057.el.root" />
-  <file sample="WcNp2"          path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200058.el.root" />
-  <file sample="WcNp3"          path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200059.el.root" />
-  <file sample="WccNp0"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200156.el.root" />
-  <file sample="WccNp1"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200157.el.root" />
-  <file sample="WccNp2"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200158.el.root" />
-  <file sample="WccNp3incl"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200159.el.root" />
-  <file sample="WbbNp0"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200256.el.root" />
-  <file sample="WbbNp1"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200257.el.root" />
-  <file sample="WbbNp2"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200258.el.root" />
-  <file sample="WbbNp3incl"     path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/200259.el.root" /> 
+  <file sample="WenuNp0"        path="nominal/tt_diffxs_8TeV.Wjets.147025.el.nominal.histograms.root" />" 
+  <file sample="WenuNp1"        path="nominal/tt_diffxs_8TeV.Wjets.147026.el.nominal.histograms.root" />"
+  <file sample="WenuNp2"        path="nominal/tt_diffxs_8TeV.Wjets.147027.el.nominal.histograms.root" />"
+  <file sample="WenuNp3"        path="nominal/tt_diffxs_8TeV.Wjets.147028.el.nominal.histograms.root" />
+  <file	sample="WenuNp4"        path="nominal/tt_diffxs_8TeV.Wjets.147029.el.nominal.histograms.root" />
+  <file	sample="WenuNp5incl"    path="nominal/tt_diffxs_8TeV.Wjets.147030.el.nominal.histograms.root" />
+  <file	sample="WmunuNp0"       path="nominal/tt_diffxs_8TeV.Wjets.147033.el.nominal.histograms.root" />
+  <file	sample="WmunuNp1"       path="nominal/tt_diffxs_8TeV.Wjets.147034.el.nominal.histograms.root" />
+  <file	sample="WmunuNp2"       path="nominal/tt_diffxs_8TeV.Wjets.147035.el.nominal.histograms.root" /> 
+  <file	sample="WmunuNp3"       path="nominal/tt_diffxs_8TeV.Wjets.147036.el.nominal.histograms.root" />
+  <file	sample="WmunuNp4"       path="nominal/tt_diffxs_8TeV.Wjets.147037.el.nominal.histograms.root" />
+  <file	sample="WmunuNp5incl"   path="nominal/tt_diffxs_8TeV.Wjets.147038.el.nominal.histograms.root" />
+  <file	sample="WtaunuNp0"      path="nominal/tt_diffxs_8TeV.Wjets.147041.el.nominal.histograms.root" />
+  <file	sample="WtaunuNp1"      path="nominal/tt_diffxs_8TeV.Wjets.147042.el.nominal.histograms.root" />
+  <file sample="WtaunuNp2"      path="nominal/tt_diffxs_8TeV.Wjets.147043.el.nominal.histograms.root" />
+  <file sample="WtaunuNp3"      path="nominal/tt_diffxs_8TeV.Wjets.147044.el.nominal.histograms.root" />
+  <file sample="WtaunuNp4"      path="nominal/tt_diffxs_8TeV.Wjets.147045.el.nominal.histograms.root" />
+  <file sample="WtaunuNp5incl"  path="nominal/tt_diffxs_8TeV.Wjets.147046.el.nominal.histograms.root" />
+  <file sample="WcNp0"          path="nominal/tt_diffxs_8TeV.Wjets.200056.el.nominal.histograms.root" />
+  <file sample="WcNp1"          path="nominal/tt_diffxs_8TeV.Wjets.200057.el.nominal.histograms.root" />
+  <file sample="WcNp2"          path="nominal/tt_diffxs_8TeV.Wjets.200058.el.nominal.histograms.root" />
+  <file sample="WcNp3"          path="nominal/tt_diffxs_8TeV.Wjets.200059.el.nominal.histograms.root" />
+  <file sample="WcNp4incl"      path="nominal/tt_diffxs_8TeV.Wjets.200060.el.nominal.histograms.root" /> 
+  <file sample="WccNp0"         path="nominal/tt_diffxs_8TeV.Wjets.200156.el.nominal.histograms.root" />
+  <file sample="WccNp1"         path="nominal/tt_diffxs_8TeV.Wjets.200157.el.nominal.histograms.root" />
+  <file sample="WccNp2"         path="nominal/tt_diffxs_8TeV.Wjets.200158.el.nominal.histograms.root" />
+  <file sample="WccNp3incl"     path="nominal/tt_diffxs_8TeV.Wjets.200159.el.nominal.histograms.root" />
+  <file sample="WbbNp0"         path="nominal/tt_diffxs_8TeV.Wjets.200256.el.nominal.histograms.root" />
+  <file sample="WbbNp1"         path="nominal/tt_diffxs_8TeV.Wjets.200257.el.nominal.histograms.root" />
+  <file sample="WbbNp2"         path="nominal/tt_diffxs_8TeV.Wjets.200258.el.nominal.histograms.root" />
+  <file sample="WbbNp3incl"     path="nominal/tt_diffxs_8TeV.Wjets.200259.el.nominal.histograms.root" /> 
 </files>
 </document>

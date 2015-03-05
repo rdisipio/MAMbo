@@ -2,11 +2,11 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
-  <sample name="DiTop"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110340.mu.nominal.histograms.root" />
-  <sample name="SingleTop" file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root" />
-  <sample name="Wjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root" />
-  <sample name="Zjets"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" />
-  <sample name="Diboson"   file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root" />
-  <sample name="Fakes"     file="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root" />
+  <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110340.mu.nominal.histograms.root" />
+  <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root" />
+  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root" />
+  <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" />
+  <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root" />
+  <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root" />
 </samples>
 </document>

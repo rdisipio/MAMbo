@@ -8,9 +8,9 @@
   <sample name="ttbar_nofullhad_03"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="AFII" />
 </samples>
 <files>
-  <file sample="ttbar_nofullhad_00" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.00" />
-  <file sample="ttbar_nofullhad_01" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.01" />
-  <file sample="ttbar_nofullhad_02" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.02" />
-  <file sample="ttbar_nofullhad_03" path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.03" />
+  <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.03" />
 </files>
 </document>

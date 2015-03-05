@@ -8,9 +8,9 @@
   <sample name="singletop_Wtchannel"        dsid="110140" xsec="20.461" kfact="1.0933" genevt="999692"  generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="singletop_tchannel_top"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/110090.mu.root" />
-  <file sample="singletop_tchannel_antitop"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/110091.mu.root" />
-  <file sample="singletop_schannel"         path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/110119.mu.root" />
-  <file sample="singletop_Wtchannel"        path="/afs/cern.ch/user/v/vscarfon/public/analysis/MAMbo/run/output/NtupleWrapped/110140.mu.root" />
+  <file sample="singletop_tchannel_top"     path="nominal/tt_diffxs_8TeV.SingleTop.110090.mu.nominal.histograms.root" />
+  <file	sample="singletop_tchannel_antitop" path="nominal/tt_diffxs_8TeV.SingleTop.110091.mu.nominal.histograms.root" />
+  <file sample="singletop_schannel"         path="nominal/tt_diffxs_8TeV.SingleTop.110119.mu.nominal.histograms.root" />
+  <file sample="singletop_Wtchannel"        path="nominal/tt_diffxs_8TeV.SingleTop.110140.mu.nominal.histograms.root" />
 </files>
 </document>
