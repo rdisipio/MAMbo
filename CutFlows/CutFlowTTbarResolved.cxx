@@ -49,12 +49,14 @@ bool CutFlowTTbarResolved::Initialize() {
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
         const string syst = m_config->custom_params_string["scale_syst"];
 
-        if( syst == "BTAGSFUP" )      m_syst_type = BTAGSFUP;
-        if( syst == "BTAGSFDOWN" )    m_syst_type = BTAGSFDOWN;
-        if( syst == "CTAUTAGSFUP" )   m_syst_type = CTAUTAGSFUP;
-        if( syst == "CTAUTAGSFDOWN" ) m_syst_type = CTAUTAGSFDOWN;    
-        if( syst == "MISTAGSFUP" )    m_syst_type = MISTAGSFUP;
-        if( syst == "MISTAGSFDOWN" )  m_syst_type = MISTAGSFDOWN;    
+        if( syst == "NOMINAL" )            m_syst_type = NOMINAL;
+        else if( syst == "BTAGSFUP" )      m_syst_type = BTAGSFUP;
+        else if( syst == "BTAGSFDOWN" )    m_syst_type = BTAGSFDOWN;
+        else if( syst == "CTAUTAGSFUP" )   m_syst_type = CTAUTAGSFUP;
+        else if( syst == "CTAUTAGSFDOWN" ) m_syst_type = CTAUTAGSFDOWN;    
+        else if( syst == "MISTAGSFUP" )    m_syst_type = MISTAGSFUP;
+        else if( syst == "MISTAGSFDOWN" )  m_syst_type = MISTAGSFDOWN;    
+	else throw runtime_error( "CutFlowTTbarResolved::Initialize(): Invalid scale factor systematic\n" );
 
         cout << "INFO: Scale factor systematic: " << syst << endl;
     }    

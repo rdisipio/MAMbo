@@ -382,6 +382,7 @@
         <TH1F variable="rapidity" binId="0"/>
         <TH1F variable="mlb" binId="0"/>
         <TH1F variable="mu" binId="0"/>
+        <TH1F variable="mu" binId="1"/>
         <TH1F variable="pvxp_n" binId="0"/>
         <TH1F variable="vxp_z" binId="0"/>
         <TH1F variable="lep_pt" binId="0"/>

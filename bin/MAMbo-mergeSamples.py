@@ -85,6 +85,9 @@ def ReadConfiguration( configFileName ):
       sample = node.attrib.get('sample')
 
       path = node.attrib.get('path')
+      if path.startswith("/"): path = path
+      else: 
+          path = os.environ['MAMBOOUTPUTDIR'] + "/" + path
       input_files[sample] = TFile.Open( path )
 
    return histograms_configuration, samples_configuration, input_files
