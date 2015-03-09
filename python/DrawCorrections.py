@@ -179,7 +179,7 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
         next_tmp(xmin, xmax, title)
     corr.Draw('P')
     _corrs.append(corr)
-    can.Print('eps/' + canname + '.eps')
+    #can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
     can.Print('pdf/' + canname + '.pdf')
 
@@ -189,20 +189,15 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 
 #ljets = [ 'll', 'el', 'mu']
 #ljets = [ 'el', 'mu']
-ljets = [ 'el' ]
+#ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-#ljets = [ 'll' ]
+ljets = [ 'll' ]
 
-ptag='_atlf'
-#ftag='_Fab12_matched_p_wp'
-#ftag='_Feb12_matched_p_wr'
-ftag='_new'
-
+ptag='_fixed'
+ftag='_fixed'
+rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/'
 
 os.system('mkdir png eps pdf')
-
-rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/'
-# 
 
 for ll in ljets:
 
