@@ -233,7 +233,6 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
 
              points[i]['u'] += pow( sample_uncertainty['stat']['u'][i], 2 )
              points[i]['d'] += pow( sample_uncertainty['stat']['d'][i], 2 )
-
              total_uncertainty['stat']['u'][i] += pow( sample_uncertainty['stat']['u'][i], 2 )
              total_uncertainty['stat']['d'][i] += pow( sample_uncertainty['stat']['d'][i], 2 )
              total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty['stat']['u'][i], 2 )
@@ -248,26 +247,27 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
 
              hpattern = "%s_%s_%s_" % ( sample, hname, systname )
 
-             # scheme: both positive 
-             dy_u = 0.
-             dy_d = 0.
-             if samples_configuration[sample].systematics[systname].has_key( "up" ):
-                h_u = hlist[hpattern+"up"]
-                h_d = hlist[hpattern+"down"]
-
-                dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
-                dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
-
-             elif samples_configuration[sample].systematics[systname].has_key( "single" ):
-                h_sys = hlist[hpattern+"single"]
-
-                dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-                dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-             else:
-                print "ERROR: side is neither up, down or single"
-                exit(1)
-
              for i in range(nbins):
+
+                 # scheme: both positive 
+                 dy_u = 0.
+                 dy_d = 0.
+                 if samples_configuration[sample].systematics[systname].has_key( "up" ):
+                    h_u = hlist[hpattern+"up"]
+                    h_d = hlist[hpattern+"down"]
+
+                    dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
+                    dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
+
+                 elif samples_configuration[sample].systematics[systname].has_key( "single" ):
+                    h_sys = hlist[hpattern+"single"]
+
+                    dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
+                    dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
+                 else:
+                    print "ERROR: side is neither up, down or single"
+                    exit(1)
+
                  if dy_u > 0. and dy_d > 0.:
                     # normal behavior
                     sample_uncertainty[systname]['u'][i] = dy_u
