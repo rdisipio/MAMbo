@@ -538,6 +538,18 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_unweight");
     FillHistogramsControlPlotsReco( values );
 
+    if (jet_n >= 5 && bjet_n >= 0) {
+    MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl", values );
+    }
+ 
+    if (jet_n >= 5 && bjet_n >= 1) {
+    MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl", values );
+    }
+        
+    if (jet_n >= 5 && bjet_n >= 2) {
+    MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl", values );
+    }
+
     // 9 Nbtags >= 1
     if (bjet_n < 1) return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
@@ -552,18 +564,6 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_unweight");
 
     FillHistogramsControlPlotsReco( values );
-
-    if (jet_n >= 5 && bjet_n >= 0) {
-    MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl", values );
-    }
-
-    if (jet_n >= 5 && bjet_n >= 1) {
-    MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl", values );
-    }
-
-    if (jet_n >= 5 && bjet_n >= 2) {
-    MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl", values );
-    }
 
     return passed;
 }
