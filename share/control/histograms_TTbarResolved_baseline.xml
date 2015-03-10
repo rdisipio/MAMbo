@@ -72,18 +72,18 @@
         </Variable>
         <Variable name="m"      title="mass [GeV]" folder="4j2b" > 
             <Bin id="0" nbins="50" xmin="0." xmax="600." particle="top"/>
-	    <Bin id="0" nbins="9" edges="225,335,405,490,590,705,840,990,1200,2500" particle="tt"/> <!--JP proposed binning-->
+	    <Bin id="0" nbins="10" edges="225,395,470,550,645,750,860,980,1100,1250,2500" particle="tt"/> <!--JP proposed binning-->
             <Bin id="1" nbins="50" xmin="225" xmax="2500" particle="tt"/> <!--fine binning-->
 	    <Bin id="2" nbins="50" xmin="160." xmax="185." particle="top"/> <!--previusly used binning-->
-	    <Bin id="2" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt"/> 
-
+	    <Bin id="2" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt"/> <!--boosted friendly binning-->
+	
             <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WL"/>
             <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WH"/>
         </Variable>
         <Variable name="absrap" title="abs rapidity |y_{t}|" folder="4j2b" > 
             <Bin id="0" nbins="18" edges="0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.7,1.9,2.5"  particle="topH"/> <!--JP proposed binning-->
-            <Bin id="0" nbins="6" edges="0,0.6,1,1.4,1.8,2.2,2.5"  particle="topL"/>
-	    <Bin id="0" nbins="10" edges="0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2.5" particle="tt"/>
+            <Bin id="0" nbins="11" edges="0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2.0,2.5"  particle="topL"/>
+	    <Bin id="0" nbins="18" edges="0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.8,2.5" particle="tt"/>
 	    <Bin id="1" nbins="50" xmin="0" xmax="2.5" particle="top"/> <!--fine binning-->
 	    <Bin id="1" nbins="50" xmin="0" xmax="2.5" particle="tt"/>
 	    <Bin id="2" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/> <!--previusly used binning-->
@@ -94,14 +94,14 @@
 
         </Variable>
         <Variable name="rapidity" title="rapidity y_{t}" folder="4j2b" >
-	    <Bin id="0" nbins="10" edges="-2.5,-1.8,-1.4,-1,-0.6,O,0.6,1,1.4,1.8,2.5" particle="topL"/>
+	    <Bin id="0" nbins="22" edges="-2.5,-2.0,-1.8,-1.6,-1.4,-1.2,-1,-0.8,-0.6,-0.4,-0.2,O,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2.0,2.5" particle="topL"/>
 	    <Bin id="0" nbins="36" edges="-2.5,-1.9,-1.7,-1.5,-1.4,-1.3,-1.2,-1.1,-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.7,1.9,2.5" particle="topH"/>
-	    <Bin id="0" nbins="20" edges="-2.5,-1.8,-1.6,-1.4,-1.2,-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2.5" particle="tt"/>
+	    <Bin id="0" nbins="36" edges="-2.5,-1.8,-1.6,-1.5,-1.4,-1.3,-1.2,-1.1,-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.8,2.5" particle="tt"/>
 	    <Bin id="1" nbins="100" xmin="-2.5" xmax="2.5" particle="top"/> <!--fine binning-->
 	    <Bin id="1" nbins="100" xmin="-2.5" xmax="2.5" particle="tt"/>
 	    <Bin id="2" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/> <!--previusly used binning-->
 	    <Bin id="2" nbins="20" edges="-2.5,-1.6,-1.2,-1,-0.8,-0.7,-0.6,-0.4,-0.2,-0.1,0,0.1,0.2,0.4,0.6,0.7,0.8,1,1.2,1.6,2.5" particle="tt"/>
-            
+
 	    <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" particle="WL"/>
 	    <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" particle="WH"/>
         </Variable>
@@ -352,6 +352,18 @@
             <Bin id="0" nbins="15" edges="0,140,270,325,380,445,510,580,660,740,825,910,1000,1090,1180,1500"/>
             <Bin id="1" nbins="100" xmin="0" xmax="1500"/>
         </Variable>
+	<Variable name="WH_m" title="m_{W,had} [GeV]" folder="4j2b" particle="difference">
+	    <Bin id="0" nbins="50" xmin="0." xmax="200."/>
+	</Variable>
+	<Variable name="WL_m" title="m_{W,lep} [GeV]" folder="4j2b" particle="difference">
+	    <Bin id="0" nbins="50" xmin="0." xmax="200."/>
+	</Variable>
+	<Variable name="TopH_m" title="m_{had} [GeV]" folder="4j2b" particle="difference">
+	    <Bin id="0" nbins="50" xmin="0." xmax="600."/>
+	</Variable>
+	<Variable name="TopL_m" title="m_{lep} [GeV]" folder="4j2b" particle="difference">
+	    <Bin id="0" nbins="50" xmin="0." xmax="600."/>
+	</Variable>
 
   </Variables>        
 
@@ -370,7 +382,11 @@
 	<TH2F variableX="jet_n" binIdX="0" variableY="AverTopPt" binIdY="0" folder="4j2b" particle="difference" />
 	<TH2F variableX="jet_n" binIdX="0" variableY="TopHPt" binIdY="0" folder="4j2b" particle="difference" />
 	<TH2F variableX="jet_n" binIdX="0" variableY="TopLPt" binIdY="0" folder="4j2b" particle="difference" />
-	<TH2F variableX="neutrino_pz_truth" binIdX="0" variableY="neutrino_pz" binIdY="0" folder="4j2b" particle="difference" /> 
+	<TH2F variableX="neutrino_pz_truth" binIdX="0" variableY="neutrino_pz" binIdY="0" folder="4j2b" particle="difference" />
+	<TH2F variableX="WH_m" binIdX="0" variableY="WL_m" binIdY="0" folder="4j2b" particle="difference"/> 
+	<TH2F variableX="TopH_m" binIdX="0" variableY="TopL_m" binIdY="0" folder="4j2b" particle="difference"/>
+	<TH2F variableX="WH_m" binIdX="0" variableY="TopH_m" binIdY="0" folder="4j2b" particle="difference"/>
+	<TH2F variableX="WL_m" binIdX="0" variableY="TopL_m" binIdY="0" folder="4j2b" particle="difference"/>
 
         <TH1F variable="ptdiff"/>
         <TH1F variable="pt" />
