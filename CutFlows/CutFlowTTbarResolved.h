@@ -14,6 +14,10 @@
 #include "MoMA/MoMA.h"
 #endif 
 
+#ifdef __USE_LHAPDF__
+#include <LHAPDF/LHAPDF.h>
+#endif
+
 using namespace PhysicsHelperFunctions;
 
 class CutFlowTTbarResolved : public CutFlow
@@ -30,6 +34,7 @@ class CutFlowTTbarResolved : public CutFlow
   bool PassedCutFlowParticle( EventData * ed );
 
   double GetFakesWeight( EventData * ed );
+  double GetPDFWeight( EventData * ed );
 
   void MoreCRFillHistogramsControlPlotsReco( string mystr, ControlPlotValues& values );
   void FillHistogramsControlPlotsReco( ControlPlotValues& values );
@@ -71,6 +76,12 @@ class CutFlowTTbarResolved : public CutFlow
     MoMATool                * m_moma;
     SYSTEMATIC_TYPE           m_syst_type;
 #endif
+
+#ifdef __USE_LHAPDF__
+    enum Sets { CT10, MSTW, NNPDF, NSETS };
+
+    LHAPDF::PDF * m_pdf;
+#endif 
     
 private:
 

@@ -95,6 +95,37 @@ def MakeCovarianceMatrix( hname, ntoys=10000 ):
 ########################################################################
 
 
+def CorrelationMatrix( cov ):
+
+  nbins = cov.shape[0]
+
+  corr = zeros( nbins, nbins )
+  for i in range(nbins):
+     sigma_i = cov[i][i]
+     for j in range(nbins):
+        sigma_j = cov[j][j]
+
+        corr[i][j] = cov[i][j] / (sigma_i * sigma_j) 
+
+########################################################################
+
+
+def NumpyMatrixToTH2D( m ):
+    nbinsx = m.shape[0]
+    nbinsy = m.shape[1]
+
+    mo = TH2D( "", "", nbinsx, -0.5, nbinsx-0.5, nbinsy, -0.5, nbinsy-0.5 )
+    for i in range( nbinsx ):
+       for j in range( nbinsy ):
+          mo.SetBinContent( i+1, nbinsy-j, m[i][j] )
+
+    return mo
+
+
+
+########################################################################
+
+
 def ApplyPCA( hname, ntoys=10000 ):
    print "Applying PCA to:", hname
 

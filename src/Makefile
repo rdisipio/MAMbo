@@ -1,7 +1,11 @@
 include ../Makefile.inc
 
-TOOLS  += PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager 
-TOOLS  += XMLBin XMLVariable XMLLevel ControlPlotValues JetValues Particle 
+TOOLS  += PhysicsHelperFunctions HelperFunctions PluginManager HistogramManager ConfigManager ScalerTree
+TOOLS  += XMLBin XMLVariable XMLLevel ControlPlotValues JetValues Particle
+
+ifdef LHAPATH
+TOOLS += ScalerPDF
+endif
 
 ifdef FASTJETLOCATION
 TOOLS += HEPTopTagger

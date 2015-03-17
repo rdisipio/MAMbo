@@ -64,7 +64,6 @@ void INtupleWrapper::Loop( Long64_t nEventsMax )
   for( Long64_t i = 0 ; i < m_maxEvents ; ++i ) {
     m_thisEvent = NextEvent();
 
-//    if( !m_thisEvent ) throw runtime_error( "Cannot create event\n" );
     if( !m_thisEvent ) {
        printf( "WARNING: Could not process event %i. Skipping..\n", i );
        continue; 
@@ -74,6 +73,10 @@ void INtupleWrapper::Loop( Long64_t nEventsMax )
       itr->second->Apply( m_thisEvent );
     }
 
+  } // event loop
+
+  for( CutFlowCollection_t::const_iterator itr = m_cutFlows.begin() ; itr != m_cutFlows.end() ; ++itr ) {
+      itr->second->Finalize();
   }
 }
 

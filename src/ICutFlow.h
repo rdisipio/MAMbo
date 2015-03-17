@@ -18,6 +18,7 @@ class CutFlow
 
    virtual bool Initialize();
    virtual bool Apply( EventData * ed ) = 0;
+   virtual bool Finalize();
 
    virtual void PrintOutStats();
 

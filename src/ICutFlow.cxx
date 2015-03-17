@@ -244,3 +244,15 @@ void CutFlow::SetCutName( const string& channelName, const string& counterName, 
   
   p_x->SetBinLabel( n+1, cutName.c_str() );
 }
+
+
+///////////////////////////////////////
+
+
+bool CutFlow::Finalize()
+{
+   bool success = true;
+
+   return success;
+}
+

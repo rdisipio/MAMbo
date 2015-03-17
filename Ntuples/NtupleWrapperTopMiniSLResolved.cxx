@@ -83,6 +83,14 @@ bool NtupleWrapperTopMiniSLResolved::MakeEventInfo( EventData * ed )
   ed->property["scaleFactor_JVFSF"]	 = GET_VALUE( scaleFactor_JVFSF      );
   ed->property["scaleFactor_ZVERTEX"]    = GET_VALUE( scaleFactor_ZVERTEX    );
 
+  ed->property["pdf_pdf1"]  = GET_VALUE( mcevt_pdf1 );
+  ed->property["pdf_id1"]   = GET_VALUE( mcevt_pdf_id1 );
+  ed->property["pdf_x1"]    = GET_VALUE( mcevt_pdf_x1 );
+  ed->property["pdf_pdf2"]  = GET_VALUE( mcevt_pdf2 );
+  ed->property["pdf_id2"]   = GET_VALUE( mcevt_pdf_id2 );
+  ed->property["pdf_x2"]    = GET_VALUE( mcevt_pdf_x2 );
+  ed->property["pdf_scale"] = GET_VALUE( mcevt_pdf_scale );
+
   return success;
 }
 

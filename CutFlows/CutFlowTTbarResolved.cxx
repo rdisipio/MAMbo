@@ -16,6 +16,10 @@ CutFlowTTbarResolved::CutFlowTTbarResolved()
    m_moma = MoMATool::GetHandle();
    cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
 #endif
+
+#ifdef __USE_LHAPDF__
+   m_pdf = NULL;
+#endif
    
 }
 
@@ -31,6 +35,10 @@ CutFlowTTbarResolved::~CutFlowTTbarResolved() {
     SAFE_DELETE( m_moma );
 #endif
 
+#ifdef __USE_LHAPDF__
+   SAFE_DELETE( m_pdf );
+#endif
+
 }
 
 /////////////////////////////////////////
@@ -44,12 +52,14 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
 	
+    if( m_config->custom_params_string.count( "scale_syst" ) ) {
+
+        const string syst = m_config->custom_params_string["scale_syst"];
+
+        cout << "INFO: Scale factor systematic: " << syst << endl;
 
 #ifdef __MOMA__
-    m_syst_type = NOMINAL;
-
-    if( m_config->custom_params_string.count( "scale_syst" ) ) {
-        const string syst = m_config->custom_params_string["scale_syst"];
+        m_syst_type = NOMINAL;
 
         if( syst == "NOMINAL" )            m_syst_type = NOMINAL;
         else if( syst == "BTAGSFUP" )      m_syst_type = BTAGSFUP;
@@ -58,12 +68,26 @@ bool CutFlowTTbarResolved::Initialize() {
         else if( syst == "CTAUTAGSFDOWN" ) m_syst_type = CTAUTAGSFDOWN;    
         else if( syst == "MISTAGSFUP" )    m_syst_type = MISTAGSFUP;
         else if( syst == "MISTAGSFDOWN" )  m_syst_type = MISTAGSFDOWN;    
-	else throw runtime_error( "CutFlowTTbarResolved::Initialize(): Invalid scale factor systematic\n" );
+//	else throw runtime_error( "CutFlowTTbarResolved::Initialize(): Invalid scale factor systematic\n" );
+#endif /* __MOMA__ */
 
-        cout << "INFO: Scale factor systematic: " << syst << endl;
+        if( syst.find("PDF") == 0 ) {
+#ifndef __USE_LHAPDF__
+             throw runtime_error( "Requested systematic shift of type PDF but LHAPDF is not set. Please recompile against LHAPDF.\n" );
+#else
+             StringVector_t params_pdf;
+             HelperFunctions::Tokenize( syst, params_pdf, ":" );
+ 	     if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" ); 
+
+             cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl; 
+
+             int imem = atoi( params_pdf[2].c_str() );
+             m_pdf = LHAPDF::mkPDF( params_pdf[1], imem );
+
+#endif /* __USE_LHAPDF__ */
+        } // PDF
+
     }    
-
-#endif
 
     m_rand = new TRandom3(12345);
 
@@ -193,6 +217,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     if( !isRealData && !isQCD ) {
          weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
+
 		 if( isStressTest )//mr
 		 {
               TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
@@ -249,7 +274,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 #endif
 
          
-//      cout << "DEBUG: sf: " << scaleFactor_PILEUP << " " << scaleFactor_ELE << " " << scaleFactor_MUON << " " << scaleFactor_TRIGGER << " " << scaleFactor_JVFSF << " " << scaleFactor_ZVERTEX << " " << scaleFactor_BTAG << endl;
+#ifdef __USE_LHAPDF__
+         const double scaleFactor_PDF  = GetPDFWeight( ed );
+         weight_reco_level     *= scaleFactor_PDF;
+         weight_particle_level *= scaleFactor_PDF;
+#else 
+        const double scaleFactor_PDF = 1.0;
+#endif
+
 
        weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
@@ -805,6 +837,42 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
 
     return qcd_weight;
 }
+
+
+////////////////////////////////////////////////
+
+
+double CutFlowTTbarResolved::GetPDFWeight( EventData * ed )
+{
+   double weight = 1.0;
+
+#ifndef __USE_LHAPDF__
+   cout << "WARNING: You asked to calculate the PDF weight but MAMbo was not compiled against LHAPDF." << endl;
+   return weight;
+#else
+
+   if( m_pdf == NULL ) return weight;
+   
+   const double pdf1 = ed->property["pdf_pdf1"];
+   const double	id1  = ed->property["pdf_id1"];
+   const double  x1  = ed->property["pdf_x1"];
+   const double	pdf2 = ed->property["pdf_pdf2"];
+   const double	id2  = ed->property["pdf_id2"];
+   const double x2   = ed->property["pdf_x2"];
+   const double q    = ed->property["pdf_scale"];
+
+   const double new_pdf1 = m_pdf->xfxQ( id1, x1, q );
+   const double new_pdf2 = m_pdf->xfxQ( id2, x2, q );
+
+   weight = (new_pdf1*new_pdf2) / (pdf1*pdf2);
+
+#endif
+
+   return weight;
+}
+
+
+////////////////////////////////////////////////
 
 
 void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( ControlPlotValues& values )

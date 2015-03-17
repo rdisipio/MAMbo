@@ -150,6 +150,22 @@ def CreateROOTPath( path ):
 ####################################################
 
 
+def CheckConsistency( h1, h2, sample ):
+    nbins1 = h1.GetNbinsX()
+    nbins2 = h2.GetNbinsX()
+
+    if not nbins1 == nbins2: raise Exception( "Inconsistent number of bins for %s: %s has %i, %s has %i", h1.GetName(), "sum", nbins1, sample, nbins2 )
+ 
+    for i in range( nbins1+1 ):
+       xlow1 = h1.GetBinLowEdge( i+1 )
+       xlow2 = h2.GetBinLowEdge( i+1 )
+     
+       if not xlow1 == xlow2: raise Exception( "Inconsistent bin %i low edges for %s: %s has %i, %s has %i", i, h1.GetName(), "sum", xlow1, sample, xlow2 ) 
+
+
+####################################################
+
+
 def CreateMergedHistograms():
 
     for hpath in histograms_configuration:
@@ -182,6 +198,7 @@ def CreateMergedHistograms():
 
                 hsum.Reset( "ICES" )
                 hsum.SetDirectory( newdir )
+            CheckConsistency( hsum, h, sample )
             hsum.Add( h, norm )
 
         hsum.Write()

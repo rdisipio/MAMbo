@@ -77,3 +77,12 @@ CFLAGS  += $(FASTJETCFLAGS)
 SOFLAGS += $(FASTJETCFLAGS)
 LIBS    += $(FASTJETLIBS)
 endif
+
+ifdef LHAPATH
+CFLAGS += -D__USE_LHAPDF__
+LHAPDFCFLAGS = $(shell lhapdf-config --cppflags)
+LHAPDFLIBS   = $(shell lhapdf-config --ldflags)
+CFLAGS += $(LHAPDFCFLAGS)
+SOFLAGS += $(LHAPDFLIBS)
+LIBS    += $(LHAPDFLIBS)
+endif

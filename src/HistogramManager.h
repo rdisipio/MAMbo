@@ -38,6 +38,7 @@ class HistogramManager
   ROOT_TH2_t* Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges );
 
   TFile * SetOutFileName( const char * name );
+  TFile * GetOutputFile() { return m_outFile; };
 
   bool   ConfigureFromXML( const string& fileName );
 
@@ -53,6 +54,7 @@ class HistogramManager
   inline void  ToggleSumW2() { m_sumw2 = !m_sumw2; };
 
   void WriteToFile();  
+
   void FillHistograms(string fullPath, double value, double weight);
   void FillMatrices(string fullPath, double valuex, double valuey, double weight);
   

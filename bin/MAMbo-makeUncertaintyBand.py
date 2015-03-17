@@ -135,7 +135,7 @@ def CreateROOTPath( path ):
 ####################################################
 
 
-def DumpSystematicsToXMLFile( hpath, points, uncertainty ):
+def DumpSystematicsToXMLFile( hpath, edges, points, uncertainty ):
     nbins = len( points )
 
     xmlfile.write( "<histogram hpath=\"%s\">\n" % hpath ) 
@@ -146,6 +146,15 @@ def DumpSystematicsToXMLFile( hpath, points, uncertainty ):
        xmlfile.write( "%f" % y_n )
        if i < nbins-1: xmlfile.write( "," )
     xmlfile.write( "</nominal>\n" )
+
+    xmlfile.write( "\t<edges>" )
+    for i in range(nbins+1):
+       xl = edges[i]
+       if xl.is_integer(): xmlfile.write( "%i" % xl )
+       else: xmlfile.write( "%.2f" % xl )
+       if i < nbins: xmlfile.write( "," )
+    xmlfile.write( "</edges>\n" ) 
+   
 
     for sname, syst in uncertainty.iteritems():
        xmlfile.write( "\t<uncertainty name=\"%s\">\n" % sname )
@@ -193,6 +202,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
 
        graph  = None
        points = None
+       edges  = []
        nbins  = 0
        title  = ""
        total_uncertainty = {}
@@ -209,6 +219,8 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
              title = h.GetTitle()
 
              points = [ { 'n': 0., 'u': 0.,  'd': 0. } for i in range(nbins) ]
+             edges  = [ 0. for i in range(nbins+1) ]
+
              graph = TGraphAsymmErrors()
              graph.SetName( hname )
              graph.SetTitle( title )
@@ -218,25 +230,27 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
           # fill nominal
           for i in range(nbins):
              points[i]['n'] += h.GetBinContent(i+1)
+             edges[i] = h.GetBinLowEdge(i+1)
+          edges[nbins] = h.GetBinLowEdge(nbins+1)
 
           # stat unc first
-          sample_uncertainty['stat'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
+          sample_uncertainty['statonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
 
-          if not total_uncertainty.has_key('stat'):
-              total_uncertainty['stat']  = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
+          if not total_uncertainty.has_key('statonly'):
+              total_uncertainty['statonly']  = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
               total_uncertainty['statsyst'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
               total_uncertainty['systonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
 
           for i in range(nbins):
-             sample_uncertainty['stat']['u'][i] = h.GetBinError(i+1)
-             sample_uncertainty['stat']['d'][i] = h.GetBinError(i+1)
+             sample_uncertainty['statonly']['u'][i] = h.GetBinError(i+1)
+             sample_uncertainty['statonly']['d'][i] = h.GetBinError(i+1)
 
-             points[i]['u'] += pow( sample_uncertainty['stat']['u'][i], 2 )
-             points[i]['d'] += pow( sample_uncertainty['stat']['d'][i], 2 )
-             total_uncertainty['stat']['u'][i] += pow( sample_uncertainty['stat']['u'][i], 2 )
-             total_uncertainty['stat']['d'][i] += pow( sample_uncertainty['stat']['d'][i], 2 )
-             total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty['stat']['u'][i], 2 )
-             total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty['stat']['d'][i], 2 )
+             points[i]['u'] += pow( sample_uncertainty['statonly']['u'][i], 2 )
+             points[i]['d'] += pow( sample_uncertainty['statonly']['d'][i], 2 )
+             total_uncertainty['statonly']['u'][i] += pow( sample_uncertainty['statonly']['u'][i], 2 )
+             total_uncertainty['statonly']['d'][i] += pow( sample_uncertainty['statonly']['d'][i], 2 )
+             total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty['statonly']['u'][i], 2 )
+             total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty['statonly']['d'][i], 2 )
  
           # syst unc
           for systname in samples_configuration[sample].systematics.keys():
@@ -308,7 +322,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                 total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )  
 
        # Print out relative shift
-       DumpSystematicsToXMLFile( hpath, points, total_uncertainty )
+       DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )
 
        # fill graph
        for i in range(nbins):
