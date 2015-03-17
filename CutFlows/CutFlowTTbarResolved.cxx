@@ -43,6 +43,8 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
+	
+
 #ifdef __MOMA__
     m_syst_type = NOMINAL;
 
@@ -171,13 +173,58 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     const unsigned long isRealData = m_config->custom_params_flag["isRealData"];
     const unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     const unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
+    unsigned long isStressTest = 0;
+	string stressTestType = "none";
+	
+    if( m_config->custom_params_string.count( "stressTest" ) ) //mr
+	{
+        stressTestType = m_config->custom_params_string["stressTest"];
+		if( stressTestType != "none" && stressTestType != "tt_pt" && stressTestType != "tt_m" && stressTestType != "tt_rapidity" && stressTestType != "top_pt" )
+		{
+			cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
+			stressTestType = "none";
+		}
+		else if(  stressTestType != "none" ) isStressTest = 1;
+	}
 
     double weight_reco_level     = 1.;
     double weight_particle_level = 1.;
 
     if( !isRealData && !isQCD ) {
-   	 weight_reco_level     = ed->info.mcWeight;
+         weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
+		 if( isStressTest )//mr
+		 {
+              TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
+              TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
+              TLorentzVector tt = t1 + t2;
+			  if( stressTestType == "tt_rapidity" )
+			  {
+				  //Rapidity gaussian reweight
+				  weight_reco_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+				  weight_particle_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+			  }
+			  else if( stressTestType == "tt_m" )
+			  {
+				  //         Mass bump"
+				  double delta = tt.M() - 800000;
+				  double sigma = 100000;
+				  weight_reco_level *= 1 + 2 * TMath::Exp( -1 * pow( delta/sigma, 2) );
+				  weight_particle_level *= 1 + 2*TMath::Exp( -1 *  pow( delta/sigma, 2) );
+			  }
+			  else if( stressTestType == "tt_pt" )
+			  {
+				  // tt pt slope
+				  weight_particle_level *= 1 + tt.Pt() / 400000;
+				  weight_reco_level *= 1 + tt.Pt() / 400000;
+			  }
+			  else
+			  {
+				  //top pt slope
+				  weight_particle_level *= 1 + ( t1.Pt() + t2.Pt())/ 1500000; //average of the pt
+				  weight_reco_level *= 1 + ( t1.Pt() + t2.Pt())/ 1500000; //average of the pt
+			  }
+		 }
 
 	 // some Single Top samples have buggy mc weight 
          if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
