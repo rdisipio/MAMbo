@@ -153,11 +153,18 @@ def ApplyPCA( hname, ntoys=10000 ):
      if S[n] / smax > 1e-3: k += 1
    print "Found %i large eigenvalues" % k
 
+   pca_systematics = {}
    for i in range(nbins):
+      sname = "pca_syst_%i" % (i+1)
+      pca_systematics[sname] = { 'u' : np.zeros(nbins), 'd' : np.zeros(nbins) }
+
       v = V[:,i] * np.sqrt( S[i] ) / nominal[i]
 
       print "Eigenvector", i, "=", v
 
+      for k in range(nbins): 
+         pca_systematics[sname]['u'][k] = v[k]
+         pca_systematics[sname]['d'][k] = -v[k]
 
 ########################################################################
 
