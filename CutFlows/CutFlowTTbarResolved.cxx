@@ -1189,6 +1189,18 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     FillHistogramsPseudoTop(ed->reco, 2, level, "tt", weight);
     FillHistogramsPseudoTop(ed->reco, 3, level, "WL", weight);
     FillHistogramsPseudoTop(ed->reco, 4, level, "WH", weight);
+    
+    Particle pTopL(ed->reco,0);
+    Particle pTopH(ed->reco,1);
+    Particle pWL(ed->reco,3);
+    Particle pWH(ed->reco,4);
+    
+    m_hm->FillMatrices("reco/4j2b/difference/WL_m_vs_WH_m", pWH.m / GeV, pWL.m / GeV, weight );
+    m_hm->FillMatrices("reco/4j2b/difference/TopL_m_vs_TopH_m", pTopH.m / GeV, pTopL.m / GeV, weight );
+    m_hm->FillMatrices("reco/4j2b/difference/TopH_m_vs_WH_m", pWH.m / GeV, pTopH.m / GeV, weight );
+    m_hm->FillMatrices("reco/4j2b/difference/TopL_m_vs_WL_m", pWL.m / GeV, pTopL.m / GeV, weight );
+   // m_hm->FillMatrices("reco/4j2b/difference/TopHPt_vs_jet_n", ed->jets.n, pTopH.pt / GeV, weight );
+   // m_hm->FillMatrices("reco/4j2b/difference/TopLPt_vs_jet_n", ed->jets.n, pTopL.pt / GeV, weight );
 
     NuData nudata;
     nudata.v_pz = ed->property["reco_v_pz"];
@@ -1201,7 +1213,6 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopReco( EventData * ed, const do
     FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, level, nudata, weight);
 
 }
-
 
 /////////////////////////////////////////
 
@@ -1236,6 +1247,17 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParticle( EventData * ed, cons
     FillHistogramsPseudoTop(ed->reco, 8, level, "WL", weight);
     FillHistogramsPseudoTop(ed->reco, 9, level, "WH", weight);
 
+    Particle pTopL(ed->reco,5);
+    Particle pTopH(ed->reco,6);
+    Particle pWL(ed->reco,8);
+    Particle pWH(ed->reco,9);
+    
+    m_hm->FillMatrices("particle/4j2b/difference/WL_m_vs_WH_m", pWH.m / GeV, pWL.m / GeV, weight );
+    m_hm->FillMatrices("particle/4j2b/difference/TopL_m_vs_TopH_m", pTopH.m / GeV, pTopL.m / GeV, weight );
+    m_hm->FillMatrices("particle/4j2b/difference/TopH_m_vs_WH_m", pWH.m / GeV, pTopH.m / GeV, weight );
+    m_hm->FillMatrices("particle/4j2b/difference/TopL_m_vs_WL_m", pWL.m / GeV, pTopL.m / GeV, weight );
+   // m_hm->FillMatrices("particle/4j2b/difference/TopHPt_vs_jet_n", ed->jets.n, pTopH.pt / GeV, weight );
+   // m_hm->FillMatrices("particle/4j2b/difference/TopLPt_vs_jet_n", ed->jets.n, pTopL.pt / GeV, weight );
 
     NuData nudata;
     nudata.v_pz = ed->property["ptcl_v_pz"];
@@ -1364,7 +1386,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_reco_HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, m_VarField.find("reco_HT_pseudo")->second / GeV, weight);
  }
  
-  void CutFlowTTbarResolved::FillMatrix(string path, Particle& py, Particle& px, double weight){
+  void CutFlowTTbarResolved::FillMatrix(string path, Particle& px, Particle& py, double weight){
     m_hm->FillMatrices( path + "_pt", px.pt / GeV, py.pt / GeV, weight);
     m_hm->FillMatrices( path + "_eta", px.eta, py.eta, weight);
     m_hm->FillMatrices( path + "_phi", px.phi, py.phi, weight);
