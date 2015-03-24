@@ -139,4 +139,6 @@
   <histogram hpath="reco/4j2b/difference/TopCosOpeningAngle" />
   <histogram hpath="reco/4j2b/difference/Salam_ttbar" />
   <histogram hpath="reco/4j2b/difference/dPhi_ttbar" />
+  <histogram hpath="reco/4j2b/difference/HT_ttbar" />
+  <histogram hpath="reco/4j2b/difference/HT_pseudo" />
 </histograms>
