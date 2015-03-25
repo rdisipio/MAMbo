@@ -112,6 +112,7 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
       }
 
   m_pseudotop_particle->Run();
+  m_VarField["particle_HT_pseudo"] = m_pseudotop_particle->GetHt();
   if (fillHistos) {
      FillHistogramsPseudotopParticle(ed, weight_particle_level);
   }
@@ -382,8 +383,14 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string path, TLor
    */
 
    m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
+   // two entries per event:
+   m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta1, weight);
+   m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta2, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
+   m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight);
+   if (path.find("particle") >= 0)
+     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
 
  }
 
@@ -502,7 +509,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton( EventData
 // response matrices
 
 
-void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& py, Particle& px, double weight){
+void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Particle& py, double weight){
     m_hm->FillMatrices( path + "_pt", px.pt / GeV, py.pt / GeV, weight);
     m_hm->FillMatrices( path + "_eta", px.eta, py.eta, weight);
     m_hm->FillMatrices( path + "_phi", px.phi, py.phi, weight);
@@ -537,7 +544,7 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& py, Pa
     Particle partonTopH(ed->mctruth, ihad);
     Particle partonTT(ed->mctruth, itt);
 
-    // particle > parton
+    // particle -> parton
     FillMatrix("particle/4j2b/topL/Matrix_particle_parton", particleTopL, partonTopL, weight);
     FillMatrix("particle/4j2b/topH/Matrix_particle_parton", particleTopH, partonTopH, weight);
     FillMatrix("particle/4j2b/tt/Matrix_particle_parton", particleTT, partonTT, weight);

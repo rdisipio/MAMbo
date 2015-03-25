@@ -50,6 +50,8 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
 
  private:
    vector<string> alias;
+   std::map < string, double > m_VarField;
+
 };
 
 typedef CutFlowPluginFactory< CutFlowTTbarResolvedParticleLevel > CutFlowPluginFactory_TTbarResolvedParticleLevel;

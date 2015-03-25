@@ -198,7 +198,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     const unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     const unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
     unsigned long isStressTest = 0;
-	string stressTestType = "none";
+    string stressTestType = "none";
 	
     if( m_config->custom_params_string.count( "stressTest" ) ) //mr
 	{
@@ -326,9 +326,15 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     bool fillHistos = true;
     bool fillCorrections = true;
-    bool splitSample = false; // HACK!
+    bool splitSample =  m_config->custom_params_string.count("splitSample");
     if (isMCSignal and splitSample) {
-      fillHistos =  (m_rand -> Integer(2)); // this or not;)
+      bool splitSampleInvert =  false;
+      if (m_config->custom_params_string.count("splitSampleInvert"))
+	splitSampleInvert = not (m_config->custom_params_string["splitSampleInvert"] == "0" or m_config->custom_params_string["splitSampleInvert"] == "false");
+      // cout << "splitSample and Invert? " << splitSample << " " << splitSampleInvert << endl;
+      fillHistos =   (m_rand -> Integer(2)); // this or not;)
+      if (splitSampleInvert)
+	fillHistos = not fillHistos;
       fillCorrections = not fillHistos;
     }
 
@@ -341,10 +347,10 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       
       m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
       m_pseudotop_reco->Run();
-      
-      
-      
-      m_VarField["reco_HT_pseudo"]=m_pseudotop_reco->GetHt();
+      m_VarField["reco_HT_pseudo"] = m_pseudotop_reco->GetHt();
+
+      // naming conventions:
+
       // OLD, w/o W's:
       // reco                : 0=t_lep 1=t_had 2=ttbar
       // truth (particle lvl): 3=t_lep 4=t_had 5=ttbar
@@ -418,7 +424,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	}
       */
       m_pseudotop_particle->Run(); 
-      m_VarField["particle_HT_pseudo"]=m_pseudotop_particle->GetHt();
+      m_VarField["particle_HT_pseudo"] = m_pseudotop_particle->GetHt();
       if (fillHistos) {
 	FillHistogramsPseudotopParticle(ed, weight_particle_level);
       }
@@ -1104,21 +1110,17 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string level, TLorentzVector &
    m_VarField[level+"_dPhi"]=DeltaPhi;
    m_VarField[level+"_HT_ttbar"]=HT;
    
-      m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
+   m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
    // two entries per event:
    m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta1, weight);
    m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta2, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
    m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight);
-   if(level=="reco")
-   {
-   m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("reco_HT_pseudo")->second / GeV, weight);
-   }
-   if(level=="particle")
-   {
-   m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
-  }
+   if (level == "reco")
+     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("reco_HT_pseudo")->second / GeV, weight);
+   else if (level == "particle")
+     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
 }
 
 /////////////////////////////////////////
@@ -1454,7 +1456,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     Particle partonTopL(ed->mctruth, ilep);
     Particle partonTopH(ed->mctruth, ihad);
     Particle partonTT(ed->mctruth, itt);
-    
+    // HERE
     // particle > parton
     FillMatrix("particle/4j2b/topL/Matrix_particle_parton", particleTopL, partonTopL, weight);
     FillMatrix("particle/4j2b/topH/Matrix_particle_parton", particleTopH, partonTopH, weight);

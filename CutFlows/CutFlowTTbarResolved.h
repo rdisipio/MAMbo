@@ -88,8 +88,6 @@ private:
     vector<string> alias;
     TRandom3 *m_rand; 
     std::map < string, double > m_VarField;
-    //double m_VarField[30];
-    //double m_ht[2];
 
 };
 

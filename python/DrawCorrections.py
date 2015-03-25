@@ -193,8 +193,8 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 #ljets = [ 'mu' ]
 ljets = [ 'll' ]
 
-ptag='_fixed'
-ftag='_fixed'
+ptag='_fixed_new'
+ftag='_fixed_new'
 rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/'
 
 os.system('mkdir png eps pdf')
