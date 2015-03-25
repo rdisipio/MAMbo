@@ -247,9 +247,9 @@ values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;;
 
 void CutFlowTTbarResolvedParticleLevel::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {
-    const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) -1;
-    string path = "parton/cutflow/" + alias[cut] + "/";
-    FillHistograms(path, values);
+  //    const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) -1;
+    //string path = "parton/cutflow/" + alias[cut] + "/";
+    //FillHistograms(path, values);
 }
 
 
