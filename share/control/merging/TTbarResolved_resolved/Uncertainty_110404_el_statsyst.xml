@@ -118,6 +118,21 @@
         <shift side="up"   file="MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.el.MISTAGSFUP.histograms.root" />
         <shift side="down" file="MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.el.MISTAGSFDOWN.histograms.root" />
     </syst> 
+    <syst name="lep_idSF" type="two_sided" > 
+        <shift side="up"   file="lep_idSF_up/tt_diffxs_8TeV.mc.DiTop.110404.el.lep_idSF_up.histograms.root" />
+        <shift side="down" file="lep_idSF_down/tt_diffxs_8TeV.mc.DiTop.110404.el.lep_idSF_down.histograms.root" />
+    </syst>
+    <syst name="lep_recoSF" type="two_sided" >
+        <shift side="up"   file="lep_recoSF_up/tt_diffxs_8TeV.mc.DiTop.110404.el.lep_recoSF_up.histograms.root" />
+        <shift side="down" file="lep_recoSF_down/tt_diffxs_8TeV.mc.DiTop.110404.el.lep_recoSF_down.histograms.root" />
+    </syst>
+    <syst name="lep_trigSF" type="two_sided" >
+        <shift side="up"   file="lep_trigSF_up/tt_diffxs_8TeV.mc.DiTop.110404.el.lep_trigSF_up.histograms.root" />
+        <shift side="down" file="lep_trigSF_down/tt_diffxs_8TeV.mc.DiTop.110404.el.lep_trigSF_down.histograms.root" />
+    </syst>
+    <syst name="jeff" type="one_sided" >
+        <shift side="single" file="jeff/tt_diffxs_8TeV.mc.DiTop.110404.el.jeff.histograms.root" />
+    </syst>
     <syst name="ees" type="two_sided" >
         <shift side="up"   file="ees_up/tt_diffxs_8TeV.mc.DiTop.110404.el.ees_up.histograms.root" />
         <shift side="down" file="ees_down/tt_diffxs_8TeV.mc.DiTop.110404.el.ees_down.histograms.root" />
