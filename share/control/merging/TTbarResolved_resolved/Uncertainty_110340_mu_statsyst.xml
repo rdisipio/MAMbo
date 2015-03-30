@@ -118,12 +118,31 @@
         <shift side="up"   file="MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110340.mu.MISTAGSFUP.histograms.root" />
         <shift side="down" file="MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110340.mu.MISTAGSFDOWN.histograms.root" />
     </syst>
-<!--
-    <syst name="musc" type="two_sided" >
-        <shift side="up"   file="musc_up/tt_diffxs_8TeV.mc.DiTop.110340.el.musc_up.histograms.root" />
-        <shift side="down" file="musc_down/tt_diffxs_8TeV.mc.DiTop.110340.el.musc_down.histograms.root" />
+    <syst name="lep_idSF" type="two_sided" >
+        <shift side="up"   file="lep_idSF_up/tt_diffxs_8TeV.mc.DiTop.110340.mu.lep_idSF_up.histograms.root" />
+        <shift side="down" file="lep_idSF_down/tt_diffxs_8TeV.mc.DiTop.110340.mu.lep_idSF_down.histograms.root" />
     </syst>
--->
+    <syst name="lep_recoSF" type="two_sided" >
+        <shift side="up"   file="lep_recoSF_up/tt_diffxs_8TeV.mc.DiTop.110340.mu.lep_recoSF_up.histograms.root" />
+        <shift side="down" file="lep_recoSF_down/tt_diffxs_8TeV.mc.DiTop.110340.mu.lep_recoSF_down.histograms.root" />
+    </syst>
+    <syst name="lep_trigSF" type="two_sided" >
+        <shift side="up"   file="lep_trigSF_up/tt_diffxs_8TeV.mc.DiTop.110340.mu.lep_trigSF_up.histograms.root" />
+        <shift side="down" file="lep_trigSF_down/tt_diffxs_8TeV.mc.DiTop.110340.mu.lep_trigSF_down.histograms.root" />
+    </syst>
+    <syst name="jeff" type="one_sided" >
+        <shift side="single" file="jeff/tt_diffxs_8TeV.mc.DiTop.110340.mu.jeff.histograms.root" />
+    </syst>
+    <syst name="musc" type="two_sided" >
+        <shift side="up"   file="musc_up/tt_diffxs_8TeV.mc.DiTop.110340.mu.musc_up.histograms.root" />
+        <shift side="down" file="musc_down/tt_diffxs_8TeV.mc.DiTop.110340.mu.musc_down.histograms.root" />
+    </syst>
+    <syst name="muid_res" type="two_sided" >
+        <shift side="single"   file="muid_res/tt_diffxs_8TeV.mc.DiTop.110340.mu.muid_res.histograms.root" />
+    </syst>
+    <syst name="mums_res" type="two_sided" >
+        <shift side="single"   file="mums_res/tt_diffxs_8TeV.mc.DiTop.110340.mu.mums_res.histograms.root" />
+    </syst>
   </sample>
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root" />
   <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root" />
