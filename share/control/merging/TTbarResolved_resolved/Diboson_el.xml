@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="WW" dsid="105985" xsec="12.416"  kfact="1.6833" genevt="2499890" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
+  <sample name="ZZ" dsid="105986" xsec="0.99081" kfact="1.5496" genevt="245000"  generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
+  <sample name="WZ" dsid="105987" xsec="3.6706"  kfact="1.9011" genevt="999998" generator="Herwig_AUET2CTEQ6L1" simulation="Full" />
+</samples>
+<files>
+  <file sample="WW" path="nominal/tt_diffxs_8TeV.Diboson.105985.el.nominal.histograms.root" />
+  <file	sample="ZZ" path="nominal/tt_diffxs_8TeV.Diboson.105986.el.nominal.histograms.root" />
+  <file	sample="WZ" path="nominal/tt_diffxs_8TeV.Diboson.105987.el.nominal.histograms.root" />
+</files>
+</document>
