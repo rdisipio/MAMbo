@@ -1,1 +1,2 @@
-user.mromano.200451.AlpgenPythia_Auto_P2011C_ZtautauccNp3incl.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586579._000002.mu.root
+user.mromano.105986.Herwig_AUET2CTEQ6L1_ZZ.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586455._000001.mu.root
+user.mromano.105986.Herwig_AUET2CTEQ6L1_ZZ.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586455._000002.mu.root

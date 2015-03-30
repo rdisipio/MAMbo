@@ -1,1 +1,6 @@
-user.mromano.200451.AlpgenPythia_Auto_P2011C_ZtautauccNp3incl.at180_combined_pdf_dijet_7_2014_12_22_mu.root/user.mromano.4586579._000002.mu.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000001.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000002.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000003.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000004.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000006.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000007.el.root
