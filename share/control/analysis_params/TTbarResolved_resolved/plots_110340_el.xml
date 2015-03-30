@@ -143,6 +143,8 @@
   <plot hpath="reco/4j2b/difference/TopCosOpeningAngle"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/Salam_ttbar"         xtitle="Salam #Delta_{t#bar{t}}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi (t, #bar{t} )" ytitle="Events" scale="logx" /> 
+  <plot hpath="reco/4j2b/difference/HT_pseudo"           xtitle="H_{T}^{pseudo}"   ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/4j2b/difference/HT_ttbar"            xtitle="H_{T}^{t#bar{t}}" ytitle="Events / GeV" scale="linear" />
 </plots>
 <samples>
   <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
