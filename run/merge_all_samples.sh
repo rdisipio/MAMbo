@@ -41,4 +41,9 @@ do
          echo
       done #var
    done # syst
+
+   ./merge_signal_sample.sh ${dsid} muid_res
+   ./merge_signal_sample.sh ${dsid} mums_res
+   ./merge_signal_sample.sh ${dsid} jeff
+
 done # sample
