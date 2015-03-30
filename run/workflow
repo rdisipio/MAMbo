@@ -1,0 +1,104 @@
+#!/bin/bash
+
+analysis=tt_diffxs_8TeV
+analytag=TTbarResolved_resolved
+
+paramsdir=${MAMBODIR}/share/control/merging/${analytag}
+outdir=${MAMBODIR}/run/output/${analytag}
+syst=nominal
+ILUMI=20300 
+
+ch=$1
+[[ ! -z $2 ]] && syst=$2
+
+if [[ ${ch} == "el" ]]
+then
+   stream=Egamma
+else
+   stream=Muons
+fi
+
+# real data
+ofile=${outdir}/nominal/${analysis}.data.${stream}.${ch}.histograms.root
+hadd -f ${ofile} ${outdir}/nominal/${analysis}.data.${stream}.period*.${ch}.histograms.root
+
+echo
+echo "//////////////////////////////////"
+echo
+
+bkgsamples=""
+expected=""
+
+# fake leptons
+ofile=${outdir}/nominal/${analysis}.qcd.${stream}.${ch}.${syst}.histograms.root
+hadd -f ${ofile} ${outdir}/nominal/${analysis}.qcd.${stream}.period*.${ch}.${syst}.histograms.root
+bkgsamples="${bkgsamples} ${ofile}"
+expected="${expected} ${ofile}"
+
+echo
+echo "//////////////////////////////////"
+echo
+
+sample=DiTop
+for dsid in 110404 #110340
+do
+   ofile=${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.${ch}.${syst}.histograms.root
+   MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/${sample}_${dsid}_${ch}.xml -o ${ofile} #&
+   expected="${expected} ${ofile}"
+done 
+
+echo
+echo "//////////////////////////////////"
+echo
+
+for sample in SingleTop Zjets Diboson
+do
+  ofile=${outdir}/${syst}/${analysis}.mc.${sample}.${ch}.${syst}.histograms.root
+  MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/${sample}_${ch}.xml -o ${ofile} #&
+  echo
+  echo "//////////////////////////////////"
+  echo
+  bkgsamples="${bkgsamples} ${ofile}"
+  expected="${expected} ${ofile}"
+done
+#wait
+
+for njets in 3jincl 4jincl
+do
+  MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/Wjets_${njets}_${ch}.xml -o ${outdir}/${syst}/${analysis}.mc.Wjets_${njets}.${ch}.${syst}.histograms.root #&
+
+  echo
+  echo "//////////////////////////////////"
+  echo
+done
+#wait
+
+ofile=${outdir}/${syst}/${analysis}.mc.Wjets.${ch}.${syst}.histograms.root
+hadd -f ${ofile} ${outdir}/${syst}/${analysis}.mc.Wjets_*.${ch}.${syst}.histograms.root
+bkgsamples="${bkgsamples} ${ofile}"
+expected="${expected} ${ofile}"
+
+echo
+echo "//////////////////////////////////"
+echo
+
+hadd -f ${outdir}/${syst}/${analysis}.mc.Background.${ch}.${syst}.histograms.root ${bkgsamples}
+hadd -f ${outdir}/${syst}/${analysis}.mc.Expected.${ch}.${syst}.histograms.root ${expected}
+
+echo
+echo "//////////////////////////////////"
+echo
+
+for dsid in 110404 #110340
+do
+  ./make_uncertainty_band.sh ${dsid} ${ch} ${syst}
+done 
+
+echo
+echo "//////////////////////////////////"
+echo 
+
+#MAMbo-makePlots.py control/basic_plots_${ch}.xml
+#echo
+#echo "//////////////////////////////////"
+
