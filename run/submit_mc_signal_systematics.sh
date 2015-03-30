@@ -46,3 +46,5 @@ done
 # these are one-sided
 ./submit_mc_signal_as_bkg.sh ${dsid} jer
 ./submit_mc_signal_as_bkg.sh ${dsid} jeff
+./submit_mc_signal_as_bkg.sh ${dsid} muid_res
+./submit_mc_signal_as_bkg.sh ${dsid} mums_res
