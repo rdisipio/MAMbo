@@ -19,32 +19,26 @@ dsid=110404
 #SingleTop Wjets Zjets Diboson
 for sample in DiTop
 do
-  for ch in el mu
-  do
- 
-    # BTAGSF etc..
-    for syst in $(cat $listfile_sf)
-    do
-       ./merge_signal_sample.sh ${dsid} ${syst}
+   # BTAGSF etc..
+   for syst in $(cat $listfile_sf)
+   do
+      ./merge_signal_sample.sh ${dsid} ${syst}
 
-       echo
-       echo "//////////////////////////////////"
-       echo
-    done # syst
+      echo
+      echo "//////////////////////////////////"
+      echo
+   done # syst
 
-    # eer ees musc JES etc..
-    for syst in $(cat $listfile_el $listfile_mu $listfile_kin)
-    do
-       for var in up down
-       do
-          ./merge_signal_sample.sh ${dsid} ${syst}_${var}
+   # eer ees musc JES etc..
+   for syst in $(cat $listfile_el $listfile_mu $listfile_kin)
+   do
+      for var in up down
+      do
+         ./merge_signal_sample.sh ${dsid} ${syst}_${var}
    
-          echo
-          echo "//////////////////////////////////"
-          echo
-          wait
-       done #var
-    done # syst
-
-  done #ch
+         echo
+         echo "//////////////////////////////////"
+         echo
+      done #var
+   done # syst
 done # sample
