@@ -26,6 +26,7 @@ public:
     double lep_eta; 
     double lep_phi; 
     double lep_E;  
+    double lep_q;
     int    jet_n; 
     int    bjet_n;  
     int    fjet_n;

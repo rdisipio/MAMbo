@@ -28,6 +28,7 @@ class CutFlowTTbarResolved : public CutFlow
 
   virtual bool Initialize();
   virtual bool Apply( EventData * ed );
+  virtual bool Finalize();
 
  protected:
   bool PassedCutFlowReco(     EventData * ed );
@@ -39,6 +40,7 @@ class CutFlowTTbarResolved : public CutFlow
   void MoreCRFillHistogramsControlPlotsReco( string mystr, ControlPlotValues& values );
   void FillHistogramsControlPlotsReco( ControlPlotValues& values );
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
+  void FillHistogramsDiagnostics( ControlPlotValues& values );
   
   void FillHistogramsPseudotopReco(      EventData * ed, const double weight = 1., string level = "reco" );
   void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1., string level = "particle" );

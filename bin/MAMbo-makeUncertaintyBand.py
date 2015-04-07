@@ -98,7 +98,7 @@ def GatherHistograms( hname, hpath ):
         hsource = f.Get( hpath )
 
         if hsource == None:
-            print "ERORR: invalid histogram", hpath, "for sample", sample
+            print "ERORR: invalid histogram", hpath, "for sample", sample, "in file", f.GetTitle()
 
         newname = "%s_%s" % ( sample, hname )
         hlist[sample] = hsource.Clone( newname )

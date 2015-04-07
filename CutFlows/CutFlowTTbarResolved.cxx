@@ -480,6 +480,23 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 /////////////////////////////////////////
 
+
+bool CutFlowTTbarResolved::Finalize()
+{
+   bool success = true;
+
+/*
+   unsigned long isQCD = m_config->custom_params_flag["isQCD"];
+   if( !isQCD ) return success;
+*/
+
+   return success;
+}
+
+
+/////////////////////////////////////////
+
+
 bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     bool passed = true;
    
@@ -501,6 +518,7 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     values.lep_eta = ed->leptons.eta.at(0);
     values.lep_phi = ed->leptons.phi.at(0);
     values.lep_E   = ed->leptons.E.at(0);
+    values.lep_q   = ed->leptons.q.at(0);
     values.jet_n   = ed->jets.n;
     values.bjet_n  = ed->bjets.n; 
     values.fjet_n  = ed->fjets.n;
@@ -571,6 +589,8 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     }
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
+
+    FillHistogramsDiagnostics( values );
 
     // 7 Njets >= 3
     if ( jet_n < 3 ) return !passed;
@@ -900,6 +920,37 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( ControlPlotValues
     const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) - 1;    
     string path = "parton/cutflow/" + alias[cut] + "/";
     FillHistograms(path, values);
+}
+
+void CutFlowTTbarResolved::FillHistogramsDiagnostics( ControlPlotValues& values )
+{
+    const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) - 1;
+    if( cut > 8 ) return;
+
+    string hpath = "reco/cutflow/3j0b/flav_comp";
+
+    static const int nj_max = 4;
+    static const int nb_max = 2;
+
+    const int nb  = min( values.bjet_n, nb_max );
+    const int nj  = min( values.jet_n,  nj_max );
+    const int lq  = ( values.lep_q > 0 ) ? 1 : 7;
+
+   
+    // q  1 1  1 1  1 1 -1 -1  -1 -1  -1 -1 
+    // b  0 0  1 1  2 2  0  0   1  1   2  2
+    // j  3 4  3 4  3 4  3  4   3  4   3  4
+    // ------------------------------------
+    // i  1 2  3 4  5 6  7  8   9 10  11 12
+
+    const int bin = lq + nb*nb_max + (nj-nj_max+1);
+
+//    cout << "DEBUG: wjets diagnostics: l=" << values.lep_q << " nb=" << values.bjet_n << " nj=" << values.jet_n << " -> bin=" << bin << endl;
+
+    ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( hpath );
+    if( !h ) throw runtime_error("CutFlowTTbarResolved::FillHistogramsDiagnostics(): Invalid path to histogram");
+
+    h->Fill( bin, values.weight );
 }
 
 void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values ){

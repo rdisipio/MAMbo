@@ -364,6 +364,14 @@
 	<Variable name="TopL_m" title="m_{lep} [GeV]" folder="4j2b" particle="difference">
 	    <Bin id="0" nbins="50" xmin="0." xmax="600."/>
 	</Variable>
+ 
+       <!-- Diagnostics -->
+
+
+       <!-- 2(l_q) X 3(Nb=0,1,>=2) X 2(Nj=3,>=4) -->
+       <Variable name="flav_comp" title="Flavor composition" folder="cutflow" >
+            <Bin id="0" nbins="12" xmin="0.5" xmax="12.5" />
+       </Variable>
 
   </Variables>        
 
@@ -487,6 +495,8 @@
 	<TH1F variable="HT_ttbar" binId="0"/>
 	<TH1F variable="HT_pseudo" binId="0"/>
 
+        <!-- diagnostics -->
+        <TH1F variable="flav_comp" binId="0"/>
 
     </Histos>    
     
