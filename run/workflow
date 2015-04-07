@@ -67,6 +67,11 @@ for njets in 3jincl 4jincl
 do
   MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/Wjets_${njets}_${ch}.xml -o ${outdir}/${syst}/${analysis}.mc.Wjets_${njets}.${ch}.${syst}.histograms.root #&
 
+  for flav in lf c bbcc
+  do
+     MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/Wjets_${flav}_${njets}_${ch}.xml -o ${outdir}/${syst}/${analysis}.mc.Wjets_${flav}_${njets}.${ch}.${syst}.histograms.root
+  done
+
   echo
   echo "//////////////////////////////////"
   echo
