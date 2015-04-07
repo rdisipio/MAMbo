@@ -28,6 +28,7 @@
   <plot hpath="reco/cutflow/3j0b/ht"                   xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/3j0b/ht_2"                   xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/3j0b/meff_2"                 xtitle="Effective Mass [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/3j0b/flav_comp"            xtitle="Flavor composition class" ytitle="Events" scale="linear" />
 
   <plot hpath="reco/cutflow/4j0b/pvxp_n"               xtitle="No. of tracks per primary vtx"     ytitle="Events" scale="linear" />
   <plot hpath="reco/cutflow/4j0b/vxp_z"                xtitle="Primary vertex p_{z} [GeV]"              ytitle="Events / GeV" scale="linear" />
