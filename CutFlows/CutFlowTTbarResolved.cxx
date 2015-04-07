@@ -924,7 +924,7 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( ControlPlotValues
 
 void CutFlowTTbarResolved::FillHistogramsDiagnostics( ControlPlotValues& values )
 {
-    const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) - 1;
+    const int cut = GetLastPassedCut( "LPLUSJETS", "reco_weighted" ) - 1;
     if( cut > 8 ) return;
 
     string hpath = "reco/cutflow/3j0b/flav_comp";
