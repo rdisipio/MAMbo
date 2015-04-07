@@ -40,12 +40,18 @@ then
    echo "INFO: ${syst} is a e+jets channel only systematic uncertainty"
    ejets=${outdir}/${syst}/${analysis}.mc.${sample}.el.${syst}.histograms.root
    mujets=${outdir}/nominal/${analysis}.mc.${sample}.mu.nominal.histograms.root
-elif [[ "$match_mu" != "" ]]
+elif [[ "$match_mu" != "" ]] 
 then
    echo	"INFO: ${syst} is a mu+jets channel only systematic uncertainty"
    ejets=${outdir}/nominal/${analysis}.mc.${sample}.el.nominal.histograms.root
    mujets=${outdir}/${syst}/${analysis}.mc.${sample}.mu.${syst}.histograms.root
+elif [ ${syst} == "muid_res" -o ${syst} == "mums_res" ]
+then
+   echo "INFO: ${syst} is a single-sided mu+jets channel only systematic uncertainty"
+   ejets=${outdir}/nominal/${analysis}.mc.${sample}.el.nominal.histograms.root
+   mujets=${outdir}/${syst}/${analysis}.mc.${sample}.mu.${syst}.histograms.root
 else
+   echo "INFO: ${syst} is a two-sided systematic uncertainty"
    ejets=${outdir}/${syst}/${analysis}.mc.${sample}.el.${syst}.histograms.root
    mujets=${outdir}/${syst}/${analysis}.mc.${sample}.mu.${syst}.histograms.root
 fi

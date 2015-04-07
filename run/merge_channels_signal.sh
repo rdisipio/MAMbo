@@ -22,6 +22,27 @@ syst=nominal
 echo "Done.."
 echo
 
+for syst in $(cat $listfile_el)
+do
+   for var in up down
+   do
+      ./merge_channels_sample.sh ${sample} ${syst}_${var}
+   done #for var
+done #for syst
+echo "Done electron syst..."
+echo //////////////////////
+
+for syst in $(cat $listfile_mu)
+do
+   for var in up down
+   do
+      ./merge_channels_sample.sh ${sample} ${syst}_${var}
+   done #for var
+done #for syst
+echo "Done muons systematics..."
+echo ///////////////////////////
+
+
 for syst in $(cat $listfile_sf)
 do
    ./merge_channels_sample.sh ${sample} ${syst}
@@ -32,36 +53,20 @@ echo /////////////////////////////////
 
 for syst in $(cat $listfile_kin)
 do 
-       for var in up down
-       do
-          ./merge_channels_sample.sh ${sample} ${syst}_${var}
-       done
-    done
+   for var in up down
+   do
+      ./merge_channels_sample.sh ${sample} ${syst}_${var}
+   done
+done
 echo "Done kinematics-changing systematics..."
 echo ////////////////////////////////////////
 
-
-for syst in $(cat $listfile_eljets_only)
-    do
-      for var in up down
-      do
-          ./merge_channels_sample.sh ${sample} ${syst}_${var}
-      done #for var
-done #for syst
-echo "Done electron syst..."
-echo //////////////////////
-
-for syst in $(cat $listfile_mujets_only)
-do
-       for var in up down
-       do
-          ./merge_channels_sample.sh ${sample} ${syst}_${var}
-       done #for var
-done #for syst
-echo "Done muons systematics..."
-echo ///////////////////////////
-
-
+./merge_channels_sample.sh ${sample} jeff
+./merge_channels_sample.sh ${sample} muid_res
+./merge_channels_sample.sh ${sample} mums_res
+echo "Done single-sided systematics"
+echo ////////////////////////////////////////
+echo
 echo "Creating combined uncertainty bands"
 
 ./make_uncertainty_band.sh ${dsid} co nominal
@@ -73,3 +78,5 @@ echo "Creating combined uncertainty bands"
 #MAMbo-makeUncertaintyBand.py -c ${paramsdir}/Uncertainty_${dsid}_co_statsyst.xml -o ${outdir}/tt_diffxs_8TeV.mc.Uncertainty_statsyst.${dsid}.co.nominal.histograms.root \
 #                             -x {outdir}/tt_diffxs_8TeV.mc.Uncertainty_statsyst.${dsid}.co.nominal.xml
 
+echo
+echo Done.
