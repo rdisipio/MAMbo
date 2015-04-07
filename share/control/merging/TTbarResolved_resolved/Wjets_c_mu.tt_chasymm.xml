@@ -5,8 +5,8 @@
   <sample name="WcNp0"             dsid="200056" sf="1.070" xsec="758.93" kfact="1.5200" genevt="22999046"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WcNp1"             dsid="200057" sf="1.070" xsec="274.47" kfact="1.5200" genevt="8198769"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WcNp2"             dsid="200058" sf="1.070" xsec="71.643" kfact="1.5200" genevt="2090290"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WcNp3"         	   dsid="200059" sf="1.070" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WcNp4incl"         dsid="200060" sf="1.070" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" /> 
+  <sample name="WcNp3"             dsid="200059" sf="1.070" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp4incl"         dsid="200060" sf="1.070" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
   <file sample="WcNp0"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200056.mu.nominal.histograms.root" />

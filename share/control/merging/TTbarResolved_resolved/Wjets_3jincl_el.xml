@@ -16,7 +16,7 @@
   <sample name="WmunuNp5incl"      dsid="147038" sf="0.9696" xsec="11.970" kfact="1.1330" genevt="3584883"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WtaunuNp0"         dsid="147041" sf="0.9696" xsec="8127.1" kfact="1.1330" genevt="31877158" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WtaunuNp1"         dsid="147042" sf="0.9696" xsec="1792.2" kfact="1.1330" genevt="48070179" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WtaunuNp2"         dsid="147043" sf="0.9696" xsec="542.27" kfact="1.1330" genevt="17581943" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp2"         dsid="147043" sf="0.9696" xsec="542.27" kfact="1.1330" genevt="17586943" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WtaunuNp3"         dsid="147044" sf="0.9696" xsec="147.64" kfact="1.1330" genevt="4982982"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WtaunuNp4"         dsid="147045" sf="0.9696" xsec="37.781" kfact="1.1330" genevt="2553295"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WtaunuNp5incl"     dsid="147046" sf="0.9696" xsec="11.959" kfact="1.1330" genevt="794096"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />

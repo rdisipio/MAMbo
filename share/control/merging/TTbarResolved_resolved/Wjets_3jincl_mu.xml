@@ -3,8 +3,8 @@
 <histograms file="control/merging/TTbarResolved_resolved/histograms_3jincl.xml" />
 <samples>
   <sample name="WenuNp0"           dsid="147025" sf="0.917472" xsec="8127.3" kfact="1.1330" genevt="28504249"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp1"           dsid="147026" sf="0.917472" xsec="1792.7" kfact="1.1330" genevt="48155904"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WenuNp2"           dsid="147027" sf="0.917472" xsec="542.18" kfact="1.1330" genevt="17554347"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp1"           dsid="147026" sf="0.917472" xsec="1792.7" kfact="1.1330" genevt="47936004"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp2"           dsid="147027" sf="0.917472" xsec="542.18" kfact="1.1330" genevt="17495947"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp3"           dsid="147028" sf="0.917472" xsec="147.65" kfact="1.1330" genevt="4855289"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp4"           dsid="147029" sf="0.917472" xsec="37.736" kfact="1.1330" genevt="7957075"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp5incl"       dsid="147030" sf="0.917472" xsec="11.962" kfact="1.1330" genevt="3586469"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
