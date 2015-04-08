@@ -218,7 +218,6 @@ def CreateMergedUpHistograms( errorsf, outfile,  outputClass = OutputType.histog
 
              points = [ { 'n': 0., 'u': 0.,  'd': 0. } for i in range(nbins) ]
              edges  = [ 0. for i in range(nbins+1) ]
-
           sample_uncertainty = {}
 
           # fill nominal
@@ -226,7 +225,7 @@ def CreateMergedUpHistograms( errorsf, outfile,  outputClass = OutputType.histog
              points[i]['n'] += h.GetBinContent(i+1)
              edges[i] = h.GetBinLowEdge(i+1)
           edges[nbins] = h.GetBinLowEdge(nbins+1)
-          histoUp = TH1D(hname, title, nbins, edges[i], edges[i+1])
+          histoUp = TH1D(hname, title, nbins, edges[0], edges[nbins])
 
           # stat unc first
           sample_uncertainty['statonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
@@ -331,7 +330,7 @@ def CreateMergedUpHistograms( errorsf, outfile,  outputClass = OutputType.histog
           for var in ['u', 'd']:
              nbins = len( total_uncertainty[systname][var] )
              for i in range( nbins ):    
-                total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )  
+                total_uncertainty[systname][var][i] = errorsf * sqrt( total_uncertainty[systname][var][i] )  
 
        # Print out relative shift
        DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )
@@ -344,7 +343,8 @@ def CreateMergedUpHistograms( errorsf, outfile,  outputClass = OutputType.histog
           eyl = sqrt( points[i]['d'] )
 
           histoUp.SetBinContent(i, y + errorsf * eyh)
-          histoUp.Print()
+#          print "%s %d i %d x %d dy" % (hpath,i,x,eyh)
+#          histoUp.Print()
           
        histoUp.Write()
        progress.increment_amount()
@@ -394,7 +394,7 @@ def CreateMergedDownHistograms( errorsf, outfile,  outputClass = OutputType.hist
              points[i]['n'] += h.GetBinContent(i+1)
              edges[i] = h.GetBinLowEdge(i+1)
           edges[nbins] = h.GetBinLowEdge(nbins+1)
-          histoDown = TH1D(hname, title, nbins, edges[i], edges[i+1])
+          histoDown = TH1D(hname, title, nbins, edges[0], edges[nbins])
 
           # stat unc first
           sample_uncertainty['statonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
@@ -502,7 +502,7 @@ def CreateMergedDownHistograms( errorsf, outfile,  outputClass = OutputType.hist
                 total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )  
 
        # Print out relative shift
-       DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )
+#       DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )
 
        # fill graph
        for i in range(nbins):
@@ -512,7 +512,7 @@ def CreateMergedDownHistograms( errorsf, outfile,  outputClass = OutputType.hist
           eyl = sqrt( points[i]['d'] )
 
           histoDown.SetBinContent(i, y - errorsf * eyl)
-          histoDown.Print()
+#          histoDown.Print()
           
        histoDown.Write()
        progress.increment_amount()
