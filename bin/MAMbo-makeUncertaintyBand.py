@@ -191,6 +191,8 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
 
     progress = ProgressBar( 0, len(histograms_configuration), 77, mode='static', char="#" )
 
+    outfile = TFile.Open( outFileName, "RECREATE" )
+
     for hpath in histograms_configuration:
        outfile.cd()
 	
@@ -336,22 +338,39 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
           graph.SetPointError( i, bw/2, bw/2, eyl, eyh )
 
        graph.Write()
+#       if outputClass == OutputType.graph:
+#          graph.Write()
+#       else:
+#          DumpUpDownHistograms( hpath, edges, points )
 
        progress.increment_amount()
        print progress, "\r",
        #time.sleep(0.05)
 
     print
+    outfile.Close()
+    print "INFO: output file closed"
+    print
+   
 
 ########################################################################
 
-    
+
+def DumpUpDownHistograms( hpath, edges, points ):
+
+    hname = hpath.split('/')[-1]
+
+
+########################################################################
+
+
 if __name__ == "__main__":
    
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-c", "--config", help="Configuration files",         dest="config", default="" )
    parser.add_option( "-o", "--output", help="Output file name [%default]", dest="output", default="uncertainty.histograms.root" )
    parser.add_option( "-x", "--output-xml", help="Dump systematics to XML file [%default]", dest="xmloutput", default="uncertainty.xml" )
+   parser.add_option( "-f", "--format", help="Output format grap|histograms [%default]", dest="format", default="graph" )
    (opts, args) = parser.parse_args()
 
    configFileName = opts.config
@@ -368,11 +387,8 @@ if __name__ == "__main__":
    xmlfile.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" )
    xmlfile.write( "<document>\n" )
 
-   outfile = TFile.Open( outFileName, "RECREATE" )
-
-   CreateMergedHistograms()
-
-   outfile.Close()
+   format = OutputType.graph if opts.format == "graph" else OutputType.histogram
+   CreateMergedHistograms( format )
 
    xmlfile.write( "</document>" )   
    xmlfile.close()
