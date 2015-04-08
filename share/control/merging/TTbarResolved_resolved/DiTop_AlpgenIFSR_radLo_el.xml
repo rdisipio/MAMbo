@@ -2,16 +2,16 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
-  <sample name="lnln_Np0"  	dsid="201040" xsec="4.7494" kfact="1.9986" genevent="3489998" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnln_Np1"  	dsid="201041" xsec="4.4065" kfact="1.9986" genevent="3296999" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnln_Np2"  	dsid="201042" xsec="2.5387" kfact="1.9986" genevent="1890999" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnln_Np3"  	dsid="201043" xsec="1.0610" kfact="1.9986" genevent="842999"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnln_Np4incl"  	dsid="201044" xsec="0.53059" kfact="1.9986" genevent="495999"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnjj_Np0"	dsid="201240" xsec="18.995" kfact="2.0841" genevent="7097992" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnjj_Np1"	dsid="201241" xsec="17.622" kfact="2.0841" genevent="6657995" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnjj_Np2"	dsid="201242" xsec="10.161" kfact="2.0841" genevent="3887998" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnjj_Np3"	dsid="201243" xsec="4.2490" kfact="2.0841" genevent="1683497" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
-  <sample name="lnjj_Np4incl"	dsid="201244" xsec="2.1198" kfact="2.0841" genevent="894999"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np0"  	dsid="201040" xsec="4.7494" kfact="1.9986" genevt="3489998" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np1"  	dsid="201041" xsec="4.4065" kfact="1.9986" genevt="3296999" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np2"  	dsid="201042" xsec="2.5387" kfact="1.9986" genevt="1890999" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np3"  	dsid="201043" xsec="1.0610" kfact="1.9986" genevt="842999"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np4incl"  	dsid="201044" xsec="0.53059" kfact="1.9986" genevt="495999"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np0"	dsid="201240" xsec="18.995" kfact="2.0841" genevt="7097992" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np1"	dsid="201241" xsec="17.622" kfact="2.0841" genevt="6657995" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np2"	dsid="201242" xsec="10.161" kfact="2.0841" genevt="3887998" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np3"	dsid="201243" xsec="4.2490" kfact="2.0841" genevt="1683497" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np4incl"	dsid="201244" xsec="2.1198" kfact="2.0841" genevt="894999"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
 </samples>
 <files>
   <file sample="lnln_Np0" 	path="radLo/tt_diffxs_8TeV.mc.DiTop.201040.el.radLo.histograms.root" />
