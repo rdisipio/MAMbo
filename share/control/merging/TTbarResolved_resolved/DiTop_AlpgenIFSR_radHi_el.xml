@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="lnln_Np0"  	dsid="201030" xsec="3.7532" kfact="1.9180" genevent="2693997" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np1"  	dsid="201031" xsec="4.2892" kfact="1.9180" genevent="3073498" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np2"  	dsid="201032" xsec="3.0905" kfact="1.9180" genevent="2181000" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np3"  	dsid="201033" xsec="1.6044" kfact="1.9180" genevent="991997"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np4incl"  	dsid="201034" xsec="1.1071" kfact="1.9180" genevent="626998"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np0"	dsid="201230" xsec="15.017" kfact="2.0010" genevent="5306998" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np1"	dsid="201231" xsec="17.162" kfact="2.0010" genevent="6183996" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np2"	dsid="201232" xsec="12.372" kfact="2.0010" genevent="4452994" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np3"	dsid="201233" xsec="6.4212" kfact="2.0010" genevent="1967495" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np4incl"	dsid="201234" xsec="4.3842" kfact="2.0010" genevent="1530499" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+</samples>
+<files>
+  <file sample="lnln_Np0" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201030.el.radHi.histograms.root" />
+  <file sample="lnln_Np1" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201031.el.radHi.histograms.root" />
+  <file sample="lnln_Np2" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201032.el.radHi.histograms.root" />
+  <file sample="lnln_Np3" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201033.el.radHi.histograms.root" />
+  <file sample="lnln_Np4incl" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201034.el.radHi.histograms.root" />
+  <file sample="lnjj_Np0"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201230.el.radHi.histograms.root" />
+  <file sample="lnjj_Np1"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201231.el.radHi.histograms.root" />
+  <file sample="lnjj_Np2"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201232.el.radHi.histograms.root" />
+  <file sample="lnjj_Np3"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201233.el.radHi.histograms.root" />
+  <file sample="lnjj_Np4incl"   path="radHi/tt_diffxs_8TeV.mc.DiTop.201234.el.radHi.histograms.root" />
+</files>
+</document>
