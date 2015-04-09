@@ -108,13 +108,9 @@ bool CutFlow::IncreaseCount( const string& histName, unsigned int cut, double we
 
   if( !p_h ) return false;
 
-  const unsigned int bin = cut + 1;
+  p_h->Fill( cut, weight );
 
-  double old_count = p_h->GetBinContent( bin );
-  double new_count = old_count + weight;
-  p_h->SetBinContent( bin, new_count );
-
-  if( new_value ) *new_value = new_count;
+  if( new_value ) *new_value = p_h->GetBinContent( cut + 1 );
 
   return true;
 }

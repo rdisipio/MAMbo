@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="DiTop"     file="PDF/110404_CTEQ_0_merged_el.root" >
+    <syst name="PDF_CT10nlo_1" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_1_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_2_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_2" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_3_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_4_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_3" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_5_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_6_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_4" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_7_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_8_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_5" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_9_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_10_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_6" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_11_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_12_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_7" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_13_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_14_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_8" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_15_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_16_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_9" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_17_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_18_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_10" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_19_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_20_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_11" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_21_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_22_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_12" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_23_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_24_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_13" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_25_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_26_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_14" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_27_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_28_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_15" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_29_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_30_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_16" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_31_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_32_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_17" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_33_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_34_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_18" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_35_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_36_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_19" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_37_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_38_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_20" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_39_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_40_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_21" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_41_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_42_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_22" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_43_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_44_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_23" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_45_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_46_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_24" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_47_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_48_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_25" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_49_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_50_merged_el.root" />
+    </syst>
+    <syst name="PDF_CT10nlo_26" type="two_sided" >
+        <shift side="up"   file="PDF/110404_CTEQ_51_merged_el.root" />
+        <shift side="down" file="PDF/110404_CTEQ_52_merged_el.root" />
+    </syst>
+  </sample>
+</samples>
+</document>
+
+<!--
+    <syst name="@SYST@" type="two_sided" >
+        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110340.el.@SYST@_up.histograms.root" />
+        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110340.el.@SYST@_down.histograms.root" />
+    </syst>
+-->

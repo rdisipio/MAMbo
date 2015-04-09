@@ -181,6 +181,8 @@ def CreateSymmetricHistograms( outfilenames ):
                  dy = 0.5 * ( y_u - y_d )
                  dy_rel = dy / y0
 
+#                 h_out_u.SetBinContent( i+1, y_n + dy )
+#                 h_out_d.SetBinContent( i+1, y_n - dy )
                  h_out_u.SetBinContent( i+1, y_n * ( 1 + dy_rel ) )
                  h_out_d.SetBinContent( i+1, y_n * ( 1 - dy_rel ) )
 
@@ -192,14 +194,6 @@ def CreateSymmetricHistograms( outfilenames ):
        CreateROOTPath( hpath )
        h_out_d.Write( hname )
     
-
-########################################################################
-
-
-def DumpUpDownHistograms( hpath, edges, points ):
-
-    hname = hpath.split('/')[-1]
-
 
 ########################################################################
 

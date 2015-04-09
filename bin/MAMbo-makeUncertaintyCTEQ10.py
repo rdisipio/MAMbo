@@ -4,8 +4,6 @@ import os, sys, time
 import optparse
 sys.path.append( os.environ['MAMBODIR'] + "/python" )
 
-from array import *
-
 from ProgressBar import *
 
 from xml.etree import ElementTree
@@ -39,6 +37,7 @@ def ReadFromExternalFile( hfilename ):
       hlist += [ node.attrib.get('hpath') ]
 
    return hlist
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,7 +98,7 @@ def GatherHistograms( hname, hpath ):
         hsource = f.Get( hpath )
 
         if hsource == None:
-            print "ERORR: invalid histogram", hpath, "for sample", sample
+            print "ERORR: invalid histogram", hpath, "for sample", sample, "in file", f.GetTitle()
 
         newname = "%s_%s" % ( sample, hname )
         hlist[sample] = hsource.Clone( newname )
@@ -133,17 +132,18 @@ def CreateROOTPath( path ):
         return CreateROOTPath( newpath )
 
 
-####################################################
+#######################################
 
 
-def DumpSystematicsToXMLFile( hpath, edges, points, uncertainty ):
-    nbins = len( points )
+def DumpSystematicsToXMLFile( hpath, h_n, uncertainty ):
+    nbins = h_n.GetNbinsX()
+    edges = [ h_n.GetBinLowEdge(i) for i in range(nbins+1) ]
 
     xmlfile.write( "<histogram hpath=\"%s\">\n" % hpath ) 
 
     xmlfile.write( "\t<nominal>" )
     for i in range(nbins):
-       y_n = points[i]['n']
+       y_n = h_n.GetBinContent( i+1 )
        xmlfile.write( "%f" % y_n )
        if i < nbins-1: xmlfile.write( "," )
     xmlfile.write( "</nominal>\n" )
@@ -163,7 +163,7 @@ def DumpSystematicsToXMLFile( hpath, edges, points, uncertainty ):
        xmlfile.write( "\t\t<u>")
        for i in range(nbins):    
           y_u = syst['u'][i]
-          y_n = points[i]['n']
+          y_n = h_n.GetBinContent( i+1 )
           dy_rel = 100. * y_u / y_n if not y_n == 0. else 0.
           sgn = "+" if dy_rel > 0. else ""
           xmlfile.write( "%s%4.3f" % ( sgn, dy_rel ) )
@@ -173,8 +173,8 @@ def DumpSystematicsToXMLFile( hpath, edges, points, uncertainty ):
        xmlfile.write( "\t\t<d>")
        for i in range(nbins):
           y_d = syst['d'][i]
-          y_n = points[i]['n']
-          dy_rel = -100. * y_d / y_n if not y_n == 0. else 0.
+          y_n = h_n.GetBinContent( i+1 )
+          dy_rel = 100. * y_d / y_n if not y_n == 0. else 0.
           sgn = "+" if dy_rel > 0. else ""
           xmlfile.write( "%s%4.3f" % ( sgn, dy_rel ) )
           if i < nbins-1: xmlfile.write( "," )
@@ -188,352 +188,141 @@ def DumpSystematicsToXMLFile( hpath, edges, points, uncertainty ):
 #######################################
 
 
-def CreateMergedUpHistograms( errorsf, outfile,  outputClass = OutputType.histogram ):
-
-    progress = ProgressBar( 0, len(histograms_configuration), 77, mode='static', char="#" )
-
-    for hpath in histograms_configuration:
-       outfile.cd()       	
-       hname = hpath.split('/')[-1]
-
-#       print "INFO: merging histogram", hpath
-
-       hlist = GatherHistograms( hname, hpath )
-       histoUp  = None
-       points = None
-       edges  = []
-       nbins  = 0
-       title  = ""
-       total_uncertainty = {}
-
-       for sample in samples_configuration.keys():
-  
-          h = hlist[sample]	
-
-          if histoUp == None:
-
-             newdir = CreateROOTPath( hpath )
-             nbins = h.GetNbinsX()
-             title = h.GetTitle()
-
-             points = [ { 'n': 0., 'u': 0.,  'd': 0. } for i in range(nbins) ]
-             edges  = [ 0. for i in range(nbins+1) ]
-          sample_uncertainty = {}
-
-          # fill nominal
-          for i in range(nbins):
-             points[i]['n'] += h.GetBinContent(i+1)
-             edges[i] = h.GetBinLowEdge(i+1)
-          edges[nbins] = h.GetBinLowEdge(nbins+1)
-          histoUp = TH1D(hname, title, nbins, edges[0], edges[nbins])
-
-          # stat unc first
-          sample_uncertainty['statonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-          if not total_uncertainty.has_key('statonly'):
-              total_uncertainty['statonly']  = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-              total_uncertainty['statsyst'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-              total_uncertainty['systonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-          for i in range(nbins):
-             sample_uncertainty['statonly']['u'][i] = 0.
-             sample_uncertainty['statonly']['d'][i] = 0.
+def sqrt_signed(x):
+    return sqrt(x) if x >= 0. else -1. * sqrt(-x)
 
 
-             points[i]['u'] += pow( sample_uncertainty['statonly']['u'][i], 2 )
-             points[i]['d'] += pow( sample_uncertainty['statonly']['d'][i], 2 )
-             total_uncertainty['statonly']['u'][i] += pow( sample_uncertainty['statonly']['u'][i], 2 )
-             total_uncertainty['statonly']['d'][i] += pow( sample_uncertainty['statonly']['d'][i], 2 )
-             total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty['statonly']['u'][i], 2 )
-             total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty['statonly']['d'][i], 2 )
- 
-          # syst unc
-          for systname in samples_configuration[sample].systematics.keys():
-             if not total_uncertainty.has_key( systname ): 
-                total_uncertainty[systname] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-             sample_uncertainty[systname] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-             hpattern = "%s_%s_%s_" % ( sample, hname, systname )
-
-             # if syst file has no entries then do not set any systematic error
-             total = 0
-             for i in range(nbins):
-                if samples_configuration[sample].systematics[systname].has_key( "up" ):
-                   h_u = hlist[hpattern+"up"]
-                   h_d = hlist[hpattern+"down"]
-                   total = h_u.GetBinContent(i+1) + h_d.GetBinContent(i+1)
-                elif samples_configuration[sample].systematics[systname].has_key( "single" ):
-                   h_sys = hlist[hpattern+"single"]
-                   total = h_sys.GetBinContent(i+1)
-             
-             if total == 0:
-                total_uncertainty[systname]['u'][i] = 0
-                total_uncertainty[systname]['d'][i] = 0                
-             
-             else:
-                for i in range(nbins):
-
-                    # scheme: both positive 
-                    dy_u = 0.
-                    dy_d = 0.
-                    if samples_configuration[sample].systematics[systname].has_key( "up" ):
-                       h_u = hlist[hpattern+"up"]
-                       h_d = hlist[hpattern+"down"]
-
-                       dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
-                       dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
-
-                    elif samples_configuration[sample].systematics[systname].has_key( "single" ):
-                       h_sys = hlist[hpattern+"single"]
-
-                       dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-                       dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-                    else:
-                       print "ERROR: side is neither up, down or single"
-                       exit(1)
-                       
-                    if dy_u > 0. and dy_d > 0.:
-                       # normal behaviour
-                       sample_uncertainty[systname]['u'][i] = dy_u
-                       sample_uncertainty[systname]['d'][i] = dy_d
-                    elif dy_u < 0. and dy_d < 0.:
-                       # crossing
-                       sample_uncertainty[systname]['u'][i] = dy_d                    
-                       sample_uncertainty[systname]['d'][i] = dy_u
-                    elif dy_u > 0. and dy_d < 0.:
-                       # both upward
-                       sample_uncertainty[systname]['u'][i] = max( [ dy_u, -dy_d ] ) 
-                       sample_uncertainty[systname]['d'][i] = 0.
-                    elif dy_u < 0. and dy_d > 0.:
-                       # both downward
-                       sample_uncertainty[systname]['u'][i] = 0.
-                       sample_uncertainty[systname]['d'][i] = max( [ -dy_u, dy_d ] )
-                    else:
-                       sample_uncertainty[systname]['u'][i] = 0.
-                       sample_uncertainty[systname]['d'][i] = 0.
-
-                    # add errors in quadrature
-                    points[i]['u'] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                    points[i]['d'] += pow( sample_uncertainty[systname]['d'][i], 2 )
-         
-                    total_uncertainty[systname]['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 ) 
-                    total_uncertainty[systname]['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )
-
-                    total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                    total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )
-                    total_uncertainty['systonly']['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                    total_uncertainty['systonly']['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )          
-
-       # apply square root
-       for systname in total_uncertainty.keys():
-          for var in ['u', 'd']:
-             nbins = len( total_uncertainty[systname][var] )
-             for i in range( nbins ):    
-                total_uncertainty[systname][var][i] = errorsf * sqrt( total_uncertainty[systname][var][i] )  
-
-       # Print out relative shift
-       DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )
-
-       # fill graph
-       for i in range(nbins):
-          x  = h.GetBinCenter( i+1 )
-          y  = points[i]['n']          
-          eyh = sqrt( points[i]['u'] )
-          eyl = sqrt( points[i]['d'] )
-
-          histoUp.SetBinContent(i, y + errorsf * eyh)
-#          print "%s %d i %d x %d dy" % (hpath,i,x,eyh)
-#          histoUp.Print()
-          
-       histoUp.Write()
-       progress.increment_amount()
-       print progress, "\r",
-       #time.sleep(0.05)
-
-    print
-
-########################################################################
+#######################################
 
 
-def CreateMergedDownHistograms( errorsf, outfile,  outputClass = OutputType.histogram ):
+def CreateHistograms( outfilenames, sf68 ):
 
-    progress = ProgressBar( 0, len(histograms_configuration), 77, mode='static', char="#" )
+    outfile_u = TFile.Open( outfilenames['u'], "RECREATE" )
+    outfile_d = TFile.Open( outfilenames['d'], "RECREATE" )
 
     for hpath in histograms_configuration:
-       outfile.cd()       	
        hname = hpath.split('/')[-1]
-
-#       print "INFO: merging histogram", hpath
-
+       
        hlist = GatherHistograms( hname, hpath )
-       histoDown  = None
-       points = None
-       edges  = []
-       nbins  = 0
-       title  = ""
-       total_uncertainty = {}
+
+       nbins = -1
+       title = ""
+
+       uncertainty = {}
 
        for sample in samples_configuration.keys():
-  
-          h = hlist[sample]	
+          h_n   = hlist[sample]
+          nbins = h_n.GetNbinsX()
+          title = h_n.GetTitle()
 
-          if histoDown == None:
+          h_out_u = h_n.Clone()
+          h_out_d = h_n.Clone()
 
-             newdir = CreateROOTPath( hpath )
-             nbins = h.GetNbinsX()
-             title = h.GetTitle()
+          h_out_u.Reset("ICES")
+          h_out_d.Reset("ICES")
 
-             points = [ { 'n': 0., 'u': 0.,  'd': 0. } for i in range(nbins) ]
-             edges  = [ 0. for i in range(nbins+1) ]
+          if not uncertainty.has_key( 'total' ):
+             uncertainty['total']  = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
 
-          sample_uncertainty = {}
-
-          # fill nominal
-          for i in range(nbins):
-             points[i]['n'] += h.GetBinContent(i+1)
-             edges[i] = h.GetBinLowEdge(i+1)
-          edges[nbins] = h.GetBinLowEdge(nbins+1)
-          histoDown = TH1D(hname, title, nbins, edges[0], edges[nbins])
-
-          # stat unc first
-          sample_uncertainty['statonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-          if not total_uncertainty.has_key('statonly'):
-              total_uncertainty['statonly']  = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-              total_uncertainty['statsyst'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-              total_uncertainty['systonly'] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-          for i in range(nbins):
-             sample_uncertainty['statonly']['u'][i] = 0.
-             sample_uncertainty['statonly']['d'][i] = 0.
-
-
-             points[i]['u'] += pow( sample_uncertainty['statonly']['u'][i], 2 )
-             points[i]['d'] += pow( sample_uncertainty['statonly']['d'][i], 2 )
-             total_uncertainty['statonly']['u'][i] += pow( sample_uncertainty['statonly']['u'][i], 2 )
-             total_uncertainty['statonly']['d'][i] += pow( sample_uncertainty['statonly']['d'][i], 2 )
-             total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty['statonly']['u'][i], 2 )
-             total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty['statonly']['d'][i], 2 )
  
-          # syst unc
           for systname in samples_configuration[sample].systematics.keys():
-             if not total_uncertainty.has_key( systname ): 
-                total_uncertainty[systname] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
-             sample_uncertainty[systname] = { 'u' : [ 0 ] * nbins, 'd' : [ 0 ] * nbins }
-
+             uncertainty[systname] = { 'u' : [ 0. ] * nbins, 'd' : [ 0. ] * nbins }
+             
              hpattern = "%s_%s_%s_" % ( sample, hname, systname )
 
-             # if syst file has no entries then do not set any systematic error
-             total = 0
              for i in range(nbins):
-                if samples_configuration[sample].systematics[systname].has_key( "up" ):
-                   h_u = hlist[hpattern+"up"]
-                   h_d = hlist[hpattern+"down"]
-                   total = h_u.GetBinContent(i+1) + h_d.GetBinContent(i+1)
-                elif samples_configuration[sample].systematics[systname].has_key( "single" ):
-                   h_sys = hlist[hpattern+"single"]
-                   total = h_sys.GetBinContent(i+1)
-             
-             if total == 0:
-                total_uncertainty[systname]['u'][i] = 0
-                total_uncertainty[systname]['d'][i] = 0                
-             
-             else:
-                for i in range(nbins):
+                 y_n = h_n.GetBinContent(i+1)
 
-                    # scheme: both positive 
-                    dy_u = 0.
-                    dy_d = 0.
-                    if samples_configuration[sample].systematics[systname].has_key( "up" ):
-                       h_u = hlist[hpattern+"up"]
-                       h_d = hlist[hpattern+"down"]
+                 dy_u = 0.
+                 dy_d = 0.
 
-                       dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
-                       dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
+                 if samples_configuration[sample].systematics[systname].has_key( "up" ):
+                    h_u = hlist[hpattern+"up"]
+                    h_d = hlist[hpattern+"down"]
 
-                    elif samples_configuration[sample].systematics[systname].has_key( "single" ):
-                       h_sys = hlist[hpattern+"single"]
+                    dy_u = h_u.GetBinContent(i+1) - y_n
+                    dy_d = h_d.GetBinContent(i+1) - y_n
 
-                       dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-                       dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-                    else:
-                       print "ERROR: side is neither up, down or single"
-                       exit(1)
-                       
-                    if dy_u > 0. and dy_d > 0.:
-                       # normal behaviour
-                       sample_uncertainty[systname]['u'][i] = dy_u
-                       sample_uncertainty[systname]['d'][i] = dy_d
-                    elif dy_u < 0. and dy_d < 0.:
-                       # crossing
-                       sample_uncertainty[systname]['u'][i] = dy_d                    
-                       sample_uncertainty[systname]['d'][i] = dy_u
-                    elif dy_u > 0. and dy_d < 0.:
-                       # both upward
-                       sample_uncertainty[systname]['u'][i] = max( [ dy_u, -dy_d ] ) 
-                       sample_uncertainty[systname]['d'][i] = 0.
-                    elif dy_u < 0. and dy_d > 0.:
-                       # both downward
-                       sample_uncertainty[systname]['u'][i] = 0.
-                       sample_uncertainty[systname]['d'][i] = max( [ -dy_u, dy_d ] )
-                    else:
-                       sample_uncertainty[systname]['u'][i] = 0.
-                       sample_uncertainty[systname]['d'][i] = 0.
+                 elif samples_configuration[sample].systematics[systname].has_key( "single" ):
+                    h_sys = hlist[hpattern+"single"]
 
-                    # add errors in quadrature
-                    points[i]['u'] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                    points[i]['d'] += pow( sample_uncertainty[systname]['d'][i], 2 )
-         
-                    total_uncertainty[systname]['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 ) 
-                    total_uncertainty[systname]['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )
+                    dy_u = h_sys.GetBinContent(i+1) - y_n
+                    dy_d = -dy_u
+                 else:
+                    print "ERROR: side is neither up, down or single"
+                    exit(1)
 
-                    total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                    total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )
-                    total_uncertainty['systonly']['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                    total_uncertainty['systonly']['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )          
+                 if dy_u > 0. and dy_d < 0.:
+                    # normal behavior
+                    uncertainty[systname]['u'][i] = dy_u
+                    uncertainty[systname]['d'][i] = dy_d
+                 elif dy_u < 0. and dy_d > 0.:
+                    # crossing
+                    uncertainty[systname]['u'][i] = dy_u                    
+                    uncertainty[systname]['d'][i] = dy_d
+                 elif dy_u > 0. and dy_d > 0.:
+                    # both upward
+                    uncertainty[systname]['u'][i] = max( [ dy_u, dy_d ] ) 
+                    uncertainty[systname]['d'][i] = 0.
+                 elif dy_u < 0. and dy_d < 0.:
+                    # both downward
+                    uncertainty[systname]['u'][i] = 0.
+                    uncertainty[systname]['d'][i] = min( [ dy_u, dy_d ] )
+                 else:
+                    uncertainty[systname]['u'][i] = 0.
+                    uncertainty[systname]['d'][i] = 0.
 
-       # apply square root
-       for systname in total_uncertainty.keys():
-          for var in ['u', 'd']:
-             nbins = len( total_uncertainty[systname][var] )
-             for i in range( nbins ):    
-                total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )  
+                 # total band: add errors in quadrature
+                 dy_u = uncertainty[systname]['u'][i]
+                 dy_d = uncertainty[systname]['d'][i]
+                 dy_u_2 = dy_u*dy_u
+                 dy_d_2 = dy_d*dy_d
 
-       # Print out relative shift
-#       DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )
+                 if dy_u >= 0.: 
+                    uncertainty['total']['u'][i] += dy_u_2
+                    uncertainty['total']['d'][i] += dy_d_2
+                 elif dy_u < 0.: 
+                    uncertainty['total']['d'][i] += dy_u_2
+                    uncertainty['total']['u'][i] += dy_d_2
 
-       # fill graph
-       for i in range(nbins):
-          x  = h.GetBinCenter( i+1 )
-          y  = points[i]['n']          
-          eyh = sqrt( points[i]['u'] )
-          eyl = sqrt( points[i]['d'] )
+          # apply square root
+          for i in range( nbins ):
+             dy_u = sf68 * sqrt( uncertainty['total']['u'][i] )
+             dy_d = sf68 * sqrt( uncertainty['total']['d'][i] )
 
-          histoDown.SetBinContent(i, y - errorsf * eyl)
-#          histoDown.Print()
-          
-       histoDown.Write()
-       progress.increment_amount()
-       print progress, "\r",
-       #time.sleep(0.05)
+             uncertainty['total']['u'][i] = dy_u
+             uncertainty['total']['d'][i] = dy_d
 
-    print
+             y_n = h_n.GetBinContent( i+1 )
 
-########################################################################
+             h_out_u.SetBinContent( i+1, y_n + dy_u )
+             h_out_d.SetBinContent( i+1, y_n - dy_d )
 
 
+          # Print out relative shift
+          DumpSystematicsToXMLFile( hpath, h_n, uncertainty )
+
+          # write out
+
+          outfile_u.cd()
+          CreateROOTPath( hpath )
+          h_out_u.Write( hname )
+
+          outfile_d.cd()
+          CreateROOTPath( hpath )
+          h_out_d.Write( hname )
     
+
+########################################################################
+
+
 if __name__ == "__main__":
    
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
-   parser.add_option( "-c", "--config",         help="Configuration files",                     dest="config", default="" )
-   parser.add_option( "-o", "--output",         help="Output file name [%default]",             dest="output", default="uncertainty.histograms.root" )
-   parser.add_option( "-x", "--output-xml",     help="Dump systematics to XML file [%default]", dest="xmloutput", default="uncertainty.xml" )
-   parser.add_option( "-k", "--channel",        help="Channel [%default]",                      dest="channel", default="el" )
-   parser.add_option( "-e", "--errorsf",        help="Error scal factor [%default]",            dest="errorsf", default=1.0 )
-   
+   parser.add_option( "-c", "--config", help="Configuration files",         dest="config", default="" )
+   parser.add_option( "-o", "--output", help="Output file name [%default]", dest="output", default="ct10_up.histograms.root,ct10_down.histograms.root" )
+   parser.add_option( "-x", "--output-xml",     help="Dump systematics to XML file [%default]", dest="xmloutput", default="uncertainty.ct10.xml" )
+   parser.add_option( "-e", "--errorsf", help="Scale factor to 68% CL [%default]", dest="errorsf", default=1.0/1.645 )
    (opts, args) = parser.parse_args()
 
    configFileName = opts.config
@@ -541,24 +330,20 @@ if __name__ == "__main__":
         print "ERROR: please specify a config file in xml format."
         exit(1)
 
-   outFileName = opts.output
-   print "INFO: Output file name:", outFileName
+   outfilenames = opts.output.split(",")
+
+   for outFileName in outfilenames:
+      print "INFO: Output file name:", outFileName
  
    histograms_configuration, samples_configuration  = ReadConfiguration( configFileName )
 
+   sf68 = float( opts.errorsf )
    xmlfile = open( opts.xmloutput, 'w' )
    xmlfile.write( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" )
    xmlfile.write( "<document>\n" )
 
-   outfileUp = TFile.Open( "up." + outFileName, "RECREATE" )
-   outfileDown = TFile.Open( "down." + outFileName, "RECREATE" )
-
-
-   CreateMergedUpHistograms(float(opts.errorsf), outfileUp)
-   CreateMergedDownHistograms(float(opts.errorsf), outfileDown) 
-
-   outfileUp.Close()
-   outfileDown.Close()
+   CreateHistograms( { 'u' : outfilenames[0], 'd' : outfilenames[1] }, sf68 )
 
    xmlfile.write( "</document>" )   
    xmlfile.close()
+
