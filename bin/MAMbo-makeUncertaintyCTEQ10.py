@@ -137,7 +137,7 @@ def CreateROOTPath( path ):
 
 def DumpSystematicsToXMLFile( hpath, h_n, uncertainty ):
     nbins = h_n.GetNbinsX()
-    edges = [ h_n.GetBinLowEdge(i) for i in range(nbins+1) ]
+    edges = [ h_n.GetBinLowEdge(i+1) for i in range(nbins+1) ]
 
     xmlfile.write( "<histogram hpath=\"%s\">\n" % hpath ) 
 
