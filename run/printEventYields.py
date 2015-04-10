@@ -50,6 +50,6 @@ for ch in channels:
         h_unw = infile.Get( hname_unw )
         h_wgt = infile.Get( hname_wgt )
 
-        print "%20s %.0f" % ( sample, h_wgt.GetBinContent( bin ) )
-#        print "%20s %10.0f / %.0f" % ( sample, h_unw.GetBinContent( bin ), h_wgt.GetBinContent( bin ) )
+#        print "%20s %.0f" % ( sample, h_wgt.GetBinContent( bin ) )
+        print "%20s %10.0f / %.0f" % ( sample, h_unw.GetBinContent( bin ), h_wgt.GetBinContent( bin ) )
   print
