@@ -44,6 +44,18 @@
   <sample name="ZtautauccNp1"           dsid="200449" xsec="7.1410" kfact="1.1800" genevt="199998"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="ZtautauccNp2"           dsid="200450" xsec="3.3582" kfact="1.1800" genevt="99800"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />  
   <sample name="ZtautauccNp3incl"           dsid="200451" xsec="1.7046" kfact="1.1800" genevt="49400"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp0"            dsid="200332" xsec="6.5083"  kfact="1.1800" genevt="1799992" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp1"            dsid="200333" xsec="3.2948"  kfact="1.1800" genevt="999896" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp2"            dsid="200334" xsec="1.2546"  kfact="1.1800" genevt="994594" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZeebbNp3incl"        dsid="200335" xsec="0.61800" kfact="1.1800" genevt="885392" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp0"          dsid="200340" xsec="6.5056"  kfact="1.1800" genevt="1799797" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp1"          dsid="200341" xsec="3.2909"  kfact="1.1800" genevt="999897" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp2"          dsid="200342" xsec="1.2585"  kfact="1.1800" genevt="999395" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZmumubbNp3incl"      dsid="200343" xsec="0.61808" kfact="1.1800" genevt="885894" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautaubbNp0"        dsid="200348" xsec="6.5062"  kfact="1.1800" genevt="300000" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautaubbNp1"        dsid="200349" xsec="3.2935"  kfact="1.1800" genevt="100000" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautaubbNp2"        dsid="200350" xsec="1.2485"  kfact="1.1800" genevt="50000" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="ZtautaubbNp3incl"    dsid="200351" xsec="0.61363" kfact="1.1800" genevt="49800" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
   <file sample="ZeeNp0"       path="nominal/tt_diffxs_8TeV.Zjets.147105.mu.nominal.histograms.root" />
@@ -88,5 +100,17 @@
   <file sample="ZtautauccNp1"      path="nominal/tt_diffxs_8TeV.Zjets.200449.mu.nominal.histograms.root" /> 
   <file sample="ZtautauccNp2"     path="nominal/tt_diffxs_8TeV.Zjets.200450.mu.nominal.histograms.root" /> 
   <file sample="ZtautauccNp3incl"     path="nominal/tt_diffxs_8TeV.Zjets.200451.mu.nominal.histograms.root" /> 
+  <file sample="ZeebbNp0"       path="nominal/tt_diffxs_8TeV.Zjets.200332.mu.nominal.histograms.root" />
+  <file sample="ZeebbNp1"       path="nominal/tt_diffxs_8TeV.Zjets.200333.mu.nominal.histograms.root" />
+  <file sample="ZeebbNp2"       path="nominal/tt_diffxs_8TeV.Zjets.200334.mu.nominal.histograms.root" />
+  <file sample="ZeebbNp3incl"       path="nominal/tt_diffxs_8TeV.Zjets.200335.mu.nominal.histograms.root" />
+  <file sample="ZmumubbNp0"       path="nominal/tt_diffxs_8TeV.Zjets.200340.mu.nominal.histograms.root" />
+  <file sample="ZmumubbNp1"      path="nominal/tt_diffxs_8TeV.Zjets.200341.mu.nominal.histograms.root" />
+  <file sample="ZmumubbNp2"     path="nominal/tt_diffxs_8TeV.Zjets.200342.mu.nominal.histograms.root" />
+  <file sample="ZmumubbNp3incl"     path="nominal/tt_diffxs_8TeV.Zjets.200343.mu.nominal.histograms.root" />
+  <file sample="ZtautaubbNp0"       path="nominal/tt_diffxs_8TeV.Zjets.200348.mu.nominal.histograms.root" />
+  <file sample="ZtautaubbNp1"      path="nominal/tt_diffxs_8TeV.Zjets.200349.mu.nominal.histograms.root" />
+  <file sample="ZtautaubbNp2"     path="nominal/tt_diffxs_8TeV.Zjets.200350.mu.nominal.histograms.root" />
+  <file sample="ZtautaubbNp3incl"     path="nominal/tt_diffxs_8TeV.Zjets.200351.mu.nominal.histograms.root" />
 </files>
 </document>

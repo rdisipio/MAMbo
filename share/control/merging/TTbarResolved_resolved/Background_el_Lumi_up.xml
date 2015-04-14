@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="SingleTop" sf="1.018" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="Wjets"     sf="1.000" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="Zjets"     sf="1.018" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="Diboson"   sf="1.018" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="Fakes"     sf="1.000" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="MotherNature" simulation="None" />
+</samples>
+<files>
+  <file sample="SingleTop"     path="nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" />
+  <file sample="Wjets"         path="nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root" />
+  <file	sample="Zjets"         path="nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" />
+  <file sample="Diboson"       path="nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root" />
+  <file sample="Fakes"         path="nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root" />
+</files>
+</document>

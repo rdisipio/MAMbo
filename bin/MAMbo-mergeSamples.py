@@ -172,34 +172,39 @@ def CreateMergedHistograms():
         outfile.cd()
 	
         hname = hpath.split('/')[-1]
-
 #        print "INFO: merging histogram", hpath
+
+        do_reweight = False if hname.endswith( "_unweight" ) else True
+        do_copy     = True if hname.find("cutflow") > -1 and hname.endswith("weighted") else False
 
         hlist = GatherHistograms( hname, hpath )
 
         hsum = None
         for sample, h in hlist.iteritems():
 
-	    #area  = h.Integral( "width" )
-            genevt = samples_configuration[sample].genevt
-            xsec   = samples_configuration[sample].xsec
-            kfact  = samples_configuration[sample].kfact
-            sf     = samples_configuration[sample].sf
-            norm   = iLumi * xsec * kfact * sf / genevt
+           norm = 1.0
+           if do_reweight:
+               genevt = samples_configuration[sample].genevt
+               xsec   = samples_configuration[sample].xsec
+               kfact  = samples_configuration[sample].kfact
+               sf     = samples_configuration[sample].sf
+               norm   = iLumi * xsec * kfact * sf / genevt
+           
+           if hsum == None:
 
-            # little hack for unweighted histograms ;)
-            if hname.find("unweight") > -1: norm = 1.
-            
-            if hsum == None:
+               newdir = CreateROOTPath( hpath )
+               hsum = h.Clone( hname )
 
-                newdir = CreateROOTPath( hpath )
+               hsum.Reset( "ICES" )
+               hsum.SetDirectory( newdir )
 
-                hsum = h.Clone( hname )
+#            CheckConsistency( hsum, h, sample )
+           h.Scale( norm )
 
-                hsum.Reset( "ICES" )
-                hsum.SetDirectory( newdir )
-            CheckConsistency( hsum, h, sample )
-            hsum.Add( h, norm )
+           if do_copy:
+             h.Write( hname+"_"+sample )
+
+           hsum.Add( h )
 
         hsum.Write()
 
@@ -212,7 +217,7 @@ if __name__ == "__main__":
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-c", "--config", help="Configuration files",         dest="config", default="" )
    parser.add_option( "-o", "--output", help="Output file name [%default]", dest="output", default="merged.histograms.root" )
-   parser.add_option( "-l", "--iLumi",  help="Target integrated luminosity [%default]", dest="iLumi", default=1. )
+   parser.add_option( "-l", "--iLumi",  help="Target integrated luminosity [%default]", dest="iLumi", default=20300 )
    (opts, args) = parser.parse_args()
 
    configFileName = opts.config

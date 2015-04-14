@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_4jincl.xml" />
+<samples>
+  <sample name="WenuNp0"           dsid="147025" sf="1.0" xsec="8127.3" kfact="1.1330" genevt="28504249"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp1"           dsid="147026" sf="1.0" xsec="1792.7" kfact="1.1330" genevt="47936004"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp2"           dsid="147027" sf="1.0" xsec="542.18" kfact="1.1330" genevt="17554347"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp3"           dsid="147028" sf="1.0" xsec="147.65" kfact="1.1330" genevt="4855289"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp4"           dsid="147029" sf="1.0" xsec="37.736" kfact="1.1330" genevt="7957075"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WenuNp5incl"       dsid="147030" sf="1.0" xsec="11.962" kfact="1.1330" genevt="3586469"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp0"          dsid="147033" sf="1.0" xsec="8127.1" kfact="1.1330" genevt="31965655" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp1"          dsid="147034" sf="1.0" xsec="1792.9" kfact="1.1330" genevt="43677615" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp2"          dsid="147035" sf="1.0" xsec="542.24" kfact="1.1330" genevt="17611454" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp3"          dsid="147036" sf="1.0" xsec="147.66" kfact="1.1330" genevt="4956077"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp4"          dsid="147037" sf="1.0" xsec="37.745" kfact="1.1330" genevt="8050476"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WmunuNp5incl"      dsid="147038" sf="1.0" xsec="11.970" kfact="1.1330" genevt="3584883"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp0"         dsid="147041" sf="1.0" xsec="8127.1" kfact="1.1330" genevt="31877158" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp1"         dsid="147042" sf="1.0" xsec="1792.2" kfact="1.1330" genevt="48070179" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp2"         dsid="147043" sf="1.0" xsec="542.27" kfact="1.1330" genevt="17581943" generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp3"         dsid="147044" sf="1.0" xsec="147.64" kfact="1.1330" genevt="4977982"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp4"         dsid="147045" sf="1.0" xsec="37.781" kfact="1.1330" genevt="2548295"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WtaunuNp5incl"     dsid="147046" sf="1.0" xsec="11.959" kfact="1.1330" genevt="789096"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp0"             dsid="200056" sf="1.0" xsec="758.93" kfact="1.5200" genevt="22999046"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp1"             dsid="200057" sf="1.0" xsec="274.47" kfact="1.5200" genevt="8198769"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp2"             dsid="200058" sf="1.0" xsec="71.643" kfact="1.5200" genevt="2090290"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp3"         	   dsid="200059" sf="1.0" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp4incl"         dsid="200060" sf="1.0" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" /> 
+  <sample name="WccNp0"            dsid="200156" sf="1.0" xsec="149.39" kfact="1.1330" genevt="4299592"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WccNp1"	       	   dsid="200157" sf="1.0" xsec="143.90" kfact="1.1330" genevt="3987891"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WccNp2"	       	   dsid="200158" sf="1.0" xsec="84.227" kfact="1.1330" genevt="2394394"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WccNp3incl"	   dsid="200159" sf="1.0" xsec="44.277" kfact="1.1330" genevt="985295"	  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp0"            dsid="200256" sf="1.0" xsec="52.237" kfact="1.1330" genevt="1599997"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp1"            dsid="200257" sf="1.0" xsec="45.628" kfact="1.1330" genevt="1398396"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp2"            dsid="200258" sf="1.0" xsec="23.955" kfact="1.1330" genevt="699398"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WbbNp3incl"        dsid="200259" sf="1.0" xsec="13.633" kfact="1.1330" genevt="398397"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="WenuNp0"        path="nominal/tt_diffxs_8TeV.Wjets.147025.mu.nominal.histograms.root" />"
+  <file sample="WenuNp1"        path="nominal/tt_diffxs_8TeV.Wjets.147026.mu.nominal.histograms.root" />"
+  <file sample="WenuNp2"        path="nominal/tt_diffxs_8TeV.Wjets.147027.mu.nominal.histograms.root" />"
+  <file sample="WenuNp3"        path="nominal/tt_diffxs_8TeV.Wjets.147028.mu.nominal.histograms.root" />
+  <file	sample="WenuNp4"        path="nominal/tt_diffxs_8TeV.Wjets.147029.mu.nominal.histograms.root" />
+  <file	sample="WenuNp5incl"    path="nominal/tt_diffxs_8TeV.Wjets.147030.mu.nominal.histograms.root" />
+  <file	sample="WmunuNp0"       path="nominal/tt_diffxs_8TeV.Wjets.147033.mu.nominal.histograms.root" />
+  <file	sample="WmunuNp1"       path="nominal/tt_diffxs_8TeV.Wjets.147034.mu.nominal.histograms.root" />
+  <file	sample="WmunuNp2"       path="nominal/tt_diffxs_8TeV.Wjets.147035.mu.nominal.histograms.root" />
+  <file	sample="WmunuNp3"       path="nominal/tt_diffxs_8TeV.Wjets.147036.mu.nominal.histograms.root" />
+  <file	sample="WmunuNp4"       path="nominal/tt_diffxs_8TeV.Wjets.147037.mu.nominal.histograms.root" />
+  <file	sample="WmunuNp5incl"   path="nominal/tt_diffxs_8TeV.Wjets.147038.mu.nominal.histograms.root" />
+  <file	sample="WtaunuNp0"      path="nominal/tt_diffxs_8TeV.Wjets.147041.mu.nominal.histograms.root" />
+  <file	sample="WtaunuNp1"      path="nominal/tt_diffxs_8TeV.Wjets.147042.mu.nominal.histograms.root" />
+  <file sample="WtaunuNp2"      path="nominal/tt_diffxs_8TeV.Wjets.147043.mu.nominal.histograms.root" />
+  <file sample="WtaunuNp3"      path="nominal/tt_diffxs_8TeV.Wjets.147044.mu.nominal.histograms.root" />
+  <file sample="WtaunuNp4"      path="nominal/tt_diffxs_8TeV.Wjets.147045.mu.nominal.histograms.root" />
+  <file sample="WtaunuNp5incl"  path="nominal/tt_diffxs_8TeV.Wjets.147046.mu.nominal.histograms.root" />
+  <file sample="WcNp0"          path="nominal/tt_diffxs_8TeV.Wjets.200056.mu.nominal.histograms.root" />
+  <file sample="WcNp1"          path="nominal/tt_diffxs_8TeV.Wjets.200057.mu.nominal.histograms.root" />
+  <file sample="WcNp2"          path="nominal/tt_diffxs_8TeV.Wjets.200058.mu.nominal.histograms.root" />
+  <file sample="WcNp3"          path="nominal/tt_diffxs_8TeV.Wjets.200059.mu.nominal.histograms.root" />
+  <file sample="WcNp4incl"      path="nominal/tt_diffxs_8TeV.Wjets.200060.mu.nominal.histograms.root" /> 
+  <file sample="WccNp0"         path="nominal/tt_diffxs_8TeV.Wjets.200156.mu.nominal.histograms.root" />
+  <file sample="WccNp1"         path="nominal/tt_diffxs_8TeV.Wjets.200157.mu.nominal.histograms.root" />
+  <file sample="WccNp2"         path="nominal/tt_diffxs_8TeV.Wjets.200158.mu.nominal.histograms.root" />
+  <file sample="WccNp3incl"     path="nominal/tt_diffxs_8TeV.Wjets.200159.mu.nominal.histograms.root" />
+  <file sample="WbbNp0"         path="nominal/tt_diffxs_8TeV.Wjets.200256.mu.nominal.histograms.root" />
+  <file sample="WbbNp1"         path="nominal/tt_diffxs_8TeV.Wjets.200257.mu.nominal.histograms.root" />
+  <file sample="WbbNp2"         path="nominal/tt_diffxs_8TeV.Wjets.200258.mu.nominal.histograms.root" />
+  <file sample="WbbNp3incl"     path="nominal/tt_diffxs_8TeV.Wjets.200259.mu.nominal.histograms.root" /> 
+</files>
+</document>
