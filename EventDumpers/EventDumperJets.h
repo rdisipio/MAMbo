@@ -15,10 +15,7 @@ class EventDumperJets : public IEventDumper< NTUPLE >
     {
        bool success = true;
 
-  size_t alljet_n = GET_VALUE( jet_n );
-    //size_t goodjet_n = 0;
-    //size_t bjet_n = 0;
-    //size_t ljet_n = 0;
+    size_t alljet_n = GET_VALUE( jet_n );
     ed->jets.n  = 0;
     ed->bjets.n = 0;
     ed->ljets.n = 0;
@@ -30,7 +27,8 @@ class EventDumperJets : public IEventDumper< NTUPLE >
         const double jet_phi  = GET_VALUE_ARRAY( jet_phi, j );
         const double jet_E    = GET_VALUE_ARRAY( jet_E, j );
 
-        if( jet_pT > 25 * GeV && ( fabs(jet_eta) < 2.5) ) {
+        if( jet_pT < 25 * GeV ) continue;
+        if( fabs(jet_eta) > 2.5 ) continue;
 
             ed->jets.n++;
 
@@ -55,7 +53,7 @@ class EventDumperJets : public IEventDumper< NTUPLE >
 
             const double mv1 = GET_VALUE_ARRAY(jet_MV1, j);
 
-            if( mv1 > 0.7892 ) {
+            if( mv1 > 0.7892 ) { // 70% eff w.p.
                 ed->bjets.n++;
 
                 ed->bjets.pT.push_back( jet_pT );
@@ -76,8 +74,6 @@ class EventDumperJets : public IEventDumper< NTUPLE >
                 ed->ljets.index.push_back( j );
                 ed->ljets.property["MV1"].push_back(mv1);
             }
-	}
-
     }
 
   // fat jet collection

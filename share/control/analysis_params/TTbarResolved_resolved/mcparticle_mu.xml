@@ -4,7 +4,7 @@
   <tree>particles</tree>
   <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolvedParticleLevel</cutflow>
-  <channel>electron</channel>
+  <channel>muon</channel>
   <parameters>
     <param name="pTmin"             type="numeric" value="20." />
     <param name="etaMax"            type="numeric" value="2.5" />
@@ -12,7 +12,5 @@
     <param name="isRealData"        type="flag"    value="0" />
     <param name="isWjets"      	    type="flag"    value="0" />
     <param name="isQCD"             type="flag"    value="0" />
-    <param name="mcfile"            type="string"  value="control/file_list/TTbarResolved_resolved/mc.DiTop.110404.mc_test.txt" />
-    <param name="treename_parton"   type="string"  value="partons"   />
   </parameters>
 </analysis>

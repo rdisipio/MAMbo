@@ -582,10 +582,10 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 
     // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
     if( m_config->channel == kElectron ) {
-       if( mwt < 30 * GeV) return !passed;
+       if( mwt <= 30 * GeV) return !passed;
     }
     else {
-       if( (mwt + ETmiss) < 60 * GeV ) return !passed;
+       if( (mwt + ETmiss) <= 60 * GeV ) return !passed;
     }
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
