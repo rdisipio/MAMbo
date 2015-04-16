@@ -9,10 +9,10 @@
   <sample name="WcNp4incl"         dsid="200060" sf="0.731" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="WcNp0"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200056.el.nominal.histograms.root" />
-  <file sample="WcNp1"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200057.el.nominal.histograms.root" />
-  <file sample="WcNp2"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200058.el.nominal.histograms.root" />
-  <file sample="WcNp3"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200059.el.nominal.histograms.root" />
-  <file sample="WcNp4incl"      path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200060.el.nominal.histograms.root" /> 
+  <file sample="WcNp0"          path="nominal/tt_diffxs_8TeV.Wjets.200056.el.nominal.histograms.root" />
+  <file sample="WcNp1"          path="nominal/tt_diffxs_8TeV.Wjets.200057.el.nominal.histograms.root" />
+  <file sample="WcNp2"          path="nominal/tt_diffxs_8TeV.Wjets.200058.el.nominal.histograms.root" />
+  <file sample="WcNp3"          path="nominal/tt_diffxs_8TeV.Wjets.200059.el.nominal.histograms.root" />
+  <file sample="WcNp4incl"      path="nominal/tt_diffxs_8TeV.Wjets.200060.el.nominal.histograms.root" /> 
 </files>
 </document>

@@ -12,13 +12,13 @@
   <sample name="WbbNp3incl"        dsid="200259" sf="1.500" xsec="13.633" kfact="1.1330" genevt="398397"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="WccNp0"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200156.el.nominal.histograms.root" />
-  <file sample="WccNp1"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200157.el.nominal.histograms.root" />
-  <file sample="WccNp2"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200158.el.nominal.histograms.root" />
-  <file sample="WccNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200159.el.nominal.histograms.root" />
-  <file sample="WbbNp0"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200256.el.nominal.histograms.root" />
-  <file sample="WbbNp1"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200257.el.nominal.histograms.root" />
-  <file sample="WbbNp2"         path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200258.el.nominal.histograms.root" />
-  <file sample="WbbNp3incl"     path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.Wjets.200259.el.nominal.histograms.root" /> 
+  <file sample="WccNp0"         path="nominal/tt_diffxs_8TeV.Wjets.200156.el.nominal.histograms.root" />
+  <file sample="WccNp1"         path="nominal/tt_diffxs_8TeV.Wjets.200157.el.nominal.histograms.root" />
+  <file sample="WccNp2"         path="nominal/tt_diffxs_8TeV.Wjets.200158.el.nominal.histograms.root" />
+  <file sample="WccNp3incl"     path="nominal/tt_diffxs_8TeV.Wjets.200159.el.nominal.histograms.root" />
+  <file sample="WbbNp0"         path="nominal/tt_diffxs_8TeV.Wjets.200256.el.nominal.histograms.root" />
+  <file sample="WbbNp1"         path="nominal/tt_diffxs_8TeV.Wjets.200257.el.nominal.histograms.root" />
+  <file sample="WbbNp2"         path="nominal/tt_diffxs_8TeV.Wjets.200258.el.nominal.histograms.root" />
+  <file sample="WbbNp3incl"     path="nominal/tt_diffxs_8TeV.Wjets.200259.el.nominal.histograms.root" /> 
 </files>
 </document>
