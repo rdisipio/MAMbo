@@ -166,7 +166,7 @@ class EventDumperMCTruthTopMiniSLResolved
 	  t.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
 	  HelperFunctions::DumpTruthParticleToEventData( t, pid, status, barcode, t_q, &ed->mctruth );	
 
-	  bool isHadronic = false;
+	  bool isHadronic = ntuple_partons->parton_topQuark_isHadronic[i];
           if( ntuple_partons->parton_topQuark_isHadronic[i] ) {
 		t1 = t;
           }

@@ -1348,6 +1348,12 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const 
         ilep = 0;
     }
     
+    /*
+      cout << "PARTON size   : " << ed->mctruth.property["isHadronic"].size() << endl;
+      cout << "PARTON isHad0 : " << ed->mctruth.property["isHadronic"].at(0) << endl;
+      cout << "PARTON ishad1 : " << ed->mctruth.property["isHadronic"].at(1) << endl;
+    */
+
     FillHistogramsPartonTop(ed->mctruth, ilep, "parton", "topL", weight);
     FillHistogramsPartonTop(ed->mctruth, ihad, "parton", "topH", weight);
     FillHistogramsPartonTop(ed->mctruth, itt, "parton", "tt", weight);   
