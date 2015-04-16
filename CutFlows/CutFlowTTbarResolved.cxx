@@ -304,6 +304,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     ed->property["weight_particle_level"] = weight_particle_level;
     ed->property["weight_reco_level"]     = weight_reco_level;
 
+    if( m_eventIds.count( ed->info.eventNumber ) == 0 ) {
+       m_eventIds.insert( ed->info.eventNumber );
+    }
+    else {
+       cout << "WARNING: duplicated event " << ed->info.eventNumber << endl;
+       return success;
+    }
+
 //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
 
     // Apply selections and fill control histograms (pt, eta, etc..)

@@ -1,6 +1,8 @@
 #ifndef __CF_TTbarResolved_H__
 #define __CF_TTbarResolved_H__
 
+#include <set>
+
 #include "TRandom3.h"
 
 #include "ICutFlow.h"
@@ -91,6 +93,7 @@ private:
     TRandom3 *m_rand; 
     std::map < string, double > m_VarField;
 
+    set< int > m_eventIds;
 };
 
 typedef CutFlowPluginFactory< CutFlowTTbarResolved > CutFlowPluginFactory_TTbarResolved;
