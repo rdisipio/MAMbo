@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="110407" xsec="99.291" kfact="1.1994" genevt="14922982" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_01"  dsid="110407" xsec="99.291" kfact="1.1994" genevt="14922982" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_02"  dsid="110407" xsec="99.291" kfact="1.1994" genevt="14922982" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_03"  dsid="110407" xsec="99.291" kfact="1.1994" genevt="14922982" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_03"  dsid="110407" xsec="99.291" kfact="1.1994" genevt="14922982" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_03"  dsid="110407" xsec="99.291" kfact="1.1994" genevt="14922982" generator="PowhegPythia_P2011C" simulation="AFII" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="nominal/tt_diffxs_8TeV.mc.DiTop.110407.mu.nominal.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="nominal/tt_diffxs_8TeV.mc.DiTop.110407.mu.nominal.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="nominal/tt_diffxs_8TeV.mc.DiTop.110407.mu.nominal.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="nominal/tt_diffxs_8TeV.mc.DiTop.110407.mu.nominal.histograms.root.03" />
+  <file sample="ttbar_nofullhad_03" path="nominal/tt_diffxs_8TeV.mc.DiTop.110407.mu.nominal.histograms.root.03" />
+  <file sample="ttbar_nofullhad_03" path="nominal/tt_diffxs_8TeV.mc.DiTop.110407.mu.nominal.histograms.root.03" />
+</files>
+</document>

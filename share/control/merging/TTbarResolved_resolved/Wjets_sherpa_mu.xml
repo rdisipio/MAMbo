@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="Wmunu"   dsid="147775" xsec="11867" kfact="1.0185" genevt="6.55995048214e+14" generator="Sherpa_MENLOPS" simulation="AFII" />
+  <sample name="Wtaunu"  dsid="147776" xsec="11858" kfact="1.0193" genevt="106830243456295.0" generator="Sherpa_MENLOPS" simulation="AFII" />
+</samples>
+<files>
+  <file sample="Wmunu"  path="nominal/tt_diffxs_8TeV.Wjets.147775.mu.nominal.histograms.root" />
+  <file sample="Wtaunu" path="nominal/tt_diffxs_8TeV.Wjets.147776.mu.nominal.histograms.root" />
+</files>
+</document>

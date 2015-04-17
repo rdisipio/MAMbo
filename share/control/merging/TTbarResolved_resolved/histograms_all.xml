@@ -27,7 +27,7 @@
   <histogram hpath="reco/cutflow/3j0b/ht" />
   <histogram hpath="reco/cutflow/3j0b/ht_2" />
   <histogram hpath="reco/cutflow/3j0b/meff_2" />
-  <histogram hpath="reco/cutflow/3j0b/flav_comp" /> 
+  <histogram hpath="reco/cutflow/3j0b/flav_comp" />  
 
 <!--  <histogram hpath="reco/cutflow/4j0b/mu_1" /> -->
   <histogram hpath="reco/cutflow/4j0b/pvxp_n" />

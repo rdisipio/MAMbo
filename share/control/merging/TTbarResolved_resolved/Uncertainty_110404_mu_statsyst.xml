@@ -143,13 +143,25 @@
     <syst name="mums_res" type="two_sided" >
         <shift side="single"   file="mums_res/tt_diffxs_8TeV.mc.DiTop.110404.mu.mums_res.histograms.root" />
     </syst>
+<!--
     <syst name="IFSR" type="two_sided" >
         <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.mu.radHi.histograms.root" />
         <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.mu.radLo.histograms.root" />
     </syst>
+-->
+<!--
+    <syst name="IFSR" type="one_sided" >
+       	<shift side="single" file="radLo/tt_diffxs_8TeV.mc.DiTop.110407.mu.radLo.histograms.root" />
+    </syst>
+    <syst name="PDF" type="two_sided" >
+        <shift side="up"   file="PDF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_up.histograms.root" />
+        <shift side="down" file="PDF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_down.histograms.root" />
+    </syst>
+-->
   </sample>
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root" />
-  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root" />
+<!--  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root" /> -->
+  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.Wjets.Sherpa.mu.nominal.histograms.root" /> 
   <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" />
   <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root" />
   <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root" />
