@@ -138,6 +138,7 @@ def ReadConfiguration( configFileName ):
       sample = node.attrib.get('sample')
 
       path = node.attrib.get('path')
+      if not path.startswith('/'): path = os.environ['MAMBOOUTPUTDIR'] + "/" + path
       input_files[sample] = TFile.Open( path )
 
    return plots_configuration, samples_configuration, input_files

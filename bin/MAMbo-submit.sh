@@ -30,7 +30,7 @@ else
    outdir=${MAMBOOUTPUTDIR}
 fi
 
-queue=T3_BO
+queue=1nh #CERN LXPLUS
 backend=lsf #options are: lsf pbs
 dryrun=0
 
@@ -100,11 +100,20 @@ echo job file: ${jobfile}
 cat > ${jobfile} <<EOF
 #!/bin/bash
 echo Running on \$HOSTNAME
-date
+echo Shell: $SHELL
+echo Timestamp: $(date)
+
+source ${HOME}/setup_mambo.sh
 
 cd ${WORKDIR}
 
+#source setenv.sh
 source MAMbo-setenv.sh
+
+echo GCC: 
+gcc --version
+echo ROOT: $(root-config --version)
+
 
 time runMAMbo -p $paramsfile -f $filelist -n $nevtmax -o $outdir/$outfilename
 

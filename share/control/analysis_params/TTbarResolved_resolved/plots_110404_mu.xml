@@ -150,13 +150,13 @@
   <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. unc."   	color="1"     fillstyle="3004" linewidth="2" /> 
 </samples>
 <inputfiles>
-  <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Muons.mu.histograms.root"    />
-  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.histograms.root"       />
-  <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root"   />
-  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root"       />
-  <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" 	/>
-  <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root"	/>
-  <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root"    />
-  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110404.mu.nominal.histograms.root" />
+  <file sample="data" 		path="nominal/tt_diffxs_8TeV.data.Muons.mu.histograms.root"    />
+  <file	sample="DiTop"		path="nominal/tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.histograms.root"       />
+  <file	sample="SingleTop" 	path="nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root"   />
+  <file	sample="Wjets" 		path="nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root"       />
+  <file sample="Zjets"          path="nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" 	/>
+  <file sample="Diboson"        path="nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root"	/>
+  <file sample="Fakes"          path="nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root"    />
+  <file	sample="uncertainty"	path="nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110404.mu.nominal.histograms.root" />
 </inputfiles>
 </document>

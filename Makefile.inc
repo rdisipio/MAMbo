@@ -7,7 +7,7 @@ endif
 
 CC = g++
 LD = g++
-CFLAGS       = -fPIC -std=c++11 -I$(MAMBODIR)
+CFLAGS      += -fPIC -std=c++11 -I$(MAMBODIR)
 DEBUGFLAGS   = -O0 -D_DEBUG_ -g
 RELEASEFLAGS = -O2 -D_RELEASE_
 

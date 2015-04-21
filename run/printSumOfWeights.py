@@ -14,7 +14,10 @@ sumw = 0.
 
 f = open( file_list )
 for filename in f.readlines():
-   filename = basedir + filename.strip()
+   filename = filename.strip()
+
+   if not filename.startswith("/"):
+      filename = basedir + filename
 
    file = TFile.Open( filename )
  
