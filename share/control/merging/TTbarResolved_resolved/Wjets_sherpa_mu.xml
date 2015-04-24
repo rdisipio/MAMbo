@@ -2,7 +2,7 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
-  <sample name="Wenu"    dsid="147774" xsec="11866" kfact="1.0186" genevt="1535966865672769.0" generator="Sherpa_MENLOPS" simulation="FS" /> 
+  <sample name="Wenu"    dsid="147774" xsec="11866" kfact="1.0186" genevt="1540011565836206.0" generator="Sherpa_MENLOPS" simulation="FS" /> 
   <sample name="Wmunu"   dsid="147775" xsec="11867" kfact="1.0185" genevt="6.55995048214e+14"  generator="Sherpa_MENLOPS" simulation="FS" />
   <sample name="Wtaunu"  dsid="147776" xsec="11858" kfact="1.0193" genevt="106830243456295.0"  generator="Sherpa_MENLOPS" simulation="FS" />
 </samples>

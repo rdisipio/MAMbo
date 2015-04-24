@@ -13,6 +13,7 @@ endif
 
 # specify special dependency here. The pattern is DEPS_[NTUPLE] = list of objects
 DEPS_TopMiniSLResolved := TopMiniSLResolvedParticles.o TopMiniSLResolvedPartons.o
+DEPS_TopMiniSLResolvedParticles := TopMiniSLResolvedPartons.o
 
 # do not change what follows unless you know what you're doing
 

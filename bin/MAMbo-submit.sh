@@ -2,6 +2,8 @@
 
 SUBMISSION_TIMESTAMP=$(date +"%Y%m%d%H%M%S")
 
+skipwn='-R "select[ (hname!='wn-205-04-13-02-b') && (hname!='wn-205-04-24-01-b') && (hname!='wn-205-04-22-01-b')]"'
+
 ######################
 
 function print_help {
@@ -30,7 +32,8 @@ else
    outdir=${MAMBOOUTPUTDIR}
 fi
 
-queue=1nh #CERN LXPLUS
+queue=T3_BO #Bologna cluster
+#queue=1nh #CERN LXPLUS
 backend=lsf #options are: lsf pbs
 dryrun=0
 
@@ -129,7 +132,7 @@ chmod +x $jobfile
 
 if [[ "${dryrun}" == "0" ]] 
 then
-  ${exe} -q $queue ${logopts} $logfile ${jobnameopts} $jobname $jobfile
+  ${exe} -q $queue ${logopts} $logfile ${jobnameopts} $jobname $jobfile ${skipwn}
 else
   echo "Dry run. See ${jobfile}"
 fi

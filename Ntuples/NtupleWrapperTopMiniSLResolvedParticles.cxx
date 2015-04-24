@@ -9,16 +9,27 @@ NtupleWrapperTopMiniSLResolvedParticles::NtupleWrapperTopMiniSLResolvedParticles
    m_dumper_mctruth->SetNtupleParticle( this->m_ntuple, false );
 
    unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
-   if( !isMCSignal ) return;
 
-   // open truth ntuples
-   const string mcfilename        = m_config.custom_params_string["mcfile"];
-   const string	treename_parton   = m_config.custom_params_string["treename_parton"];
+   if( isMCSignal ) {
+      // open truth ntuples
+      const string mcfilename        = m_config.custom_params_string["mcfile"];
+      const string treename_parton   = m_config.custom_params_string["treename_parton"];
 
-   cout << "INFO: MC tree read from " << mcfilename << endl;
+      cout << "INFO: MC tree read from " << mcfilename << endl;
 
-   m_partons = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() );
+      m_partons = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() );
+   }
+   else {
+      m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, "partons" );
+   }
 
+   if( !m_partons ) {
+     cout << "WARNING: no partons tree found in the file list" << endl;
+ 
+     return;
+   }
+
+   cout << "INFO: MC partons tree has " << m_partons->GetEntries() << " entries" << endl;
    m_ntuple_parton   = new TopMiniSLResolvedPartons( m_partons );
 
    if( !m_ntuple_parton )   throw std::runtime_error( "ERROR: NtupleWrapperTopMiniSLResolvedParticles: invalid partons ROOT tree." );
@@ -115,11 +126,13 @@ bool NtupleWrapperTopMiniSLResolvedParticles::MakeEventTruth( EventData * ed )
 
   //m_dumper_mctruth->GetEntryWithIndex( ed->info.runNumber, ed->info.eventNumber );
 //  m_ntuple_parton->fChain->GetEntryWithIndex( ed->info.runNumber, ed->info.eventNumber );
+
+  m_dumper_mctruth->GetEntryWithIndex( ed->info.runNumber, ed->info.eventNumber );
  
   m_dumper_mctruth->DumpEventLeptons( this->m_ntuple, ed );
   m_dumper_mctruth->DumpEventMET( this->m_ntuple, ed );
   m_dumper_mctruth->DumpEventJets( this->m_ntuple, ed );
-//  m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
+  m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
 
   return success;
 }

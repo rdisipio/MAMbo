@@ -4,7 +4,7 @@
 <samples>
   <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.histograms.root" />
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" />
-  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root" />
+  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.Sherpa.el.nominal.histograms.root" />
   <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" />
   <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root" />
   <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root" />

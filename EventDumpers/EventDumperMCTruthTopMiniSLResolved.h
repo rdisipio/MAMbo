@@ -149,9 +149,23 @@ class EventDumperMCTruthTopMiniSLResolved
     template< class T >
     bool DumpEventMCTruth( const T * ntuple_partons, EventData * ed )
     {
-       TLorentzVector t1, t2, ttbar;
+       int success = true;
 
-       for( int i = 0 ; i < ntuple_partons->parton_topQuark_n ; ++i ) {
+       int isDileptonic = -1;
+       int ntops = ntuple_partons->parton_topQuark_n;
+
+       if( ntops < 2 ) {
+          cout << "WARNING: event " << ntuple_partons->eventNumber << " has too few top quarks in the MC event record: " << ntops << endl;
+          ed->property["isDileptonic"] = isDileptonic;
+          return success;  
+       }
+
+       if( ntops > 2 ) cout << "WARNING: event " << ntuple_partons->eventNumber << " has too many top quarks in the MC event record: " << ntops << endl;
+
+       int nthad = 0;
+       TLorentzVector ttbar;
+
+       for( int i = 0 ; i < ntops ; ++i ) {
 	  const double t_pT  = ntuple_partons->parton_topQuark_pt[i];
 	  const double t_eta = ntuple_partons->parton_topQuark_eta[i];
 	  const double t_phi = ntuple_partons->parton_topQuark_phi[i];
@@ -167,17 +181,20 @@ class EventDumperMCTruthTopMiniSLResolved
 	  HelperFunctions::DumpTruthParticleToEventData( t, pid, status, barcode, t_q, &ed->mctruth );	
 
 	  bool isHadronic = ntuple_partons->parton_topQuark_isHadronic[i];
-          if( ntuple_partons->parton_topQuark_isHadronic[i] ) {
-		t1 = t;
-          }
-          else {
-	        t2 = t;
-          }
 	  ed->mctruth.property["isHadronic"].push_back( isHadronic );
 
+          if( i < 2 ) ttbar += t;
+
+          if( isHadronic ) nthad++;
+//          cout << "DEBUG: is hadronic: " << isHadronic << endl;
        }
-       ttbar = t1 + t2;
        HelperFunctions::DumpTruthParticleToEventData( ttbar, 166, 2, 0, 0, &ed->mctruth );
+
+       isDileptonic = ( nthad == 0 ) ? 1 : 0;
+       ed->property["isDileptonic"] = isDileptonic;
+//       cout << "DEBUG: isDileptonic: " << isDileptonic << endl;
+
+       return success;
     };
 };
 
