@@ -397,7 +397,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       }
       // makes sense only when passed reco:
       if (fillCorrections)
-      FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
+	FillHistogramsPseudotopResponseRecoToParton(ed, weight_reco_level);
     } 
     
     // nb: events could NOT pass the particle-level selection

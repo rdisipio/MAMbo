@@ -7,6 +7,7 @@ namespace PhysicsHelperFunctions {
 
   const double KinemEdge = 14e3*GeV; // 14 TeV should be a good limit enough;-)
 
+  const double mWPDG =  80.399*GeV;
 
   struct NuData {
     double v_pz = -KinemEdge, D = -KinemEdge, v_pz_truth = -KinemEdge;
@@ -30,13 +31,13 @@ namespace PhysicsHelperFunctions {
     void SetTarget( const PseudoTopTarget target = kReco );
     void SetChargedLepton( const LeptonFlavor channel = kElectron, const int index = 0 );
     void SetEventData( EventData * p_ed ) { m_p_ed = p_ed; };
-    int Run( );
+    int Run(bool Run7TevPseudotopAlgo = true);
     void MakeDummyPseudotops();
     double GetHt();
 
   protected:
     int MakeChargedLepton();
-    int MakeNeutrino(NuData &nudata, bool FitAlsoParticle = true, int option = 0, const double mW = 80.399*GeV );
+    int MakeNeutrino(NuData &nudata, bool FitAlsoParticle = true, int option = 0, const double mW = mWPDG );
 
   protected:
     PseudoTopTarget       m_target;

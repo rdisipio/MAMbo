@@ -48,9 +48,11 @@ namespace PhysicsHelperFunctions {
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   
-  int PseudoTopReconstruction::Run()
+  int PseudoTopReconstruction::Run(bool Run7TevPseudotopAlgo)
   {
 //    printf( "DEBUG: Running pseudotop reconstruction on event %i\n", m_p_ed->info.eventNumber );
+
+    // cout << "Run7TevPseudotopAlgo=" << Run7TevPseudotopAlgo << endl;
 
     MakeChargedLepton();
     
@@ -100,26 +102,79 @@ namespace PhysicsHelperFunctions {
 
     int Njets = ( m_target == kReco ) ? m_p_ed->jets.n : m_p_ed->truth_jets.n;
 
-    for( int j = 0 ; j < Njets ; ++j ) {
 
-      const int jindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(j) : m_p_ed->truth_jets.index.at(j);
+    if (Run7TevPseudotopAlgo) {
+      
+      //      cout << "  OK, running OLD Whad prescription!" << endl;
 
-      //      printf( "DEBUG:  hadW indicesL %i,  %i\n",  Wj1_index, Wj2_index );
-
-      if( jindex == bj1_index ) continue;
-      if( jindex == bj2_index )	continue;
-
+      for( int j = 0 ; j < Njets ; ++j ) {
+	const int jindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(j) : m_p_ed->truth_jets.index.at(j);
+	//      printf( "DEBUG:  hadW indicesL %i,  %i\n",  Wj1_index, Wj2_index );
+	if( jindex == bj1_index ) continue;
+	if( jindex == bj2_index )	continue;
 	if( Wj1_index == -1 ) {
 	  Wj1_index = jindex;
 	  continue;
 	}
-
 	if( Wj2_index == -1 ) {
 	  Wj2_index = jindex;
 	  break;
 	}
+      }
+      //      cout << "OLD Whad jet indices: " << Wj1_index  << "," << Wj2_index << endl;
+    } else {
+      // find jets forming hadronic W based on best W mass match:
+
+
+      //cout << " OK, running NEW Whad prescription!" << endl;
+
+      double bestwmass = 999.e9;
+
+      
+      for( int i = 0 ; i < Njets ; ++i ) {
+	const int iindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(i) : m_p_ed->truth_jets.index.at(i);
+	if( iindex == bj1_index ) continue;
+	if( iindex == bj2_index ) continue;
+
+	for( int j = 0 ; j < Njets ; ++j ) {
+	  const int jindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(j) : m_p_ed->truth_jets.index.at(j);
+
+	  if( jindex == bj1_index ) continue;
+	  if( jindex == bj2_index ) continue;
+	
+	  //cout << "   current Whad jet indices: " << iindex  << "," << jindex << endl;
+
+	  TLorentzVector Wj1 = ( m_target == kReco ) ?
+	    HelperFunctions::MakeFourMomentum( m_p_ed->jets, iindex ) :
+	    HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, iindex );
+	  TLorentzVector Wj2 = ( m_target == kReco ) ?
+	    HelperFunctions::MakeFourMomentum( m_p_ed->jets, jindex ) :
+	    HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, jindex );
+
+	  double wmass = (Wj1 + Wj2).M();
+	  /*	 
+		 cout << "     Wmass: PDG=" << mWPDG << " new=" << wmass << " OldBest=" << bestwmass 
+		 << " |deltaNew|=" << fabs(wmass - mWPDG) 
+		 << " |deltaOldBest|=" << fabs(bestwmass - mWPDG) 
+		 << endl;
+	  */
+	  if ( fabs(wmass - mWPDG) <  fabs(bestwmass - mWPDG)) {
+	    Wj1_index = iindex;
+	    Wj2_index = jindex;
+	    bestwmass = wmass;
+	    //cout << "       ===> OK, updated!" << endl;
+	  }
+	  
+	}
+      }
+      
+      //cout << "    NEW Whad jet indices: " << Wj1_index  << "," << Wj2_index << endl;
+
     }
 
+
+
+    
     //    printf( "  DEBUG: bjets = j%i, j%i ; hadW = j%i + j%i\n", bj1_index, bj2_index, Wj1_index, Wj2_index );
 
     TLorentzVector Wj1 = ( m_target == kReco ) ?
