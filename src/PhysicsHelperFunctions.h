@@ -5,7 +5,7 @@
 
 namespace PhysicsHelperFunctions {
 
-  const double KinemEdge = 14e3*GeV; // 14 TeV should be a good limit enough;-)
+  const double KinemEdge = 13.9e6;
 
   const double mWPDG =  80.399*GeV;
 
@@ -33,7 +33,7 @@ namespace PhysicsHelperFunctions {
     void SetEventData( EventData * p_ed ) { m_p_ed = p_ed; };
     int Run(bool Run7TevPseudotopAlgo = true);
     void MakeDummyPseudotops();
-    double GetHt();
+    double GetHt(), GetR_lb(), GetR_Wb_had(), GetR_Wb_lep();
 
   protected:
     int MakeChargedLepton();
@@ -53,7 +53,7 @@ namespace PhysicsHelperFunctions {
     TLorentzVector m_W_had;
     TLorentzVector m_top_had;
     TLorentzVector m_ttbar;
-    double         m_ht;
+    double         m_ht,m_R_lb,m_R_Wb_had,m_R_Wb_lep;
   };
 
   

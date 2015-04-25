@@ -65,7 +65,7 @@ namespace PhysicsHelperFunctions {
       v_pz_truth = nudata.v_pz_truth;
     }
     
-    m_ht=-KinemEdge;
+    m_ht=-1;
     
     m_W_lep = m_neutrino + m_lepton;
 
@@ -84,16 +84,19 @@ namespace PhysicsHelperFunctions {
     
     m_ht = m_neutrino.Pt()+m_lepton.Pt()+bj1.Pt()+bj2.Pt();
 
-    TLorentzVector bj_had;
+    TLorentzVector bj_had, bj_lep;
     if( dR1 < dR2 ) {
       m_top_lep = m_W_lep + bj1;
       bj_had    = bj2;
+      bj_lep	= bj1;
     }
     else {
       m_top_lep = m_W_lep + bj2;
       bj_had    = bj1;
+      bj_lep	= bj2;
     }
-
+  
+    
       
     int Wj1_index = -1;
     int Wj2_index = -1;
@@ -171,7 +174,7 @@ namespace PhysicsHelperFunctions {
       //cout << "    NEW Whad jet indices: " << Wj1_index  << "," << Wj2_index << endl;
 
     }
-
+     
 
 
     
@@ -183,12 +186,13 @@ namespace PhysicsHelperFunctions {
     TLorentzVector Wj2 = ( m_target == kReco ) ?
       HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj2_index ) :
       HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj2_index );
-           
-    m_ht += Wj1.Pt()+Wj2.Pt();
-    
+      
+    m_R_lb    = (Wj1.Pt()+Wj2.Pt())/(bj1.Pt()+bj2.Pt());       
+    m_ht     += Wj1.Pt()+Wj2.Pt();
     m_W_had   = Wj1 + Wj2;
+    m_R_Wb_had= m_W_had.Pt()/bj_had.Pt();
+    m_R_Wb_lep= m_W_lep.Pt()/bj_lep.Pt();
     m_top_had = bj_had + m_W_had;
-
     m_ttbar   = m_top_lep + m_top_had;
 
     const int top_lep_pid = ( m_p_ed->lepton.q > 0 ) ? 6 : -6;
@@ -351,15 +355,14 @@ namespace PhysicsHelperFunctions {
     nudata.v_pz = v_pz;
     nudata.D = delta;
 
-    if (m_target == kTruth ) {
+    if(m_target == kTruth ) {
       nudata.v_pz_truth = m_p_ed->MET_truth.etz;
       if(!FitAlsoParticle) {
-	// cout << "Setting neutrino's p_z using truth" << endl;
-	nudata.v_pz = m_p_ed->MET_truth.etz;
+	//cout << "Setting neutrino's p_z using truth" << endl;
 	m_neutrino.SetXYZM( m_p_ed->MET_truth.etx, m_p_ed->MET_truth.ety, m_p_ed->MET_truth.etz, 0. );
 	return status;
       } else {
-	// cout << "OK, will run MW also in particle mode..." << endl;
+	//cout << "OK, will run MW also in particle mode..." << endl;
       }
     } else {
       nudata.v_pz_truth = v_pz;
@@ -369,7 +372,7 @@ namespace PhysicsHelperFunctions {
     const double v_px = ( m_target == kReco ) ? v_pT * cos( m_p_ed->MET.phi ) : m_p_ed->MET_truth.etx;
     const double v_py = ( m_target == kReco ) ? v_pT * sin( m_p_ed->MET.phi ) : m_p_ed->MET_truth.ety;
 
-    // lepton already made at reco or particle levels:
+    // lepton already made by reco or particle levels:
     const double l_px = m_lepton.Px();
     const double l_py = m_lepton.Py();
     const double l_pz = m_lepton.Pz();
@@ -379,30 +382,29 @@ namespace PhysicsHelperFunctions {
     const double mdiff = 0.5 * ( mW*mW - l_m*l_m );
     const double pT_vl = v_px*l_px + v_py*l_py; // pT( v \cdot l )
 
-    const double a = l_E*l_E - l_pz*l_pz;                                            // dimension: GeV^2
-    const double b = -2. * l_pz * ( mdiff + pT_vl );                                 // dimension: GeV^3
+    const double a = l_E*l_E - l_pz*l_pz; // dimension: GeV^2
+    const double b = -2. * l_pz * ( mdiff + pT_vl ); // dimension : GeV^3
     const double c = v_pT*v_pT*l_E*l_E - mdiff*mdiff - pT_vl*pT_vl - 2.*mdiff*pT_vl; // dimension: GeV^4
   
-    delta = b*b - 4.*a*c;                                                            // dimesion: GeV^6
+    delta = b*b - 4.*a*c; // dimesion: GeV^6
     
     if( delta <= 0. ) {
       v_pz = -0.5*b/a;
       nudata.v_pz_1 = v_pz;
       nudata.v_pz_2 = v_pz;
       // hm...maybe try fixing top mass to PDG or make t,lep mass same as t,had mass?
-      // not now...besides, D<0 is of different frequency on particle and reco levels.
     } else {
       const double v_pz_1 = 0.5 * ( -b - sqrt(delta) ) / a;
       const double v_pz_2 = 0.5 * ( -b + sqrt(delta) ) / a;
       nudata.v_pz_1 = v_pz_1;
       nudata.v_pz_2 = v_pz_2;
       if (option == 1) {
-	// smaller
-	if (v_pz_1 < v_pz_2)
+	// more central:
+	if (fabs(v_pz_1) < fabs(v_pz_2))
 	  v_pz = v_pz_1;
       } else if (option == 2) {
-	// bigger:
-	if (v_pz_1 < v_pz_2)
+	// more forward:
+	if (fabs(v_pz_1) < fabs(v_pz_2))
 	  v_pz = v_pz_2;       
       } else {
 	// default, more central neutrino preferred:
@@ -580,5 +582,16 @@ namespace PhysicsHelperFunctions {
   {
       return m_ht;
   }
-  
+  double PseudoTopReconstruction::GetR_Wb_had()
+  {
+    return m_R_Wb_had;
+  }
+    double PseudoTopReconstruction::GetR_Wb_lep()
+  {
+    return m_R_Wb_lep;
+  }
+  double PseudoTopReconstruction::GetR_lb()
+  {
+    return m_R_lb;
+  }
 };

@@ -1,8 +1,6 @@
 #ifndef __CF_TTbarResolved_H__
 #define __CF_TTbarResolved_H__
 
-#include <set>
-
 #include "TRandom3.h"
 
 #include "ICutFlow.h"
@@ -59,12 +57,12 @@ class CutFlowTTbarResolved : public CutFlow
   void FillHistograms(string path, ControlPlotValues& values);
   void FillMatrix(string path, Particle& px, Particle& py, double weight);
   
-  void FillHistogramsTopPairs(string level, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, NuData nudata, const double weight);
+  void FillHistogramsTopPairs(string level, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, TLorentzVector &WL, TLorentzVector &WH, NuData nudata, const double weight);
 
   void FillHistogramsPartonTop(EventData::Truth_t& particle, int index, string level, string topType, const double weight);
   void FillHistogramsPartonTopPairs(EventData::Truth_t& particle, int indexL, int indexH, int indextt, string level, const double weight);
 
-  void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mlb = -1);
+  void FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight,const double mlb = -1);
   void FillHistogramsPseudoTopPairs(EventData::Reco_t& particle, int indexL, int indexH, int indextt, string level, NuData nudata, const double weight);
 
 
@@ -93,7 +91,6 @@ private:
     TRandom3 *m_rand; 
     std::map < string, double > m_VarField;
 
-    set< int > m_eventIds;
 };
 
 typedef CutFlowPluginFactory< CutFlowTTbarResolved > CutFlowPluginFactory_TTbarResolved;
