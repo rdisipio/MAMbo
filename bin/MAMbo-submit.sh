@@ -32,8 +32,9 @@ else
    outdir=${MAMBOOUTPUTDIR}
 fi
 
-queue=T3_BO #Bologna cluster
-#queue=1nh #CERN LXPLUS
+#queue=T3_BO #Bologna cluster
+queue=1nh #CERN LXPLUS
+[[ ${HOSTNAME} == *"cnaf.infn.it"* ]] && queue=T3_BO
 backend=lsf #options are: lsf pbs
 dryrun=0
 
@@ -132,7 +133,7 @@ chmod +x $jobfile
 
 if [[ "${dryrun}" == "0" ]] 
 then
-  ${exe} -q $queue ${logopts} $logfile ${jobnameopts} $jobname $jobfile ${skipwn}
+  ${exe} -q $queue ${logopts} $logfile ${jobnameopts} $jobname $jobfile #${skipwn}
 else
   echo "Dry run. See ${jobfile}"
 fi

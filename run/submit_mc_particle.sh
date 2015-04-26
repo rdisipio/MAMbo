@@ -4,6 +4,9 @@ analysis=tt_diffxs_8TeV
 outtag=TTbarResolved_resolved
 syst=particle
 
+queue=T3_BO
+[[ ${HOSTNAME} == *"cern.ch"* ]] && queue=1nh
+
 dsid=117050
 [ ! -z $1 ] && dsid=$1
 
@@ -24,7 +27,8 @@ do
          jobname=${tag}.${batchid}
        
 	 echo "Submitting ${jobname}"
-         MAMbo-submit.sh -p ${params} -f ${flist} -o ${outfile} -j ${jobname} # -q T3_BO_FAST
+
+         MAMbo-submit.sh -p ${params} -f ${flist} -o ${outfile} -j ${jobname} -q ${queue}
      done
 
      echo

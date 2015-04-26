@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_01"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_02"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_03"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_04"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_05"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_06"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_07"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_08"  dsid="110408" xsec="129.51" kfact="1.1994" genevt="14969485" generator="PowhegPythia_P2011C" simulation="AFII" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.04" />
+  <file sample="ttbar_nofullhad_05" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.05" />
+  <file sample="ttbar_nofullhad_06" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.06" />
+  <file sample="ttbar_nofullhad_07" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.07" />
+  <file sample="ttbar_nofullhad_08" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110408.@CHANNEL@.@SYST@.histograms.root.08" />
+</files>
+</document>
