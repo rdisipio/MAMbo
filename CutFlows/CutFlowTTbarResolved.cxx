@@ -1594,7 +1594,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
      
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_Pout",m_VarField.find("reco_Pout1")->second / GeV, m_VarField.find("parton_Pout1")->second / GeV, weight);
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_Pout",m_VarField.find("reco_Pout2")->second / GeV, m_VarField.find("parton_Pout2")->second / GeV, weight);
-     m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_z_ttbar",m_VarField.find("reco_z_ttbar1")->second, m_VarField.find("parton_z_ttbar2")->second, weight);
+     m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_z_ttbar",m_VarField.find("reco_z_ttbar1")->second, m_VarField.find("parton_z_ttbar1")->second, weight);
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_z_ttbar",m_VarField.find("reco_z_ttbar2")->second, m_VarField.find("parton_z_ttbar2")->second, weight);
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_Yboost",m_VarField.find("reco_Yboost")->second, m_VarField.find("parton_Yboost")->second, weight);
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_dPhi_ttbar",m_VarField.find("reco_dPhi")->second, m_VarField.find("parton_dPhi")->second, weight);
@@ -1682,7 +1682,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Pout",m_VarField.find("particle_Pout1")->second / GeV, m_VarField.find("parton_Pout1")->second / GeV, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Pout",m_VarField.find("particle_Pout2")->second / GeV, m_VarField.find("parton_Pout2")->second / GeV, weight);
-    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField.find("particle_z_ttbar1")->second, m_VarField.find("parton_z_ttbar2")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField.find("particle_z_ttbar1")->second, m_VarField.find("parton_z_ttbar1")->second, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField.find("particle_z_ttbar2")->second, m_VarField.find("parton_z_ttbar2")->second, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Yboost",m_VarField.find("particle_Yboost")->second, m_VarField.find("parton_Yboost")->second, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_dPhi_ttbar",m_VarField.find("particle_dPhi")->second, m_VarField.find("parton_dPhi")->second, weight);
