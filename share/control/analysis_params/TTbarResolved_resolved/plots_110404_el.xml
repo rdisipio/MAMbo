@@ -136,11 +136,14 @@
   <plot hpath="reco/4j2b/difference/topHCosThetaStar"    xtitle="Hadronic top cos #theta^{*}" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/TopCosOpeningAngle"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/Salam_ttbar"         xtitle="Salam #Delta_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi (t, #bar{t} )" ytitle="Events" scale="logx" /> 
-<!--
+  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi (t, #bar{t} )" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/HT_pseudo"           xtitle="H_{T}^{pseudo}"   ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/4j2b/difference/HT_ttbar"            xtitle="H_{T}^{t#bar{t}}" ytitle="Events / GeV" scale="linear" />
--->
+  <plot hpath="reco/4j2b/difference/R_Wb_had"            xtitle="R_{Wb}^{had}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wb_lep"  	      	 xtitle="R_{Wb}^{lep}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_lb_1"              xtitle="R_{lb}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/ptRatioWtopH"        xtitle="p_{T}^{W,had} / p_{T}^{t,had}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/ptRatioWtopL"     	 xtitle="p_{T}^{W,lep} / p_{T}^{t,lep}" ytitle="Events" scale="linear" />
 </plots>
 <samples>
   <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
@@ -156,8 +159,7 @@
   <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Egamma.el.histograms.root"    />
   <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.histograms.root"       />
   <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root"   />
-<!--  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root"       /> -->
-  <file sample="Wjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.Sherpa.el.nominal.histograms.root" />
+  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root"       />
   <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" 	/>
   <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root"	/>
   <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root"    />
