@@ -120,5 +120,11 @@
   <histogram hpath="reco/4j2b/difference/dPhi_ttbar" />
   <histogram hpath="reco/4j2b/difference/HT_ttbar" />
   <histogram hpath="reco/4j2b/difference/HT_pseudo" />
+  <histogram hpath="reco/4j2b/difference/R_Wb_had" />
+  <histogram hpath="reco/4j2b/difference/R_Wb_lep" />
+  <histogram hpath="reco/4j2b/difference/R_lb" />
+  <histogram hpath="reco/4j2b/difference/R_lb_1" /> <!-- fix this -->
+  <histogram hpath="reco/4j2b/difference/ptRatioWtopL" />
+  <histogram hpath="reco/4j2b/difference/ptRatioWtopH" />
 </histograms>
 
