@@ -175,6 +175,8 @@ class EventDumperMCTruthTopMiniSLResolved
 	  const int status  = ntuple_partons->parton_topQuark_status[i];
 	  const int barcode = 0;
 	  const float t_q   = ( pid >= 0 ) ? 1 : -1;
+ 
+          if( ntops > 2 ) cout << "t: bc=" << barcode << " pid=" << pid << " status=" << status << " pT=" << t_pT/GeV << endl;
 
           TLorentzVector t;
 	  t.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
@@ -183,7 +185,14 @@ class EventDumperMCTruthTopMiniSLResolved
 	  bool isHadronic = ntuple_partons->parton_topQuark_isHadronic[i];
 	  ed->mctruth.property["isHadronic"].push_back( isHadronic );
 
-          if( i < 2 ) ttbar += t;
+          if( ntops > 2 ) {
+//            if( status == 155 ) ttbar += t; // HERWIG
+//            if( status == 3 )   ttbar += t; // PYTHIA
+              if( status > 2 ) ttbar += t;
+          }
+          else {
+              ttbar += t;
+          }
 
           if( isHadronic ) nthad++;
 //          cout << "DEBUG: is hadronic: " << isHadronic << endl;

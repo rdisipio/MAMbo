@@ -80,12 +80,10 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
 
-  int isDileptonic = ed->property["isDileptonic"];
-
-//  cout << "DEBUG: isDileptonic = " << isDileptonic << endl;
-
-  if( isDileptonic < 0 ) cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
-  if( isDileptonic ) cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl;
+  //int isDileptonic = ed->property["isDileptonic"];
+  //cout << "DEBUG: isDileptonic = " << isDileptonic << endl;
+  //if( isDileptonic < 0 ) cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
+  //if( isDileptonic ) cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl;
  
   double weight_particle_level = 1.;
   // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
