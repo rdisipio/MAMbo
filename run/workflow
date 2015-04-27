@@ -63,6 +63,8 @@ do
 done
 #wait
 
+#./merge_wjets_sample.sh ${ch} ${syst}
+
 for njets in 3jincl 4jincl
 do
   MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/Wjets_${njets}_${ch}.xml -o ${outdir}/${syst}/${analysis}.mc.Wjets_${njets}.${ch}.${syst}.histograms.root #&
