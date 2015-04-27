@@ -160,7 +160,7 @@ class EventDumperMCTruthTopMiniSLResolved
           return success;  
        }
 
-       if( ntops > 2 ) cout << "WARNING: event " << ntuple_partons->eventNumber << " has too many top quarks in the MC event record: " << ntops << endl;
+  //     if( ntops > 2 ) cout << "WARNING: event " << ntuple_partons->eventNumber << " has too many top quarks in the MC event record: " << ntops << endl;
 
        int nthad = 0;
        TLorentzVector ttbar;
@@ -175,26 +175,33 @@ class EventDumperMCTruthTopMiniSLResolved
 	  const int status  = ntuple_partons->parton_topQuark_status[i];
 	  const int barcode = 0;
 	  const float t_q   = ( pid >= 0 ) ? 1 : -1;
- 
-          if( ntops > 2 ) cout << "t: bc=" << barcode << " pid=" << pid << " status=" << status << " pT=" << t_pT/GeV << endl;
+	  const int isHadronic = ntuple_partons->parton_topQuark_isHadronic[i];
+
+/* 
+          if( ntops > 2 ) {
+                cout << "DEBUG: event=" << ntuple_partons->eventNumber << " topq bc=" << barcode << " pid=" << pid 
+                     << " status=" << status << " pT=" << t_pT/GeV << " eta=" << t_eta << " m=" << t_m/GeV << " isHad=" << isHadronic << endl;
+          }
+*/
+
+          if( abs(pid) != 6 ) continue;
 
           TLorentzVector t;
 	  t.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
 	  HelperFunctions::DumpTruthParticleToEventData( t, pid, status, barcode, t_q, &ed->mctruth );	
 
-	  bool isHadronic = ntuple_partons->parton_topQuark_isHadronic[i];
 	  ed->mctruth.property["isHadronic"].push_back( isHadronic );
 
           if( ntops > 2 ) {
 //            if( status == 155 ) ttbar += t; // HERWIG
 //            if( status == 3 )   ttbar += t; // PYTHIA
-              if( status > 2 ) ttbar += t;
+              if( ( status > 2 ) && ( isHadronic >= 0 ) ) ttbar += t;
           }
           else {
               ttbar += t;
           }
 
-          if( isHadronic ) nthad++;
+          if( isHadronic == 1 ) nthad++;
 //          cout << "DEBUG: is hadronic: " << isHadronic << endl;
        }
        HelperFunctions::DumpTruthParticleToEventData( ttbar, 166, 2, 0, 0, &ed->mctruth );
