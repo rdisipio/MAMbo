@@ -29,4 +29,4 @@ for filename in files:
 
    f.Close()
 
-print "DSID:", dsid, "ch:", ch, " genevents:", ngen
+print "DSID:", dsid, "ch:", ch, " genevents: %i"% ngen
