@@ -2,7 +2,6 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_3jincl.xml" />
 <samples>
-<samples>
   <sample name="WenuNp0"           dsid="147025" sf="0.9696" xsec="8127.3" kfact="1.1330" genevt="28509246"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp1"           dsid="147026" sf="0.9696" xsec="1792.7" kfact="1.1330" genevt="47936004"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WenuNp2"           dsid="147027" sf="0.9696" xsec="542.18" kfact="1.1330" genevt="17495947"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
@@ -36,9 +35,9 @@
   <sample name="WbbNp3incl"        dsid="200259" sf="1.40693" xsec="13.633" kfact="1.1330" genevt="398397"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="WenuNp0"        path="nominal/tt_diffxs_8TeV.Wjets.147025.el.nominal.histograms.root" />" 
-  <file sample="WenuNp1"        path="nominal/tt_diffxs_8TeV.Wjets.147026.el.nominal.histograms.root" />"
-  <file sample="WenuNp2"        path="nominal/tt_diffxs_8TeV.Wjets.147027.el.nominal.histograms.root" />"
+  <file sample="WenuNp0"        path="nominal/tt_diffxs_8TeV.Wjets.147025.el.nominal.histograms.root" /> 
+  <file sample="WenuNp1"        path="nominal/tt_diffxs_8TeV.Wjets.147026.el.nominal.histograms.root" />
+  <file sample="WenuNp2"        path="nominal/tt_diffxs_8TeV.Wjets.147027.el.nominal.histograms.root" />
   <file sample="WenuNp3"        path="nominal/tt_diffxs_8TeV.Wjets.147028.el.nominal.histograms.root" />
   <file	sample="WenuNp4"        path="nominal/tt_diffxs_8TeV.Wjets.147029.el.nominal.histograms.root" />
   <file	sample="WenuNp5incl"    path="nominal/tt_diffxs_8TeV.Wjets.147030.el.nominal.histograms.root" />

@@ -35,9 +35,9 @@
   <sample name="WbbNp3incl"        dsid="200259" sf="1.592498" xsec="13.633" kfact="1.1330" genevt="398397"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
 </samples>
 <files>
-  <file sample="WenuNp0"        path="nominal/tt_diffxs_8TeV.Wjets.147025.mu.nominal.histograms.root" />"
-  <file sample="WenuNp1"        path="nominal/tt_diffxs_8TeV.Wjets.147026.mu.nominal.histograms.root" />"
-  <file sample="WenuNp2"        path="nominal/tt_diffxs_8TeV.Wjets.147027.mu.nominal.histograms.root" />"
+  <file sample="WenuNp0"        path="nominal/tt_diffxs_8TeV.Wjets.147025.mu.nominal.histograms.root" />
+  <file sample="WenuNp1"        path="nominal/tt_diffxs_8TeV.Wjets.147026.mu.nominal.histograms.root" />
+  <file sample="WenuNp2"        path="nominal/tt_diffxs_8TeV.Wjets.147027.mu.nominal.histograms.root" />
   <file sample="WenuNp3"        path="nominal/tt_diffxs_8TeV.Wjets.147028.mu.nominal.histograms.root" />
   <file	sample="WenuNp4"        path="nominal/tt_diffxs_8TeV.Wjets.147029.mu.nominal.histograms.root" />
   <file	sample="WenuNp5incl"    path="nominal/tt_diffxs_8TeV.Wjets.147030.mu.nominal.histograms.root" />
