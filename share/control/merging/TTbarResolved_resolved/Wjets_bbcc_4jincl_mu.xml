@@ -3,9 +3,9 @@
 <histograms file="control/merging/TTbarResolved_resolved/histograms_4jincl.xml" />
 <samples>
   <sample name="WccNp0"            dsid="200156" sf="1.483" xsec="149.39" kfact="1.1330" genevt="4299592"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WccNp1"	       	   dsid="200157" sf="1.483" xsec="143.90" kfact="1.1330" genevt="3987891"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WccNp2"	       	   dsid="200158" sf="1.483" xsec="84.227" kfact="1.1330" genevt="2394394"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
-  <sample name="WccNp3incl"	   dsid="200159" sf="1.483" xsec="44.277" kfact="1.1330" genevt="985295"	  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WccNp1"            dsid="200157" sf="1.483" xsec="143.90" kfact="1.1330" genevt="3987891"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WccNp2"            dsid="200158" sf="1.483" xsec="84.227" kfact="1.1330" genevt="2394394"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WccNp3incl"        dsid="200159" sf="1.483" xsec="44.277" kfact="1.1330" genevt="985295"          generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WbbNp0"            dsid="200256" sf="1.483" xsec="52.237" kfact="1.1330" genevt="1599997"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WbbNp1"            dsid="200257" sf="1.483" xsec="45.628" kfact="1.1330" genevt="1398396"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
   <sample name="WbbNp2"            dsid="200258" sf="1.483" xsec="23.955" kfact="1.1330" genevt="699398"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
