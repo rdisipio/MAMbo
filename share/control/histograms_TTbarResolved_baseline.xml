@@ -400,7 +400,7 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	<!-- Diagnostics -->
        <!-- 2(l_q) X 3(Nb=0,1,>=2) X 2(Nj=3,>=4) -->
        <Variable name="flav_comp" title="Flavor composition" folder="cutflow" >
-            <Bin id="0" nbins="12" xmin="0.5" xmax="12.5" />
+            <Bin id="0" nbins="18" xmin="0.5" xmax="18.5" />
        </Variable>
 
   </Variables>        

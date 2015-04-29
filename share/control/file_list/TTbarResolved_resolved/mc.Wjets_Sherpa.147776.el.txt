@@ -1,0 +1,10 @@
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25184457/user.mromano.5310470._000001.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25184457/user.mromano.5310470._000006.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25184457/user.mromano.5310470._000007.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25184457/user.mromano.5310470._000008.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25184457/user.mromano.5310470._000010.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25191984/user.mromano.5310470._000002.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25191984/user.mromano.5310470._000003.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25191984/user.mromano.5310470._000005.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25193239/user.mromano.5310470._000004.el.root
+user.mromano.147776.Sherpa_CT10_Wtaunu.e1434_s1499_s1504_r3658_r3549_p1575.at180_el.root.25203206/user.mromano.5310470._000009.el.root

@@ -141,7 +141,7 @@
   <plot hpath="reco/4j2b/difference/HT_ttbar"            xtitle="H_{T}^{t#bar{t}}" ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/4j2b/difference/R_Wb_had"            xtitle="R_{Wb}^{had}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/R_Wb_lep"  	      	 xtitle="R_{Wb}^{lep}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/R_lb_1"              xtitle="R_{lb}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_lb"                xtitle="R_{lb}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/ptRatioWtopH"        xtitle="p_{T}^{W,had} / p_{T}^{t,had}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/ptRatioWtopL"     	 xtitle="p_{T}^{W,lep} / p_{T}^{t,lep}" ytitle="Events" scale="linear" />
 </plots>
@@ -163,6 +163,6 @@
   <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" 	/>
   <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root"	/>
   <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root"    />
-  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110404.el.nominal.histograms.root" />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statonly.110404.el.nominal.histograms.root" />
 </inputfiles>
 </document>

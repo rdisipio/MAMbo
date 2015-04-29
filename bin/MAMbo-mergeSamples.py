@@ -175,7 +175,8 @@ def CreateMergedHistograms():
 #        print "INFO: merging histogram", hpath
 
         do_reweight = False if hname.endswith( "_unweight" ) else True
-        do_copy     = True if hname.find("cutflow") > -1 and hname.endswith("weighted") else False
+#        do_copy     = True if hname.find("cutflow") > -1 and hname.endswith("weighted") else False
+        do_copy     = True if hname.find("cutflow") > -1 else False
 
         hlist = GatherHistograms( hname, hpath )
 

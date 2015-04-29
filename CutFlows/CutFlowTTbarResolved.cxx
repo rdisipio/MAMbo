@@ -963,21 +963,28 @@ void CutFlowTTbarResolved::FillHistogramsDiagnostics( ControlPlotValues& values 
 
     string hpath = "reco/cutflow/3j0b/flav_comp";
 
+    static const int nj_min = 2;
+    static const int nb_min = 0;
     static const int nj_max = 4;
     static const int nb_max = 2;
 
+    static int kj = ( nj_max - nj_min + 1 );
+
     const int nb  = min( values.bjet_n, nb_max );
     const int nj  = min( values.jet_n,  nj_max );
-    const int lq  = ( values.lep_q > 0 ) ? 1 : 7;
+    const int lq  = ( values.lep_q > 0 ) ? 1 : 10;
 
    
-    // q  1 1  1 1  1 1 -1 -1  -1 -1  -1 -1 
-    // b  0 0  1 1  2 2  0  0   1  1   2  2
-    // j  3 4  3 4  3 4  3  4   3  4   3  4
-    // ------------------------------------
-    // i  1 2  3 4  5 6  7  8   9 10  11 12
+    // q  1 1 1 1 1 1 1 1 1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+    // j  2 2 2 3 3 3 4 4 4  2  2  2  3  3  3  4  4  4
+    // b  0 1 2 0 1 2 0 1 2  0  1  2  0  1  2  0  1  2
+    // -----------------------------------------------
+    // i  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
 
-    const int bin = lq + nb*nb_max + (nj-nj_max+1);
+    // q=1 nj=3 nb=1 -> i=5
+    // q=-1 nj=4 nb=0 -> i=16
+
+    const int bin = lq + ( nj - nj_min ) * kj + ( nb - nb_min ); 
 
 //    cout << "DEBUG: wjets diagnostics: l=" << values.lep_q << " nb=" << values.bjet_n << " nj=" << values.jet_n << " -> bin=" << bin << endl;
 

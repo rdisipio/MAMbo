@@ -54,34 +54,19 @@ echo
 for sample in SingleTop Zjets Diboson
 do
   ofile=${outdir}/${syst}/${analysis}.mc.${sample}.${ch}.${syst}.histograms.root
-  MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/${sample}_${ch}.xml -o ${ofile} #&
+  MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/${sample}_${ch}.xml -o ${ofile} &
   echo
   echo "//////////////////////////////////"
   echo
   bkgsamples="${bkgsamples} ${ofile}"
   expected="${expected} ${ofile}"
 done
-#wait
+wait
 
-#./merge_wjets_sample.sh ${ch} ${syst}
-
-for njets in 3jincl 4jincl
-do
-  MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/Wjets_${njets}_${ch}.xml -o ${outdir}/${syst}/${analysis}.mc.Wjets_${njets}.${ch}.${syst}.histograms.root #&
-
-  for flav in lf c bbcc
-  do
-     MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/Wjets_${flav}_${njets}_${ch}.xml -o ${outdir}/${syst}/${analysis}.mc.Wjets_${flav}_${njets}.${ch}.${syst}.histograms.root
-  done
-
-  echo
-  echo "//////////////////////////////////"
-  echo
-done
-#wait
+./merge_wjets_samples.sh ${ch} ${syst}
 
 ofile=${outdir}/${syst}/${analysis}.mc.Wjets.${ch}.${syst}.histograms.root
-hadd -f ${ofile} ${outdir}/${syst}/${analysis}.mc.Wjets_*.${ch}.${syst}.histograms.root
+#hadd -f ${ofile} ${outdir}/${syst}/${analysis}.mc.Wjets_*.${ch}.${syst}.histograms.root
 bkgsamples="${bkgsamples} ${ofile}"
 expected="${expected} ${ofile}"
 
@@ -89,8 +74,8 @@ echo
 echo "//////////////////////////////////"
 echo
 
-hadd -f ${outdir}/${syst}/${analysis}.mc.Background.${ch}.${syst}.histograms.root ${bkgsamples}
-hadd -f ${outdir}/${syst}/${analysis}.mc.Expected.${ch}.${syst}.histograms.root ${expected}
+hadd -f ${outdir}/${syst}/${analysis}.mc.Background.${ch}.${syst}.histograms.root ${bkgsamples} 
+hadd -f ${outdir}/${syst}/${analysis}.mc.Expected.${ch}.${syst}.histograms.root ${expected} 
 
 echo
 echo "//////////////////////////////////"

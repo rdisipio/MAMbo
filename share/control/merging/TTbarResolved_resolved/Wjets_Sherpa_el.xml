@@ -7,8 +7,8 @@
   <sample name="Wtaunu"  dsid="147776" xsec="11858" kfact="1.0193" genevt="106830243456295.0"  generator="Sherpa_MENLOPS" simulation="FS" />
 </samples>
 <files>
-  <file sample="Wenu"   path="nominal/tt_diffxs_8TeV.Wjets.147774.mu.nominal.histograms.root" />
-  <file sample="Wmunu"  path="nominal/tt_diffxs_8TeV.Wjets.147775.mu.nominal.histograms.root" />
-  <file sample="Wtaunu" path="nominal/tt_diffxs_8TeV.Wjets.147776.mu.nominal.histograms.root" />
+  <file sample="Wenu"   path="nominal/tt_diffxs_8TeV.Wjets_Sherpa.147774.el.nominal.histograms.root" />
+  <file sample="Wmunu"  path="nominal/tt_diffxs_8TeV.Wjets_Sherpa.147775.el.nominal.histograms.root" />
+  <file sample="Wtaunu" path="nominal/tt_diffxs_8TeV.Wjets_Sherpa.147776.el.nominal.histograms.root" />
 </files>
 </document>
