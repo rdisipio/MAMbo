@@ -299,7 +299,7 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
             <Bin id="1" nbins="100" xmin="-300." xmax="300." />
         </Variable>
         <Variable name="Chi_ttbar" title="#chi_{out};#chi_{out};" folder="4j2b" particle="difference" >
-            <Bin id="0" nbins="11" edges="0.0,1.0,1.4,1.9,2.5,3.2,4.2,5.5,7.2,9.3,12.,20." />
+            <Bin id="0" nbins="11" edges="1.0,1.4,1.9,2.5,3.2,4.2,5.5,7.2,9.3,12.,20." />
             <Bin id="1" nbins="100" xmin="0." xmax="20." />
         </Variable>
 	<Variable name="Yboost" title="y_{boost};y_{boost};" folder="4j2b" particle="difference" >

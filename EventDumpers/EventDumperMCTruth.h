@@ -66,7 +66,6 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
       TLorentzVector tquark;
       tquark.SetPtEtaPhiM( t_pT, t_eta, t_phi, t_m );
       HelperFunctions::DumpTruthParticleToEventData( tquark, pid, status, barcode, q, &ed->mctruth );
-
       const PhysicsHelperFunctions::TOP_QUARK_DECAY_CLASS topdecay =
         PhysicsHelperFunctions::ClassifyTopDecay( i, this->m_truth_ntuple->mc_child_index, this->m_truth_ntuple->mc_pdgId );
       const bool isHadronic = ( topdecay == PhysicsHelperFunctions::kTopDecayHadronic );

@@ -118,8 +118,12 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 
   m_pseudotop_particle->Run();
   m_VarField["particle_HT_pseudo"] = m_pseudotop_particle->GetHt();
+  m_VarField["particle_R_lb"] = m_pseudotop_particle->GetR_lb();
+  m_VarField["particle_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();
+  m_VarField["particle_R_Wb_lep"] = m_pseudotop_particle->GetR_Wb_lep();
   if (fillHistos) {
      FillHistogramsPseudotopParticle(ed, weight_particle_level);
+     FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
   }
 
   return success;
@@ -308,8 +312,9 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudoTop(EventData::Reco_
 }
 
 /////////////////////////////////////////
-void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string path, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, const double weight){
+void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLorentzVector &topL, TLorentzVector &topH, TLorentzVector &ttSystem, TLorentzVector &WL, TLorentzVector &WH, const double weight){
 
+  string path = level + "/4j2b/difference/";
    // Pout, two entries per event:
    TVector3 zUnit(0., 0., 1.);
    TVector3 top1 = topL.Vect();
@@ -317,12 +322,14 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string path, TLor
    if (top1.Mag() > 0.) {
      TVector3 perp = zUnit.Cross(top1);
      double pout = top2.Dot(perp) / perp.Mag();
+     m_VarField[level+"_Pout1"]=pout;
      m_hm->FillHistograms(path + "Pout", pout / GeV, weight);
      //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
    }
    if (top2.Mag() > 0.) {
      TVector3 perp = zUnit.Cross(top2);
     double pout = top1.Dot(perp) / perp.Mag();
+    m_VarField[level+"_Pout2"]=pout;
     m_hm->FillHistograms(path + "Pout", pout / GeV, weight);
     //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
    }
@@ -331,21 +338,34 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string path, TLor
    // z = pTop1 / pTop2
    if (topH.Pt() > 0.) {
      double z = topL.Pt() / topH.Pt();
+     m_VarField[level+"_z_ttbar1"]=z;
      m_hm->FillHistograms(path + "z_ttbar", z, weight);
    }
    if (topL.Pt() > 0.) {
      double z = topH.Pt() / topL.Pt();
+     m_VarField[level+"_z_ttbar2"]=z;
      m_hm->FillHistograms(path + "z_ttbar", z, weight);
    }
 
-   // TODO: top pT dPt as function of pT average
+   // top pT dPt as function of pT average:
+   m_hm->FillMatrices(path + "dTopPt_vs_AverTopPt", 0.5*(topH.Pt() + topL.Pt()) / GeV, (topH.Pt() - topL.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPt_vs_AverTopPt", 0.5*(topH.Pt() + topL.Pt()) / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPtLH_vs_AverTopPt", 0.5*(topH.Pt() + topL.Pt()) / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPtLH_vs_TopLPt", topL.Pt() / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   m_hm->FillMatrices(path + "dTopPtLH_vs_TopHPt", topH.Pt() / GeV, (topL.Pt() - topH.Pt()) / GeV, weight);
+   
+   m_VarField[level+"_topH_pt"]=topH.Pt() / GeV;
+   m_VarField[level+"_topL_pt"]=topL.Pt() / GeV;
+   
    // chi = exp |y1-y2|
    double chittbar = exp(TMath::Abs(topL.Rapidity() - topH.Rapidity()));
+   m_VarField[level+"_Chi_ttbar"]=chittbar;
    m_hm->FillHistograms(path + "Chi_ttbar", chittbar , weight);
    //  if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsChittbar", chittbar, ttSystem.Pt());
 
    // y_boost
    double yboost = 0.5*(TMath::Abs(topL.Rapidity() + topH.Rapidity()));
+   m_VarField[level+"_Yboost"]=yboost;
    m_hm->FillHistograms(path + "Yboost", yboost , weight);
    // if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsYboost", yboost, ttSystem.Pt());
 
@@ -380,18 +400,49 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string path, TLor
    double Delta1 = (3*pt1 - pt2) / HT;
    double Delta2 = (3*pt2 - pt1) / HT;
    double DeltaPhi = TMath::Abs(topL.DeltaPhi(topH));
-
+   m_VarField[level+"_Salam_ttbar1"]=Delta1;
+   m_VarField[level+"_Salam_ttbar2"]=Delta2;
+   m_VarField[level+"_dPhi"]=DeltaPhi;
+   m_VarField[level+"_HT_ttbar"]=HT;
+   
    m_hm->FillHistograms(path + "dPhi_ttbar", DeltaPhi, weight);
    // two entries per event:
    m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta1, weight);
    m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta2, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
-   m_hm->FillHistograms(path + "HT_ttbar", HT / GeV, weight);
-   if (path.find("particle") >= 0)
+   m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight);
+   if (level == "reco")
+     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("reco_HT_pseudo")->second / GeV, weight);
+   else if (level == "particle")
      m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
-
- }
+   
+   //px, py, pz
+   double pxL = pt1*cos(topL.Phi());
+   double pyL = pt1*sin(topL.Phi());
+   double pzL = pt1*sinh(topL.Eta());
+   double pxH = pt1*cos(topH.Phi());
+   double pyH = pt1*sin(topH.Phi());
+   double pzH = pt1*sinh(topH.Eta());
+   m_VarField[level+"_pxL"] = pxL;
+   m_VarField[level+"_pxH"] = pxH;
+   m_VarField[level+"_pyL"] = pyL;
+   m_VarField[level+"_pyH"] = pyH;
+   m_VarField[level+"_pzL"] = pzL;
+   m_VarField[level+"_pzH"] = pzH;
+   
+   //W gymnastics
+   if (level=="particle"){
+     m_VarField[level+"_ptRatioWtopL"] = WL.Pt()/topL.Pt();
+     m_VarField[level+"_ptRatioWtopH"] = WH.Pt()/topH.Pt();
+     m_hm->FillHistograms(path+"ptRatioWtopH",m_VarField.find("particle_ptRatioWtopH")->second, weight);
+     m_hm->FillHistograms(path+"ptRatioWtopL",m_VarField.find("particle_ptRatioWtopL")->second, weight);
+     m_hm->FillHistograms(path+"R_lb",m_VarField.find("particle_R_lb")->second, weight);
+     m_hm->FillHistograms(path+"mlb",m_VarField.find("particle_mlb")->second, weight);
+     m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find("particle_R_Wb_had")->second, weight);
+     m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find("particle_R_Wb_lep")->second, weight);
+  }
+}
 
 /////////////////////////////////////////
 
@@ -400,14 +451,16 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudoTopPairs(EventData::
   Particle ptopL(particle, indexL);
   Particle ptopH(particle, indexH);
   Particle pttSystem(particle, indextt);
+  Particle pWL(particle, indextt + 1);
+  Particle pWH(particle, indextt + 2);
 
   TLorentzVector topL = ptopL.MakeLorentz();
   TLorentzVector topH = ptopH.MakeLorentz();
   TLorentzVector ttSystem = pttSystem.MakeLorentz();
+  TLorentzVector WL = pWL.MakeLorentz();
+  TLorentzVector WH = pWH.MakeLorentz();
 
-  string path = level + "/4j2b/difference/";
-
-  FillHistogramsTopPairs(path, topL, topH, ttSystem, weight);
+  FillHistogramsTopPairs(level, topL, topH, ttSystem, WL, WH, weight);
 }
 
 /////////////////////////////////////////
@@ -431,9 +484,10 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPartonTopPairs(EventData::
   TLorentzVector topL = ptopL.MakeLorentz();
   TLorentzVector topH = ptopH.MakeLorentz();
   TLorentzVector ttSystem = pttSystem.MakeLorentz();
+  TLorentzVector WL;
+  TLorentzVector WH;
 
-  string path = level + "/4j2b/difference/";
-  FillHistogramsTopPairs(path, topL, topH, ttSystem, weight);
+  FillHistogramsTopPairs(level, topL, topH, WL, WH, ttSystem, weight);
 
 }
 
@@ -469,10 +523,10 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton( EventData
     int ilep, ihad;
     int itt = 2;
 
-    if (ed->mctruth.n <= 0) {
-      cerr << "THIS SHOULD NOT HAPPEN! mctruth size 0! In CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton" << endl;
-      return;
-    }
+//     if (ed->mctruth.n <= 0) {
+//       cerr << "THIS SHOULD NOT HAPPEN! mctruth size 0! In CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton" << endl;
+//       return;
+//     }
 
     const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
     if( isHadronic ) {
@@ -550,6 +604,40 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     FillMatrix("parton/4j2b/topL/Matrix_parton_particle", partonTopL, particleTopL, weight);
     FillMatrix("parton/4j2b/topH/Matrix_parton_particle", partonTopH, particleTopH, weight);
     FillMatrix("parton/4j2b/tt/Matrix_parton_particle", partonTT, particleTT, weight);
+    
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Pout",m_VarField.find("parton_Pout1")->second / GeV, m_VarField.find("particle_Pout1")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Pout",m_VarField.find("parton_Pout2")->second / GeV, m_VarField.find("particle_Pout2")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_z_ttbar",m_VarField.find("parton_z_ttbar1")->second, m_VarField.find("particle_z_ttbar1")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_z_ttbar",m_VarField.find("parton_z_ttbar2")->second, m_VarField.find("particle_z_ttbar2")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Yboost",m_VarField.find("parton_Yboost")->second ,m_VarField.find("particle_Yboost")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_dPhi_ttbar",m_VarField.find("parton_dPhi")->second, m_VarField.find("particle_dPhi")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_HT_ttbar",m_VarField.find("parton_HT_ttbar")->second / GeV, m_VarField.find("particle_HT_ttbar")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Chi_ttbar",m_VarField.find("parton_Chi_ttbar")->second, m_VarField.find("particle_Chi_ttbar")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Salam_ttbar",m_VarField.find("parton_Salam_ttbar1")->second, m_VarField.find("particle_Salam_ttbar1")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Salam_ttbar",m_VarField.find("parton_Salam_ttbar2")->second, m_VarField.find("particle_Salam_ttbar2")->second, weight);
+    m_hm->FillMatrices("parton/4j2b/topL/Matrix_parton_particle_px",m_VarField.find("parton_pxL")->second / GeV, m_VarField.find("particle_pxL")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/topH/Matrix_parton_particle_px",m_VarField.find("parton_pxH")->second / GeV, m_VarField.find("particle_pxH")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/topL/Matrix_parton_particle_py",m_VarField.find("parton_pyL")->second / GeV, m_VarField.find("particle_pyL")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/topH/Matrix_parton_particle_py",m_VarField.find("parton_pyH")->second / GeV, m_VarField.find("particle_pyH")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/topL/Matrix_parton_particle_pz",m_VarField.find("parton_pzL")->second / GeV, m_VarField.find("particle_pzL")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/topH/Matrix_parton_particle_pz",m_VarField.find("parton_pzH")->second / GeV, m_VarField.find("particle_pzH")->second / GeV, weight);    
+    
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Pout",m_VarField.find("particle_Pout1")->second / GeV, m_VarField.find("parton_Pout1")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Pout",m_VarField.find("particle_Pout2")->second / GeV, m_VarField.find("parton_Pout2")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField.find("particle_z_ttbar1")->second, m_VarField.find("parton_z_ttbar1")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField.find("particle_z_ttbar2")->second, m_VarField.find("parton_z_ttbar2")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Yboost",m_VarField.find("particle_Yboost")->second, m_VarField.find("parton_Yboost")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_dPhi_ttbar",m_VarField.find("particle_dPhi")->second, m_VarField.find("parton_dPhi")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_HT_ttbar",m_VarField.find("particle_HT_ttbar")->second / GeV, m_VarField.find("parton_HT_ttbar")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Chi_ttbar",m_VarField.find("particle_Chi_ttbar")->second, m_VarField.find("parton_Chi_ttbar")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Salam_ttbar",m_VarField.find("particle_Salam_ttbar1")->second, m_VarField.find("parton_Salam_ttbar1")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Salam_ttbar",m_VarField.find("particle_Salam_ttbar2")->second, m_VarField.find("parton_Salam_ttbar2")->second, weight);
+    m_hm->FillMatrices("particle/4j2b/topL/Matrix_particle_parton_px",m_VarField.find("particle_pxL")->second / GeV, m_VarField.find("parton_pxL")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/topH/Matrix_particle_parton_px",m_VarField.find("particle_pxH")->second / GeV, m_VarField.find("parton_pxH")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/topL/Matrix_particle_parton_py",m_VarField.find("particle_pyL")->second / GeV, m_VarField.find("parton_pyL")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/topH/Matrix_particle_parton_py",m_VarField.find("particle_pyH")->second / GeV, m_VarField.find("parton_pyH")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/topL/Matrix_particle_parton_pz",m_VarField.find("particle_pzL")->second / GeV, m_VarField.find("parton_pzL")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/topH/Matrix_particle_parton_pz",m_VarField.find("particle_pzH")->second / GeV, m_VarField.find("parton_pzH")->second / GeV, weight);
   }
 
 
