@@ -16,10 +16,9 @@ NtupleWrapperTopMiniSLResolvedParticles::NtupleWrapperTopMiniSLResolvedParticles
       const string treename_parton   = m_config.custom_params_string["treename_parton"];
 
       cout << "INFO: MC tree read from " << mcfilename << endl;
-
-//      m_partons = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() ); // this line is responsible for empty parton tree, flanked by next line 
-m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, "partons" );
-  }
+      // JK && JK      m_partons = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() ); // this line is responsible for empty parton tree, flanked by next line 
+      m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, "partons" );
+   }
    else {
       m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, "partons" );
    }

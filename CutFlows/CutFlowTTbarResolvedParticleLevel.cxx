@@ -523,10 +523,10 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton( EventData
     int ilep, ihad;
     int itt = 2;
 
-//     if (ed->mctruth.n <= 0) {
-//       cerr << "THIS SHOULD NOT HAPPEN! mctruth size 0! In CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton" << endl;
-//       return;
-//     }
+    if (ed->mctruth.n <= 0) {
+      cerr << "THIS SHOULD NOT HAPPEN! mctruth size 0! In CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton" << endl;
+      //      return;
+    }
 
     const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
     if( isHadronic ) {

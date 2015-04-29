@@ -338,6 +338,16 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     bool fillHistos = true;
     bool fillCorrections = true;
     bool splitSample =  m_config->custom_params_string.count("splitSample");
+
+    if (isMCSignal) {
+      if (ed->mctruth.n <= 0) {
+	cout << "ERROR: CutFlowTTbarResolved::FillHistogramsPseudotopParton event has too few top quarks in the MC event record!" << endl;
+	return success;
+      }
+    }
+
+
+
     if (isMCSignal and splitSample) {
       bool splitSampleInvert =  false;
       if (m_config->custom_params_string.count("splitSampleInvert"))
@@ -346,7 +356,13 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       fillHistos =   (m_rand -> Integer(2)); // this or not;)
       if (splitSampleInvert)
 	fillHistos = not fillHistos;
-      fillCorrections = not fillHistos;
+
+      //      fillCorrections = not fillHistos;
+      // we cannot simply fill EITHER corrections or histograms, as some variables needed fro corrections are COMPUTED and CACHED only in histograms filling!
+      // jk April 2015
+      // so we need to KEEP or SKIP:
+      if (not fillHistos)
+	return success;
     }
 
 
