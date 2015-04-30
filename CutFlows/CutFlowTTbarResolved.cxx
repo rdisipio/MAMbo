@@ -333,8 +333,12 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     // yup, this line really needs to be here:
     m_pseudotop_reco->SetEventData(ed);
 
-
-
+    //dileptonic filter
+//    int isDileptonic = ed->property["isDileptonic"];
+    //cout << "DEBUG: isDileptonic = " << isDileptonic << endl;
+//    if( isDileptonic < 0 ) { return 0; cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl; }
+//    if( isDileptonic == 1 ) { return 0; cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; }
+    
     bool fillHistos = true;
     bool fillCorrections = true;
     bool splitSample =  m_config->custom_params_string.count("splitSample");
