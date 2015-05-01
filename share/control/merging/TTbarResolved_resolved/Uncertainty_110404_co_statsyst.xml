@@ -151,10 +151,12 @@
     <syst name="jeff" type="one_sided" >
         <shift side="single" file="jeff/tt_diffxs_8TeV.mc.DiTop.110404.co.jeff.histograms.root" />
     </syst>
+<!--
     <syst name="IFSR" type="two_sided" >
         <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.co.radHi.histograms.root" />
         <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.co.radLo.histograms.root" />
     </syst>
+-->
   </sample>
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.co.nominal.histograms.root" />
   <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.co.nominal.histograms.root" />

@@ -967,16 +967,16 @@ void CutFlowTTbarResolved::FillHistogramsDiagnostics( ControlPlotValues& values 
 
     string hpath = "reco/cutflow/3j0b/flav_comp";
 
-    static const int nj_min = 2;
-    static const int nb_min = 0;
-    static const int nj_max = 4;
-    static const int nb_max = 2;
+    int nj_min = 2;
+    int nb_min = 0;
+    int nj_max = 4;
+    int nb_max = 2;
 
-    static int kj = ( nj_max - nj_min + 1 );
+    int kj = ( nj_max - nj_min + 1 );
 
-    const int nb  = min( values.bjet_n, nb_max );
-    const int nj  = min( values.jet_n,  nj_max );
-    const int lq  = ( values.lep_q > 0 ) ? 1 : 10;
+    int nb  = min( values.bjet_n, nb_max );
+    int nj  = min( values.jet_n,  nj_max );
+    int lq  = ( values.lep_q > 0 ) ? 1 : 10;
 
    
     // q  1 1 1 1 1 1 1 1 1 -1 -1 -1 -1 -1 -1 -1 -1 -1
@@ -988,14 +988,33 @@ void CutFlowTTbarResolved::FillHistogramsDiagnostics( ControlPlotValues& values 
     // q=1 nj=3 nb=1 -> i=5
     // q=-1 nj=4 nb=0 -> i=16
 
-    const int bin = lq + ( nj - nj_min ) * kj + ( nb - nb_min ); 
+    int bin = lq + ( nj - nj_min ) * kj + ( nb - nb_min ); 
 
 //    cout << "DEBUG: wjets diagnostics: l=" << values.lep_q << " nb=" << values.bjet_n << " nj=" << values.jet_n << " -> bin=" << bin << endl;
 
     ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( hpath );
-    if( !h ) throw runtime_error("CutFlowTTbarResolved::FillHistogramsDiagnostics(): Invalid path to histogram");
+    if( !h ) throw runtime_error("CutFlowTTbarResolved::FillHistogramsDiagnostics(): Invalid path to histogram flav_comp");
 
     h->Fill( bin, values.weight );
+
+    hpath = "reco/cutflow/3j0b/flav_comp_excl";
+    h = (ROOT_TH1_t*)m_hm->GetHistogram( hpath );
+    if( !h ) throw runtime_error("CutFlowTTbarResolved::FillHistogramsDiagnostics(): Invalid path to histogram flav_comp_excl");
+    nj_max = 5;
+    lq  = ( values.lep_q > 0 ) ? 1 : nj_max;
+    nj = min( values.jet_n, nj_max );
+    bin = lq + ( nj - nj_min );
+    h->Fill( bin, values.weight );
+
+    hpath = "reco/cutflow/3j0b/flav_comp_incl";
+    if( !h ) throw runtime_error("CutFlowTTbarResolved::FillHistogramsDiagnostics(): Invalid path to histogram flav_comp_incl");
+    h = (ROOT_TH1_t*)m_hm->GetHistogram( hpath );
+    for( int z = nj_min ; z <= nj_max ; ++z ) {
+       if( z > nj ) continue;
+
+       bin = lq + ( z - nj_min );
+       h->Fill( bin, values.weight );
+    }
 }
 
 void CutFlowTTbarResolved::FillHistograms(string path, ControlPlotValues& values ){

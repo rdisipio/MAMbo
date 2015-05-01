@@ -78,7 +78,7 @@ def Normalize( hw, i, N_CA, k=4 ):
 ######################################
 
 
-def Likelihood( histograms, params, N_DD ):
+def LogLikelihood( histograms, params, N_DD ):
    h = histograms['others'].Clone( "h" )
 
    hw = h.Clone("hw")
@@ -93,9 +93,9 @@ def Likelihood( histograms, params, N_DD ):
 
    h.Add( hw )
 
-   chi2 = histograms['data'].Chi2Test( h, "WW CHI2/NDF" )
+   chi2 = histograms['data'].Chi2Test( h, "WW CHI2" )
 
-   return chi2
+   return -log( chi2 )
 
 
 ######################################
@@ -143,23 +143,7 @@ for sample, h in histograms.iteritems():
       for b in [ 4, 5, 6, 13, 14, 15 ]:
          h.SetBinContent( b, 0 )
 
-histograms['data'].Print("all")
-
-
-dx = 0.7
-if len(sys.argv) > 3: dx = float( sys.argv[3] )
-
-step = 0.01
-
-range_lf   = np.arange( 1.0 - dx, 1.0 + dx, step )
-range_c    = np.arange( 1.0 - dx, 1.0 + dx, step )
-range_bbcc = np.arange( 1.0 - dx, 1.0 + dx, step )
-
-#range_lf   = np.arange( 0.6, 2.0, step )
-#range_c    = np.arange( 0.6, 2.0, step )
-#range_bbcc = np.arange( 0.6, 2.0, step )
-
-n_itr = len(range_lf) * len(range_c) * len(range_bbcc)
+#histograms['data'].Print("all")
 
 N_DD, CA = NormCA( histograms )
 print "INFO: N_DD = %i ; CA = %.3f" % ( N_DD, CA )
@@ -168,46 +152,29 @@ print "INFO: N_DD = %i ; CA = %.3f" % ( N_DD, CA )
 bestfit = []
 chi2_min = 1e20
 
-progress = ProgressBar( 0, n_itr, 77, mode='static', char="#" )
+#progress = ProgressBar( 0, n_itr, 77, mode='static', char="#" )
 
 print "INFO: Starting main loop"
-itr = 0 
-for k_lf in range_lf:
-   for k_c in range_c:
-      for k_bbcc in range_bbcc:
-
-          chi2 = Likelihood( histograms, [ k_lf, k_c, k_bbcc ], N_DD )
-
-          if chi2 < chi2_min:
-            chi2_min = chi2
-            bestfit  = [ k_lf, k_c, k_bbcc ]
-
-#          progress.increment_amount()
-#          print progress, "\r",
-          #time.sleep(0.05)
-          itr += 1
-
-print "INFO: Best fit:"
-print "INFO: X2/NDF = %.2f  CA=%.3f ;  k_l = %.3f  ;  k_c = %.3f  ;  k_bb = %.3f " % ( chi2_min, CA, bestfit[0], bestfit[1], bestfit[2] )          
-
-
 
 stepsizes = [ 0.01, 0.01, 0.01 ] # accuracy
 params = [ 1.0, 1.0, 1.0 ] # initial guess
 N_params = len( params )
 A = [ params ]
 accepted = 0.
-Nitr = 10000
+Nitr = 100000
 for n in range( Nitr ):
    old_params = A[-1]
-   old_logL  = log( Likelihood( histograms, old_params, N_DD ) )
+   old_logL  = LogLikelihood( histograms, old_params, N_DD ) 
 
    new_params = np.zeros( N_params )
 
    for k in range( N_params ):
-       new_params[k] = random.gauss( old_params[k], stepsizes[k] )
+       p = random.gauss( old_params[k], stepsizes[k] )
+       if p < 0.4: p = 0.4
+       if p > 1.6: p = 1.6
+       new_params[k] = p
 
-   new_logL = log( Likelihood( histograms, new_params, N_DD ) )
+   new_logL = LogLikelihood( histograms, new_params, N_DD )
    
    if new_logL > old_logL:
       A.append( new_params )
@@ -224,4 +191,4 @@ for n in range( Nitr ):
          chi2_min = exp( old_logL )
 
 print "INFO: acceptance rate:", accepted/float(Nitr) 
-print "INFO: Markov chain best-fit chi2 = %.2  scale factors: [ %.3f, %.3f, %.3f ]" % ( chi2_min, A[-1][0], A[-1][1], A[-1][2] )
+print "INFO: Markov chain best-fit chi2 = %.2f  scale factors: [ %.3f, %.3f, %.3f ]" % ( exp(chi2_min), A[-1][0], A[-1][1], A[-1][2] )

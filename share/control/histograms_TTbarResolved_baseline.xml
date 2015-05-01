@@ -398,10 +398,19 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	</Variable> 
 
 	<!-- Diagnostics -->
-       <!-- 2(l_q) X 3(Nb=0,1,>=2) X 2(Nj=3,>=4) -->
-       <Variable name="flav_comp" title="Flavor composition" folder="cutflow" >
+       <!-- 2(l_q) X 3(Nj=2,3,>=4) X 2(Nb=0,1,>=2) -->
+       <Variable name="flav_comp" title="Flavor composition (excl)" folder="cutflow" >
             <Bin id="0" nbins="18" xmin="0.5" xmax="18.5" />
        </Variable>
+       <Variable name="flav_comp_incl" title="Flavor composition (incl)" folder="cutflow" >
+            <!-- 2(l_q) X 3(Nj>=2,>=3,>=4,>=5)   -->
+            <Bin id="0" nbins="8" xmin="0.5" xmax="8.5" />
+       </Variable>
+       <Variable name="flav_comp_excl" title="Flavor composition (excl)" folder="cutflow" >
+       	    <!-- 2(l_q) X 3(Nj==2,==3,==4,>=5)   -->
+            <Bin id="0" nbins="8" xmin="0.5" xmax="8.5" />
+       </Variable>       
+
 
   </Variables>        
 
@@ -544,7 +553,9 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	<TH1F variable="HT_pseudo" binId="0"/>
 
         <!-- diagnostics -->
-        <TH1F variable="flav_comp" binId="0"/>
+        <TH1F variable="flav_comp"      binId="0"/>
+        <TH1F variable="flav_comp_excl" binId="0"/>
+        <TH1F variable="flav_comp_incl" binId="0"/>
 
     </Histos>    
     

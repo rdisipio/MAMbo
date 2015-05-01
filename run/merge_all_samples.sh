@@ -22,28 +22,30 @@ do
    # BTAGSF etc..
    for syst in $(cat $listfile_sf)
    do
-      ./merge_signal_sample.sh ${dsid} ${syst}
+      ./merge_signal_sample.sh ${dsid} ${syst} &
 
       echo
       echo "//////////////////////////////////"
       echo
    done # syst
+   wait
 
    # eer ees musc JES etc..
    for syst in $(cat $listfile_el $listfile_mu $listfile_kin)
    do
       for var in up down
       do
-         ./merge_signal_sample.sh ${dsid} ${syst}_${var}
+         ./merge_signal_sample.sh ${dsid} ${syst}_${var} &
    
          echo
          echo "//////////////////////////////////"
          echo
       done #var
+      wait
    done # syst
 
-   ./merge_signal_sample.sh ${dsid} muid_res
-   ./merge_signal_sample.sh ${dsid} mums_res
-   ./merge_signal_sample.sh ${dsid} jeff
-
+   ./merge_signal_sample.sh ${dsid} muid_res &
+   ./merge_signal_sample.sh ${dsid} mums_res &
+   ./merge_signal_sample.sh ${dsid} jeff &
+   wait
 done # sample
