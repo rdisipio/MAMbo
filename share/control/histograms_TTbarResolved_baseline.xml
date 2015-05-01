@@ -109,7 +109,7 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	    <Bin id="1" nbins="50" xmin="-2.5" xmax="2.5" particle="WH"/>
         </Variable>
         <Variable name="mlb" title="Reco (b,l) invariant mass [GeV]" folder="4j2b" >
-            <Bin nbins="50" xmin="0." xmax="300." />
+            <Bin id="0" nbins="50" xmin="0." xmax="300." />
         </Variable>
         <Variable name="mu" title="Avg. no. of interactions per b.c." folder="cutflow">
             <Bin id="0" nbins="10" xmin="-0.5" xmax="49.5" />
@@ -507,11 +507,16 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
         <TH1F variable="delta_rapidity" binId="0"/>
         <TH1F variable="delta_phi" binId="0"/>
         <TH1F variable="delta_m" binId="0"/>
+        <TH1F variable="R_lb" binId="0"/>
 	<TH1F variable="R_lb" binId="1"/>
 	<TH1F variable="R_Wb_had" binId="1"/>
+        <TH1F variable="R_Wb_had" binId="0"/>
 	<TH1F variable="R_Wb_lep" binId="1"/>
-	<TH1F variable="ptRatioWtopL" binId="1"/>
-	<TH1F variable="ptRatioWtopH" binId="1"/>
+        <TH1F variable="R_Wb_lep" binId="0"/>
+	<TH1F variable="ptRatioWtopL" binId="0"/>
+        <TH1F variable="ptRatioWtopL" binId="1"/>
+        <TH1F variable="ptRatioWtopH" binId="0"/>
+        <TH1F variable="ptRatioWtopH" binId="1"/>
 
         <Matrix variable="pt" binId="0"/>
         <Matrix variable="eta" binId="0"/>
@@ -532,12 +537,18 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	<Matrix variable="px" binId="1"/>
 	<Matrix variable="py" binId="1"/>
 	<Matrix variable="pz" binId="1"/>
-	<Matrix variable="ptRatioWtopL" binId="1"/>
-	<Matrix variable="ptRatioWtopH" binId="2"/>
-	<Matrix variable="mlb" binId="1"/>
+	<Matrix variable="ptRatioWtopL" binId="0"/>
+        <Matrix variable="ptRatioWtopL" binId="1"/>
+        <Matrix variable="ptRatioWtopH" binId="0"/>
+	<Matrix variable="ptRatioWtopH" binId="1"/>
+	<Matrix variable="mlb" binId="0"/>
+        <Matrix variable="R_lb" binId="0"/>
 	<Matrix variable="R_lb" binId="1"/>
+        <Matrix variable="R_Wb_had" binId="0"/>
 	<Matrix variable="R_Wb_had" binId="1"/>
+        <Matrix variable="R_Wb_lep" binId="0"/>
 	<Matrix variable="R_Wb_lep" binId="1"/>
+        
 
 
  	<!-- top pair distributions -->
