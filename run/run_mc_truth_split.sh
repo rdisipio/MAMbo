@@ -1,5 +1,8 @@
 #!/bin/bash
 
+tag=_incl
+
+
 for ll in el mu ; do
 
   ./clean.sh
@@ -12,8 +15,8 @@ for ll in el mu ; do
     # echo " $base"
     # make the config:
 
-    cfg=control/mcparticles_${ll}_JK.xml
-    echo "runMAMbo -p ${cfg} -f lists/${mclist} -o histograms_PowHeg_${ll}_particle_${base}.root >& log_ptcl_${ll}_${base}.txt &"
+    cfg=control/analysis_params/TTbarResolved_resolved/mcparticles_${ll}_JK.xml
+    echo "runMAMbo -p ${cfg} -f lists/${mclist} -o histograms_PowHeg_${ll}_particle_${base}${tag}.root >& log_ptcl_${ll}_${base}${tag}.txt &"
 
 
   done

@@ -46,7 +46,11 @@ CutFlowTTbarResolved::~CutFlowTTbarResolved() {
 bool CutFlowTTbarResolved::Initialize() {
     bool success = true;
 
-//    int isMCSignal = (int) m_config->custom_params["isMCSignal"];
+    // just for info purposes here:
+    int isMCSignal = (int) m_config->custom_params_flag["isMCSignal"];
+    int isDilepton = (int) m_config->custom_params_flag["isDilepton"];
+    cout << "INFO: signal flags: " << " isMCSignal=" << isMCSignal << " isDilepton=" << isDilepton << endl;
+
     unsigned long isRealData = m_config->custom_params_flag["isRealData"];
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
@@ -194,6 +198,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     CutFlow::Start();
 
     const unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
+    const unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
     const unsigned long isRealData = m_config->custom_params_flag["isRealData"];
     const unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     const unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
@@ -314,7 +319,32 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     }
 #endif
 
-//    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
+
+    // dileptonic filter
+    // flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
+    int EventIsDileptonic = ed->property["isDileptonic"];
+    //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
+
+    /*
+
+    if (isMCSignal) {
+      if ( EventIsDileptonic < 0 ) {
+	cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
+	return 0; 
+      }
+      if (not isDilepton and EventIsDileptonic == 1) { 
+	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
+	return 0; 
+      }
+      if (isDilepton and EventIsDileptonic != 1) { 
+	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
+	return 0; 
+      }
+    }
+
+    */
+
+    //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
 
     // Apply selections and fill control histograms (pt, eta, etc..)
     const bool passedRecoSelection     = PassedCutFlowReco( ed );
@@ -333,12 +363,6 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     // yup, this line really needs to be here:
     m_pseudotop_reco->SetEventData(ed);
 
-    //dileptonic filter
-//    int isDileptonic = ed->property["isDileptonic"];
-    //cout << "DEBUG: isDileptonic = " << isDileptonic << endl;
-//    if( isDileptonic < 0 ) { return 0; cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl; }
-//    if( isDileptonic == 1 ) { return 0; cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; }
-    
     bool fillHistos = true;
     bool fillCorrections = true;
     bool splitSample =  m_config->custom_params_string.count("splitSample");
@@ -406,7 +430,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       m_pseudotop_reco->MakeDummyPseudotops();
     }
 
-    if( !isMCSignal)
+    if( !isMCSignal or isDilepton)
       return success;
 
     // there is always a parton-level top

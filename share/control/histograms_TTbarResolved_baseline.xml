@@ -380,9 +380,11 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	    <Bin id="1" nbins="100" xmin="-1000." xmax="1000." particle="topH"/>
 	</Variable>
 	<Variable name="ptRatioWtopL" title="p_{T}^{W,lep}/p_{T}^{t,lep}" folder="4j2b">
+	    <Bin id="0" nbins="12" edges="0,0.1,0.2,0.3,0.4,0.6,0.8,1,1.3,1.7,2.3,3.1,5"/> 
 	    <Bin id="1" nbins="100" xmin="0" xmax="5" particle="difference"/>
 	</Variable>
 	<Variable name="ptRatioWtopH" title="p_{T}^{W,had}/p_{T}^{t,had}" folder="4j2b">
+	    <Bin id="0" nbins="12" edges="0,0.1,0.2,0.3,0.4,0.6,0.8,1,1.3,1.7,2.3,3.1,5"/>
 	    <Bin id="1" nbins="100" xmin="0" xmax="5" particle="difference"/>
 	</Variable>	
 	<Variable name="R_Wb_had" title="p_{T}^{W,had}/p_{T}^{b,had}" folder="4j2b">
@@ -390,6 +392,7 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
 	    <Bin id="1" nbins="100" xmin="0" xmax="5" particle="difference"/>
 	</Variable>
 	<Variable name="R_Wb_lep" title="p_{T}^{W,lep}/p_{T}^{b,lep}">
+   	    <Bin id="0" nbins="12" edges="0,0.1,0.2,0.3,0.4,0.6,0.8,1,1.3,1.7,2.3,3.1,5"/>
 	    <Bin id="1" nbins="100" xmin="0" xmax="5" particle="difference"/>
 	</Variable>
 	<Variable name="R_lb" title="(p_{T}^{lj1}+p_{T}^{lj2})/(p_{T}^{bj1}+p_{T}^{bj2})">

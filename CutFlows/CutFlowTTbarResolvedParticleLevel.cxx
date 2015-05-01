@@ -79,11 +79,30 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   CutFlow::Start();
 
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
+  unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
 
-//  int isDileptonic = ed->property["isDileptonic"];
-  //cout << "DEBUG: isDileptonic = " << isDileptonic << endl;
-//  if( isDileptonic < 0 ){return 0; cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;}
-//  if( isDileptonic == 1 ){return 0; cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl;}
+  // dileptonic filter
+  // flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
+  int EventIsDileptonic = ed->property["isDileptonic"];
+  //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
+
+  /*
+    if (isMCSignal) {
+      if ( EventIsDileptonic < 0 ) {
+	cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
+	return 0; 
+      }
+      if (not isDilepton and EventIsDileptonic == 1) { 
+	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
+	return 0; 
+      }
+      if (isDilepton and EventIsDileptonic != 1) { 
+	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
+	return 0; 
+      }
+    }
+  */
+
   
   double weight_particle_level = 1.;
   // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
@@ -108,6 +127,7 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   if( !passedParticleSelection ) return success;
 
   m_pseudotop_particle->SetEventData(ed);
+
   m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
   m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
 
@@ -411,12 +431,15 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLo
    m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta2, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
-   m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight);
-   if (level == "reco")
+   if (level == "reco") {
      m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("reco_HT_pseudo")->second / GeV, weight);
-   else if (level == "particle")
+     m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight); 
+   } else if (level == "particle") {
      m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
-   
+     m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("particle_HT_ttbar")->second / GeV, weight); 
+   }
+
+
    //px, py, pz
    double pxL = pt1*cos(topL.Phi());
    double pyL = pt1*sin(topL.Phi());

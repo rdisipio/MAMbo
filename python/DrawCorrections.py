@@ -179,7 +179,7 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
         next_tmp(xmin, xmax, title)
     corr.Draw('P')
     _corrs.append(corr)
-    #can.Print('eps/' + canname + '.eps')
+    can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
     can.Print('pdf/' + canname + '.pdf')
 
@@ -193,9 +193,19 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 #ljets = [ 'mu' ]
 ljets = [ 'll' ]
 
-ptag='_fixed_new'
-ftag='_fixed_new'
+#ptag=''
+#ftag=''
+
+ptag='_incl'
+ftag='_incl'
+
+
+#ptag='_fixed_new'
+#ftag='_fixed_new'
 rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/'
+#rpath='/home/qitek/qitek/public/MCsigHalves/OldWhad/'
+#rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
+#rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
 
 os.system('mkdir png eps pdf')
 
