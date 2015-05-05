@@ -433,11 +433,6 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLo
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
    m_hm->FillHistograms(path + "HT_ttbar",HT / GeV, weight);
   
-   if (level == "particle") {
-     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
-   }
-
-
    //px, py, pz
    double pxL = pt1*cos(topL.Phi());
    double pyL = pt1*sin(topL.Phi());
@@ -462,6 +457,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLo
      m_hm->FillHistograms(path+"mlb",m_VarField.find(level + "_mlb")->second, weight);
      m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find(level + "_R_Wb_had")->second, weight);
      m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find(level + "_R_Wb_lep")->second, weight);
+     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find(level + "_HT_pseudo")->second / GeV, weight);
    }
 }
 

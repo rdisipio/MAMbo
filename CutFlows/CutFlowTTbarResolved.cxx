@@ -506,32 +506,39 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 	// JK:
 	bool passedDRMatching = m_pseudotop_matching_reco2particle->DoObjectsMatching(0); // 0 = no debug
+	
 
+	    
 	if (fillCorrections) {
 
 	  // fill reco && particle for the denumerator of the f_'missassign' and numerator for f_{r!p} (acceptance)
 	  // this is WITHOUT the matching condition!
 	  FillHistogramsPseudotopReco(ed, weight_reco_level, "reco_and_particle_r"); // YES, with reco weight! _r as binned in reco
-
+  
 	  // fill response matrix:
 	  // NEW: added here the matching condition!!! JK 3.12.2014
-
+	    m_VarField["reco_and_particle_r_HT_pseudo"] = m_pseudotop_reco->GetHt();
+	    m_VarField["reco_and_particle_r_R_lb"] = m_pseudotop_reco->GetR_lb();
+	    m_VarField["reco_and_particle_r_R_Wb_had"] = m_pseudotop_reco->GetR_Wb_had();
+	    m_VarField["reco_and_particle_r_R_Wb_lep"] = m_pseudotop_reco->GetR_Wb_lep();
+	    
 	  if (passedDRMatching) {
+	    m_VarField["matched_r_HT_pseudo"] = m_pseudotop_reco->GetHt();
+	    m_VarField["matched_r_R_lb"] = m_pseudotop_reco->GetR_lb();
+	    m_VarField["matched_r_R_Wb_had"] = m_pseudotop_reco->GetR_Wb_had();
+	    m_VarField["matched_r_R_Wb_lep"] = m_pseudotop_reco->GetR_Wb_lep();
+
+	    m_VarField["matched_p_HT_pseudo"] = m_pseudotop_particle->GetHt();
+	    m_VarField["matched_p_R_lb"] = m_pseudotop_particle->GetR_lb();
+	    m_VarField["matched_p_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();
+	    m_VarField["matched_p_R_Wb_lep"] = m_pseudotop_particle->GetR_Wb_lep();
 	    // N.B.: migration matrices for unfolding filled only when also the matching passed!!!
 	    FillHistogramsPseudotopResponseRecoToParticle(ed, weight_reco_level); 
 	    FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
 	    //  fill numerator for the matching eff (f_'missassign')
 	    // reco && particle && matched:
 	    FillHistogramsPseudotopReco(ed, weight_reco_level, "matched_r"); // YES, binned in reco, and with reco weight! _r as binned in reco
-	    m_VarField["matched_r_HT_pseudo"] = m_pseudotop_reco->GetHt();
-	    m_VarField["matched_r_R_lb"] = m_pseudotop_reco->GetR_lb();
-	    m_VarField["matched_r_R_Wb_had"] = m_pseudotop_reco->GetR_Wb_had();
-	    m_VarField["matched_r_R_Wb_lep"] = m_pseudotop_reco->GetR_Wb_lep();
 	    FillHistogramsPseudotopParticle(ed, weight_reco_level, "matched_p"); // YES, binned in particle, but weighted in reco! _p as binned in particle
-	    m_VarField["matched_p_HT_pseudo"] = m_pseudotop_particle->GetHt();
-	    m_VarField["matched_p_R_lb"] = m_pseudotop_particle->GetR_lb();
-	    m_VarField["matched_p_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();
-	    m_VarField["matched_p_R_Wb_lep"] = m_pseudotop_particle->GetR_Wb_lep();
 	  }
 	}
 
@@ -1266,10 +1273,6 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string level, TLorentzVector &
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
    m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight);
-   if (level == "reco")
-     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("reco_HT_pseudo")->second / GeV, weight);
-   else if (level == "particle")
-     m_hm->FillHistograms(path + "HT_pseudo",m_VarField.find("particle_HT_pseudo")->second / GeV, weight);
    
    //px, py, pz
    double pxL = pt1*cos(topL.Phi());
@@ -1295,6 +1298,7 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string level, TLorentzVector &
      m_hm->FillHistograms(path+"mlb",m_VarField.find(level + "_mlb")->second, weight);
      m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find(level + "_R_Wb_had")->second, weight);
      m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find(level + "_R_Wb_lep")->second, weight);
+     m_hm->FillHistograms(path+"HT_pseudo",m_VarField.find(level + "_HT_pseudo")->second / GeV, weight);
  }
 }
 
