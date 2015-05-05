@@ -523,7 +523,15 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	    //  fill numerator for the matching eff (f_'missassign')
 	    // reco && particle && matched:
 	    FillHistogramsPseudotopReco(ed, weight_reco_level, "matched_r"); // YES, binned in reco, and with reco weight! _r as binned in reco
+	    m_VarField["matched_r_HT_pseudo"] = m_pseudotop_reco->GetHt();
+	    m_VarField["matched_r_R_lb"] = m_pseudotop_reco->GetR_lb();
+	    m_VarField["matched_r_R_Wb_had"] = m_pseudotop_reco->GetR_Wb_had();
+	    m_VarField["matched_r_R_Wb_lep"] = m_pseudotop_reco->GetR_Wb_lep();
 	    FillHistogramsPseudotopParticle(ed, weight_reco_level, "matched_p"); // YES, binned in particle, but weighted in reco! _p as binned in particle
+	    m_VarField["matched_p_HT_pseudo"] = m_pseudotop_particle->GetHt();
+	    m_VarField["matched_p_R_lb"] = m_pseudotop_particle->GetR_lb();
+	    m_VarField["matched_p_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();
+	    m_VarField["matched_p_R_Wb_lep"] = m_pseudotop_particle->GetR_Wb_lep();
 	  }
 	}
 
@@ -1278,27 +1286,16 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string level, TLorentzVector &
    m_VarField[level+"_pzH"] = pzH;
    
    //W gymnastics
-   if (level=="particle"){
+   if (!(level=="parton")){
      m_VarField[level+"_ptRatioWtopL"] = WL.Pt()/topL.Pt();
      m_VarField[level+"_ptRatioWtopH"] = WH.Pt()/topH.Pt();
-     m_hm->FillHistograms(path+"ptRatioWtopH",m_VarField.find("particle_ptRatioWtopH")->second, weight);
-     m_hm->FillHistograms(path+"ptRatioWtopL",m_VarField.find("particle_ptRatioWtopL")->second, weight);
-     m_hm->FillHistograms(path+"R_lb",m_VarField.find("particle_R_lb")->second, weight);
-     m_hm->FillHistograms(path+"mlb",m_VarField.find("particle_mlb")->second, weight);
-     m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find("particle_R_Wb_had")->second, weight);
-     m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find("particle_R_Wb_lep")->second, weight);
+     m_hm->FillHistograms(path+"ptRatioWtopH",m_VarField.find(level + "_ptRatioWtopH")->second, weight);
+     m_hm->FillHistograms(path+"ptRatioWtopL",m_VarField.find(level + "_ptRatioWtopL")->second, weight);
+     m_hm->FillHistograms(path+"R_lb",m_VarField.find(level + "_R_lb")->second, weight);
+     m_hm->FillHistograms(path+"mlb",m_VarField.find(level + "_mlb")->second, weight);
+     m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find(level + "_R_Wb_had")->second, weight);
+     m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find(level + "_R_Wb_lep")->second, weight);
  }
-   if (level=="reco"){
-     m_VarField[level+"_ptRatioWtopL"] = WL.Pt()/topL.Pt();
-     m_VarField[level+"_ptRatioWtopH"] = WH.Pt()/topH.Pt();
-     m_hm->FillHistograms(path+"ptRatioWtopH",m_VarField.find("reco_ptRatioWtopH")->second, weight);
-     m_hm->FillHistograms(path+"ptRatioWtopL",m_VarField.find("reco_ptRatioWtopL")->second, weight);
-     m_hm->FillHistograms(path+"R_lb",m_VarField.find("reco_R_lb")->second, weight);
-     m_hm->FillHistograms(path+"mlb",m_VarField.find("reco_mlb")->second, weight);
-     m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find("reco_R_Wb_had")->second, weight);
-     m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find("reco_R_Wb_lep")->second, weight);
-     
-  }
 }
 
 /////////////////////////////////////////
