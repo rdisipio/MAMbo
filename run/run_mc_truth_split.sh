@@ -16,6 +16,8 @@ for ll in el mu ; do
     # make the config:
 
     cfg=control/analysis_params/TTbarResolved_resolved/mcparticles_${ll}_JK.xml
+    #cfg=control/mcparticles_${ll}_JK.xml
+
     echo "runMAMbo -p ${cfg} -f lists/${mclist} -o histograms_PowHeg_${ll}_particle_${base}${tag}.root >& log_ptcl_${ll}_${base}${tag}.txt &"
 
 
