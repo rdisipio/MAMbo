@@ -2,7 +2,7 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
-  <sample name="DiTop" sf="1.018" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="DiTop" sf="1.028" dsid="1" xsec="1.0" kfact="1.0" genevt="1.0" generator="PowhegPythia_P2011C" simulation="Full" />
 </samples>
 <files>
   <file sample="DiTop"     path="nominal/tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.histograms.root" />

@@ -13,6 +13,11 @@ do
   ./make_unfolding_sample.sh $syst $ch
 done
 
+for syst in st_xsec_up st_xsec_down
+do
+  ./make_unfolding_sample.sh $syst $ch
+done
+
 for syst in $(cat ${systfile} )
 do
   ./make_unfolding_sample.sh $syst $ch

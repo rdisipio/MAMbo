@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="singletop_tchannel_top"     dsid="110090" sf="1.04" xsec="17.520" kfact="1.0500" genevt="4994481" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="singletop_tchannel_antitop" dsid="110091" sf="1.04" xsec="9.3932" kfact="1.0616" genevt="4999879" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="singletop_schannel"         dsid="110119" sf="1.04" xsec="1.6424" kfact="1.1067" genevt="5999781" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="singletop_Wtchannel"        dsid="110140" sf="1.07" xsec="20.461" kfact="1.0933" genevt="999692"  generator="PowhegPythia_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="singletop_tchannel_top"     path="nominal/tt_diffxs_8TeV.SingleTop.110090.el.nominal.histograms.root" />
+  <file	sample="singletop_tchannel_antitop" path="nominal/tt_diffxs_8TeV.SingleTop.110091.el.nominal.histograms.root" />
+  <file sample="singletop_schannel"         path="nominal/tt_diffxs_8TeV.SingleTop.110119.el.nominal.histograms.root" />
+  <file sample="singletop_Wtchannel"        path="nominal/tt_diffxs_8TeV.SingleTop.110140.el.nominal.histograms.root" />
+</files>
+</document>

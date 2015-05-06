@@ -158,7 +158,12 @@
 -->
 
   </sample>
-  <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" />
+  <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" >
+    <syst name="st_xsec" type="two_sided" >
+       <shift side="up"   file="st_xsec_up/tt_diffxs_8TeV.mc.SingleTop.el.st_xsec_up.histograms.root" /> 
+       <shift side="down" file="st_xsec_down/tt_diffxs_8TeV.mc.SingleTop.el.st_xsec_down.histograms.root" />
+    </syst>
+  </sample>
 <!--  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root" /> -->
   <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.nominal.histograms.root" >
      <syst name="WjetsSF" type="two_sided" >

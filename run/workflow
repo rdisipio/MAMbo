@@ -63,7 +63,8 @@ do
 done
 wait
 
-./merge_wjets_samples.sh ${ch} ${syst}
+#./merge_wjets_samples.sh ${ch} ${syst}
+./merge_wjets_samples_custom.sh tt_chasymm nominal
 
 ofile=${outdir}/${syst}/${analysis}.mc.Wjets.${ch}.${syst}.histograms.root
 #hadd -f ${ofile} ${outdir}/${syst}/${analysis}.mc.Wjets_*.${ch}.${syst}.histograms.root
