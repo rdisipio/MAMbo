@@ -5,7 +5,7 @@ analysis=tt_diffxs_8TeV
 syst=nominal
 [ ! -z $1 ] && syst=$1
 
-wjets=Sherpa
+tag_wjets=tt_chasymm
 [ ! -z $2 ] && wjets=$2
 
 for ch in el mu
@@ -14,12 +14,17 @@ do
   [ $ch == "mu" ] && stream="Muons"
 
   hadd -f ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Background.${ch}.${syst}.histograms.root \
-          ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Wjets.${wjets}.${ch}.${syst}.histograms.root \
-          ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.SingleTop.${ch}.${syst}.histograms.root \
-          ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Zjets.${ch}.${syst}.histograms.root \
-          ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Diboson.${ch}.${syst}.histograms.root \
-          ${MAMBOOUTPUTDIR}/${syst}/${analysis}.qcd.${stream}.${ch}.${syst}.histograms.root 
+          ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Wjets.${ch}.${tag_wjets}.${syst}.histograms.root \
+          ${MAMBOOUTPUTDIR}/nominal/${analysis}.mc.SingleTop.${ch}.nominal.histograms.root \
+          ${MAMBOOUTPUTDIR}/nominal/${analysis}.mc.Zjets.${ch}.nominal.histograms.root \
+          ${MAMBOOUTPUTDIR}/nominal/${analysis}.mc.Diboson.${ch}.nominal.histograms.root \
+          ${MAMBOOUTPUTDIR}/nominal/${analysis}.qcd.${stream}.${ch}.nominal.histograms.root &
 done
+wait
+
+echo
+echo /////////////////////////////
+echo
 
 hadd -f ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Background.co.${syst}.histograms.root \
         ${MAMBOOUTPUTDIR}/${syst}/${analysis}.mc.Background.el.${syst}.histograms.root \

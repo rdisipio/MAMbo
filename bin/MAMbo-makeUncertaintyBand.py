@@ -103,12 +103,16 @@ def GatherHistograms( hname, hpath ):
         newname = "%s_%s" % ( sample, hname )
         hlist[sample] = hsource.Clone( newname )
 
+        # smoothing
+#        if sample in [ "qcd", "fakes", "Fakes", "QCD" ]: hlist[sample].Smooth()
+
         for syst,flist in samples_configuration[sample].systematics.iteritems():
            for side, fname in flist.iteritems():
               hsource = fname.Get( hpath )
               newname = "%s_%s_%s_%s" % ( sample, hname, syst, side )
               if hsource == None: print "ERROR: invalid histogram", sample, hname, syst, side
               hlist[newname] = hsource.Clone( newname )
+#              if sample in [ "qcd", "fakes", "QCD", "Fakes" ]: hlist[newname].Smooth()
 
     return hlist
 

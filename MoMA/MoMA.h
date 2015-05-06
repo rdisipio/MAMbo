@@ -20,7 +20,9 @@ enum BTagType {
 
 enum SYSTEMATIC_TYPE {
    NOMINAL = 0,
-   BTAGSFUP, BTAGSFDOWN, CTAUTAGSFUP, CTAUTAGSFDOWN, MISTAGSFUP, MISTAGSFDOWN
+   BTAGSFUP, BTAGSFDOWN, CTAUTAGSFUP, CTAUTAGSFDOWN, MISTAGSFUP, MISTAGSFDOWN,
+   QCD_MM_EL_FAKE_MC_UP, QCD_MM_EL_FAKE_MC_DOWN, QCD_MM_EL_FAKE_ALTERNATE, QCD_MM_EL_REAL_ALTERNATE, QCD_MM_EL_PAR_ALTERNATE, 
+   QCD_MM_MU_FAKE_MC_UP, QCD_MM_MU_FAKE_MC_DOWN, QCD_MM_MU_FAKE_ALTERNATE, QCD_MM_MU_REAL_ALTERNATE, QCD_MM_MU_PAR_ALTERNATE
 };
 
 
@@ -32,6 +34,9 @@ class MoMATool
 	static MoMATool * GetHandle();
 
  public:
+        inline void SetSystematicType( SYSTEMATIC_TYPE type ) { m_syst_type = type; };
+        inline SYSTEMATIC_TYPE GetSystematicType() const      { return m_syst_type; };
+
 	inline void SetDebug( bool debug = true ) { m_debug = debug; };
 
         double GetFakesWeight( int channel, const MMEvent& event, const MMLepton& lepton, bool tight );
@@ -40,9 +45,14 @@ class MoMATool
 
 	double GetBTagWeight( EventData * ed, const double mv1_cut = 0.7892, SYSTEMATIC_TYPE syst_type = NOMINAL ) const;
 
+ protected:
+        void InitializeFakesWeights();
+        void InitializeBTagWeights();
+
  private:
 	MoMATool();
 
+        SYSTEMATIC_TYPE m_syst_type;
 	bool           m_debug;
 
         FakesWeights * m_fakes_weighter_el;

@@ -1,22 +1,19 @@
 #include "MoMA.h"
 
 MoMATool::MoMATool() :
-  m_debug(false), m_fakes_weighter_el( NULL ), m_fakes_weighter_mu( NULL )
+  m_debug(false), m_fakes_weighter_el( NULL ), m_fakes_weighter_mu( NULL ), 
+  m_btag_weighter( NULL ), m_CDIindex_SF(NULL), m_CDIindex_Eff(NULL)
 {
-   m_fakes_weighter_el = new FakesWeights();
-   m_fakes_weighter_mu = new FakesWeights();
+  InitializeBTagWeights();
+}
 
-   // nominal 
-   string mamboDir = getenv( "MAMBODIR" );
-   string dataDir  = getenv( "ROOTCOREDIR" );
 
-   m_fakes_weighter_el->SetDataPath( dataDir + "/data/FakesMacros" );
-   m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+//////////////////////////////////////////
 
-   m_fakes_weighter_mu->SetDataPath( dataDir + "/data/FakesMacros" );
-   m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
 
-//   m_fakes_weighter_el->SetDebug(1);
+void MoMATool::InitializeBTagWeights()
+{
+   const string mamboDir = getenv( "MAMBODIR" );
 
    BTagType btag_type = MV1_70;
 //   m_btag_weighter = new Analysis::CalibrationDataInterfaceROOT( "MV1", dataDir + "/data/TopD3PDCorrections/BTagCalibration.env" );
@@ -85,11 +82,77 @@ MoMATool * MoMATool::GetHandle()
 ///////////////////////////////////////////
 
 
+void MoMATool::InitializeFakesWeights()
+{
+   if( m_fakes_weighter_el ) throw runtime_error( "ERROR: MoMA: trying to re-initialize fakes weights.\n" );
+
+   m_fakes_weighter_el = new FakesWeights();
+   m_fakes_weighter_mu = new FakesWeights();
+
+   const string dataDir  = getenv( "ROOTCOREDIR" );
+
+   m_fakes_weighter_el->SetDataPath( dataDir + "/data/FakesMacros" );
+   m_fakes_weighter_mu->SetDataPath( dataDir + "/data/FakesMacros" );
+
+   if(      m_syst_type == QCD_MM_EL_FAKE_MC_UP ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "MCup" );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
+   }
+   else if( m_syst_type == QCD_MM_EL_FAKE_MC_DOWN ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "MCdown" );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );       
+   }
+   else if( m_syst_type == QCD_MM_EL_FAKE_ALTERNATE ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "CRfake" );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
+   }
+   else if( m_syst_type == QCD_MM_EL_REAL_ALTERNATE ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "CRreal" );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
+   }
+   else if( m_syst_type == QCD_MM_EL_PAR_ALTERNATE ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "EffPar" );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
+   }
+   else if( m_syst_type == QCD_MM_MU_FAKE_MC_UP ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "MCup" );
+   }
+   else if( m_syst_type == QCD_MM_MU_FAKE_MC_DOWN ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "MCdown" );
+   }
+   else if( m_syst_type == QCD_MM_MU_FAKE_ALTERNATE ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "CRfake" );
+   }
+   else if( m_syst_type == QCD_MM_MU_REAL_ALTERNATE ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "CRreal" );
+   }
+   else if( m_syst_type == QCD_MM_MU_PAR_ALTERNATE ) {
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "EffPar" );
+   }
+   else { // Nominal or non QCD
+      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
+      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
+   }
+//   m_fakes_weighter_el->SetDebug(1);
+
+}
+
+
+///////////////////////////////////////////
+
+
 double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLepton& lepton, bool tight )
 {
   double w = 1.;
   double R = -666;
   double F = -666;
+
+  if( !m_fakes_weighter_el) InitializeFakesWeights();
 
   if( channel == FakesWeights::EJETS ) {
     m_fakes_weighter_el->SetLepton( event, lepton );
@@ -114,6 +177,8 @@ double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLept
   }
 
   if( m_debug )  cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
+
+  if( fabs(w) > 5.0 ) w = 0.; // see https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod
   
   return w;
 }

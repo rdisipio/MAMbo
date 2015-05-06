@@ -72,7 +72,21 @@ bool CutFlowTTbarResolved::Initialize() {
         else if( syst == "CTAUTAGSFDOWN" ) m_syst_type = CTAUTAGSFDOWN;    
         else if( syst == "MISTAGSFUP" )    m_syst_type = MISTAGSFUP;
         else if( syst == "MISTAGSFDOWN" )  m_syst_type = MISTAGSFDOWN;    
+        else if( syst == "QCD_MM_EL_FAKE_MC_UP" )     m_syst_type = QCD_MM_EL_FAKE_MC_UP;
+        else if( syst == "QCD_MM_EL_FAKE_MC_DOWN" )   m_syst_type = QCD_MM_EL_FAKE_MC_DOWN;
+      	else if( syst == "QCD_MM_EL_FAKE_ALTERNATE" ) m_syst_type = QCD_MM_EL_FAKE_ALTERNATE;
+      	else if( syst == "QCD_MM_EL_REAL_ALTERNATE" ) m_syst_type = QCD_MM_EL_REAL_ALTERNATE;
+      	else if( syst == "QCD_MM_EL_PAR_ALTERNATE" )  m_syst_type = QCD_MM_EL_PAR_ALTERNATE;    
+      	else if( syst == "QCD_MM_MU_FAKE_MC_UP" )     m_syst_type = QCD_MM_MU_FAKE_MC_UP;    
+      	else if( syst == "QCD_MM_MU_FAKE_MC_DOWN" )   m_syst_type = QCD_MM_MU_FAKE_MC_DOWN;    
+      	else if( syst == "QCD_MM_MU_FAKE_ALTERNATE" ) m_syst_type = QCD_MM_MU_FAKE_ALTERNATE;    
+      	else if( syst == "QCD_MM_MU_REAL_ALTERNATE" ) m_syst_type = QCD_MM_MU_REAL_ALTERNATE;      
+      	else if( syst == "QCD_MM_MU_PAR_ALTERNATE" )  m_syst_type = QCD_MM_MU_PAR_ALTERNATE;     
+
 //	else throw runtime_error( "CutFlowTTbarResolved::Initialize(): Invalid scale factor systematic\n" );
+
+        m_moma->SetSystematicType( m_syst_type );
+
 #endif /* __MOMA__ */
 
         if( syst.find("PDF") == 0 ) {

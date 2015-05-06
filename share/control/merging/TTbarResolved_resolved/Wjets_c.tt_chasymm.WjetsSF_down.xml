@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="WcNp0"             dsid="200056" sf="0.800" xsec="758.93" kfact="1.5200" genevt="22999046"  generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp1"             dsid="200057" sf="0.800" xsec="274.47" kfact="1.5200" genevt="8198769"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp2"             dsid="200058" sf="0.800" xsec="71.643" kfact="1.5200" genevt="2090290"   generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp3"             dsid="200059" sf="0.800" xsec="16.482" kfact="1.5200" genevt="499498"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+  <sample name="WcNp4incl"         dsid="200060" sf="0.800" xsec="4.7824" kfact="1.5200" genevt="199499"    generator="AlpgenPythia_Auto_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="WcNp0"          path="nominal/tt_diffxs_8TeV.Wjets.200056.@CHANNEL@.nominal.histograms.root" />
+  <file sample="WcNp1"          path="nominal/tt_diffxs_8TeV.Wjets.200057.@CHANNEL@.nominal.histograms.root" />
+  <file sample="WcNp2"          path="nominal/tt_diffxs_8TeV.Wjets.200058.@CHANNEL@.nominal.histograms.root" />
+  <file sample="WcNp3"          path="nominal/tt_diffxs_8TeV.Wjets.200059.@CHANNEL@.nominal.histograms.root" />
+  <file sample="WcNp4incl"      path="nominal/tt_diffxs_8TeV.Wjets.200060.@CHANNEL@.nominal.histograms.root" /> 
+</files>
+</document>

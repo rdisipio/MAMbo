@@ -20,7 +20,7 @@ syst=nominal
 for ch in el mu
 do
   params_src=${paramsdir}/${sample}_${dsid}_template.xml
-  params=${paramsdir}/.otf/${sample}_${dsid}_${ch}.xml
+  params=${paramsdir}/.otf/${sample}_${dsid}_${ch}_${syst}.xml
   cp ${params_src} ${params}
 
   sed -i "s/@CHANNEL@/${ch}/g" ${params}

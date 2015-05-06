@@ -17,13 +17,18 @@ do
     tag=${analysis}.qcd.${stream}.period${period}.${channel}.${syst}
 
     jobname=${tag}
-    paramfile=control/analysis_params/TTbarResolved_resolved/qcd_${channel}.xml
+    params=control/analysis_params/TTbarResolved_resolved/qcd_${channel}.xml
+
+    newparams=$(echo $params | sed "s/xml/${syst}.xml/" )
+    cp ${params} ${newparams}
+
+    [ ! syst == "nominal" ] && sed -i "s/NOMINAL/${syst}/g" ${newparams}
 
     filelist=${sourcedir}/qcd.${stream}.period${period}.${channel}.txt
 
     outfile=${syst}/${tag}.histograms.root
 
-    MAMbo-submit.sh -p ${paramfile} -f ${filelist} -o ${outfile} -j ${jobname}
+    MAMbo-submit.sh -p ${newparams} -f ${filelist} -o ${outfile} -j ${jobname}
   done
 
 done
