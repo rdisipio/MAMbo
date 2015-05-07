@@ -28,6 +28,7 @@ public :
    Int_t           runNumber;
    Int_t           channelNumber;
    Int_t           eventNumber;
+   Float_t         eventWeight;
    Int_t           part_el_n;
    Float_t         part_el_pt[2];   //[part_el_n]
    Float_t         part_el_eta[2];   //[part_el_n]
@@ -71,6 +72,7 @@ public :
    TBranch        *b_runNumber;   //!
    TBranch        *b_channelNumber;   //!
    TBranch        *b_eventNumber;   //!
+   TBranch        *b_eventWeight; //!
    TBranch        *b_part_el_n;   //!
    TBranch        *b_part_el_pt;   //!
    TBranch        *b_part_el_eta;   //!
@@ -185,6 +187,7 @@ void TopMiniSLResolvedParticles::Init(TTree *tree)
    fChain->SetBranchAddress("runNumber", &runNumber, &b_runNumber);
    fChain->SetBranchAddress("channelNumber", &channelNumber, &b_channelNumber);
    fChain->SetBranchAddress("eventNumber", &eventNumber, &b_eventNumber);
+   fChain->SetBranchAddress("eventWeight", &eventWeight, &b_eventWeight );
    fChain->SetBranchAddress("part_el_n", &part_el_n, &b_part_el_n);
    fChain->SetBranchAddress("part_el_pt", part_el_pt, &b_part_el_pt);
    fChain->SetBranchAddress("part_el_eta", part_el_eta, &b_part_el_eta);
