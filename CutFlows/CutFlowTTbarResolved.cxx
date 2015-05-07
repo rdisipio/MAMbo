@@ -1286,7 +1286,7 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string level, TLorentzVector &
    m_hm->FillMatrices(path + "Salam_ttbar_vs_dPhi_ttbar", DeltaPhi, Delta2, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta1, weight);
    m_hm->FillHistograms(path + "Salam_ttbar", Delta2, weight);
-   m_hm->FillHistograms(path + "HT_ttbar",m_VarField.find("reco_HT_ttbar")->second / GeV, weight);
+   m_hm->FillHistograms(path + "HT_ttbar",HT / GeV, weight);
    
    //px, py, pz
    double pxL = pt1*cos(topL.Phi());
