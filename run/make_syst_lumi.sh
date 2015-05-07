@@ -7,30 +7,32 @@ paramsdir=${MAMBODIR}/share/control/merging/${analytag}
 outdir=${MAMBODIR}/run/output/${analytag}
 
 sample=DiTop
-for ch in el mu
+for syst in Lumi_up Lumi_down
 do
-  for syst in Lumi_up Lumi_down
+  for dsid in 110404 #110340
   do
-     for dsid in 110404 #110340
-     do
+    for ch in el mu
+    do
+
         params=${paramsdir}/${sample}_${dsid}_${ch}_${syst}.xml
 
         tag=${analysis}.mc.${sample}.${dsid}.${ch}.${syst}
 
-        MAMbo-mergeSamples.py -c ${params} -o ${outdir}/${syst}/${tag}.histograms.root
-     done
-  done
-done
+        MAMbo-mergeSamples.py -l 1.0 -c ${params} -o ${outdir}/${syst}/${tag}.histograms.root &
+     done #channel
+     wait
 
+     echo
+     echo ///////////////////////////////////
+     echo
 
-sample=Background
-for ch in el mu
-do
-  for syst in Lumi_up Lumi_down
-  do
-     params=${paramsdir}/${sample}_${ch}_${syst}.xml
-     tag=${analysis}.mc.${sample}.${ch}.${syst}
+     hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.co.${syst}.histograms.root \
+             ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.el.${syst}.histograms.root \
+             ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.mu.${syst}.histograms.root
 
-     MAMbo-mergeSamples.py -c ${params} -o ${outdir}/${syst}/${tag}.histograms.root
-  done
-done
+     echo
+     echo ///////////////////////////////////
+     echo
+
+  done #dsid
+done #syst

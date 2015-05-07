@@ -30,6 +30,11 @@ for filename in f.readlines():
    h_cutflow_weighted = file.Get( hpath_wgt )
    h_cutflow_unweight = file.Get( hpath_unw )
 
+   if not h_cutflow_weighted:
+      print "ERROR: not wgt cutflow found in file", filename
+   if not h_cutflow_unweight:
+      print "ERROR: not unw cutflow found in file", filename
+
    sumw_unw += h_cutflow_unweight.GetBinContent( i )
    sumw_wgt += h_cutflow_weighted.GetBinContent( i )
 
