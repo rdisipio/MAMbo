@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="4998495" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_01"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="4998495" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_02"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="4998495" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_03"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="4998495" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_04"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="4998495" generator="McAtNlo_Jimmy" simulation="FS" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.04" />
+</files>
+</document>
