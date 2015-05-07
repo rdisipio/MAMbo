@@ -1,7 +1,7 @@
 #!/bin/sh
 
-
 tag=_incl
+#tag=_ljets
 
 for ll in el mu ; do
 
@@ -18,7 +18,7 @@ for ll in el mu ; do
       # make the config:
       cfg=control/analysis_params_TTbarResolved_mcsignal_${ll}_eos_half${half}_${base}.xml
       cat control/analysis_params_TTbarResolved_mcsignal_${ll}_eos_half${half}.xml | sed "s|list_eos_new_mc.txt|${mclist}|g" > ${cfg}
-      # run:
+      # prepare run cmd:
       echo "   runMAMbo ${opt} -p ${cfg} -f lists/${list} -o histograms_PowHeg_${ll}_half${half}${tag}_${base}.root >& log_${ll}_mcsig_half${half}${tag}_${base}.txt " #& "
 
     done
