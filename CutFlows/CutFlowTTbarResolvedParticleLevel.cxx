@@ -87,6 +87,7 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
   /*
+  
     if (isMCSignal) {
       if ( EventIsDileptonic < 0 ) {
 	cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
@@ -101,8 +102,8 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 	return 0; 
       }
     }
+  
   */
-
   
   double weight_particle_level = 1.;
   // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?

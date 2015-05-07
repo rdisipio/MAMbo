@@ -29,7 +29,14 @@ TitleNames = { 'pt' : 'p_{T}',
                'Yboost' : 'y_{boost}',
                'Chi_ttbar' : '#chi_{#hat{t}_{l}#hat{t}_{h}}',
                'dPhi_ttbar' : '#Delta#phi_{#hat{t}_{l}#hat{t}_{h}}',
-               'Salam_ttbar' : 'S_{#hat{t}_{l}#hat{t}_{h}}'
+               'Salam_ttbar' : 'S_{#hat{t}_{l}#hat{t}_{h}}',
+               'HT_ttbar' : 'H_{T}^{t#bar{t}}',
+               'HT_pseudo' : 'H_{T}^{pseudo}',
+               'R_lb' : '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]',
+               'R_Wb_had' : 'p_{T}^{W,had} / p_{T}^{b,had}',
+               'R_Wb_lep' : 'p_{T}^{W,lep} / p_{T}^{b,lep}',
+               'ptRatioWtopL' : 'p_{T}^{W,had} / p_{T}^{t,had}',
+               'ptRatioWtopH' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
                }
 CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}', 
               'match' : 'Misassignment correction f_{match}', 
@@ -187,25 +194,28 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 ####################################################
 
-#ljets = [ 'll', 'el', 'mu']
+ljets = [ 'll', 'el', 'mu']
 #ljets = [ 'el', 'mu']
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-ljets = [ 'll' ]
+#ljets = [ 'll' ]
 
-#ptag=''
-#ftag=''
+ptag=''
+ftag=''
 
-ptag='_incl'
-ftag='_incl'
+#ptag='_incl'
+#ftag='_incl'
 
 
 #ptag='_fixed_new'
 #ftag='_fixed_new'
-rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/'
+#rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/incl/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/OldWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
+
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
+
 
 os.system('mkdir png eps pdf')
 
@@ -229,14 +239,18 @@ for ll in ljets:
 
     for obj in Obj:
         for var in Var:
-            DrawCorrection(ll, rfile, pfile, obj, var, 0)
-            DrawCorrection(ll, rfile, pfile, obj, var, 1)
-            DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            #DrawCorrection(ll, rfile, pfile, obj, var, 0)
+            #DrawCorrection(ll, rfile, pfile, obj, var, 1)
+            #DrawCorrection(ll, rfile, pfile, obj, var, 2)
             pass
 
 
     SpecObj = ['difference' ]
-    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar']
+    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar', 
+               'HT_ttbar', 'HT_pseudo',
+               'R_lb', 'R_Wb_lep', 'R_Wb_had',
+               'ptRatioWtopL', 'ptRatioWtopH' 
+    ]
 
     for obj in SpecObj:
         for var in SpecVar:
