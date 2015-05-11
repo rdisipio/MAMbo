@@ -177,8 +177,6 @@ double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLept
   }
 
   if( m_debug )  cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
-
-  if( fabs(w) > 5.0 ) w = 0.; // see https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod
   
   return w;
 }

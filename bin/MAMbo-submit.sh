@@ -32,9 +32,9 @@ else
    outdir=${MAMBOOUTPUTDIR}
 fi
 
-#queue=T3_BO #Bologna cluster
+#queue=T3_BO_LOCAL #Bologna cluster
 queue=1nh #CERN LXPLUS
-[[ ${HOSTNAME} == *"cnaf.infn.it"* ]] && queue=T3_BO
+[[ ${HOSTNAME} == *"cnaf.infn.it"* ]] && queue=T3_BO_LOCAL
 backend=lsf #options are: lsf pbs
 dryrun=0
 

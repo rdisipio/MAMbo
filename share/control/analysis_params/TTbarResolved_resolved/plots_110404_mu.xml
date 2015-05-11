@@ -134,8 +134,8 @@
   <plot hpath="reco/4j2b/difference/topLCosThetaStar"    xtitle="Leptonic top cos #theta^{*}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/topHCosThetaStar"    xtitle="Hadronic top cos #theta^{*}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/TopCosOpeningAngle"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/Salam_ttbar"         xtitle="Salam #Delta_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi (t, #bar{t} )" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/Salam_ttbar"         xtitle="S_{t#bar{t}}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi_{t#bar{t}}" ytitle="Events" scale="linear" />
   <plot hpath="reco/4j2b/difference/HT_pseudo"           xtitle="H_{T}^{pseudo}"   ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/4j2b/difference/HT_ttbar"            xtitle="H_{T}^{t#bar{t}}" ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/4j2b/difference/R_Wb_had"  	      	 xtitle="R_{Wb}^{had}" ytitle="Events" scale="linear" />
@@ -158,7 +158,7 @@
   <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Muons.mu.histograms.root"    />
   <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.histograms.root"       />
   <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root"   />
-  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root"       />
+  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.mu.tt_chasymm.nominal.histograms.root"       />
   <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" 	/>
   <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root"	/>
   <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root"    />

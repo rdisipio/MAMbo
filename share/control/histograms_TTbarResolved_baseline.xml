@@ -274,7 +274,6 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
             <Bin nbins="20" xmin="-200." xmax="200." />
         </Variable>
 
-
 	<!-- top pair distributions -->
 
 
@@ -413,7 +412,13 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
        	    <!-- 2(l_q) X 3(Nj==2,==3,==4,>=5)   -->
             <Bin id="0" nbins="8" xmin="0.5" xmax="8.5" />
        </Variable>       
-
+       <Variable name="fakes_weights" title="Fake Leptons MM weight" folder="cutflow">
+            <Bin id="0" nbins="20" xmin="-10." xmax="10." />
+            <Bin id="1" nbins="200" xmin="-10." xmax="10." />
+       </Variable>
+       <Variable name="MC_gen_weights" title="MC Generator weights" folder="cutflow">
+            <Bin id="0" nbins="3" xmin="-1.5" xmax="1.5" />
+       </Variable>
 
   </Variables>        
 
@@ -570,7 +575,9 @@ BOB            <Bin id="0" nbins="25" xmin="-2.5" xmax="2.5"/>
         <TH1F variable="flav_comp"      binId="0"/>
         <TH1F variable="flav_comp_excl" binId="0"/>
         <TH1F variable="flav_comp_incl" binId="0"/>
-
+        <TH1F variable="fakes_weights"  binId="0"/>
+        <TH1F variable="fakes_weights"  binId="1"/>
+        <TH1F variable="MC_gen_weights" binId="0"/>
     </Histos>    
     
   <!--TH1F name="vxp_nTracks"   title="No. of tracks per pv" nbins="20"  xmin="0" xmax="20" /-->

@@ -1,0 +1,89 @@
+CHECKLIST
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DETECTOR-LEVEL ANALYSIS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1) Submit MAMbo - all nominal samples
+./submit_all_resolved.sh
+
+2) Submit MAMbo - all signal systematics
+./submit_mc_signal_systematics.sh 110404
+
+3) Submit MAMbo - all QCD systmatics
+./submit_fakes_systematics.sh
+# ...wait until finished...
+./merge_fakes.sh
+
+4a) Wjets scale systematics (just rescale, no need to re-run)
+./merge_wjets_samples_custom.sh tt_chasymm nominal
+./merge_wjets_samples_custom.sh tt_chasymm WjetsSF_up
+./merge_wjets_samples_custom.sh tt_chasymm WjetsSF_down
+
+4b) Single top xsec systematics (just rescale, no need to re-run)
+./merge_stop_samples.sh
+
+5) Create backgrounds with systematics
+./merge_backgrounds_syst_fakes.sh
+./merge_backgrounds_syst_stop.sh
+./merge_backgrounds_syst_wjets.sh nominal tt_chasymm
+./merge_backgrounds_syst_wjets.sh WjetsSF_up tt_chasymm
+./merge_backgrounds_syst_wjets.sh WjetsSF_down tt_chasymm
+
+6) Generate pseudo-signals for unfolding [ = sig(nominal) + bkg(nominal) - bkg(syst) ]
+./make_all_unfolding_samples.sh
+
+7) Make Lumi systematic
+./make_syst_lumi.sh
+
+
+8) Create the total uncertainty band for control plots
+./workflow el
+./workflow mu
+
+9) Make control plots
+./make_all_plots.sh
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+UNFOLDING
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[ do what follows using either "particle" or "parton" ]
+
+1) Unfold all MC
+./unfold_all_mc_cluster.sh particle
+
+2) Make uncertainty bands
+./make_all_uncertainties.sh particle
+NB: sometimes there is a crash due to a missing pseudo-data histogram. It means there has been an undetected (?) crash in the previous step. It is likely to be due to a bug in the unfolding program that happens when the jobs run in parallel - two jobs try to create the same file for the toys at the same time. Just repeat the step above or run e.g.:
+./jobs/tt_m_ll.sh > logs/particle/tt_m_ll.log 2&>1 
+
+3) Unfold real data
+./unfold_all_data.sh particle
+
+4) Translate MC uncertainties to real data
+./translate_all_uncertainties_to_data.sh particle
+
+5) Create tables of systematics
+./make_all_tables_syst_unfolded.sh particle
+
+6) Calculate the covariance matrices
+./make_all_covariance_matrices.sh particle
+
+If you see many warnings like this:
+WARNING: total variation capped at -1.
+this means that there may be a source of uncertainty pretty large. This is generally not a good sign.
+
+./make_all_tables_cov.sh particle
+
+7) Make plots
+cd macros/Plots
+./make_all_plots.sh particle
+./make_all_plots_fractional_uncertainties.sh particle
+./plot_all_correlation_matrices.sh particle
+
+[ go back to 1) and repeat the steps above using parton instead of particle ]
+
+

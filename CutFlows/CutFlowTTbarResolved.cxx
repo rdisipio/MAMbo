@@ -271,6 +271,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 			  }
 		 }
 
+         ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( "reco/cutflow/3j0b/MC_gen_weights" );
+         h->Fill( weight_reco_level );
+
 	 // some Single Top samples have buggy mc weight 
          if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
          if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
@@ -315,7 +318,12 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     //if( isWjets ) { }
 
     if( isQCD ) {
-      const double qcd_weight = GetFakesWeight( ed );
+      double qcd_weight = GetFakesWeight( ed );
+      m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights" )->Fill( qcd_weight );
+      m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights_1" )->Fill( qcd_weight );
+
+      if( fabs(qcd_weight) > 3.0 ) qcd_weight = 0.; // see https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod
+
       weight_reco_level     *= qcd_weight;
       weight_particle_level *= qcd_weight; // should we?
     }
@@ -921,16 +929,18 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
 
 	hthad += jet_pT;
 
-        double dR_lj = PhysicsHelperFunctions::DeltaR( ed->leptons, 0, ed->jets, j );
-
+        double dR_lj = ( rc_channel == FakesWeights::EJETS ) ? 
+                       PhysicsHelperFunctions::DeltaR( ed->electrons, 0, ed->jets, j ) :
+                       PhysicsHelperFunctions::DeltaR( ed->muons, 0, ed->jets, j );                       
+ 
         //cout << "Nj = " << ed->jets.n  << " j_ind = " << j << " dR_lj = " << dR_lj << " dR_lj_min = " << dR_lj_min << endl;
 
         if( dR_lj < dR_lj_min ) {
-          dR_lj_min = dR_lj;
-
+          dR_lj_min   = dR_lj;
           pTdR_lj_min = jet_pT / dR_lj;
         }
     }
+
     rc_event.hthad    = hthad;
     rc_lepton.dR      = dR_lj_min;
     rc_lepton.dRpt    = pTdR_lj_min; 
