@@ -1,6 +1,8 @@
 #ifndef __EVENTDUMPER_MCTRUTH_TOPMINISL_RESOLVED_H__
 #define __EVENTDUMPER_MCTRUTH_TOPMINISL_RESOLVED_H__
 
+#include "TTreeIndex.h"
+
 template< class NTUP_PARTICLE, class NTUP_PARTON >
 class EventDumperMCTruthTopMiniSLResolved
 {
@@ -16,7 +18,7 @@ class EventDumperMCTruthTopMiniSLResolved
     NTUP_PARTON      * m_ntuple_parton;
 
  public: 
-    void SetNtupleParticle( NTUP_PARTICLE * ntuple, bool buildIndex = true ) { 
+    void SetNtupleParticle( NTUP_PARTICLE * ntuple, bool buildIndex = true, std::string outIndexFileName = "index_particle.root" ) { 
         m_ntuple_particle = ntuple; 
 
         if( !buildIndex ) return ;
@@ -27,9 +29,17 @@ class EventDumperMCTruthTopMiniSLResolved
 
  	int res = m_ntuple_particle->fChain->BuildIndex( "runNumber", "eventNumber" );
 	cout << "INFO: particles tree index: returned value: " << res << endl;
+
+	// TEST: Marino, JK:
+	TFile * test = TFile::Open( outIndexFileName.c_str(), "recreate" );
+	TTreeIndex *index = (TTreeIndex*) p_c->GetTreeIndex();
+	index->Write( "index" );
+	test->Write();
+	test->Close();
+	
     };
     
-    void SetNtupleParton( NTUP_PARTON * ntuple, bool buildIndex = true ) {
+    void SetNtupleParton( NTUP_PARTON * ntuple, bool buildIndex = true, std::string outIndexFileName = "index_parton.root" ) {
         m_ntuple_parton = ntuple;
 
         if( !buildIndex	) return ;
@@ -37,6 +47,14 @@ class EventDumperMCTruthTopMiniSLResolved
  	cout << "INFO: building index for partons chain..." << endl;
         int res = m_ntuple_parton->fChain->BuildIndex( "runNumber", "eventNumber" );
 	cout << "INFO: partons tree index: returned value: " << res << endl;
+
+	// TEST: Marino, JK:
+	TFile * test = TFile::Open( outIndexFileName.c_str(), "recreate" );
+	TTreeIndex *index = (TTreeIndex*) m_ntuple_parton->fChain->GetTreeIndex();
+	index->Write( "index" );
+	test->Write();
+	test->Close();
+
     };
 
     void GetEntryWithIndex( unsigned long major, unsigned long minor = 0 ) { 
