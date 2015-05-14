@@ -36,12 +36,15 @@ DETECTOR-LEVEL ANALYSIS
 7) Make Lumi systematic
 ./make_syst_lumi.sh
 
+8) Make IFSR syst using ALPGEN
+./merge_AlpgenIFSR.sh
+./make_syst_ifsr_alpgen.sh
 
-8) Create the total uncertainty band for control plots
+9) Create the total uncertainty band for control plots
 ./workflow el
 ./workflow mu
 
-9) Make control plots
+10) Make control plots
 ./make_all_plots.sh
 
 

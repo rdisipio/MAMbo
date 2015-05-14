@@ -42,8 +42,8 @@ NtupleWrapperTopMiniSLResolved::NtupleWrapperTopMiniSLResolved( const AnalysisPa
 
 NtupleWrapperTopMiniSLResolved::~NtupleWrapperTopMiniSLResolved()
 {
-   SAFE_DELETE( m_particles );
-   SAFE_DELETE( m_partons );    
+//   SAFE_DELETE( m_particles );
+//   SAFE_DELETE( m_partons );    
    SAFE_DELETE( m_dumper_mctruth );
    SAFE_DELETE( m_ntuple_particle );
    SAFE_DELETE( m_ntuple_parton );

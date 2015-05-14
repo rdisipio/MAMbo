@@ -20,20 +20,18 @@ fi
 
 # real data
 ofile=${outdir}/nominal/${analysis}.data.${stream}.${ch}.histograms.root
-hadd -f ${ofile} ${outdir}/nominal/${analysis}.data.${stream}.period*.${ch}.histograms.root
-
-echo
-echo "//////////////////////////////////"
-echo
+hadd -f ${ofile} ${outdir}/nominal/${analysis}.data.${stream}.period*.${ch}.histograms.root &
 
 bkgsamples=""
 expected=""
 
 # fake leptons
 ofile=${outdir}/nominal/${analysis}.qcd.${stream}.${ch}.${syst}.histograms.root
-hadd -f ${ofile} ${outdir}/nominal/${analysis}.qcd.${stream}.period*.${ch}.${syst}.histograms.root
+hadd -f ${ofile} ${outdir}/nominal/${analysis}.qcd.${stream}.period*.${ch}.${syst}.histograms.root &
 bkgsamples="${bkgsamples} ${ofile}"
 expected="${expected} ${ofile}"
+
+wait
 
 echo
 echo "//////////////////////////////////"

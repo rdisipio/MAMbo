@@ -25,10 +25,11 @@
   <plot hpath="reco/cutflow/3j0b/met_pt_2"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/cutflow/3j0b/mtw_2"                   xtitle="W boson transverse mass [GeV]"                 ytitle="Events / GeV"  scale="linear" />
   <plot hpath="reco/cutflow/3j0b/jet_ht"               xtitle="H_{T}^{jets} [GeV]" ytitle="Events / GeV" scale="linear" />
-  <plot hpath="reco/cutflow/3j0b/ht"                   xtitle="H_{T} [GeV]" ytitle="Events        / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/3j0b/ht"                   xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
+  <plot hpath="reco/cutflow/3j0b/ht_2"                   xtitle="H_{T} [GeV]" ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/3j0b/meff_2"                 xtitle="Effective Mass [GeV]" ytitle="Events / GeV" scale="linear" />
-  <plot hpath="reco/cutflow/3j0b/flav_comp"    	       xtitle="Flavor composition class" ytitle="Events" scale="linear"	/> 
- 
+  <plot hpath="reco/cutflow/3j0b/flav_comp"            xtitle="Flavor composition class" ytitle="Events" scale="linear" /> 
+
   <plot hpath="reco/cutflow/4j0b/pvxp_n"               xtitle="No. of tracks per primary vtx"     ytitle="Events" scale="linear" />
   <plot hpath="reco/cutflow/4j0b/vxp_z"                xtitle="Primary vertex p_{z} [GeV]"              ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/cutflow/4j0b/lep_pt"               xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
@@ -101,48 +102,49 @@
   <plot hpath="reco/cutflow/afterCuts/ht"                   xtitle="H_{T} [GeV]" ytitle="Events        / GeV" scale="linear" />
   <plot hpath="reco/cutflow/afterCuts/meff_2"                 xtitle="Effective Mass [GeV]" ytitle="Events / GeV" scale="linear" />
 
-  <plot hpath="reco/4j2b/WH/m"                             xtitle="Reconstructed hadronic pseudo-W mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/WH/pt"                            xtitle="Reconstructed hadronic pseudo-W p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/WH/rapidity"	       	      	     xtitle="Reconstructed hadronic pseudo-W rapidity" ytitle="Events / Rapidity"  scale="linear" />
-  <plot hpath="reco/4j2b/WH/absrap"                        xtitle="Reconstructed hadronic pseudo-W |y|" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/WH/m"                             xtitle="Hadronic pseudo-W mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/WH/pt"                            xtitle="Hadronic pseudo-W p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/WH/rapidity"	       	      	     xtitle="Hadronic pseudo-W rapidity" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/WH/absrap"                        xtitle="Hadronic pseudo-W |y|" ytitle="Events / Rapidity"  scale="linear" />
 
-  <plot hpath="reco/4j2b/WL/m"                             xtitle="Reconstructed leptonic pseudo-W mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/WL/pt"                            xtitle="Reconstructed leptonic pseudo-W p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/WL/rapidity"                        xtitle="Reconstructed leptonic pseudo-W rapidity" ytitle="Events / Rapidity"  scale="linear" />
-  <plot hpath="reco/4j2b/WL/absrap"                        xtitle="Reconstructed leptonic pseudo-W |y|" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/WL/m"                             xtitle="Leptonic pseudo-W mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/WL/pt"                            xtitle="Leptonic pseudo-W p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/WL/rapidity"                        xtitle="Leptonic pseudo-W rapidity" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/WL/absrap"                        xtitle="Leptonic pseudo-W |y|" ytitle="Events / Rapidity"  scale="linear" />
 
-  <plot hpath="reco/4j2b/topH/m"              		     xtitle="Reconstructed hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/topH/pt"			     xtitle="Reconstructed hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/topH/rapidity"                      xtitle="Reconstructed hadronic pseudo-top rapidity" ytitle="Events / Rapidity"  scale="linear" /> 
-  <plot hpath="reco/4j2b/topH/absrap"			     xtitle="Reconstructed hadronic pseudo-top |y|" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/m"              		     xtitle="Hadronic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/pt"			     xtitle="Hadronic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/rapidity"                      xtitle="Hadronic pseudo-top rapidity" ytitle="Events / Rapidity"  scale="linear" /> 
+  <plot hpath="reco/4j2b/topH/absrap"			     xtitle="Hadronic pseudo-top |y|" ytitle="Events / Rapidity"  scale="linear" />
 
-  <plot hpath="reco/4j2b/topL/m"			     xtitle="Reconstructed leptonic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/topL/pt" 			xtitle="Reconstructed leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
-  <plot hpath="reco/4j2b/topL/rapidity"	       	      	     xtitle="Reconstructed leptonic pseudo-top rapidity" ytitle="Events / Rapidity"  scale="linear" />
-  <plot hpath="reco/4j2b/topL/absrap"			xtitle="Reconstructed leptonic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/m"			     xtitle="Leptonic pseudo-top mass [GeV]"  ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/pt" 			xtitle="Leptonic pseudo-top p_{T} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/rapidity"	       	      	     xtitle="Leptonic pseudo-top rapidity" ytitle="Events / Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/topL/absrap"			xtitle="Leptonic pseudo-top |y| [GeV]" ytitle="Events / Rapidity"  scale="linear" />
   <plot hpath="reco/4j2b/topL/mlb"                       xtitle="(l,b) invariant mass" ytitle="Events / GeV" scale="linear" />
 
-  <plot hpath="reco/4j2b/tt/m"			xtitle="Reconstructed m_{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="linear"    />
-  <plot hpath="reco/4j2b/tt/pt"			xtitle="Reconstructed p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="linear"    />
-  <plot hpath="reco/4j2b/tt/rapidity"           xtitle="Reconstructed y_{t#bar{t}}"                  ytitle="Events / Rapidity" scale="linear" />
-  <plot hpath="reco/4j2b/tt/absrap"		xtitle="Reconstructed |y_{t#bar{t}}|"                ytitle="Events / Rapidity" scale="linear" />
+  <plot hpath="reco/4j2b/tt/m"			xtitle=" m_{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/4j2b/tt/pt"			xtitle=" p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/4j2b/tt/rapidity"           xtitle=" y_{t#bar{t}}"                  ytitle="Events / Rapidity" scale="linear" />
+  <plot hpath="reco/4j2b/tt/absrap"		xtitle=" |y_{t#bar{t}}|"                ytitle="Events / Rapidity" scale="linear" />
 
   <plot hpath="reco/4j2b/difference/z_ttbar"             xtitle="z_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/Pout"                xtitle="P_{out}"      ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/Chi_ttbar"           xtitle="#chi_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/Yboost"              xtitle="Y_{boost}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/Pout"                xtitle="P_{out}"      ytitle="Events" scale="linear" /> 
+  <plot hpath="reco/4j2b/difference/Chi_ttbar"           xtitle="#chi_{t#bar{t}}" ytitle="Events" scale="linear" /> 
+  <plot hpath="reco/4j2b/difference/Yboost"              xtitle="Y_{boost}" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/topLCosThetaStar"    xtitle="Leptonic top cos #theta^{*}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/topHCosThetaStar"    xtitle="Hadronic top cos #theta^{*}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/TopCosOpeningAngle"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/topHCosThetaStar"    xtitle="Hadronic top cos #theta^{*}" ytitle="Events" scale="linear" /> 
+  <plot hpath="reco/4j2b/difference/TopCosOpeningAngle"  xtitle="Top quarks cos #theta_{12}" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/Salam_ttbar"         xtitle="S_{t#bar{t}}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi_{t#bar{t}}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/PtAsymm_ttbar"     	 xtitle="A_{p_{T}}^{t#bar{t}}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi_{t#bar{t}}" ytitle="Events" scale="linear" /> 
   <plot hpath="reco/4j2b/difference/HT_pseudo"           xtitle="H_{T}^{pseudo}"   ytitle="Events / GeV" scale="linear" />
   <plot hpath="reco/4j2b/difference/HT_ttbar"            xtitle="H_{T}^{t#bar{t}}" ytitle="Events / GeV" scale="linear" />
-  <plot hpath="reco/4j2b/difference/R_Wb_had"  	      	 xtitle="R_{Wb}^{had}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/R_Wb_lep"            xtitle="R_{Wb}^{lep}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/R_lb"   	       	 xtitle="R_{lb}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/ptRatioWtopH"    	 xtitle="p_{T}^{W,had} / p_{T}^{t,had}" ytitle="Events" scale="linear" />
-  <plot hpath="reco/4j2b/difference/ptRatioWtopL"        xtitle="p_{T}^{W,lep} / p_{T}^{t,lep}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wb_had"            xtitle="R_{Wb}^{had}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wb_lep"  	      	 xtitle="R_{Wb}^{lep}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_lb"                xtitle="R_{lb}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wt_lep"            xtitle="R_{Wt}^{lep}" ytitle="Events" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wt_had"     	 xtitle="R_{Wt}^{had}" ytitle="Events" scale="linear" />
 </plots>
 <samples>
   <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
@@ -162,6 +164,6 @@
   <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" 	/>
   <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root"	/>
   <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root"    />
-  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110404.mu.nominal.histograms.root" />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statonly.110404.mu.nominal.histograms.root" />
 </inputfiles>
 </document>
