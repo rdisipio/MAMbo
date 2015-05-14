@@ -2,12 +2,14 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
+  <sample name="ttbar_incl"           dsid="105200" xsec="1."      kfact="1."     genevt="1"      generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
   <sample name="ttbar_mtt_1100_1300"  dsid="117304" xsec="0.57116" kfact="1.2158" genevt="69527"  generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
   <sample name="ttbar_mtt_1300_1500"  dsid="117305" xsec="0.19707" kfact="1.2158" genevt="116833" generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
   <sample name="ttbar_mtt_1500_1700"  dsid="117306" xsec="0.07273" kfact="1.2158" genevt="111487" generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
   <sample name="ttbar_mtt_1700_inf"   dsid="117307" xsec="0.05069" kfact="1.2158" genevt="113716" generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
 </samples>
 <files>
+  <file sample="ttbar_incl"          path="nominal/tt_diffxs_8TeV.mc.DiTop.105200.el.nominal.histograms.root" />
   <file sample="ttbar_mtt_1100_1300" path="nominal/tt_diffxs_8TeV.mc.DiTop.117304.el.nominal.histograms.root" />
   <file sample="ttbar_mtt_1300_1500" path="nominal/tt_diffxs_8TeV.mc.DiTop.117305.el.nominal.histograms.root" />
   <file sample="ttbar_mtt_1500_1700" path="nominal/tt_diffxs_8TeV.mc.DiTop.117306.el.nominal.histograms.root" />
