@@ -498,7 +498,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPartonTopPairs(EventData::
   TLorentzVector WL;
   TLorentzVector WH;
 
-  FillHistogramsTopPairs(level, topL, topH, WL, WH, ttSystem, weight);
+  FillHistogramsTopPairs(level, topL, topH, ttSystem, WL, WH, weight);
 
 }
 
