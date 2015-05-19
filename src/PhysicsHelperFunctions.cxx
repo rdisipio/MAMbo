@@ -139,7 +139,13 @@ namespace PhysicsHelperFunctions {
 	if( iindex == bj1_index ) continue;
 	if( iindex == bj2_index ) continue;
 
+//        if( i > 4 ) break; 
+
 	for( int j = 0 ; j < Njets ; ++j ) {
+          if( j == i ) continue;
+
+ //         if( j > 4 ) break;
+
 	  const int jindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(j) : m_p_ed->truth_jets.index.at(j);
 
 	  if( jindex == bj1_index ) continue;
@@ -175,8 +181,6 @@ namespace PhysicsHelperFunctions {
 
     }
      
-
-
     
     //    printf( "  DEBUG: bjets = j%i, j%i ; hadW = j%i + j%i\n", bj1_index, bj2_index, Wj1_index, Wj2_index );
 

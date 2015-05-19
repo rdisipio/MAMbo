@@ -4,7 +4,7 @@ analysis=tt_diffxs_8TeV
 outtag=TTbarResolved_resolved
 syst=particle
 
-queue=T3_BO
+queue=T3_BO_LOCAL
 [[ ${HOSTNAME} == *"cern.ch"* ]] && queue=1nh
 
 dsid=117050
