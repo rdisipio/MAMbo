@@ -1,7 +1,12 @@
 #!/bin/sh
 
 tag=_incl
+
+#tag=_boostedWonly
+#tag=_boostedW
 #tag=_ljets
+#tag=_7TeVpst
+#tag=_noMonoJetW
 
 for ll in el mu ; do
 

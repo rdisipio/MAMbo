@@ -40,9 +40,13 @@
     </Level>
     <Variables>
         <Variable name="pt" title="p_{T} [GeV]" folder="4j2b" >
-            <Bin id="0" nbins="15" edges="0,25,50,75,105,135,165,195,230,265,305,345,390,440,500,1000" particle="topH"/> <!--JP proposed binning-->
-            <Bin id="0" nbins="11" edges="0,45,90,135,185,235,290,350,410,470,530,1000" particle="topL"/>
+
+            <Bin id="0" nbins="15" edges="0,25,50,75,105,135,165,195,230,265,300,350,400,450,500,1000" particle="topH"/> <!--JP, JK modified to match ATLAS 8TeV boosted edges-->
+            <!-- <Bin id="0" nbins="15" edges="0,25,50,75,105,135,165,195,230,265,305,345,390,440,500,1000" particle="topH"/> JP proposed binning--> 
+            <Bin id="0" nbins="11" edges="0,45,90,135,185,235,290,350,400,450,500,1000" particle="topL"/> <!--JP, JK modified to match ATLAS 8TeV boosted edges-->
+            <!-- <Bin id="0" nbins="11" edges="0,45,90,135,185,235,290,350,410,470,530,1000" particle="topL"/>JP proposed binning--> 
 	    <Bin id="0"	nbins="6"  edges="0,35,75,125,170,225,500" particle="tt"/>
+
 	    <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="topH"/> <!--fine binning-->
             <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="topL"/> <!--fine binning-->
       	    <Bin id="1" nbins="50" xmin="0" xmax="500" particle="tt"/>

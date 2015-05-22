@@ -104,7 +104,7 @@ namespace PhysicsHelperFunctions {
     int bj2_index = ( m_target == kReco ) ? m_p_ed->bjets.index.at(1) : m_p_ed->truth_bjets.index.at(1);
 
     int Njets = ( m_target == kReco ) ? m_p_ed->jets.n : m_p_ed->truth_jets.n;
-
+    bool isMonoJetW = false;
 
     if (Run7TevPseudotopAlgo) {
       
@@ -132,20 +132,21 @@ namespace PhysicsHelperFunctions {
       //cout << " OK, running NEW Whad prescription!" << endl;
 
       double bestwmass = 999.e9;
-
       
       for( int i = 0 ; i < Njets ; ++i ) {
 	const int iindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(i) : m_p_ed->truth_jets.index.at(i);
 	if( iindex == bj1_index ) continue;
 	if( iindex == bj2_index ) continue;
 
-//        if( i > 4 ) break; 
+	// test:       if( i > 4 ) break; 
 
 	for( int j = 0 ; j < Njets ; ++j ) {
-          if( j == i ) continue;
 
- //         if( j > 4 ) break;
-
+	  //   skip mono-jet W:    
+	  if ( j == i ) continue;
+	  
+	  // test:         if( j > 4 ) break;
+	  
 	  const int jindex = ( m_target == kReco ) ? m_p_ed->jets.index.at(j) : m_p_ed->truth_jets.index.at(j);
 
 	  if( jindex == bj1_index ) continue;
@@ -161,6 +162,8 @@ namespace PhysicsHelperFunctions {
 	    HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, jindex );
 
 	  double wmass = (Wj1 + Wj2).M();
+	  if (iindex == jindex)
+	    wmass = Wj1.M();
 	  /*	 
 		 cout << "     Wmass: PDG=" << mWPDG << " new=" << wmass << " OldBest=" << bestwmass 
 		 << " |deltaNew|=" << fabs(wmass - mWPDG) 
@@ -191,9 +194,19 @@ namespace PhysicsHelperFunctions {
       HelperFunctions::MakeFourMomentum( m_p_ed->jets, Wj2_index ) :
       HelperFunctions::MakeFourMomentum( m_p_ed->truth_jets, Wj2_index );
       
-    m_R_lb    = (Wj1.Pt()+Wj2.Pt())/(bj1.Pt()+bj2.Pt());       
-    m_ht     += Wj1.Pt()+Wj2.Pt();
-    m_W_had   = Wj1 + Wj2;
+    if (Wj1_index == Wj2_index)
+      isMonoJetW = true;
+
+    if (isMonoJetW) {
+      m_W_had = Wj1;
+      m_R_lb  = Wj1.Pt()/(bj1.Pt()+bj2.Pt());       
+      m_ht   += Wj1.Pt();
+    } else {
+      m_R_lb  = (Wj1.Pt()+Wj2.Pt())/(bj1.Pt()+bj2.Pt());   
+      m_W_had = Wj1 + Wj2;    
+      m_ht   += Wj1.Pt()+Wj2.Pt();
+    }
+
     m_R_Wb_had= m_W_had.Pt()/bj_had.Pt();
     m_R_Wb_lep= m_W_lep.Pt()/bj_lep.Pt();
     m_top_had = bj_had + m_W_had;
@@ -205,7 +218,6 @@ namespace PhysicsHelperFunctions {
     const int W_lep_pid = ( m_p_ed->lepton.q > 0 ) ? 24 : -24;
     const int W_had_pid = -1 * W_lep_pid;
 	
-
     // dump to event data
     const size_t top_lep_index = HelperFunctions::DumpParticleToEventData( m_top_lep, &m_p_ed->reco );
     const size_t top_had_index = HelperFunctions::DumpParticleToEventData( m_top_had, &m_p_ed->reco );
@@ -218,7 +230,6 @@ namespace PhysicsHelperFunctions {
     m_p_ed->reco.pdgId.push_back( ttbar_pid );
     m_p_ed->reco.pdgId.push_back( W_lep_pid );
     m_p_ed->reco.pdgId.push_back( W_had_pid );
-
 
     string prefix = ( m_target == kReco ) ? "reco_" : "ptcl_";
     m_p_ed->iproperty[prefix + "pseudotop_had_jet_1_index"] = Wj1_index;
@@ -250,6 +261,8 @@ namespace PhysicsHelperFunctions {
 
     //    cout << "Size of bjets B: " << m_p_ed->bjets.n << endl;
    
+    return isMonoJetW;
+
   }
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

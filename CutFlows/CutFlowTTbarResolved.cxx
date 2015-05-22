@@ -396,8 +396,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       }
     }
 
-
-
+    bool isMonoJetW_particle = false;
+    bool isMonoJetW_reco = false;
+    
     if (isMCSignal and splitSample) {
       bool splitSampleInvert =  false;
       if (m_config->custom_params_string.count("splitSampleInvert"))
@@ -423,7 +424,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
       
       m_pseudotop_reco->SetChargedLepton(m_config->channel, 0);
-      m_pseudotop_reco->Run();
+      isMonoJetW_reco = m_pseudotop_reco->Run();
       m_VarField["reco_HT_pseudo"] = m_pseudotop_reco->GetHt();
       m_VarField["reco_R_lb"] = m_pseudotop_reco->GetR_lb();
       m_VarField["reco_R_Wb_had"] = m_pseudotop_reco->GetR_Wb_had();
@@ -503,7 +504,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         return success;
 	}
       */
-      m_pseudotop_particle->Run(); 
+      isMonoJetW_particle = m_pseudotop_particle->Run(); 
       m_VarField["particle_HT_pseudo"] = m_pseudotop_particle->GetHt();
       m_VarField["particle_R_lb"] = m_pseudotop_particle->GetR_lb();
       m_VarField["particle_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();

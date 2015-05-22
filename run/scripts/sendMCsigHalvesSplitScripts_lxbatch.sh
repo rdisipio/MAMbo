@@ -26,10 +26,16 @@ for h in 0 1 ; do
     mv $j $i
     chmod +x $i
 
+    outfile=`cat ${i} | grep root | cut -d \- -f 4 | cut -d " " -f 2`
+
     echo  "OK, calling bsub -q 8nh ${i}"
     ###!!!!
-    bsub -q 8nh ${i}
-
+    if [ -f $outfile  ] ; then
+      echo "    Skipping submission, out file exists!!!"
+    else 
+      echo "    Will submit..."
+      bsub -q 8nh ${i}
+    fi
   done
 done
 

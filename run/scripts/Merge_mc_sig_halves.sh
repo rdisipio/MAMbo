@@ -4,6 +4,11 @@
 tag="_incl"
 #tag="_ljets"
 
+#tag="_7TeVpst"
+#tag="_noMonoJetW"
+#tag="_boostedW"
+
+
 for half in 0 1 ; do
   echo "half${half}${tag}"
   for ll in el mu ; do

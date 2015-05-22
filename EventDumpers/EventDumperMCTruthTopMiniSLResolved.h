@@ -31,11 +31,13 @@ class EventDumperMCTruthTopMiniSLResolved
 	cout << "INFO: particles tree index: returned value: " << res << endl;
 
 	// TEST: Marino, JK:
-	TFile * test = TFile::Open( outIndexFileName.c_str(), "recreate" );
-	TTreeIndex *index = (TTreeIndex*) p_c->GetTreeIndex();
-	index->Write( "index" );
-	test->Write();
-	test->Close();
+	/*
+	  TFile * test = TFile::Open( outIndexFileName.c_str(), "recreate" );
+	  TTreeIndex *index = (TTreeIndex*) p_c->GetTreeIndex();
+	  index->Write( "index" );
+	  test->Write();
+	  test->Close();
+	*/
 	
     };
     
@@ -49,12 +51,13 @@ class EventDumperMCTruthTopMiniSLResolved
 	cout << "INFO: partons tree index: returned value: " << res << endl;
 
 	// TEST: Marino, JK:
-	TFile * test = TFile::Open( outIndexFileName.c_str(), "recreate" );
-	TTreeIndex *index = (TTreeIndex*) m_ntuple_parton->fChain->GetTreeIndex();
-	index->Write( "index" );
-	test->Write();
-	test->Close();
-
+	/*
+	  TFile * test = TFile::Open( outIndexFileName.c_str(), "recreate" );
+	  TTreeIndex *index = (TTreeIndex*) m_ntuple_parton->fChain->GetTreeIndex();
+	  index->Write( "index" );
+	  test->Write();
+	  test->Close();
+	*/
     };
 
     void GetEntryWithIndex( unsigned long major, unsigned long minor = 0 ) { 
@@ -227,6 +230,56 @@ class EventDumperMCTruthTopMiniSLResolved
        isDileptonic = ( nthad == 0 ) ? 1 : 0;
        ed->property["isDileptonic"] = isDileptonic;
 //       cout << "DEBUG: isDileptonic: " << isDileptonic << endl;
+
+
+// JK and now also W bosons:
+       int nWs = ntuple_partons->parton_Wboson_n;
+
+       if( nWs < 2 ) {
+          cout << "WARNING: event " << ntuple_partons->eventNumber << " has too few Ws in the MC event record: " << nWs << endl;
+          return success;  
+       }
+
+  //     if( nWs > 2 ) cout << "WARNING: event " << ntuple_partons->eventNumber << " has too many W in the MC event record: " << nWs << endl;
+
+       int nWhad = 0;
+
+       for( int i = 0 ; i < nWs ; ++i ) {
+	  const double W_pT  = ntuple_partons->parton_Wboson_pt[i];
+	  const double W_eta = ntuple_partons->parton_Wboson_eta[i];
+	  const double W_phi = ntuple_partons->parton_Wboson_phi[i];
+	  const double W_m   = ntuple_partons->parton_Wboson_m[i];
+
+	  const int pid     = ntuple_partons->parton_Wboson_pdgId[i];
+	  const int status  = ntuple_partons->parton_Wboson_status[i];
+	  const int barcode = 0;
+	  const float W_q   = ( pid >= 0 ) ? 1 : -1;
+	  const int isHadronic = ntuple_partons->parton_Wboson_isHadronic[i];
+
+/* 
+          if( nWs > 2 ) {
+                cout << "DEBUG: event=" << ntuple_partons->eventNumber << " W bc=" << barcode << " pid=" << pid 
+                     << " status=" << status << " pT=" << W_pT/GeV << " eta=" << W_eta << " m=" << W_m/GeV << " isHad=" << isHadronic << endl;
+          }
+*/
+
+          if( abs(pid) != 24 ) continue;
+
+          TLorentzVector W;
+	  W.SetPtEtaPhiM( W_pT, W_eta, W_phi, W_m );
+	  HelperFunctions::DumpTruthParticleToEventData( W, pid, status, barcode, W_q, &ed->mctruth );	
+
+	  ed->mctruth.property["isHadronicW"].push_back( isHadronic );
+
+          if( isHadronic == 1 ) nWhad++;
+//          cout << "DEBUG: is hadronicW: " << isHadronic << endl;
+       }
+
+       isDileptonic = ( nWhad == 0 ) ? 1 : 0;
+       ed->property["isDileptonicW"] = isDileptonic;
+
+
+
 
        return success;
     };

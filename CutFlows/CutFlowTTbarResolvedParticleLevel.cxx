@@ -549,10 +549,26 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton( EventData
         ilep = 0;
     }
 
+    // add getting truth-level W here:
+    int ilepW, ihadW;
+    const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(3);
+    // TODO: add a consisteny check for dilepton events?
+    if( isHadronicW ) {
+        ihadW = 2;
+        ilepW = 3;
+    }
+    else {
+	ihadW = 3;
+        ilepW = 2;
+    }
+
     FillHistogramsPartonTop(ed->mctruth, ilep, "parton", "topL", weight);
     FillHistogramsPartonTop(ed->mctruth, ihad, "parton", "topH", weight);
     FillHistogramsPartonTop(ed->mctruth, itt, "parton", "tt", weight);
     FillHistogramsPartonTopPairs(ed->mctruth, ilep, ihad, itt, "parton", weight);
+    FillHistogramsPartonTop(ed->mctruth, ilepW, "parton", "WL", weight);
+    FillHistogramsPartonTop(ed->mctruth, ihadW, "parton", "WH", weight);
+
 
     // TODO: sth like:
     //    FillHistogramsPseudoTopPairs(ed->reco, 0, 1, 2, "reco", weight);
@@ -586,15 +602,22 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
   void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopResponseParticleToParton(  EventData * ed, const double weight )
   {
     // particle level
+
+    // see order in // dump to event data
+    // in PhysicsHelperFunctions.cxx:
     Particle particleTopL(ed->reco, 0);
     Particle particleTopH(ed->reco, 1);
     Particle particleTT(ed->reco, 2);
+    Particle particleWL(ed->reco, 3);
+    Particle particleWH(ed->reco, 4);
+    
 
     // parton level
     int ilep, ihad;
     int itt = 2;
 
     const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
+    // TODO: add a consisteny check for dilepton events?
     if( isHadronic ) {
         ihad = 0;
         ilep = 1;
@@ -607,6 +630,21 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     Particle partonTopL(ed->mctruth, ilep);
     Particle partonTopH(ed->mctruth, ihad);
     Particle partonTT(ed->mctruth, itt);
+    
+    // add getting truth-level W:
+    int ilepW, ihadW;
+    const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(3);
+    // TODO: add a consisteny check for dilepton events?
+    if( isHadronicW ) {
+        ihadW = 2;
+        ilepW = 3;
+    }
+    else {
+	ihadW = 3;
+        ilepW = 2;
+    }
+    Particle partonWL(ed->mctruth, ilepW);
+    Particle partonWH(ed->mctruth, ihadW);
 
     // particle -> parton
     FillMatrix("particle/4j2b/topL/Matrix_particle_parton", particleTopL, partonTopL, weight);
@@ -615,6 +653,11 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     FillMatrix("parton/4j2b/topL/Matrix_parton_particle", partonTopL, particleTopL, weight);
     FillMatrix("parton/4j2b/topH/Matrix_parton_particle", partonTopH, particleTopH, weight);
     FillMatrix("parton/4j2b/tt/Matrix_parton_particle", partonTT, particleTT, weight);
+
+    FillMatrix("particle/4j2b/WL/Matrix_particle_parton", particleWL, partonWL, weight);
+    FillMatrix("particle/4j2b/WH/Matrix_particle_parton", particleWH, partonWH, weight);
+    FillMatrix("parton/4j2b/WL/Matrix_parton_particle", partonWL, particleWL, weight);
+    FillMatrix("parton/4j2b/WH/Matrix_parton_particle", partonWH, particleWH, weight);
     
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Pout",m_VarField.find("parton_Pout")->second / GeV, m_VarField.find("particle_Pout")->second / GeV, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_z_ttbar",m_VarField.find("parton_z_ttbar")->second, m_VarField.find("particle_z_ttbar")->second, weight);
@@ -623,6 +666,7 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_HT_ttbar",m_VarField.find("parton_HT_ttbar")->second / GeV, m_VarField.find("particle_HT_ttbar")->second / GeV, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Chi_ttbar",m_VarField.find("parton_Chi_ttbar")->second, m_VarField.find("particle_Chi_ttbar")->second, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Salam_ttbar",m_VarField.find("parton_Salam_ttbar")->second, m_VarField.find("particle_Salam_ttbar")->second, weight);
+
     m_hm->FillMatrices("parton/4j2b/topL/Matrix_parton_particle_px",m_VarField.find("parton_pxL")->second / GeV, m_VarField.find("particle_pxL")->second / GeV, weight);
     m_hm->FillMatrices("parton/4j2b/topH/Matrix_parton_particle_px",m_VarField.find("parton_pxH")->second / GeV, m_VarField.find("particle_pxH")->second / GeV, weight);
     m_hm->FillMatrices("parton/4j2b/topL/Matrix_parton_particle_py",m_VarField.find("parton_pyL")->second / GeV, m_VarField.find("particle_pyL")->second / GeV, weight);
@@ -637,6 +681,7 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_HT_ttbar",m_VarField.find("particle_HT_ttbar")->second / GeV, m_VarField.find("parton_HT_ttbar")->second / GeV, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Chi_ttbar",m_VarField.find("particle_Chi_ttbar")->second, m_VarField.find("parton_Chi_ttbar")->second, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Salam_ttbar",m_VarField.find("particle_Salam_ttbar")->second, m_VarField.find("parton_Salam_ttbar")->second, weight);
+
     m_hm->FillMatrices("particle/4j2b/topL/Matrix_particle_parton_px",m_VarField.find("particle_pxL")->second / GeV, m_VarField.find("parton_pxL")->second / GeV, weight);
     m_hm->FillMatrices("particle/4j2b/topH/Matrix_particle_parton_px",m_VarField.find("particle_pxH")->second / GeV, m_VarField.find("parton_pxH")->second / GeV, weight);
     m_hm->FillMatrices("particle/4j2b/topL/Matrix_particle_parton_py",m_VarField.find("particle_pyL")->second / GeV, m_VarField.find("parton_pyL")->second / GeV, weight);
