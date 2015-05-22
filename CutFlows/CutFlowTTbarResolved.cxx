@@ -1783,6 +1783,11 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     FillMatrix("parton/4j2b/topL/Matrix_parton_particle", partonTopL, particleTopL, weight);
     FillMatrix("parton/4j2b/topH/Matrix_parton_particle", partonTopH, particleTopH, weight);
     FillMatrix("parton/4j2b/tt/Matrix_parton_particle", partonTT, particleTT, weight);
+
+    FillMatrix("particle/4j2b/WL/Matrix_particle_parton", particleWL, partonWL, weight);
+    FillMatrix("particle/4j2b/WH/Matrix_particle_parton", particleWH, partonWH, weight);
+    FillMatrix("parton/4j2b/WL/Matrix_parton_particle", partonWL, particleWL, weight);
+    FillMatrix("parton/4j2b/WH/Matrix_parton_particle", partonWH, particleWH, weight);
     
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Pout",m_VarField.find("parton_Pout")->second / GeV, m_VarField.find("particle_Pout")->second / GeV, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_z_ttbar",m_VarField.find("parton_z_ttbar")->second, m_VarField.find("particle_z_ttbar")->second, weight);
