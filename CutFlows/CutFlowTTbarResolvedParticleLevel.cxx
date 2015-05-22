@@ -551,15 +551,15 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParton( EventData
 
     // add getting truth-level W here:
     int ilepW, ihadW;
-    const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(3);
+    const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(0);
     // TODO: add a consisteny check for dilepton events?
     if( isHadronicW ) {
-        ihadW = 2;
-        ilepW = 3;
+        ihadW = 3;
+        ilepW = 4;
     }
     else {
-	ihadW = 3;
-        ilepW = 2;
+	ihadW = 4;
+        ilepW = 3;
     }
 
     FillHistogramsPartonTop(ed->mctruth, ilep, "parton", "topL", weight);
@@ -633,15 +633,15 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     
     // add getting truth-level W:
     int ilepW, ihadW;
-    const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(3);
+    const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(0);
     // TODO: add a consisteny check for dilepton events?
     if( isHadronicW ) {
-        ihadW = 2;
-        ilepW = 3;
+        ihadW = 3;
+        ilepW = 4;
     }
     else {
-	ihadW = 3;
-        ilepW = 2;
+	ihadW = 4;
+        ilepW = 3;
     }
     Particle partonWL(ed->mctruth, ilepW);
     Particle partonWH(ed->mctruth, ihadW);

@@ -1495,7 +1495,6 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const 
     int itt = 2;
     
     const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
-     
     if( isHadronic ) {
         ihad = 0;
         ilep = 1;
@@ -1505,9 +1504,22 @@ void CutFlowTTbarResolved::FillHistogramsPseudotopParton( EventData * ed, const 
         ilep = 0;
     }
 
+   const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(0);
+   int ilepW, ihadW;
+    if( isHadronicW ) {
+        ihadW = 3;
+        ilepW = 4;
+    }
+    else {
+        ihadW = 4;
+        ilepW = 3;
+    }
+
     FillHistogramsPartonTop(ed->mctruth, ilep, "parton", "topL", weight);
     FillHistogramsPartonTop(ed->mctruth, ihad, "parton", "topH", weight);
     FillHistogramsPartonTop(ed->mctruth, itt, "parton", "tt", weight);   
+    FillHistogramsPartonTop(ed->mctruth, ilepW, "parton", "WL", weight);
+    FillHistogramsPartonTop(ed->mctruth, ihadW, "parton", "WH", weight);
     FillHistogramsPartonTopPairs(ed->mctruth, ilep, ihad, itt, "parton", weight);   
 
 }
@@ -1644,8 +1656,8 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
      Particle recoTopL(ed->reco, 0);
      Particle recoTopH(ed->reco, 1);
      Particle recoTT(ed->reco, 2);
-  //   Particle recoWL(ed->reco, 3);
-  //   Particle recoWH(ed->reco, 4);
+     Particle recoWL(ed->reco, 3);
+     Particle recoWH(ed->reco, 4);
 
     // parton level
     int ilep, ihad;
@@ -1660,10 +1672,24 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
         ihad = 1;
         ilep = 0;
     }
+
+   const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(0);
+   int ilepW, ihadW;
+    if( isHadronicW ) {
+        ihadW = 3;
+        ilepW = 4;
+    }
+    else {
+        ihadW = 4;
+        ilepW = 3;
+    }
     
      Particle partonTopL(ed->mctruth, ilep);
      Particle partonTopH(ed->mctruth, ihad);
      Particle partonTT(ed->mctruth, itt);
+     Particle partonWL(ed->mctruth, ilepW);
+     Particle partonWH(ed->mctruth, ihadW);
+
     
     //  reco > parton
      FillMatrix("reco/4j2b/topL/Matrix_reco_parton", recoTopL, partonTopL, weight);
@@ -1671,7 +1697,14 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
      FillMatrix("reco/4j2b/tt/Matrix_reco_parton", recoTT, partonTT, weight);
      FillMatrix("parton/4j2b/topL/Matrix_parton_reco", partonTopL, recoTopL, weight);
      FillMatrix("parton/4j2b/topH/Matrix_parton_reco", partonTopH, recoTopH, weight);
+
      FillMatrix("parton/4j2b/tt/Matrix_parton_reco", partonTT, recoTT, weight);
+     FillMatrix("reco/4j2b/tt/Matrix_reco_parton", recoTT, partonTT, weight);
+
+     FillMatrix("reco/4j2b/WL/Matrix_reco_parton", recoWL, partonWL, weight);
+     FillMatrix("reco/4j2b/WH/Matrix_reco_parton", recoWH, partonWH, weight);
+     FillMatrix("parton/4j2b/WL/Matrix_parton_reco", partonWL, recoWL, weight);
+     FillMatrix("parton/4j2b/WH/Matrix_parton_reco", partonWH, recoWH, weight);
      
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_Pout",m_VarField.find("reco_Pout")->second / GeV, m_VarField.find("parton_Pout")->second / GeV, weight);
      m_hm->FillMatrices("reco/4j2b/difference/Matrix_reco_parton_z_ttbar",m_VarField.find("reco_z_ttbar")->second, m_VarField.find("parton_z_ttbar")->second, weight);
@@ -1725,10 +1758,23 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
         ihad = 1;
         ilep = 0;
     }
-    
+
+  const bool isHadronicW = ed->mctruth.property["isHadronicW"].at(0);
+   int ilepW, ihadW;
+    if( isHadronicW ) {
+        ihadW = 3;
+        ilepW = 4;
+    }
+    else {
+        ihadW = 4;
+        ilepW = 3;
+    }
+
     Particle partonTopL(ed->mctruth, ilep);
     Particle partonTopH(ed->mctruth, ihad);
     Particle partonTT(ed->mctruth, itt);
+    Particle partonWL(ed->mctruth, ilepW);
+    Particle partonWH(ed->mctruth, ihadW);
     
     // particle > parton
     FillMatrix("particle/4j2b/topL/Matrix_particle_parton", particleTopL, partonTopL, weight);
