@@ -1,17 +1,13 @@
 #!/bin/sh
 
-#tag=_incl
-tag=_ljets
+tag=_particle
 
-./scripts/makeRunScriptsMC_sig_PowHeg_hdamp_eos_split_halves.sh > _run_halves${tag}.sh
+./scripts/makeRunScriptsMCTruth_sig_PowHeg_hdamp_eos_split.sh > _run_particle${tag}.sh
 
-for h in 0 1 ; do
-
-  cat _run_halves${tag}.sh | grep half${h} > _run_half${h}${tag}.sh
-  split -l 1 _run_half${h}${tag}.sh _run_half${h}${tag}_a
-  chmod +x _run_half${h}${tag}_a*
+  split -l 1 _run_particle${tag}.sh _run_particle${tag}_a
+  chmod +x _run_particle${tag}_a*
   
-  for i in `ls _run_half${h}${tag}_a*` ; do
+  for i in `ls _run_particle${tag}_a*` ; do
 
     j=${i}_tmp
     echo "#!/bin/bash" > $j
@@ -34,8 +30,8 @@ for h in 0 1 ; do
       echo "    Skipping submission, out file exists!!!"
     else 
       echo "    Will submit..."
-      bsub -q 8nh ${i}
+      ###bsub -q 8nh ${i}
     fi
   done
-done
+
 

@@ -15,7 +15,7 @@ for ll in el mu ; do
     cfg=control/analysis_params_TTbarResolved_dilepton_${ll}_eos_${base}.xml
     cat control/analysis_params_TTbarResolved_dilepton_${ll}_eos.xml | sed "s|list_eos_new_mc.txt|${mclist}|g" > ${cfg}
     # run:
-    echo "   runMAMbo ${opt} -p ${cfg} -f lists/${list} -o histograms_PowHeg_${ll}_dilepton_${base}.root >& log_${ll}_dilepton_${base}.txt & "
+    echo "   runMAMbo ${opt} -p ${cfg} -f lists/${list} -o histograms_PowHeg_${ll}_dilepton_${base}.root >& log_${ll}_dilepton_${base}.txt "
   done
 
 done
