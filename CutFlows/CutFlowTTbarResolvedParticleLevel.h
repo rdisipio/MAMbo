@@ -49,7 +49,7 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
   PseudoTopMatching       * m_pseudotop_matching_particle2parton;
 
  private:
-   vector<string> alias;
+   vector<string> m_alias;
    std::map < string, double > m_VarField;
 
 };

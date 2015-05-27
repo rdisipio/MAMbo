@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# jiri kvita, 2015
+
 import os, sys
 from ROOT import *
 from array import array
@@ -35,8 +37,8 @@ TitleNames = { 'pt' : 'p_{T}',
                'R_lb' : '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]',
                'R_Wb_had' : 'p_{T}^{W,had} / p_{T}^{b,had}',
                'R_Wb_lep' : 'p_{T}^{W,lep} / p_{T}^{b,lep}',
-               'ptRatioWtopL' : 'p_{T}^{W,had} / p_{T}^{t,had}',
-               'ptRatioWtopH' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
+               'R_Wt_had' : 'p_{T}^{W,had} / p_{T}^{t,had}',
+               'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
                }
 CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}', 
               'match' : 'Misassignment correction f_{match}', 
@@ -216,7 +218,6 @@ ftag=''
 
 rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 
-
 os.system('mkdir png eps pdf')
 
 for ll in ljets:
@@ -239,17 +240,20 @@ for ll in ljets:
 
     for obj in Obj:
         for var in Var:
-            #DrawCorrection(ll, rfile, pfile, obj, var, 0)
-            #DrawCorrection(ll, rfile, pfile, obj, var, 1)
-            #DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            DrawCorrection(ll, rfile, pfile, obj, var, 0)
+            DrawCorrection(ll, rfile, pfile, obj, var, 1)
+            DrawCorrection(ll, rfile, pfile, obj, var, 2)
             pass
 
 
     SpecObj = ['difference' ]
     SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar', 
                'HT_ttbar', 'HT_pseudo',
-               'R_lb', 'R_Wb_lep', 'R_Wb_had',
-               'ptRatioWtopL', 'ptRatioWtopH' 
+               'R_lb', 
+               'R_Wb_lep', 
+               'R_Wb_had',
+               'R_Wt_lep', 
+               'R_Wt_had' 
     ]
 
     for obj in SpecObj:

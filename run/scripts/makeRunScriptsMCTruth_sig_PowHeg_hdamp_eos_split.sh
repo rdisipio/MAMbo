@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tag=_particle
+tag=_particle_ljets
 
 
 for ll in el mu ; do

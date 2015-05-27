@@ -1,8 +1,8 @@
 #!/bin/sh
 
 
-tag="_incl"
-#tag="_ljets"
+#tag="_incl"
+tag="_ljets"
 
 #tag="_7TeVpst"
 #tag="_noMonoJetW"

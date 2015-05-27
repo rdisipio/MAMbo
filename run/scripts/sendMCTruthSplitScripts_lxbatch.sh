@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tag=_particle
+tag=_particle_ljets
 
 ./scripts/makeRunScriptsMCTruth_sig_PowHeg_hdamp_eos_split.sh > _run_particle${tag}.sh
 
@@ -30,7 +30,7 @@ tag=_particle
       echo "    Skipping submission, out file exists!!!"
     else 
       echo "    Will submit..."
-      ###bsub -q 8nh ${i}
+      bsub -q 8nh ${i}
     fi
   done
 

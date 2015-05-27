@@ -8,7 +8,7 @@ CutFlowTTbarResolved::CutFlowTTbarResolved()
     m_pseudotop_matching_reco2parton     = new PseudoTopMatching( PseudoTopMatching::kRecoToParton );
     m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
     
-    alias = {
+    m_alias = {
         "beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
     };
 
@@ -364,7 +364,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       }
     }
 
-    */
+    */    
 
     //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
 
@@ -828,7 +828,7 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     // 0 All events
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
-//    FillHistogramsControlPlotsParticle( values );
+    //    FillHistogramsControlPlotsParticle( values );
     
     // 1 trigger 
     PassedCut( "LPLUSJETS", "particle_unweight" );
@@ -1006,7 +1006,7 @@ double CutFlowTTbarResolved::GetPDFWeight( EventData * ed )
 void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( ControlPlotValues& values )
 {
     const int cut = GetLastPassedCut( "LPLUSJETS", "reco_weighted" ) - 1;    
-    string path = "reco/cutflow/" + alias[cut] + "/";    
+    string path = "reco/cutflow/" + m_alias[cut] + "/";    
     FillHistograms(path, values);   
 } 
   
@@ -1020,7 +1020,7 @@ void CutFlowTTbarResolved::MoreCRFillHistogramsControlPlotsReco( string mystr, C
 void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {    
     const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) - 1;    
-    string path = "parton/cutflow/" + alias[cut] + "/";
+    string path = "parton/cutflow/" + m_alias[cut] + "/";
     FillHistograms(path, values);
 }
 

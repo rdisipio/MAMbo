@@ -6,7 +6,7 @@ CutFlowTTbarResolvedParticleLevel::CutFlowTTbarResolvedParticleLevel()
 
    m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
 
-   alias = {
+   m_alias = {
 	"beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
    };
 }
@@ -174,10 +174,12 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
 
     ControlPlotValues values;
     values.weight = weight;
-    values.lep_pt  = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.pT.at(0) : 0.;;
-    values.lep_eta = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.eta.at(0) : 0.;;
-    values.lep_phi = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.phi.at(0) : 0.;;
-values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;;
+    values.lep_pt  = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.pT.at(0) : 0.;
+    //    cout << "   ed->truth_leptons.n=" << ed->truth_leptons.n << " lep_pt=" << values.lep_pt << endl;
+    
+    values.lep_eta = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.eta.at(0) : 0.;
+    values.lep_phi = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.phi.at(0) : 0.;
+    values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;
     values.jet_n   = ed->truth_jets.n;
     values.bjet_n  = ed->truth_bjets.n;
     values.fjet_n  = ed->truth_fjets.n;
@@ -202,7 +204,7 @@ values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;;
         jet.m   = ed->truth_bjets.m.at(bj);
         values.bJets.push_back(&jet);
     }
-// 0 All events
+   // 0 All events
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     FillHistogramsControlPlotsParticle( values );
@@ -277,9 +279,12 @@ values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;;
 
 void CutFlowTTbarResolvedParticleLevel::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {
-  //    const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) -1;
-    //string path = "parton/cutflow/" + alias[cut] + "/";
-    //FillHistograms(path, values);
+  // JK : TODO to uncomment?? Useless, we do not du any cuts in this class;) We get particle before cuts;)
+  //const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) -1;
+  //string path = "parton/cutflow/" + m_alias[cut] + "/";
+  //  cout << "FillHistogramsControlPlotsParticle path=" << path.c_str() << " cut=" << cut << endl;
+  // cout << "     lep_pt=" << values.lep_pt << endl;
+  //FillHistograms(path, values);
 }
 
 
@@ -436,7 +441,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLo
    m_VarField[level+"_pzH"] = topH.Pz();
 
    // pT asymmetry 
-//   const double PtAsymm_ttbar =	( topH_pT > topL_pT ) ? ( topH_pT - topL_pT ) / HT_ttbar : ( topL_pT - topH_pT ) / HT_ttbar;
+   //   const double PtAsymm_ttbar =	( topH_pT > topL_pT ) ? ( topH_pT - topL_pT ) / HT_ttbar : ( topL_pT - topH_pT ) / HT_ttbar;
    const double PtAsymm_ttbar =	( topH_pT - topL_pT ) / HT_ttbar;
    m_VarField[level+"_PtAsymm_ttbar"] =	PtAsymm_ttbar;
    m_hm->FillHistograms(path + "PtAsymm_ttbar", PtAsymm_ttbar, weight );

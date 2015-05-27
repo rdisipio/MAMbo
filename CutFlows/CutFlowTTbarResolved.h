@@ -87,7 +87,7 @@ class CutFlowTTbarResolved : public CutFlow
     
 private:
 
-    vector<string> alias;
+    vector<string> m_alias;
     TRandom3 *m_rand; 
     std::map < string, double > m_VarField;
 
