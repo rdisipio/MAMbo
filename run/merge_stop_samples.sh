@@ -16,7 +16,6 @@ do
        MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outdir}/${syst}/${analysis}.mc.SingleTop.${ch}.${syst}.histograms.root &
    done
    wait
-done
 
 echo
 echo //////////////////////////////////////
@@ -26,3 +25,4 @@ hadd -f ${outdir}/${syst}/${analysis}.mc.SingleTop.co.${syst}.histograms.root \
         ${outdir}/${syst}/${analysis}.mc.SingleTop.el.${syst}.histograms.root \
         ${outdir}/${syst}/${analysis}.mc.SingleTop.mu.${syst}.histograms.root
   
+done

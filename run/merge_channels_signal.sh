@@ -69,7 +69,7 @@ echo ////////////////////////////////////////
 echo
 echo "Creating combined uncertainty bands"
 
-./make_uncertainty_band.sh ${dsid} co nominal
+#./make_uncertainty_band.sh ${dsid} co nominal
 
 # make uncertainty bands
 #MAMbo-makeUncertaintyBand.py -c ${paramsdir}/Uncertainty_${dsid}_co_statonly.xml -o ${outdir}/tt_diffxs_8TeV.mc.Uncertainty_statonly.${dsid}.co.nominal.histograms.root \

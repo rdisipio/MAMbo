@@ -16,25 +16,29 @@ listfile_mu=${systdir}/signal_systematics_mujets_only.dat
 cofile=${outdir}/nominal/${analysis}.data.Combined.co.histograms.root
 elfile=${outdir}/nominal/${analysis}.data.Egamma.el.histograms.root
 mufile=${outdir}/nominal/${analysis}.data.Muons.mu.histograms.root
-hadd -f ${cofile} ${elfile} ${mufile}
+hadd -f ${cofile} ${elfile} ${mufile} &
+
+syst=nominal
 
 # fake leptons
-for syst in nominal
-do
    cofile=${outdir}/nominal/${analysis}.qcd.Combined.co.${syst}.histograms.root
    elfile=${outdir}/nominal/${analysis}.qcd.Egamma.el.${syst}.histograms.root
    mufile=${outdir}/nominal/${analysis}.qcd.Muons.mu.${syst}.histograms.root
-   hadd -f ${cofile} ${elfile} ${mufile}
-done
+   hadd -f ${cofile} ${elfile} ${mufile} &
 
-# nominal MC
-syst=nominal
-for sample in SingleTop Wjets Zjets Diboson Background
+# Wjets
+    cofile=${outdir}/${syst}/${analysis}.mc.Wjets.co.tt_chasymm.${syst}.histograms.root
+    elfile=${outdir}/${syst}/${analysis}.mc.Wjets.el.tt_chasymm.${syst}.histograms.root
+    mufile=${outdir}/${syst}/${analysis}.mc.Wjets.mu.tt_chasymm.${syst}.histograms.root
+    hadd -f ${cofile} ${elfile} ${mufile} &
+
+for sample in SingleTop Zjets Diboson Background
 do
     cofile=${outdir}/${syst}/${analysis}.mc.${sample}.co.${syst}.histograms.root
     elfile=${outdir}/${syst}/${analysis}.mc.${sample}.el.${syst}.histograms.root
     mufile=${outdir}/${syst}/${analysis}.mc.${sample}.mu.${syst}.histograms.root
-    hadd -f ${cofile} ${elfile} ${mufile}
+    hadd -f ${cofile} ${elfile} ${mufile} &
 done
+wait
 echo "Done.."
 echo
