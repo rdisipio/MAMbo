@@ -1,5 +1,7 @@
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-december-combined_pdf_dijet_7/user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586495._000001.el.root
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-december-combined_pdf_dijet_7/user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586495._000002.el.root
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-december-combined_pdf_dijet_7/user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586495._000003.el.root
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-december-combined_pdf_dijet_7/user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586495._000004.el.root
-/gpfs_data/local/atlas/mromano/Resolved8TeV/minintuples-december-combined_pdf_dijet_7/user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586495._000005.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000001.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000002.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000003.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000004.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000005.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000006.el.root
+user.mromano.147107.AlpgenPythia_Auto_P2011C_ZeeNp2.e1879_s1581_s1586_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5520154._000007.el.root
