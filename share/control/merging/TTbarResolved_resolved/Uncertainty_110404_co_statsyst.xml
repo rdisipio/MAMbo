@@ -118,24 +118,6 @@
         <shift side="up"   file="MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.co.MISTAGSFUP.histograms.root" />
         <shift side="down" file="MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.co.MISTAGSFDOWN.histograms.root" />
     </syst> 
-    <syst name="ees" type="two_sided" >
-        <shift side="up"   file="ees_up/tt_diffxs_8TeV.mc.DiTop.110404.co.ees_up.histograms.root" />
-        <shift side="down" file="ees_down/tt_diffxs_8TeV.mc.DiTop.110404.co.ees_down.histograms.root" />
-    </syst>
-    <syst name="eer" type="two_sided" >
-        <shift side="up"   file="eer_up/tt_diffxs_8TeV.mc.DiTop.110404.co.eer_up.histograms.root" />
-        <shift side="down" file="eer_down/tt_diffxs_8TeV.mc.DiTop.110404.co.eer_down.histograms.root" />
-    </syst>
-    <syst name="musc" type="two_sided" >
-        <shift side="up"   file="musc_up/tt_diffxs_8TeV.mc.DiTop.110404.co.musc_up.histograms.root" />
-        <shift side="down" file="musc_down/tt_diffxs_8TeV.mc.DiTop.110404.co.musc_down.histograms.root" />
-    </syst>
-    <syst name="muid_res" type="one_sided" >
-        <shift side="single"   file="muid_res/tt_diffxs_8TeV.mc.DiTop.110404.co.muid_res.histograms.root" />
-    </syst>
-    <syst name="mums_res" type="one_sided" >
-        <shift side="single"   file="mums_res/tt_diffxs_8TeV.mc.DiTop.110404.co.mums_res.histograms.root" />
-    </syst>
     <syst name="lep_idSF" type="two_sided" > 
         <shift side="up"   file="lep_idSF_up/tt_diffxs_8TeV.mc.DiTop.110404.co.lep_idSF_up.histograms.root" />
         <shift side="down" file="lep_idSF_down/tt_diffxs_8TeV.mc.DiTop.110404.co.lep_idSF_down.histograms.root" />
@@ -151,18 +133,62 @@
     <syst name="jeff" type="one_sided" >
         <shift side="single" file="jeff/tt_diffxs_8TeV.mc.DiTop.110404.co.jeff.histograms.root" />
     </syst>
+    <syst name="ees" type="two_sided" >
+        <shift side="up"   file="ees_up/tt_diffxs_8TeV.mc.DiTop.110404.co.ees_up.histograms.root" />
+        <shift side="down" file="ees_down/tt_diffxs_8TeV.mc.DiTop.110404.co.ees_down.histograms.root" />
+    </syst>
+    <syst name="eer" type="two_sided" >
+        <shift side="up"   file="eer_up/tt_diffxs_8TeV.mc.DiTop.110404.co.eer_up.histograms.root" />
+        <shift side="down" file="eer_down/tt_diffxs_8TeV.mc.DiTop.110404.co.eer_down.histograms.root" />
+    </syst>
 <!--
     <syst name="IFSR" type="two_sided" >
         <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.co.radHi.histograms.root" />
-        <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.co.radLo.histograms.root" />
+        <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.co.radLo.histograms.root"	/>
     </syst>
 -->
+<!--
+    <syst name="IFSR" type="one_sided" >
+        <shift side="single" file="radLo/tt_diffxs_8TeV.mc.DiTop.110407.co.radLo.histograms.root" />
+    </syst>
+    <syst name="PDF" type="two_sided" >
+        <shift side="up"   file="PDF_up/tt_diffxs_8TeV.mc.DiTop.110404.co.PDF_up.histograms.root" />
+        <shift side="down" file="PDF_down/tt_diffxs_8TeV.mc.DiTop.110404.co.PDF_down.histograms.root" />
+    </syst>
+-->
+
   </sample>
-  <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.co.nominal.histograms.root" />
-  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.co.nominal.histograms.root" />
+  <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.co.nominal.histograms.root" >
+    <syst name="st_xsec" type="two_sided" >
+       <shift side="up"   file="st_xsec_up/tt_diffxs_8TeV.mc.SingleTop.co.st_xsec_up.histograms.root" /> 
+       <shift side="down" file="st_xsec_down/tt_diffxs_8TeV.mc.SingleTop.co.st_xsec_down.histograms.root" />
+    </syst>
+  </sample>
+<!--  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.co.nominal.histograms.root" /> -->
+  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.co.tt_chasymm.nominal.histograms.root" >
+     <syst name="WjetsSF" type="two_sided" >
+       <shift side="up"   file="WjetsSF_up/tt_diffxs_8TeV.mc.Wjets.co.tt_chasymm.WjetsSF_up.histograms.root" />
+       <shift side="down" file="WjetsSF_down/tt_diffxs_8TeV.mc.Wjets.co.tt_chasymm.WjetsSF_down.histograms.root" />
+     </syst>
+  </sample>
   <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.co.nominal.histograms.root" />
   <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.co.nominal.histograms.root" />
-  <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root" />
+  <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root" >
+    <!-- see: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod -->
+    <syst name="QCD_MM_FAKE_MC" type="two_sided" >
+      <shift side="up"   file="QCD_MM_EL_FAKE_MC_UP/tt_diffxs_8TeV.qcd.Combined.co.QCD_MM_EL_FAKE_MC_UP.histograms.root" />
+      <shift side="down" file="QCD_MM_EL_FAKE_MC_DOWN/tt_diffxs_8TeV.qcd.Combined.co.QCD_MM_EL_FAKE_MC_DOWN.histograms.root" />
+    </syst>
+    <syst name="QCD_MM_FAKE_ALTERNATE" type="one_sided" >
+       <shift side="single" file="QCD_MM_EL_FAKE_ALTERNATE/tt_diffxs_8TeV.qcd.Combined.co.QCD_MM_EL_FAKE_ALTERNATE.histograms.root" />
+    </syst>
+    <syst name="QCD_MM_REAL_ALTERNATE" type="one_sided" >
+       <shift side="single" file="QCD_MM_EL_REAL_ALTERNATE/tt_diffxs_8TeV.qcd.Combined.co.QCD_MM_EL_REAL_ALTERNATE.histograms.root" />
+    </syst>
+    <syst name="QCD_MM_PAR_ALTERNATE" type="one_sided" >
+       <shift side="single" file="QCD_MM_EL_PAR_ALTERNATE/tt_diffxs_8TeV.qcd.Combined.co.QCD_MM_EL_PAR_ALTERNATE.histograms.root" />
+    </syst>
+  </sample>
 </samples>
 </document>
 

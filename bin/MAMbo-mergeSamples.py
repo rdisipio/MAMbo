@@ -226,6 +226,8 @@ if __name__ == "__main__":
         print "ERROR: please specify a config file in xml format."
         exit(1)
 
+   print "INFO: Config file name:", configFileName
+
    outFileName = opts.output
    print "INFO: Output file name:", outFileName
  

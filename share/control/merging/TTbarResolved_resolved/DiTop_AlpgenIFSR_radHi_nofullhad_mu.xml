@@ -14,15 +14,15 @@
   <sample name="lnjj_Np4incl"	dsid="201234" xsec="4.3842" kfact="2.0010" genevt="1530499" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
 </samples>
 <files>
-  <file sample="lnln_Np0" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201030.el.radHi.histograms.root" />
-  <file sample="lnln_Np1" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201031.el.radHi.histograms.root" />
-  <file sample="lnln_Np2" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201032.el.radHi.histograms.root" />
-  <file sample="lnln_Np3" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201033.el.radHi.histograms.root" />
-  <file sample="lnln_Np4incl" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201034.el.radHi.histograms.root" />
-  <file sample="lnjj_Np0"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201230.el.radHi.histograms.root" />
-  <file sample="lnjj_Np1"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201231.el.radHi.histograms.root" />
-  <file sample="lnjj_Np2"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201232.el.radHi.histograms.root" />
-  <file sample="lnjj_Np3"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201233.el.radHi.histograms.root" />
-  <file sample="lnjj_Np4incl"   path="radHi/tt_diffxs_8TeV.mc.DiTop.201234.el.radHi.histograms.root" />
+  <file sample="lnln_Np0" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201030.mu.radHi.histograms.root" />
+  <file sample="lnln_Np1" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201031.mu.radHi.histograms.root" />
+  <file sample="lnln_Np2" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201032.mu.radHi.histograms.root" />
+  <file sample="lnln_Np3" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201033.mu.radHi.histograms.root" />
+  <file sample="lnln_Np4incl" 	path="radHi/tt_diffxs_8TeV.mc.DiTop.201034.mu.radHi.histograms.root" />
+  <file sample="lnjj_Np0"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201230.mu.radHi.histograms.root" />
+  <file sample="lnjj_Np1"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201231.mu.radHi.histograms.root" />
+  <file sample="lnjj_Np2"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201232.mu.radHi.histograms.root" />
+  <file sample="lnjj_Np3"       path="radHi/tt_diffxs_8TeV.mc.DiTop.201233.mu.radHi.histograms.root" />
+  <file sample="lnjj_Np4incl"   path="radHi/tt_diffxs_8TeV.mc.DiTop.201234.mu.radHi.histograms.root" />
 </files>
 </document>

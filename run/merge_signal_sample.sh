@@ -28,3 +28,8 @@ do
 
   MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.${ch}.${syst}.histograms.root
 done
+
+hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.co.${syst}.histograms.root \
+        ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.el.${syst}.histograms.root \
+        ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.mu.${syst}.histograms.root
+

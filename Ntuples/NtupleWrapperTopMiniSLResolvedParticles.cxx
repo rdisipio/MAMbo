@@ -60,8 +60,9 @@ bool NtupleWrapperTopMiniSLResolvedParticles::MakeEventInfo( EventData * ed )
   ed->info.eventNumber     = GET_VALUE( eventNumber );
   ed->info.runNumber       = GET_VALUE( runNumber );
   ed->info.mcChannelNumber = GET_VALUE( channelNumber );
-//  ed->info.mcWeight        = GET_VALUE( eventWeight ); //MC@NLO ??
-  ed->info.mcWeight = 1.; // bug in D3PD2MiniSL? All zeros. Can't use MC@NLO at the moment.
+  ed->info.mcWeight        = GET_VALUE( eventWeight ); //MC@NLO ??
+//  ed->info.mcWeight = 1.; // bug in D3PD2MiniSL? All zeros. Can't use MC@NLO at the moment.
+  if( fabs(ed->info.mcWeight) < 1e-4 ) ed->info.mcWeight = 1.;
 
   return success;
 }

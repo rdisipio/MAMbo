@@ -273,6 +273,9 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
          ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( "reco/cutflow/3j0b/MC_gen_weights" );
          h->Fill( weight_reco_level );
+         h = (ROOT_TH1_t*)m_hm->GetHistogram( "particle/cutflow/3j0b/MC_gen_weights" );
+         h->Fill( weight_particle_level );
+ 	 h = NULL;
 
 	 // some Single Top samples have buggy mc weight 
          if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);

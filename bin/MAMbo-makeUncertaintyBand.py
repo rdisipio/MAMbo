@@ -277,55 +277,78 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                     h_d = hlist[hpattern+"down"]
 
                     dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
-                    dy_d = h.GetBinContent(i+1) - h_d.GetBinContent(i+1)
+                    dy_d = h_d.GetBinContent(i+1) - h.GetBinContent(i+1) 
 
                  elif samples_configuration[sample].systematics[systname].has_key( "single" ):
                     h_sys = hlist[hpattern+"single"]
 
                     dy_u = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
-                    dy_d = h_sys.GetBinContent(i+1) - h.GetBinContent(i+1)
+                    dy_d = -dy_u
                  else:
                     print "ERROR: side is neither up, down or single"
                     exit(1)
 
-                 if dy_u > 0. and dy_d > 0.:
+                 if dy_u > 0. and dy_d < 0.:
                     # normal behavior
                     sample_uncertainty[systname]['u'][i] = dy_u
                     sample_uncertainty[systname]['d'][i] = dy_d
-                 elif dy_u < 0. and dy_d < 0.:
-                    # crossing
-                    sample_uncertainty[systname]['u'][i] = dy_d                    
-                    sample_uncertainty[systname]['d'][i] = dy_u
-                 elif dy_u > 0. and dy_d < 0.:
-                    # both upward
-                    sample_uncertainty[systname]['u'][i] = max( [ dy_u, -dy_d ] ) 
-                    sample_uncertainty[systname]['d'][i] = 0.
                  elif dy_u < 0. and dy_d > 0.:
+                    # crossing
+                    sample_uncertainty[systname]['u'][i] = dy_u                    
+                    sample_uncertainty[systname]['d'][i] = dy_d
+                 elif dy_u > 0. and dy_d > 0.:
+                    # both upward
+                    sample_uncertainty[systname]['u'][i] = max( [ dy_u, dy_d ] ) 
+                    sample_uncertainty[systname]['d'][i] = 0.
+                 elif dy_u < 0. and dy_d < 0.:
                     # both downward
                     sample_uncertainty[systname]['u'][i] = 0.
-                    sample_uncertainty[systname]['d'][i] = max( [ -dy_u, dy_d ] )
+                    sample_uncertainty[systname]['d'][i] = min( [ dy_u, dy_d ] )
                  else:
                     sample_uncertainty[systname]['u'][i] = 0.
                     sample_uncertainty[systname]['d'][i] = 0.
 
                  # add errors in quadrature
-                 points[i]['u'] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                 points[i]['d'] += pow( sample_uncertainty[systname]['d'][i], 2 )
-      
-                 total_uncertainty[systname]['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 ) 
-                 total_uncertainty[systname]['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )
+                 dy_u = sample_uncertainty[systname]['u'][i]
+                 dy_d = sample_uncertainty[systname]['d'][i]
+                 dy_u_2 = dy_u*dy_u
+                 dy_d_2 = dy_d*dy_d
 
-                 total_uncertainty['statsyst']['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                 total_uncertainty['statsyst']['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )
-                 total_uncertainty['systonly']['u'][i] += pow( sample_uncertainty[systname]['u'][i], 2 )
-                 total_uncertainty['systonly']['d'][i] += pow( sample_uncertainty[systname]['d'][i], 2 )          
-
+                 if dy_u >= 0.: 
+                    points[i]['u'] += dy_u_2
+                    total_uncertainty[systname]['u'][i]   += dy_u_2
+                    total_uncertainty['statsyst']['u'][i] += dy_u_2
+                    total_uncertainty['systonly']['u'][i] += dy_u_2
+                    points[i]['d'] += dy_d_2
+                    total_uncertainty[systname]['d'][i]   += dy_d_2
+                    total_uncertainty['statsyst']['d'][i] += dy_d_2
+                    total_uncertainty['systonly']['d'][i] += dy_d_2
+                 elif dy_u < 0.: 
+                    points[i]['d'] += dy_u_2
+                    total_uncertainty[systname]['d'][i]   += dy_u_2
+                    total_uncertainty['statsyst']['d'][i] += dy_u_2
+                    total_uncertainty['systonly']['d'][i] += dy_u_2
+                    points[i]['u'] += dy_d_2
+                    total_uncertainty[systname]['u'][i]   += dy_d_2
+                    total_uncertainty['statsyst']['u'][i] += dy_d_2
+                    total_uncertainty['systonly']['u'][i] += dy_d_2
+    
        # apply square root
        for systname in total_uncertainty.keys():
-          for var in ['u', 'd']:
-             nbins = len( total_uncertainty[systname][var] )
-             for i in range( nbins ):    
-                total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )  
+             for var in ['u', 'd']: 
+               nbins = len( total_uncertainty[systname][var] )
+               for i in range( nbins ):    
+                  dy = total_uncertainty[systname][var][i]
+                  if dy < 0.:
+                     raise Exception( "ERROR: negative uncertainty for %s:%s:%s" % (systname,var,i) ) 
+                  total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )
+#                  if var == 'd': total_uncertainty[systname][var][i] *= -1.0
+
+#       for systname in total_uncertainty.keys():
+#          for var in ['u', 'd']:
+#             nbins = len( total_uncertainty[systname][var] )
+#             for i in range( nbins ):    
+#                total_uncertainty[systname][var][i] = sqrt( total_uncertainty[systname][var][i] )  
 
        # Print out relative shift
        DumpSystematicsToXMLFile( hpath, edges, points, total_uncertainty )

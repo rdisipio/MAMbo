@@ -67,11 +67,18 @@
   <histogram hpath="reco/cutflow/afterCuts/jet_m" />
   <histogram hpath="reco/cutflow/afterCuts/jet1_pt" />
   <histogram hpath="reco/cutflow/afterCuts/jet1_pt_2" />
+  <histogram hpath="reco/cutflow/afterCuts/jet2_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/jet2_pt_2" />
+  <histogram hpath="reco/cutflow/afterCuts/jet3_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/jet3_pt_2" />
+  <histogram hpath="reco/cutflow/afterCuts/jet4_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/jet4_pt_2" />
   <histogram hpath="reco/cutflow/afterCuts/bjet_n" />
   <histogram hpath="reco/cutflow/afterCuts/bjet_pt" />
   <histogram hpath="reco/cutflow/afterCuts/bjet_eta" />
   <histogram hpath="reco/cutflow/afterCuts/bjet_m" />
   <histogram hpath="reco/cutflow/afterCuts/bjet1_pt" />
+  <histogram hpath="reco/cutflow/afterCuts/bjet2_pt" />
   <histogram hpath="reco/cutflow/afterCuts/met_pt" />
   <histogram hpath="reco/cutflow/afterCuts/met_pt_2" />
   <histogram hpath="reco/cutflow/afterCuts/mtw" />
@@ -126,5 +133,6 @@
   <histogram hpath="reco/4j2b/difference/R_lb" /> 
   <histogram hpath="reco/4j2b/difference/R_Wt_lep" />
   <histogram hpath="reco/4j2b/difference/R_Wt_had" />
+
 </histograms>
 

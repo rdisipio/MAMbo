@@ -299,8 +299,10 @@ TDirectory * HistogramManager::CreatePath( const string& path )
 
 void HistogramManager::WriteToFile()
 {
+  cout << "INFO: HistogramManager: Writing histograms on disk..." << endl;
   m_outFile->Write();
   m_outFile->Close();
+  cout << "INFO: HistogramManager: Histograms stored in file " << m_outFile->GetName() << endl;
 }
 
 

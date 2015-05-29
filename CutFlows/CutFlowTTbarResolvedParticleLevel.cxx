@@ -105,9 +105,12 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   
   */
   
-  double weight_particle_level = 1.;
+  double weight_particle_level = ed->info.mcWeight;
   // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
   ed->property["weight_particle_level"] = weight_particle_level;
+
+  ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( "particle/cutflow/3j0b/MC_gen_weights" );
+  h->Fill( weight_particle_level );
 
   const bool passedParticleSelection = PassedCutFlowParticle( ed );
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="lnln_Np0"	dsid="201020" xsec="4.2869" kfact="1.9655" genevt="3199485" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnln_Np1"	dsid="201021" xsec="4.3844" kfact="1.9655" genevt="3187981" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnln_Np2"	dsid="201022" xsec="2.7985" kfact="1.9655" genevt="2091691" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnln_Np3"	dsid="201023" xsec="1.2939" kfact="1.9655" genevt="971691" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnln_Np4incl"	dsid="201024" xsec="0.74637" kfact="1.9655" genevt="589998" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np0"	dsid="201220" xsec="17.151" kfact="2.0491" genevt="6293873" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np1"       dsid="201221" xsec="17.532" kfact="2.0491" genevt="6389459" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np2"	dsid="201222" xsec="11.209" kfact="2.0491" genevt="4179757" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np3"	dsid="201223" xsec="5.1767" kfact="2.0491" genevt="1949886" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np4incl"   dsid="201224" xsec="2.9869" kfact="2.0491" genevt="1179291" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+</samples>
+<files>
+  <file sample="lnln_Np0" 	path="nominal/tt_diffxs_8TeV.mc.DiTop.201020.el.nominal.histograms.root" />
+  <file sample="lnln_Np1" 	path="nominal/tt_diffxs_8TeV.mc.DiTop.201021.el.nominal.histograms.root" />
+  <file sample="lnln_Np2" 	path="nominal/tt_diffxs_8TeV.mc.DiTop.201022.el.nominal.histograms.root" />
+  <file sample="lnln_Np3" 	path="nominal/tt_diffxs_8TeV.mc.DiTop.201023.el.nominal.histograms.root" />
+  <file sample="lnln_Np4incl" 	path="nominal/tt_diffxs_8TeV.mc.DiTop.201024.el.nominal.histograms.root" />
+  <file sample="lnjj_Np0"       path="nominal/tt_diffxs_8TeV.mc.DiTop.201220.el.nominal.histograms.root" />
+  <file sample="lnjj_Np1"       path="nominal/tt_diffxs_8TeV.mc.DiTop.201221.el.nominal.histograms.root" />
+  <file sample="lnjj_Np2"       path="nominal/tt_diffxs_8TeV.mc.DiTop.201222.el.nominal.histograms.root" />
+  <file sample="lnjj_Np3"       path="nominal/tt_diffxs_8TeV.mc.DiTop.201223.el.nominal.histograms.root" />
+  <file sample="lnjj_Np4incl"   path="nominal/tt_diffxs_8TeV.mc.DiTop.201224.el.nominal.histograms.root" />
+</files>
+</document>
