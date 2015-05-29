@@ -1,6 +1,5 @@
-user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000001.el.root
-user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000002.el.root
-user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000003.el.root
-user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000004.el.root
-user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000006.el.root
-user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586453._000007.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.e1576_s1499_s1504_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5536928._000001.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.e1576_s1499_s1504_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5536928._000002.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.e1576_s1499_s1504_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5536928._000003.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.e1576_s1499_s1504_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5536928._000004.el.root
+user.mromano.105985.Herwig_AUET2CTEQ6L1_WW.e1576_s1499_s1504_r3658_r3549_p1575.at180_2jet_el.root/user.mromano.5536928._000005.el.root

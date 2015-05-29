@@ -1,2 +1,2 @@
-user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586462._000001.el.root
-user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.at180_combined_pdf_dijet_7_2014_12_22_el.root/user.mromano.4586462._000002.el.root
+user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.e1743_s1581_s1586_r3925_r3549_p1575.at180_2jet_el.root/user.mromano.5536941._000001.el.root
+user.mromano.110140.PowhegPythia_P2011C_st_Wtchan_incl_DR.e1743_s1581_s1586_r3925_r3549_p1575.at180_2jet_el.root/user.mromano.5536941._000002.el.root
