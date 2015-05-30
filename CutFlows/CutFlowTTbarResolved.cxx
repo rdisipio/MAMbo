@@ -797,10 +797,17 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     
     ControlPlotValues values;
     values.weight = weight;
-    values.lep_pt  = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.pT.at(0)  : 0.;
-    values.lep_eta = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.eta.at(0) : 0.;
-    values.lep_phi = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.phi.at(0) : 0.;
-    values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0)   : 0.;
+    if ((el_n > 0) && (mu_n == 0)){
+    values.lep_pt  = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.pT.at(0)  : 0.;
+    values.lep_eta = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.eta.at(0) : 0.;
+    values.lep_phi = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.phi.at(0) : 0.;
+    values.lep_E   = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.E.at(0)   : 0.;}
+    else if ((el_n == 0) && (mu_n > 0)){
+    values.lep_pt  = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.pT.at(0)  : 0.;
+    values.lep_eta = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.eta.at(0) : 0.;
+    values.lep_phi = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.phi.at(0) : 0.;
+    values.lep_E   = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.E.at(0)   : 0.;}
+
     values.jet_n   = ed->truth_jets.n;
     values.bjet_n  = ed->truth_bjets.n; 
     values.fjet_n  = ed->truth_fjets.n;
@@ -808,22 +815,22 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     values.mwt     = ed->MET_truth.mwt;
 
     for (int j = 0; j < ed->truth_jets.n; ++j) {
-        JetValues jet;
-        jet.pt  = ed->truth_jets.pT.at(j);
-        jet.eta = ed->truth_jets.eta.at(j);
-        jet.phi = ed->truth_jets.phi.at(j);
-        jet.E   = ed->truth_jets.E.at(j);
-        jet.m   = ed->truth_jets.m.at(j);
-        values.jets.push_back(&jet);
+        JetValues* jet = new JetValues();
+        jet->pt  = ed->truth_jets.pT.at(j);
+        jet->eta = ed->truth_jets.eta.at(j);
+        jet->phi = ed->truth_jets.phi.at(j);
+        jet->E   = ed->truth_jets.E.at(j);
+        jet->m   = ed->truth_jets.m.at(j); 
+        values.jets.push_back(jet);
     }
     for (int bj = 0; bj < ed->truth_bjets.n; ++bj) {
-        JetValues jet;
-        jet.pt  = ed->truth_bjets.pT.at(bj);
-        jet.eta = ed->truth_bjets.eta.at(bj);
-        jet.phi = ed->truth_bjets.phi.at(bj);
-        jet.E   = ed->truth_bjets.E.at(bj);
-        jet.m   = ed->truth_bjets.m.at(bj);
-        values.bJets.push_back(&jet);
+        JetValues* jet = new JetValues();
+        jet->pt  = ed->truth_bjets.pT.at(bj);
+        jet->eta = ed->truth_bjets.eta.at(bj);
+        jet->phi = ed->truth_bjets.phi.at(bj);
+        jet->E   = ed->truth_bjets.E.at(bj);
+        jet->m   = ed->truth_bjets.m.at(bj);
+        values.bJets.push_back(jet);
     }
 
     // if( (hfor<0) || (hfor>3) ) return passed;
@@ -1023,7 +1030,7 @@ void CutFlowTTbarResolved::MoreCRFillHistogramsControlPlotsReco( string mystr, C
 void CutFlowTTbarResolved::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {    
     const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) - 1;    
-    string path = "parton/cutflow/" + m_alias[cut] + "/";
+    string path = "particle/cutflow/" + m_alias[cut] + "/";
     FillHistograms(path, values);
 }
 
