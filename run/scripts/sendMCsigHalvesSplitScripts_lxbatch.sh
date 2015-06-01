@@ -1,7 +1,7 @@
 #!/bin/sh
 
-#tag=_incl
-tag=_ljets
+tag=_incl
+#tag=_ljets
 
 ./scripts/makeRunScriptsMC_sig_PowHeg_hdamp_eos_split_halves.sh > _run_halves${tag}.sh
 

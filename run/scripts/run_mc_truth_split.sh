@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#tag=_particle_ljets
-tag=_particle
+tag=_incl
 
 
 for ll in el mu ; do
@@ -19,7 +18,7 @@ for ll in el mu ; do
     cfg=control/analysis_params/TTbarResolved_resolved/mcparticles_${ll}_JK.xml
     #cfg=control/mcparticles_${ll}_JK.xml
 
-    echo "runMAMbo -p ${cfg} -f lists/${mclist} -o histograms_PowHeg_${ll}_particle_${base}${tag}.root >& log_ptcl_${ll}_${base}${tag}.txt"
+    echo "runMAMbo -p ${cfg} -f lists/${mclist} -o histograms_PowHeg_${ll}_particle_${base}${tag}.root >& log_ptcl_${ll}_${base}${tag}.txt &"
 
 
   done

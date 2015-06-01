@@ -1,6 +1,7 @@
 #!/bin/sh
 
-tag=_particle_ljets
+#tag=_particle_ljets
+tag=_particle
 
 ./scripts/makeRunScriptsMCTruth_sig_PowHeg_hdamp_eos_split.sh > _run_particle${tag}.sh
 
