@@ -11,7 +11,7 @@ dsid=110404
 for ch in el mu
 do
     MAMbo-makeIFSRUncertainty.py -c ${paramsdir}/Uncertainty_${dsid}_${ch}_IFSR.xml \
-            -o ${outdir}/radHi/${analysis}.mc.DiTop.${dsid}.${ch}.radHi.histograms.root,${outdir}/radLo/${analysis}.mc.DiTop.${dsid}.${ch}.radLo.histograms.root 
+            -o ${outdir}/radHi/${analysis}.mc.DiTop.${dsid}.${ch}.radHi.histograms.root,${outdir}/radLo/${analysis}.mc.DiTop.${dsid}.${ch}.radLo.histograms.root,${outdir}/rad0/${analysis}.mc.DiTop.${dsid}.${ch}.rad0.histograms.root 
 done
 
 echo 

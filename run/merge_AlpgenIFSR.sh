@@ -22,3 +22,12 @@ do
       done
    done
 done
+
+for syst in radHi radLo
+do
+  for decay in ljets dilep nofullhad
+  do
+     hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.AlpgenIFSR.${decay}.co.${syst}.histograms.root \
+             ${outdir}/${syst}/${analysis}.mc.${sample}.AlpgenIFSR.${decay}.el.${syst}.histograms.root  ${outdir}/${syst}/${analysis}.mc.${sample}.AlpgenIFSR.${decay}.mu.${syst}.histograms.root
+  done
+done

@@ -292,7 +292,7 @@ def DoPlot( plot, iLumi = 1. ):
     SetHistogramsStyle( histograms )
 
     sfmax = 1.4 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 100.
-    sfmin = 0.0 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 1e-4
+    sfmin = 0.0 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 1e-2
     SetMaximum( histograms, 'data', sfmax, sfmin )
 
     histograms['data'].GetYaxis().SetTitle( plot.ytitle )

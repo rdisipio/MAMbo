@@ -8,7 +8,7 @@ outdir=${MAMBODIR}/run/output/${analytag}
 syst=nominal
 ILUMI=20300 
 
-for syst in st_xsec_up st_xsec_down
+for syst in nominal st_xsec_up st_xsec_down
 do
    for ch in el mu
    do

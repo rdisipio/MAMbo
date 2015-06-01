@@ -136,6 +136,7 @@ def CreateROOTPath( path ):
 
 def CreateSymmetricHistograms( outfilenames ):
 
+    outfile_n = TFile.Open( outfilenames['u'], "RECREATE" )
     outfile_u = TFile.Open( outfilenames['u'], "RECREATE" )
     outfile_d = TFile.Open( outfilenames['d'], "RECREATE" )
 
@@ -153,11 +154,13 @@ def CreateSymmetricHistograms( outfilenames ):
           nbins = h_n.GetNbinsX()
           title = h_n.GetTitle()
 
+          h_out_n = h_n.Clone()
           h_out_u = h_n.Clone()
           h_out_d = h_n.Clone()
 
-          h_out_u.Reset("ICES")
-          h_out_d.Reset("ICES")
+          h_out_n.Reset()
+          h_out_u.Reset()
+          h_out_d.Reset()
 
           for i in range(nbins):
              y_n = h_n.GetBinContent(i+1)
@@ -174,17 +177,24 @@ def CreateSymmetricHistograms( outfilenames ):
                  y0 = 0.5 * ( y_u + y_d )
   
                  if y0 == 0.:
+                    h_out_n.SetBinContent( i+1, 0. )
                     h_out_u.SetBinContent( i+1, 0. )
                     h_out_d.SetBinContent( i+1, 0. )
                     continue
 
                  dy = 0.5 * ( y_u - y_d )
                  dy_rel = dy / y0
+                 y_avg = 0.5 * ( y_u + y_d )
 
 #                 h_out_u.SetBinContent( i+1, y_n + dy )
 #                 h_out_d.SetBinContent( i+1, y_n - dy )
+                 h_out_n.SetBinContent( i+1, y_avg )
                  h_out_u.SetBinContent( i+1, y_n * ( 1 + dy_rel ) )
                  h_out_d.SetBinContent( i+1, y_n * ( 1 - dy_rel ) )
+
+       outfile_n.cd()
+       CreateROOTPath( hpath )
+       h_out_n.Write( hname )
 
        outfile_u.cd()
        CreateROOTPath( hpath )
@@ -202,7 +212,7 @@ if __name__ == "__main__":
    
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-c", "--config", help="Configuration files",         dest="config", default="" )
-   parser.add_option( "-o", "--output", help="Output file name [%default]", dest="output", default="uncertainty_up.histograms.root,uncertainty_down.histograms.root" )
+   parser.add_option( "-o", "--output", help="Output file name [%default]", dest="output", default="ifsr_up.histograms.root,ifsr_down.histograms.root,ifsr_central.histograms.root" )
    (opts, args) = parser.parse_args()
 
    configFileName = opts.config
@@ -217,5 +227,5 @@ if __name__ == "__main__":
  
    histograms_configuration, samples_configuration  = ReadConfiguration( configFileName )
 
-   CreateSymmetricHistograms( { 'u' : outfilenames[0], 'd' : outfilenames[1] } )
+   CreateSymmetricHistograms( { 'u' : outfilenames[0], 'd' : outfilenames[1], 'n' : outfilenames[2] } )
 

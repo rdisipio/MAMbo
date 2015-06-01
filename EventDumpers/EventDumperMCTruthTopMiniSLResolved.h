@@ -225,6 +225,8 @@ class EventDumperMCTruthTopMiniSLResolved
           if( isHadronic == 1 ) nthad++;
 //          cout << "DEBUG: is hadronic: " << isHadronic << endl;
        }
+       if( ttbar.M() < 225*GeV ) cout << "WARNING: low ttbar m = " << ttbar.M()/GeV << " GeV" << endl;
+
        HelperFunctions::DumpTruthParticleToEventData( ttbar, 166, 2, 0, 0, &ed->mctruth );
 
        isDileptonic = ( nthad == 0 ) ? 1 : 0;
