@@ -45,6 +45,9 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
     if( barcode > 2e5 ) continue; //skip GEANT particles
 
     if( apid == 6 ) {
+      ntops++;
+
+      if( ntops > 2 ) cout << "WARNING: event " << ed->info.eventNumber << ": t quarks found: " << ntops << endl;
 /*
       printf( "INFO: branch mc_pt %i for event %i\n", m_truth_ntuple->mc_pt, m_truth_ntuple->eventNumber );
       if( !m_truth_ntuple->mc_pt ) {
@@ -79,7 +82,6 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
 
       if( q > 0 ) top = tquark;
       else antitop = tquark;
-      ntops++;
     }
     else if( ( apid == 11 ) || ( apid == 13 ) ) {
       // dressed FS leptons
@@ -131,6 +133,8 @@ class EventDumperMCTruth : public IEventDumper<NTUPLE>
   if( ntops >= 2 ) {
     // Create ttbar object and dump it
     ttbar = top + antitop;
+
+    if( ttbar.M() < 200*GeV ) cout << "WARNING: low mtt = " << ttbar.M()/GeV << " GeV" << endl;
     HelperFunctions::DumpTruthParticleToEventData( ttbar, 166, 2, 0, 0.0, &ed->mctruth );
     ed->mctruth.property["isHadronic"].push_back( 3 ); // 0x11
   }

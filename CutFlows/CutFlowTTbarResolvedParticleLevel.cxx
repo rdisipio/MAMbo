@@ -510,7 +510,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPartonTopPairs(EventData::
 
   if( ttSystem.M() < 200*GeV ) {
     cout << "WARNING: CutFlowTTbarResolvedParticle::FillHistogramsPartonTop(): low pT mtt = " << ttSystem.M()/GeV << " GeV" << endl;
-    cout << "topL i=" << indexL << " m=" << topL.M()/GeV << " topH i=" << indexH << " m=" << topH.M()/GeV << " tt i=" << indextt << " m=" << ttSystem.M()/GeV  << endl;
+    cout << "topL i=" << indexL << " m=" << topL.M()/GeV << " topH i=" << indexH << " m=" << topH.M()/GeV << " tt i=" << indextt << " m=" << ttSystem.M()/GeV << " pT=" << ttSystem.Pt()/GeV << endl;
   }
 //  cout << "DEBUG: level:" << level << " mc weight=" << weight << endl;
 
