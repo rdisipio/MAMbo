@@ -1,7 +1,7 @@
 #!/bin/sh
 
-tag=_particle_ljets
-#tag=_incl
+#tag=_particle_ljets
+tag=_particle
 
 for ll in el mu ; do
   hadd histograms_PowHeg_${ll}_particle${tag}.root histograms_PowHeg_${ll}_particle_a?${tag}.root

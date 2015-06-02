@@ -4,7 +4,7 @@ jk, june 2015:
 some guidance fo making eos lists:
 
 ./MakeSigList.sh
-which also autoamtically splits the filelist for the main signal.
+which also automatically splits the filelist for the main signal.
 
 (Depricated:
   from existing list_eos_new.txt
