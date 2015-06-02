@@ -30,7 +30,7 @@ tag=_dilepton
       echo "    Skipping submission, out file exists!!!"
     else 
       echo "    Will submit..."
-      bsub -q 8nh ${i}
+      #bsub -q 8nh ${i}
     fi
   done
 

@@ -7,6 +7,9 @@ tag=_ljets
 #tag=_7TeVpst
 #tag=_noMonoJetW
 
+listbase=split_list_PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.mcfixed_at180_combined_pdf_dijet
+#listbase=split_list_eos_new
+
 for ll in el mu ; do
 
   ./clean.sh
@@ -14,9 +17,9 @@ for ll in el mu ; do
 
   for half in 0 1 ; do
 
-    for list in `cd  lists ; ls split_list_eos_new_${ll}_a?` ; do
+    for list in `cd  lists ; ls ${listbase}_${ll}_a?` ; do
 
-      base=`echo $list | sed "s/split_list_eos_new_${ll}_//g"`
+      base=`echo $list | sed "s/${listbase}_${ll}_//g"`
       mclist=`echo $list | sed "s/_${ll}/_mc/g"`
       # echo " $base"
       # make the config:

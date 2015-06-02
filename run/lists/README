@@ -1,0 +1,29 @@
+
+jk, june 2015:
+
+some guidance fo making eos lists:
+
+./MakeSigList.sh
+which also autoamtically splits the filelist for the main signal.
+
+(Depricated:
+  from existing list_eos_new.txt
+  stream it to el, mu, mc:
+  ./Stream.sh)
+
+
+then you can run over signal on lxplus PBS as:
+cd ../
+scripts/sendMCsigDileptonSplitScripts_lxbatch.sh
+scripts/sendMCsigHalvesSplitScripts_lxbatch.sh
+scripts/sendMCTruthSplitScripts_lxbatch.sh
+
+
+Data and Bg samples:
+ . ./ListEos.sh | grep root > ListMarinoNew.sh
+./MakeBgList.sh
+./MakeDataList.sh
+
+then you can run oved data locally as
+cd ../
+./scripts/run_data_locally.sh

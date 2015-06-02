@@ -8,8 +8,12 @@
 #for i in `eos ls ${area} ` ; do
 #  echo $i >> ${file}
 #done
+#file=list_Marino.txt
 
-file=list_Marino.txt
+# area=/eos/atlas/user/m/mromano/minintuples-december
+# source ./ListEos.sh | grep root > ListMarinoNew.sh
+file=ListMarinoNew.sh
+
 
 for ll in el mu ; do
   echo "Working on ${ll}..."
