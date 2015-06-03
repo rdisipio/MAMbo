@@ -60,6 +60,7 @@
   <histogram hpath="parton/4j2b/topL/rapidity" />
   <histogram hpath="parton/4j2b/topL/absrap" />
   <histogram hpath="parton/4j2b/tt/m" />
+  <histogram hpath="parton/4j2b/tt/m_4" />
   <histogram hpath="parton/4j2b/tt/pt" />
   <histogram hpath="parton/4j2b/tt/rapidity" />
   <histogram hpath="parton/4j2b/tt/absrap" />
