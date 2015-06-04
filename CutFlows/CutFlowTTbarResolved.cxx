@@ -292,7 +292,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
  
 #ifdef __MOMA__
-         const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
+         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else 

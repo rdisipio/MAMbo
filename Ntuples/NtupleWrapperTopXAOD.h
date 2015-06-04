@@ -5,10 +5,6 @@
 
 #include "TopXAOD.h"
 
-#include "EventDumperEventInfo.h"
-#include "EventDumperLeptons.h"
-#include "EventDumperJets.h"
-
 class NtupleWrapperTopXAOD : public NtupleWrapper< TopXAOD > 
 {
  public:
@@ -20,15 +16,9 @@ class NtupleWrapperTopXAOD : public NtupleWrapper< TopXAOD >
   virtual bool MakeEventInfo( EventData * ed );
   virtual bool MakeEventTrigger( EventData * ed );
   virtual bool MakeEventMET( EventData * ed );
-  virtual bool MakeEventElectrons( EventData * ed );
-  virtual bool MakeEventMuons( EventData * ed );
+  virtual bool MakeEventLeptons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
   virtual bool MakeEventTruth( EventData * ed );
-
-private:
-   EventDumperEventInfo<TopXAOD>   * m_dumper_info;
-   EventDumperLeptons<TopXAOD>     * m_dumper_leptons;
-   EventDumperJets<TopXAOD>        * m_dumper_jets;
 
 };
 
