@@ -81,7 +81,7 @@
             <Bin id="1" nbins="50" xmin="225" xmax="2500" particle="tt"/> <!--fine binning-->
 	    <Bin id="2" nbins="50" xmin="160." xmax="185." particle="top"/> <!--previusly used binning-->
 	    <Bin id="3" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt"/> <!--boosted friendly binning-->
-            <Bin id="4" nbins="160" xmin="160." xmax="320." particle="tt"/> <!-- fine binning, mass rise region -->	
+            <Bin id="4" nbins="250" xmin="150." xmax="400." particle="tt"/> <!-- fine binning, mass rise region -->	
 
             <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WL"/>
             <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WH"/>

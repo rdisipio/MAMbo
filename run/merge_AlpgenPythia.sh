@@ -26,5 +26,5 @@ hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.co.${syst}.hi
         ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.el.${syst}.histograms.root \
         ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.mu.${syst}.histograms.root
 
-ln -s ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.co.${syst}.histograms.root \
-      ${outdir}/generator/${analysis}.mc.${sample}.110404.co.generator.histograms.root
+#ln -s ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.co.${syst}.histograms.root \
+#      ${outdir}/generator/${analysis}.mc.${sample}.110404.co.generator.histograms.root

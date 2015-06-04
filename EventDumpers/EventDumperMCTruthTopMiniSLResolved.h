@@ -214,7 +214,7 @@ class EventDumperMCTruthTopMiniSLResolved
 
           if( (ntops>2) && (isHadronic < 0) ) continue;
 
-          if( (status>2) && (status!=155) ) continue;
+//          if( (status>2) && (status!=155) ) continue;
 
           if( n_good_tops < 2 ) {
  

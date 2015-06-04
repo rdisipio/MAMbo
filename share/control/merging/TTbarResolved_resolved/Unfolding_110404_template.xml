@@ -3,8 +3,8 @@
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
  <sample name="ttbar_nofullhad"            dsid="110404"  xsec="1.0"  kfact="1.0"  genevt="1" generator="PowhegPythia_P2011C" simulation="Full" />
- <sample name="background_nominal"         dsid="0" 	  xsec="1.0"  kfact="1.0"  genevt="1" generator="Multiple" 	   simulation="Mixed" />
- <sample name="background_shifted"         dsid="1" 	  xsec="1.0"  kfact="-1.0" genevt="1" generator="Multiple" 	   simulation="Mixed" />
+ <sample name="background_shifted"         dsid="1" 	  xsec="1.0"  kfact="1.0" genevt="1" generator="Multiple" 	   simulation="Mixed" />
+ <sample name="background_nominal"         dsid="0" 	  xsec="1.0"  kfact="-1.0"  genevt="1" generator="Multiple" 	   simulation="Mixed" />
 </samples>
 <files>
  <file sample="ttbar_nofullhad"     	path="nominal/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.nominal.histograms.root" />
