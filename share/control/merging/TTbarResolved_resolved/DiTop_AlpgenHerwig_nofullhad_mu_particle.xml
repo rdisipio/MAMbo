@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="lnln_Np0"	dsid="164440" xsec="4.7977" kfact="1.7360" genevt="799897" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnln_Np1"	dsid="164441" xsec="5.0677" kfact="1.7360" genevt="778897" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnln_Np2"	dsid="164442" xsec="3.2541" kfact="1.7360" genevt="529996" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnln_Np3p"	dsid="164443" xsec="2.1749" kfact="1.7360" genevt="359997" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" /> 
+<!--
+  <sample name="lnln_Np3"       dsid="164444" xsec="1.5226" kfact="1.7360" genevt="" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnln_Np4p"	dsid="164445" xsec="0.76980" kfact="1.7360" genevt="" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+-->
+  <sample name="lnqq_Np0"	dsid="164450" xsec="19.186" kfact="1.8080" genevt="3359080" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np1"       dsid="164451" xsec="20.282" kfact="1.8080" genevt="3398787" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np2"       dsid="164452" xsec="13.084" kfact="1.8080" genevt="2209980" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np3p"      dsid="164453" xsec="8.7001" kfact="1.8080" genevt="1439791" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" /> 
+<!--
+  <sample name="lnqq_Np3"       dsid="164454" xsec="6.0821" kfact="1.8080" genevt="" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np4p"      dsid="164455" xsec="3.0842" kfact="1.8080" genevt="" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+-->
+</samples>
+<files>
+  <file sample="lnln_Np0" 	path="particle/tt_diffxs_8TeV.mc.DiTop.164440.mu.nominal.particle.histograms.root" />
+  <file sample="lnln_Np1" 	path="particle/tt_diffxs_8TeV.mc.DiTop.164441.mu.nominal.particle.histograms.root" />
+  <file sample="lnln_Np2" 	path="particle/tt_diffxs_8TeV.mc.DiTop.164442.mu.nominal.particle.histograms.root" />
+  <file sample="lnln_Np3p" 	path="particle/tt_diffxs_8TeV.mc.DiTop.164443.mu.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np0"       path="particle/tt_diffxs_8TeV.mc.DiTop.164450.mu.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np1"       path="particle/tt_diffxs_8TeV.mc.DiTop.164451.mu.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np2"       path="particle/tt_diffxs_8TeV.mc.DiTop.164452.mu.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np3p"      path="particle/tt_diffxs_8TeV.mc.DiTop.164453.mu.nominal.particle.histograms.root" />
+</files>
+</document>
