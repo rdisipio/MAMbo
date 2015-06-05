@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
 <samples>
   <sample name="lnln_Np0"	dsid="164440" xsec="4.7977" kfact="1.7360" genevt="799897" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
   <sample name="lnln_Np1"	dsid="164441" xsec="5.0677" kfact="1.7360" genevt="778897" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
