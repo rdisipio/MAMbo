@@ -107,8 +107,9 @@ bool CutFlowTTbarResolved::Initialize() {
 
     }    
 
-    m_rand = new TRandom3(12345);
-
+    //m_rand = new TRandom3(12345);
+    m_rand = new TRandom3( 0 );
+ 
     AddChannel("LPLUSJETS");
 
     AddCounterName("LPLUSJETS", "reco_unweight", 10 );
@@ -233,7 +234,6 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     double weight_reco_level     = 1.;
     double weight_particle_level = 1.;
 
-
     if( !isRealData && !isQCD ) {
          weight_reco_level     = ed->info.mcWeight;
          weight_particle_level = ed->info.mcWeight;
@@ -292,7 +292,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
  
 #ifdef __MOMA__
-         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
+           const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type );
+//         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else 
@@ -330,6 +331,15 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       weight_reco_level     *= qcd_weight;
       weight_particle_level *= qcd_weight; // should we?
     }
+
+// @ BOOTSTRAP
+//    double pw = -1.;
+//    while( pw <= 0. ) pw = m_rand->Poisson( 1. );
+//    weight_reco_level     *= pw;
+//    weight_particle_level *= pw;
+//    cout << "DEBUG: bootstrap event " << ed->info.eventNumber << "  poiss w = " << pw << endl;
+// @ BOOTSTRAP
+
 
     ed->property["weight_particle_level"] = weight_particle_level;
     ed->property["weight_reco_level"]     = weight_reco_level;
@@ -679,17 +689,19 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 
     // 5 ETmiss cut
     const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
-    if( ETmiss < met_cut ) return !passed;
+    //if( ETmiss < met_cut ) return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
 
     // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
+/*
     if( m_config->channel == kElectron ) {
        if( mwt < 30 * GeV) return !passed;
     }
     else {
        if( (mwt + ETmiss) < 60 * GeV ) return !passed;
     }
+*/
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
 
@@ -862,17 +874,19 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
 
     // 5 ETmiss cut
     const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
-    if( ETmiss < met_cut ) return !passed;
+//    if( ETmiss < met_cut ) return !passed;
     PassedCut("LPLUSJETS", "particle_weighted", weight );
     PassedCut("LPLUSJETS", "particle_unweight");
 
     // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
+/* 
     if( m_config->channel == kElectron ) {
        if( mwt < 30 * GeV) return !passed;
     }
     else {
        if( (mwt + ETmiss) < 60 * GeV ) return !passed;
     }
+*/
     PassedCut("LPLUSJETS", "particle_weighted", weight );
     PassedCut("LPLUSJETS", "particle_unweight");
 

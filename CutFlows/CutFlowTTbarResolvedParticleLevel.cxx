@@ -234,17 +234,19 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
 
     // 5 ETmiss cut
     const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
-    if( ETmiss < met_cut ) return !passed;
+//    if( ETmiss < met_cut ) return !passed;
     PassedCut("LPLUSJETS", "particle_weighted", weight );
     PassedCut("LPLUSJETS", "particle_unweight");
 
     // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
+/*
     if( m_config->channel == kElectron ) {
        if( mwt < 30 * GeV) return !passed;
     }
     else {
        if( (mwt + ETmiss) < 60 * GeV ) return !passed;
     }
+*/
     PassedCut("LPLUSJETS", "particle_weighted", weight );
     PassedCut("LPLUSJETS", "particle_unweight");
 

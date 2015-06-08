@@ -7,6 +7,8 @@ sourcedir=${MAMBODIR}/share/control/file_list/TTbarResolved_resolved
 syst=nominal
 [[ "x$1" == "x" ]] || syst=$1
 
+[ ! -d $MAMBOOUTPUTDIR/${syst} ] && mkdir -p $MAMBOOUTPUTDIR/${syst}
+
 for channel in el mu
 do
   [[ ${channel} == "el" ]] && stream="Egamma"

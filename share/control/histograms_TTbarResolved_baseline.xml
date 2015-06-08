@@ -77,6 +77,8 @@
         </Variable>
         <Variable name="m"      title="mass [GeV]" folder="4j2b" > 
             <Bin id="0" nbins="50" xmin="0." xmax="600." particle="top"/>
+            <Bin id="1" nbins="100" xmin="160." xmax="180" particle="top" />
+
 	    <Bin id="0" nbins="11" edges="225,345,420,500,590,685,790,910,1040,1175,1320,2500" particle="tt"/> <!--JP proposed binning-->
             <Bin id="1" nbins="50" xmin="225" xmax="2500" particle="tt"/> <!--fine binning-->
 	    <Bin id="2" nbins="50" xmin="160." xmax="185." particle="top"/> <!--previusly used binning-->
@@ -426,7 +428,7 @@
             <Bin id="1" nbins="200" xmin="-10." xmax="10." />
        </Variable>
        <Variable name="MC_gen_weights" title="MC Generator weights" folder="cutflow">
-            <Bin id="0" nbins="3" xmin="-1.5" xmax="1.5" />
+            <Bin id="0" nbins="7" xmin="-3.5" xmax="3.5" />
        </Variable>
 
   </Variables>        

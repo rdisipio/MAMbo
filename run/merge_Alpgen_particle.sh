@@ -6,14 +6,20 @@ analytag=TTbarResolved_resolved
 ILUMI=1
 sample=DiTop
 syst=nominal
-gen=AlpgenPythia
 decay=nofullhad
+
+gen=pythia
+[ ! -z $1 ] && gen=$1
+
+[[ $gen == "pythia" ]] && gen=AlpgenPythia
+[[ $gen == "herwig" ]] && gen=AlpgenHerwig
+
 
 paramsdir=${MAMBODIR}/share/control/merging/${analytag}
 outdir=${MAMBODIR}/run/output/${analytag}
 
-   for ch in el mu
-   do
+for ch in el mu
+do
       for decay in nofullhad #ljets dilep 
       do
          params=${paramsdir}/DiTop_${gen}_${decay}_${ch}_particle.xml
@@ -21,8 +27,8 @@ outdir=${MAMBODIR}/run/output/${analytag}
 
          MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outfile}
       done
-   done
+done
 
-   hadd -f ${outdir}/particle/histograms_AlpgenPythia_ll_particle.root \
+   hadd -f ${outdir}/particle/histograms_${gen}_ll_particle.root \
            ${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.el.nominal.particle.histograms.root \
            ${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.mu.nominal.particle.histograms.root

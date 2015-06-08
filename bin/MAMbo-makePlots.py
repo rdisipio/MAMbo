@@ -382,7 +382,8 @@ if __name__ == "__main__":
 
    plots_configuration, samples_configuration, input_files = ReadConfiguration( configFileName )
   
-   for ext in [ 'png', 'eps', 'C' ]:
+#   for ext in [ 'png', 'eps', 'C' ]:
+   for ext in [ 'png']:
       mkpath( "./img/%s" % ext )   
 
    c, pad0, pad1 = MakeCanvas()

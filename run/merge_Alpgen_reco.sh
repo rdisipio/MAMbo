@@ -5,8 +5,13 @@ analytag=TTbarResolved_resolved
 ILUMI=20300
 sample=DiTop
 syst=nominal
-gen=AlpgenPythia
 decay=nofullhad
+
+gen=pythia
+[ ! -z $1 ] && gen=$1
+
+[[ $gen == "pythia" ]] && gen=AlpgenPythia
+[[ $gen == "herwig" ]] && gen=AlpgenHerwig
 
 paramsdir=${MAMBODIR}/share/control/merging/${analytag}
 outdir=${MAMBODIR}/run/output/${analytag}
