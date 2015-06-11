@@ -470,15 +470,15 @@ void BinOpt (TString type="all",TString var="all")
     
      if (var=="all"||var=="Ht")
      {
-      resmat_Ht_pseudo=(TH2D*)in->Get("reco/4j2b/difference/Matrix_reco_particle_HT_pseudo_1"); 
+      resmat_Ht_pseudo=(TH2D*)in->Get("reco/4j2b/difference/Matrix_reco_particle_HT_ttbar_1"); 
  
-      TGraphErrors *HtpsRms=SliceFit(resmat_Ht_pseudo,"tt","HT_pseudo");
+      TGraphErrors *HtpsRms=SliceFit(resmat_Ht_pseudo,"tt","HT_ttbar");
    
       TCanvas *Htps=new TCanvas("Htps","Sum of transversal momentum of all pseudotop elements");
       Htps->cd(1);
       HtpsRms->Draw();
       HtpsRms->SetTitle("");
-      HtpsRms->GetXaxis()->SetTitle("H_{T}^{pseudo} [GeV]");
+      HtpsRms->GetXaxis()->SetTitle("H_{T}^{t#bar{t}} [GeV]");
       HtpsRms->GetYaxis()->SetTitle("#sigma_{fit}[GeV]");
       HtpsRms->GetYaxis()->SetTitleOffset(1.4);
       HtpsRms->SetLineColor(4);
@@ -486,7 +486,7 @@ void BinOpt (TString type="all",TString var="all")
       HtpsRms->SetMarkerSize(1);
       HtpsRms->SetMarkerColor(4);
       
-      EvalBins(HtpsRms,"Ht_pseudo");
+      EvalBins(HtpsRms,"Ht_ttbar");
      }
      
      if (var=="all"||var=="Pout")
