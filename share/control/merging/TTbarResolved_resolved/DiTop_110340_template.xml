@@ -2,10 +2,10 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
-  <sample name="ttbar_nofullhad_00"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_nofullhad_01"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_nofullhad_02"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_nofullhad_03"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="AFII" />
+  <sample name="ttbar_nofullhad_00"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="FS" />
+  <sample name="ttbar_nofullhad_01"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="FS" />
+  <sample name="ttbar_nofullhad_02"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="FS" />
+  <sample name="ttbar_nofullhad_03"  dsid="110340" xsec="105.86" kfact="1.2971" genevt="4998495" generator="PowhegPythia_P2011C" simulation="FS" />
 </samples>
 <files>
   <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110340.@CHANNEL@.@SYST@.histograms.root.00" />

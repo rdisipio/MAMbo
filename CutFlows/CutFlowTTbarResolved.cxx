@@ -1611,6 +1611,7 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     FillMatrix("reco/4j2b/tt/Matrix_reco_particle", recoTT, particleTT, weight);
     FillMatrix("reco/4j2b/WL/Matrix_reco_particle", recoWL, particleWL, weight);
     FillMatrix("reco/4j2b/WH/Matrix_reco_particle", recoWH, particleWH, weight);    
+
     FillMatrix("particle/4j2b/topL/Matrix_particle_reco", particleTopL, recoTopL, weight);
     FillMatrix("particle/4j2b/topH/Matrix_particle_reco", particleTopH, recoTopH, weight);
     FillMatrix("particle/4j2b/tt/Matrix_particle_reco", particleTT, recoTT, weight);
@@ -1719,14 +1720,13 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
      FillMatrix("reco/4j2b/topL/Matrix_reco_parton", recoTopL, partonTopL, weight);
      FillMatrix("reco/4j2b/topH/Matrix_reco_parton", recoTopH, partonTopH, weight);
      FillMatrix("reco/4j2b/tt/Matrix_reco_parton", recoTT, partonTT, weight);
-     FillMatrix("parton/4j2b/topL/Matrix_parton_reco", partonTopL, recoTopL, weight);
-     FillMatrix("parton/4j2b/topH/Matrix_parton_reco", partonTopH, recoTopH, weight);
-
-     FillMatrix("parton/4j2b/tt/Matrix_parton_reco", partonTT, recoTT, weight);
-     FillMatrix("reco/4j2b/tt/Matrix_reco_parton", recoTT, partonTT, weight);
-
+//     FillMatrix("reco/4j2b/tt/Matrix_reco_parton", recoTT, partonTT, weight); // was filled twice??
      FillMatrix("reco/4j2b/WL/Matrix_reco_parton", recoWL, partonWL, weight);
      FillMatrix("reco/4j2b/WH/Matrix_reco_parton", recoWH, partonWH, weight);
+
+     FillMatrix("parton/4j2b/topL/Matrix_parton_reco", partonTopL, recoTopL, weight);
+     FillMatrix("parton/4j2b/topH/Matrix_parton_reco", partonTopH, recoTopH, weight);
+     FillMatrix("parton/4j2b/tt/Matrix_parton_reco", partonTT, recoTT, weight);
      FillMatrix("parton/4j2b/WL/Matrix_parton_reco", partonWL, recoWL, weight);
      FillMatrix("parton/4j2b/WH/Matrix_parton_reco", partonWH, recoWH, weight);
      
@@ -1804,12 +1804,12 @@ void CutFlowTTbarResolved::FillHistogramsMatchingRecoToParton( double weight )
     FillMatrix("particle/4j2b/topL/Matrix_particle_parton", particleTopL, partonTopL, weight);
     FillMatrix("particle/4j2b/topH/Matrix_particle_parton", particleTopH, partonTopH, weight);
     FillMatrix("particle/4j2b/tt/Matrix_particle_parton", particleTT, partonTT, weight);
+    FillMatrix("particle/4j2b/WL/Matrix_particle_parton", particleWL, partonWL, weight);
+    FillMatrix("particle/4j2b/WH/Matrix_particle_parton", particleWH, partonWH, weight);
+
     FillMatrix("parton/4j2b/topL/Matrix_parton_particle", partonTopL, particleTopL, weight);
     FillMatrix("parton/4j2b/topH/Matrix_parton_particle", partonTopH, particleTopH, weight);
     FillMatrix("parton/4j2b/tt/Matrix_parton_particle", partonTT, particleTT, weight);
-
-    FillMatrix("particle/4j2b/WL/Matrix_particle_parton", particleWL, partonWL, weight);
-    FillMatrix("particle/4j2b/WH/Matrix_particle_parton", particleWH, partonWH, weight);
     FillMatrix("parton/4j2b/WL/Matrix_parton_particle", partonWL, particleWL, weight);
     FillMatrix("parton/4j2b/WH/Matrix_parton_particle", partonWH, particleWH, weight);
     

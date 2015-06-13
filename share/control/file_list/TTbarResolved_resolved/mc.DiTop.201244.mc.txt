@@ -1,1 +1,2 @@
-user.mromano.201244.AlpgenAutoPythia_P2012_radLo_ttbar_ktfac2p0_jjlnNp4inc.e2356_a188_a222_r4540_p1575.at180_nosyst_mc.root.23853762/user.mromano.5237209._000002.mc.root
+user.mromano.201244.AlpgenAutoPythia_P2012_radLo_ttbar_ktfac2p0_jjlnNp4inc.e2356_a188_a222_r4540_p1575.at180_nosyst_mc.root/user.mromano.5237209._000001.mc.root
+user.mromano.201244.AlpgenAutoPythia_P2012_radLo_ttbar_ktfac2p0_jjlnNp4inc.e2356_a188_a222_r4540_p1575.at180_nosyst_mc.root/user.mromano.5237209._000002.mc.root

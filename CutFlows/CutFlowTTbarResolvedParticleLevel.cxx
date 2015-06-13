@@ -112,6 +112,9 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( "particle/cutflow/3j0b/MC_gen_weights" );
   h->Fill( weight_particle_level );
 
+  h = (ROOT_TH1_t*)m_hm->GetHistogram( "parton/cutflow/3j0b/MC_gen_weights" );
+  h->Fill( weight_particle_level );
+
   const bool passedParticleSelection = PassedCutFlowParticle( ed );
 
   int Debug = 0;
@@ -668,12 +671,12 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     FillMatrix("particle/4j2b/topL/Matrix_particle_parton", particleTopL, partonTopL, weight);
     FillMatrix("particle/4j2b/topH/Matrix_particle_parton", particleTopH, partonTopH, weight);
     FillMatrix("particle/4j2b/tt/Matrix_particle_parton", particleTT, partonTT, weight);
+    FillMatrix("particle/4j2b/WL/Matrix_particle_parton", particleWL, partonWL, weight);
+    FillMatrix("particle/4j2b/WH/Matrix_particle_parton", particleWH, partonWH, weight);
+
     FillMatrix("parton/4j2b/topL/Matrix_parton_particle", partonTopL, particleTopL, weight);
     FillMatrix("parton/4j2b/topH/Matrix_parton_particle", partonTopH, particleTopH, weight);
     FillMatrix("parton/4j2b/tt/Matrix_parton_particle", partonTT, particleTT, weight);
-
-    FillMatrix("particle/4j2b/WL/Matrix_particle_parton", particleWL, partonWL, weight);
-    FillMatrix("particle/4j2b/WH/Matrix_particle_parton", particleWH, partonWH, weight);
     FillMatrix("parton/4j2b/WL/Matrix_parton_particle", partonWL, particleWL, weight);
     FillMatrix("parton/4j2b/WH/Matrix_parton_particle", partonWH, particleWH, weight);
     
