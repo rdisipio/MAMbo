@@ -291,7 +291,7 @@
             <Bin id="0" nbins="250" xmin="-500." xmax="500." />
         </Variable>
         <Variable name="Discriminant" title="Signed #nu's |D|^{1/6};Signed #nu's |D|^{1/6} [GeV];" folder="4j2b" particle="difference" >
-            <Bin id="0" nbins="250" xmin="-500." xmax="500." />
+            <Bin id="0" nbins="125" xmin="-500." xmax="500." />
         </Variable>
 
         <Variable name="z_ttbar" title="z_{t#bar{t}};z_{t#bar{t}};" folder="4j2b" particle="difference" >
