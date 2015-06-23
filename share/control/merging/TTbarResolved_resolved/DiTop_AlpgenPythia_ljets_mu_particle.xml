@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
+<samples>
+  <sample name="lnjj_Np0"	dsid="201220" xsec="17.151" kfact="2.0491" genevt="6293873" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np1"	dsid="201221" xsec="17.532" kfact="2.0491" genevt="6389459" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np2"	dsid="201222" xsec="11.209" kfact="2.0491" genevt="4179757" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np3"	dsid="201223" xsec="5.1767" kfact="2.0491" genevt="1949886" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+  <sample name="lnjj_Np4incl"   dsid="201224" xsec="2.9869" kfact="2.0491" genevt="1179291" generator="AlpgenAutoPythia_P2012" simulation="FS" />
+</samples>
+<files>
+  <file sample="lnjj_Np0"       path="particle/tt_diffxs_8TeV.mc.DiTop.201220.mu.nominal.particle.histograms.root" />
+  <file sample="lnjj_Np1"       path="particle/tt_diffxs_8TeV.mc.DiTop.201221.mu.nominal.particle.histograms.root" />
+  <file sample="lnjj_Np2"       path="particle/tt_diffxs_8TeV.mc.DiTop.201222.mu.nominal.particle.histograms.root" />
+  <file sample="lnjj_Np3"       path="particle/tt_diffxs_8TeV.mc.DiTop.201223.mu.nominal.particle.histograms.root" />
+  <file sample="lnjj_Np4incl"   path="particle/tt_diffxs_8TeV.mc.DiTop.201224.mu.nominal.particle.histograms.root" />
+</files>
+</document>

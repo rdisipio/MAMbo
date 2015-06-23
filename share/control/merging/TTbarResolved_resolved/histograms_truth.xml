@@ -42,6 +42,7 @@
   <histogram hpath="particle/4j2b/difference/R_lb" />
   <histogram hpath="particle/4j2b/difference/R_Wt_lep" />
   <histogram hpath="particle/4j2b/difference/R_Wt_had" />
+  <histogram hpath="particle/4j2b/difference/Discriminant" />
 
   <histogram hpath="parton/4j2b/WH/m" />
   <histogram hpath="parton/4j2b/WH/pt" />

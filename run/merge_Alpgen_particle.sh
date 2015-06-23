@@ -2,8 +2,8 @@
 
 analysis=tt_diffxs_8TeV
 analytag=TTbarResolved_resolved
-#ILUMI=20300
-ILUMI=1
+ILUMI=20300
+#ILUMI=1
 sample=DiTop
 syst=nominal
 decay=nofullhad
@@ -20,7 +20,7 @@ outdir=${MAMBODIR}/run/output/${analytag}
 
 for ch in el mu
 do
-      for decay in nofullhad #ljets dilep 
+      for decay in nofullhad ljets dilep 
       do
          params=${paramsdir}/DiTop_${gen}_${decay}_${ch}_particle.xml
          outfile=${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.${ch}.nominal.particle.histograms.root
@@ -29,6 +29,9 @@ do
       done
 done
 
-   hadd -f ${outdir}/particle/histograms_${gen}_ll_particle.root \
+for decay in nofullhad ljets dilep
+do
+   hadd -f ${outdir}/particle/histograms_${gen}_ll_${decay}_particle.root \
            ${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.el.nominal.particle.histograms.root \
            ${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.mu.nominal.particle.histograms.root
+done

@@ -133,6 +133,39 @@
   <histogram hpath="reco/4j2b/difference/R_lb" /> 
   <histogram hpath="reco/4j2b/difference/R_Wt_lep" />
   <histogram hpath="reco/4j2b/difference/R_Wt_had" />
+  <histogram hpath="reco/4j2b/difference/Discriminant" />
+
+  <!-- Response matrices -->
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_particle_pt" />
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_particle_rapidity" />
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_particle_absrap" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_particle_m" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_particle_pt" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_particle_rapidity" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_particle_absrap" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_z_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_Pout" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_Chi_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_Yboost" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_dPhi_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_HT_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_R_Wb_had" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_R_lb" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_R_Wt_had" />
+
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_pt" />
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_rapidity" />
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_absrap" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_m" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_pt" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_rapidity" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_absrap" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_z_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_Pout" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_Chi_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_Yboost" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_dPhi_ttbar" />
+  <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_HT_ttbar" />
 
 </histograms>
 
