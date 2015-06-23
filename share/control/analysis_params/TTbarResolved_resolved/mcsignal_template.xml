@@ -1,0 +1,19 @@
+<analysis name="TTbarResolved">
+  <ntuple>TopMiniSLResolved</ntuple>
+  <branches>control/branch_list_TopMiniSLResolved.txt</branches>
+  <tree>mini</tree>
+  <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
+  <cutflow>TTbarResolved</cutflow>
+  <channel>@CHANNEL@</channel>
+  <parameters>
+    <param name="pTmin"             type="numeric" value="20." />
+    <param name="etaMax"            type="numeric" value="2.5" />
+    <param name="isMCSignal"        type="flag"    value="1" />
+    <param name="isRealData"        type="flag"    value="0" />
+    <param name="isWjets"      	    type="flag"    value="0" />
+    <param name="isQCD"             type="flag"    value="0" />
+    <param name="mcfile"            type="string"  value="@MCFILELIST@" />
+    <param name="treename_particle" type="string"  value="particles" />
+    <param name="treename_parton"   type="string"  value="partons"   />
+  </parameters>
+</analysis>
