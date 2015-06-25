@@ -86,6 +86,10 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   int EventIsDileptonic = ed->property["isDileptonic"];
   //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
+  if( isMCSignal ) {
+    if( (isDilepton==0) && (EventIsDileptonic==1) ) return success;
+  }
+
   /*
   
     if (isMCSignal) {

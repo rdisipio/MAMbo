@@ -15,7 +15,10 @@ dsid=110404
 [ ! -z $1 ] && dsid=$1
 
 syst=nominal
-[ ! -z $2 ] && syst=$2
+#[ ! -z $2 ] && syst=$2
+
+decay=nofullhad
+[ ! -z $2 ] && decay=$2
 
 for ch in el mu
 do
@@ -26,10 +29,10 @@ do
   sed -i "s/@CHANNEL@/${ch}/g" ${params}
   sed -i "s/@SYST@/${syst}/g"  ${params}
 
-  MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.${ch}.${syst}.histograms.root
+  MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.${ch}.${syst}.${decay}.histograms.root
 done
 
-hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.co.${syst}.histograms.root \
-        ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.el.${syst}.histograms.root \
-        ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.mu.${syst}.histograms.root
+hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.co.${syst}.${decay}.histograms.root \
+        ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.el.${syst}.${decay}.histograms.root \
+        ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.mu.${syst}.${decay}.histograms.root
 

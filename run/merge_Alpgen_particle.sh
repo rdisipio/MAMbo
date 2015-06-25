@@ -23,15 +23,16 @@ do
       for decay in nofullhad ljets dilep 
       do
          params=${paramsdir}/DiTop_${gen}_${decay}_${ch}_particle.xml
-         outfile=${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.${ch}.nominal.particle.histograms.root
+         outfile=${outdir}/particle/${analysis}.mc.${sample}.${gen}.${ch}.particle.${decay}.histograms.root
 
-         MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outfile}
+         MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outfile} &
       done
+      wait
 done
 
 for decay in nofullhad ljets dilep
 do
-   hadd -f ${outdir}/particle/histograms_${gen}_ll_${decay}_particle.root \
-           ${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.el.nominal.particle.histograms.root \
-           ${outdir}/particle/${analysis}.mc.${sample}.${gen}.${decay}.mu.nominal.particle.histograms.root
+   hadd -f ${outdir}/particle/${analysis}.mc.${sample}.${gen}.co.particle.${decay}.histograms.root \
+           ${outdir}/particle/${analysis}.mc.${sample}.${gen}.el.particle.${decay}.histograms.root \
+           ${outdir}/particle/${analysis}.mc.${sample}.${gen}.mu.particle.${decay}.histograms.root
 done

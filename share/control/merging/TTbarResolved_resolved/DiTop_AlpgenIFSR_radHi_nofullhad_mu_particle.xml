@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
+<samples>
+  <sample name="lnln_Np0"	dsid="201030" xsec="3.7532" kfact="1.9180" genevt="2693997" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np1"	dsid="201031" xsec="4.2892" kfact="1.9180" genevt="3073498" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np2"	dsid="201032" xsec="3.0905" kfact="1.9180" genevt="2176000" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np3"	dsid="201033" xsec="1.6044" kfact="1.9180" genevt="991997"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnln_Np4incl"   dsid="201034" xsec="1.1071" kfact="1.9180" genevt="626998"  generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np0"	dsid="201230" xsec="15.017" kfact="2.0010" genevt="5306998" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np1"	dsid="201231" xsec="17.162" kfact="2.0010" genevt="6183996" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np2"	dsid="201232" xsec="12.372" kfact="2.0010" genevt="4452994" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np3"	dsid="201233" xsec="6.4212" kfact="2.0010" genevt="1967495" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+  <sample name="lnjj_Np4incl"   dsid="201234" xsec="4.3842" kfact="2.0010" genevt="1530499" generator="AlpgenAutoPythia_P2012" simulation="AFII" />
+</samples>
+<files>
+  <file sample="lnln_Np0" 	path="particle/tt_diffxs_8TeV.mc.DiTop.201030.mu.radHi.particle.histograms.root" />
+  <file sample="lnln_Np1" 	path="particle/tt_diffxs_8TeV.mc.DiTop.201031.mu.radHi.particle.histograms.root" />
+  <file sample="lnln_Np2" 	path="particle/tt_diffxs_8TeV.mc.DiTop.201032.mu.radHi.particle.histograms.root" />
+  <file sample="lnln_Np3" 	path="particle/tt_diffxs_8TeV.mc.DiTop.201033.mu.radHi.particle.histograms.root" />
+  <file sample="lnln_Np4incl" 	path="particle/tt_diffxs_8TeV.mc.DiTop.201034.mu.radHi.particle.histograms.root" />
+  <file sample="lnjj_Np0"       path="particle/tt_diffxs_8TeV.mc.DiTop.201230.mu.radHi.particle.histograms.root" />
+  <file sample="lnjj_Np1"       path="particle/tt_diffxs_8TeV.mc.DiTop.201231.mu.radHi.particle.histograms.root" />
+  <file sample="lnjj_Np2"       path="particle/tt_diffxs_8TeV.mc.DiTop.201232.mu.radHi.particle.histograms.root" />
+  <file sample="lnjj_Np3"       path="particle/tt_diffxs_8TeV.mc.DiTop.201233.mu.radHi.particle.histograms.root" />
+  <file sample="lnjj_Np4incl"   path="particle/tt_diffxs_8TeV.mc.DiTop.201234.mu.radHi.particle.histograms.root" />
+</files>
+</document>

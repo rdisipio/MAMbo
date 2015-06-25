@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
+<samples>
+  <sample name="lnqq_Np0"	dsid="164450" xsec="19.186" kfact="1.8080" genevt="3359080" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np1"       dsid="164451" xsec="20.282" kfact="1.8080" genevt="3398787" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np2"       dsid="164452" xsec="13.084" kfact="1.8080" genevt="2209980" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" />
+  <sample name="lnqq_Np3p"      dsid="164453" xsec="8.7001" kfact="1.8080" genevt="1439791" generator="AlpgenJimmy_AUET2CTEQ6L1" simulation="FS" /> 
+</samples>
+<files>
+  <file sample="lnqq_Np0"       path="particle/tt_diffxs_8TeV.mc.DiTop.164450.el.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np1"       path="particle/tt_diffxs_8TeV.mc.DiTop.164451.el.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np2"       path="particle/tt_diffxs_8TeV.mc.DiTop.164452.el.nominal.particle.histograms.root" />
+  <file sample="lnqq_Np3p"      path="particle/tt_diffxs_8TeV.mc.DiTop.164453.el.nominal.particle.histograms.root" />
+</files>
+</document>

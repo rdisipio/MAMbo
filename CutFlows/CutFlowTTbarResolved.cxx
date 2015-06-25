@@ -361,6 +361,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
     /*
+    // JK
 
     if (isMCSignal) {
       if ( EventIsDileptonic < 0 ) {
@@ -376,8 +377,12 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	return 0; 
       }
     }
-
     */    
+
+    // RDS -- ljets filter
+    if (isMCSignal) {
+       if( (isDilepton==0) && (EventIsDileptonic==1) ) return success;
+    }
 
     //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
 

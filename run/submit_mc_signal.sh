@@ -16,7 +16,6 @@ do
      [ $ch == "el" ] && ch_tag="electron"
      [ $ch == "mu" ] && ch_tag="muon"
       
-     params=${MAMBODIR}/share/control/analysis_params/${outtag}/mcsignal_${dsid}_${ch}.xml 
      filelist=${MAMBODIR}/share/control/file_list/${outtag}/mc.DiTop.${dsid}.${ch}.txt
      filelist_mc=$( echo $filelist | sed "s/${ch}.root/mc.root/" )
 
