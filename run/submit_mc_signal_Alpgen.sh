@@ -4,7 +4,7 @@ analysis=tt_diffxs_8TeV
 outtag=TTbarResolved_resolved
 paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 
-infile=AlpgenPythia.dat
+infile=AlpgenPythia_ljets.dat
 [ ! -z $1 ] && infile=$1
 
 for dts in $(cat ${infile} | grep -v ':mc' | grep -v 'jjjj' | sort )

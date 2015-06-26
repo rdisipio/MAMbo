@@ -166,19 +166,21 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
     string plotTitle =  variableNameY + " vs "+  variableNameX;
 
     XMLBin *binX = 0, *binY = 0;
-    bool useEdges;
+    bool useEdges = false;
     
     for (XMLVariable* variable : variables){
         if (VariableNameAndFolderCondition(variable, variableNameX, path)){
             binX = variable->GetBinByIdInPath(binIdX, path);
 	    //	    cout << "  HistogramManager::Book2DHistogram got binX @ " << binX  << endl;
 	    //	    cout << "  HistogramManager::Book2DHistogram got binX n=" << binX->edges.size() << endl;
+            if( binX == NULL ) throw runtime_error( "Invalid binX variable." );
             if (binX->edges.size() > 0){
                 useEdges = true;
             }
         }
         if (VariableNameAndFolderCondition(variable, variableNameY, path)){
             binY = variable->GetBinByIdInPath(binIdY, path);
+            if(	binY ==	NULL ) throw runtime_error( "Invalid binY variable." );
 	    //	    cout << "  HistogramManager::Book2DHistogram got binY @ " << binY  << endl;
 	    //	    cout << "  HistogramManager::Book2DHistogram got binY n=" << binY->edges.size() << endl;
         }
@@ -189,16 +191,16 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
        plotNameWithBin += "_" + std::to_string(binX->id) + "_" + std::to_string(binY->id);
     }   
 
-    ROOT_TH2_t*  h;
-    //    cout << "  HistogramManager::Book2DHistogram: Booking " << plotNameWithBin.c_str() << endl;
+    ROOT_TH2_t*  h = NULL;
     if (binX != NULL && binY != NULL) {
-      if (useEdges)
+      if (useEdges) {
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->edges, binY->nBins, binY->edges);
-      else 
+      }
+      else {
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->min, binX->max , binY->nBins, binY->min, binY->max );
-      //      cout << "  HistogramManager::Book2DHistogram: Booked!" << endl;
+      }
+
       MoveHistogramtToFolder(h, path+"/"+plotName);
-      //      cout << "  HistogramManager::Book2DHistogram: Moved!" << endl;
     }
 }
 

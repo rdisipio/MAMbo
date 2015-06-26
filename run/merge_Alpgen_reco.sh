@@ -21,7 +21,7 @@ do
       for decay in nofullhad ljets dilep 
       do
          params=${paramsdir}/DiTop_${gen}_${decay}_${ch}.xml
-         outfile=${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.${ch}.${syst}.histograms.root
+         outfile=${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${ch}.${syst}.${decay}.histograms.root
 
          MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outfile}
       done
@@ -29,7 +29,7 @@ done
 
 for decay in nofullhad ljets dilep
 do
-   hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.co.${syst}.histograms.root \
-        ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.el.${syst}.histograms.root \
-        ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.${decay}.mu.${syst}.histograms.root
+   hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.co.${syst}.${decay}.histograms.root \
+           ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.el.${syst}.${decay}.histograms.root \
+           ${outdir}/${syst}/${analysis}.mc.${sample}.${gen}.mu.${syst}.${decay}.histograms.root
 done
