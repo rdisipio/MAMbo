@@ -12,6 +12,6 @@
     <param name="isRealData"        type="flag"    value="0" />
     <param name="isWjets"      	    type="flag"    value="0" />
     <param name="isQCD"             type="flag"    value="0" />
-    <param name="isDilepton"   	    type="flag"    value="0" />
+    <param name="isDilepton"   	    type="flag"    value="-1" />
   </parameters>
 </analysis>

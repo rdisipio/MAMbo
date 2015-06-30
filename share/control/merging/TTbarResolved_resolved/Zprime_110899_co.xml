@@ -6,7 +6,7 @@
   <sample name="zprime_400_mu"  dsid="110899" xsec="4.2589" kfact="1.000" genevt="100000" generator="PowhegPythia_P2011C" simulation="FullSimulation" />
 </samples>
 <files>
-  <file sample="zprime_400_el" path="nominal/tt_diffxs_8TeV.mc.Zprime.110899.el.nominal.histograms.root" />
-  <file sample="zprime_400_mu" path="nominal/tt_diffxs_8TeV.mc.Zprime.110899.mu.nominal.histograms.root" />
+  <file sample="zprime_400_el" path="nominal/tt_diffxs_8TeV.Zprime.110899.el.nominal.histograms.root" />
+  <file sample="zprime_400_mu" path="nominal/tt_diffxs_8TeV.Zprime.110899.mu.nominal.histograms.root" />
 </files>
 </document>

@@ -1267,11 +1267,14 @@ void CutFlowTTbarResolved::FillHistogramsTopPairs(string level, TLorentzVector &
     
    // chi = exp |y1-y2|
    // alison lister: leading top - subleading top
-   const double chittbar = ( topH_pT > topL_pT ) ? exp( fabs(topH_y - topL_y) ) : exp( fabs(topL_y - topH_y) );
+   const double ystar    = ( topH_pT > topL_pT ) ? 0.5 * ( topH_y - topL_y ) : 0.5 * ( topL_y - topH_y );
+   const double chittbar = exp( 2. * fabs( ystar ) );
    m_hm->FillHistograms(path + "Chi_ttbar", chittbar , weight);
    m_VarField[level+"_Chi_ttbar"]=chittbar;
    //  if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsChittbar", chittbar, ttSystem.Pt());
    m_hm->FillMatrices( path + "Chi_ttbar_vs_mtt", ttSystem.M()/GeV, chittbar, weight );  
+   m_hm->FillHistograms(path + "Ystar_ttbar", ystar, weight );
+   m_hm->FillMatrices( path + "Ystar_ttbar_vs_mtt", ttSystem.M()/GeV, ystar, weight );
    //cout << "DEBUG: mtt = " << ttSystem.M()/GeV << " Xtt = " << chittbar << " w = " << weight << endl;
 
    // y_boost

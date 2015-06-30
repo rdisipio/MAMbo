@@ -164,6 +164,7 @@
   <histogram hpath="reco/4j2b/difference/R_Wt_lep" />
   <histogram hpath="reco/4j2b/difference/R_Wt_had" />
   <histogram hpath="reco/4j2b/difference/Discriminant" />
+  <histogram hpath="reco/4j2b/difference/Chi_ttbar_vs_mtt" />
 
   <!-- Response matrices -->
   <histogram hpath="reco/4j2b/topH/Matrix_reco_particle_pt" />

@@ -312,6 +312,10 @@
             <Bin id="0" nbins="11" edges="225,345,420,500,590,685,790,910,1040,1175,1320,2500" /> <!--JP proposed binning-->
             <Bin id="1" nbins="250" xmin="0." xmax="2500."  />
         </Variable>
+        <Variable name="Ystar_ttbar" title="y^{\star}_{t#bar{t}}" folder="4j2b" particle="difference"  >
+            <Bin id="0" nbins="32" edges="-2.,-1.5,-1.4,-1.3,-1.2,-1.1,-1.0,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.,1.1,1.2,1.3,1.4,1.5,2." />
+            <Bin id="1" nbins="100" xmin="0." xmax="2." />
+        </Variable>
 	<Variable name="Yboost" title="y_{boost};y_{boost};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="16" edges="0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.,1.1,1.2,1.3,1.4,1.5,2." />
             <Bin id="1" nbins="100" xmin="0." xmax="2." />
@@ -458,6 +462,7 @@
 	<TH2F variableX="WH_m" binIdX="0" variableY="TopH_m" binIdY="0" folder="4j2b" particle="difference"/>
 	<TH2F variableX="WL_m" binIdX="0" variableY="TopL_m" binIdY="0" folder="4j2b" particle="difference"/>
         <TH2F variableX="mtt"  binIdX="0" variableY="Chi_ttbar" binIdY="0" folder="4j2b" particle="difference"/>
+        <TH2F variableX="mtt"  binIdX="0" variableY="Ystar_ttbar" binIdY="0" folder="4j2b" particle="difference"/>
 
         <TH1F variable="ptdiff"/>
         <TH1F variable="pt" />
@@ -553,6 +558,7 @@
 	<Matrix variable="HT_ttbar" binId="0"/> 
 	<Matrix variable="HT_pseudo" binId="0"/>
 	<Matrix variable="Chi_ttbar" binId="0"/>
+        <Matrix variable="Ystar_ttbar" binId="0"/>
 	<Matrix variable="Yboost" binId="0"/>
 	<Matrix variable="Salam_ttbar" binId="0"/>
 	<Matrix variable="px" binId="1"/>
@@ -578,6 +584,8 @@
         <TH1F variable="neutrino_pz"  binId="0"/>
         <TH1F variable="Discriminant"  binId="0"/>
         <TH1F variable="Chi_ttbar"  binId="0"/>
+        <TH1F variable="Ystar_ttbar" binId="0"/>
+       	<TH1F variable="Ystar_ttbar" binId="1"/>
 	<TH1F variable="Yboost"  binId="0"/>
 	<TH1F variable="topLCosThetaStar"  binId="0"/>
 	<TH1F variable="topHCosThetaStar"  binId="0"/>
