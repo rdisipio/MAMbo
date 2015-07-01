@@ -15,6 +15,25 @@
 #include "XMLLevel.h"
 #include <vector>
 
+
+// If want to use bootstrap:
+// https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/StandardModelUnfolding#Bootstrap_method
+//
+// cd $MAMBODIR/../
+// svn co svn+ssh://svn.cern.ch/reps/atlasphys/Physics/StandardModel/Common/BootstrapGenerator/tags/BootstrapGenerator-01-00-02 BootstrapGenerator
+// cd BootstrapGenerator/cmt
+// make -f Makefile.Standalone
+//
+// then uncomment ###JK in Makefile.inc
+//
+// and finally uncomment:
+// #define BOOTSTRAP_MAMBO
+
+#ifdef BOOTSTRAP_MAMBO
+#include "BootstrapGenerator/BootstrapGenerator.h"
+#include "BootstrapGenerator/TH1DBootstrap.h"
+#endif
+
 class HistogramManager 
 {
  public:
@@ -27,12 +46,12 @@ class HistogramManager
   void Book1DHistogram( const string path, const xmlNodePtr xml );
   void Book2DHistogram( const string path, const xmlNodePtr xml );
   void BookMatrices( const string path, const xmlNodePtr xml );
-  void MoveHistogramtToFolder( TH1* h, const string fullPath );
+  void MoveHistogramToFolder( TH1* h, const string fullPath );
 
   void CreateAllMatricesForVariableAndBin(const string path, XMLVariable* variable, XMLBin* bin, string matrixNameSuffix);
 
-  ROOT_TH1_t* Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
-  ROOT_TH1_t* Book1DHistogram( const string& name, const string& title, int nbins, const vector<double>  xedges );
+  ROOT_TH1_t* Book1DHistogram( const string& path, const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax );
+  ROOT_TH1_t* Book1DHistogram( const string& path, const string& name, const string& title, int nbins, const vector<double>  xedges );
   
   ROOT_TH2_t* Book2DHistogram( const string& name, const string& title, int nbinsx, Double_t xmin, Double_t xmax, int nbinsy, Double_t ymin, Double_t ymax );
   ROOT_TH2_t* Book2DHistogram( const string& name, const string& title, int nbinsx, const vector<double>  xedges, int nbinsy, vector<double>  yedges );
@@ -52,6 +71,11 @@ class HistogramManager
   inline ROOT_TH2_t * Get2DHistogram( const string& name ) { return (ROOT_TH2_t*)m_outFile->Get( name.c_str() ); };
 
   inline void  ToggleSumW2() { m_sumw2 = !m_sumw2; };
+
+#ifdef BOOTSTRAP_MAMBO
+  void InitBootsTrap(int runno, int evtno);
+  std::vector<TH1DBootstrap*> m_th1dbootstrap;
+#endif
 
   void WriteToFile();  
 
@@ -83,6 +107,13 @@ private :
   bool VariableNameAndFolderCondition(XMLVariable* variable, string variableName, string path);
   bool FolderCondition(vector<string> folders, string path);
   bool IsParentInFolderList(string parentName, vector<string> list);
+
+#ifdef BOOTSTRAP_MAMBO
+  bool m_DoBootsTrap;
+  int m_Nreplicas;
+  BootstrapGenerator* m_Bootstrap_Gen;
+#endif
+
 };
 
 

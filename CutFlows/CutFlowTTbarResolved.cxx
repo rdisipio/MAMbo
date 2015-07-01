@@ -9,8 +9,9 @@ CutFlowTTbarResolved::CutFlowTTbarResolved()
     m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
     
     m_alias = {
-        "beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
+      "beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
     };
+
 
 #ifdef __MOMA__
    m_moma = MoMATool::GetHandle();
@@ -355,14 +356,13 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 #endif
 
 
-    // dileptonic filter
+    // dileptonic filter; JK, RDS
     // flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
     int EventIsDileptonic = ed->property["isDileptonic"];
     //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
-    /*
-    // JK
-
+    
+    // ljets filter
     if (isMCSignal) {
       if ( EventIsDileptonic < 0 ) {
 	cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
@@ -370,18 +370,12 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       }
       if (not isDilepton and EventIsDileptonic == 1) { 
 	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
-	return 0; 
+	return success; 
       }
       if (isDilepton and EventIsDileptonic != 1) { 
 	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
-	return 0; 
+	return success; 
       }
-    }
-    */    
-
-    // RDS -- ljets filter
-    if (isMCSignal) {
-       if( (isDilepton==0) && (EventIsDileptonic==1) ) return success;
     }
 
     //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
@@ -793,6 +787,8 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     return passed;
 }
 
+/////////////////////////////////////////
+
 bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {    
     bool passed = true;
 
@@ -814,16 +810,19 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     
     ControlPlotValues values;
     values.weight = weight;
-    if ((el_n > 0) && (mu_n == 0)){
-    values.lep_pt  = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.pT.at(0)  : 0.;
-    values.lep_eta = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.eta.at(0) : 0.;
-    values.lep_phi = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.phi.at(0) : 0.;
-    values.lep_E   = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.E.at(0)   : 0.;}
-    else if ((el_n == 0) && (mu_n > 0)){
-    values.lep_pt  = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.pT.at(0)  : 0.;
-    values.lep_eta = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.eta.at(0) : 0.;
-    values.lep_phi = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.phi.at(0) : 0.;
-    values.lep_E   = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.E.at(0)   : 0.;}
+    if ((el_n > 0) && (mu_n == 0)) {
+      values.lep_pt  = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.pT.at(0)  : 0.;
+      values.lep_eta = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.eta.at(0) : 0.;
+      values.lep_phi = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.phi.at(0) : 0.;
+      values.lep_E   = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.E.at(0)   : 0.;}
+    else if ((el_n == 0) && (mu_n > 0)) {
+      values.lep_pt  = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.pT.at(0)  : 0.;
+      values.lep_eta = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.eta.at(0) : 0.;
+      values.lep_phi = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.phi.at(0) : 0.;
+      values.lep_E   = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.E.at(0)   : 0.;
+    } else {
+      //      cerr << "CutFlowTTbarResolved::PassedCutFlowParticle: THIS SHOULD NEVER HAPPEN!" << endl;
+    }
 
     values.jet_n   = ed->truth_jets.n;
     values.bjet_n  = ed->truth_bjets.n; 

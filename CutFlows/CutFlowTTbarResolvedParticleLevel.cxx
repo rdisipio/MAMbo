@@ -110,6 +110,13 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   */
   
   double weight_particle_level = ed->info.mcWeight;
+  // NaN check:
+  if (weight_particle_level / weight_particle_level != 1.) {
+    cerr << "ERROR: NaN corrected!" << endl;
+    weight_particle_level = 1.;
+  }
+
+
   // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
   ed->property["weight_particle_level"] = weight_particle_level;
 
@@ -129,7 +136,12 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 
   // there is always a parton-level top  
   if (isMCSignal && fillHistos) {
-     FillHistogramsPseudotopParton(ed, weight_particle_level);
+    if (weight_particle_level > 1.e10) {
+      cerr << "ERROR: CRAZY weight corrected!" << endl;
+      weight_particle_level = 1.;
+    }
+      
+    FillHistogramsPseudotopParton(ed, weight_particle_level);
   }
 
   // nb: events could NOT pass the particle-level selection
@@ -170,9 +182,13 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
 
     const double weight = ed->property["weight_particle_level"];
 
+    /*
+      m_pseudotop_particle->SetEventData(ed);
+      m_pseudotop_particle->MakeChargedLepton();
+    */
     const int    el_n  = ed->truth_electrons.n;
     const int    mu_n  = ed->truth_muons.n;
-
+    
     const bool   single_lept = ( m_config->channel == kElectron ) ?
                                 (el_n == 1)&&(mu_n==0) :
                                 (el_n == 0)&&(mu_n==1);
@@ -185,17 +201,39 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
     ControlPlotValues values;
     values.weight = weight;
     values.lep_pt  = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.pT.at(0) : 0.;
-    //    cout << "   ed->truth_leptons.n=" << ed->truth_leptons.n << " lep_pt=" << values.lep_pt << endl;
-    
-    values.lep_eta = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.eta.at(0) : 0.;
-    values.lep_phi = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.phi.at(0) : 0.;
-    values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;
+    /*
+      cout << "   ed->truth_leptons.n=" << ed->truth_leptons.n << " lep_pt=" << values.lep_pt << endl;
+      cout << "   ed->truth_electrons.n=" << ed->truth_electrons.n  << endl;
+      cout << "   ed->truth_muons.n=" << ed->truth_muons.n << endl;
+    */
+
+    /*
+      values.lep_eta = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.eta.at(0) : 0.;
+      values.lep_phi = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.phi.at(0) : 0.;
+      values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;
+    */
+
+    if ((el_n > 0) && (mu_n == 0)) {
+      values.lep_pt  = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.pT.at(0)  : 0.;
+      values.lep_eta = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.eta.at(0) : 0.;
+      values.lep_phi = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.phi.at(0) : 0.;
+      values.lep_E   = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.E.at(0)   : 0.;}
+    else if ((el_n == 0) && (mu_n > 0)) {
+      values.lep_pt  = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.pT.at(0)  : 0.;
+      values.lep_eta = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.eta.at(0) : 0.;
+      values.lep_phi = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.phi.at(0) : 0.;
+      values.lep_E   = ( ed->truth_muons.n > 0 ) ?  ed->truth_muons.E.at(0)   : 0.;
+    } else {
+      //      cerr << "CutFlowTTbarResolved::PassedCutFlowParticle: THIS SHOULD NEVER HAPPEN!" << endl;
+    }
+
     values.jet_n   = ed->truth_jets.n;
     values.bjet_n  = ed->truth_bjets.n;
     values.fjet_n  = ed->truth_fjets.n;
     values.ETmiss  = ed->MET_truth.et;
     values.mwt     = ed->MET_truth.mwt;
 
+    /*
     for (int j = 0; j < ed->truth_jets.n; ++j) {
         JetValues jet;
         jet.pt  = ed->truth_jets.pT.at(j);
@@ -214,10 +252,31 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
         jet.m   = ed->truth_bjets.m.at(bj);
         values.bJets.push_back(&jet);
     }
+    */
+
+    for (int j = 0; j < ed->truth_jets.n; ++j) {
+      JetValues* jet = new JetValues();
+      jet->pt  = ed->truth_jets.pT.at(j);
+      jet->eta = ed->truth_jets.eta.at(j);
+      jet->phi = ed->truth_jets.phi.at(j);
+      jet->E   = ed->truth_jets.E.at(j);
+      jet->m   = ed->truth_jets.m.at(j);
+      values.jets.push_back(jet);
+    }
+    for (int bj = 0; bj < ed->truth_bjets.n; ++bj) {
+      JetValues* jet = new JetValues();
+      jet->pt  = ed->truth_bjets.pT.at(bj);
+      jet->eta = ed->truth_bjets.eta.at(bj);
+      jet->phi = ed->truth_bjets.phi.at(bj);
+      jet->E   = ed->truth_bjets.E.at(bj);
+      jet->m   = ed->truth_bjets.m.at(bj);
+      values.bJets.push_back(jet);
+    }
+
    // 0 All events
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
-    FillHistogramsControlPlotsParticle( values );
+    //    FillHistogramsControlPlotsParticle( values );
 
     // 1 trigger 
     PassedCut( "LPLUSJETS", "particle_unweight" );
@@ -291,16 +350,18 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
 
 void CutFlowTTbarResolvedParticleLevel::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {
-  // JK : TODO to uncomment?? Useless, we do not du any cuts in this class;) We get particle before cuts;)
-  //const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) -1;
-  //string path = "parton/cutflow/" + m_alias[cut] + "/";
+  const int cut = GetLastPassedCut( "LPLUSJETS", "particle_weighted" ) -1;
+  string path = "particle/cutflow/" + m_alias[cut] + "/";
+  // JK
   //  cout << "FillHistogramsControlPlotsParticle path=" << path.c_str() << " cut=" << cut << endl;
-  // cout << "     lep_pt=" << values.lep_pt << endl;
-  //FillHistograms(path, values);
+  //cout << "     lep_pt=" << values.lep_pt << endl;
+
+  FillHistograms(path, values);
 }
 
 
 // move this to the histogramming facility
+/////////////////////////////////////////
 
 void CutFlowTTbarResolvedParticleLevel::FillHistograms(string path, ControlPlotValues& values ){
     m_hm->FillHistograms( path + "lep_pt" , values.lep_pt / GeV, values.weight );
@@ -628,6 +689,8 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     m_hm->FillMatrices( path + "_rapidity", px.y, py.y, weight);
     m_hm->FillMatrices( path + "_E", px.E / GeV, py.E / GeV, weight);
   }
+
+/////////////////////////////////////////
 
   void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopResponseParticleToParton(  EventData * ed, const double weight )
   {

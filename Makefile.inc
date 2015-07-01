@@ -21,6 +21,7 @@ release: MSG = Level-3 optimization
 
 ROOTCFLAGS    = $(shell root-config --cflags)
 XMLCFLAGS     = $(shell xml2-config --cflags)
+###JK ROOTCFLAGS    = $(shell root-config --cflags) -I$(MAMBODIR)/../BootstrapGenerator/
 
 CFLAGS += $(ROOTCFLAGS) $(XMLCFLAGS)
 
@@ -31,6 +32,7 @@ XMLLIBS     = $(shell xml2-config --libs)
 
 # finally
 LIBS = $(ROOTLIBS) $(XMLLIBS)
+###JK LIBS = $(ROOTLIBS) $(XMLLIBS) -L$(MAMBODIR)/../BootstrapGenerator/StandAlone/ -lBootstrapGenerator
 
 # compile directives
 
@@ -42,13 +44,17 @@ LIBS = $(ROOTLIBS) $(XMLLIBS)
 
 ifdef MAMBO_USE_ANALYSISTOP
 CFLAGS += -D__MOMA__
-include $(MAMBODIR)/MoMA/Makefile.rootcore.inc
+include $(MAMBODIR)/MoMA/Makefile.rootcore.inc 
 
 ARCH=x86_64-slc6-gcc47-opt
 
 CFLAGS += -I$(MAMBODIR)/MoMA
 LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA
 endif
+
+###JK CFLAGS += -I$(MAMBODIR)/../BootstrapGenerator/
+###JK LIBS   += -L$(MAMBODIR)/../BootstrapGenerator/StandAlone/ -lBootstrapGenerator
+
 
 ## Use xAOD format?
 #ifeq ($(shell $(MAMBODIR)/share/use_xAOD.sh),"USE_XAOD")

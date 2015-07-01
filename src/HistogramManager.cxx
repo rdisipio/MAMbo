@@ -4,6 +4,16 @@ HistogramManager::HistogramManager() :
   m_sumw2( true )
 {
     pathNames = new vector< vector< XMLLevel* > >();
+
+#ifdef BOOTSTRAP_MAMBO
+    m_Nreplicas = 10;
+    m_DoBootsTrap = false;
+    //    m_DoBootsTrap = false;
+    if (m_DoBootsTrap) {
+      m_Bootstrap_Gen = new BootstrapGenerator("Gen", "Gen", m_Nreplicas); 
+    }
+#endif
+
 }
 
 
@@ -46,7 +56,7 @@ TFile * HistogramManager::SetOutFileName( const char * name )
   return m_outFile;
 }
 
-void HistogramManager::MoveHistogramtToFolder( TH1* h, const string fullPath )
+void HistogramManager::MoveHistogramToFolder( TH1* h, const string fullPath )
 {
     //cout << "DEBUG: create h: "<< h->GetName() << " in dir " << gDirectory->GetPath() << endl;
     if( m_sumw2 ) h->Sumw2();
@@ -57,18 +67,47 @@ void HistogramManager::MoveHistogramtToFolder( TH1* h, const string fullPath )
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-ROOT_TH1_t* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax )
+ROOT_TH1_t* HistogramManager::Book1DHistogram( const string& path, const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax )
 {
-    return new ROOT_TH1_t( name.c_str(), title.c_str(), nbins, xmin, xmax );
+
+
+  ROOT_TH1_t* h1 = new ROOT_TH1_t( name.c_str(), title.c_str(), nbins, xmin, xmax );
+
+#ifdef BOOTSTRAP_MAMBO
+  if (m_DoBootsTrap and m_Bootstrap_Gen) {
+    std::string pwd = gDirectory->GetPath();
+    currentDir = CreatePath( path );
+    currentDir->cd();
+    TH1DBootstrap* boots1 = new TH1DBootstrap( (name + "_boots").c_str(), title.c_str(), nbins, xmin, xmax, m_Nreplicas, m_Bootstrap_Gen );
+    m_th1dbootstrap.push_back( boots1 );
+    gDirectory -> cd(pwd.c_str()); 
+  }
+#endif
+
+  return h1;
 }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-ROOT_TH1_t* HistogramManager::Book1DHistogram( const string& name, const string& title, int nbins, const vector<double> xedges )
+ROOT_TH1_t* HistogramManager::Book1DHistogram( const string& path, const string& name, const string& title, int nbins, const vector<double> xedges )
 {
-    return new ROOT_TH1_t( name.c_str(), title.c_str(), nbins, &xedges[0] );
+
+  ROOT_TH1_t* h1 = new ROOT_TH1_t( name.c_str(), title.c_str(), nbins, &xedges[0] );
+
+#ifdef BOOTSTRAP_MAMBO
+  if (m_DoBootsTrap and m_Bootstrap_Gen) {
+    std::string pwd = gDirectory->GetPath();
+    currentDir = CreatePath( path );
+    currentDir->cd();
+    TH1DBootstrap* boots1 = new TH1DBootstrap( (name + "_boots").c_str(), title.c_str(), nbins,  &xedges[0], m_Nreplicas, m_Bootstrap_Gen );
+    m_th1dbootstrap.push_back( boots1 );
+    gDirectory -> cd(pwd.c_str()); 
+  }
+#endif
+
+  return h1;
 }
 
 
@@ -128,13 +167,13 @@ void HistogramManager::Book1DHistogram( const string path, const xmlNodePtr xml 
                 
                 ROOT_TH1_t* h;
                 if (bin->edges.size() > 0){
-                    h = Book1DHistogram( plotName, variable->title, bin->nBins, bin->edges);
+		  h = Book1DHistogram( path, plotName, variable->title, bin->nBins, bin->edges);
                 }
                 else {
-                    h = Book1DHistogram( plotName, variable->title, bin->nBins, bin->min, bin->max);
+		  h = Book1DHistogram( path, plotName, variable->title, bin->nBins, bin->min, bin->max);
                 }
                 
-                MoveHistogramtToFolder(h, path+"/"+variable->name);
+                MoveHistogramToFolder(h, path+"/"+variable->name);
             }            
         }
     }    
@@ -200,7 +239,7 @@ void HistogramManager::Book2DHistogram(const string path, const xmlNodePtr xml )
         h = Book2DHistogram( plotNameWithBin, plotTitle, binX->nBins, binX->min, binX->max , binY->nBins, binY->min, binY->max );
       }
 
-      MoveHistogramtToFolder(h, path+"/"+plotName);
+      MoveHistogramToFolder(h, path+"/"+plotName);
     }
 }
 
@@ -244,7 +283,7 @@ void HistogramManager::CreateAllMatricesForVariableAndBin(const string path, XML
                 h = Book2DHistogram( matrixNameWithBin, matrixTitle, bin->nBins, bin->min, bin->max, bin->nBins, bin->min, bin->max);
             }
             
-            MoveHistogramtToFolder(h, path+"/"+matrixName);
+            MoveHistogramToFolder(h, path+"/"+matrixName);
         }
     }
 }
@@ -302,6 +341,13 @@ TDirectory * HistogramManager::CreatePath( const string& path )
 void HistogramManager::WriteToFile()
 {
   cout << "INFO: HistogramManager: Writing histograms on disk..." << endl;
+
+#ifdef BOOTSTRAP_MAMBO
+  for (unsigned int i = 0; i <  m_th1dbootstrap.size(); ++i) {
+    m_th1dbootstrap[i] -> Write();
+  }
+#endif
+
   m_outFile->Write();
   m_outFile->Close();
   cout << "INFO: HistogramManager: Histograms stored in file " << m_outFile->GetName() << endl;
@@ -389,7 +435,7 @@ void HistogramManager::FillMatrices(string fullPath, double valuex, double value
 void HistogramManager::Book1DHistogramInFolder(string path, const string& name, const string& title, int nbins, Double_t xmin, Double_t xmax ){
     currentDir = CreatePath( path );
     currentDir->cd();
-    Book1DHistogram(name, title, nbins, xmin, xmax);
+    Book1DHistogram(path, name, title, nbins, xmin, xmax);
 }
 
 void HistogramManager::WriteHistosToXML(string outputFileName){
@@ -413,3 +459,12 @@ void HistogramManager::WriteHistosToXML(string outputFileName){
     out << xml;
     out.close();
 }
+
+#ifdef BOOTSTRAP_MAMBO
+void HistogramManager::InitBootsTrap(int runno, int evtno)
+{
+  if (m_DoBootsTrap and m_Bootstrap_Gen) {
+    m_Bootstrap_Gen->Generate(runno,evtno);
+  }
+}
+#endif
