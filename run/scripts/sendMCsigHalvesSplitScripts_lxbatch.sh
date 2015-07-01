@@ -1,7 +1,7 @@
 #!/bin/sh
 
-tag=_incl
-#tag=_ljets
+#tag=_incl
+tag=_ljets
 
 ./scripts/makeRunScriptsMC_sig_PowHeg_hdamp_eos_split_halves.sh > _run_halves${tag}.sh
 
@@ -32,9 +32,11 @@ for h in 0 1 ; do
     ###!!!!
     if [ -f $outfile  ] ; then
       echo "    Skipping submission, out file exists!!!"
+      rm ${i}
     else 
       echo "    Will submit..."
       bsub -q 8nh ${i}
+      # bsub -q 1nh ${i} 
     fi
   done
 done
