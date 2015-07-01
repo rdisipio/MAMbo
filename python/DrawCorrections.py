@@ -196,11 +196,11 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 ####################################################
 
-ljets = [ 'll', 'el', 'mu']
+#ljets = [ 'co', 'el', 'mu']
 #ljets = [ 'el', 'mu']
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-#ljets = [ 'll' ]
+ljets = [ 'co' ]
 
 ptag=''
 ftag=''
@@ -215,8 +215,8 @@ ftag=''
 #rpath='/home/qitek/qitek/public/MCsigHalves/OldWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
-
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
+#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
 
 os.system('mkdir png eps pdf')
 
