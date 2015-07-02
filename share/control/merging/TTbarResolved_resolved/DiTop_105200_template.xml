@@ -20,21 +20,15 @@
 -->
 </samples>
 <files>
-  <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.00" />
-  <file sample="ttbar_nofullhad_01" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.01" />
-  <file sample="ttbar_nofullhad_02" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.02" />
-  <file sample="ttbar_nofullhad_03" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.03" />
-  <file sample="ttbar_nofullhad_04" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.04" />
-  <file sample="ttbar_nofullhad_05" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.05" />
-  <file sample="ttbar_nofullhad_06" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.06" />
-  <file sample="ttbar_nofullhad_07" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.07" />
-  <file sample="ttbar_nofullhad_08" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.08" />
-  <file sample="ttbar_nofullhad_09" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.histograms.root.09" />
-<!--
-  <file sample="ttbar_mtt_1100_1300" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.117304.@CHANNEL@.@SYST@.histograms.root" />
-  <file sample="ttbar_mtt_1300_1500" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.117305.@CHANNEL@.@SYST@.histograms.root" />
-  <file sample="ttbar_mtt_1500_1700" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.117306.@CHANNEL@.@SYST@.histograms.root" />
-  <file sample="ttbar_mtt_1700_inf"  path="@SYST@/tt_diffxs_8TeV.mc.DiTop.117307.@CHANNEL@.@SYST@.histograms.root" />
--->
+  <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.04" />
+  <file sample="ttbar_nofullhad_05" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.05" />
+  <file sample="ttbar_nofullhad_06" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.06" />
+  <file sample="ttbar_nofullhad_07" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.07" />
+  <file sample="ttbar_nofullhad_08" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.08" />
+  <file sample="ttbar_nofullhad_09" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.09" />
 </files>
 </document>
