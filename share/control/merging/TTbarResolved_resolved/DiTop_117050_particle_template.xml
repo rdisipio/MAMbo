@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_01"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_02"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_03"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_04"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_05"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_06"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_07"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_08"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_09"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_10"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_11"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_12"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_13"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+  <sample name="ttbar_nofullhad_14"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.04" />
+  <file sample="ttbar_nofullhad_05" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.05" />
+  <file sample="ttbar_nofullhad_06" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.06" />
+  <file sample="ttbar_nofullhad_07" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.07" />
+  <file sample="ttbar_nofullhad_08" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.08" />
+  <file sample="ttbar_nofullhad_09" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.09" />
+  <file sample="ttbar_nofullhad_10" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.10" />
+  <file sample="ttbar_nofullhad_11" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.11" />
+  <file sample="ttbar_nofullhad_12" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.12" />
+  <file sample="ttbar_nofullhad_13" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.13" />
+  <file sample="ttbar_nofullhad_14" path="particle/tt_diffxs_8TeV.mc.DiTop.117050.@CHANNEL@.particle.@DECAY@.histograms.root.14" />
+</files>
+</document>
