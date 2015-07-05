@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_01"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_02"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_03"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_04"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_05"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+  <sample name="ttbar_nofullhad_06"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.02" />
+  <file sample="ttbar_nofullhad_03" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.03" />
+  <file sample="ttbar_nofullhad_04" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.04" />
+  <file sample="ttbar_nofullhad_05" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.05" />
+  <file sample="ttbar_nofullhad_06" path="particle/tt_diffxs_8TeV.mc.DiTop.110404.@CHANNEL@.particle.@DECAY@.histograms.root.06" />
+</files>
+</document>
