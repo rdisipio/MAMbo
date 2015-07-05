@@ -23,6 +23,8 @@ dsid=110404
 [ ! -z $2 ] && syst=$2
 echo "Analyzing signal sample $dsid with systematics: $syst"
 
+decay=nofullhad
+
 outdir=${MAMBODIR}/run/output/${outtag}/${syst}
 
 [[ -d ${outdir} ]] || mkdir -p ${outdir}
@@ -56,7 +58,7 @@ do
      do
          batchid=$(echo ${flist} | grep -oE "[^.]+$")
 
-	 tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}
+	 tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
 
          outfile=${syst}/${tag}.histograms.root.${batchid}
          jobname=${tag}.${batchid}

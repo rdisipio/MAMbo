@@ -17,17 +17,18 @@ dsid=110404
 syst=nominal
 #[ ! -z $2 ] && syst=$2
 
-decay=nofullhad
+decay=ljets
 [ ! -z $2 ] && decay=$2
 
 for ch in el mu
 do
   params_src=${paramsdir}/${sample}_${dsid}_template.xml
-  params=${paramsdir}/.otf/${sample}_${dsid}_${ch}_${syst}.xml
+  params=${paramsdir}/.otf/${sample}_${dsid}_${ch}_${syst}_${decay}.xml
   cp ${params_src} ${params}
 
-  sed -i "s/@CHANNEL@/${ch}/g" ${params}
-  sed -i "s/@SYST@/${syst}/g"  ${params}
+  sed -i "s/@CHANNEL@/${ch}/g"  ${params}
+  sed -i "s/@SYST@/${syst}/g"   ${params}
+  sed -i "s/@DECAY@/${decay}/g" ${params}
 
   MAMbo-mergeSamples.py -l ${ILUMI} -c ${params} -o ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.${ch}.${syst}.${decay}.histograms.root
 done

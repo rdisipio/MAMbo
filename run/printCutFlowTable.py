@@ -23,5 +23,5 @@ ncuts = 11
 
 print "Cut  |   unweight  |   weighted"
 print "--------------------------"
-for i in range( 8, ncuts ):
+for i in range( 7, ncuts ):
    print "%2i)  | %10.0f  | %10.0f" % ( i+1, cutflow_unweight.GetBinContent( i+1 ), cutflow_weighted.GetBinContent( i+1 ) )

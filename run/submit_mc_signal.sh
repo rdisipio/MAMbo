@@ -9,9 +9,12 @@ paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 dsid=110404
 [ ! -z $1 ] && dsid=$1
 
+decay=ljets
+[ ! -z $2 ] && decay=$2
+
 for ch in el mu
 do
-     echo "INFO: submitting DiTop dsid=$dsid channel ${ch}"
+     echo "INFO: submitting DiTop dsid=$dsid channel ${ch} decay ${decay}"
 
      [ $ch == "el" ] && ch_tag="electron"
      [ $ch == "mu" ] && ch_tag="muon"
@@ -25,10 +28,10 @@ do
 
          flist_mc=$( echo ${flist} | sed "s/.${ch}.txt/.mc.txt/" )
 
-    	 tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}
+    	 tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
 
          params=${paramsdir}/mcsignal_${ch}.${syst}.${batchid}.xml
-         cp ${paramsdir}/mcsignal_template.xml ${params}
+         cp ${paramsdir}/mcsignal_template_${decay}.xml ${params}
 
          sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
          sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
