@@ -187,7 +187,6 @@ class EventDumperMCTruthTopMiniSLResolved
        TLorentzVector ttbar, top, antitop;
        int n_good_tops = 0;
        for( int i = ntops-1 ; i >= 0 ; i-- ) {
- //         if( n_good_tops == 2 ) continue;
 
 	  const double t_pT  = ntuple_partons->parton_topQuark_pt[i];
 	  const double t_eta = ntuple_partons->parton_topQuark_eta[i];
@@ -207,15 +206,11 @@ class EventDumperMCTruthTopMiniSLResolved
           }
 */
 
-          if( abs(pid) != 6 ) {
-             cout << "WARNING: event=" << ntuple_partons->eventNumber << " top PID = " << pid << endl;
-             continue;
-          }
+//          if( (ntops>2) && (isHadronic < 0) ) continue;
 
-          if( (ntops>2) && (isHadronic < 0) ) continue;
-
-//          if( (status != 3) && (status!=155) ) continue;
           if( (status != 3) && (status!=155) && (status!=52) && (status!=51) && (status!=22)  ) continue;
+
+          // in some cases you can have status=155 and isHadronic=-2 (no childred)
 
           if( n_good_tops < 2 ) {
  
@@ -249,15 +244,6 @@ class EventDumperMCTruthTopMiniSLResolved
          cout << "DEBUG: ttbar   pT=" << ttbar.Pt()/GeV << " eta=" << ttbar.Eta() << " m=" << ttbar.M()/GeV << endl;
        }
 */
-/*
-       try {
-         assert(top.Pt()>0);
-         assert(antitop.Pt()>0);
-       } 
-       catch(...) {
-         cout << "ERROR: event " << ntuple_partons->eventNumber << " could not find good t and tbar." << endl;
-       }
- */
        if( (top.Pt()<=0.) || (antitop.Pt()<=0.) ) {
            cout << "ERROR: event " << ntuple_partons->eventNumber << " could not find good t and tbar." << endl;
        }

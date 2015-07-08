@@ -15,3 +15,4 @@
     <param name="isDilepton"        type="flag"    value="0" />
   </parameters>
 </analysis>
+<!-- NB: signal=ljets so dileptons are discarded -->

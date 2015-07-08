@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
 <samples>
   <sample name="ttbar_nofullhad_00"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />
   <sample name="ttbar_nofullhad_01"  dsid="117050" xsec="114.49" kfact="1.1994" genevt="49973332" generator="PWG+PY hdamp=inf" simulation="FS" />

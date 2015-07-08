@@ -363,16 +363,16 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     
     // ljets filter
-    if (isMCSignal) {
+    if( isMCSignal && ( isDilepton >= 0 ) ) {
       if ( EventIsDileptonic < 0 ) {
 	cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
 	return 0; 
       }
-      if (not isDilepton and EventIsDileptonic == 1) { 
+      if( ( isDilepton == 0 ) && ( EventIsDileptonic == 1 ) ) { 
 	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
 	return success; 
       }
-      if (isDilepton and EventIsDileptonic != 1) { 
+      if( ( isDilepton == 1 ) && ( EventIsDileptonic != 1 ) ) { 
 	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
 	return success; 
       }
