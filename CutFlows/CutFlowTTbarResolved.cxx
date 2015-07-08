@@ -361,7 +361,11 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     int EventIsDileptonic = ed->property["isDileptonic"];
     //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
-    
+    if( isMCSignal ) {
+       if( ( isDilepton == 0 ) && ( EventIsDileptonic == 1 ) ) return success;
+    }
+
+    /*
     // ljets filter
     if( isMCSignal && ( isDilepton >= 0 ) ) {
       if ( EventIsDileptonic < 0 ) {
@@ -377,6 +381,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	return success; 
       }
     }
+*/
 
     //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
 
@@ -465,7 +470,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
       m_pseudotop_reco->MakeDummyPseudotops();
     }
 
-    if( !isMCSignal or isDilepton)
+    if( (!isMCSignal) || (isDilepton==1) )
       return success;
 
     // there is always a parton-level top

@@ -86,12 +86,13 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   int EventIsDileptonic = ed->property["isDileptonic"];
   //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
-/*
+
   // RDS+MR
   if( isMCSignal ) {
     if( (isDilepton==0) && (EventIsDileptonic==1) ) return success;
   }
-*/
+
+/*
     // ljets filter
     if( isMCSignal && ( isDilepton >= 0 ) ) {
       if ( EventIsDileptonic < 0 ) {
@@ -107,6 +108,7 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
         return success;
       }
     }
+*/
 
   double weight_particle_level = ed->info.mcWeight;
   // NaN check:
