@@ -45,11 +45,11 @@
             <!-- <Bin id="0" nbins="15" edges="0,25,50,75,105,135,165,195,230,265,305,345,390,440,500,1000" particle="topH"/> JP proposed binning--> 
             <Bin id="0" nbins="11" edges="0,45,90,135,185,235,290,350,400,450,500,1000" particle="topL"/> <!--JP, JK modified to match ATLAS 8TeV boosted edges-->
             <!-- <Bin id="0" nbins="11" edges="0,45,90,135,185,235,290,350,410,470,530,1000" particle="topL"/>JP proposed binning--> 
-	    <Bin id="0"	nbins="6"  edges="0,35,75,125,170,225,500" particle="tt"/>
+	    <Bin id="0"	nbins="6"  edges="0,35,75,125,170,225,800" particle="tt"/>
 
 	    <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="topH"/> <!--fine binning-->
             <Bin id="1" nbins="50" xmin="0" xmax="1000" particle="topL"/> <!--fine binning-->
-      	    <Bin id="1" nbins="50" xmin="0" xmax="500" particle="tt"/>
+      	    <Bin id="1" nbins="50" xmin="0" xmax="800" particle="tt"/>
             
 	    <Bin id="2" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="topH"/> <!--previously used binning-->
             <Bin id="2" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" particle="topL"/> <!--previously used binning-->
@@ -57,6 +57,10 @@
    
             <Bin id="3" nbins="16" edges="0,45,90,120,150,180,220,260,300,350,400,450,500,550,650,750,1200" particle="topH" />           
             <Bin id="3"	nbins="16" edges="0,45,90,120,150,180,220,260,300,350,400,450,500,550,650,750,1200" particle="topL" />
+
+            <Bin id="5" nbins="8" edges="0,60,100,150,200,260,320,400,500" particle="topH" />  <!--CMS parton binning-->         
+            <Bin id="5" nbins="8" edges="0,60,100,150,200,260,320,400,500" particle="topL" />  <!--CMS parton binning-->         
+            <Bin id="5" nbins="6" edges="0,20,45,75,120,190,300" particle="tt" />  <!--CMS parton binning-->         
 
 	    <Bin id="0" nbins="50" xmin="0" xmax="600" particle="WL"/>
 	    <Bin id="0" nbins="20" edges="0,20,40,60,80,100,120,145,170,200,230,260,290,320,350,380,420,460,500,540,600" particle="WH"/>
@@ -79,11 +83,12 @@
             <Bin id="0" nbins="50" xmin="0." xmax="600." particle="top"/>
             <Bin id="1" nbins="100" xmin="160." xmax="180" particle="top" />
 
-	    <Bin id="0" nbins="11" edges="225,345,420,500,590,685,790,910,1040,1175,1320,2500" particle="tt"/> <!--JP proposed binning-->
-            <Bin id="1" nbins="50" xmin="225" xmax="2500" particle="tt"/> <!--fine binning-->
+	    <Bin id="0" nbins="11" edges="225,345,420,500,590,685,790,910,1040,1175,1320,3000" particle="tt"/> <!--JP proposed binning-->
+            <Bin id="1" nbins="50" xmin="225" xmax="3000" particle="tt"/> <!--fine binning-->
 	    <Bin id="2" nbins="50" xmin="160." xmax="185." particle="top"/> <!--previusly used binning-->
-	    <Bin id="3" nbins="8" edges="225,400,500,600,700,850,1000,1250,2500" particle="tt"/> <!--boosted friendly binning-->
+	    <Bin id="3" nbins="8" edges="225,400,500,600,700,850,1000,1250,3000" particle="tt"/> <!--boosted friendly binning-->
             <Bin id="4" nbins="250" xmin="150." xmax="400." particle="tt"/> <!-- fine binning, mass rise region -->	
+            <Bin id="5" nbins="7" edges="345,400,470,550,650,800,1100,1600" particle="tt"/> <!-- CMS parton binning -->	
 
             <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WL"/>
             <Bin id="0" nbins="50" xmin="0." xmax="200." particle="WH"/>
@@ -97,6 +102,10 @@
 	    <Bin id="2" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/> <!--previusly used binning-->
 	    <Bin id="2" nbins="10" edges="0,0.1,0.2,0.4,0.6,0.7,0.8,1,1.2,1.6,2.5" particle="tt"/>
 
+	    <Bin id="5" nbins="5" edges="0,0.4,0.8,1.2,1.6,2.5" particle="topL"/> <!-- CMS parton binning -->
+	    <Bin id="5" nbins="5" edges="0,0.4,0.8,1.2,1.6,2.5" particle="topH"/> <!-- CMS parton binning -->
+	    <Bin id="5" nbins="5" edges="0,0.3,0.6,0.9,1.3,2.5" particle="tt"/> <!-- CMS parton binning -->
+
 	    <Bin id="0" nbins="25" xmin="0" xmax="2.5" particle="WL"/>
 	    <Bin id="0" nbins="18" edges="0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.7,1.9,2.5" particle="WH"/>
 	    <Bin id="1" nbins="25" xmin="0" xmax="2.5" particle="WH"/> 
@@ -109,7 +118,10 @@
 	    <Bin id="1" nbins="100" xmin="-2.5" xmax="2.5" particle="top"/> <!--fine binning-->
 	    <Bin id="1" nbins="100" xmin="-2.5" xmax="2.5" particle="tt"/>
 	    <Bin id="2" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0,0.4,0.8,1.1,1.4,1.8,2.5" particle="top"/> <!--previusly used binning-->
-	    <Bin id="2" nbins="20" edges="-2.5,-1.6,-1.2,-1,-0.8,-0.7,-0.6,-0.4,-0.2,-0.1,0,0.1,0.2,0.4,0.6,0.7,0.8,1,1.2,1.6,2.5" particle="tt"/>
+
+	    <Bin id="5" nbins="10" edges="-2.5,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2.5" particle="topH"/> <!-- CMS parton binning -->
+	    <Bin id="5" nbins="10" edges="-2.5,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2.5" particle="topL"/> <!-- CMS parton binning -->
+	    <Bin id="5" nbins="10" edges="-2.5,-1.3,-0.9,-0.6,-0.3,0,0.3,0.6,0.9,1.3,2.5" particle="tt"/> <!-- CMS parton binning -->
 
 	    <Bin id="0" nbins="50" xmin="-2.5" xmax="2.5" particle="WL"/>
 	    <Bin id="0" nbins="36" edges="-2.5,-1.9,-1.7,-1.5,-1.4,-1.3,-1.2,-1.1,-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.7,1.9,2.5" particle="WH"/>
@@ -298,15 +310,18 @@
 	    <Bin id="0" nbins="6" edges="0,0.4,0.7,1,1.3,1.7,3.00"/>
             <Bin id="2" nbins="10" edges="0.00,0.60,0.75,0.84,0.90,0.99,1.05,1.14,1.26,1.50,3.00" />
             <Bin id="1" nbins="100" xmin="0." xmax="3." />
+	    <Bin id="5" nbins="6" edges="0,0.4,0.7,1,1.3,1.7,3.00"/>
         </Variable>
         <Variable name="Pout" title="p_{out};p_{out} [GeV];" folder="4j2b" particle="difference" >
-	    <Bin id="0" nbins="12" edges="-300,-230,-170,-120,-80,-40,0,40,80,120,170,230,300"/>
-	    <Bin id="2" nbins="10" edges="-300.00,-50.00,-24.00,-12.00,-6.00,0.0,6.00,12.00,24.00,50.00,300.00" />
-            <Bin id="1" nbins="100" xmin="-300." xmax="300." />
+	    <Bin id="0" nbins="12" edges="-600,-230,-170,-120,-80,-40,0,40,80,120,170,230,600"/>
+	    <Bin id="2" nbins="10" edges="-600.00,-50.00,-24.00,-12.00,-6.00,0.0,6.00,12.00,24.00,50.00,600.00" />
+            <Bin id="1" nbins="100" xmin="-600." xmax="600." />
+	    <Bin id="5" nbins="12" edges="-600,-230,-170,-120,-80,-40,0,40,80,120,170,230,600"/>
         </Variable>
         <Variable name="Chi_ttbar" title="#chi_{out};#chi_{out};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" edges="1.0,1.4,1.9,2.5,3.2,4.2,5.5,7.2,9.3,12.,20." />
             <Bin id="1" nbins="100" xmin="0." xmax="20." />
+            <Bin id="5" nbins="10" edges="1.0,1.4,1.9,2.5,3.2,4.2,5.5,7.2,9.3,12.,20." />
         </Variable>
         <Variable name="mtt" title="m_{t#bar{t}} [GeV]" folder="4j2b" particle="difference"  >
             <Bin id="0" nbins="11" edges="225,345,420,500,590,685,790,910,1040,1175,1320,2500" /> <!--JP proposed binning-->
@@ -319,6 +334,7 @@
 	<Variable name="Yboost" title="y_{boost};y_{boost};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="16" edges="0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.,1.1,1.2,1.3,1.4,1.5,2." />
             <Bin id="1" nbins="100" xmin="0." xmax="2." />
+            <Bin id="5" nbins="16" edges="0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.,1.1,1.2,1.3,1.4,1.5,2." />
         </Variable>
 	<Variable name="topLCosThetaStar" title="leptonic top cos #theta^{*};cos #theta*;" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" edges="-1.00,-0.82,-0.62,-0.42,-0.22,0.00,0.22,0.42,0.62,0.82,1.00" />
@@ -344,6 +360,7 @@
 	    <Bin id="0" nbins="4" edges="0.00,1.4,2.2,2.7,3.15"/>
             <Bin id="2" nbins="10" edges="0.00,2.29,2.61,2.76,2.86,2.92,2.98,3.02,3.05,3.08,3.1416" />
             <Bin id="1" nbins="100" xmin="0." xmax="3.1416" />
+            <Bin id="5" nbins="4" edges="0.0,2.0,2.75,3.0,3.15" /> <!-- CMS parton binning -->
         </Variable>
         <Variable name="AverTopPt" title="Average p_{T}^{t} [GeV]" folder="4j2b" particle="difference" >
   	    <Bin id="0" nbins="10" edges="0,45,90,120,150,180,220,260,300,350,1000" />
@@ -368,6 +385,7 @@
 	<Variable name="HT_ttbar" title="H_{T}^{t#bar{t}} [GeV]" folder="4j2b" particle="difference ">
 	    <Bin id="0" nbins="15" edges="0,90,140,195,255,320,385,455,530,610,695,780,865,950,1041,1500"/>
 	    <Bin id="1" nbins="100" xmin="0" xmax="1500"/>	
+	    <Bin id="5" nbins="15" edges="0,90,140,195,255,320,385,455,530,610,695,780,865,950,1041,1500"/>
 	</Variable>
 	<Variable name="HT_pseudo" title="H_{T}^{pseudo} [GeV]" folder="4j2b" particle="difference ">
             <Bin id="0" nbins="14" edges="140,270,320,375,435,500,570,645,725,805,890,970,1060,1150,1500"/>
