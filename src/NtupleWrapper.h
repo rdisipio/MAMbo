@@ -105,15 +105,15 @@ class NtupleWrapper : public INtupleWrapper
       return ed;
     };
       
-    virtual bool MakeEventInfo( EventData * ed )      { return true; };
-    virtual bool MakeEventTruth( EventData * ed )     { return true; };      
-    virtual bool MakeEventTrigger( EventData * ed )   { return true; };
-    virtual bool MakeEventMET( EventData * ed )       { return true; };
-    virtual bool MakeEventJets( EventData * ed )      { return true; };
-    virtual bool MakeEventElectrons( EventData * ed ) { return true; };
-    virtual bool MakeEventMuons( EventData * ed )     { return true; };
+    virtual bool MakeEventInfo( EventData * ed = NULL )      { return true; };
+    virtual bool MakeEventTruth( EventData * ed = NULL )     { return true; };      
+    virtual bool MakeEventTrigger( EventData * ed = NULL )   { return true; };
+    virtual bool MakeEventMET( EventData * ed = NULL )       { return true; };
+    virtual bool MakeEventJets( EventData * ed = NULL )      { return true; };
+    virtual bool MakeEventElectrons( EventData * ed = NULL ) { return true; };
+    virtual bool MakeEventMuons( EventData * ed = NULL )     { return true; };
 
-    virtual bool MakeEventLeptons( EventData * ed )   { 
+    virtual bool MakeEventLeptons( EventData * ed = NULL )   { 
         MakeEventMuons(ed); 
         MakeEventElectrons(ed);
         return true;

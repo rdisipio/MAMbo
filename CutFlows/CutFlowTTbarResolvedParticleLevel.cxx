@@ -342,6 +342,11 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
 
     FillHistogramsControlPlotsParticle( values );
 
+    // flush jet values
+    for(auto &it:values.jets) delete it; values.jets.clear();
+    for(auto &it:values.bJets) delete it; values.bJets.clear();
+  
+
     return passed;
 }
 
@@ -532,7 +537,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLo
      m_hm->FillHistograms(path+"R_Wt_had",m_VarField.find(level + "_R_Wt_had")->second, weight);
      m_hm->FillHistograms(path+"R_Wt_lep",m_VarField.find(level + "_R_Wt_lep")->second, weight);
      m_hm->FillHistograms(path+"R_lb",m_VarField.find(level + "_R_lb")->second, weight);
-     m_hm->FillHistograms(path+"mlb",m_VarField.find(level + "_mlb")->second, weight);
+//     m_hm->FillHistograms(path+"mlb",m_VarField.find(level + "_mlb")->second, weight);
      m_hm->FillHistograms(path+"R_Wb_had",m_VarField.find(level + "_R_Wb_had")->second, weight);
      m_hm->FillHistograms(path+"R_Wb_lep",m_VarField.find(level + "_R_Wb_lep")->second, weight);
      m_hm->FillHistograms(path+"HT_pseudo",m_VarField.find(level + "_HT_pseudo")->second / GeV, weight);

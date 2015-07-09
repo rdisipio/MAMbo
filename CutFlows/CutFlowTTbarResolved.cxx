@@ -789,6 +789,10 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 
     FillHistogramsControlPlotsReco( values );
 
+    // flush jet values
+    for(auto &it:values.jets) delete it; values.jets.clear();
+    for(auto &it:values.bJets) delete it; values.bJets.clear();
+
     return passed;
 }
 
@@ -922,6 +926,10 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     FillHistogramsControlPlotsParticle( values );
+
+    // flush jet values
+    for(auto &it:values.jets) delete it; values.jets.clear();
+    for(auto &it:values.bJets) delete it; values.bJets.clear();
     
     return passed;
 }

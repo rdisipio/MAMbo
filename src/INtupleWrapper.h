@@ -31,11 +31,11 @@ class INtupleWrapper
 
    virtual EventData  * NextEvent();
 
-   virtual bool         MakeEventInfo( EventData * ed )      = 0;
-   virtual bool         MakeEventMET( EventData * ed )       = 0;
-   virtual bool         MakeEventLeptons( EventData * ed )   = 0;
-   virtual bool         MakeEventJets( EventData * ed )      = 0;
-   virtual bool         MakeEventTruth( EventData * ed )     = 0;
+   virtual bool         MakeEventInfo( EventData * ed = NULL )      = 0;
+   virtual bool         MakeEventMET( EventData * ed = NULL )       = 0;
+   virtual bool         MakeEventLeptons( EventData * ed = NULL )   = 0;
+   virtual bool         MakeEventJets( EventData * ed = NULL )      = 0;
+   virtual bool         MakeEventTruth( EventData * ed = NULL )     = 0;
   
  protected:
    HistogramManager * m_hm;

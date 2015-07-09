@@ -27,28 +27,28 @@ class CutFlowTTbarResolved : public CutFlow
   virtual ~CutFlowTTbarResolved();
 
   virtual bool Initialize();
-  virtual bool Apply( EventData * ed );
+  virtual bool Apply( EventData * ed = NULL );
   virtual bool Finalize();
 
  protected:
-  bool PassedCutFlowReco(     EventData * ed );
-  bool PassedCutFlowParticle( EventData * ed );
+  bool PassedCutFlowReco(     EventData * ed = NULL );
+  bool PassedCutFlowParticle( EventData * ed = NULL );
 
-  double GetFakesWeight( EventData * ed );
-  double GetPDFWeight( EventData * ed );
+  double GetFakesWeight( EventData * ed = NULL );
+  double GetPDFWeight( EventData * ed = NULL );
 
   void MoreCRFillHistogramsControlPlotsReco( string mystr, ControlPlotValues& values );
   void FillHistogramsControlPlotsReco( ControlPlotValues& values );
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
   void FillHistogramsDiagnostics( ControlPlotValues& values );
   
-  void FillHistogramsPseudotopReco(      EventData * ed, const double weight = 1., string level = "reco" );
-  void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1., string level = "particle" );
-  void FillHistogramsPseudotopParton(    EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopReco(      EventData * ed = NULL, const double weight = 1., string level = "reco" );
+  void FillHistogramsPseudotopParticle(  EventData * ed = NULL, const double weight = 1., string level = "particle" );
+  void FillHistogramsPseudotopParton(    EventData * ed = NULL, const double weight = 1. );
   
-  void FillHistogramsPseudotopResponseRecoToParticle(    EventData * ed, const double weight = 1. );
-  void FillHistogramsPseudotopResponseRecoToParton(      EventData * ed, const double weight = 1. );
-  void FillHistogramsPseudotopResponseParticleToParton(  EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopResponseRecoToParticle(    EventData * ed = NULL, const double weight = 1. );
+  void FillHistogramsPseudotopResponseRecoToParton(      EventData * ed = NULL, const double weight = 1. );
+  void FillHistogramsPseudotopResponseParticleToParton(  EventData * ed = NULL, const double weight = 1. );
   
   void FillHistogramsMatchingRecoToParticle(   double weight = 1. );   
   void FillHistogramsMatchingRecoToParton(     double weight = 1. ); 

@@ -17,17 +17,17 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
   virtual ~CutFlowTTbarResolvedParticleLevel();
 
   virtual bool Initialize();
-  virtual bool Apply( EventData * ed );
+  virtual bool Apply( EventData * ed = NULL );
 
  protected:
-  bool PassedCutFlowParticle( EventData * ed );
+  bool PassedCutFlowParticle( EventData * ed  = NULL);
 
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
 
-  void FillHistogramsPseudotopParticle(  EventData * ed, const double weight = 1., string level = "particle" );
-  void FillHistogramsPseudotopParton(    EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopParticle(  EventData * ed = NULL, const double weight = 1., string level = "particle" );
+  void FillHistogramsPseudotopParton(    EventData * ed = NULL, const double weight = 1. );
 
-  void FillHistogramsPseudotopResponseParticleToParton(  EventData * ed, const double weight = 1. );
+  void FillHistogramsPseudotopResponseParticleToParton(  EventData * ed = NULL, const double weight = 1. );
 
   void FillHistogramsMatchingParticleToParton( double weight = 1. );
 
