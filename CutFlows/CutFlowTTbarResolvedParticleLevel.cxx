@@ -92,23 +92,6 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
     if( (isDilepton==0) && (EventIsDileptonic==1) ) return success;
   }
 
-/*
-    // ljets filter
-    if( isMCSignal && ( isDilepton >= 0 ) ) {
-      if ( EventIsDileptonic < 0 ) {
-        cout << "WARNING: event " << ed->info.eventNumber << " isDileptonic flag not initialized" << endl;
-        return 0;
-      }
-      if( ( isDilepton == 0 ) && ( EventIsDileptonic == 1 ) ) {
-        // cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
-        return success;
-      }
-      if( ( isDilepton == 1 ) && ( EventIsDileptonic != 1 ) ) {
-	// cout << "INFO: event " << ed->info.eventNumber << " isDileptonic" << endl; 
-        return success;
-      }
-    }
-*/
 
   double weight_particle_level = ed->info.mcWeight;
   // NaN check:
@@ -443,6 +426,8 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsTopPairs(string level, TLo
    m_VarField[level+"_Pout"] = pout;
    m_hm->FillHistograms( path + "Pout", pout / GeV, weight );
      //    if (_fillSpecial2D) m_hm->FillHistograms(path + "SystemPtVsPout", pout, ttSystem.Pt());
+   m_VarField[level+"_absPout"] = fabs(pout);
+   m_hm->FillHistograms( path + "absPout", fabs(pout) / GeV, weight );
 
    // top quark pT ratio
    const double z_ttbar = topH_pT / topL_pT;
@@ -759,6 +744,7 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     FillMatrix("parton/4j2b/WH/Matrix_parton_particle", partonWH, particleWH, weight);
     
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Pout",m_VarField.find("parton_Pout")->second / GeV, m_VarField.find("particle_Pout")->second / GeV, weight);
+    m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_absPout",m_VarField.find("parton_absPout")->second / GeV, m_VarField.find("particle_absPout")->second / GeV, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_z_ttbar",m_VarField.find("parton_z_ttbar")->second, m_VarField.find("particle_z_ttbar")->second, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_Yboost",m_VarField.find("parton_Yboost")->second ,m_VarField.find("particle_Yboost")->second, weight);
     m_hm->FillMatrices("parton/4j2b/difference/Matrix_parton_particle_dPhi_ttbar",m_VarField.find("parton_dPhi")->second, m_VarField.find("particle_dPhi")->second, weight);
@@ -774,6 +760,7 @@ void CutFlowTTbarResolvedParticleLevel::FillMatrix(string path, Particle& px, Pa
     m_hm->FillMatrices("parton/4j2b/topH/Matrix_parton_particle_pz",m_VarField.find("parton_pzH")->second / GeV, m_VarField.find("particle_pzH")->second / GeV, weight);    
     
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Pout",m_VarField.find("particle_Pout")->second / GeV, m_VarField.find("parton_Pout")->second / GeV, weight);
+    m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_absPout",m_VarField.find("particle_absPout")->second / GeV, m_VarField.find("parton_absPout")->second / GeV, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_z_ttbar",m_VarField.find("particle_z_ttbar")->second, m_VarField.find("parton_z_ttbar")->second, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_Yboost",m_VarField.find("particle_Yboost")->second, m_VarField.find("parton_Yboost")->second, weight);
     m_hm->FillMatrices("particle/4j2b/difference/Matrix_particle_parton_dPhi_ttbar",m_VarField.find("particle_dPhi")->second, m_VarField.find("parton_dPhi")->second, weight);
