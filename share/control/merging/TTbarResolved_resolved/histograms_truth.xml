@@ -27,6 +27,7 @@
   <histogram hpath="particle/4j2b/topL/mlb" />
   <histogram hpath="particle/4j2b/difference/z_ttbar" />
   <histogram hpath="particle/4j2b/difference/Pout" />
+  <histogram hpath="particle/4j2b/difference/absPout" />
   <histogram hpath="particle/4j2b/difference/Chi_ttbar" />
   <histogram hpath="particle/4j2b/difference/Yboost" />
   <histogram hpath="particle/4j2b/difference/topLCosThetaStar" />
@@ -44,45 +45,24 @@
   <histogram hpath="particle/4j2b/difference/R_Wt_had" />
   <histogram hpath="particle/4j2b/difference/Discriminant" />
 
-  <histogram hpath="parton/4j2b/WH/m" />
-  <histogram hpath="parton/4j2b/WH/pt" />
-  <histogram hpath="parton/4j2b/WH/rapidity" />
-  <histogram hpath="parton/4j2b/WH/absrap" />
-  <histogram hpath="parton/4j2b/WL/m" />
-  <histogram hpath="parton/4j2b/WL/pt" />
-  <histogram hpath="parton/4j2b/WL/rapidity" />
-  <histogram hpath="parton/4j2b/WL/absrap" />
-  <histogram hpath="parton/4j2b/topH/m" />
-  <histogram hpath="parton/4j2b/topH/pt" />
-  <histogram hpath="parton/4j2b/topH/rapidity" />
-  <histogram hpath="parton/4j2b/topH/absrap" />
+<!-- parton level -->
+  <histogram hpath="parton/4j2b/topH/pt_5" />
+  <histogram hpath="parton/4j2b/topH/absrap_5" />
   <histogram hpath="parton/4j2b/topL/m" />
   <histogram hpath="parton/4j2b/topL/pt" />
-  <histogram hpath="parton/4j2b/topL/rapidity" />
   <histogram hpath="parton/4j2b/topL/absrap" />
-  <histogram hpath="parton/4j2b/tt/m" />
-  <histogram hpath="parton/4j2b/tt/m_4" />
-  <histogram hpath="parton/4j2b/tt/pt" />
-  <histogram hpath="parton/4j2b/tt/rapidity" />
-  <histogram hpath="parton/4j2b/tt/absrap" />
-  <histogram hpath="parton/4j2b/topL/mlb" />
-  <histogram hpath="parton/4j2b/difference/z_ttbar" />
-  <histogram hpath="parton/4j2b/difference/Pout" />
-  <histogram hpath="parton/4j2b/difference/Chi_ttbar" />
-  <histogram hpath="parton/4j2b/difference/Yboost" />
-  <histogram hpath="parton/4j2b/difference/topLCosThetaStar" />
-  <histogram hpath="parton/4j2b/difference/topHCosThetaStar" />
-  <histogram hpath="parton/4j2b/difference/TopCosOpeningAngle" />
-  <histogram hpath="parton/4j2b/difference/Salam_ttbar" />
+  <histogram hpath="parton/4j2b/tt/m_5" />
+  <histogram hpath="parton/4j2b/tt/pt_5" />
+  <histogram hpath="parton/4j2b/tt/absrap_5" />
+  <histogram hpath="parton/4j2b/difference/z_ttbar_5" />
+  <histogram hpath="parton/4j2b/difference/Pout_5" />
+  <histogram hpath="parton/4j2b/difference/absPout" />
+  <histogram hpath="parton/4j2b/difference/Chi_ttbar_5" />
+  <histogram hpath="parton/4j2b/difference/Yboost_5" />
   <histogram hpath="parton/4j2b/difference/PtAsymm_ttbar" />
-  <histogram hpath="parton/4j2b/difference/dPhi_ttbar" />
-  <histogram hpath="parton/4j2b/difference/HT_ttbar" />
-  <histogram hpath="parton/4j2b/difference/HT_pseudo" />
-  <histogram hpath="parton/4j2b/difference/R_Wb_had" />
-  <histogram hpath="parton/4j2b/difference/R_Wb_lep" />
-  <histogram hpath="parton/4j2b/difference/R_lb" />
-  <histogram hpath="parton/4j2b/difference/R_Wt_lep" />
-  <histogram hpath="parton/4j2b/difference/R_Wt_had" />
+  <histogram hpath="parton/4j2b/difference/dPhi_ttbar_5" />
+  <histogram hpath="parton/4j2b/difference/HT_ttbar_5" />
+
 
 </histograms>
 

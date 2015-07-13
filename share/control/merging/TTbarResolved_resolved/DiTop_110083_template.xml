@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="110083" xsec="114.87" kfact="1.1954" genevt="1635293" generator="aMcAtNlo_herwigpp_UEEE5" simulation="Full" />
+  <sample name="ttbar_nofullhad_01"  dsid="110083" xsec="114.87" kfact="1.1954" genevt="1635293" generator="aMcAtNlo_herwigpp_UEEE5" simulation="Full" />
+  <sample name="ttbar_nofullhad_02"  dsid="110083" xsec="114.87" kfact="1.1954" genevt="1635293" generator="aMcAtNlo_herwigpp_UEEE5" simulation="Full" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110083.@CHANNEL@.@SYST@.@DECAY@.histograms.root.00" />
+  <file sample="ttbar_nofullhad_01" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110083.@CHANNEL@.@SYST@.@DECAY@.histograms.root.01" />
+  <file sample="ttbar_nofullhad_02" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.110083.@CHANNEL@.@SYST@.@DECAY@.histograms.root.02" />
+</files>
+</document>

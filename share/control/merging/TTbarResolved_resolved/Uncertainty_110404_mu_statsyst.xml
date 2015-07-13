@@ -9,153 +9,153 @@
 -->
 
 <samples>
-  <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.histograms.root" >
+  <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.nofullhad.histograms.root" >
     <syst name="BJesUnc" type="two_sided" >
-        <shift side="up"   file="BJesUnc_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.BJesUnc_up.histograms.root" />
-        <shift side="down" file="BJesUnc_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.BJesUnc_down.histograms.root" />
+        <shift side="up"   file="BJesUnc_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.BJesUnc_up.nofullhad.histograms.root" />
+        <shift side="down" file="BJesUnc_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.BJesUnc_down.nofullhad.histograms.root" />
     </syst>
     <syst name="jvf" type="two_sided" >
-        <shift side="up"   file="jvf_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.jvf_up.histograms.root" />
-        <shift side="down" file="jvf_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.jvf_down.histograms.root" />
+        <shift side="up"   file="jvf_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.jvf_up.nofullhad.histograms.root" />
+        <shift side="down" file="jvf_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.jvf_down.nofullhad.histograms.root" />
     </syst>
     <syst name="flavor_comp" type="two_sided" >
-        <shift side="up"   file="flavor_comp_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.flavor_comp_up.histograms.root" />
-        <shift side="down" file="flavor_comp_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.flavor_comp_down.histograms.root" />
+        <shift side="up"   file="flavor_comp_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.flavor_comp_up.nofullhad.histograms.root" />
+        <shift side="down" file="flavor_comp_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.flavor_comp_down.nofullhad.histograms.root" />
     </syst>
     <syst name="EtaIntercalibrationModel" type="two_sided" >
-        <shift side="up"   file="EtaIntercalibrationModel_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.EtaIntercalibrationModel_up.histograms.root" />
-        <shift side="down" file="EtaIntercalibrationModel_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.EtaIntercalibrationModel_down.histograms.root" />
+        <shift side="up"   file="EtaIntercalibrationModel_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.EtaIntercalibrationModel_up.nofullhad.histograms.root" />
+        <shift side="down" file="EtaIntercalibrationModel_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.EtaIntercalibrationModel_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveDet1" type="two_sided" >
-        <shift side="up"   file="JesEffectiveDet1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet1_up.histograms.root" />
-        <shift side="down" file="JesEffectiveDet1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet1_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveDet1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet1_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveDet1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet1_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveDet2" type="two_sided" >
-        <shift side="up"   file="JesEffectiveDet2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet2_up.histograms.root" />
-        <shift side="down" file="JesEffectiveDet2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet2_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveDet2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet2_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveDet2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet2_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveDet3" type="two_sided" >
-        <shift side="up"   file="JesEffectiveDet3_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet3_up.histograms.root" />
-        <shift side="down" file="JesEffectiveDet3_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet3_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveDet3_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet3_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveDet3_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveDet3_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveMix1" type="two_sided" >
-        <shift side="up"   file="JesEffectiveMix1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix1_up.histograms.root" />
-        <shift side="down" file="JesEffectiveMix1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix1_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveMix1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix1_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveMix1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix1_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveMix2" type="two_sided" >
-        <shift side="up"   file="JesEffectiveMix2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix2_up.histograms.root" />
-        <shift side="down" file="JesEffectiveMix2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix2_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveMix2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix2_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveMix2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveMix2_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveModel1" type="two_sided" >
-        <shift side="up"   file="JesEffectiveModel1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel1_up.histograms.root" />
-        <shift side="down" file="JesEffectiveModel1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel1_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveModel1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel1_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveModel1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel1_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveModel2" type="two_sided" >
-        <shift side="up"   file="JesEffectiveModel2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel2_up.histograms.root" />
-        <shift side="down" file="JesEffectiveModel2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel2_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveModel2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel2_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveModel2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel2_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveModel3" type="two_sided" >
-        <shift side="up"   file="JesEffectiveModel3_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel3_up.histograms.root" />
-        <shift side="down" file="JesEffectiveModel3_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel3_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveModel3_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel3_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveModel3_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel3_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveModel4" type="two_sided" >
-        <shift side="up"   file="JesEffectiveModel4_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel4_up.histograms.root" />
-        <shift side="down" file="JesEffectiveModel4_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel4_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveModel4_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel4_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveModel4_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveModel4_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveStat1" type="two_sided" >
-        <shift side="up"   file="JesEffectiveStat1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat1_up.histograms.root" />
-        <shift side="down" file="JesEffectiveStat1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat1_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveStat1_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat1_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveStat1_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat1_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveStat2" type="two_sided" >
-        <shift side="up"   file="JesEffectiveStat2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat2_up.histograms.root" />
-        <shift side="down" file="JesEffectiveStat2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat2_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveStat2_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat2_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveStat2_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat2_down.nofullhad.histograms.root" />
     </syst>
     <syst name="JesEffectiveStat3" type="two_sided" >
-        <shift side="up"   file="JesEffectiveStat3_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat3_up.histograms.root" />
-        <shift side="down" file="JesEffectiveStat3_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat3_down.histograms.root" />
+        <shift side="up"   file="JesEffectiveStat3_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat3_up.nofullhad.histograms.root" />
+        <shift side="down" file="JesEffectiveStat3_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.JesEffectiveStat3_down.nofullhad.histograms.root" />
     </syst>
     <syst name="Pileup_OffsetMu" type="two_sided" >
-        <shift side="up"   file="Pileup_OffsetMu_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetMu_up.histograms.root" />
-        <shift side="down" file="Pileup_OffsetMu_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetMu_down.histograms.root" />
+        <shift side="up"   file="Pileup_OffsetMu_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetMu_up.nofullhad.histograms.root" />
+        <shift side="down" file="Pileup_OffsetMu_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetMu_down.nofullhad.histograms.root" />
     </syst>
     <syst name="Pileup_OffsetNPV" type="two_sided" >
-        <shift side="up"   file="Pileup_OffsetNPV_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetNPV_up.histograms.root" />
-        <shift side="down" file="Pileup_OffsetNPV_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetNPV_down.histograms.root" />
+        <shift side="up"   file="Pileup_OffsetNPV_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetNPV_up.nofullhad.histograms.root" />
+        <shift side="down" file="Pileup_OffsetNPV_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_OffsetNPV_down.nofullhad.histograms.root" />
     </syst>
     <syst name="Pileup_Pt" type="two_sided" >
-        <shift side="up"   file="Pileup_Pt_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Pt_up.histograms.root" />
-        <shift side="down" file="Pileup_Pt_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Pt_down.histograms.root" />
+        <shift side="up"   file="Pileup_Pt_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Pt_up.nofullhad.histograms.root" />
+        <shift side="down" file="Pileup_Pt_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Pt_down.nofullhad.histograms.root" />
     </syst>
     <syst name="Pileup_Rho" type="two_sided" >
-        <shift side="up"   file="Pileup_Rho_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Rho_up.histograms.root" />
-        <shift side="down" file="Pileup_Rho_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Rho_down.histograms.root" />
+        <shift side="up"   file="Pileup_Rho_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Rho_up.nofullhad.histograms.root" />
+        <shift side="down" file="Pileup_Rho_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.Pileup_Rho_down.nofullhad.histograms.root" />
     </syst>
     <syst name="PunchThrough" type="two_sided" >
-        <shift side="up"   file="PunchThrough_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.PunchThrough_up.histograms.root" />
-        <shift side="down" file="PunchThrough_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.PunchThrough_down.histograms.root" />
+        <shift side="up"   file="PunchThrough_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.PunchThrough_up.nofullhad.histograms.root" />
+        <shift side="down" file="PunchThrough_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.PunchThrough_down.nofullhad.histograms.root" />
     </syst>
     <syst name="SinglePart" type="two_sided" >
-        <shift side="up"   file="SinglePart_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.SinglePart_up.histograms.root" />
-        <shift side="down" file="SinglePart_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.SinglePart_down.histograms.root" />
+        <shift side="up"   file="SinglePart_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.SinglePart_up.nofullhad.histograms.root" />
+        <shift side="down" file="SinglePart_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.SinglePart_down.nofullhad.histograms.root" />
     </syst>
     <syst name="res_soft" type="two_sided" >
-        <shift side="up"   file="res_soft_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.res_soft_up.histograms.root" />
-        <shift side="down" file="res_soft_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.res_soft_down.histograms.root" />
+        <shift side="up"   file="res_soft_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.res_soft_up.nofullhad.histograms.root" />
+        <shift side="down" file="res_soft_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.res_soft_down.nofullhad.histograms.root" />
     </syst>
     <syst name="sc_soft" type="two_sided" >
-        <shift side="up"   file="sc_soft_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.sc_soft_up.histograms.root" />
-        <shift side="down" file="sc_soft_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.sc_soft_down.histograms.root" />
+        <shift side="up"   file="sc_soft_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.sc_soft_up.nofullhad.histograms.root" />
+        <shift side="down" file="sc_soft_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.sc_soft_down.nofullhad.histograms.root" />
     </syst>
     <syst name="BTAGSF" type="two_sided" >
-        <shift side="up"   file="BTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.mu.BTAGSFUP.histograms.root" />
-        <shift side="down" file="BTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.mu.BTAGSFDOWN.histograms.root" />
+        <shift side="up"   file="BTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.mu.BTAGSFUP.nofullhad.histograms.root" />
+        <shift side="down" file="BTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.mu.BTAGSFDOWN.nofullhad.histograms.root" />
     </syst>
     <syst name="CTAUTAGSF" type="two_sided" >
-        <shift side="up"   file="CTAUTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.mu.CTAUTAGSFUP.histograms.root" />
-        <shift side="down" file="CTAUTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.mu.CTAUTAGSFDOWN.histograms.root" />$
+        <shift side="up"   file="CTAUTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.mu.CTAUTAGSFUP.nofullhad.histograms.root" />
+        <shift side="down" file="CTAUTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.mu.CTAUTAGSFDOWN.nofullhad.histograms.root" />$
     </syst>
     <syst name="MISTAGSF" type="two_sided" >
-        <shift side="up"   file="MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.mu.MISTAGSFUP.histograms.root" />
-        <shift side="down" file="MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.mu.MISTAGSFDOWN.histograms.root" />
+        <shift side="up"   file="MISTAGSFUP/tt_diffxs_8TeV.mc.DiTop.110404.mu.MISTAGSFUP.nofullhad.histograms.root" />
+        <shift side="down" file="MISTAGSFDOWN/tt_diffxs_8TeV.mc.DiTop.110404.mu.MISTAGSFDOWN.nofullhad.histograms.root" />
     </syst>
     <syst name="lep_idSF" type="two_sided" >
-        <shift side="up"   file="lep_idSF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_idSF_up.histograms.root" />
-        <shift side="down" file="lep_idSF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_idSF_down.histograms.root" />
+        <shift side="up"   file="lep_idSF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_idSF_up.nofullhad.histograms.root" />
+        <shift side="down" file="lep_idSF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_idSF_down.nofullhad.histograms.root" />
     </syst>
     <syst name="lep_recoSF" type="two_sided" >
-        <shift side="up"   file="lep_recoSF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_recoSF_up.histograms.root" />
-        <shift side="down" file="lep_recoSF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_recoSF_down.histograms.root" />
+        <shift side="up"   file="lep_recoSF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_recoSF_up.nofullhad.histograms.root" />
+        <shift side="down" file="lep_recoSF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_recoSF_down.nofullhad.histograms.root" />
     </syst>
     <syst name="lep_trigSF" type="two_sided" >
-        <shift side="up"   file="lep_trigSF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_trigSF_up.histograms.root" />
-        <shift side="down" file="lep_trigSF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_trigSF_down.histograms.root" />
+        <shift side="up"   file="lep_trigSF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_trigSF_up.nofullhad.histograms.root" />
+        <shift side="down" file="lep_trigSF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.lep_trigSF_down.nofullhad.histograms.root" />
     </syst>
     <syst name="jeff" type="one_sided" >
-        <shift side="single" file="jeff/tt_diffxs_8TeV.mc.DiTop.110404.mu.jeff.histograms.root" />
+        <shift side="single" file="jeff/tt_diffxs_8TeV.mc.DiTop.110404.mu.jeff.nofullhad.histograms.root" />
     </syst>
     <syst name="musc" type="two_sided" >
-        <shift side="up"   file="musc_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.musc_up.histograms.root" />
-        <shift side="down" file="musc_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.musc_down.histograms.root" />
+        <shift side="up"   file="musc_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.musc_up.nofullhad.histograms.root" />
+        <shift side="down" file="musc_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.musc_down.nofullhad.histograms.root" />
     </syst>
     <syst name="muid_res" type="two_sided" >
-        <shift side="single"   file="muid_res/tt_diffxs_8TeV.mc.DiTop.110404.mu.muid_res.histograms.root" />
+        <shift side="single"   file="muid_res/tt_diffxs_8TeV.mc.DiTop.110404.mu.muid_res.nofullhad.histograms.root" />
     </syst>
     <syst name="mums_res" type="two_sided" >
-        <shift side="single"   file="mums_res/tt_diffxs_8TeV.mc.DiTop.110404.mu.mums_res.histograms.root" />
+        <shift side="single"   file="mums_res/tt_diffxs_8TeV.mc.DiTop.110404.mu.mums_res.nofullhad.histograms.root" />
     </syst>
 <!--
     <syst name="IFSR" type="two_sided" >
-        <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.mu.radHi.histograms.root" />
-        <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.mu.radLo.histograms.root" />
+        <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.mu.radHi.nofullhad.histograms.root" />
+        <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.mu.radLo.nofullhad.histograms.root" />
     </syst>
 -->
 <!--
     <syst name="IFSR" type="one_sided" >
-       	<shift side="single" file="radLo/tt_diffxs_8TeV.mc.DiTop.110407.mu.radLo.histograms.root" />
+       	<shift side="single" file="radLo/tt_diffxs_8TeV.mc.DiTop.110407.mu.radLo.nofullhad.histograms.root" />
     </syst>
     <syst name="PDF" type="two_sided" >
-        <shift side="up"   file="PDF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_up.histograms.root" />
-        <shift side="down" file="PDF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_down.histograms.root" />
+        <shift side="up"   file="PDF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_up.nofullhad.histograms.root" />
+        <shift side="down" file="PDF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_down.nofullhad.histograms.root" />
     </syst>
 -->
   </sample>

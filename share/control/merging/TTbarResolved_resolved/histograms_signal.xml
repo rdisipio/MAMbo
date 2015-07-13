@@ -165,6 +165,20 @@
   <histogram hpath="reco/4j2b/difference/R_Wt_lep" />
   <histogram hpath="reco/4j2b/difference/R_Wt_had" />
   <histogram hpath="reco/4j2b/difference/Discriminant" />
+  <histogram hpath="reco/4j2b/difference/Chi_ttbar_vs_mtt" />
+
+<!-- parton-level binning -->
+  <histogram hpath="reco/4j2b/topH/pt_5" />
+  <histogram hpath="reco/4j2b/topH/absrap_5" />
+  <histogram hpath="reco/4j2b/tt/m_5" />
+  <histogram hpath="reco/4j2b/tt/pt_5" />
+  <histogram hpath="reco/4j2b/tt/absrap_5" />
+  <histogram hpath="reco/4j2b/difference/z_ttbar_5" />
+  <histogram hpath="reco/4j2b/difference/Pout_5" />
+  <histogram hpath="reco/4j2b/difference/Chi_ttbar_5" />
+  <histogram hpath="reco/4j2b/difference/Yboost_5" />
+  <histogram hpath="reco/4j2b/difference/dPhi_ttbar_5" />
+  <histogram hpath="reco/4j2b/difference/HT_ttbar_5" />
 
   <!-- Response matrices -->
   <histogram hpath="reco/4j2b/topH/Matrix_reco_particle_pt" />
@@ -196,19 +210,6 @@
   <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_HT_ttbar_5" />
 
 
-
-<!-- parton-level binning -->
-  <histogram hpath="reco/4j2b/topH/pt_5" />
-  <histogram hpath="reco/4j2b/topH/absrap_5" />
-  <histogram hpath="reco/4j2b/tt/m_5" />
-  <histogram hpath="reco/4j2b/tt/pt_5" />
-  <histogram hpath="reco/4j2b/tt/absrap_5" />
-  <histogram hpath="reco/4j2b/difference/z_ttbar_5" />
-  <histogram hpath="reco/4j2b/difference/Pout_5" />
-  <histogram hpath="reco/4j2b/difference/Chi_ttbar_5" />
-  <histogram hpath="reco/4j2b/difference/Yboost_5" />
-  <histogram hpath="reco/4j2b/difference/dPhi_ttbar_5" />
-  <histogram hpath="reco/4j2b/difference/HT_ttbar_5" />
 
 <!-- particle level -->
   <histogram hpath="particle/4j2b/WH/m" />
