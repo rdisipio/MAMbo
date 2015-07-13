@@ -7,6 +7,8 @@ paramsdir=${MAMBODIR}/share/control/merging/${analytag}
 outdir=${MAMBODIR}/run/output/${analytag}
 
 sample=DiTop
+decay=nofullhad
+
 for syst in Lumi_up Lumi_down
 do
   for dsid in 110404 #110340
@@ -18,7 +20,7 @@ do
 
         tag=${analysis}.mc.${sample}.${dsid}.${ch}.${syst}
 
-        MAMbo-mergeSamples.py -l 1.0 -c ${params} -o ${outdir}/${syst}/${tag}.histograms.root &
+        MAMbo-mergeSamples.py -l 1.0 -c ${params} -o ${outdir}/${syst}/${tag}.${decay}.histograms.root &
      done #channel
      wait
 
@@ -26,9 +28,9 @@ do
      echo ///////////////////////////////////
      echo
 
-     hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.co.${syst}.histograms.root \
-             ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.el.${syst}.histograms.root \
-             ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.mu.${syst}.histograms.root
+     hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.co.${syst}.${decay}.histograms.root \
+             ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.el.${syst}.${decay}.histograms.root \
+             ${outdir}/${syst}/${analysis}.mc.${sample}.${dsid}.mu.${syst}.${decay}.histograms.root
 
      echo
      echo ///////////////////////////////////

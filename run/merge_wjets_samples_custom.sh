@@ -12,6 +12,8 @@ tag=nosf
 [[ ! -z $1 ]] && tag=$1
 [[ ! -z $2 ]] && syst=$2
 
+[[ ! -d =${MAMBODIR}/run/output/${analytag}/${syst} ]] && mkdir -p ${MAMBODIR}/run/output/${analytag}/${syst}
+
 for ch in el mu
 do
 

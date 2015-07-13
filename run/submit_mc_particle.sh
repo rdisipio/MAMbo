@@ -13,6 +13,8 @@ dsid=110404
 decay=ljets
 [ ! -z $2 ] && decay=$2
 
+[[ ! -d ${MAMBOOUTPUTDIR}/particle ]] && mkdir -p ${MAMBOOUTPUTDIR}/particle
+
 for ch in el mu
 do
      echo "INFO: submitting DiTop dsid=$dsid channel ${ch}"

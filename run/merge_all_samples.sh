@@ -16,13 +16,18 @@ listfile_mu=${systdir}/signal_systematics_mujets_only.dat
 dsid=110404
 [ ! -z $1 ] && dsid=$1
 
+decay=nofullhad
+[ ! -z $2 ] && decay=$2
+
+echo INFO: Merging signal DSID: ${dsid} decay: ${decay}
+
 #SingleTop Wjets Zjets Diboson
 for sample in DiTop
 do
    # BTAGSF etc..
    for syst in $(cat $listfile_sf)
    do
-      ./merge_signal_sample.sh ${dsid} ${syst} &
+      ./merge_signal_sample.sh ${dsid} ${syst} ${decay} &
 
       echo
       echo "//////////////////////////////////"
@@ -35,7 +40,7 @@ do
    do
       for var in up down
       do
-         ./merge_signal_sample.sh ${dsid} ${syst}_${var} &
+         ./merge_signal_sample.sh ${dsid} ${syst}_${var} ${decay} &
    
          echo
          echo "//////////////////////////////////"
@@ -44,8 +49,8 @@ do
       wait
    done # syst
 
-   ./merge_signal_sample.sh ${dsid} muid_res &
-   ./merge_signal_sample.sh ${dsid} mums_res &
-   ./merge_signal_sample.sh ${dsid} jeff &
+   ./merge_signal_sample.sh ${dsid} muid_res ${decay} &
+   ./merge_signal_sample.sh ${dsid} mums_res ${decay} &
+   ./merge_signal_sample.sh ${dsid} jeff ${decay} &
    wait
 done # sample

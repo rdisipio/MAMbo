@@ -15,10 +15,10 @@ dsid=110404
 [ ! -z $1 ] && dsid=$1
 
 syst=nominal
-#[ ! -z $2 ] && syst=$2
+[ ! -z $2 ] && syst=$2
 
-decay=ljets
-[ ! -z $2 ] && decay=$2
+decay=nofullhad
+[ ! -z $3 ] && decay=$3
 
 for ch in el mu
 do

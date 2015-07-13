@@ -5,6 +5,9 @@ ILUMI=20300
 dsid=110404
 [ ! -z $1 ] && dsid=$1
 
+decay=nofullhad
+[ ! -z $2 ] && decay=$2
+
 systdir=${MAMBODIR}/share/control/analysis_params/${analytag}
 paramsdir=${MAMBODIR}/share/control/merging/${analytag}
 outdir=${MAMBODIR}/run/output/${analytag}

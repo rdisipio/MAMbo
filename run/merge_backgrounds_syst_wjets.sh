@@ -8,6 +8,8 @@ syst=nominal
 tag_wjets=tt_chasymm
 [ ! -z $2 ] && wjets=$2
 
+[[ ! -d ${MAMBOOUTPUTDIR}/${syst} ]] && mkdir -p ${MAMBOOUTPUTDIR}/${syst}
+
 for ch in el mu
 do
   [ $ch == "el" ] && stream="Egamma"

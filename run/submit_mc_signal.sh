@@ -30,7 +30,7 @@ do
 
     	 tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
 
-         params=${paramsdir}/mcsignal_${ch}.${syst}.${batchid}.xml
+         params=${paramsdir}/mcsignal_${ch}.${syst}.${decay}.${batchid}.xml
          cp ${paramsdir}/mcsignal_template_${decay}.xml ${params}
 
          sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
