@@ -207,10 +207,10 @@ class EventDumperMCTruthTopMiniSLResolved
 */
 
 //          if( (ntops>2) && (isHadronic < 0) ) continue;
-
-          if( (status != 3) && (status!=155) && (status!=52) && (status!=51) && (status!=22)  ) continue;
-
+          if( (status != 3) && (status!=11) && (status!=155) && (status!=52) && (status!=51) && (status!=22)  ) continue;
           // in some cases you can have status=155 and isHadronic=-2 (no childred)
+
+          if( ( status != 155 ) && ( isHadronic == -2 ) ) continue;
 
           if( n_good_tops < 2 ) {
  
@@ -244,8 +244,11 @@ class EventDumperMCTruthTopMiniSLResolved
          cout << "DEBUG: ttbar   pT=" << ttbar.Pt()/GeV << " eta=" << ttbar.Eta() << " m=" << ttbar.M()/GeV << endl;
        }
 */
-       if( (top.Pt()<=0.) || (antitop.Pt()<=0.) ) {
-           cout << "ERROR: event " << ntuple_partons->eventNumber << " could not find good t and tbar." << endl;
+       if( top.Pt() <= 0. ) {
+           cout << "ERROR: event " << ntuple_partons->eventNumber << " could not find a good t " << endl;
+       }
+       if( antitop.Pt() <= 0. ) {
+           cout << "ERROR: event " << ntuple_partons->eventNumber << " could not find a good tbar." << endl;
        }
 
        if( ttbar.M() < 225*GeV ) cout << "WARNING: EventDumperMCTruthTopMiniSLResolved: event " << ntuple_partons->eventNumber << " low ttbar m = " << ttbar.M()/GeV << " pT = " << ttbar.Pt()/GeV << endl;
