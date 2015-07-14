@@ -13,15 +13,18 @@ syst=nominal
 ch=co
 [ ! -z $2 ] && ch=$2
 
+decay=nofullhad
+[ ! -z $3 ] && decay=$3
+
 outdir=$MAMBODIR/run/output/${analysis}
 
 params=$MAMBODIR/share/control/merging/${analysis}/Unfolding_${dsid}_template.xml
-newparams=$MAMBODIR/share/control/merging/${analysis}/.otf/Unfolding_${dsid}_${ch}_${syst}.xml
+newparams=$MAMBODIR/share/control/merging/${analysis}/.otf/Unfolding_${dsid}_${ch}_${syst}_${decay}.xml
 
 cp $params $newparams
 
 sed -i "s/@CHANNEL@/${ch}/g" $newparams
 sed -i "s/@SYST@/${syst}/g"  $newparams
 
-MAMbo-mergeSamples.py -l ${ILUMI} -c ${newparams} -o ${outdir}/${syst}/${analytag}.mc.DiTop.${dsid}.${ch}.${syst}.histograms.root
+MAMbo-mergeSamples.py -l ${ILUMI} -c ${newparams} -o ${outdir}/${syst}/${analytag}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}.histograms.root
 
