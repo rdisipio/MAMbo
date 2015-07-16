@@ -312,11 +312,14 @@
             <Bin id="1" nbins="100" xmin="0." xmax="3." />
 	    <Bin id="5" nbins="6" edges="0,0.4,0.7,1,1.3,1.7,3.00"/>
         </Variable>
-        <Variable name="Pout" title="p_{out};p_{out} [GeV];" folder="4j2b" particle="difference" >
+        <Variable name="Pout" title="p_{out};p_{out};[GeV]" folder="4j2b" particle="difference" >
 	    <Bin id="0" nbins="12" edges="-600,-230,-170,-120,-80,-40,0,40,80,120,170,230,600"/>
-	    <Bin id="2" nbins="10" edges="-600.00,-50.00,-24.00,-12.00,-6.00,0.0,6.00,12.00,24.00,50.00,600.00" />
             <Bin id="1" nbins="100" xmin="-600." xmax="600." />
+	    <Bin id="2" nbins="10" edges="-600.00,-50.00,-24.00,-12.00,-6.00,0.0,6.00,12.00,24.00,50.00,600.00" />
 	    <Bin id="5" nbins="12" edges="-600,-230,-170,-120,-80,-40,0,40,80,120,170,230,600"/>
+        </Variable>
+        <Variable name="absPout" title="|p_{out}|;|p_{out}|;[GeV]" folder="4j2b" particle="difference" >
+            <Bin id="0" nbins="6"  edges="0,40,80,120,170,230,600" /> 
         </Variable>
         <Variable name="Chi_ttbar" title="#chi_{out};#chi_{out};" folder="4j2b" particle="difference" >
             <Bin id="0" nbins="10" edges="1.0,1.4,1.9,2.5,3.2,4.2,5.5,7.2,9.3,12.,20." />
@@ -571,6 +574,7 @@
         <Matrix variable="rapidity" binId="0"/>
 	<Matrix variable="Discriminant" binId="0"/>
 	<Matrix variable="Pout" binId="0"/>
+        <Matrix variable="absPout" binId="0"/>
 	<Matrix variable="z_ttbar" binId="0"/>
 	<Matrix variable="dPhi_ttbar" binId="0"/>
 	<Matrix variable="HT_ttbar" binId="0"/> 
@@ -598,7 +602,9 @@
 
  	<!-- top pair distributions -->
         <TH1F variable="z_ttbar" binId="0"/>
+        <TH1F variable="Pout"  binId="0"/>
         <TH1F variable="Pout"  binId="1"/>
+        <TH1F variable="absPout"  binId="0"/>
         <TH1F variable="neutrino_pz"  binId="0"/>
         <TH1F variable="Discriminant"  binId="0"/>
         <TH1F variable="Chi_ttbar"  binId="0"/>

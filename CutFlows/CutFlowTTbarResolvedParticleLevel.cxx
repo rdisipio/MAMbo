@@ -385,6 +385,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistograms(string path, ControlPlotV
 
 
 void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudoTop(EventData::Reco_t& particle, int index, string level, string topType, const double weight, const double mbl){
+//cout << "DEBUG: FillHistogramsPseudoTop(): level:" << level << " top:" << topType << " mc weight = " << weight << endl;
     Particle p(particle, index);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/pt", p.pt / GeV, weight);
     m_hm->FillHistograms(level + "/4j2b/" + topType + "/eta", p.eta, weight);
@@ -589,7 +590,7 @@ void CutFlowTTbarResolvedParticleLevel::FillHistogramsPartonTopPairs(EventData::
 
 void CutFlowTTbarResolvedParticleLevel::FillHistogramsPseudotopParticle( EventData * ed, const double weight, string level) {
 
-
+  //cout << "DEBUG: FillHistogramsPseudotopParticle(): level:" << level << " mc weight = " << weight << endl; 
   if (ed->truth_leptons.n > 0) {
     TLorentzVector lep_bjet = HelperFunctions::MakeFourMomentum(ed->jets, ed->iproperty["ptcl_pseudotop_lep_bjet_index"]);
     TLorentzVector lep = HelperFunctions::MakeFourMomentum( ed->truth_leptons, 0 );

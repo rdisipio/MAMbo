@@ -199,18 +199,20 @@ class EventDumperMCTruthTopMiniSLResolved
 	  const float t_q   = ( pid >= 0 ) ? 1 : -1;
 	  const int isHadronic = ntuple_partons->parton_topQuark_isHadronic[i];
 
-/*
-          if( ntops > 2 ) {
-                cout << "DEBUG: event=" << ntuple_partons->eventNumber << " topq bc=" << barcode << " pid=" << pid 
-                     << " status=" << status << " pT=" << t_pT/GeV << " eta=" << t_eta << " m=" << t_m/GeV << " isHad=" << isHadronic << endl;
+          if( (status != 3) && (status!=11) && (status!=155) && (status!=52) && (status!=51) && (status!=62) && (status!=22) && (status!=44) ) continue;
+//          cout << "DEBUG: event " << ntuple_partons->eventNumber << " top found pid=" << pid << " status=" << status << " pT=" << t_pT/GeV << " eta=" << t_eta << " m=" << t_m/GeV << " isHad=" << isHadronic << endl; 
+
+          if( isHadronic == -2 ) {
+            bool is_good_top = false;
+
+            if( ntops == 2 ) is_good_top = true; // dramatic fallback, accept anyway
+            if( status == 155 ) is_good_top = true; // well it decayed somehow..
+
+            if( is_good_top == false ) continue;
+
+            cout << "WARNING: event " << ntuple_partons->eventNumber << " childless good top found pid=" << pid << " status=" << status << " pT=" << t_pT/GeV << " eta=" << t_eta << " m=" << t_m/GeV << " isHad=" << isHadronic << endl;
+
           }
-*/
-
-//          if( (ntops>2) && (isHadronic < 0) ) continue;
-          if( (status != 3) && (status!=11) && (status!=155) && (status!=52) && (status!=51) && (status!=22)  ) continue;
-          // in some cases you can have status=155 and isHadronic=-2 (no childred)
-
-          if( ( status != 155 ) && ( isHadronic == -2 ) ) continue;
 
           if( n_good_tops < 2 ) {
  
@@ -228,11 +230,6 @@ class EventDumperMCTruthTopMiniSLResolved
 
             if( isHadronic == 1 ) nthad++;
 
-/*
-            if( ntops > 2 ) {
-              cout << "DEBUG: event " << ntuple_partons->eventNumber << " good top found pid=" << pid << " status=" << status << " pT=" << t.Pt()/GeV << " eta=" << t.Eta() << " m=" << t.M()/GeV << " isHad=" << isHadronic << endl; 
-            }
-*/
           } 
        } // loop over all top quarks in MC record
 

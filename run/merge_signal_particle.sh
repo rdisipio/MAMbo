@@ -15,7 +15,7 @@ fi
 
 syst=particle
 
-decay=ljets
+decay=nofullhad
 [ ! -z $2 ] && decay=$2
 
 paramsdir=${MAMBODIR}/share/control/merging/${analytag}

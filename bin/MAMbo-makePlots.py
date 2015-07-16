@@ -360,7 +360,7 @@ def DoPlot( plot, iLumi = 1. ):
     ## save image
 
     c.cd()
-    for ext in [ "png", "pdf", "C" ]:
+    for ext in [ "png" ]: #, "pdf", "C" ]:
        imgname = "img/%s/%s%s.%s" % ( ext, plot.hname, tag_scale, ext )
        c.SaveAs( imgname ) 
 

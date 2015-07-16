@@ -10,7 +10,7 @@ queue=T3_BO_LOCAL
 dsid=110404
 [ ! -z $1 ] && dsid=$1
 
-decay=ljets
+decay=nofullhad
 [ ! -z $2 ] && decay=$2
 
 [[ ! -d ${MAMBOOUTPUTDIR}/particle ]] && mkdir -p ${MAMBOOUTPUTDIR}/particle
