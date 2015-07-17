@@ -1,0 +1,7 @@
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000001.mc.root
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000002.mc.root
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000003.mc.root
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000004.mc.root
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000005.mc.root
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000006.mc.root
+user.mromano.110872.MadGraphCT10Pythia_CT10_P2011C_ttbar_dilepton.e2609_a188_a222_r3549_p1575.at180_mc.root/user.mromano.5934656._000007.mc.root
