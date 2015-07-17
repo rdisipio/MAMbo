@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
+<samples>
+  <sample name="ttbar_ljets_00"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_01"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_02"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_03"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_04"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_05"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_06"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_07"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_ljets_08"  dsid="110871" xsec="54.831" kfact="2.0201" genevt="14623988" generator="MadGraphPythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_dilep_00"  dsid="110872" xsec="13.153" kfact="2.0188" genevt="4709497" generator="MadGraphCT10Pythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_dilep_01"  dsid="110872" xsec="13.153" kfact="2.0188" genevt="4709497" generator="MadGraphCT10Pythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_dilep_03"  dsid="110872" xsec="13.153" kfact="2.0188" genevt="4709497" generator="MadGraphCT10Pythia_CT10_P2011C" simulation="Full" />
+  <sample name="ttbar_dilep_03"  dsid="110872" xsec="13.153" kfact="2.0188" genevt="4709497" generator="MadGraphCT10Pythia_CT10_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="ttbar_ljets_00" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.00" />
+  <file sample="ttbar_ljets_01" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.01" />
+  <file sample="ttbar_ljets_02" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.02" />
+  <file sample="ttbar_ljets_03" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.03" />
+  <file sample="ttbar_ljets_04" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.04" />
+  <file sample="ttbar_ljets_05" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.05" />
+  <file sample="ttbar_ljets_06" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.06" />
+  <file sample="ttbar_ljets_07" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.07" />
+  <file sample="ttbar_ljets_08" path="particle/tt_diffxs_8TeV.mc.DiTop.110871.@CHANNEL@.particle.nofullhad.histograms.root.08" />
+
+  <file sample="ttbar_dilep_00" path="particle/tt_diffxs_8TeV.mc.DiTop.110872.@CHANNEL@.particle.nofullhad.histograms.root.00" />
+  <file sample="ttbar_dilep_01" path="particle/tt_diffxs_8TeV.mc.DiTop.110872.@CHANNEL@.particle.nofullhad.histograms.root.01" />
+  <file sample="ttbar_dilep_02" path="particle/tt_diffxs_8TeV.mc.DiTop.110872.@CHANNEL@.particle.nofullhad.histograms.root.02" />
+  <file sample="ttbar_dilep_03" path="particle/tt_diffxs_8TeV.mc.DiTop.110872.@CHANNEL@.particle.nofullhad.histograms.root.03" />
+</files>
+</document>
