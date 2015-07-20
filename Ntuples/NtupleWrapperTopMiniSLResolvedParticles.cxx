@@ -64,6 +64,14 @@ bool NtupleWrapperTopMiniSLResolvedParticles::MakeEventInfo( EventData * ed )
 //  ed->info.mcWeight = 1.; // bug in D3PD2MiniSL? All zeros. Can't use MC@NLO at the moment.
   if( fabs(ed->info.mcWeight) < 1e-4 ) ed->info.mcWeight = 1.;
 
+  ed->property["pdf_pdf1"]  = GET_VALUE( mcevt_pdf1 );
+  ed->property["pdf_id1"]   = GET_VALUE( mcevt_pdf_id1 );
+  ed->property["pdf_x1"]    = GET_VALUE( mcevt_pdf_x1 );
+  ed->property["pdf_pdf2"]  = GET_VALUE( mcevt_pdf2 );
+  ed->property["pdf_id2"]   = GET_VALUE( mcevt_pdf_id2 );
+  ed->property["pdf_x2"]    = GET_VALUE( mcevt_pdf_x2 );
+  ed->property["pdf_scale"] = GET_VALUE( mcevt_pdf_scale );
+
   return success;
 }
 

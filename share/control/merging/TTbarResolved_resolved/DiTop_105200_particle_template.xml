@@ -2,16 +2,14 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_truth.xml" />
 <samples>
-  <sample name="ttbar_@DECAY@_00"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_01"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_02"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_03"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_04"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_05"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_06"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_07"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_08"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_@DECAY@_09"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_00"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_01"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_02"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_03"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_04"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_05"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_06"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_@DECAY@_07"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
 </samples>
 <files>
   <file sample="ttbar_@DECAY@_00" path="particle/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.particle.@DECAY@.histograms.root.00" />
@@ -22,7 +20,5 @@
   <file sample="ttbar_@DECAY@_05" path="particle/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.particle.@DECAY@.histograms.root.05" />
   <file sample="ttbar_@DECAY@_06" path="particle/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.particle.@DECAY@.histograms.root.06" />
   <file sample="ttbar_@DECAY@_07" path="particle/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.particle.@DECAY@.histograms.root.07" />
-  <file sample="ttbar_@DECAY@_08" path="particle/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.particle.@DECAY@.histograms.root.08" />
-  <file sample="ttbar_@DECAY@_09" path="particle/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.particle.@DECAY@.histograms.root.09" />
 </files>
 </document>

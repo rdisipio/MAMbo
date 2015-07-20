@@ -12,8 +12,7 @@
     <param name="isRealData"        type="flag"    value="0" />
     <param name="isWjets"      	    type="flag"    value="0" />
     <param name="isQCD"             type="flag"    value="0" />
-    <param name="isDilepton"        type="flag"    value="0" />
-<!--    <param name="scale_syst"        type="string"  value="PDF:CT10nlo:0" /> -->
+    <param name="isDilepton"        type="flag"    value="-1" />
+    <param name="scale_syst"        type="string"  value="PDF:NNPDF23_nlo_as_0119:0" />
   </parameters>
 </analysis>
-<!-- NB: signal=ljets so dileptons are discarded -->

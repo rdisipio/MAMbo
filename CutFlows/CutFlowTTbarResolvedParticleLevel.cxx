@@ -9,12 +9,21 @@ CutFlowTTbarResolvedParticleLevel::CutFlowTTbarResolvedParticleLevel()
    m_alias = {
 	"beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
    };
+
+#ifdef __USE_LHAPDF__
+   m_pdf = NULL;
+#endif
+
 }
 
 CutFlowTTbarResolvedParticleLevel::~CutFlowTTbarResolvedParticleLevel()
 {
    SAFE_DELETE( m_pseudotop_particle )
    SAFE_DELETE( m_pseudotop_matching_particle2parton )
+
+#ifdef __USE_LHAPDF__
+   SAFE_DELETE( m_pdf );
+#endif
 }
 
 
@@ -24,6 +33,27 @@ CutFlowTTbarResolvedParticleLevel::~CutFlowTTbarResolvedParticleLevel()
 bool CutFlowTTbarResolvedParticleLevel::Initialize()
 {
     bool success = true;
+
+    if( m_config->custom_params_string.count( "scale_syst" ) ) {
+
+      const string syst = m_config->custom_params_string["scale_syst"];
+
+      if( syst.find("PDF") == 0 ) {
+#ifndef __USE_LHAPDF__
+        throw runtime_error( "Requested systematic shift of type PDF but LHAPDF is not set. Please recompile against LHAPDF.\n" );
+#else
+        StringVector_t params_pdf;
+        HelperFunctions::Tokenize( syst, params_pdf, ":" );
+        if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" );
+
+        cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl;
+
+        int imem = atoi( params_pdf[2].c_str() );
+        m_pdf = LHAPDF::mkPDF( params_pdf[1], imem );
+
+#endif /* __USE_LHAPDF__ */
+      } // PDF
+    }
 
     AddChannel("LPLUSJETS");
 
@@ -99,6 +129,14 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
     cerr << "ERROR: NaN corrected!" << endl;
     weight_particle_level = 1.;
   }
+
+#ifdef __USE_LHAPDF__
+         const double scaleFactor_PDF  = GetPDFWeight( ed );
+         weight_particle_level *= scaleFactor_PDF;
+         ed->property["scaleFactor_PDF"] = scaleFactor_PDF;
+#else
+        const double scaleFactor_PDF = 1.0;
+#endif
 
 
   // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
@@ -336,6 +374,39 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
 
 /////////////////////////////////////////
  
+
+double CutFlowTTbarResolvedParticleLevel::GetPDFWeight( EventData * ed )
+{
+   double weight = 1.0;
+
+#ifndef __USE_LHAPDF__
+   cout << "WARNING: You asked to calculate the PDF weight but MAMbo was not compiled against LHAPDF." << endl;
+   return weight;
+#else
+
+   if( m_pdf == NULL ) return weight;
+
+   const double pdf1 = ed->property["pdf_pdf1"];
+   const double id1  = ed->property["pdf_id1"];
+   const double  x1  = ed->property["pdf_x1"];
+   const double pdf2 = ed->property["pdf_pdf2"];
+   const double id2  = ed->property["pdf_id2"];
+   const double x2   = ed->property["pdf_x2"];
+   const double q    = ed->property["pdf_scale"];
+
+   const double new_pdf1 = m_pdf->xfxQ( id1, x1, q );
+   const double new_pdf2 = m_pdf->xfxQ( id2, x2, q );
+
+   weight = (new_pdf1*new_pdf2) / (pdf1*pdf2);
+
+#endif
+
+   return weight;
+}
+
+
+/////////////////////////////////////////
+
 
 void CutFlowTTbarResolvedParticleLevel::FillHistogramsControlPlotsParticle( ControlPlotValues& values )
 {

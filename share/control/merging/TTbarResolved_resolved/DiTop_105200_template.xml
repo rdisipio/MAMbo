@@ -2,21 +2,14 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
 <samples>
-  <sample name="ttbar_nofullhad_00"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_01"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_02"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_03"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_04"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_05"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_06"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_07"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_08"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-  <sample name="ttbar_nofullhad_09"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11137305" generator="McAtNlo_Jimmy" simulation="FS" />
-<!--
-  <sample name="ttbar_mtt_1100_1300"  dsid="117304" xsec="0.57116" kfact="1.2158" genevt="69527"  generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
-  <sample name="ttbar_mtt_1300_1500"  dsid="117305" xsec="0.19707" kfact="1.2158" genevt="116833" generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
-  <sample name="ttbar_mtt_1500_1700"  dsid="117306" xsec="0.07273" kfact="1.2158" genevt="111487" generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
-  <sample name="ttbar_mtt_1700_inf"   dsid="117307" xsec="0.05069" kfact="1.2158" genevt="113716" generator="MCatNLO_Jimmy_AUET2" simulation="Full" />
+  <sample name="ttbar_nofullhad_00"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_01"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_02"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_03"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_04"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_05"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_06"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
+  <sample name="ttbar_nofullhad_07"  dsid="105200" xsec="112.94" kfact="1.2158" genevt="11553421" generator="McAtNlo_Jimmy" simulation="FS" />
 -->
 </samples>
 <files>
@@ -28,7 +21,5 @@
   <file sample="ttbar_nofullhad_05" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.05" />
   <file sample="ttbar_nofullhad_06" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.06" />
   <file sample="ttbar_nofullhad_07" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.07" />
-  <file sample="ttbar_nofullhad_08" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.08" />
-  <file sample="ttbar_nofullhad_09" path="@SYST@/tt_diffxs_8TeV.mc.DiTop.105200.@CHANNEL@.@SYST@.@DECAY@.histograms.root.09" />
 </files>
 </document>

@@ -8,6 +8,10 @@
 #include "EventData.h"
 #include "Particle.h"
 
+#ifdef __USE_LHAPDF__
+#include <LHAPDF/LHAPDF.h>
+#endif
+
 using namespace PhysicsHelperFunctions;
 
 class CutFlowTTbarResolvedParticleLevel : public CutFlow
@@ -21,6 +25,8 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
 
  protected:
   bool PassedCutFlowParticle( EventData * ed  = NULL);
+
+  double GetPDFWeight( EventData * ed = NULL );
 
   void FillHistogramsControlPlotsParticle( ControlPlotValues& values );
 
@@ -47,6 +53,12 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
   PseudoTopReconstruction * m_pseudotop_particle;
 
   PseudoTopMatching       * m_pseudotop_matching_particle2parton;
+
+#ifdef __USE_LHAPDF__
+    enum Sets { CT10, MSTW, NNPDF, NSETS };
+
+    LHAPDF::PDF * m_pdf;
+#endif
 
  private:
    vector<string> m_alias;

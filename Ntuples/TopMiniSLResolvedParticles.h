@@ -29,6 +29,13 @@ public :
    Int_t           channelNumber;
    Int_t           eventNumber;
    Float_t         eventWeight;
+   Double_t        mcevt_pdf1;
+   Double_t        mcevt_pdf2;
+   Int_t           mcevt_pdf_id1;
+   Int_t           mcevt_pdf_id2;
+   Double_t        mcevt_pdf_scale;
+   Double_t        mcevt_pdf_x1;
+   Double_t        mcevt_pdf_x2;
    Int_t           part_el_n;
    Float_t         part_el_pt[2];   //[part_el_n]
    Float_t         part_el_eta[2];   //[part_el_n]
@@ -73,6 +80,13 @@ public :
    TBranch        *b_channelNumber;   //!
    TBranch        *b_eventNumber;   //!
    TBranch        *b_eventWeight; //!
+   TBranch        *b_mcevt_pdf1;   //!
+   TBranch        *b_mcevt_pdf2;   //!
+   TBranch        *b_mcevt_pdf_id1;   //!
+   TBranch        *b_mcevt_pdf_id2;   //!
+   TBranch        *b_mcevt_pdf_scale;   //!
+   TBranch        *b_mcevt_pdf_x1;   //!
+   TBranch        *b_mcevt_pdf_x2;   //!
    TBranch        *b_part_el_n;   //!
    TBranch        *b_part_el_pt;   //!
    TBranch        *b_part_el_eta;   //!
@@ -188,6 +202,13 @@ void TopMiniSLResolvedParticles::Init(TTree *tree)
    fChain->SetBranchAddress("channelNumber", &channelNumber, &b_channelNumber);
    fChain->SetBranchAddress("eventNumber", &eventNumber, &b_eventNumber);
    fChain->SetBranchAddress("eventWeight", &eventWeight, &b_eventWeight );
+   fChain->SetBranchAddress("mcevt_pdf1", &mcevt_pdf1, &b_mcevt_pdf1);
+   fChain->SetBranchAddress("mcevt_pdf2", &mcevt_pdf2, &b_mcevt_pdf2);
+   fChain->SetBranchAddress("mcevt_pdf_id1", &mcevt_pdf_id1, &b_mcevt_pdf_id1);
+   fChain->SetBranchAddress("mcevt_pdf_id2", &mcevt_pdf_id2, &b_mcevt_pdf_id2);
+   fChain->SetBranchAddress("mcevt_pdf_scale", &mcevt_pdf_scale, &b_mcevt_pdf_scale);
+   fChain->SetBranchAddress("mcevt_pdf_x1", &mcevt_pdf_x1, &b_mcevt_pdf_x1);
+   fChain->SetBranchAddress("mcevt_pdf_x2", &mcevt_pdf_x2, &b_mcevt_pdf_x2);
    fChain->SetBranchAddress("part_el_n", &part_el_n, &b_part_el_n);
    fChain->SetBranchAddress("part_el_pt", part_el_pt, &b_part_el_pt);
    fChain->SetBranchAddress("part_el_eta", part_el_eta, &b_part_el_eta);

@@ -25,6 +25,13 @@ public :
    // Declaration of leaf types
    Int_t           runNumber;
    Int_t           eventNumber;
+   Double_t        mcevt_pdf1;
+   Double_t        mcevt_pdf2;
+   Int_t           mcevt_pdf_id1;
+   Int_t           mcevt_pdf_id2;
+   Double_t        mcevt_pdf_scale;
+   Double_t        mcevt_pdf_x1;
+   Double_t        mcevt_pdf_x2;
    Int_t           parton_topQuark_n;
    Float_t         parton_topQuark_m[10];   //[parton_topQuark_n]
    Float_t         parton_topQuark_pt[10];   //[parton_topQuark_n]
@@ -62,6 +69,13 @@ public :
    // List of branches
    TBranch        *b_runNumber;   //!
    TBranch        *b_eventNumber;   //!
+   TBranch        *b_mcevt_pdf1;   //!
+   TBranch        *b_mcevt_pdf2;   //!
+   TBranch        *b_mcevt_pdf_id1;   //!
+   TBranch        *b_mcevt_pdf_id2;   //!
+   TBranch        *b_mcevt_pdf_scale;   //!
+   TBranch        *b_mcevt_pdf_x1;   //!
+   TBranch        *b_mcevt_pdf_x2;   //!
    TBranch        *b_parton_topQuark_n;   //!
    TBranch        *b_parton_topQuark_m;   //!
    TBranch        *b_parton_topQuark_pt;   //!
@@ -170,6 +184,13 @@ void TopMiniSLResolvedPartons::Init(TTree *tree)
 
    fChain->SetBranchAddress("runNumber", &runNumber, &b_runNumber);
    fChain->SetBranchAddress("eventNumber", &eventNumber, &b_eventNumber);
+   fChain->SetBranchAddress("mcevt_pdf1", &mcevt_pdf1, &b_mcevt_pdf1);
+   fChain->SetBranchAddress("mcevt_pdf2", &mcevt_pdf2, &b_mcevt_pdf2);
+   fChain->SetBranchAddress("mcevt_pdf_id1", &mcevt_pdf_id1, &b_mcevt_pdf_id1);
+   fChain->SetBranchAddress("mcevt_pdf_id2", &mcevt_pdf_id2, &b_mcevt_pdf_id2);
+   fChain->SetBranchAddress("mcevt_pdf_scale", &mcevt_pdf_scale, &b_mcevt_pdf_scale);
+   fChain->SetBranchAddress("mcevt_pdf_x1", &mcevt_pdf_x1, &b_mcevt_pdf_x1);
+   fChain->SetBranchAddress("mcevt_pdf_x2", &mcevt_pdf_x2, &b_mcevt_pdf_x2);
    fChain->SetBranchAddress("parton_topQuark_n", &parton_topQuark_n, &b_parton_topQuark_n);
    fChain->SetBranchAddress("parton_topQuark_m", parton_topQuark_m, &b_parton_topQuark_m);
    fChain->SetBranchAddress("parton_topQuark_pt", parton_topQuark_pt, &b_parton_topQuark_pt);
