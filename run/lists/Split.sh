@@ -13,4 +13,4 @@ base=`basename $1 .txt`
 #  split -l 8 ${base}_${ll}.txt split_${base}_${ll}_
 #done
 
-split -l 8 ${base}.txt split_${base}_
+split -l 5 ${base}.txt split_${base}_

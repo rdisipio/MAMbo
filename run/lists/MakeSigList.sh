@@ -2,6 +2,7 @@
 
 
 #area=/eos/atlas/user/j/jschovan/top-phys/2015/20150121_ntuples/
+#area=/eos/atlas/user/q/qitek/top-phys/2015/20150716_ntuples/
 #    !!!
 #file=all.txt
 #rm -f ${file}
@@ -12,7 +13,8 @@
 
 # area=/eos/atlas/user/m/mromano/minintuples-december
 # source ./ListEos.sh | grep root > ListMarinoNew.sh
-file=ListMarinoNew.sh
+
+file=ListMarinoNew.txt
 
 
 for ll in el mu mc ; do
