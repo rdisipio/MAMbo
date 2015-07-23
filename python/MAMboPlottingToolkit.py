@@ -329,10 +329,11 @@ def MakeUncertaintyBand( prediction ):
 #########################################################
 
 
-def MakeRatio( data, prediction ):
+def MakeRatio( data, prediction, setgr = True ):
     ratio = TGraphAsymmErrors()
     
-    SetTH1FStyle( ratio, color=data.GetMarkerColor(), markerstyle=data.GetMarkerStyle() )
+    if setgr:
+        SetTH1FStyle( ratio, color=data.GetMarkerColor(), markerstyle=data.GetMarkerStyle() )
     
     if data.Class() in [ TGraph().Class(), TGraphErrors.Class(), TGraphAsymmErrors().Class() ]:
        nbins = data.GetN()

@@ -12,10 +12,11 @@ _files = []
 _corrs = []
 _h = []
 
+Col = [kOrange+10, kBlue+2, kViolet-1 ]
 
 Paths = ['particle', 'reco', 'matched_p', 'matched_r', 'reco_and_particle_r']
 
-ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
+ObjNames = { 'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
              'topL' : '#hat{t}_{l}',
              'topH' : '#hat{t}_{h}',
              'WL' : '#hat{W}_{l}',
@@ -43,6 +44,13 @@ TitleNames = { 'pt' : 'p_{T}',
 CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}', 
               'match' : 'Misassignment correction f_{match}', 
               'acc' : 'Acceptance correction f_{r!p}' }
+
+
+#################
+def ZeroErrorBars(corr):
+    for i in range(0,corr.GetN()):
+        corr.SetPointError(i,0., 0., 0., 0.)
+
 
 #################
 def CheckAcc(acc,name):
@@ -103,17 +111,24 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
 
     # from now on, access reco file:
 
+    matrixPath =  '/' + basepath + '/' + objname + '/Matrix_reco_particle_' + varname+tag
+    h_matrix = rfile.Get( Paths[1] + matrixPath )
+
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
 
     print '        %s' %(Paths[2] + path)
-    h_match_p = rfile.Get(Paths[2] + path)
+    # h_match_p = rfile.Get(Paths[2] + path)
+    # fix by Marino:
+    h_match_p = h_matrix.ProjectionY( "particle_recoandparticle", 1, h_matrix.GetNbinsY() )
 
     print '        %s' %(Paths[3] + path)
     h_match_r = rfile.Get(Paths[3] + path)
 
     print '        %s' %(Paths[4] + path)
     h_rp = rfile.Get(Paths[4] + path)
+    # fix by Marino:
+    # h_rp = h_matrix.ProjectionX( "reco_recoandparticle", 1, h_matrix.GetNbinsX() )
     
 #    xtitle=h_rp.GetXaxis().GetTitle()
 #    ytitle=h_rp.GetYaxis().GetTitle()
@@ -125,16 +140,16 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
     print '    RMS check: %f ' % (h_part.GetRMS(),)
     print '    RMS check: %f ' % (h_match_p.GetRMS(),)
-    eff = MakeRatio( h_part,  h_match_p)
+    eff = MakeRatio( h_part,  h_match_p, False)
 
     print '  Making acc...'
     print '    RMS check: %f %f' % (h_rp.GetRMS(), h_reco.GetRMS())
-    acc = MakeRatio( h_rp, h_reco)
+    acc = MakeRatio( h_rp, h_reco, False)
     CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
 
     print '  Making match...'
     print '    RMS check: %f %f' % (h_match_r.GetRMS(), h_rp.GetRMS())
-    match = MakeRatio( h_match_r,  h_rp)
+    match = MakeRatio( h_match_r,  h_rp, False)
 
     if icorr == 0: return eff,h_part,h_match_p
     if icorr == 1: return acc,h_rp,h_reco
@@ -142,10 +157,8 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     return
 
 #################
-def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
     print '  Drawing %s/%s/%s' % (basepath,objname,varname)
-
-    corr,h1,h2 = GetCorrection(rfile, pfile, objname, varname, icorr, basepath)
 
     tag = ''
     if icorr == 0: tag = 'eff'
@@ -170,24 +183,50 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     
     #can.cd(2)
     can.cd()
-    corr.SetLineColor(2)
-    corr.SetMarkerColor(2)
-    corr.SetMarkerSize(1)
-    corr.SetMarkerStyle(20)
+  
+    opt = 'P'
+    count = 0
+    xmin = -1
+    xmax = -1
+    for rfile,pfile in zip(rfiles,pfiles):
 
-    xmin = GetMin(rfile, objname, varname, icorr, basepath)
-    xmax = GetMax(rfile, objname, varname, icorr, basepath)
+        corr,h1,h2 = GetCorrection(rfile, pfile, objname, varname, icorr, basepath)
 
-    xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
-    ytitle = ''
+        col = Col[icorr]
+        corr.SetLineColor(col)
+        if count > 0:
+            corr.SetLineWidth(2)
+            corr.SetLineStyle(1+count)
+            corr.SetMarkerStyle(0)
+            corr.SetMarkerSize(0)
+            corr.SetMarkerStyle(0)
+            corr.SetMarkerColor(0)
+            ZeroErrorBars(corr)
+        else:
+            corr.SetMarkerSize(1)
+            corr.SetMarkerStyle(20)
+            corr.SetMarkerColor(col)
+            
+        if count == 0:
+            xmin = GetMin(rfile, objname, varname, icorr, basepath)
+            xmax = GetMax(rfile, objname, varname, icorr, basepath)
 
-    title=CorrNames[tag] + ';' + xtitle + ';' + ytitle
-    if icorr == 0:
-        next_tmp(xmin, xmax, title, 0., 24.)
-    else:
-        next_tmp(xmin, xmax, title)
-    corr.Draw('P')
-    _corrs.append(corr)
+        xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
+        ytitle = ''
+
+        title=CorrNames[tag] + ';' + xtitle + ';' + ytitle
+        if count == 0:
+            if icorr == 0:
+                next_tmp(xmin, xmax, title, 0., 24.)
+            else:
+                next_tmp(xmin, xmax, title)
+        
+        corr.Draw(opt)
+        _corrs.append(corr)
+        opt = 'L'
+        count = count+1
+
+
     can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
     can.Print('pdf/' + canname + '.pdf')
@@ -196,8 +235,10 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 ####################################################
 
+# do not even try this"
 #ljets = [ 'co', 'el', 'mu']
-#ljets = [ 'el', 'mu']
+# better use separate channels, due to the amount of plots:
+#
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
 ljets = [ 'co' ]
@@ -216,22 +257,40 @@ ftag=''
 #rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
+#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
+
+
+GenNames = [ 'PowHeg',
+             '110408.PowhegPythia_Perugia2012radHi',
+             '110407.PowhegPythia_Perugia2012radLo',
+         ]
+
+
 
 os.system('mkdir png eps pdf')
 
 for ll in ljets:
 
-    rfile = TFile('%shistograms_PowHeg_%s%s.root' % (rpath, ll, ftag, ), 'read')
-#    rfile = TFile('%shistograms_PowHeg_%s_halves.root' % (rpath, ll, ), 'read')
-    _files.append(rfile)
-    print 'Opened file %s' % (rfile.GetName(),)
 
-    pfile = TFile('%shistograms_PowHeg_%s_particle%s.root' % (rpath, ll, ptag, ), 'read')
-    _files.append(pfile)
-    print 'Opened file %s' % (pfile.GetName(),)
+    rfiles = []
+    pfiles = []
 
-    Obj = ['topH', 'topL',
+    for genname in GenNames:
+        rfile = TFile('%shistograms_%s_%s%s.root' % (rpath, genname, ll, ftag, ), 'read')
+        _files.append(rfile)
+        rfiles.append(rfile)
+        print 'Opened file %s' % (rfile.GetName(),)
+        
+        pfile = TFile('%shistograms_%s_%s_particle%s.root' % (rpath, genname, ll, ptag, ), 'read')
+        _files.append(pfile)
+        pfiles.append(pfile)
+        print 'Opened file %s' % (pfile.GetName(),)
+
+
+
+    Obj = ['topH', 
+           'topL',
            'WH', 
            'WL',
            'tt']
@@ -240,9 +299,9 @@ for ll in ljets:
 
     for obj in Obj:
         for var in Var:
-            DrawCorrection(ll, rfile, pfile, obj, var, 0)
-            DrawCorrection(ll, rfile, pfile, obj, var, 1)
-            DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            #DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
+            #DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
+            #DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
             pass
 
 
@@ -258,9 +317,9 @@ for ll in ljets:
 
     for obj in SpecObj:
         for var in SpecVar:
-            DrawCorrection(ll, rfile, pfile, obj, var, 0)
-            DrawCorrection(ll, rfile, pfile, obj, var, 1)
-            DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
             pass
 
     
