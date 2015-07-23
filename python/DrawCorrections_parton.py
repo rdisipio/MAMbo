@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# jiri kvita, 2015
+# jiri kvita, marino romano, 2015
 
 import os, sys
 from ROOT import *
@@ -31,18 +31,18 @@ TitleNames = { 'pt' : 'p_{T}',
                'Yboost' : 'y_{boost}',
                'Chi_ttbar' : '#chi_{t_{l}t_{h}}',
                'dPhi_ttbar' : '#Delta#phi_{t_{l}t_{h}}',
-               'Salam_ttbar' : 'S_{t_{l}t_{h}}',
+               #'Salam_ttbar' : 'S_{t_{l}t_{h}}',
                'HT_ttbar' : 'H_{T}^{t#bar{t}}',
-               'HT_pseudo' : 'H_{T}^{pseudo}',
-               'R_lb' : '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]',
-               'R_Wb_had' : 'p_{T}^{W,had} / p_{T}^{b,had}',
-               'R_Wb_lep' : 'p_{T}^{W,lep} / p_{T}^{b,lep}',
-               'R_Wt_had' : 'p_{T}^{W,had} / p_{T}^{t,had}',
-               'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
+               #'HT_pseudo' : 'H_{T}^{pseudo}',
+               #'R_lb' : '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]',
+               #'R_Wb_had' : 'p_{T}^{W,had} / p_{T}^{b,had}',
+               #'R_Wb_lep' : 'p_{T}^{W,lep} / p_{T}^{b,lep}',
+               #'R_Wt_had' : 'p_{T}^{W,had} / p_{T}^{t,had}',
+               #'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
                }
 CorrNames = { 'eff' : 'Efficiency correction', 
               'match' : 'Misassignment correction f_{match}', 
-              'acc' : 'Acceptance correction f_{r!p}' }
+              'acc' : 'Acceptance correction f_{acc}' }
 
 #################
 def CheckAcc(acc,name):
@@ -108,16 +108,15 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
 
-    print '        %s' %(Paths[2] + path)
-    h_match_p = rfile.Get(Paths[2] + path)
+    #print '        %s' %(Paths[4] + path)
+    #h_rp = rfile.Get(Paths[4] + path)
+    # fix by Marino:
+    matrixPath =  '/' + basepath + '/' + objname + '/Matrix_reco_parton_' + varname+tag
+    h_matrix = rfile.Get( Paths[1] + matrixPath )
+    print h_matrix
+    h_rp = h_matrix.ProjectionX( "reco_recoandparticle", 1, h_matrix.GetNbinsX() )
+    print h_rp
 
-    print '        %s' %(Paths[3] + path)
-    h_match_r = rfile.Get(Paths[3] + path)
-
-    print '        %s' %(Paths[4] + path)
-    h_rp = rfile.Get(Paths[4] + path)
-	
-	
     print '        %s' %(Paths[5] + path)
     h_partonReco = rfile.Get(Paths[5] + path)
     
@@ -133,26 +132,21 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     # print '    RMS check: %f ' % (h_match_p.GetRMS(),)
     # eff = MakeRatio( h_part,  h_match_p)
 	
+
+   
 	
     print '  Making parton eff...'
-    #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
     print '    RMS check: %f ' % (h_partonTot.GetRMS(),)
     print '    RMS check: %f ' % (h_partonReco.GetRMS(),)
     eff = MakeRatio( h_partonReco, h_partonTot  )
 
-    print '  Making acc...'
+    print '  Making parton acc...'
     print '    RMS check: %f %f' % (h_rp.GetRMS(), h_reco.GetRMS())
     acc = MakeRatio( h_rp, h_reco)
     CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
 
-    print '  Making match...'
-    print '    RMS check: %f %f' % (h_match_r.GetRMS(), h_rp.GetRMS())
-    match = MakeRatio( h_match_r,  h_rp)
-
-    # if icorr == 0: return eff,h_part,h_match_p
     if icorr == 0: return eff,h_partonTot,h_partonReco
     if icorr == 1: return acc,h_rp,h_reco
-    if icorr == 2: return match,h_match_r,h_rp
     return
 
 #################
@@ -164,7 +158,6 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     tag = ''
     if icorr == 0: tag = 'eff'
     if icorr == 1: tag = 'acc'
-    if icorr == 2: tag = 'match'
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
     can = TCanvas(canname, canname)
@@ -203,9 +196,9 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
         next_tmp(xmin, xmax, title)
     corr.Draw('P')
     _corrs.append(corr)
-    can.Print('corrections/eps/' + canname + '.eps')
-    can.Print('corrections/png/' + canname + '.png')
-    can.Print('corrections/pdf/' + canname + '.pdf')
+    can.Print('eps_parton/' + canname + '.eps')
+    can.Print('png_parton/' + canname + '.png')
+    can.Print('pdf_parton/' + canname + '.pdf')
 
 ####################################################
 ####################################################
@@ -231,10 +224,12 @@ ftag=''
 #rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
+#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
 
-os.system('mkdir png eps pdf')
-ROOT.gROOT.SetBatch( 1)
+os.system('mkdir png_parton eps_parton pdf_parton')
+ROOT.gROOT.SetBatch(1)
+
 for ll in ljets:
 
     rfile = TFile('%shistograms_PowHeg_%s%s.root' % (rpath, ll, ftag, ), 'read')
@@ -247,8 +242,8 @@ for ll in ljets:
     print 'Opened file %s' % (pfile.GetName(),)
 
     Obj = ['topH', 'topL',
-           'WH', 
-           'WL',
+           #'WH', 
+           #'WL',
            'tt']
     Var = ['pt', 'm', 
            'absrap']
@@ -257,25 +252,25 @@ for ll in ljets:
         for var in Var:
             DrawCorrection(ll, rfile, pfile, obj, var, 0)
             DrawCorrection(ll, rfile, pfile, obj, var, 1)
-            DrawCorrection(ll, rfile, pfile, obj, var, 2)
             pass
 
 
     SpecObj = ['difference' ]
-    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar', 
-               'HT_ttbar', 'HT_pseudo',
-               'R_lb', 
-               'R_Wb_lep', 
-               'R_Wb_had',
-               'R_Wt_lep', 
-               'R_Wt_had' 
+    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar',
+               #'Salam_ttbar', 
+               'HT_ttbar', 
+               #'HT_pseudo',
+               #'R_lb', 
+               #'R_Wb_lep', 
+               #'R_Wb_had',
+               #'R_Wt_lep', 
+               #'R_Wt_had' 
     ]
 
     for obj in SpecObj:
         for var in SpecVar:
             DrawCorrection(ll, rfile, pfile, obj, var, 0)
-     #       DrawCorrection(ll, rfile, pfile, obj, var, 1)
-      #      DrawCorrection(ll, rfile, pfile, obj, var, 2)
+            DrawCorrection(ll, rfile, pfile, obj, var, 1)
             pass
 
     

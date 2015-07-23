@@ -41,9 +41,9 @@ TitleNames = { 'pt' : 'p_{T}',
                'R_Wt_had' : 'p_{T}^{W,had} / p_{T}^{t,had}',
                'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
                }
-CorrNames = { 'eff' : 'Efficiency correction: f_{p!r}', 
+CorrNames = { 'eff' : 'Efficiency correction: f_{eff}', 
               'match' : 'Misassignment correction f_{match}', 
-              'acc' : 'Acceptance correction f_{r!p}' }
+              'acc' : 'Acceptance correction f_{acc}' }
 
 
 #################
@@ -235,13 +235,13 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
 ####################################################
 ####################################################
 
-# do not even try this"
-#ljets = [ 'co', 'el', 'mu']
+# do not even try this unless in bartch mode;)
+ljets = [ 'co', 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-ljets = [ 'co' ]
+#ljets = [ 'co' ]
 
 ptag=''
 ftag=''
@@ -269,6 +269,7 @@ GenNames = [ 'PowHeg',
 
 
 os.system('mkdir png eps pdf')
+ROOT.gROOT.SetBatch(1)
 
 for ll in ljets:
 
@@ -299,9 +300,9 @@ for ll in ljets:
 
     for obj in Obj:
         for var in Var:
-            #DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
-            #DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
-            #DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
             pass
 
 
