@@ -1,0 +1,12 @@
+
+yanglilin@pku.edu.cn
+
+
+We use mt = 172.5 GeV and MSTW2008NNLO PDFs.
+
+The 4 columns correspond to pT(ttbar), max, central, min. The uncertainties are due to scale variation only.
+Best,
+
+Li Lin
+
+
