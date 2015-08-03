@@ -126,7 +126,8 @@ TH1D *RebinTheory_pTtt_NNLO(TString inputName = "data/pTtt_8000.dat", int Result
     cout << "Making the binned histo..." << endl; 
   // call the function MakeHisto from the Theory.C file and draw it
   TH1D *theoryNewBin = 0;
-  theoryNewBin=MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data, debug, false, true);
+  bool ValuesAreAtCentreOfBin = true; // !!!???
+  theoryNewBin = MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data, debug, ValuesAreAtCentreOfBin);
   cout << "Integral after rebin: " << theoryNewBin->Integral("width") << endl;
 
 

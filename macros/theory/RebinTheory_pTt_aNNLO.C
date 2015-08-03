@@ -2,7 +2,7 @@
 // May 2012
 //
 // This code is used to read in the theory 
-
+// root -l -b -q 'RebinTheory_pTt_aNNLO.C+("data/ptaNNNLO8lhc173.3m.dat")'
 
 #include <stdlib.h>
 #include <iostream>
@@ -105,11 +105,11 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   TGraph *theory = new TGraph(nRows);
   theory -> SetName("gr_" + basename);
   double integral = 0.;
-  for(int j = 0; j < nRows; j++){
+  for(int j = 0; j < nRows-1; j++){
     theory->SetPoint(j,data[j][0],data[j][1]);
     if (j < nRows-1)
-      integral += (data[j+1][0]-data[j][0])*data[j][1];
-    // integral += getArea(data[j][0], data[j+1][0], data[j][1], data[j+1][1]);
+      //  integral += (data[j+1][0]-data[j][0])*data[j][1];
+      integral += getArea(data[j][0], data[j+1][0], data[j][1], data[j+1][1]);
   }
   theory -> SetLineColor(kRed);
   theory -> SetMarkerColor(kRed);
@@ -122,7 +122,8 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
     cout << "Making the binned histo..." << endl; 
   // call the function MakeHisto from the Theory.C file and draw it
   TH1D *theoryNewBin = 0;
-  theoryNewBin=MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data);
+  bool ValuesAreAtCentreOfBin = false; // !!!
+  theoryNewBin = MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data, debug, ValuesAreAtCentreOfBin);
   cout << "Integral after rebin: " << theoryNewBin->Integral("width") << endl;
 
 
