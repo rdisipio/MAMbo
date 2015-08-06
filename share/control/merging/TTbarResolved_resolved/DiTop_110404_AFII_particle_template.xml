@@ -15,24 +15,6 @@
   <sample name="ttbar_@DECAY@_10"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
   <sample name="ttbar_@DECAY@_11"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
   <sample name="ttbar_@DECAY@_12"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_13"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_14"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_15"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_16"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_17"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_18"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_19"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_20"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_21"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_22"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_23"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_24"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_25"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_26"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_27"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_28"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_29"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
-  <sample name="ttbar_@DECAY@_30"  dsid="110404_AFII" xsec="114.47" kfact="1.1996" genevt="96786903" generator="PowhegPythia_P2011C" simulation="AFII" />
 </samples>
 <files>
   <file sample="ttbar_@DECAY@_00" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.00" />
@@ -48,23 +30,5 @@
   <file sample="ttbar_@DECAY@_10" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.10" />
   <file sample="ttbar_@DECAY@_11" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.11" />
   <file sample="ttbar_@DECAY@_12" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.12" />
-  <file sample="ttbar_@DECAY@_13" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.13" />
-  <file sample="ttbar_@DECAY@_14" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.14" />
-  <file sample="ttbar_@DECAY@_15" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.15" />
-  <file sample="ttbar_@DECAY@_16" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.16" />
-  <file sample="ttbar_@DECAY@_17" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.17" />
-  <file sample="ttbar_@DECAY@_18" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.18" />
-  <file sample="ttbar_@DECAY@_19" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.19" />
-  <file sample="ttbar_@DECAY@_20" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.20" />
-  <file sample="ttbar_@DECAY@_21" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.21" />
-  <file sample="ttbar_@DECAY@_22" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.22" />
-  <file sample="ttbar_@DECAY@_23" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.23" />
-  <file sample="ttbar_@DECAY@_24" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.24" />
-  <file sample="ttbar_@DECAY@_25" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.25" />
-  <file sample="ttbar_@DECAY@_26" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.26" />
-  <file sample="ttbar_@DECAY@_27" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.27" />
-  <file sample="ttbar_@DECAY@_28" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.28" />
-  <file sample="ttbar_@DECAY@_29" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.29" />
-  <file sample="ttbar_@DECAY@_30" path="particle/tt_diffxs_8TeV.mc.DiTop.110404_AFII.@CHANNEL@.particle.@DECAY@.histograms.root.30" />
 </files>
 </document>
