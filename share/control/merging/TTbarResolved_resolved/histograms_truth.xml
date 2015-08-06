@@ -82,12 +82,15 @@
 <!-- parton level -->
   <histogram hpath="parton/4j2b/topH/pt_5" />
   <histogram hpath="parton/4j2b/topH/absrap_5" />
+  <histogram hpath="parton/4j2b/topH/rapidity_5" />
   <histogram hpath="parton/4j2b/topL/m" />
   <histogram hpath="parton/4j2b/topL/pt" />
   <histogram hpath="parton/4j2b/topL/absrap" />
+  <histogram hpath="parton/4j2b/topL/rapidity" />
   <histogram hpath="parton/4j2b/tt/m_5" />
   <histogram hpath="parton/4j2b/tt/pt_5" />
   <histogram hpath="parton/4j2b/tt/absrap_5" />
+  <histogram hpath="parton/4j2b/tt/rapidity_5" />
   <histogram hpath="parton/4j2b/difference/z_ttbar_5" />
   <histogram hpath="parton/4j2b/difference/Pout_5" />
   <histogram hpath="parton/4j2b/difference/absPout" />

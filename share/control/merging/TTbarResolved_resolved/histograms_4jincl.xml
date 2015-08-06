@@ -139,9 +139,11 @@
 <!-- parton-level binning -->
   <histogram hpath="reco/4j2b/topH/pt_5" />
   <histogram hpath="reco/4j2b/topH/absrap_5" />
+  <histogram hpath="reco/4j2b/topH/rapidity_5" />
   <histogram hpath="reco/4j2b/tt/m_5" />
   <histogram hpath="reco/4j2b/tt/pt_5" />
   <histogram hpath="reco/4j2b/tt/absrap_5" />
+  <histogram hpath="reco/4j2b/tt/rapidity_5" />
   <histogram hpath="reco/4j2b/difference/z_ttbar_5" />
   <histogram hpath="reco/4j2b/difference/Pout_5" />
   <histogram hpath="reco/4j2b/difference/absPout" />
@@ -169,9 +171,11 @@
 
   <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_pt_5" />
   <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_absrap_5" />
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_rapidity_5" />
   <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_m_5" />
   <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_pt_5" />
   <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_absrap_5" />
+  <histogram hpath="reco/4j2b/tt/Matrix_reco_parton_rapidity_5" />
   <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_z_ttbar_5" />
   <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_Pout_5" />
   <histogram hpath="reco/4j2b/difference/Matrix_reco_parton_absPout" />
