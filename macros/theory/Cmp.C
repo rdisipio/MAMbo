@@ -39,12 +39,28 @@ using std::cout;
 #include "TGraphErrors.h"
 
 
+// _______________________________________________________________________
+
 TH1D* MakeRatio(TH1D* h1,TH1D* h2)
 {
   TH1D* ratio = (TH1D*) h1 -> Clone( TString(h1 -> GetName()) + "_div_" + TString(h2 -> GetName()) );
   ratio -> Divide(h2);
   return ratio;
 }
+
+
+// _______________________________________________________________________
+
+void PrintRMS(TH1D *histo)
+{
+  cout << "histo " << histo->GetName() << " mean=" << histo->GetMean() << " RMS=" << histo->GetRMS() << endl;
+}
+
+// _______________________________________________________________________
+// _______________________________________________________________________
+// _______________________________________________________________________
+
+
 
 void Cmp() 
 {
@@ -58,6 +74,11 @@ void Cmp()
   TH1D *h_good = (TH1D*) _file_good -> Get("h_theory");
   TH1D *h_bad = (TH1D*) _file_bad -> Get("h_theory");
   TH1D *h_binCentre = (TH1D*) _file_binCentre -> Get("h_theory");
+
+  PrintRMS(h_old);
+  PrintRMS(h_good);
+  PrintRMS(h_bad);
+  PrintRMS(h_binCentre);
 
   TCanvas *can = new TCanvas();
 
@@ -84,15 +105,24 @@ void Cmp()
   h_bad->SetLineStyle(1); 
   h_bad->Draw("hist same");
 
-  h_bad->SetLineColor(kMagenta); 
-  h_bad->SetLineWidth(3);
-  h_bad->SetLineStyle(3); 
-  h_bad->Draw("hist same");
+  h_binCentre->SetLineColor(kMagenta); 
+  h_binCentre->SetLineWidth(3);
+  h_binCentre->SetLineStyle(3); 
+  h_binCentre->Draw("hist same");
   
   h_old -> SetLineStyle(2); 
   h_old -> SetLineColor(kBlack); 
   h_old -> Draw("hist same");
- 
+
+  TLegend *leg1 = new TLegend(0.5, 0.5, 0.87, 0.87);
+  leg1 -> SetBorderSize(0);
+  leg1 -> SetHeader("7 TeV");
+  leg1 -> AddEntry(h_good, "new", "PL");
+  leg1 -> AddEntry(h_bad, "bugged tri", "PL");
+  leg1 -> AddEntry(h_old, "old", "PL");
+  leg1 -> AddEntry(h_binCentre, "binCenre", "PL");
+  leg1 -> Draw();
+
   pad2 -> cd();
   
   TH1D* h_bad_r = MakeRatio(h_bad, h_good);
@@ -108,4 +138,13 @@ void Cmp()
   h_binCentre_r -> Draw("hist same");
   h_old_r -> Draw("hist same");
  
+  TLegend *leg2 = new TLegend(0.5, 0.5, 0.87, 0.87);
+  leg2 -> SetBorderSize(0);
+  leg2 -> SetHeader("7 TeV");
+  leg2 -> AddEntry(h_bad_r, "bugged tri / new", "PL");
+  leg2 -> AddEntry(h_old_r, "old / new", "PL");
+  leg2 -> AddEntry(h_binCentre_r, "binCenre / new", "PL");
+  leg2 -> Draw();
+
+
 }

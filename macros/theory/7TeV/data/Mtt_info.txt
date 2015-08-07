@@ -1,0 +1,70 @@
+This is a finely binned estimate for dsigma/dmttbar and 1/sigma dsigma/dmttbar. 
+
+1)You can convert it to any binning by integrating  dsigma/dmttbar *Delta:
+
+In Lilin words
+
+Hi Francesco,
+The values I gave you are d\sigma/dMtt, not d\sigma/bin. So you will
+need to multiply those by the bin size (25 GeV) to get the latter. The
+total would be 0.04*25=1.
+
+
+2) This si what Lilin was writing  as description:
+
+I attached a data file for d\sigma/dMtt, 
+
+*)
+the columns  for the unnormalized results are:
+
+Mtt (center of bin), \sigma(default), \sigma(+scale), \sigma(-scale), \sigma(+pdf), \sigma(-pdf).
+
+Note that the cross sections are in pb/GeV in , not pb/bin.
+
+*) 
+the columns for the normalized results are the same but the results are scaled 1/sigma_tot * dsigma/dmttbar
+
+
+Cheers,
+Francesco
+
+
+
+
+>
+> Dear Francesco,
+>
+> As promised I'm sending you the data files with PDF+alphas errors (the
+> last two columns).
+>
+> If you don't want to go into 0905.3531 for details, I'll explain
+> briefly how I got the errors using the convention of MSTW:
+>
+> I have used three sets of PDFs fitted with three values of alphas (0
+> labels the central fit, 1 and 2 labels the %68 CL upper and lower fits
+> of alphas). Each set has 1+40 members, which are used to compute the
+> central value and PDF uncertainties for each alphas value. I therefore
+> obtain three central values c0, c1, c2, and three 68% CL PDF-only
+> intervals (l0, u0), (l1, u1), (l2, u2).
+>
+> Now the PDF+alphas combined %68 CL interval is taken as the envelope
+> of the three intervals, namely (min(l0,l1,l2), max(u0,u1,u2)). What's
+> in the last two columns of the new files are then max(u0,u1,u2)-c0 and
+> min(l0,l1,l2)-c0.
+>
+> Hope that's clear to you.
+>
+> I have noticed one thing when using this method for the normalized
+> cross sections. It happens that sometimes the combined PDF+alphas
+> interval is still given by (l0,u0), i.e., the same as the PDF-only
+> interval. Probably it's not so surprising since alphas-dependence
+> largely cancels in the ratio...
+>
+> Best regards,
+>
+> Li Lin
+
+
+
+
+
