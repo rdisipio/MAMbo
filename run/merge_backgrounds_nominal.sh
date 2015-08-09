@@ -20,15 +20,21 @@ echo
 echo "//////////////////////////////////"
 echo
 
-for ch in el mu
+for sample in SingleTop Zjets Diboson
 do
-  for sample in SingleTop Zjets Diboson
+  for ch in el mu
   do
     ofile=${outdir}/${syst}/${analysis}.mc.${sample}.${ch}.${syst}.histograms.root
     MAMbo-mergeSamples.py -l ${ILUMI} -c ${paramsdir}/${sample}_${ch}.xml -o ${ofile} &
   done
   wait
+
+  hadd -f ${outdir}/${syst}/${analysis}.mc.${sample}.co.${syst}.histograms.root \
+          ${outdir}/${syst}/${analysis}.mc.${sample}.el.${syst}.histograms.root \
+       	  ${outdir}/${syst}/${analysis}.mc.${sample}.mu.${syst}.histograms.root
+
 done
+
 
   echo
   echo "//////////////////////////////////"

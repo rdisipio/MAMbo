@@ -9,7 +9,7 @@ paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 dsid=110404
 [ ! -z $1 ] && dsid=$1
 
-decay=ljets
+decay=nofullhad
 [ ! -z $2 ] && decay=$2
 
 for ch in el mu

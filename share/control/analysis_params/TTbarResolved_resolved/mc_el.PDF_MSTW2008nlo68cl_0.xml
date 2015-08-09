@@ -15,4 +15,3 @@
     <param name="scale_syst"        type="string"  value="PDF:MSTW2008nlo68cl:0" />
   </parameters>
 </analysis>
-<!-- "CT10nlo", "MSTW2008nlo68cl", "NNPDF23_nlo_as_0119" -->
