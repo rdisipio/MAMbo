@@ -14,9 +14,13 @@ do
   ./make_unfolding_sample.sh $syst $ch $decay
 done
 
-for syst in st_xsec_up st_xsec_down
+for sample in st zjets diboson
 do
-  ./make_unfolding_sample.sh $syst $ch $decay
+  for syst in xsec_up xsec_down 
+  do
+    syst="${sample}_${syst}"
+      ./make_unfolding_sample.sh $syst $ch $decay
+  done
 done
 
 for syst in $(cat ${systfile} )
