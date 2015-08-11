@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
 
 <!--
 <histograms>
@@ -164,15 +164,20 @@
        <shift side="down" file="st_xsec_down/tt_diffxs_8TeV.mc.SingleTop.el.st_xsec_down.histograms.root" />
     </syst>
   </sample>
-<!--  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root" /> -->
   <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.nominal.histograms.root" >
      <syst name="WjetsSF" type="two_sided" >
        <shift side="up"   file="WjetsSF_up/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.WjetsSF_up.histograms.root" />
        <shift side="down" file="WjetsSF_down/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.WjetsSF_down.histograms.root" />
      </syst>
   </sample>
-  <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" />
-  <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root" />
+  <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" >
+       <shift side="up"   file="zjets_xsec_up/tt_diffxs_8TeV.mc.Zjets.el.zjets_xsec_up.histograms.root" />
+       <shift side="down" file="zjets_xsec_down/tt_diffxs_8TeV.mc.Zjets.el.zjets_xsec_down.histograms.root" />    
+  </sample>
+  <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root" >
+       <shift side="up"   file="diboson_xsec_up/tt_diffxs_8TeV.mc.Diboson.el.diboson_xsec_up.histograms.root" />
+       <shift side="down" file="diboson_xsec_down/tt_diffxs_8TeV.mc.Diboson.el.diboson_xsec_down.histograms.root" />
+  </sample>
   <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root" >
     <!-- see: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod -->
     <syst name="QCD_MM_FAKE_MC" type="two_sided" >

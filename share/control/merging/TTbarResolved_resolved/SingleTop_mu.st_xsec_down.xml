@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
 <samples>
   <sample name="singletop_tchannel_top"     dsid="110090" sf="0.98" xsec="17.520" kfact="1.0500" genevt="4994481" generator="PowhegPythia_P2011C" simulation="Full" />
   <sample name="singletop_tchannel_antitop" dsid="110091" sf="0.98" xsec="9.3932" kfact="1.0616" genevt="4999879" generator="PowhegPythia_P2011C" simulation="Full" />
