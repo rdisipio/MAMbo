@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_stresstests.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="/home/ATLAS-T3/mromano/StressTest/newStress/toppt/ll.root" />
+</files>
+</document>
