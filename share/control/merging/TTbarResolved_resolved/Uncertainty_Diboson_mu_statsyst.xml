@@ -3,8 +3,10 @@
 <histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
 <samples>
   <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root" >
+    <syst name="diboson_xsec" type="two_sided" >    
        <shift side="up"   file="diboson_xsec_up/tt_diffxs_8TeV.mc.Diboson.mu.diboson_xsec_up.histograms.root" />
        <shift side="down" file="diboson_xsec_down/tt_diffxs_8TeV.mc.Diboson.mu.diboson_xsec_down.histograms.root" />
+    </syst>
   </sample>
 </samples>
 </document>
