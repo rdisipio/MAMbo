@@ -17,9 +17,9 @@ syst=nominal
 
 
 # stat only
-MAMbo-makeUncertaintyBand.py -c ${paramsdir}/Uncertainty_${dsid}_${ch}_statonly.xml \
-                             -o ${outdir}/${syst}/${analysis}.mc.Uncertainty_statonly.${dsid}.${ch}.${syst}.histograms.root \
-    			     -x ${outdir}/${syst}/${analysis}.mc.Uncertainty_statonly.${dsid}.${ch}.${syst}.xml
+#MAMbo-makeUncertaintyBand.py -c ${paramsdir}/Uncertainty_${dsid}_${ch}_statonly.xml \
+#                             -o ${outdir}/${syst}/${analysis}.mc.Uncertainty_statonly.${dsid}.${ch}.${syst}.histograms.root \
+#    			     -x ${outdir}/${syst}/${analysis}.mc.Uncertainty_statonly.${dsid}.${ch}.${syst}.xml
 
 # stat + syst
 MAMbo-makeUncertaintyBand.py -c ${paramsdir}/Uncertainty_${dsid}_${ch}_statsyst.xml \

@@ -6,7 +6,7 @@ analytag=TTbarResolved_resolved
 paramsdir=${MAMBODIR}/share/control/merging/${analytag}
 outdir=${MAMBODIR}/run/output/${analytag}
 syst=nominal
-ILUMI=20300 
+ILUMI=1
 
 for sample in Zjets Diboson
 do
