@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+<samples>
+  <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" > 
+       <shift side="up"   file="zjets_xsec_up/tt_diffxs_8TeV.mc.Zjets.mu.zjets_xsec_up.histograms.root" />
+       <shift side="down" file="zjets_xsec_down/tt_diffxs_8TeV.mc.Zjets.mu.zjets_xsec_down.histograms.root" />
+  </sample>
+</samples>
+</document>
+
+<!--
+    <syst name="@SYST@" type="two_sided" >
+        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.@SYST@_up.histograms.root" />
+        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.@SYST@_down.histograms.root" />
+    </syst>
+-->

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+<samples>
+  <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root" >
+       <shift side="up"   file="diboson_xsec_up/tt_diffxs_8TeV.mc.Diboson.el.diboson_xsec_up.histograms.root" />
+       <shift side="down" file="diboson_xsec_down/tt_diffxs_8TeV.mc.Diboson.el.diboson_xsec_down.histograms.root" />
+  </sample>
+</samples>
+</document>

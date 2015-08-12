@@ -2,9 +2,12 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_stresstests.xml" />
 <samples>
-  <sample name="ttbar_nofullhad_00"  dsid="110404" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" />
+ <sample name="ttbar_nofullhad_00"  dsid="110404" sf="16849." xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" /> 
+<!--  <sample name="ttbar_nofullhad_00"  dsid="110404" sf="0.83" xsec="114.47" kfact="1.1996" genevt="49948212" generator="PowhegPythia_P2011C" simulation="Full" /> -->
+  <sample name="bkg"                 dsid="0"      sf="1.0"    xsec="1.0"    kfact="1.0"    genevt="1.0" generator="Many" simulation="Mixed" />
 </samples>
 <files>
   <file sample="ttbar_nofullhad_00" path="/home/ATLAS-T3/mromano/StressTest/newStress/toppt/ll.root" />
+  <file sample="bkg"                path="nominal/tt_diffxs_8TeV.mc.Background.co.nominal.histograms.root" />
 </files>
 </document>

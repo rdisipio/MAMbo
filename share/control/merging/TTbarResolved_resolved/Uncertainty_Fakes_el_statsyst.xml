@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+
+<samples>
+  <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root" >
+    <!-- see: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod -->
+    <syst name="QCD_MM_FAKE_MC" type="two_sided" >
+      <shift side="up"   file="QCD_MM_EL_FAKE_MC_UP/tt_diffxs_8TeV.qcd.Egamma.el.QCD_MM_EL_FAKE_MC_UP.histograms.root" />
+      <shift side="down" file="QCD_MM_EL_FAKE_MC_DOWN/tt_diffxs_8TeV.qcd.Egamma.el.QCD_MM_EL_FAKE_MC_DOWN.histograms.root" />
+    </syst>
+    <syst name="QCD_MM_FAKE_ALTERNATE" type="one_sided" >
+       <shift side="single" file="QCD_MM_EL_FAKE_ALTERNATE/tt_diffxs_8TeV.qcd.Egamma.el.QCD_MM_EL_FAKE_ALTERNATE.histograms.root" />
+    </syst>
+    <syst name="QCD_MM_REAL_ALTERNATE" type="one_sided" >
+       <shift side="single" file="QCD_MM_EL_REAL_ALTERNATE/tt_diffxs_8TeV.qcd.Egamma.el.QCD_MM_EL_REAL_ALTERNATE.histograms.root" />
+    </syst>
+    <syst name="QCD_MM_PAR_ALTERNATE" type="one_sided" >
+       <shift side="single" file="QCD_MM_EL_PAR_ALTERNATE/tt_diffxs_8TeV.qcd.Egamma.el.QCD_MM_EL_PAR_ALTERNATE.histograms.root" />
+    </syst>
+  </sample>
+</samples>
+</document>

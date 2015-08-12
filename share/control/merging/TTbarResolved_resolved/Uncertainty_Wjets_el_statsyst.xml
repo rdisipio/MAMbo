@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+<samples>
+  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.nominal.histograms.root" >
+     <syst name="WjetsSF" type="two_sided" >
+       <shift side="up"   file="WjetsSF_up/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.WjetsSF_up.histograms.root" />
+       <shift side="down" file="WjetsSF_down/tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.WjetsSF_down.histograms.root" />
+     </syst>
+  </sample>
+</samples>
+</document>
+
+<!--
+    <syst name="@SYST@" type="two_sided" >
+        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110404.el.@SYST@_up.histograms.root" />
+        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110404.el.@SYST@_down.histograms.root" />
+    </syst>
+-->

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="DiTop"   file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.histograms.root" >
+    <syst name="AltGen1" type="one_sided" >
+        <shift side="single"   file="nominal/tt_diffxs_8TeV.mc.DiTop.110340.el.nominal.histograms.root" />
+    </syst>
+  </sample>
+</samples>
+</document>
