@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
-
 <samples>
-  </sample>
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" >
     <syst name="st_xsec" type="two_sided" >
        <shift side="up"   file="st_xsec_up/tt_diffxs_8TeV.mc.SingleTop.el.st_xsec_up.histograms.root" /> 
@@ -12,10 +10,3 @@
   </sample>
 </samples>
 </document>
-
-<!--
-    <syst name="@SYST@" type="two_sided" >
-        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110404.el.@SYST@_up.histograms.root" />
-        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110404.el.@SYST@_down.histograms.root" />
-    </syst>
--->

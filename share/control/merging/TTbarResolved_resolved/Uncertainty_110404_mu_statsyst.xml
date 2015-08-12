@@ -173,12 +173,16 @@
     </syst>
   </sample>
   <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root" > 
+    <syst name="zjets_xsec" type="two_sided" >
        <shift side="up"   file="zjets_xsec_up/tt_diffxs_8TeV.mc.Zjets.mu.zjets_xsec_up.histograms.root" />
        <shift side="down" file="zjets_xsec_down/tt_diffxs_8TeV.mc.Zjets.mu.zjets_xsec_down.histograms.root" />
+    </syst>
   </sample>
   <sample name="Diboson"   file="nominal/tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root" >
+    <syst name="diboson_xsec" type="two_sided" >
        <shift side="up"   file="diboson_xsec_up/tt_diffxs_8TeV.mc.Diboson.mu.diboson_xsec_up.histograms.root" />
        <shift side="down" file="diboson_xsec_down/tt_diffxs_8TeV.mc.Diboson.mu.diboson_xsec_down.histograms.root" />
+    </syst>
   </sample>
   <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root" >
     <!-- see: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod -->

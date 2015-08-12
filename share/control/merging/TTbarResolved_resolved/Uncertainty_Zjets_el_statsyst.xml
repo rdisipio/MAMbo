@@ -3,8 +3,10 @@
 <histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
 <samples>
   <sample name="Zjets"     file="nominal/tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root" >
+    <syst name="zjets_xsec" type="two_sided" >
        <shift side="up"   file="zjets_xsec_up/tt_diffxs_8TeV.mc.Zjets.el.zjets_xsec_up.histograms.root" />
        <shift side="down" file="zjets_xsec_down/tt_diffxs_8TeV.mc.Zjets.el.zjets_xsec_down.histograms.root" />    
+    </syst>
   </sample>
 </samples>
 </document>
