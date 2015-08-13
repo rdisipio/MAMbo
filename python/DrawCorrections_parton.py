@@ -5,7 +5,15 @@
 import os, sys
 from ROOT import *
 from array import array
- 
+
+
+if os.environ['MAMBODIR'] == '':
+    gROOT.Macro( "../share/rootlogon.C" )
+    gROOT.LoadMacro( "../share/AtlasUtils.C" )
+else:
+    gROOT.Macro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
+    gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
+    
 from MAMboPlottingToolkit import *
 _cans = []
 _files = []
@@ -27,6 +35,7 @@ TitleNames = { 'pt' : 'p_{T}',
                'absrap' : '|y|', 
                'rapidity' : 'y',
                'Pout' : 'p_{out}',
+               'absPout' : '|p_{out}|',
                'z_ttbar' : 'z_{t_{l}t_{h}}',
                'Yboost' : 'y_{boost}',
                'Chi_ttbar' : '#chi_{t_{l}t_{h}}',
@@ -41,7 +50,7 @@ TitleNames = { 'pt' : 'p_{T}',
                #'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
                }
 CorrNames = { 'eff' : 'Efficiency correction', 
-              'match' : 'Misassignment correction f_{match}', 
+#              'match' : 'Misassignment correction f_{match}', 
               'acc' : 'Acceptance correction f_{acc}' }
 
 #################
@@ -101,12 +110,19 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '        %s' %(Paths[0] + path)
     h_part = pfile.Get(Paths[0] + path)
     print '        %s' %(Paths[5] + path)
-    h_partonTot = pfile.Get(Paths[5] + path)
+    suffix = "_5"
+    if path.find('absPout') >= 0:
+        suffix = ''
+    hpath = Paths[5] + path + suffix
+    print 'Trying to get %s' % (hpath,)
+    h_partonTot = pfile.Get(hpath)
 
     # from now on, access reco file:
 
     print '        %s' %(Paths[1] + path)
-    h_reco = rfile.Get(Paths[1] + path)
+    hpath = Paths[1] + path + suffix
+    print 'Trying to get %s' % (hpath,)
+    h_reco = rfile.Get(hpath)
 
     #print '        %s' %(Paths[4] + path)
     #h_rp = rfile.Get(Paths[4] + path)
@@ -160,7 +176,7 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     if icorr == 1: tag = 'acc'
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
-    can = TCanvas(canname, canname)
+    can = TCanvas(canname, canname, 1, 1, 800, 600)
     #can.Divide(2,1)
     _cans.append(can)
 
@@ -224,8 +240,18 @@ ftag=''
 #rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
 #rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
+
+# ljets:
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
+# ljets+dilepton, wrong!!!
+# rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
+# ljets+dilepton, wrong!!!
+# rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug3/'
+
+# ljets:
+# corrupted: rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug7_ljets/'
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug10_ljets/'
+
 
 os.system('mkdir png_parton eps_parton pdf_parton')
 ROOT.gROOT.SetBatch(1)
@@ -241,7 +267,7 @@ for ll in ljets:
     _files.append(pfile)
     print 'Opened file %s' % (pfile.GetName(),)
 
-    Obj = ['topH', 'topL',
+    Obj = ['topH', #'topL',
            #'WH', 
            #'WL',
            'tt']
@@ -250,13 +276,15 @@ for ll in ljets:
 
     for obj in Obj:
         for var in Var:
+            if obj.find('top') >= 0 and var == 'm':
+                continue
             DrawCorrection(ll, rfile, pfile, obj, var, 0)
             DrawCorrection(ll, rfile, pfile, obj, var, 1)
             pass
 
 
     SpecObj = ['difference' ]
-    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar',
+    SpecVar = ['Pout', 'absPout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar',
                #'Salam_ttbar', 
                'HT_ttbar', 
                #'HT_pseudo',

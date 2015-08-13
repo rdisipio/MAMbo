@@ -6,6 +6,13 @@ import os, sys
 from ROOT import *
 from array import array
  
+try:
+    gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
+    gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
+except:
+    gROOT.LoadMacro( "../share/rootlogon.C" )
+    gROOT.LoadMacro( "../share/AtlasUtils.C" )
+
 from MAMboPlottingToolkit import *
 _cans = []
 _files = []
@@ -17,32 +24,34 @@ Col = [kOrange+10, kBlue+2, kViolet-1 ]
 Paths = ['particle', 'reco', 'matched_p', 'matched_r', 'reco_and_particle_r']
 
 ObjNames = { 'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
-             'topL' : '#hat{t}_{l}',
-             'topH' : '#hat{t}_{h}',
+             #'topL' : '#hat{t}_{l}',
+             #'topH' : '#hat{t}_{h}',
              'WL' : '#hat{W}_{l}',
              'WH' : '#hat{W}_{h}',
-             'tt' : '#hat{t}_{l}#hat{t}_{h}',
+             'tt' : 't#bar{t}',
+             #'tt' : '#hat{t}_{l}#hat{t}_{h}',
              'difference' : ''}
-TitleNames = { 'pt' : 'p_{T}', 
-               'm' : 'm', 
+TitleNames = { 'pt' : 'p_{T} [GeV]', 
+               'm' : 'm [GeV]', 
                'absrap' : '|y|', 
                'rapidity' : 'y',
-               'Pout' : 'p_{out}',
+               'Pout' : 'p_{out} [GeV]',
+               'absPout' : '|p_{out}| [GeV]',
                'z_ttbar' : 'z_{#hat{t}_{l}#hat{t}_{h}}',
                'Yboost' : 'y_{boost}',
                'Chi_ttbar' : '#chi_{#hat{t}_{l}#hat{t}_{h}}',
                'dPhi_ttbar' : '#Delta#phi_{#hat{t}_{l}#hat{t}_{h}}',
                'Salam_ttbar' : 'S_{#hat{t}_{l}#hat{t}_{h}}',
-               'HT_ttbar' : 'H_{T}^{t#bar{t}}',
-               'HT_pseudo' : 'H_{T}^{pseudo}',
+               'HT_ttbar' : 'H_{T}^{t#bar{t}} [GeV]',
+               'HT_pseudo' : 'H_{T}^{pseudo} [GeV]',
                'R_lb' : '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]',
                'R_Wb_had' : 'p_{T}^{W,had} / p_{T}^{b,had}',
                'R_Wb_lep' : 'p_{T}^{W,lep} / p_{T}^{b,lep}',
                'R_Wt_had' : 'p_{T}^{W,had} / p_{T}^{t,had}',
                'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
                }
-CorrNames = { 'eff' : 'Efficiency correction: f_{eff}', 
-              'match' : 'Misassignment correction f_{match}', 
+CorrNames = { 'eff' : 'Efficiency correction f_{eff}', 
+              'match' : 'Matching correction f_{match}', 
               'acc' : 'Acceptance correction f_{acc}' }
 
 
@@ -76,6 +85,7 @@ def next_tmp(xmin, xmax, title = 'tmp', ymin=0., ymax=1.1,):
     h.SetStats(0)
     h.Draw()
     _h.append(h)
+    return h
 
 def PrintBinContent(histo):
     nx = histo.GetXaxis().GetNbins()
@@ -98,6 +108,17 @@ def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'
     return h_part.GetXaxis().GetXmin()
 
 
+def SetStyle(corr, xtitle, ytitle, size=0.045, offset = 0.9):
+
+    corr.GetYaxis().SetTitle(ytitle)
+    corr.GetYaxis().SetTitleSize(size);
+    corr.GetYaxis().SetTitleOffset(offset)
+
+    corr.GetXaxis().SetTitle(xtitle)
+    corr.GetXaxis().SetTitleSize(size);
+    corr.GetXaxis().SetTitleOffset(offset)
+
+
 #################
 def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
     tag = GetTag(objname, varname)
@@ -112,6 +133,7 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     # from now on, access reco file:
 
     matrixPath =  '/' + basepath + '/' + objname + '/Matrix_reco_particle_' + varname+tag
+    print 'Getting the matrix %s from file %s' % (Paths[1] + matrixPath, rfile.GetName(),)
     h_matrix = rfile.Get( Paths[1] + matrixPath )
 
     print '        %s' %(Paths[1] + path)
@@ -166,7 +188,7 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     if icorr == 2: tag = 'match'
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
-    can = TCanvas(canname, canname)
+    can = TCanvas(canname, canname, 1, 1, 800, 600)
     #can.Divide(2,1)
     _cans.append(can)
 
@@ -212,15 +234,20 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
             xmax = GetMax(rfile, objname, varname, icorr, basepath)
 
         xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
-        ytitle = ''
+        print 'XTITLE=%s' % (xtitle,)
+        ytitle = CorrNames[tag]
 
-        title=CorrNames[tag] + ';' + xtitle + ';' + ytitle
+        title=CorrNames[tag] + ';' + xtitle# + ';' + ytitle
         if count == 0:
             if icorr == 0:
-                next_tmp(xmin, xmax, title, 0., 24.)
+                tmp = next_tmp(xmin, xmax, title, 0., 24.)
+                #tmp.GetXaxis().SetTitle(xtitle)
+                SetStyle(tmp, xtitle, ytitle)
             else:
-                next_tmp(xmin, xmax, title)
-        
+                tmp = next_tmp(xmin, xmax, title)
+                #tmp.GetXaxis().SetTitle(xtitle)
+                SetStyle(tmp, xtitle, ytitle)
+        SetStyle(corr, xtitle, ytitle)
         corr.Draw(opt)
         _corrs.append(corr)
         opt = 'L'
@@ -234,6 +261,8 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
 ####################################################
 ####################################################
 ####################################################
+
+gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
 ljets = [ 'co', 'el', 'mu']
@@ -258,7 +287,8 @@ ftag=''
 #rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
+#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug3/'
 
 
 GenNames = [ 'PowHeg',
@@ -291,9 +321,9 @@ for ll in ljets:
 
 
     Obj = ['topH', 
-           'topL',
-           'WH', 
-           'WL',
+           #'topL',
+           #'WH', 
+           #'WL',
            'tt']
     Var = ['pt', 'm', 
            'absrap']
@@ -307,7 +337,7 @@ for ll in ljets:
 
 
     SpecObj = ['difference' ]
-    SpecVar = ['Pout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar', 
+    SpecVar = ['Pout', 'absPout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar', 
                'HT_ttbar', 'HT_pseudo',
                'R_lb', 
                'R_Wb_lep', 
