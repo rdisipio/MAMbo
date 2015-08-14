@@ -2,33 +2,33 @@
 
 # jiri kvita, marino romano, 2015
 
-import os, sys
 from ROOT import *
-from array import array
-
-
-if os.environ['MAMBODIR'] == '':
-    gROOT.Macro( "../share/rootlogon.C" )
-    gROOT.LoadMacro( "../share/AtlasUtils.C" )
-else:
-    gROOT.Macro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
+try:
+    gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
     gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
-    
-from MAMboPlottingToolkit import *
+    gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasStyle.C" )
+except:
+    gROOT.LoadMacro( "../share/rootlogon.C" )
+    gROOT.LoadMacro( "../share/AtlasUtils.C" )
+    gROOT.LoadMacro( "../share/AtlasStyle.C" )
+
+import os, sys
+from array import array
+from CorrStyle import *
+
 _cans = []
 _files = []
 _corrs = []
-_h = []
 
+    
+from MAMboPlottingToolkit import *
 
 Paths = ['particle', 'reco', 'matched_p', 'matched_r', 'reco_and_particle_r', 'parton']
 
-ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
-             'topL' : 't_{l}',
-             'topH' : 't_{h}',
+ObjNames = { 'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
              'WL' : 'W_{l}',
              'WH' : 'W_{h}',
-             'tt' : 't_{l}t_{h}',
+             'tt' : 't#bar{t}',
              'difference' : ''}
 TitleNames = { 'pt' : 'p_{T}', 
                'm' : 'm', 
@@ -61,7 +61,7 @@ def CheckAcc(acc,name):
     for i in range(0,acc.GetN()):
         #acc.GetPoint(i,vals[0],vals[1])
         acc.GetPoint(i,x,eff)
-        if eff > 1.:
+        if eff > 1.0001:
             print '  ERROR: acceptance=%4.2f in bin %i of %s!' % (eff,i,name)
     return
 
@@ -71,31 +71,25 @@ def GetTag(objname, varname):
     #if objname.find('tt') >= 0 and varname == "pt": tag = '_5'
     return tag
 
-def next_tmp(xmin, xmax, title = 'tmp', ymin=0., ymax=1.1,):
-    print xmin, xmax
-    h = TH2D("tmp%i" % (len(_h),), title, 100, xmin, xmax, 100, ymin, ymax) 
-    h.SetStats(0)
-    h.Draw()
-    _h.append(h)
-
-def PrintBinContent(histo):
-    nx = histo.GetXaxis().GetNbins()
-    line=''
-    prefix = ''
-    for binx in range(0,nx+2):
-        line = '%s%s %4.1f' % (line, prefix, histo.GetBinContent(binx),)
-        prefix=','
-    print line
 
 def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
-    h_part = rfile.Get(Paths[0] + path)
+    suffix = "_5"
+    if path.find('absPout') >= 0:
+        suffix = ''
+    print 'GetMax taken from %s' % (Paths[0] + path + suffix,)
+    h_part = rfile.Get(Paths[0] + path + suffix)
     return h_part.GetXaxis().GetXmax()
+
 def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
-    h_part = rfile.Get(Paths[0] + path)
+    suffix = "_5"
+    if path.find('absPout') >= 0:
+        suffix = ''
+    print 'GetMin taken from %s' % (Paths[0] + path + suffix,)
+    h_part = rfile.Get(Paths[0] + path + suffix)
     return h_part.GetXaxis().GetXmin()
 
 
@@ -127,14 +121,14 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     #print '        %s' %(Paths[4] + path)
     #h_rp = rfile.Get(Paths[4] + path)
     # fix by Marino:
-    matrixPath =  '/' + basepath + '/' + objname + '/Matrix_reco_parton_' + varname+tag
+    matrixPath =  '/' + basepath + '/' + objname + '/Matrix_reco_parton_' + varname+tag+suffix
     h_matrix = rfile.Get( Paths[1] + matrixPath )
     print h_matrix
     h_rp = h_matrix.ProjectionX( "reco_recoandparticle", 1, h_matrix.GetNbinsX() )
     print h_rp
 
     print '        %s' %(Paths[5] + path)
-    h_partonReco = rfile.Get(Paths[5] + path)
+    h_partonReco = rfile.Get(Paths[5] + path + suffix)
     
 #    xtitle=h_rp.GetXaxis().GetTitle()
 #    ytitle=h_rp.GetYaxis().GetTitle()
@@ -202,16 +196,23 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     xmax = GetMax(rfile, objname, varname, icorr, basepath)
 
     xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
-    ytitle = ''
+    print 'XTITLE=%s' % (xtitle,)
+    ytitle = CorrNames[tag]
 
-    title=CorrNames[tag] + ';' + xtitle + ';' + ytitle
+    title=CorrNames[tag] + ';' + xtitle# + ';' + ytitle
     if icorr == 0:
-        next_tmp(xmin, xmax, title, 0., 0.1)
+        tmp = next_tmp(xmin, xmax, title, 0., 0.1)
+        SetStyle(tmp, xtitle, ytitle)
        # next_tmp(xmin, xmax, title, 0., 24.)
     else:
-        next_tmp(xmin, xmax, title)
+        tmp = next_tmp(xmin, xmax, title)
+        SetStyle(tmp, xtitle, ytitle)
+    SetStyle(corr, xtitle, ytitle)
     corr.Draw('P')
     _corrs.append(corr)
+
+    ATLAS_LABEL(0.16, 0.96, kBlack)
+    myText(0.29, 0.96, kBlack, "Internal Simulation");
     can.Print('eps_parton/' + canname + '.eps')
     can.Print('png_parton/' + canname + '.png')
     can.Print('pdf_parton/' + canname + '.pdf')
@@ -219,6 +220,8 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 ####################################################
 ####################################################
 ####################################################
+
+SetAtlasStyle()
 
 ljets = [ 'co', 'el', 'mu']
 #ljets = [ 'el', 'mu']

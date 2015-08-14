@@ -2,22 +2,27 @@
 
 # jiri kvita, 2015
 
-import os, sys
 from ROOT import *
-from array import array
- 
 try:
     gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
     gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
+    gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasStyle.C" )
 except:
     gROOT.LoadMacro( "../share/rootlogon.C" )
     gROOT.LoadMacro( "../share/AtlasUtils.C" )
+    gROOT.LoadMacro( "../share/AtlasStyle.C" )
 
-from MAMboPlottingToolkit import *
+from CorrStyle import *
+import os, sys
+from array import array
+
 _cans = []
 _files = []
 _corrs = []
-_h = []
+
+
+
+from MAMboPlottingToolkit import *
 
 Col = [kOrange+10, kBlue+2, kViolet-1 ]
 
@@ -79,22 +84,6 @@ def GetTag(objname, varname):
     #if objname.find('tt') >= 0 and varname == "pt": tag = '_5'
     return tag
 
-def next_tmp(xmin, xmax, title = 'tmp', ymin=0., ymax=1.1,):
-    print xmin, xmax
-    h = TH2D("tmp%i" % (len(_h),), title, 100, xmin, xmax, 100, ymin, ymax) 
-    h.SetStats(0)
-    h.Draw()
-    _h.append(h)
-    return h
-
-def PrintBinContent(histo):
-    nx = histo.GetXaxis().GetNbins()
-    line=''
-    prefix = ''
-    for binx in range(0,nx+2):
-        line = '%s%s %4.1f' % (line, prefix, histo.GetBinContent(binx),)
-        prefix=','
-    print line
 
 def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
     tag = GetTag(objname, varname)
@@ -106,17 +95,6 @@ def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
     h_part = rfile.Get(Paths[0] + path)
     return h_part.GetXaxis().GetXmin()
-
-
-def SetStyle(corr, xtitle, ytitle, size=0.045, offset = 0.9):
-
-    corr.GetYaxis().SetTitle(ytitle)
-    corr.GetYaxis().SetTitleSize(size);
-    corr.GetYaxis().SetTitleOffset(offset)
-
-    corr.GetXaxis().SetTitle(xtitle)
-    corr.GetXaxis().SetTitleSize(size);
-    corr.GetXaxis().SetTitleOffset(offset)
 
 
 #################
@@ -253,6 +231,8 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
         opt = 'L'
         count = count+1
 
+    ATLAS_LABEL(0.16, 0.96, kBlack)
+    myText(0.29, 0.96, kBlack, "Internal Simulation");
 
     can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
@@ -261,6 +241,8 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
 ####################################################
 ####################################################
 ####################################################
+
+SetAtlasStyle()
 
 gStyle.SetOptTitle(0)
 
