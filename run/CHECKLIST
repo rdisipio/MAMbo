@@ -36,9 +36,10 @@ hadd -f tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root tt_diffxs_8TeV.qc
 
 
 3) Submit MAMbo - all QCD systmatics
-./submit_fakes_systematics.sh
+./submit_fakes_systematics.sh $MAMBODIR/run/systematics_qcd.dat
 # ...wait until finished...
 ./merge_fakes.sh
+#this takes quite a long time to complete...
 
 4a) Wjets scale systematics (just rescale, no need to re-run)
 ./merge_wjets_samples_custom.sh tt_chasymm nominal
