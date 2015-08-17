@@ -7,8 +7,33 @@ DETECTOR-LEVEL ANALYSIS
 1) Submit MAMbo - all nominal samples
 ./submit_all_resolved.sh
 
+./merge_signal_sample.sh 110404 nominal nofullhad
+
 2) Submit MAMbo - all signal systematics
 ./submit_mc_signal_systematics.sh 110404
+
+./submit_Alpgen.sh AlpgenIFSR.dat
+
+./submit_mc_signal_as_bkg.sh 105200
+...wait...
+./merge_signal_sample.sh 105200
+
+#> cd output/TTbarResolved_resolved/gen_mcatnlo/
+#> ln -s ../nominal/tt_diffxs_8TeV.mc.DiTop.105200.el.nominal.histograms.root ./tt_diffxs_8TeV.mc.DiTop.110404.el.gen_mcatnlo.histograms.root
+#> ln -s ../nominal/tt_diffxs_8TeV.mc.DiTop.105200.mu.nominal.histograms.root ./tt_diffxs_8TeV.mc.DiTop.110404.mu.gen_mcatnlo.histograms.root
+#> hadd -f tt_diffxs_8TeV.mc.DiTop.110404.co.gen_mcatnlo.histograms.root *.root
+
+# merge real data
+hadd -f tt_diffxs_8TeV.data.Egamma.el.histograms.root tt_diffxs_8TeV.data.Egamma.period*.el.histograms.root  
+hadd -f tt_diffxs_8TeV.data.Muons.mu.histograms.root tt_diffxs_8TeV.data.Muons.period*.mu.histograms.root
+hadd -f tt_diffxs_8TeV.data.Combined.co.histograms.root tt_diffxs_8TeV.data.Egamma.el.histograms.root tt_diffxs_8TeV.data.Muons.mu.histograms.root 
+
+#merge fakes
+#> cd output/TTbarResolved_resolved/nominal
+hadd -f tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root tt_diffxs_8TeV.qcd.Egamma.period*.el.nominal.histograms.root  
+hadd -f tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root tt_diffxs_8TeV.qcd.Muons.period*.mu.nominal.histograms.root
+hadd -f tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root 
+
 
 3) Submit MAMbo - all QCD systmatics
 ./submit_fakes_systematics.sh
@@ -22,52 +47,126 @@ DETECTOR-LEVEL ANALYSIS
 
 4b) Single top xsec systematics (just rescale, no need to re-run)
 ./merge_stop_samples.sh
+./merge_mc_background_samples.sh #Zjets and diboson xsec
 
-5) Create backgrounds with systematics
+5) Create backgrounds for nominal and systematics
+./merge_backgrounds_nominal.sh
 ./merge_backgrounds_syst_fakes.sh
 ./merge_backgrounds_syst_stop.sh
+./merge_backgrounds_syst_zjets.sh
+./merge_backgrounds_syst_diboson.sh
 ./merge_backgrounds_syst_wjets.sh nominal tt_chasymm
 ./merge_backgrounds_syst_wjets.sh WjetsSF_up tt_chasymm
 ./merge_backgrounds_syst_wjets.sh WjetsSF_down tt_chasymm
 
-6) Generate pseudo-signals for unfolding [ = sig(nominal) + bkg(nominal) - bkg(syst) ]
+7)  Make IFSR syst using ALPGEN
+./merge_AlpgenIFSR.sh
+#./make_syst_ifsr_alpgen.sh
+
+8) Generate pseudo-signals for unfolding [ = sig(nominal) + bkg(nominal) - bkg(syst) ]
+./merge_all_samples.sh 110404 
+./merge_channels_signal.sh 110404
 ./make_all_unfolding_samples.sh
 
-7) Make Lumi systematic
+
+6) Make Lumi systematic
 ./make_syst_lumi.sh
 
-8) Make IFSR syst using ALPGEN
-./merge_AlpgenIFSR.sh
-./make_syst_ifsr_alpgen.sh
-
 9) Create the total uncertainty band for control plots
-./workflow el
-./workflow mu
+./make_uncertainty_band.sh 110404 el
+./make_uncertainty_band.sh 110404 mu
+
+
+
+#./workflow el
+#./workflow mu
 
 10) Make control plots
 ./make_all_plots.sh
 
 
+11) Submit particle/parton level analysis
+
+for d in 110404 117001 117046 117050 105860 110407 110408 105200 ; do ./submit_mc_particle.sh $d ; done
+
+./submit_mc_particle_Alpgen.sh AlpgenPythia.dat 
+./submit_mc_particle_Alpgen.sh AlpgenIFSR.dat
+
+./merge_AlpgenIFSR.sh 
+
+
+12) Merge particle level analysis files
+
+for d in 110404 117001 117046 117050 105860 110407 110408 105200 ; do ./merge_signal_particle.sh $d ; done
+
+./merge_AlpgenIFSR_particle.sh
+./merge_Alpgen_particle.sh pythia
+./merge_Alpgen_particle.sh herwig
+
+# this produces migration matrices
+./submit_mc_signal.sh 110404
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 UNFOLDING
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+hadd -f tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.signal.histograms.root tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.signal.histograms.root tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.signal.histograms.root
+
+
 [ do what follows using either "particle" or "parton" ]
 
-1) Unfold all MC
+for dts in 110404 110340 110407 110408 105200 105860 117050 187003 117046 ; do ./make_all_truth_spectra.sh $dts particle ; done
+# AlpgenPythia AlpgenHerwig
+
+
+2) Unfold all MC and data
 ./unfold_all_mc_cluster.sh particle
+./unfold_all_data_cluster.sh particle
+./unfold_mc_syst_cluster.sh particle nominal 3 #nb: default is reg=4
+./unfold_mc_syst_cluster.sh particle nominal 5
 
-2) Make uncertainty bands
+# Matrix Element systematic: unfold MC@NLO+HW with PWG+HW corrections
+./unfold_mc_pwghw_cluster.sh particle 105200 4
+
+# Parton Shower systematic: unfold PWG+PY with PWG+HW corrections (NB: both have h_damp=inf)
+./unfold_mc_pwghw_cluster.sh particle 117050 4
+
+# AFII fast sim nominal sample (needed for systematics)
+./unfold_mc_syst_cluster.sh particle AFII
+
+# IFSR systematic: unfold PWG+PY radHi/radLo with nominal corrections
+./unfold_mc_syst_cluster.sh particle pwg_radHi 4
+./unfold_mc_syst_cluster.sh particle pwg_radLo 4
+
+#MCstat
+./unfold_mc_syst_cluster.sh particle MCstat 4
+
+...wait...
+
+3) Make uncertainty bands
+
+./make_all_extra_uncertainties.sh particle
+
+OR
+
+./make_all_generator_matrix_element_uncertainty.sh particle
+./make_all_generator_parton_shower_uncertainty.sh particle
+./make_all_ifsr_uncertainty.sh particle
+#./make_all_unfolding_uncertainty.sh particle
+#./make_all_ct10nlo_uncertainty.sh particle
+#./make_all_pdf_uncertainty.sh particle
+
+
+THEN 
+
+
 ./make_all_uncertainties.sh particle
-NB: sometimes there is a crash due to a missing pseudo-data histogram. It means there has been an undetected (?) crash in the previous step. It is likely to be due to a bug in the unfolding program that happens when the jobs run in parallel - two jobs try to create the same file for the toys at the same time. Just repeat the step above or run e.g.:
-./jobs/tt_m_ll.sh > logs/particle/tt_m_ll.log 2&>1 
-
-3) Unfold real data
-./unfold_all_data.sh particle
 
 4) Translate MC uncertainties to real data
+hadd -f tt_diffxs_8TeV.data.Combined.co.histograms.root tt_diffxs_8TeV.data.Egamma.el.histograms.root tt_diffxs_8TeV.data.Muons.mu.histograms.root
+
 ./translate_all_uncertainties_to_data.sh particle
+
 
 5) Create tables of systematics
 ./make_all_tables_syst_unfolded.sh particle
@@ -81,12 +180,19 @@ this means that there may be a source of uncertainty pretty large. This is gener
 
 ./make_all_tables_cov.sh particle
 
-7) Make plots
+
+7) Calculate chi2 and p-values
+
+./calculate_all_chi2.sh particle
+
+
+8) Make plots
+
 cd macros/Plots
 ./make_all_plots.sh particle
 ./make_all_plots_fractional_uncertainties.sh particle
 ./plot_all_correlation_matrices.sh particle
+./make_all_plots.sh particle share/observables.csv share/plot_template_IFSR.xml
 
-[ go back to 1) and repeat the steps above using parton instead of particle ]
 
-
+[ go back to 2) and repeat the steps above using parton instead of particle ]
