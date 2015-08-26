@@ -30,7 +30,7 @@ double getArea(double x1, double x2, double y1, double y2, bool ValuesAreAtCentr
 // _____________________________________________________________
 
 // xbins - array of new binning
-TH1D* MakeHisto(TString name, TString title, int nbins, double *xbins, MyDataType xsect, int debug = 2, bool ValuesAreAtCentreOfBin = false)
+TH1D* MakeHisto(TString name, TString title, int nbins, double *xbins, MyDataType xsect, int debug = 2, bool CorrectFirstBin = false, bool ValuesAreAtCentreOfBin = false)
   {
 
     TH1D *hist = new TH1D(name, title, nbins, xbins);

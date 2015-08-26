@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "../../share/AtlasStyle.C"
 
 using std::endl;
 using std::cerr;
@@ -36,7 +37,9 @@ using std::cout;
 #include "TH2F.h"
 
 #include "TF1.h"
+#include "TGraph.h"
 #include "TGraphErrors.h"
+
 
 
 // _______________________________________________________________________
@@ -65,6 +68,9 @@ void PrintRMS(TH1D *histo)
 void Cmp() 
 {
 
+
+  SetAtlasStyle ();
+
   TFile *_file_old = TFile::Open("v1/ptaNNNLO8lhc173.3m.root");
   TFile *_file_good = TFile::Open("v2_goodTri/ptaNNNLO8lhc173.3m.root");
   TFile *_file_bad = TFile::Open("v2_badTri/ptaNNNLO8lhc173.3m.root");
@@ -74,6 +80,8 @@ void Cmp()
   TH1D *h_good = (TH1D*) _file_good -> Get("h_theory");
   TH1D *h_bad = (TH1D*) _file_bad -> Get("h_theory");
   TH1D *h_binCentre = (TH1D*) _file_binCentre -> Get("h_theory");
+
+  TGraph* gr = (TGraph*) _file_good -> Get("gr_theory");
 
   PrintRMS(h_old);
   PrintRMS(h_good);
@@ -114,13 +122,18 @@ void Cmp()
   h_old -> SetLineColor(kBlack); 
   h_old -> Draw("hist same");
 
+  gr -> SetMarkerSize(0.8);
+  gr -> SetMarkerStyle(21);
+  gr -> SetMarkerColor(kBlack);
+  gr -> Draw("P");
+
   TLegend *leg1 = new TLegend(0.5, 0.5, 0.87, 0.87);
   leg1 -> SetBorderSize(0);
   leg1 -> SetHeader("7 TeV");
   leg1 -> AddEntry(h_good, "new", "PL");
   leg1 -> AddEntry(h_bad, "bugged tri", "PL");
   leg1 -> AddEntry(h_old, "old", "PL");
-  leg1 -> AddEntry(h_binCentre, "binCenre", "PL");
+  leg1 -> AddEntry(h_binCentre, "binCentre", "PL");
   leg1 -> Draw();
 
   pad2 -> cd();
@@ -140,10 +153,10 @@ void Cmp()
  
   TLegend *leg2 = new TLegend(0.5, 0.5, 0.87, 0.87);
   leg2 -> SetBorderSize(0);
-  leg2 -> SetHeader("7 TeV");
+  leg2 -> SetHeader("8 TeV");
   leg2 -> AddEntry(h_bad_r, "bugged tri / new", "PL");
   leg2 -> AddEntry(h_old_r, "old / new", "PL");
-  leg2 -> AddEntry(h_binCentre_r, "binCenre / new", "PL");
+  leg2 -> AddEntry(h_binCentre_r, "binCentre / new", "PL");
   leg2 -> Draw();
 
 

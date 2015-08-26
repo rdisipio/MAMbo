@@ -1,6 +1,8 @@
 #!/bin/bash
 
 
+mkdir oldfixed/ new/ orig/
+
 rm *.so *_C.d
 rm Theory.C ; ln -s Theory_oldfixed.C Theory.C ; ./RunTheory.sh ; mv *.root oldfixed/
 
