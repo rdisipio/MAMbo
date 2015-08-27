@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
-
-<!--
-<histograms>
-  <histogram hpath="reco/4j2b/tt/m" />
-</histograms>
--->
-
 <samples>
   <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.nofullhad.histograms.root" >
     <syst name="BJesUnc" type="two_sided" >
@@ -141,22 +134,6 @@
         <shift side="up"   file="eer_up/tt_diffxs_8TeV.mc.DiTop.110404.el.eer_up.nofullhad.histograms.root" />
         <shift side="down" file="eer_down/tt_diffxs_8TeV.mc.DiTop.110404.el.eer_down.nofullhad.histograms.root" />
     </syst>
-<!--
-    <syst name="IFSR" type="two_sided" >
-        <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.el.radHi.nofullhad.histograms.root" />
-        <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.el.radLo.nofullhad.histograms.root"	/>
-    </syst>
--->
-<!--
-    <syst name="IFSR" type="one_sided" >
-        <shift side="single" file="radLo/tt_diffxs_8TeV.mc.DiTop.110407.el.radLo.nofullhad.histograms.root" />
-    </syst>
-    <syst name="PDF" type="two_sided" >
-        <shift side="up"   file="PDF_up/tt_diffxs_8TeV.mc.DiTop.110404.el.PDF_up.nofullhad.histograms.root" />
-        <shift side="down" file="PDF_down/tt_diffxs_8TeV.mc.DiTop.110404.el.PDF_down.nofullhad.histograms.root" />
-    </syst>
--->
-
   </sample>
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root" >
     <syst name="st_xsec" type="two_sided" >

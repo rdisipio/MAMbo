@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
-
-<!--
-<histograms>
-  <histogram hpath="reco/4j2b/tt/m" />
-</histograms>
--->
-
 <samples>
   <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.nofullhad.histograms.root" >
     <syst name="BJesUnc" type="two_sided" >
@@ -143,21 +136,6 @@
     <syst name="mums_res" type="two_sided" >
         <shift side="single"   file="mums_res/tt_diffxs_8TeV.mc.DiTop.110404.mu.mums_res.nofullhad.histograms.root" />
     </syst>
-<!--
-    <syst name="IFSR" type="two_sided" >
-        <shift side="up"   file="radHi/tt_diffxs_8TeV.mc.DiTop.110404.mu.radHi.nofullhad.histograms.root" />
-        <shift side="down" file="radLo/tt_diffxs_8TeV.mc.DiTop.110404.mu.radLo.nofullhad.histograms.root" />
-    </syst>
--->
-<!--
-    <syst name="IFSR" type="one_sided" >
-       	<shift side="single" file="radLo/tt_diffxs_8TeV.mc.DiTop.110407.mu.radLo.nofullhad.histograms.root" />
-    </syst>
-    <syst name="PDF" type="two_sided" >
-        <shift side="up"   file="PDF_up/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_up.nofullhad.histograms.root" />
-        <shift side="down" file="PDF_down/tt_diffxs_8TeV.mc.DiTop.110404.mu.PDF_down.nofullhad.histograms.root" />
-    </syst>
--->
   </sample>
   <sample name="SingleTop" file="nominal/tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root" >
     <syst name="st_xsec" type="two_sided" >
@@ -165,7 +143,6 @@
        <shift side="down" file="st_xsec_down/tt_diffxs_8TeV.mc.SingleTop.mu.st_xsec_down.histograms.root" />	
     </syst>
   </sample>
-<!--  <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root" /> --> 
   <sample name="Wjets"     file="nominal/tt_diffxs_8TeV.mc.Wjets.mu.tt_chasymm.nominal.histograms.root" >
     <syst name="WjetsSF" type="two_sided" >
       <shift side="up"   file="WjetsSF_up/tt_diffxs_8TeV.mc.Wjets.mu.tt_chasymm.WjetsSF_up.histograms.root" />
@@ -187,17 +164,17 @@
   <sample name="Fakes"     file="nominal/tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root" >
     <!-- see: https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod -->
     <syst name="QCD_MM_FAKE_MC" type="two_sided" >
-      <shift side="up"   file="QCD_MM_EL_FAKE_MC_UP/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_EL_FAKE_MC_UP.histograms.root" />
-      <shift side="down" file="QCD_MM_EL_FAKE_MC_DOWN/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_EL_FAKE_MC_DOWN.histograms.root" />
+      <shift side="up"   file="QCD_MM_MU_FAKE_MC_UP/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_MU_FAKE_MC_UP.histograms.root" />
+      <shift side="down" file="QCD_MM_MU_FAKE_MC_DOWN/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_MU_FAKE_MC_DOWN.histograms.root" />
     </syst>
     <syst name="QCD_MM_FAKE_ALTERNATE" type="one_sided" >
-       <shift side="single" file="QCD_MM_EL_FAKE_ALTERNATE/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_EL_FAKE_ALTERNATE.histograms.root" />
+       <shift side="single" file="QCD_MM_MU_FAKE_ALTERNATE/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_MU_FAKE_ALTERNATE.histograms.root" />
     </syst>
     <syst name="QCD_MM_REAL_ALTERNATE" type="one_sided" >
-       <shift side="single" file="QCD_MM_EL_REAL_ALTERNATE/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_EL_REAL_ALTERNATE.histograms.root" />
+       <shift side="single" file="QCD_MM_MU_REAL_ALTERNATE/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_MU_REAL_ALTERNATE.histograms.root" />
     </syst>
     <syst name="QCD_MM_PAR_ALTERNATE" type="one_sided" >
-       <shift side="single" file="QCD_MM_EL_PAR_ALTERNATE/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_EL_PAR_ALTERNATE.histograms.root" />
+       <shift side="single" file="QCD_MM_MU_PAR_ALTERNATE/tt_diffxs_8TeV.qcd.Muons.mu.QCD_MM_MU_PAR_ALTERNATE.histograms.root" />
     </syst>
   </sample>
 </samples>
