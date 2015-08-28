@@ -6,7 +6,17 @@ source ~/bin/asetup.sh
 
 # path=/eos/atlas/user/j/jschovan/top-phys/2015/20150219_ntuples/
 # path=/eos/atlas/user/m/mromano/minintuples-december/
-path=/eos/atlas/user/q/qitek/top-phys/2015/20150716_ntuples/
+
+
+# DEFAULT:
+# path=/eos/atlas/user/q/qitek/top-phys/2015/20150716_ntuples/
+
+
+### TODO!!!
+# fixed data:
+path=/eos/atlas/user/q/qitek/top-phys/2015/20150826_ntuples/
+# mass-varied samples:
+#path=/eos/atlas/user/q/qitek/top-phys/2015/20150827_ntuples/
 
 
 alias eos='/afs/cern.ch/project/eos/installation/0.3.84-aquamarine/bin/eos.select'

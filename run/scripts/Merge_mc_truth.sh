@@ -1,6 +1,7 @@
 #!/bin/sh
 
-tag=_particle_ljets
+tag=_ljets
+#tag=_particle_ljets
 #tag=_particle
 #tag=_incl
 

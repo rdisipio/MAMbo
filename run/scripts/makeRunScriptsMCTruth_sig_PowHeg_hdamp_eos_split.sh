@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tag=_particle_ljets
+tag=_ljets
 #tag=_incl
 
 listbase=split_list_PowhegPythia_P2011C_ttbar_hdamp172p5_nonallhad.mcfixed_at180_combined_pdf_dijet

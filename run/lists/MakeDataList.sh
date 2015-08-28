@@ -4,12 +4,15 @@
 # jk 2.6.2015
 # area=/eos/atlas/user/m/mromano/minintuples-december
 # source ./ListEos.sh | grep root > ListMarinoNew.sh
-file=ListMarinoNew.sh
+# source ./ListEos.sh | grep root > ListDataNew.txt
+
+file=ListDataNew.txt
 
 # data:
 for ll in el mu ; do
   echo "Working on ${ll}..."
-  for j in DATA_RESOLVED_2014_11_03_${ll}  ; do
+  ###  for j in DATA_RESOLVED_2014_11_03_${ll}  ; do
+  for j in 2jet_ajc0340_${ll}  ; do
     list=list_data_${ll}.txt
     rm -f ${list}
     veto=Egamma
@@ -27,7 +30,8 @@ done
 # loose:
 for ll in el mu ; do
   echo "Working on ${ll}..."
-  for j in DATA_RESOLVED_2014_11_03_${ll}  ; do
+  #  for j in DATA_RESOLVED_2014_11_03_${ll}  ; do
+  for j in 2jet_ajc0340_${ll}  ; do
     list=list_data_loose_${ll}.txt
     rm -f ${list}
     echo "  Making ${list} ..."
