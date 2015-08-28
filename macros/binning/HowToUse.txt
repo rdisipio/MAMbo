@@ -1,0 +1,14 @@
+Migra.C 
+----------
+----------
+Macro for plotting migration matrices between all analysis levels.
+You can specify the input file by adding it when running in root. Example: Migra("filename.root")
+Output of this macro is same as pathes inside the root file.
+You can choose which migration matrix you want to plot by editing main body of this script.
+There are several helping function to set different style for different levels as well as normalizing tools.
+
+To compile use '.L Migra.C' only.
+
+In case of further questions send an e-mail to: josef.pacalt@cern.ch
+
+Enjoy!
