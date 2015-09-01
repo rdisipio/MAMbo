@@ -25,30 +25,37 @@ from MAMboPlottingToolkit import *
 
 Paths = ['particle', 'reco', 'matched_p', 'matched_r', 'reco_and_particle_r', 'parton']
 
-ObjNames = { 'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
-             'WL' : 'W_{l}',
-             'WH' : 'W_{h}',
+ObjNames = { 'topL' : 't,lep',
+             'topH' : 't,had',
+             'WL' : 'W,lep',
+             'WH' : 'W,had',
+             #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
+             #'WL' : 'W_{l}',
+             #'WH' : 'W_{h}',
              'tt' : 't#bar{t}',
              'difference' : ''}
-TitleNames = { 'pt' : 'p_{T}', 
-               'm' : 'm', 
-               'absrap' : '|y|', 
-               'rapidity' : 'y',
-               'Pout' : 'p_{out}',
-               'absPout' : '|p_{out}|',
-               'z_ttbar' : 'z_{t_{l}t_{h}}',
-               'Yboost' : 'y_{boost}',
-               'Chi_ttbar' : '#chi_{t_{l}t_{h}}',
-               'dPhi_ttbar' : '#Delta#phi_{t_{l}t_{h}}',
-               #'Salam_ttbar' : 'S_{t_{l}t_{h}}',
-               'HT_ttbar' : 'H_{T}^{t#bar{t}}',
-               #'HT_pseudo' : 'H_{T}^{pseudo}',
-               #'R_lb' : '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]',
-               #'R_Wb_had' : 'p_{T}^{W,had} / p_{T}^{b,had}',
-               #'R_Wb_lep' : 'p_{T}^{W,lep} / p_{T}^{b,lep}',
-               #'R_Wt_had' : 'p_{T}^{W,had} / p_{T}^{t,had}',
-               #'R_Wt_lep' : 'p_{T}^{W,lep} / p_{T}^{t,lep}',
+
+
+TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ], 
+               'm' : [  'm', '[GeV]' ], 
+               'absrap' : [  '|y|', '' ], 
+               'rapidity' : [  'y', '' ],
+               'Pout' : [  'p_{out}', '[GeV]' ],
+               'absPout' : [  '|p_{out}|', '[GeV]' ],
+               'z_ttbar' : [  'z_{#hat{t}_{l}#hat{t}_{h}}', '' ],
+               'Yboost' : [  'y_{boost}', '' ],
+               'Chi_ttbar' : [  '#chi_{#hat{t}_{l}#hat{t}_{h}}', '' ],
+               'dPhi_ttbar' : [  '#Delta#phi_{#hat{t}_{l}#hat{t}_{h}}', '' ],
+               'Salam_ttbar' : [  'S_{#hat{t}_{l}#hat{t}_{h}}', '' ],
+               'HT_ttbar' : [  'H_{T}^{t#bar{t}}', '[GeV]' ],
+               'HT_pseudo' : [  'H_{T}^{pseudo}', '[GeV]' ],
+               'R_lb' : [  '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]', '' ],
+               'R_Wb_had' : [  'p_{T}^{W,had} / p_{T}^{b,had}', '' ],
+               'R_Wb_lep' : [  'p_{T}^{W,lep} / p_{T}^{b,lep}', '' ],
+               'R_Wt_had' : [  'p_{T}^{W,had} / p_{T}^{t,had}', '' ],
+               'R_Wt_lep' : [  'p_{T}^{W,lep} / p_{T}^{t,lep}', '' ],
                }
+
 CorrNames = { 'eff' : 'Efficiency correction', 
 #              'match' : 'Misassignment correction f_{match}', 
               'acc' : 'Acceptance correction f_{acc}' }
@@ -170,7 +177,7 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     if icorr == 1: tag = 'acc'
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
-    can = TCanvas(canname, canname, 1, 1, 800, 600)
+    can = TCanvas(canname, canname, 1, 1, 800, 800)
     #can.Divide(2,1)
     _cans.append(can)
 
@@ -195,7 +202,13 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     xmin = GetMin(rfile, objname, varname, icorr, basepath)
     xmax = GetMax(rfile, objname, varname, icorr, basepath)
 
-    xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
+    # HERE
+    # xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
+    if ObjNames[objname] != 'difference':
+        xtitle = TitleNames[varname][0] + '^{' + ObjNames[objname] + '} ' + TitleNames[varname][1]
+    else:
+        xtitle = TitleNames[varname][0] + ' ' + TitleNames[varname][1]
+
     print 'XTITLE=%s' % (xtitle,)
     ytitle = CorrNames[tag]
 
@@ -207,12 +220,16 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     else:
         tmp = next_tmp(xmin, xmax, title)
         SetStyle(tmp, xtitle, ytitle)
+
+    tmp.GetYaxis().SetTitleOffset(1.3)
+    tmp.GetXaxis().SetNdivisions(505)
     SetStyle(corr, xtitle, ytitle)
     corr.Draw('P')
     _corrs.append(corr)
 
     ATLAS_LABEL(0.16, 0.96, kBlack)
-    myText(0.29, 0.96, kBlack, "Internal Simulation");
+    myText(0.335, 0.96, kBlack, "Internal Simulation");
+
     can.Print('eps_parton/' + canname + '.eps')
     can.Print('png_parton/' + canname + '.png')
     can.Print('pdf_parton/' + canname + '.pdf')
@@ -257,7 +274,7 @@ rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug10_ljets/'
 
 
 os.system('mkdir png_parton eps_parton pdf_parton')
-ROOT.gROOT.SetBatch(1)
+ROOT.gROOT.SetBatch(0)
 
 for ll in ljets:
 
@@ -300,8 +317,8 @@ for ll in ljets:
 
     for obj in SpecObj:
         for var in SpecVar:
-            DrawCorrection(ll, rfile, pfile, obj, var, 0)
-            DrawCorrection(ll, rfile, pfile, obj, var, 1)
+            #DrawCorrection(ll, rfile, pfile, obj, var, 0)
+            #DrawCorrection(ll, rfile, pfile, obj, var, 1)
             pass
 
     

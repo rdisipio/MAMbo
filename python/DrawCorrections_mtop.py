@@ -254,9 +254,9 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     ATLAS_LABEL(0.16, 0.96, kBlack)
     myText(0.335, 0.96, kBlack, "Internal Simulation");
 
-    can.Print('eps/' + canname + '.eps')
-    can.Print('png/' + canname + '.png')
-    can.Print('pdf/' + canname + '.pdf')
+    can.Print('eps_mtop/' + canname + '.eps')
+    can.Print('png_mtop/' + canname + '.png')
+    can.Print('pdf_mtop/' + canname + '.pdf')
 
 ####################################################
 ####################################################
@@ -267,12 +267,12 @@ SetAtlasStyle()
 gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
-ljets = [ 'co', 'el', 'mu']
+#ljets = [ 'co', 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-#ljets = [ 'co' ]
+ljets = [ 'co' ]
 
 ptag=''
 ftag=''
@@ -290,18 +290,26 @@ ftag=''
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug3/'
+#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug3/'
+rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/mtop_ljets/'
 
 
-GenNames = [ 'PowHeg',
-             '110408.PowhegPythia_Perugia2012radHi',
-             '110407.PowhegPythia_Perugia2012radLo',
-         ]
+GenNames = [ 
+
+    'TTbar_MT1750',
+
+    'TTbar_MT1650',
+    'TTbar_MT1675',
+    'TTbar_MT1700',
+
+    'TTbar_MT1775',
+    'TTbar_MT1800',
+   ]
 
 
 
-os.system('mkdir png eps pdf')
-ROOT.gROOT.SetBatch(1)
+os.system('mkdir png_mtop eps_mtop pdf_mtop')
+ROOT.gROOT.SetBatch(0)
 
 for ll in ljets:
 
@@ -310,12 +318,12 @@ for ll in ljets:
     pfiles = []
 
     for genname in GenNames:
-        rfile = TFile('%shistograms_%s_%s%s.root' % (rpath, genname, ll, ftag, ), 'read')
+        rfile = TFile('%shistograms_PowHeg_%s_ljets_%s%s.root' % (rpath, ll, genname, ftag, ), 'read')
         _files.append(rfile)
         rfiles.append(rfile)
         print 'Opened file %s' % (rfile.GetName(),)
         
-        pfile = TFile('%shistograms_%s_%s_particle%s.root' % (rpath, genname, ll, ptag, ), 'read')
+        pfile = TFile('%shistograms_PowHeg_%s_particle_%s_ljets%s.root' % (rpath, ll, genname, ptag, ), 'read')
         _files.append(pfile)
         pfiles.append(pfile)
         print 'Opened file %s' % (pfile.GetName(),)
