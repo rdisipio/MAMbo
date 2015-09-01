@@ -83,7 +83,8 @@ TH2D * MakeIntHisto(TH2D *input)
     }
   }
   migra -> Scale(1.);
-  
+  migra->GetXaxis()->SetNdivisions(nx,0,0);
+  migra->GetYaxis()->SetNdivisions(ny,0,0);
 //   cout << "Setting labels..." << endl;
 
   
@@ -232,7 +233,7 @@ void basic_plot( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, "Simulation e/#mu+jets" );
+  myText( 0.21, 0.92, kBlack, "Internal Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -333,7 +334,7 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.95, kBlack );
-  myText( 0.19, 0.95, kBlack, "Simulation   l+jets" );
+  myText( 0.19, 0.95, kBlack, "Internal Simulation   l+jets" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -434,7 +435,7 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, "Simulation e/#mu+jets" );
+  myText( 0.21, 0.92, kBlack, "Internal Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 

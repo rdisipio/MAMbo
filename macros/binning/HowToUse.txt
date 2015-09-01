@@ -4,7 +4,7 @@ Migra.C
 Macro for plotting migration matrices between all analysis levels.
 You can specify the input file by adding it when running in root. Example: Migra("filename.root")
 Output of this macro is same as pathes inside the root file.
-You can choose which migration matrix you want to plot by editing main body of this script.
+You can choose which migration matrix you want to plot by editing main body of this script. Example:basic_plot("reco/4j2b/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]");
 There are several helping function to set different style for different levels as well as normalizing tools.
 
 To compile use '.L Migra.C' only.
