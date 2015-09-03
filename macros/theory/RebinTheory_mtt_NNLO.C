@@ -1,7 +1,7 @@
 
 
 // main usage: 
-// root -l -b -q 'RebinTheory_pTtt_NNLO.C+("data/pTtt_8000.dat", 0, false, 1, "recreate")'
+// root -l -b -q 'RebinTheory_mtt_NNLO.C+("data/Mtt_8000_172.5_Mtt_fin.dat", 0, false, 1, "recreate")'
 
 
 
@@ -30,12 +30,12 @@ using namespace std;
 // _____________________________________________________________
 // _____________________________________________________________
 
-TH1D *RebinTheory_pTtt_NNLO(TString inputName = "data/pTtt_8000.dat", int ResultToUse = 1, bool Draw = true, int debug = 2, TString fopt = "recreate" ) 
+TH1D *RebinTheory_mtt_NNLO(TString inputName = "data/Mtt_8000_172.5_Mtt_fin.dat", int ResultToUse = -1, bool Draw = true, int debug = 2, TString fopt = "recreate" ) 
 {
   
   MyDataType data;
   ifstream readData;
-  const int nresults = 3;
+  const int nresults = 7;
   double xx, y[nresults];
   assert(ResultToUse < nresults);
 
@@ -81,8 +81,8 @@ TH1D *RebinTheory_pTtt_NNLO(TString inputName = "data/pTtt_8000.dat", int Result
   //static const int numXbins = 5;
    // 7 TeV parton binning:   double xbins[numXbins] = { 0, 40, 170, 340, 1000. };
    // 8 TeV parton binning:
-  static const int numXbins = 7;
-   double xbins[numXbins] = { 0,20,45,75,120,190,300 };
+  static const int numXbins = 8;
+   double xbins[numXbins] = { 345,400,470,550,650,800,1100,1600 };
    
    int numBins = numXbins - 1;
 
@@ -92,7 +92,7 @@ TH1D *RebinTheory_pTtt_NNLO(TString inputName = "data/pTtt_8000.dat", int Result
   outName.ReplaceAll("data/", "");
   outName.ReplaceAll(".dat", "");
   TFile *outFile = new TFile(outName + ".root",  fopt);
-  TString basename = "theorypTtt_";
+  TString basename = "theorymtt_";
   if (ResultToUse > 0)
     basename += ResultToUse;
   //  TString basename = outName;
@@ -126,7 +126,7 @@ TH1D *RebinTheory_pTtt_NNLO(TString inputName = "data/pTtt_8000.dat", int Result
     cout << "Making the binned histo..." << endl; 
   // call the function MakeHisto from the Theory.C file and draw it
   TH1D *theoryNewBin = 0;
-  bool ValuesAreAtCentreOfBin = false; // was true !!!???
+  bool ValuesAreAtCentreOfBin = false; // !!!???
   theoryNewBin = MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data, debug, ValuesAreAtCentreOfBin);
   cout << "Integral after rebin: " << theoryNewBin->Integral("width") << endl;
 

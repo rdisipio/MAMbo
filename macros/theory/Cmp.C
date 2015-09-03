@@ -75,11 +75,13 @@ void Cmp()
   TFile *_file_good = TFile::Open("v2_goodTri/ptaNNNLO8lhc173.3m.root");
   TFile *_file_bad = TFile::Open("v2_badTri/ptaNNNLO8lhc173.3m.root");
   TFile *_file_binCentre = TFile::Open("v2_stepLike/ptaNNNLO8lhc173.3m.root");
+  TFile *_file_RDS = TFile::Open("topH_pt_ll.aNNNLO.root");
 
   TH1D *h_old = (TH1D*) _file_old -> Get("h_theory");
   TH1D *h_good = (TH1D*) _file_good -> Get("h_theory");
   TH1D *h_bad = (TH1D*) _file_bad -> Get("h_theory");
   TH1D *h_binCentre = (TH1D*) _file_binCentre -> Get("h_theory");
+  TH1D *h_RDS = (TH1D*) _file_RDS -> Get("TheoryXs_abs");
 
   TGraph* gr = (TGraph*) _file_good -> Get("gr_theory");
 
@@ -87,6 +89,7 @@ void Cmp()
   PrintRMS(h_good);
   PrintRMS(h_bad);
   PrintRMS(h_binCentre);
+  PrintRMS(h_RDS);
 
   TCanvas *can = new TCanvas();
 
@@ -117,6 +120,11 @@ void Cmp()
   h_binCentre->SetLineWidth(3);
   h_binCentre->SetLineStyle(3); 
   h_binCentre->Draw("hist same");
+
+  h_RDS->SetLineColor(kAzure); 
+  h_RDS->SetLineWidth(3);
+  h_RDS->SetLineStyle(4); 
+  h_RDS->Draw("hist same");
   
   h_old -> SetLineStyle(2); 
   h_old -> SetLineColor(kBlack); 
@@ -129,11 +137,12 @@ void Cmp()
 
   TLegend *leg1 = new TLegend(0.5, 0.5, 0.87, 0.87);
   leg1 -> SetBorderSize(0);
-  leg1 -> SetHeader("7 TeV");
+  leg1 -> SetHeader("8 TeV");
   leg1 -> AddEntry(h_good, "new", "PL");
   leg1 -> AddEntry(h_bad, "bugged tri", "PL");
   leg1 -> AddEntry(h_old, "old", "PL");
   leg1 -> AddEntry(h_binCentre, "binCentre", "PL");
+  leg1 -> AddEntry(h_RDS, "Riccardo", "PL");
   leg1 -> Draw();
 
   pad2 -> cd();
@@ -141,6 +150,7 @@ void Cmp()
   TH1D* h_bad_r = MakeRatio(h_bad, h_good);
   TH1D* h_binCentre_r = MakeRatio(h_binCentre, h_good);
   TH1D* h_old_r = MakeRatio(h_old, h_good);
+  TH1D* h_RDS_r = MakeRatio(h_RDS, h_good);
 
   // draw ratios:
 
@@ -149,11 +159,13 @@ void Cmp()
 
   h_bad_r -> Draw("hist");
   h_binCentre_r -> Draw("hist same");
+  h_RDS_r -> Draw("hist same");
   h_old_r -> Draw("hist same");
  
   TLegend *leg2 = new TLegend(0.5, 0.5, 0.87, 0.87);
   leg2 -> SetBorderSize(0);
   leg2 -> SetHeader("8 TeV");
+  leg2 -> AddEntry(h_RDS_r, "Riccardo / new", "PL");
   leg2 -> AddEntry(h_bad_r, "bugged tri / new", "PL");
   leg2 -> AddEntry(h_old_r, "old / new", "PL");
   leg2 -> AddEntry(h_binCentre_r, "binCentre / new", "PL");
