@@ -26,7 +26,7 @@ using namespace std;
 #include "Theory.C"
 
 
-TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.dat", bool Draw = true, int debug = 0) 
+TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.dat", bool Draw = true, int debug = 1) 
 {
   
   MyDataType data;
@@ -34,8 +34,6 @@ TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.d
   Float_t num;
 
   // opens file, throws error if file cannot be opened
-  //  readData.open("data/pttopnnloapprox7lhc173m.dat");
-  //  readData.open("data/pttopnnloapprox7lhc173mT.dat");
   readData.open(inputName.Data());
   if (!readData) {
     cerr << "File could not be opened." << endl;
@@ -45,7 +43,7 @@ TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.d
   // fills the data array with the data from the file
   // prints what is filled in the array
   int nRows = 0;
-
+  cout << "Reading data..." << endl;
   while (!readData.eof()) {
     vector<double> item;
     readData >> num;
@@ -53,6 +51,12 @@ TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.d
     readData >> num;
     item.push_back(num);
     readData >> num;
+    if (debug) {
+      for (int it = 0; it < item.size(); ++it) {
+	cout << " " << item[it];
+      }
+      cout << endl;
+    } // debug
     data.push_back(item);
     nRows++;
   }
@@ -83,7 +87,8 @@ TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.d
   TGraph *theory = new TGraph(nRows);
   theory -> SetName("gr_" + basename);
   double integral = 0.;
-  for(int j = 0; j < nRows-1; j++){
+  for(int j = 0; j < nRows; j++){
+    cout << "Setting point " << j << " " << data[j][0] << " " << data[j][1] << endl;
     theory->SetPoint(j,data[j][0],data[j][1]);
     if (j < nRows-1) {
       //  integral += (data[j+1][0]-data[j][0])*data[j][1];

@@ -26,7 +26,7 @@ using namespace std;
 #include "Theory.C"
 
 
-TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14.dat", bool Draw = true, int debug = 0) 
+TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14.dat", bool Draw = true, int debug = 2) 
 {
   
   MyDataType data;
@@ -43,7 +43,6 @@ TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14
   // fills the data array with the data from the file
   // prints what is filled in the array
   int nRows = 0;
-  //  readData >> num;
   while (!readData.eof()) {
     vector<double> item;
     readData >> num;
@@ -51,7 +50,13 @@ TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14
     readData >> num;
     item.push_back(num);
     readData >> num;
-    data.push_back(item);
+    if (debug) {
+      for (int it = 0; it < item.size(); ++it) {
+	cout << " " << item[it];
+      }
+      cout << endl;
+    } // debug
+   data.push_back(item);
     nRows++;
   }
 
@@ -59,16 +64,6 @@ TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14
   readData.close();
   if (debug > 0)
     cout << "End of File, read " << nRows << " lines." << endl;
-
-
-  // creates array xbins with proper binning
-  // see /configs/HistoMakerBinnings.cfg 
-  //double xbins [numXbins] = {0., 41.27, 85.80, 132.37, 184.3, 245.28, 320.91, 421.99, 571.23}; //standard binning
-  //double xbins [numXbins] = { 0., 50., 105., 160., 230., 310., 420., 600., 1000.}; //Opt1
-  //double xbins[numXbins] = { 0., 55., 110., 170., 245., 340., 500., 820., 1000.}; //Opt2 
-  //double xbins[numXbins] = { 0., 50., 105., 160., 230., 310., 420., 1000.}; //Opt3 
-  //double xbins[numXbins] = { 0., 50., 100., 150., 200., 250., 400., 600., 1000.}; //Opt4
-  //double xbins[numXbins] = { 0., 50., 100., 150., 200., 250., 325., 600., 1000.}; //Opt5
 
   // ATLAS 7 TeV:
   //  static const int numXbins = 8;
@@ -100,7 +95,8 @@ TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14
   TGraph *theory = new TGraph(nRows);
   theory -> SetName("gr_" + basename);
   double integral = 0.;
-  for(int j = 0; j < nRows-1; j++){
+  for(int j = 0; j < nRows; j++){
+    cout << "Setting point " << j << " " << data[j][0] << " " << data[j][1] << endl;
     theory->SetPoint(j,data[j][0],data[j][1]);
     if (j < nRows-1)
       //  integral += (data[j+1][0]-data[j][0])*data[j][1];

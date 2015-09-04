@@ -26,7 +26,7 @@ using namespace std;
 #include "Theory.C"
 
 
-TH1D *RebinTheory_yt_aNNLO(TString inputName = "data/yaNNNLO8lhc173.3m.dat", bool Draw = true, int debug = 0) 
+TH1D *RebinTheory_yt_aNNLO(TString inputName = "data/yaNNNLO8lhc173.3m.dat", bool Draw = true, int debug = 2) 
 {
   
   MyDataType data;
@@ -34,8 +34,6 @@ TH1D *RebinTheory_yt_aNNLO(TString inputName = "data/yaNNNLO8lhc173.3m.dat", boo
   Float_t num;
 
   // opens file, throws error if file cannot be opened
-  //  readData.open("data/pttopnnloapprox7lhc173m.dat");
-  //  readData.open("data/pttopnnloapprox7lhc173mT.dat");
   readData.open(inputName.Data());
   if (!readData) {
     cerr << "File could not be opened." << endl;
@@ -50,11 +48,17 @@ TH1D *RebinTheory_yt_aNNLO(TString inputName = "data/yaNNNLO8lhc173.3m.dat", boo
     cout << "nRows=" << nRows << endl;
     vector<double> item;
     readData >> num;
-    cout << "  num0=" << num << endl;
+    //cout << "  num0=" << num << endl;
     item.push_back(num);
     readData >> num;
-    cout << "  num1=" << num << endl;
+    //cout << "  num1=" << num << endl;
     item.push_back(num);
+    if (debug) {
+      for (int it = 0; it < item.size(); ++it) {
+	cout << " " << item[it];
+      }
+      cout << endl;
+    } // debug
     data.push_back(item);
     nRows++;
 
@@ -86,8 +90,9 @@ TH1D *RebinTheory_yt_aNNLO(TString inputName = "data/yaNNNLO8lhc173.3m.dat", boo
   TGraph *theory = new TGraph(nRows);
   theory -> SetName("gr_" + basename);
   double integral = 0.;
-  for(int j = 0; j < nRows-1; j++){
-    theory->SetPoint(j,data[j][0],data[j][1]);
+  for(int j = 0; j < nRows; j++){
+   cout << "Setting point " << j << " " << data[j][0] << " " << data[j][1] << endl;
+   theory->SetPoint(j,data[j][0],data[j][1]);
     if (j < nRows-1) {
       //  integral += (data[j+1][0]-data[j][0])*data[j][1];
       integral += getArea(data[j][0], data[j+1][0], data[j][1], data[j+1][1]);

@@ -60,7 +60,7 @@ TH1D *RebinTheory_mtt_NNLO(TString inputName = "data/Mtt_8000_172.5_Mtt_fin.dat"
     else // pdf or scale variation:
       //      item.push_back(y[0] + y[ResultToUse]);
       item.push_back(y[ResultToUse]);
-    if (debug > 1) {
+    if (debug == 1) {
       cout << " xx=" << xx;
       for (int i = 0; i < nresults; ++i)
 	cout << " y" << i << "=" << y[i];
@@ -68,6 +68,14 @@ TH1D *RebinTheory_mtt_NNLO(TString inputName = "data/Mtt_8000_172.5_Mtt_fin.dat"
     }
 
     readData >> xx;
+
+    if (debug) {
+      for (int it = 0; it < item.size(); ++it) {
+	cout << " " << item[it];
+      }
+      cout << endl;
+    } // debug
+
     data.push_back(item);
     nRows++;
   }
@@ -104,6 +112,7 @@ TH1D *RebinTheory_mtt_NNLO(TString inputName = "data/Mtt_8000_172.5_Mtt_fin.dat"
   theory -> SetName("gr_" + basename);
   double integral = 0.;
   for(int j = 0; j < nRows; j++){
+    cout << "Setting point " << j << " " << data[j][0] << " " << data[j][1] << endl;
     theory->SetPoint(j,data[j][0],data[j][1]);
     if (j < nRows-1) {
       // this gives rel. xsect integral of 1...
