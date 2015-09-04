@@ -1,0 +1,29 @@
+1               choice: pt (0) or y (1) distrib.; sigma_total (2) or (3);
+1               PDFflag: (1) LHAPDF; (0) Stand alone PDFs;
+13000           Iset index to select the PDFs relative to .LHgrid;
+99              nalfas: (99) LHAPDF alphas; (2,3) Lambda_QCD version, alphas(M_Z) = 0.118; 
+0.0878          qcdl1 for nlf=5;
+0.226           qcdl2 for nlf=5; 
+0.186           qcdl3 for nlf=5; 
+0               ipdf: is (0) when PDFflag=1 ->LHAPDF; (1) stdalone PDFs; 
+2               naccur (0)  LL, (1) NLL, (2) NNLL;
+1               nggborn: GG channel Born level;
+1               nqqborn: QQb channel Born level;
+1               nggnlo: GG channel NLO;
+1               nqqnlo: QQb channel NLO;
+1               nggnnlo: GG channel NNLO;
+1               nqqnnlo: QQb channel NNLO;
+0               scale choice: (0) scale = mq; (1) scale = sqrt(mq^2+pt^2)
+1.0d0           mfac:  muF/scale 
+1.0d0           kR:    muR/scale
+173.0d0         mq: mass of the heavy quark
+8000.0d0        center of mass energy
+5               Number of light flavors nlf
+top@LHC         heavy-quark produced at collider
+1.0d0          pTmin: Min val in pT grid
+500.0d0         pTmax: Max val in pT grid
+40               Npt: Num points for (Npt+1) pT-output grid
+-2.5d0          ymin: Min val in y grid
+2.5d0           ymax: Max val in y grid
+40              Ny: Num points for (Ny+1) y-output grid
+0.2d0           cutoff parameter del

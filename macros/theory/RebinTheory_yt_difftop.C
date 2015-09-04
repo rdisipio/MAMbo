@@ -2,7 +2,7 @@
 // May 2012
 //
 // This code is used to read in the theory 
-// root -l -b -q 'RebinTheory_pTt_aNNLO.C+("data/ptaNNNLO8lhc173.3m.dat")'
+// root -l -b -q 'RebinTheory_yt_difftop.C+("data/difftop_lhc_8TeV_y_ct14.dat")'
 
 #include <stdlib.h>
 #include <iostream>
@@ -26,7 +26,7 @@ using namespace std;
 #include "Theory.C"
 
 
-TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", bool Draw = true, int debug = 0) 
+TH1D *RebinTheory_yt_difftop(TString inputName = "data/difftop_lhc_8TeV_y_ct14.dat", bool Draw = true, int debug = 0) 
 {
   
   MyDataType data;
@@ -45,15 +45,12 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   // fills the data array with the data from the file
   // prints what is filled in the array
   int nRows = 0;
-  readData >> num;
+
   while (!readData.eof()) {
-    //cout << num << endl;
     vector<double> item;
-    //    data[nRows][0] = num;
+    readData >> num;
     item.push_back(num);
     readData >> num;
-    //cout << num << endl;
-    //    data[nRows][1] = num;
     item.push_back(num);
     readData >> num;
     data.push_back(item);
@@ -65,29 +62,10 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   if (debug > 0)
     cout << "End of File, read " << nRows << " lines." << endl;
 
-
-  // creates array xbins with proper binning
-  // see /configs/HistoMakerBinnings.cfg 
-  //double xbins [numXbins] = {0., 41.27, 85.80, 132.37, 184.3, 245.28, 320.91, 421.99, 571.23}; //standard binning
-  //double xbins [numXbins] = { 0., 50., 105., 160., 230., 310., 420., 600., 1000.}; //Opt1
-  //double xbins[numXbins] = { 0., 55., 110., 170., 245., 340., 500., 820., 1000.}; //Opt2 
-  //double xbins[numXbins] = { 0., 50., 105., 160., 230., 310., 420., 1000.}; //Opt3 
-  //double xbins[numXbins] = { 0., 50., 100., 150., 200., 250., 400., 600., 1000.}; //Opt4
-  //double xbins[numXbins] = { 0., 50., 100., 150., 200., 250., 325., 600., 1000.}; //Opt5
-
-  // ATLAS 7 TeV:
-  //  static const int numXbins = 8;
-  //  double xbins[numXbins] = { 0., 50., 100., 150., 200., 250., 350., 800.}; //Opt5
-
-  // CMS binning 7 TeV
-  // const int numXbins = 8;
-  //  double xbins[numXbins] = {0,60,100,150,200,260,320,400};
-
   // CMS binning 8 TeV
-  const int numXbins = 9;
-  double xbins[numXbins] = {0,60,100,150,200,260,320,400,500};
+  const int numXbins = 11;
+  double xbins[numXbins] = {-2.5,-1.3,-0.9,-0.6,-0.3,0,0.3,0.6,0.9,1.3,2.5};
  
-
   int numBins = numXbins - 1;
 
    if (debug > 0)
@@ -107,9 +85,10 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   double integral = 0.;
   for(int j = 0; j < nRows-1; j++){
     theory->SetPoint(j,data[j][0],data[j][1]);
-    if (j < nRows-1)
+    if (j < nRows-1) {
       //  integral += (data[j+1][0]-data[j][0])*data[j][1];
       integral += getArea(data[j][0], data[j+1][0], data[j][1], data[j+1][1]);
+    }
   }
   theory -> SetLineColor(kRed);
   theory -> SetMarkerColor(kRed);

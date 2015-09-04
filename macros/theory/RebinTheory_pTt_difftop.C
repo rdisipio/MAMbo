@@ -2,7 +2,7 @@
 // May 2012
 //
 // This code is used to read in the theory 
-// root -l -b -q 'RebinTheory_pTt_aNNLO.C+("data/ptaNNNLO8lhc173.3m.dat")'
+// root -l -b -q 'RebinTheory_pTt_difftop.C+("data/difftop_lhc_8TeV_pt_ct14.dat")'
 
 #include <stdlib.h>
 #include <iostream>
@@ -26,7 +26,7 @@ using namespace std;
 #include "Theory.C"
 
 
-TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", bool Draw = true, int debug = 0) 
+TH1D *RebinTheory_pTt_difftop(TString inputName = "data/difftop_lhc_8TeV_pt_ct14.dat", bool Draw = true, int debug = 0) 
 {
   
   MyDataType data;
@@ -34,8 +34,6 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   Float_t num;
 
   // opens file, throws error if file cannot be opened
-  //  readData.open("data/pttopnnloapprox7lhc173m.dat");
-  //  readData.open("data/pttopnnloapprox7lhc173mT.dat");
   readData.open(inputName.Data());
   if (!readData) {
     cerr << "File could not be opened." << endl;
@@ -45,15 +43,12 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   // fills the data array with the data from the file
   // prints what is filled in the array
   int nRows = 0;
-  readData >> num;
+  //  readData >> num;
   while (!readData.eof()) {
-    //cout << num << endl;
     vector<double> item;
-    //    data[nRows][0] = num;
+    readData >> num;
     item.push_back(num);
     readData >> num;
-    //cout << num << endl;
-    //    data[nRows][1] = num;
     item.push_back(num);
     readData >> num;
     data.push_back(item);
