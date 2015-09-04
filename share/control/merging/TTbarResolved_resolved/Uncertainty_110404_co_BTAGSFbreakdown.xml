@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+
+<!--
+<histograms>
+  <histogram hpath="reco/4j2b/tt/m" />
+</histograms>
+-->
+
+<samples>
+  <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root" >
+    <syst name="btag1" type="two_sided" >
+       <shift side="up"   file="btag1_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag1_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag1_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag1_down.nofullhad.histograms.root" />
+    </syst>
+    <syst name="btag2" type="two_sided" >
+       <shift side="up"   file="btag2_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag2_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag2_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag2_down.nofullhad.histograms.root" />
+    </syst>
+    <syst name="btag3" type="two_sided" >
+       <shift side="up"   file="btag3_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag3_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag3_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag3_down.nofullhad.histograms.root" />
+    </syst>
+    <syst name="btag4" type="two_sided" >
+       <shift side="up"   file="btag4_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag4_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag4_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag4_down.nofullhad.histograms.root" />
+    </syst>
+    <syst name="btag5" type="two_sided" >
+       <shift side="up"   file="btag5_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag5_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag5_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag5_down.nofullhad.histograms.root" />
+    </syst>
+    <syst name="btag6" type="two_sided" >
+       <shift side="up"   file="btag6_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag6_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag6_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag6_down.nofullhad.histograms.root" />
+    </syst>
+  </sample>
+</samples>
+</document>
+
+<!--
+    <syst name="@SYST@" type="two_sided" >
+        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110404.co.@SYST@_up.histograms.root" />
+        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110404.co.@SYST@_down.histograms.root" />
+    </syst>
+-->

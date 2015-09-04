@@ -183,6 +183,7 @@
   <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_R_lb" />
   <histogram hpath="reco/4j2b/difference/Matrix_reco_particle_R_Wt_had" />
 
+  <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_pt" />
   <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_pt_5" />
   <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_absrap_5" />
   <histogram hpath="reco/4j2b/topH/Matrix_reco_parton_rapidity_5" />
@@ -252,6 +253,7 @@
   <histogram hpath="particle/4j2b/difference/Discriminant" />
 
 <!-- parton level -->
+  <histogram hpath="parton/4j2b/topH/pt" />
   <histogram hpath="parton/4j2b/topH/pt_5" />
   <histogram hpath="parton/4j2b/topH/absrap_5" />
   <histogram hpath="parton/4j2b/topH/rapidity_5" />

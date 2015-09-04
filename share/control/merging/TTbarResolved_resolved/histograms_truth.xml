@@ -80,6 +80,7 @@
   <histogram hpath="particle/4j2b/difference/Discriminant" />
 
 <!-- parton level -->
+  <histogram hpath="parton/4j2b/topH/pt" />
   <histogram hpath="parton/4j2b/topH/pt_5" />
   <histogram hpath="parton/4j2b/topH/absrap_5" />
   <histogram hpath="parton/4j2b/topH/rapidity_5" />
