@@ -10,6 +10,10 @@
 
 <samples>
   <sample name="DiTop"     file="nominal/tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root" >
+    <syst name="btag0" type="two_sided" >
+       <shift side="up"   file="btag0_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag0_up.nofullhad.histograms.root" />
+       <shift side="down" file="btag0_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag0_down.nofullhad.histograms.root" />
+    </syst>
     <syst name="btag1" type="two_sided" >
        <shift side="up"   file="btag1_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag1_up.nofullhad.histograms.root" />
        <shift side="down" file="btag1_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag1_down.nofullhad.histograms.root" />
@@ -30,10 +34,12 @@
        <shift side="up"   file="btag5_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag5_up.nofullhad.histograms.root" />
        <shift side="down" file="btag5_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag5_down.nofullhad.histograms.root" />
     </syst>
+<!--
     <syst name="btag6" type="two_sided" >
        <shift side="up"   file="btag6_up/tt_diffxs_8TeV.mc.DiTop.110404.co.btag6_up.nofullhad.histograms.root" />
        <shift side="down" file="btag6_down/tt_diffxs_8TeV.mc.DiTop.110404.co.btag6_down.nofullhad.histograms.root" />
     </syst>
+-->
   </sample>
 </samples>
 </document>
