@@ -121,5 +121,21 @@ TH1D* MakeHisto(TString name, TString title, int nbins, double *xbins, MyDataTyp
   }
 
 // _____________________________________________________________
+
+
+
+// _____________________________________________________________
+
+TH1D *NormalizeHisto(TH1D *hist, TString name = "TheoryXs_rel") 
+{
+  TH1D* newh = (TH1D*) hist -> Clone(name);
+  double integral = hist -> Integral(1, hist->GetNbinsX(), "width");
+  if (integral > 0.)
+    newh -> Scale( 1./ integral );
+  return newh;
+}
+
+
+// _____________________________________________________________
 // _____________________________________________________________
 // _____________________________________________________________

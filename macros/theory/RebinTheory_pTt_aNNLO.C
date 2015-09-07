@@ -111,7 +111,9 @@ TH1D *RebinTheory_pTt_aNNLO(TString inputName = "data/ptaNNNLO8lhc173.3m.dat", b
   // call the function MakeHisto from the Theory.C file and draw it
   TH1D *theoryNewBin = 0;
   bool ValuesAreAtCentreOfBin = false; // !!!
-  theoryNewBin = MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data, debug, ValuesAreAtCentreOfBin);
+  //  theoryNewBin = MakeHisto("h_" + basename, "Theory Histogram", numBins, xbins, data, debug, ValuesAreAtCentreOfBin);
+  theoryNewBin = MakeHisto("TheoryXs_abs", "TheoryXs_abs", numBins, xbins, data, debug, ValuesAreAtCentreOfBin);
+  TH1D *theoryNewBin_rel = NormalizeHisto(theoryNewBin);
   cout << "Integral after rebin: " << theoryNewBin->Integral("width") << endl;
 
 
