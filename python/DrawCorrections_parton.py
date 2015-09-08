@@ -56,9 +56,9 @@ TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ],
                'R_Wt_lep' : [  'p_{T}^{W,lep} / p_{T}^{t,lep}', '' ],
                }
 
-CorrNames = { 'eff' : 'Efficiency correction', 
+CorrNames = { 'eff' : 'Efficiency correction #hat{f}_{eff}', 
 #              'match' : 'Misassignment correction f_{match}', 
-              'acc' : 'Acceptance correction f_{acc}' }
+              'acc' : 'Acceptance correction #hat{f}_{acc}' }
 
 #################
 def CheckAcc(acc,name):
@@ -274,7 +274,7 @@ rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug10_ljets/'
 
 
 os.system('mkdir png_parton eps_parton pdf_parton')
-ROOT.gROOT.SetBatch(0)
+ROOT.gROOT.SetBatch(1)
 
 for ll in ljets:
 
