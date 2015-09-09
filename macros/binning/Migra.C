@@ -233,7 +233,7 @@ void basic_plot( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, "Internal Simulation" );
+  myText( 0.21, 0.92, kBlack, "Preliminary Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -242,9 +242,9 @@ void basic_plot( const char * hname, const char * htitle = "" )
   //myText(  0.7, 0.95, kBlack, buf );
 
   char pname[128];
-  sprintf( pname, "~/workdir/migration_%s_co.png", hname );
+  sprintf( pname, "migration_%s_co.png", hname );
   c->SaveAs( pname );
-  sprintf( pname, "~/workdir/migration_%s_co.pdf", hname );
+  sprintf( pname, "migration_%s_co.pdf", hname );
   c->SaveAs( pname );
 }
 
@@ -334,7 +334,7 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.95, kBlack );
-  myText( 0.19, 0.95, kBlack, "Internal Simulation   l+jets" );
+  myText( 0.19, 0.95, kBlack, "Preliminary Simulation   l+jets" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -343,9 +343,9 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
   //myText(  0.7, 0.95, kBlack, buf );
 
   char pname[128];
-  sprintf( pname, "~/workdir/migration_%s_co.png", hname );
+  sprintf( pname, "migration_%s_co.png", hname );
   c->SaveAs( pname );
-  sprintf( pname, "~/workdir/migration_%s_co.pdf", hname );
+  sprintf( pname, "migration_%s_co.pdf", hname );
   c->SaveAs( pname );
 }
 
@@ -435,7 +435,7 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, "Internal Simulation" );
+  myText( 0.21, 0.92, kBlack, "Preliminary Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -444,11 +444,12 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
   //myText(  0.7, 0.95, kBlack, buf );
 
   char pname[128];
-  sprintf( pname, "~/workdir/migration_%s_co.png", hname );
+  sprintf( pname, "migration_%s_co.png", hname );
   c->SaveAs( pname );
-  sprintf( pname, "~/workdir/migration_%s_co.pdf", hname );
+  sprintf( pname, "migration_%s_co.pdf", hname );
   c->SaveAs( pname );
 }
+
 void Migra(TString input = "~/workdir/histograms_PowHeg_Wdil_co.root")
 {
   //TFile *in=new TFile("~/workdir/histograms_PowHeg_ll_diles_ljets.root","read");
