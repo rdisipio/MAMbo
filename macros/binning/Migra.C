@@ -183,7 +183,7 @@ void basic_plot( const char * hname, const char * htitle = "" )
   char buf[128];
   sprintf( buf, "%s (detector level)", htitle );
   migra->GetXaxis()->SetTitle( buf );
-  migra->GetXaxis()->SetTitleOffset( 1.1 );
+  migra->GetXaxis()->SetTitleOffset( 1.3 );
   sprintf( buf,	"%s (particle level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
   migra->GetYaxis()->SetTitleOffset( 1.5 );
@@ -234,7 +234,7 @@ void basic_plot( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, " Preliminary Simulation" );
+  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -284,7 +284,7 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
   
   sprintf( buf, "%s (particle level)", htitle );
   migra->GetXaxis()->SetTitle( buf );
-  migra->GetXaxis()->SetTitleOffset( 1.1 );
+  migra->GetXaxis()->SetTitleOffset( 1.3 );
   sprintf( buf,	"%s (parton level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
   migra->GetYaxis()->SetTitleOffset( 1.5 );
@@ -335,7 +335,7 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.95, kBlack );
-  myText( 0.19, 0.95, kBlack, " Preliminary Simulation   l+jets" );
+  myText( 0.19, 0.95, kBlack, " Simulation Preliminary   l+jets" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -385,7 +385,7 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
   
   sprintf( buf, "%s (detector level)", htitle );
   migra->GetXaxis()->SetTitle( buf );
-  migra->GetXaxis()->SetTitleOffset( 1.1 );
+  migra->GetXaxis()->SetTitleOffset( 1.3 );
   sprintf( buf,	"%s (parton level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
   migra->GetYaxis()->SetTitleOffset( 1.2 );
@@ -436,7 +436,7 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, " Preliminary Simulation" );
+  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
