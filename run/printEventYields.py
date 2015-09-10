@@ -11,15 +11,15 @@ basedir = os.environ['MAMBODIR'] + "/run/output/" + analysis + "/" + syst + "/"
 hname_wgt = "LPLUSJETS_cutflow_reco_weighted"
 hname_unw  = "LPLUSJETS_cutflow_reco_unweight" 
 
-channels = [ 'el', 'mu' ]
-samples = [ 'Data', 'ttbar', 'Single top', 'W+jets', 'Z+jets', 'Diboson', 'Fake Lep.', 'Tot. Bkg', 'Expected' ]
+channels = [ 'el', 'mu', 'co' ]
+samples = [ 'Data', 'ttbar', 'Single top', 'W+jets', 'Z+jets', 'Diboson', 'Fake Lep.', 'Tot. Bkg' ]#, 'Expected' ]
 
 flist = {
 'el' : {
 'Data'       : "tt_diffxs_8TeV.data.Egamma.el.histograms.root",
-'ttbar'      : "tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.histograms.root",
+'ttbar'      : "tt_diffxs_8TeV.mc.DiTop.110404.el.nominal.nofullhad.histograms.root",
 'Single top' : "tt_diffxs_8TeV.mc.SingleTop.el.nominal.histograms.root",
-'W+jets'     : "tt_diffxs_8TeV.mc.Wjets.el.nominal.histograms.root",
+'W+jets'     : "tt_diffxs_8TeV.mc.Wjets.el.tt_chasymm.nominal.histograms.root",
 'Z+jets'     : "tt_diffxs_8TeV.mc.Zjets.el.nominal.histograms.root",
 'Diboson'    : "tt_diffxs_8TeV.mc.Diboson.el.nominal.histograms.root",
 'Fake Lep.'  : "tt_diffxs_8TeV.qcd.Egamma.el.nominal.histograms.root",
@@ -28,14 +28,25 @@ flist = {
 },
 'mu' : {
 'Data'       : "tt_diffxs_8TeV.data.Muons.mu.histograms.root",
-'ttbar'      : "tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.histograms.root",
+'ttbar'      : "tt_diffxs_8TeV.mc.DiTop.110404.mu.nominal.nofullhad.histograms.root",
 'Single top' : "tt_diffxs_8TeV.mc.SingleTop.mu.nominal.histograms.root",
-'W+jets'     : "tt_diffxs_8TeV.mc.Wjets.mu.nominal.histograms.root",
+'W+jets'     : "tt_diffxs_8TeV.mc.Wjets.mu.tt_chasymm.nominal.histograms.root",
 'Z+jets'     : "tt_diffxs_8TeV.mc.Zjets.mu.nominal.histograms.root",
 'Diboson'    : "tt_diffxs_8TeV.mc.Diboson.mu.nominal.histograms.root",
 'Fake Lep.'  : "tt_diffxs_8TeV.qcd.Muons.mu.nominal.histograms.root",
 'Tot. Bkg'   : "tt_diffxs_8TeV.mc.Background.mu.nominal.histograms.root",
 'Expected'   : "tt_diffxs_8TeV.mc.Expected.mu.nominal.histograms.root",
+},
+'co' : {
+'Data'       : "tt_diffxs_8TeV.data.Combined.co.histograms.root",
+'ttbar'      : "tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root",
+'Single top' : "tt_diffxs_8TeV.mc.SingleTop.co.nominal.histograms.root",
+'W+jets'     : "tt_diffxs_8TeV.mc.Wjets.co.tt_chasymm.nominal.histograms.root",
+'Z+jets'     : "tt_diffxs_8TeV.mc.Zjets.co.nominal.histograms.root",
+'Diboson'    : "tt_diffxs_8TeV.mc.Diboson.co.nominal.histograms.root",
+'Fake Lep.'  : "tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root",
+'Tot. Bkg'   : "tt_diffxs_8TeV.mc.Background.co.nominal.histograms.root",
+'Expected'   : "tt_diffxs_8TeV.mc.Expected.co.nominal.histograms.root",
 }
 }
 

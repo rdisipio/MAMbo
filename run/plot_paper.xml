@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<plots tag="co" latex="" >
+  <plot hpath="reco/cutflow/afterCuts/lep_pt"               xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <plot hpath="reco/cutflow/afterCuts/met_pt_2"                xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_n"                 xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_pt"                xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <plot hpath="reco/cutflow/afterCuts/bjet_n"                 xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/bjet1_pt"               xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <plot hpath="reco/4j2b/difference/HT_ttbar"            xtitle="H_{T}^{t#bar{t}} [GeV]" ytitle="Events / GeV" scale="log" />
+  <plot hpath="reco/4j2b/difference/absPout"             xtitle="|p_{out}^{t#bar{t}}| [GeV]"      ytitle="Events / GeV" scale="log" />
+  <plot hpath="reco/4j2b/difference/Chi_ttbar"           xtitle="#chi^{t#bar{t}}" ytitle="Events / Unit #chi^{t#bar{t}}" scale="bilog" />
+  <plot hpath="reco/4j2b/difference/Yboost"              xtitle="y_{boost}^{t#bar{t}}" ytitle="Events / Unit y_{boost}^{t#bar{t}}" scale="linear" />
+  <plot hpath="reco/4j2b/difference/dPhi_ttbar"          xtitle="#Delta #phi^{t#bar{t}} [rad]" ytitle="Events / rad" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wt_had"            xtitle="R_{Wt}" ytitle="Events / Unit R_{Wt}" scale="linear" /> 
+  <plot hpath="reco/4j2b/topH/pt"                            xtitle="p_{T}^{t,had} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/4j2b/topH/absrap"                        xtitle="|y^{t,had}|" ytitle="Events / Unit Rapidity"  scale="linear" />
+  <plot hpath="reco/4j2b/tt/m"                  xtitle=" m^{t#bar{t}} [GeV]"               ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/4j2b/tt/pt"                 xtitle=" p_{T}^{t#bar{t}} [GeV]"           ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/4j2b/tt/absrap"             xtitle=" |y^{t#bar{t}}|"                ytitle="Events / Unit Rapidity" scale="linear" />
+
+</plots>
+<samples>
+  <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
+  <sample name="DiTop"       type="signal"      description="t#bar{t}"                  color="1"     fillstyle="1001" linewidth="2" />
+  <sample name="SingleTop"   type="background"  description="Single top"          	color="62"    fillstyle="1001" linewidth="2" />
+  <sample name="Wjets"       type="background"  description="W+jets"              	color="92"    fillstyle="1001" linewidth="2" /> 
+  <sample name="Zjets"       type="background"  description="Z+jets"              	color="95"    fillstyle="1001" linewidth="2" />
+  <sample name="Diboson"     type="background"  description="WW/ZZ/WZ"            	color="5"     fillstyle="1001" linewidth="2" />
+  <sample name="Fakes"       type="datadriven"  description="Fake lept."          	color="619"   fillstyle="1001" linewidth="2" />
+  <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. unc."   	color="1"     fillstyle="3004" linewidth="2" /> 
+</samples>
+<inputfiles>
+  <file sample="data" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.data.Combined.co.histograms.root"    />
+  <file	sample="DiTop"		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root"       />
+  <file	sample="SingleTop" 	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.SingleTop.co.nominal.histograms.root"   />
+  <file	sample="Wjets" 		path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Wjets.co.tt_chasymm.nominal.histograms.root"       />
+  <file sample="Zjets"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Zjets.co.nominal.histograms.root" 	/>
+  <file sample="Diboson"        path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Diboson.co.nominal.histograms.root"	/>
+  <file sample="Fakes"          path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.qcd.Combined.co.nominal.histograms.root"    />
+  <file	sample="uncertainty"	path="/home/ATLAS/disipio/development/MAMbo/run/output/TTbarResolved_resolved/nominal/tt_diffxs_8TeV.mc.Uncertainty_statsyst.110404.co.nominal.histograms.root" />
+</inputfiles>
+</document>
