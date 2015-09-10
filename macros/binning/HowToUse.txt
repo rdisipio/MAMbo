@@ -18,7 +18,7 @@ There are several helping function to set different style for different levels a
 To run use '.L Migra.C' only.
 
 root -b -q -l 'Migra.C("/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug3/histograms_PowHeg_co.root")' 
-
+root -b -q -l 'Migra.C("/afs/cern.ch/user/d/disipio/work/public/ttbar_diffxs_8TeV/reco/nominal/tt_diffxs_8TeV.mc.DiTop_110404.co.nominal.histograms.root")'
 
 In case of further questions send an e-mail to: josef.pacalt@cern.ch
 

@@ -36,6 +36,7 @@ void PercDraw(const TH2D *resmat)
   percmat->GetZaxis()->SetLabelSize(0.030);
   percmat->GetZaxis()->SetTitleSize(0.04);
   percmat->GetZaxis()->SetTitleOffset(1.1);
+  percmat->GetYaxis()->SetTitleOffset(1.5);
   percmat->Draw("colz");
   percmat->Draw("sametext");
   cout << "Setting labels..." << endl;
@@ -185,7 +186,7 @@ void basic_plot( const char * hname, const char * htitle = "" )
   migra->GetXaxis()->SetTitleOffset( 1.1 );
   sprintf( buf,	"%s (particle level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
-  migra->GetYaxis()->SetTitleOffset( 1.2 );
+  migra->GetYaxis()->SetTitleOffset( 1.5 );
 
   TCanvas * c = new TCanvas("c", "canv", 800, 800 );
   gPad->SetLeftMargin( 0.13 );
@@ -233,7 +234,7 @@ void basic_plot( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, "Preliminary Simulation" );
+  myText( 0.21, 0.92, kBlack, " Preliminary Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -286,7 +287,7 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
   migra->GetXaxis()->SetTitleOffset( 1.1 );
   sprintf( buf,	"%s (parton level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
-  migra->GetYaxis()->SetTitleOffset( 1.1 );
+  migra->GetYaxis()->SetTitleOffset( 1.5 );
 
   TCanvas * c = new TCanvas("c", "canv", 800, 600 );
   gPad->SetLeftMargin( 0.12 );
@@ -334,7 +335,7 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.95, kBlack );
-  myText( 0.19, 0.95, kBlack, "Preliminary Simulation   l+jets" );
+  myText( 0.19, 0.95, kBlack, " Preliminary Simulation   l+jets" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -435,7 +436,7 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, "Preliminary Simulation" );
+  myText( 0.21, 0.92, kBlack, " Preliminary Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
