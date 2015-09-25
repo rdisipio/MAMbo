@@ -309,7 +309,7 @@ GenNames = [
 
 
 os.system('mkdir png_mtop eps_mtop pdf_mtop')
-ROOT.gROOT.SetBatch(0)
+ROOT.gROOT.SetBatch(1)
 
 for ll in ljets:
 

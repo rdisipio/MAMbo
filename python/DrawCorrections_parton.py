@@ -178,6 +178,8 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
     can = TCanvas(canname, canname, 1, 1, 800, 800)
+    gPad.SetLeftMargin(0.14)
+    gPad.SetRightMargin(0.039)
     #can.Divide(2,1)
     _cans.append(can)
 
@@ -221,14 +223,14 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
         tmp = next_tmp(xmin, xmax, title)
         SetStyle(tmp, xtitle, ytitle)
 
-    tmp.GetYaxis().SetTitleOffset(1.3)
+    tmp.GetYaxis().SetTitleOffset(1.6)
     tmp.GetXaxis().SetNdivisions(505)
     SetStyle(corr, xtitle, ytitle)
     corr.Draw('P')
     _corrs.append(corr)
 
     ATLAS_LABEL(0.16, 0.96, kBlack)
-    myText(0.335, 0.96, kBlack, "Preliminary Simulation");
+    myText(0.335, 0.96, kBlack, "Simulation Preliminary");
 
     can.Print('eps_parton/' + canname + '.eps')
     can.Print('png_parton/' + canname + '.png')
@@ -240,11 +242,11 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
 
 SetAtlasStyle()
 
-ljets = [ 'co', 'el', 'mu']
+#ljets = [ 'co', 'el', 'mu']
 #ljets = [ 'el', 'mu']
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-#ljets = [ 'co' ]
+ljets = [ 'co' ]
 
 ptag=''
 ftag=''
@@ -274,7 +276,7 @@ rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug10_ljets/'
 
 
 os.system('mkdir png_parton eps_parton pdf_parton')
-ROOT.gROOT.SetBatch(1)
+ROOT.gROOT.SetBatch(0)
 
 for ll in ljets:
 
@@ -287,12 +289,16 @@ for ll in ljets:
     _files.append(pfile)
     print 'Opened file %s' % (pfile.GetName(),)
 
-    Obj = ['topH', #'topL',
+    Obj = ['topH',
+           #'topL',
            #'WH', 
            #'WL',
-           'tt']
-    Var = ['pt', 'm', 
-           'absrap']
+           #'tt'
+    ]
+    Var = ['pt',
+           #'m', 
+           #'absrap'
+    ]
 
     for obj in Obj:
         for var in Var:
