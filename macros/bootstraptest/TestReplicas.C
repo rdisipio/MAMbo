@@ -1,7 +1,10 @@
 {
 
 
-  TString fname = "/afs/cern.ch/user/q/qitek/public/MCsigHalves/BootsTrap/10toys/histograms_data_el.root";
+
+  //TString dir = "/afs/cern.ch/user/q/qitek/public/MCsigHalves/BootsTrap/10toys";
+  TString dir = "../../run/";
+  TString fname = dir + "/histograms_data_el.root";
 
 
   gSystem->AddIncludePath(" -I../../../");
@@ -9,7 +12,8 @@
   gROOT->ProcessLine( ".L ../../../BootstrapGenerator/StandAlone/libBootstrapGenerator.so" );
   TH1DBootstrap * h;
   TFile * f = TFile::Open( fname, "read" );
-  f->GetObject( "m_boots", h );
+  //  f->GetObject( "m_boots", h );
+  f->GetObject( "reco_4j2b_tt_m_boots", h );
   TH1D * hist = h->GetNominal();
   hist->Print( "all" );
   int nReplica = h->GetNReplica();

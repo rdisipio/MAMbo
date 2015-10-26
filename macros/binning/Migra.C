@@ -36,7 +36,7 @@ void PercDraw(const TH2D *resmat)
   percmat->GetZaxis()->SetLabelSize(0.030);
   percmat->GetZaxis()->SetTitleSize(0.04);
   percmat->GetZaxis()->SetTitleOffset(1.1);
-  percmat->GetYaxis()->SetTitleOffset(1.5);
+  percmat->GetYaxis()->SetTitleOffset(1.1);
   percmat->Draw("colz");
   percmat->Draw("sametext");
   cout << "Setting labels..." << endl;
@@ -151,11 +151,20 @@ void normalize_rows( TH2D * h )
 void basic_plot( const char * hname, const char * htitle = "" )
 {
    
+
+ // gROOT->Macro("./rootlogon.C");
+  gROOT->LoadMacro("../../share/AtlasUtils.C");
+  gROOT->LoadMacro( "../../share/rootlogon.C" );
+  gROOT->LoadMacro( "../../share/AtlasStyle.C" );
+  SetAtlasStyle();
+
+
    gStyle->SetPaintTextFormat("4.0f");
    gStyle->SetOptStat(0);
    gStyle->SetMarkerSize(1.5);
    gStyle->SetOptTitle(0);
-   static const UInt_t Number = 3;
+
+   const int Number = 3;
    Double_t Red[Number]    = { 1.00, 0.43, 0.05};
    Double_t Green[Number]  = { 1.00, 0.78, 0.59};
    Double_t Blue[Number]   = { 1.00, 0.69, 0.53};
@@ -164,10 +173,6 @@ void basic_plot( const char * hname, const char * htitle = "" )
    Int_t nb=100;
    TColor::CreateGradientColorTable(Number,Length,Red,Green,Blue,nb);
     
-
- // gROOT->Macro("./rootlogon.C");
-  gROOT->LoadMacro("./AtlasUtils.C");
-
   TH2D * h = (TH2D*)gDirectory->Get( hname );
   
   int nbins = h->GetXaxis()->GetNbins();
@@ -183,10 +188,10 @@ void basic_plot( const char * hname, const char * htitle = "" )
   char buf[128];
   sprintf( buf, "%s (detector level)", htitle );
   migra->GetXaxis()->SetTitle( buf );
-  migra->GetXaxis()->SetTitleOffset( 1.3 );
+  migra->GetXaxis()->SetTitleOffset( 1.1 );
   sprintf( buf,	"%s (particle level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
-  migra->GetYaxis()->SetTitleOffset( 1.5 );
+  migra->GetYaxis()->SetTitleOffset( 1.1 );
 
   TCanvas * c = new TCanvas("c", "canv", 800, 800 );
   gPad->SetLeftMargin( 0.13 );
@@ -233,10 +238,9 @@ void basic_plot( const char * hname, const char * htitle = "" )
  // double x = 0.15; // eta distributions
 //  double x = 0.45;
  // double y = 0.93;
-  ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
-//  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
-//  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
+  ATLAS_LABEL( 0.16, 0.80, kBlack );
+  myText( 0.31, 0.80, kBlack, " Simulation" );
+  myText( 0.16, 0.74, kBlack, " Preliminary" );
 
   //const double rho = h->GetCorrelationFactor();
   //sprintf( buf, "correlation: %3.2f", rho );
@@ -284,10 +288,10 @@ void basic_plot_par( const char * hname, const char * htitle = "" )
   
   sprintf( buf, "%s (particle level)", htitle );
   migra->GetXaxis()->SetTitle( buf );
-  migra->GetXaxis()->SetTitleOffset( 1.3 );
+  migra->GetXaxis()->SetTitleOffset( 1.1 );
   sprintf( buf,	"%s (parton level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
-  migra->GetYaxis()->SetTitleOffset( 1.5 );
+  migra->GetYaxis()->SetTitleOffset( 1.1 );
 
   TCanvas * c = new TCanvas("c", "canv", 800, 600 );
   gPad->SetLeftMargin( 0.12 );
@@ -385,10 +389,10 @@ void basic_plot_rp( const char * hname, const char * htitle = "" )
   
   sprintf( buf, "%s (detector level)", htitle );
   migra->GetXaxis()->SetTitle( buf );
-  migra->GetXaxis()->SetTitleOffset( 1.3 );
+  migra->GetXaxis()->SetTitleOffset( 1.1 );
   sprintf( buf,	"%s (parton level)", htitle );
   migra->GetYaxis()->SetTitle( buf );
-  migra->GetYaxis()->SetTitleOffset( 1.2 );
+  migra->GetYaxis()->SetTitleOffset( 1.1 );
 
   TCanvas * c = new TCanvas("c", "canv", 800, 800 );
   gPad->SetLeftMargin( 0.13 );
