@@ -13,9 +13,15 @@ source ~/bin/asetup.sh
 
 
 ### TODO!!!
-# fixed data:
-path=/eos/atlas/user/q/qitek/top-phys/2015/20150826_ntuples/
-# mass-varied samples:
+# fixed data, but incoplete:
+#path=/eos/atlas/user/q/qitek/top-phys/2015/20150826_ntuples/
+
+# COMPLETE FIXED DATA:
+# /eos/atlas/user/m/mromano/minintuples-december/user.mromano.period*.at180_2jet_ajc0340_*.root                                                                                                
+path=/eos/atlas/user/m/mromano/minintuples-december/
+
+
+# mass-varied MC samples:
 #path=/eos/atlas/user/q/qitek/top-phys/2015/20150827_ntuples/
 
 
