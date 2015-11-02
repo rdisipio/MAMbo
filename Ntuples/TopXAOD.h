@@ -56,7 +56,7 @@ public :
    vector<float>   *jet_mv2c10;
    vector<float>   *jet_mv2c20;
    vector<float>   *jet_ip3dsv1;
-   vector<float>   *jet_jvf;
+   vector<float>   *jet_jvt;
    Float_t         met_met;
    Float_t         met_phi;
    Short_t         klfitter_selected;
@@ -129,7 +129,7 @@ public :
    TBranch        *b_jet_mv2c10;   //!
    TBranch        *b_jet_mv2c20;   //!
    TBranch        *b_jet_ip3dsv1;   //!
-   TBranch        *b_jet_jvf;   //!
+   TBranch        *b_jet_jvt;   //!
    TBranch        *b_met_met;   //!
    TBranch        *b_met_phi;   //!
    TBranch        *b_klfitter_selected;   //!
@@ -260,7 +260,7 @@ void TopXAOD::Init(TTree *tree)
    jet_mv2c10 = 0;
    jet_mv2c20 = 0;
    jet_ip3dsv1 = 0;
-   jet_jvf = 0;
+   jet_jvt = 0;
    klfitter_minuitDidNotConverge = 0;
    klfitter_fitAbortedDueToNaN = 0;
    klfitter_atLeastOneFitParameterAtItsLimit = 0;
@@ -329,7 +329,7 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("jet_mv2c10", &jet_mv2c10, &b_jet_mv2c10);
    fChain->SetBranchAddress("jet_mv2c20", &jet_mv2c20, &b_jet_mv2c20);
    fChain->SetBranchAddress("jet_ip3dsv1", &jet_ip3dsv1, &b_jet_ip3dsv1);
-   fChain->SetBranchAddress("jet_jvf", &jet_jvf, &b_jet_jvf);
+   fChain->SetBranchAddress("jet_jvt", &jet_jvt, &b_jet_jvt);
    fChain->SetBranchAddress("met_met", &met_met, &b_met_met);
    fChain->SetBranchAddress("met_phi", &met_phi, &b_met_phi);
    fChain->SetBranchAddress("klfitter_selected", &klfitter_selected, &b_klfitter_selected);

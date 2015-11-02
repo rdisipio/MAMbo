@@ -149,12 +149,12 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
             const double jet_m = PhysicsHelperFunctions::Mass( ed->jets, j );
             ed->jets.m.push_back( jet_m );
 
-            ed->jets.property["jvf"].push_back(          GET_VALUE_VECTOR(jet_jvf, j)          );
+            ed->jets.property["jvt"].push_back(          GET_VALUE_VECTOR(jet_jvt, j)          );
 
-            const double mv1 = GET_VALUE_VECTOR(jet_mv1, j);
-            ed->jets.property["MV1"].push_back( mv1 );
+            const double mv2c20 = GET_VALUE_VECTOR(jet_mv2c20, j);
+            ed->jets.property["mv2c20"].push_back( mv2c20 );
 
-            if( mv1 > 0.7892 ) { // 70% eff w.p.
+            if( mv2c20 > -0.0436 ) { // 70% eff w.p.
                 ed->bjets.n++;
 
                 ed->bjets.pT.push_back( jet_pT );
@@ -163,7 +163,7 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
                 ed->bjets.E.push_back( jet_E );
                 ed->bjets.m.push_back( jet_m );
                 ed->bjets.index.push_back( j );
-                ed->bjets.property["MV1"].push_back(mv1);
+                ed->bjets.property["mv2c20"].push_back(mv2c20);
             } else {
                 ed->ljets.n++;
 
@@ -173,7 +173,7 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
                 ed->ljets.E.push_back( jet_E );
                 ed->ljets.m.push_back( jet_m );
                 ed->ljets.index.push_back( j );
-                ed->ljets.property["MV1"].push_back(mv1);
+                ed->ljets.property["mv2c20"].push_back(mv2c20);
             }
     }
 
