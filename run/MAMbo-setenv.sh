@@ -1,1 +1,1 @@
-/home/ATLAS/disipio/development/MAMbo/bin/MAMbo-setenv.sh
+/home/r/rorr/disipio/development/MAMbo/bin/MAMbo-setenv.sh
