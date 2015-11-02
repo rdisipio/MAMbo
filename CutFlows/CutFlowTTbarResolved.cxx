@@ -665,6 +665,10 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_unweight");
 
     // 3 SingleLepton
+    int goodflavor_lep_n = ( m_config->channel == kElectron ) ? ed->electrons.n : ed->muons.n;
+    int oppositeflavor_lep_n = ( m_config->channel == kElectron ) ? ed->muons.n : ed->electrons.n;
+    if( goodflavor_lep_n != 1 ) return !passed;
+    if( oppositeflavor_lep_n != 0 ) return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
 
