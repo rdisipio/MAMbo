@@ -109,7 +109,7 @@ bool NtupleWrapperTopXAOD::MakeEventLeptons( EventData * ed )
   }
   // should be re-ordered by pT. Or there is just one lepton, either el or mu?
 
-  cout << "DEBUG: el_n=" << ed->electrons.n << " mu_n=" << ed->muons.n << endl;
+//  cout << "DEBUG: el_n=" << ed->electrons.n << " mu_n=" << ed->muons.n << endl;
 
   return success;
 }
