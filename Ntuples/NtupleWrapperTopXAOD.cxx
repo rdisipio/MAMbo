@@ -25,14 +25,19 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->info.eventNumber     = GET_VALUE( eventNumber );
   ed->info.runNumber       = GET_VALUE( runNumber );
   ed->info.mcChannelNumber = GET_VALUE( mcChannelNumber );
-  ed->info.mcWeight        = GET_VALUE( mcWeight );
+//  ed->info.mcWeight        = GET_VALUE( mcWeight );
+  ed->info.mcWeight        = 1.0; // no mcWeight??
 
-  SET_PROPERTY( mu );
-  SET_PROPERTY( ee );
-  SET_PROPERTY( mumu );
-  SET_PROPERTY(	emu );
-  SET_PROPERTY( ejets );
-  SET_PROPERTY( mujets );
+  SET_PROPERTY( passed_resolved_ejets );
+  SET_PROPERTY( passed_resolved_mujets );
+  SET_PROPERTY( passed_boosted_ejets );
+  SET_PROPERTY( passed_boosted_mujets );
+
+  SET_PROPERTY( HLT_mu20_iloose_L1MU15 );
+  SET_PROPERTY( HLT_mu50 );
+  SET_PROPERTY( HLT_e60_lhmedium );
+  SET_PROPERTY( HLT_e24_lhmedium_L1EM18VH );
+  SET_PROPERTY( HLT_e120_lhloose );
 
   return success;
 }

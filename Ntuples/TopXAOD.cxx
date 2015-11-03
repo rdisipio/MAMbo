@@ -7,12 +7,12 @@
 void TopXAOD::Loop()
 {
 //   In a ROOT session, you can do:
-//      Root > .L TopXAOD.C
-//      Root > TopXAOD t
-//      Root > t.GetEntry(12); // Fill t data members with entry number 12
-//      Root > t.Show();       // Show values of entry 12
-//      Root > t.Show(16);     // Read and show values of entry 16
-//      Root > t.Loop();       // Loop on all entries
+//      root> .L TopXAOD.C
+//      root> TopXAOD t
+//      root> t.GetEntry(12); // Fill t data members with entry number 12
+//      root> t.Show();       // Show values of entry 12
+//      root> t.Show(16);     // Read and show values of entry 16
+//      root> t.Loop();       // Loop on all entries
 //
 
 //     This is the loop skeleton where:

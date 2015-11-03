@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Thu Jun  4 19:08:09 2015 by ROOT version 5.34/19
+// Mon Nov  2 15:02:44 2015 by ROOT version 6.02/12
 // from TTree nominal/tree
-// found on file: ../run/spano.root
+// found on file: /home/r/rorr/disipio/SCRATCH/ntuples/tt_diffxs_13TeV/ljets/DAOD_TOPQ1/user.disipio.00276262.physics_Main.DAOD_TOPQ1.f620_m1480_p2425.20151030_25ns_v2_ljets.output.root/user.disipio.6847553._000001.ljets.output.root
 //////////////////////////////////////////////////////////
 
 #ifndef TopXAOD_h
@@ -13,38 +13,37 @@
 #include <TFile.h>
 
 // Header file for the classes stored in the TTree if any.
-#include <vector>
-#include <vector>
-#include <vector>
-#include <vector>
+#include "vector"
 
 using namespace std;
-// Fixed size dimensions of array or collections stored in the TTree if any.
 
 class TopXAOD {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
+// Fixed size dimensions of array or collections stored in the TTree if any.
+
    // Declaration of leaf types
-   Float_t         mcWeight;
-   Float_t         pileupWeight;
    UInt_t          eventNumber;
    UInt_t          runNumber;
    UInt_t          mcChannelNumber;
    Float_t         mu;
+   Float_t         mu_original_xAOD;
    vector<float>   *el_pt;
    vector<float>   *el_eta;
    vector<float>   *el_phi;
    vector<float>   *el_e;
    vector<float>   *el_charge;
-   vector<float>   *el_miniiso;
+   vector<float>   *el_topoetcone20;
+   vector<float>   *el_ptvarcone20;
    vector<float>   *mu_pt;
    vector<float>   *mu_eta;
    vector<float>   *mu_phi;
    vector<float>   *mu_e;
    vector<float>   *mu_charge;
-   vector<float>   *mu_miniiso;
+   vector<float>   *mu_topoetcone20;
+   vector<float>   *mu_ptvarcone30;
    vector<float>   *jet_pt;
    vector<float>   *jet_eta;
    vector<float>   *jet_phi;
@@ -57,67 +56,49 @@ public :
    vector<float>   *jet_mv2c20;
    vector<float>   *jet_ip3dsv1;
    vector<float>   *jet_jvt;
+   vector<float>   *ljet_pt;
+   vector<float>   *ljet_eta;
+   vector<float>   *ljet_phi;
+   vector<float>   *ljet_e;
+   vector<float>   *ljet_m;
+   vector<float>   *ljet_sd12;
    Float_t         met_met;
    Float_t         met_phi;
-   Short_t         klfitter_selected;
-   vector<short>   *klfitter_minuitDidNotConverge;
-   vector<short>   *klfitter_fitAbortedDueToNaN;
-   vector<short>   *klfitter_atLeastOneFitParameterAtItsLimit;
-   vector<short>   *klfitter_invalidTransferFunctionAtConvergence;
-   vector<unsigned int> *klfitter_bestPermutation;
-   vector<float>   *klfitter_logLikelihood;
-   vector<float>   *klfitter_eventProbability;
-   vector<vector<double> > *klfitter_parameters;
-   vector<vector<double> > *klfitter_parameterErrors;
-   vector<float>   *klfitter_model_bhad_pt;
-   vector<float>   *klfitter_model_bhad_eta;
-   vector<float>   *klfitter_model_bhad_phi;
-   vector<float>   *klfitter_model_bhad_E;
-   vector<unsigned int> *klfitter_model_bhad_jetIndex;
-   vector<float>   *klfitter_model_blep_pt;
-   vector<float>   *klfitter_model_blep_eta;
-   vector<float>   *klfitter_model_blep_phi;
-   vector<float>   *klfitter_model_blep_E;
-   vector<unsigned int> *klfitter_model_blep_jetIndex;
-   vector<float>   *klfitter_model_lq1_pt;
-   vector<float>   *klfitter_model_lq1_eta;
-   vector<float>   *klfitter_model_lq1_phi;
-   vector<float>   *klfitter_model_lq1_E;
-   vector<unsigned int> *klfitter_model_lq1_jetIndex;
-   vector<float>   *klfitter_model_lq2_pt;
-   vector<float>   *klfitter_model_lq2_eta;
-   vector<float>   *klfitter_model_lq2_phi;
-   vector<float>   *klfitter_model_lq2_E;
-   vector<unsigned int> *klfitter_model_lq2_jetIndex;
-   vector<float>   *klfitter_model_lep_pt;
-   vector<float>   *klfitter_model_lep_eta;
-   vector<float>   *klfitter_model_lep_phi;
-   vector<float>   *klfitter_model_lep_E;
-   Int_t           ee;
-   Int_t           mumu;
-   Int_t           emu;
-   Int_t           ejets;
-   Int_t           mujets;
+   Int_t           passed_resolved_ejets;
+   Int_t           passed_resolved_mujets;
+   Int_t           passed_boosted_ejets;
+   Int_t           passed_boosted_mujets;
+   Char_t          HLT_mu20_iloose_L1MU15;
+   Char_t          HLT_mu50;
+   Char_t          HLT_e60_lhmedium;
+   Char_t          HLT_e24_lhmedium_L1EM18VH;
+   Char_t          HLT_e120_lhloose;
+   vector<char>    *el_trigMatch_HLT_e60_lhmedium;
+   vector<char>    *el_trigMatch_HLT_e24_lhmedium_L1EM18VH;
+   vector<char>    *el_trigMatch_HLT_e120_lhloose;
+   vector<char>    *mu_trigMatch_HLT_mu50;
+   vector<char>    *mu_trigMatch_HLT_mu20_iloose_L1MU15;
 
    // List of branches
-   TBranch        *b_mcWeight;   //!
-   TBranch        *b_pileupWeight;   //!
    TBranch        *b_eventNumber;   //!
    TBranch        *b_runNumber;   //!
    TBranch        *b_mcChannelNumber;   //!
    TBranch        *b_mu;   //!
+   TBranch        *b_mu_original_xAOD;   //!
    TBranch        *b_el_pt;   //!
    TBranch        *b_el_eta;   //!
    TBranch        *b_el_phi;   //!
    TBranch        *b_el_e;   //!
    TBranch        *b_el_charge;   //!
-   TBranch        *b_el_miniiso;   //!
+   TBranch        *b_el_topoetcone20;   //!
+   TBranch        *b_el_ptvarcone20;   //!
    TBranch        *b_mu_pt;   //!
    TBranch        *b_mu_eta;   //!
    TBranch        *b_mu_phi;   //!
    TBranch        *b_mu_e;   //!
    TBranch        *b_mu_charge;   //!
-   TBranch        *b_mu_miniiso;   //!
+   TBranch        *b_mu_topoetcone20;   //!
+   TBranch        *b_mu_ptvarcone30;   //!
    TBranch        *b_jet_pt;   //!
    TBranch        *b_jet_eta;   //!
    TBranch        *b_jet_phi;   //!
@@ -130,47 +111,28 @@ public :
    TBranch        *b_jet_mv2c20;   //!
    TBranch        *b_jet_ip3dsv1;   //!
    TBranch        *b_jet_jvt;   //!
+   TBranch        *b_ljet_pt;   //!
+   TBranch        *b_ljet_eta;   //!
+   TBranch        *b_ljet_phi;   //!
+   TBranch        *b_ljet_e;   //!
+   TBranch        *b_ljet_m;   //!
+   TBranch        *b_ljet_sd12;   //!
    TBranch        *b_met_met;   //!
    TBranch        *b_met_phi;   //!
-   TBranch        *b_klfitter_selected;   //!
-   TBranch        *b_klfitter_minuitDidNotConverge;   //!
-   TBranch        *b_klfitter_fitAbortedDueToNaN;   //!
-   TBranch        *b_klfitter_atLeastOneFitParameterAtItsLimit;   //!
-   TBranch        *b_klfitter_invalidTransferFunctionAtConvergence;   //!
-   TBranch        *b_klfitter_bestPermutation;   //!
-   TBranch        *b_klfitter_logLikelihood;   //!
-   TBranch        *b_klfitter_eventProbability;   //!
-   TBranch        *b_klfitter_parameters;   //!
-   TBranch        *b_klfitter_parameterErrors;   //!
-   TBranch        *b_klfitter_model_bhad_pt;   //!
-   TBranch        *b_klfitter_model_bhad_eta;   //!
-   TBranch        *b_klfitter_model_bhad_phi;   //!
-   TBranch        *b_klfitter_model_bhad_E;   //!
-   TBranch        *b_klfitter_model_bhad_jetIndex;   //!
-   TBranch        *b_klfitter_model_blep_pt;   //!
-   TBranch        *b_klfitter_model_blep_eta;   //!
-   TBranch        *b_klfitter_model_blep_phi;   //!
-   TBranch        *b_klfitter_model_blep_E;   //!
-   TBranch        *b_klfitter_model_blep_jetIndex;   //!
-   TBranch        *b_klfitter_model_lq1_pt;   //!
-   TBranch        *b_klfitter_model_lq1_eta;   //!
-   TBranch        *b_klfitter_model_lq1_phi;   //!
-   TBranch        *b_klfitter_model_lq1_E;   //!
-   TBranch        *b_klfitter_model_lq1_jetIndex;   //!
-   TBranch        *b_klfitter_model_lq2_pt;   //!
-   TBranch        *b_klfitter_model_lq2_eta;   //!
-   TBranch        *b_klfitter_model_lq2_phi;   //!
-   TBranch        *b_klfitter_model_lq2_E;   //!
-   TBranch        *b_klfitter_model_lq2_jetIndex;   //!
-   TBranch        *b_klfitter_model_lep_pt;   //!
-   TBranch        *b_klfitter_model_lep_eta;   //!
-   TBranch        *b_klfitter_model_lep_phi;   //!
-   TBranch        *b_klfitter_model_lep_E;   //!
-   TBranch        *b_ee;   //!
-   TBranch        *b_mumu;   //!
-   TBranch        *b_emu;   //!
-   TBranch        *b_ejets;   //!
-   TBranch        *b_mujets;   //!
+   TBranch        *b_passed_resolved_ejets;   //!
+   TBranch        *b_passed_resolved_mujets;   //!
+   TBranch        *b_passed_boosted_ejets;   //!
+   TBranch        *b_passed_boosted_mujets;   //!
+   TBranch        *b_HLT_mu20_iloose_L1MU15;   //!
+   TBranch        *b_HLT_mu50;   //!
+   TBranch        *b_HLT_e60_lhmedium;   //!
+   TBranch        *b_HLT_e24_lhmedium_L1EM18VH;   //!
+   TBranch        *b_HLT_e120_lhloose;   //!
+   TBranch        *b_el_trigMatch_HLT_e60_lhmedium;   //!
+   TBranch        *b_el_trigMatch_HLT_e24_lhmedium_L1EM18VH;   //!
+   TBranch        *b_el_trigMatch_HLT_e120_lhloose;   //!
+   TBranch        *b_mu_trigMatch_HLT_mu50;   //!
+   TBranch        *b_mu_trigMatch_HLT_mu20_iloose_L1MU15;   //!
 
    TopXAOD(TTree *tree=0);
    virtual ~TopXAOD();
@@ -191,9 +153,9 @@ TopXAOD::TopXAOD(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../run/spano.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/r/rorr/disipio/SCRATCH/ntuples/tt_diffxs_13TeV/ljets/DAOD_TOPQ1/user.disipio.00276262.physics_Main.DAOD_TOPQ1.f620_m1480_p2425.20151030_25ns_v2_ljets.output.root/user.disipio.6847553._000001.ljets.output.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("../run/spano.root");
+         f = new TFile("/home/r/rorr/disipio/SCRATCH/ntuples/tt_diffxs_13TeV/ljets/DAOD_TOPQ1/user.disipio.00276262.physics_Main.DAOD_TOPQ1.f620_m1480_p2425.20151030_25ns_v2_ljets.output.root/user.disipio.6847553._000001.ljets.output.root");
       }
       f->GetObject("nominal",tree);
 
@@ -242,13 +204,15 @@ void TopXAOD::Init(TTree *tree)
    el_phi = 0;
    el_e = 0;
    el_charge = 0;
-   el_miniiso = 0;
+   el_topoetcone20 = 0;
+   el_ptvarcone20 = 0;
    mu_pt = 0;
    mu_eta = 0;
    mu_phi = 0;
    mu_e = 0;
    mu_charge = 0;
-   mu_miniiso = 0;
+   mu_topoetcone20 = 0;
+   mu_ptvarcone30 = 0;
    jet_pt = 0;
    jet_eta = 0;
    jet_phi = 0;
@@ -261,63 +225,42 @@ void TopXAOD::Init(TTree *tree)
    jet_mv2c20 = 0;
    jet_ip3dsv1 = 0;
    jet_jvt = 0;
-   klfitter_minuitDidNotConverge = 0;
-   klfitter_fitAbortedDueToNaN = 0;
-   klfitter_atLeastOneFitParameterAtItsLimit = 0;
-   klfitter_invalidTransferFunctionAtConvergence = 0;
-   klfitter_bestPermutation = 0;
-   klfitter_logLikelihood = 0;
-   klfitter_eventProbability = 0;
-   klfitter_parameters = 0;
-   klfitter_parameterErrors = 0;
-   klfitter_model_bhad_pt = 0;
-   klfitter_model_bhad_eta = 0;
-   klfitter_model_bhad_phi = 0;
-   klfitter_model_bhad_E = 0;
-   klfitter_model_bhad_jetIndex = 0;
-   klfitter_model_blep_pt = 0;
-   klfitter_model_blep_eta = 0;
-   klfitter_model_blep_phi = 0;
-   klfitter_model_blep_E = 0;
-   klfitter_model_blep_jetIndex = 0;
-   klfitter_model_lq1_pt = 0;
-   klfitter_model_lq1_eta = 0;
-   klfitter_model_lq1_phi = 0;
-   klfitter_model_lq1_E = 0;
-   klfitter_model_lq1_jetIndex = 0;
-   klfitter_model_lq2_pt = 0;
-   klfitter_model_lq2_eta = 0;
-   klfitter_model_lq2_phi = 0;
-   klfitter_model_lq2_E = 0;
-   klfitter_model_lq2_jetIndex = 0;
-   klfitter_model_lep_pt = 0;
-   klfitter_model_lep_eta = 0;
-   klfitter_model_lep_phi = 0;
-   klfitter_model_lep_E = 0;
+   ljet_pt = 0;
+   ljet_eta = 0;
+   ljet_phi = 0;
+   ljet_e = 0;
+   ljet_m = 0;
+   ljet_sd12 = 0;
+   el_trigMatch_HLT_e60_lhmedium = 0;
+   el_trigMatch_HLT_e24_lhmedium_L1EM18VH = 0;
+   el_trigMatch_HLT_e120_lhloose = 0;
+   mu_trigMatch_HLT_mu50 = 0;
+   mu_trigMatch_HLT_mu20_iloose_L1MU15 = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
 
-   fChain->SetBranchAddress("mcWeight", &mcWeight, &b_mcWeight);
-   fChain->SetBranchAddress("pileupWeight", &pileupWeight, &b_pileupWeight);
    fChain->SetBranchAddress("eventNumber", &eventNumber, &b_eventNumber);
    fChain->SetBranchAddress("runNumber", &runNumber, &b_runNumber);
    fChain->SetBranchAddress("mcChannelNumber", &mcChannelNumber, &b_mcChannelNumber);
    fChain->SetBranchAddress("mu", &mu, &b_mu);
+   fChain->SetBranchAddress("mu_original_xAOD", &mu_original_xAOD, &b_mu_original_xAOD);
    fChain->SetBranchAddress("el_pt", &el_pt, &b_el_pt);
    fChain->SetBranchAddress("el_eta", &el_eta, &b_el_eta);
    fChain->SetBranchAddress("el_phi", &el_phi, &b_el_phi);
    fChain->SetBranchAddress("el_e", &el_e, &b_el_e);
    fChain->SetBranchAddress("el_charge", &el_charge, &b_el_charge);
-   fChain->SetBranchAddress("el_miniiso", &el_miniiso, &b_el_miniiso);
+   fChain->SetBranchAddress("el_topoetcone20", &el_topoetcone20, &b_el_topoetcone20);
+   fChain->SetBranchAddress("el_ptvarcone20", &el_ptvarcone20, &b_el_ptvarcone20);
    fChain->SetBranchAddress("mu_pt", &mu_pt, &b_mu_pt);
    fChain->SetBranchAddress("mu_eta", &mu_eta, &b_mu_eta);
    fChain->SetBranchAddress("mu_phi", &mu_phi, &b_mu_phi);
    fChain->SetBranchAddress("mu_e", &mu_e, &b_mu_e);
    fChain->SetBranchAddress("mu_charge", &mu_charge, &b_mu_charge);
-   fChain->SetBranchAddress("mu_miniiso", &mu_miniiso, &b_mu_miniiso);
+   fChain->SetBranchAddress("mu_topoetcone20", &mu_topoetcone20, &b_mu_topoetcone20);
+   fChain->SetBranchAddress("mu_ptvarcone30", &mu_ptvarcone30, &b_mu_ptvarcone30);
    fChain->SetBranchAddress("jet_pt", &jet_pt, &b_jet_pt);
    fChain->SetBranchAddress("jet_eta", &jet_eta, &b_jet_eta);
    fChain->SetBranchAddress("jet_phi", &jet_phi, &b_jet_phi);
@@ -330,47 +273,28 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("jet_mv2c20", &jet_mv2c20, &b_jet_mv2c20);
    fChain->SetBranchAddress("jet_ip3dsv1", &jet_ip3dsv1, &b_jet_ip3dsv1);
    fChain->SetBranchAddress("jet_jvt", &jet_jvt, &b_jet_jvt);
+   fChain->SetBranchAddress("ljet_pt", &ljet_pt, &b_ljet_pt);
+   fChain->SetBranchAddress("ljet_eta", &ljet_eta, &b_ljet_eta);
+   fChain->SetBranchAddress("ljet_phi", &ljet_phi, &b_ljet_phi);
+   fChain->SetBranchAddress("ljet_e", &ljet_e, &b_ljet_e);
+   fChain->SetBranchAddress("ljet_m", &ljet_m, &b_ljet_m);
+   fChain->SetBranchAddress("ljet_sd12", &ljet_sd12, &b_ljet_sd12);
    fChain->SetBranchAddress("met_met", &met_met, &b_met_met);
    fChain->SetBranchAddress("met_phi", &met_phi, &b_met_phi);
-   fChain->SetBranchAddress("klfitter_selected", &klfitter_selected, &b_klfitter_selected);
-   fChain->SetBranchAddress("klfitter_minuitDidNotConverge", &klfitter_minuitDidNotConverge, &b_klfitter_minuitDidNotConverge);
-   fChain->SetBranchAddress("klfitter_fitAbortedDueToNaN", &klfitter_fitAbortedDueToNaN, &b_klfitter_fitAbortedDueToNaN);
-   fChain->SetBranchAddress("klfitter_atLeastOneFitParameterAtItsLimit", &klfitter_atLeastOneFitParameterAtItsLimit, &b_klfitter_atLeastOneFitParameterAtItsLimit);
-   fChain->SetBranchAddress("klfitter_invalidTransferFunctionAtConvergence", &klfitter_invalidTransferFunctionAtConvergence, &b_klfitter_invalidTransferFunctionAtConvergence);
-   fChain->SetBranchAddress("klfitter_bestPermutation", &klfitter_bestPermutation, &b_klfitter_bestPermutation);
-   fChain->SetBranchAddress("klfitter_logLikelihood", &klfitter_logLikelihood, &b_klfitter_logLikelihood);
-   fChain->SetBranchAddress("klfitter_eventProbability", &klfitter_eventProbability, &b_klfitter_eventProbability);
-   fChain->SetBranchAddress("klfitter_parameters", &klfitter_parameters, &b_klfitter_parameters);
-   fChain->SetBranchAddress("klfitter_parameterErrors", &klfitter_parameterErrors, &b_klfitter_parameterErrors);
-   fChain->SetBranchAddress("klfitter_model_bhad_pt", &klfitter_model_bhad_pt, &b_klfitter_model_bhad_pt);
-   fChain->SetBranchAddress("klfitter_model_bhad_eta", &klfitter_model_bhad_eta, &b_klfitter_model_bhad_eta);
-   fChain->SetBranchAddress("klfitter_model_bhad_phi", &klfitter_model_bhad_phi, &b_klfitter_model_bhad_phi);
-   fChain->SetBranchAddress("klfitter_model_bhad_E", &klfitter_model_bhad_E, &b_klfitter_model_bhad_E);
-   fChain->SetBranchAddress("klfitter_model_bhad_jetIndex", &klfitter_model_bhad_jetIndex, &b_klfitter_model_bhad_jetIndex);
-   fChain->SetBranchAddress("klfitter_model_blep_pt", &klfitter_model_blep_pt, &b_klfitter_model_blep_pt);
-   fChain->SetBranchAddress("klfitter_model_blep_eta", &klfitter_model_blep_eta, &b_klfitter_model_blep_eta);
-   fChain->SetBranchAddress("klfitter_model_blep_phi", &klfitter_model_blep_phi, &b_klfitter_model_blep_phi);
-   fChain->SetBranchAddress("klfitter_model_blep_E", &klfitter_model_blep_E, &b_klfitter_model_blep_E);
-   fChain->SetBranchAddress("klfitter_model_blep_jetIndex", &klfitter_model_blep_jetIndex, &b_klfitter_model_blep_jetIndex);
-   fChain->SetBranchAddress("klfitter_model_lq1_pt", &klfitter_model_lq1_pt, &b_klfitter_model_lq1_pt);
-   fChain->SetBranchAddress("klfitter_model_lq1_eta", &klfitter_model_lq1_eta, &b_klfitter_model_lq1_eta);
-   fChain->SetBranchAddress("klfitter_model_lq1_phi", &klfitter_model_lq1_phi, &b_klfitter_model_lq1_phi);
-   fChain->SetBranchAddress("klfitter_model_lq1_E", &klfitter_model_lq1_E, &b_klfitter_model_lq1_E);
-   fChain->SetBranchAddress("klfitter_model_lq1_jetIndex", &klfitter_model_lq1_jetIndex, &b_klfitter_model_lq1_jetIndex);
-   fChain->SetBranchAddress("klfitter_model_lq2_pt", &klfitter_model_lq2_pt, &b_klfitter_model_lq2_pt);
-   fChain->SetBranchAddress("klfitter_model_lq2_eta", &klfitter_model_lq2_eta, &b_klfitter_model_lq2_eta);
-   fChain->SetBranchAddress("klfitter_model_lq2_phi", &klfitter_model_lq2_phi, &b_klfitter_model_lq2_phi);
-   fChain->SetBranchAddress("klfitter_model_lq2_E", &klfitter_model_lq2_E, &b_klfitter_model_lq2_E);
-   fChain->SetBranchAddress("klfitter_model_lq2_jetIndex", &klfitter_model_lq2_jetIndex, &b_klfitter_model_lq2_jetIndex);
-   fChain->SetBranchAddress("klfitter_model_lep_pt", &klfitter_model_lep_pt, &b_klfitter_model_lep_pt);
-   fChain->SetBranchAddress("klfitter_model_lep_eta", &klfitter_model_lep_eta, &b_klfitter_model_lep_eta);
-   fChain->SetBranchAddress("klfitter_model_lep_phi", &klfitter_model_lep_phi, &b_klfitter_model_lep_phi);
-   fChain->SetBranchAddress("klfitter_model_lep_E", &klfitter_model_lep_E, &b_klfitter_model_lep_E);
-   fChain->SetBranchAddress("ee", &ee, &b_ee);
-   fChain->SetBranchAddress("mumu", &mumu, &b_mumu);
-   fChain->SetBranchAddress("emu", &emu, &b_emu);
-   fChain->SetBranchAddress("ejets", &ejets, &b_ejets);
-   fChain->SetBranchAddress("mujets", &mujets, &b_mujets);
+   fChain->SetBranchAddress("passed_resolved_ejets", &passed_resolved_ejets, &b_passed_resolved_ejets);
+   fChain->SetBranchAddress("passed_resolved_mujets", &passed_resolved_mujets, &b_passed_resolved_mujets);
+   fChain->SetBranchAddress("passed_boosted_ejets", &passed_boosted_ejets, &b_passed_boosted_ejets);
+   fChain->SetBranchAddress("passed_boosted_mujets", &passed_boosted_mujets, &b_passed_boosted_mujets);
+   fChain->SetBranchAddress("HLT_mu20_iloose_L1MU15", &HLT_mu20_iloose_L1MU15, &b_HLT_mu20_iloose_L1MU15);
+   fChain->SetBranchAddress("HLT_mu50", &HLT_mu50, &b_HLT_mu50);
+   fChain->SetBranchAddress("HLT_e60_lhmedium", &HLT_e60_lhmedium, &b_HLT_e60_lhmedium);
+   fChain->SetBranchAddress("HLT_e24_lhmedium_L1EM18VH", &HLT_e24_lhmedium_L1EM18VH, &b_HLT_e24_lhmedium_L1EM18VH);
+   fChain->SetBranchAddress("HLT_e120_lhloose", &HLT_e120_lhloose, &b_HLT_e120_lhloose);
+   fChain->SetBranchAddress("el_trigMatch_HLT_e60_lhmedium", &el_trigMatch_HLT_e60_lhmedium, &b_el_trigMatch_HLT_e60_lhmedium);
+   fChain->SetBranchAddress("el_trigMatch_HLT_e24_lhmedium_L1EM18VH", &el_trigMatch_HLT_e24_lhmedium_L1EM18VH, &b_el_trigMatch_HLT_e24_lhmedium_L1EM18VH);
+   fChain->SetBranchAddress("el_trigMatch_HLT_e120_lhloose", &el_trigMatch_HLT_e120_lhloose, &b_el_trigMatch_HLT_e120_lhloose);
+   fChain->SetBranchAddress("mu_trigMatch_HLT_mu50", &mu_trigMatch_HLT_mu50, &b_mu_trigMatch_HLT_mu50);
+   fChain->SetBranchAddress("mu_trigMatch_HLT_mu20_iloose_L1MU15", &mu_trigMatch_HLT_mu20_iloose_L1MU15, &b_mu_trigMatch_HLT_mu20_iloose_L1MU15);
    Notify();
 }
 

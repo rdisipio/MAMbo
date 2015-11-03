@@ -278,9 +278,11 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          h->Fill( weight_particle_level );
  	 h = NULL;
 
+/*
 	 // some Single Top samples have buggy mc weight 
          if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
          if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
+*/
 
          const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
          const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
@@ -293,7 +295,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
  
 #ifdef __MOMA__
-           const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type );
+           const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); // to be changed!!
 //         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
@@ -311,11 +313,13 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 #endif
 
 
+      // to be fixed
+/*
        weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
             scaleFactor_ELE * scaleFactor_MUON *
             scaleFactor_BTAG;
-
+*/
    	 // as boosted guys do
          // weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
     }
@@ -615,11 +619,13 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     values.mu      = ed->property["mu"];
     values.pvxp_n  = ed->property["pvxp_n"];
     values.vxp_z   = ed->property["vxp_z"];
+/*
     values.lep_pt  = ed->leptons.pT.at(0);
     values.lep_eta = ed->leptons.eta.at(0);
     values.lep_phi = ed->leptons.phi.at(0);
     values.lep_E   = ed->leptons.E.at(0);
     values.lep_q   = ed->leptons.q.at(0);
+*/
     values.jet_n   = ed->jets.n;
     values.bjet_n  = ed->bjets.n; 
     values.fjet_n  = ed->fjets.n;
@@ -665,12 +671,30 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_unweight");
 
     // 3 SingleLepton
-    int goodflavor_lep_n = ( m_config->channel == kElectron ) ? ed->electrons.n : ed->muons.n;
-    int oppositeflavor_lep_n = ( m_config->channel == kElectron ) ? ed->muons.n : ed->electrons.n;
-    if( goodflavor_lep_n != 1 ) return !passed;
-    if( oppositeflavor_lep_n != 0 ) return !passed;
+    const int    el_n  = ed->electrons.n; 
+    const int    mu_n  = ed->muons.n; 
+
+    const bool   single_lept = ( m_config->channel == kElectron ) ?
+                (el_n == 1)&&(mu_n==0) :
+                (el_n == 0)&&(mu_n==1);
+    if( !single_lept )   return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
+
+    if( m_config->channel == kElectron ) {
+       values.lep_pt  = ed->electrons.pT.at(0);
+       values.lep_eta = ed->electrons.eta.at(0);
+       values.lep_phi = ed->electrons.phi.at(0);
+       values.lep_E   = ed->electrons.E.at(0);
+       values.lep_q   = ed->electrons.q.at(0);
+    }
+    else {
+       values.lep_pt  = ed->muons.pT.at(0);
+       values.lep_eta = ed->muons.eta.at(0);
+       values.lep_phi = ed->muons.phi.at(0);
+       values.lep_E   = ed->muons.E.at(0);
+       values.lep_q   = ed->muons.q.at(0);
+    }
 
     const double lep_pt = ( m_config->channel == kElectron ) ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
 
