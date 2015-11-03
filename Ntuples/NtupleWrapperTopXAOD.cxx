@@ -25,8 +25,8 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->info.eventNumber     = GET_VALUE( eventNumber );
   ed->info.runNumber       = GET_VALUE( runNumber );
   ed->info.mcChannelNumber = GET_VALUE( mcChannelNumber );
-//  ed->info.mcWeight        = GET_VALUE( mcWeight );
-  ed->info.mcWeight        = 1.0; // no mcWeight??
+  ed->info.mcWeight        = GET_VALUE( weight_mc );
+//  ed->info.mcWeight        = 1.0; // no mcWeight??
 
   SET_PROPERTY( passed_resolved_ejets );
   SET_PROPERTY( passed_resolved_mujets );
@@ -38,6 +38,8 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   SET_PROPERTY( HLT_e60_lhmedium );
   SET_PROPERTY( HLT_e24_lhmedium_L1EM18VH );
   SET_PROPERTY( HLT_e120_lhloose );
+
+  ed->property["scaleFactor_BTAG"]   = GET_VALUE( weight_bTagSF_77 );
 
   return success;
 }

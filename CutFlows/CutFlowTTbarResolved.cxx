@@ -292,28 +292,27 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
          const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
          const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
-//         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
- 
 #ifdef __MOMA__
            const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); // to be changed!!
 //         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
-#else 
+#else
          const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
 #endif
 
-         
 #ifdef __USE_LHAPDF__
          const double scaleFactor_PDF  = GetPDFWeight( ed );
          weight_reco_level     *= scaleFactor_PDF;
          weight_particle_level *= scaleFactor_PDF;
-#else 
+#else
         const double scaleFactor_PDF = 1.0;
 #endif
 
 
       // to be fixed
+      weight_reco_level *= scaleFactor_BTAG;
+
 /*
        weight_reco_level *=
             scaleFactor_PILEUP * scaleFactor_TRIGGER * scaleFactor_JVFSF * scaleFactor_ZVERTEX *
