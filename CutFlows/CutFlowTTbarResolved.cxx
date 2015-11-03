@@ -278,15 +278,17 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          h->Fill( weight_particle_level );
  	 h = NULL;
 
-/*
+
 	 // some Single Top samples have buggy mc weight 
+//     if( fabs(weight_reco_level) < 1e-5 )  cout << "WARNING: very small MC weight " << weight_reco_level << endl;
          if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
          if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
-*/
+
 
          const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
-         const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
-         const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
+//         const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
+//         const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
+         const double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"];
          const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
 //         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
@@ -311,7 +313,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 
       // to be fixed
-      weight_reco_level *= scaleFactor_BTAG;
+      weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP;
 
 /*
        weight_reco_level *=
