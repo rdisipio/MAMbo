@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+ <sample name="Wplus_enu_incl"  dsid="361100" sf="1.0" xsec="11278.0" kfact="1.0198" genevt="3.37756563451e+11" generator="Powheg+Pythia8+EvtGen+Photospp" simulation="Full" />
+ <sample name="Wminus_enu_incl" dsid="361103" sf="1.0" xsec="8290.8"  kfact="1.0348" genevt="1.35954974027e+11" generator="Powheg+Pythia8+EvtGen+Photospp" simulation="Full" />
+</samples>
+<files>
+  <file sample="Wplus_enu_incl"    path="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.ljets_resolved.Wjets.361100.el.histograms.root" />
+  <file sample="Wminus_enu_incl"   path="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.ljets_resolved.Wjets.361103.el.histograms.root" />
+</files>
+</document>

@@ -11,9 +11,12 @@ from xml.etree import ElementTree
 from ROOT import *
 from MAMboPlottingToolkit import *
 
-gROOT.Macro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
+#gROOT.Macro( os.environ['MAMBODIR'] + "/share/rootlogon.C" )
+gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasStyle.C" )
 gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/AtlasUtils.C" )
 gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/graph_scale.C" )
+SetAtlasStyle()
+
 gROOT.LoadMacro( os.environ['MAMBODIR'] + "/share/DrawOverflow.C" )
 from ROOT import ScaleGraph, DrawOverflow
 
@@ -343,7 +346,7 @@ def DoPlot( plot, iLumi = 1. ):
         }
     legend = PrintLegend( lparams, histograms )
 
-    MakeATLASLabel( 0.18, 0.87, "Internal", "20.3", "8" )
+    MakeATLASLabel( 0.18, 0.87, "Internal", "1.7", "13" )
 
     ## make data/prediction ratio
 
@@ -360,7 +363,7 @@ def DoPlot( plot, iLumi = 1. ):
     ## save image
 
     c.cd()
-    for ext in [ "png" ]: #, "pdf", "C" ]:
+    for ext in [ "pdf", "png" ]: #, "pdf", "C" ]:
        imgname = "img/%s/%s%s.%s" % ( ext, plot.hname, tag_scale, ext )
        c.SaveAs( imgname ) 
 

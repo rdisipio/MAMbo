@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="tchannel_top"     dsid="410011" sf="1.0" xsec="43.739" kfact="1.0094" genevt="4988200.0" generator="PowhegPythia_P2012" simulation="Full" />
+  <sample name="tchannel_tbar"    dsid="410012" sf="1.0" xsec="25.778" kfact="1.0193" genevt="4989800.0" generator="PowhegPythia_P2012" simulation="Full" />
+<!--  <sample name="Wtchannel_top"        dsid="410013" sf="1.0" xsec="34.009" kfact="1.054" genevt=""  generator="PowhegPythia_P2012" simulation="Full" /> -->
+<!--  <sample name="Wtchannel_tbar"       dsid="410014" sf="1.0" xsec="33.989" kfact="1.054" genevt=""  generator="PowhegPythia_P2012" simulation="Full" /> -->
+<!--  <sample name="schannel"         dsid="410025" sf="1.0" xsec="2.0517" kfact="1.6806" genevt="" generator="PowhegPythia_P2012" simulation="Full" /> -->
+</samples>
+<files>
+  <file sample="tchannel_top"     path="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.ljets_resolved.SingleTop.410011.el.histograms.root" />
+  <file	sample="tchannel_tbar"    path="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.ljets_resolved.SingleTop.410012.el.histograms.root" />
+<!--  <file sample="Wtchannel_top"        path="" /> -->
+<!--  <file sample="Wtchannel_tbar"       path="" /> -->
+<!--  <file sample="schannel"         path="" /> -->
+</files>
+</document>

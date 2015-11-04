@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_all.xml" />
+<samples>
+  <sample name="ttbar_nofullhad_00"  dsid="410000" sf="0.543" xsec="696.12" kfact="1.1949" genevt="9941000.0" generator="PowhegPythia_P2012" simulation="Full" />
+</samples>
+<files>
+  <file sample="ttbar_nofullhad_00" path="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.ljets_resolved.DiTop.410000.el.histograms.root" />
+</files>
+</document>

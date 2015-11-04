@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+<samples>
+  <sample name="DiTop"     file="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.13TeV_ljets_resolved.DiTop_410000.el.nominal.histograms.root" />
+  <sample name="SingleTop" file="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.13TeV_ljets_resolved.SingleTop.el.nominal.histograms.root" />
+  <sample name="Wjets"     file="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.13TeV_ljets_resolved.Wjets.el.nominal.histograms.root" />
+</samples>
+</document>
