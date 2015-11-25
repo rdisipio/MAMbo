@@ -30,8 +30,8 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 
   SET_PROPERTY( passed_resolved_ejets );
   SET_PROPERTY( passed_resolved_mujets );
-  SET_PROPERTY( passed_boosted_ejets );
-  SET_PROPERTY( passed_boosted_mujets );
+  SET_PROPERTY( passed_boosted_ejets_1fj0b );
+  SET_PROPERTY( passed_boosted_mujets_1fj0b );
 
   SET_PROPERTY( HLT_mu20_iloose_L1MU15 );
   SET_PROPERTY( HLT_mu50 );
@@ -135,7 +135,7 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
     ed->jets.n  = 0;
     ed->bjets.n = 0;
     ed->ljets.n = 0;
-    ed->fjets.n = 0;
+   
 
     for( int j = 0; j < alljet_n; ++j ) {
         const double jet_pT   = GET_VALUE_VECTOR( jet_pt, j );
@@ -155,7 +155,7 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
             ed->jets.phi.push_back( jet_phi );
             ed->jets.E.push_back(   jet_E );
 
-            const double jet_m = PhysicsHelperFunctions::Mass( ed->jets, j );
+            const double jet_m = PhysicsHelperFunctions::Mass( ed->jets, (ed->jets.n-1) );
             ed->jets.m.push_back( jet_m );
 
             ed->jets.property["jvt"].push_back(          GET_VALUE_VECTOR(jet_jvt, j)          );
@@ -183,10 +183,55 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
                 ed->ljets.m.push_back( jet_m );
                 ed->ljets.index.push_back( j );
                 ed->ljets.property["mv2c20"].push_back(mv2c20);
-            }
+		
+         }
     }
 
-  return success;
+
+    size_t allfjet_n = m_ntuple->ljet_pt->size();
+    ed->fjets.n = 0;
+    
+    for( int lj = 0; lj < allfjet_n; ++lj ) {
+
+      const double fjet_pT   = GET_VALUE_VECTOR( ljet_pt,  lj );
+      const double fjet_eta  = GET_VALUE_VECTOR( ljet_eta, lj );
+      const double fjet_phi  = GET_VALUE_VECTOR( ljet_phi, lj );
+      const double fjet_E    = GET_VALUE_VECTOR( ljet_e, lj );
+      const double fjet_m    = GET_VALUE_VECTOR( ljet_m, lj );
+       
+      if( fjet_pT < 25 * GeV ) continue;
+      if( fabs(fjet_eta) > 2.5 ) continue;
+      
+      ed->fjets.n++;
+      
+      ed->fjets.index.push_back( lj );
+      
+      ed->fjets.pT.push_back(  fjet_pT );
+      ed->fjets.eta.push_back( fjet_eta );
+      ed->fjets.phi.push_back( fjet_phi );
+      ed->fjets.E.push_back(   fjet_E );
+      //      const double fjet_m = PhysicsHelperFunctions::Mass( ed->fjets, lj );  ////For the Large-Rjet the mass is in the Ntuple
+      ed->fjets.m.push_back( fjet_m );
+      
+      ////--Tagging and substructures properties of the Large-R jet--/////
+      const double sd12 = GET_VALUE_VECTOR(ljet_sd12, lj);
+      ed->fjets.property["sd12"].push_back( sd12 );
+      
+      const double tau32 = GET_VALUE_VECTOR(ljet_tau32, lj);
+      ed->fjets.property["tau32"].push_back( tau32 );
+      
+      const double tau21 = GET_VALUE_VECTOR(ljet_tau21, lj);
+      ed->fjets.property["tau21"].push_back( tau21 );
+
+      const int topTag50 = GET_VALUE_VECTOR(ljet_topTag50, lj);
+      ed->fjets.property["topTag50"].push_back(topTag50 );
+
+      const int topTag80 = GET_VALUE_VECTOR(ljet_topTag80, lj);
+      ed->fjets.property["topTag80"].push_back(topTag80);
+
+    }
+    
+    return success;
 }
 
 
