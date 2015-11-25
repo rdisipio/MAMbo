@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Nov  3 11:19:34 2015 by ROOT version 6.02/12
+// Tue Nov 10 14:23:14 2015 by ROOT version 6.02/12
 // from TTree nominal/tree
-// found on file: /home/r/rorr/disipio/SCRATCH/ntuples/tt_diffxs_13TeV/ljets/DAOD_TOPQ1/user.disipio.410000.PowhegPythiaEvtGen.DAOD_TOPQ1.e3698_a766_a777_r6282_p2421.20151030_25ns_v1_ljets.output.root/user.disipio.6846850._000001.ljets.output.root
+// found on file: ljets.output.root
 //////////////////////////////////////////////////////////
 
 #ifndef TopXAOD_h
@@ -11,6 +11,7 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+
 
 // Header file for the classes stored in the TTree if any.
 #include "vector"
@@ -88,17 +89,20 @@ public :
    Float_t         weight_bTagSF_77_extrapolation_down;
    Float_t         weight_bTagSF_77_extrapolation_from_charm_up;
    Float_t         weight_bTagSF_77_extrapolation_from_charm_down;
-   UInt_t          eventNumber;
+   ULong64_t       eventNumber;
    UInt_t          runNumber;
    UInt_t          mcChannelNumber;
    Float_t         mu;
    vector<float>   *el_pt;
    vector<float>   *el_eta;
+   vector<float>   *el_cl_eta;
    vector<float>   *el_phi;
    vector<float>   *el_e;
    vector<float>   *el_charge;
    vector<float>   *el_topoetcone20;
    vector<float>   *el_ptvarcone20;
+   vector<float>   *el_d0sig;
+   vector<float>   *el_delta_z0_sintheta;
    vector<float>   *mu_pt;
    vector<float>   *mu_eta;
    vector<float>   *mu_phi;
@@ -106,6 +110,8 @@ public :
    vector<float>   *mu_charge;
    vector<float>   *mu_topoetcone20;
    vector<float>   *mu_ptvarcone30;
+   vector<float>   *mu_d0sig;
+   vector<float>   *mu_delta_z0_sintheta;
    vector<float>   *jet_pt;
    vector<float>   *jet_eta;
    vector<float>   *jet_phi;
@@ -128,8 +134,8 @@ public :
    Float_t         met_phi;
    Int_t           passed_resolved_ejets;
    Int_t           passed_resolved_mujets;
-   Int_t           passed_boosted_ejets;
-   Int_t           passed_boosted_mujets;
+   Int_t           passed_boosted_ejets_1fj0b;
+   Int_t           passed_boosted_mujets_1fj0b;
    Char_t          HLT_mu20_iloose_L1MU15;
    Char_t          HLT_mu50;
    Char_t          HLT_e60_lhmedium;
@@ -140,6 +146,13 @@ public :
    vector<char>    *el_trigMatch_HLT_e120_lhloose;
    vector<char>    *mu_trigMatch_HLT_mu50;
    vector<char>    *mu_trigMatch_HLT_mu20_iloose_L1MU15;
+   UInt_t          lumiblock;
+   UInt_t          npv;
+   Float_t         vtxz;
+   vector<float>   *ljet_tau32;
+   vector<float>   *ljet_tau21;
+   vector<int>     *ljet_topTag50;
+   vector<int>     *ljet_topTag80;
 
    // List of branches
    TBranch        *b_weight_mc;   //!
@@ -211,11 +224,14 @@ public :
    TBranch        *b_mu;   //!
    TBranch        *b_el_pt;   //!
    TBranch        *b_el_eta;   //!
+   TBranch        *b_el_cl_eta;   //!
    TBranch        *b_el_phi;   //!
    TBranch        *b_el_e;   //!
    TBranch        *b_el_charge;   //!
    TBranch        *b_el_topoetcone20;   //!
    TBranch        *b_el_ptvarcone20;   //!
+   TBranch        *b_el_d0sig;   //!
+   TBranch        *b_el_delta_z0_sintheta;   //!
    TBranch        *b_mu_pt;   //!
    TBranch        *b_mu_eta;   //!
    TBranch        *b_mu_phi;   //!
@@ -223,6 +239,8 @@ public :
    TBranch        *b_mu_charge;   //!
    TBranch        *b_mu_topoetcone20;   //!
    TBranch        *b_mu_ptvarcone30;   //!
+   TBranch        *b_mu_d0sig;   //!
+   TBranch        *b_mu_delta_z0_sintheta;   //!
    TBranch        *b_jet_pt;   //!
    TBranch        *b_jet_eta;   //!
    TBranch        *b_jet_phi;   //!
@@ -245,8 +263,8 @@ public :
    TBranch        *b_met_phi;   //!
    TBranch        *b_passed_resolved_ejets;   //!
    TBranch        *b_passed_resolved_mujets;   //!
-   TBranch        *b_passed_boosted_ejets;   //!
-   TBranch        *b_passed_boosted_mujets;   //!
+   TBranch        *b_passed_boosted_ejets_1fj0b;   //!
+   TBranch        *b_passed_boosted_mujets_1fj0b;   //!
    TBranch        *b_HLT_mu20_iloose_L1MU15;   //!
    TBranch        *b_HLT_mu50;   //!
    TBranch        *b_HLT_e60_lhmedium;   //!
@@ -257,6 +275,13 @@ public :
    TBranch        *b_el_trigMatch_HLT_e120_lhloose;   //!
    TBranch        *b_mu_trigMatch_HLT_mu50;   //!
    TBranch        *b_mu_trigMatch_HLT_mu20_iloose_L1MU15;   //!
+   TBranch        *b_lumiblock;   //!
+   TBranch        *b_npv;   //!
+   TBranch        *b_vtxz;   //!
+   TBranch        *b_ljet_tau32;   //!
+   TBranch        *b_ljet_tau21;   //!
+   TBranch        *b_ljet_topTag50;   //!
+   TBranch        *b_ljet_topTag80;   //!
 
    TopXAOD(TTree *tree=0);
    virtual ~TopXAOD();
@@ -277,9 +302,9 @@ TopXAOD::TopXAOD(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/home/r/rorr/disipio/SCRATCH/ntuples/tt_diffxs_13TeV/ljets/DAOD_TOPQ1/user.disipio.410000.PowhegPythiaEvtGen.DAOD_TOPQ1.e3698_a766_a777_r6282_p2421.20151030_25ns_v1_ljets.output.root/user.disipio.6846850._000001.ljets.output.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("ljets.output.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("/home/r/rorr/disipio/SCRATCH/ntuples/tt_diffxs_13TeV/ljets/DAOD_TOPQ1/user.disipio.410000.PowhegPythiaEvtGen.DAOD_TOPQ1.e3698_a766_a777_r6282_p2421.20151030_25ns_v1_ljets.output.root/user.disipio.6846850._000001.ljets.output.root");
+         f = new TFile("ljets.output.root");
       }
       f->GetObject("nominal",tree);
 
@@ -331,11 +356,14 @@ void TopXAOD::Init(TTree *tree)
    weight_bTagSF_77_eigenvars_Light_down = 0;
    el_pt = 0;
    el_eta = 0;
+   el_cl_eta = 0;
    el_phi = 0;
    el_e = 0;
    el_charge = 0;
    el_topoetcone20 = 0;
    el_ptvarcone20 = 0;
+   el_d0sig = 0;
+   el_delta_z0_sintheta = 0;
    mu_pt = 0;
    mu_eta = 0;
    mu_phi = 0;
@@ -343,6 +371,8 @@ void TopXAOD::Init(TTree *tree)
    mu_charge = 0;
    mu_topoetcone20 = 0;
    mu_ptvarcone30 = 0;
+   mu_d0sig = 0;
+   mu_delta_z0_sintheta = 0;
    jet_pt = 0;
    jet_eta = 0;
    jet_phi = 0;
@@ -366,6 +396,10 @@ void TopXAOD::Init(TTree *tree)
    el_trigMatch_HLT_e120_lhloose = 0;
    mu_trigMatch_HLT_mu50 = 0;
    mu_trigMatch_HLT_mu20_iloose_L1MU15 = 0;
+   ljet_tau32 = 0;
+   ljet_tau21 = 0;
+   ljet_topTag50 = 0;
+   ljet_topTag80 = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -441,11 +475,14 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("mu", &mu, &b_mu);
    fChain->SetBranchAddress("el_pt", &el_pt, &b_el_pt);
    fChain->SetBranchAddress("el_eta", &el_eta, &b_el_eta);
+   fChain->SetBranchAddress("el_cl_eta", &el_cl_eta, &b_el_cl_eta);
    fChain->SetBranchAddress("el_phi", &el_phi, &b_el_phi);
    fChain->SetBranchAddress("el_e", &el_e, &b_el_e);
    fChain->SetBranchAddress("el_charge", &el_charge, &b_el_charge);
    fChain->SetBranchAddress("el_topoetcone20", &el_topoetcone20, &b_el_topoetcone20);
    fChain->SetBranchAddress("el_ptvarcone20", &el_ptvarcone20, &b_el_ptvarcone20);
+   fChain->SetBranchAddress("el_d0sig", &el_d0sig, &b_el_d0sig);
+   fChain->SetBranchAddress("el_delta_z0_sintheta", &el_delta_z0_sintheta, &b_el_delta_z0_sintheta);
    fChain->SetBranchAddress("mu_pt", &mu_pt, &b_mu_pt);
    fChain->SetBranchAddress("mu_eta", &mu_eta, &b_mu_eta);
    fChain->SetBranchAddress("mu_phi", &mu_phi, &b_mu_phi);
@@ -453,6 +490,8 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("mu_charge", &mu_charge, &b_mu_charge);
    fChain->SetBranchAddress("mu_topoetcone20", &mu_topoetcone20, &b_mu_topoetcone20);
    fChain->SetBranchAddress("mu_ptvarcone30", &mu_ptvarcone30, &b_mu_ptvarcone30);
+   fChain->SetBranchAddress("mu_d0sig", &mu_d0sig, &b_mu_d0sig);
+   fChain->SetBranchAddress("mu_delta_z0_sintheta", &mu_delta_z0_sintheta, &b_mu_delta_z0_sintheta);
    fChain->SetBranchAddress("jet_pt", &jet_pt, &b_jet_pt);
    fChain->SetBranchAddress("jet_eta", &jet_eta, &b_jet_eta);
    fChain->SetBranchAddress("jet_phi", &jet_phi, &b_jet_phi);
@@ -475,8 +514,8 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("met_phi", &met_phi, &b_met_phi);
    fChain->SetBranchAddress("passed_resolved_ejets", &passed_resolved_ejets, &b_passed_resolved_ejets);
    fChain->SetBranchAddress("passed_resolved_mujets", &passed_resolved_mujets, &b_passed_resolved_mujets);
-   fChain->SetBranchAddress("passed_boosted_ejets", &passed_boosted_ejets, &b_passed_boosted_ejets);
-   fChain->SetBranchAddress("passed_boosted_mujets", &passed_boosted_mujets, &b_passed_boosted_mujets);
+   fChain->SetBranchAddress("passed_boosted_ejets_1fj0b", &passed_boosted_ejets_1fj0b, &b_passed_boosted_ejets_1fj0b);
+   fChain->SetBranchAddress("passed_boosted_mujets_1fj0b", &passed_boosted_mujets_1fj0b, &b_passed_boosted_mujets_1fj0b);
    fChain->SetBranchAddress("HLT_mu20_iloose_L1MU15", &HLT_mu20_iloose_L1MU15, &b_HLT_mu20_iloose_L1MU15);
    fChain->SetBranchAddress("HLT_mu50", &HLT_mu50, &b_HLT_mu50);
    fChain->SetBranchAddress("HLT_e60_lhmedium", &HLT_e60_lhmedium, &b_HLT_e60_lhmedium);
@@ -487,6 +526,13 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("el_trigMatch_HLT_e120_lhloose", &el_trigMatch_HLT_e120_lhloose, &b_el_trigMatch_HLT_e120_lhloose);
    fChain->SetBranchAddress("mu_trigMatch_HLT_mu50", &mu_trigMatch_HLT_mu50, &b_mu_trigMatch_HLT_mu50);
    fChain->SetBranchAddress("mu_trigMatch_HLT_mu20_iloose_L1MU15", &mu_trigMatch_HLT_mu20_iloose_L1MU15, &b_mu_trigMatch_HLT_mu20_iloose_L1MU15);
+   fChain->SetBranchAddress("lumiblock", &lumiblock, &b_lumiblock);
+   fChain->SetBranchAddress("npv", &npv, &b_npv);
+   fChain->SetBranchAddress("vtxz", &vtxz, &b_vtxz);
+   fChain->SetBranchAddress("ljet_tau32", &ljet_tau32, &b_ljet_tau32);
+   fChain->SetBranchAddress("ljet_tau21", &ljet_tau21, &b_ljet_tau21);
+   fChain->SetBranchAddress("ljet_topTag50", &ljet_topTag50, &b_ljet_topTag50);
+   fChain->SetBranchAddress("ljet_topTag80", &ljet_topTag80, &b_ljet_topTag80);
    Notify();
 }
 
