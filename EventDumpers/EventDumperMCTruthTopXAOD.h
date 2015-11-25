@@ -136,38 +136,50 @@ class EventDumperMCTruthTopXAOD
     template< class T >
     bool DumpEventJets( const T * ntuple, EventData * ed )
     {
-       const int jet_n = ntuple->jet_pt->size();
-       for( int i = 0 ; i < jet_n ; ++i ) {
-//	 ed->truth_jets.n++;
-         ed->truth_jets.index.push_back( i );
-
-	 TLorentzVector jet;
-	 jet.SetPtEtaPhiE( ntuple->jet_pt->at(i),
-			   ntuple->jet_eta->at(i),
-			   ntuple->jet_phi->at(i),
-			   ntuple->jet_e->at(i) );
-	 HelperFunctions::DumpParticleToEventData( jet, &ed->truth_jets );
-
-	 const int nBhadrons = ntuple->jet_nGhosts_bHadron->at(i);
-	 if( nBhadrons > 0 ) { 
-	    HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );
-	    ed->truth_bjets.index.push_back( i );
-         }
-       }
-
+        const int jet_n = ntuple->jet_pt->size();
+	int jindex = 0;
+	ed->truth_jets.n = 0;
+	ed->truth_bjets.n = 0;
+        for( int i = 0 ; i < jet_n ; ++i ) 
+        {
+   	     if( ntuple->jet_pt->at(i) < 25 * GeV ) continue;
+   	     if( fabs(ntuple->jet_eta->at(i)) > 2.5 ) continue;
+	     cout << "ed->truth_jets.n " << ed->truth_jets.n << endl;
+	     TLorentzVector jet;
+	     jet.SetPtEtaPhiE( ntuple->jet_pt->at(i),
+	     ntuple->jet_eta->at(i),
+	     ntuple->jet_phi->at(i),
+	     ntuple->jet_e->at(i) );
+	     HelperFunctions::DumpParticleToEventData( jet, &ed->truth_jets );
+	     cout << "ed->truth_jets.pT.size() " << ed->truth_jets.pT.size() << endl;
+	     ed->truth_jets.index.push_back( jindex );
+	     const int nBhadrons = ntuple->jet_nGhosts_bHadron->at(i);
+	     if( nBhadrons > 0 ) 
+	     { 
+	    	HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );
+	    	ed->truth_bjets.index.push_back( jindex );
+	     }
+	     jindex++;
+        }
+	if( ed->truth_jets.n != ed->truth_jets.index.size() )
+	{
+		cout << "Error: ed->truth_jets.n is " << ed->truth_jets.n << ", while ed->truth_jets.index.size() is " << ed->truth_jets.index.size() << endl;
+	}
 
 	const int fjet_n = ntuple->ljet_pt->size();
-       for( int i = 0 ; i < fjet_n ; ++i ) {
-//	 ed->truth_jets.n++;
-         ed->truth_fjets.index.push_back( i );
+	jindex = 0;
+        for( int i = 0 ; i < fjet_n ; ++i ) 
+        {
 
-	 TLorentzVector jet;
-	 jet.SetPtEtaPhiE( ntuple->ljet_pt->at(i),
+        	ed->truth_fjets.index.push_back( jindex );
+
+		TLorentzVector jet;
+		jet.SetPtEtaPhiE( ntuple->ljet_pt->at(i),
 			   ntuple->ljet_eta->at(i),
 			   ntuple->ljet_phi->at(i),
 			   ntuple->ljet_e->at(i) );
-	 HelperFunctions::DumpParticleToEventData( jet, &ed->truth_fjets );
-
+		HelperFunctions::DumpParticleToEventData( jet, &ed->truth_fjets );
+		jindex++;
 /*	 const int nBhadrons = ntuple->ljet_nGhosts_bHadron->at(i);
 	 if( nBhadrons > 0 ) { 
 	    HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );

@@ -132,8 +132,8 @@ public :
    vector<float>   *ljet_sd12;
    Float_t         met_met;
    Float_t         met_phi;
-   Int_t           passed_resolved_ejets;
-   Int_t           passed_resolved_mujets;
+   Int_t           passed_resolved_ejets_4j2b;
+   Int_t           passed_resolved_mujets_4j2b;
    Int_t           passed_boosted_ejets_1fj0b;
    Int_t           passed_boosted_mujets_1fj0b;
    Char_t          HLT_mu20_iloose_L1MU15;
@@ -261,8 +261,8 @@ public :
    TBranch        *b_ljet_sd12;   //!
    TBranch        *b_met_met;   //!
    TBranch        *b_met_phi;   //!
-   TBranch        *b_passed_resolved_ejets;   //!
-   TBranch        *b_passed_resolved_mujets;   //!
+   TBranch        *b_passed_resolved_ejets_4j2b;   //!
+   TBranch        *b_passed_resolved_mujets_4j2b;   //!
    TBranch        *b_passed_boosted_ejets_1fj0b;   //!
    TBranch        *b_passed_boosted_mujets_1fj0b;   //!
    TBranch        *b_HLT_mu20_iloose_L1MU15;   //!
@@ -512,8 +512,8 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("ljet_sd12", &ljet_sd12, &b_ljet_sd12);
    fChain->SetBranchAddress("met_met", &met_met, &b_met_met);
    fChain->SetBranchAddress("met_phi", &met_phi, &b_met_phi);
-   fChain->SetBranchAddress("passed_resolved_ejets", &passed_resolved_ejets, &b_passed_resolved_ejets);
-   fChain->SetBranchAddress("passed_resolved_mujets", &passed_resolved_mujets, &b_passed_resolved_mujets);
+   fChain->SetBranchAddress("passed_resolved_ejets_4j2b", &passed_resolved_ejets_4j2b, &b_passed_resolved_ejets_4j2b);
+   fChain->SetBranchAddress("passed_resolved_mujets_4j2b", &passed_resolved_mujets_4j2b, &b_passed_resolved_mujets_4j2b);
    fChain->SetBranchAddress("passed_boosted_ejets_1fj0b", &passed_boosted_ejets_1fj0b, &b_passed_boosted_ejets_1fj0b);
    fChain->SetBranchAddress("passed_boosted_mujets_1fj0b", &passed_boosted_mujets_1fj0b, &b_passed_boosted_mujets_1fj0b);
    fChain->SetBranchAddress("HLT_mu20_iloose_L1MU15", &HLT_mu20_iloose_L1MU15, &b_HLT_mu20_iloose_L1MU15);

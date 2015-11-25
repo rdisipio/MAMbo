@@ -53,8 +53,8 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->info.mcWeight        = GET_VALUE( weight_mc );
 //  ed->info.mcWeight        = 1.0; // no mcWeight??
 
-  SET_PROPERTY( passed_resolved_ejets );
-  SET_PROPERTY( passed_resolved_mujets );
+  SET_PROPERTY( passed_resolved_ejets_4j2b );
+  SET_PROPERTY( passed_resolved_mujets_4j2b );
   SET_PROPERTY( passed_boosted_ejets_1fj0b );
   SET_PROPERTY( passed_boosted_mujets_1fj0b );
 
@@ -160,8 +160,8 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
     ed->jets.n  = 0;
     ed->bjets.n = 0;
     ed->ljets.n = 0;
-   
-
+    int jindex = 0;
+    
     for( int j = 0; j < alljet_n; ++j ) {
         const double jet_pT   = GET_VALUE_VECTOR( jet_pt, j );
         const double jet_eta  = GET_VALUE_VECTOR( jet_eta, j );
@@ -170,10 +170,10 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
 
         if( jet_pT < 25 * GeV ) continue;
         if( fabs(jet_eta) > 2.5 ) continue;
-
+        
             ed->jets.n++;
 
-            ed->jets.index.push_back( j );
+            ed->jets.index.push_back( jindex );
 
             ed->jets.pT.push_back(  jet_pT );
             ed->jets.eta.push_back( jet_eta );
@@ -196,7 +196,7 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
                 ed->bjets.phi.push_back( jet_phi );
                 ed->bjets.E.push_back( jet_E );
                 ed->bjets.m.push_back( jet_m );
-                ed->bjets.index.push_back( j );
+                ed->bjets.index.push_back( jindex );
                 ed->bjets.property["mv2c20"].push_back(mv2c20);
             } else {
                 ed->ljets.n++;
@@ -206,10 +206,11 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
                 ed->ljets.phi.push_back( jet_phi );
                 ed->ljets.E.push_back( jet_E );
                 ed->ljets.m.push_back( jet_m );
-                ed->ljets.index.push_back( j );
+                ed->ljets.index.push_back( jindex );
                 ed->ljets.property["mv2c20"].push_back(mv2c20);
 		
          }
+	jindex++;
     }
 
 
