@@ -4,7 +4,10 @@
 #include "NtupleWrapper.h"
 
 #include "TopXAOD.h"
+#include "TopXAODParticles.h"
+#include "TopXAODPartons.h"
 
+#include "EventDumperMCTruthTopXAOD.h"
 class NtupleWrapperTopXAOD : public NtupleWrapper< TopXAOD > 
 {
  public:
@@ -18,7 +21,13 @@ class NtupleWrapperTopXAOD : public NtupleWrapper< TopXAOD >
   virtual bool MakeEventMET( EventData * ed );
   virtual bool MakeEventLeptons( EventData * ed );
   virtual bool MakeEventJets( EventData * ed );
-  virtual bool MakeEventTruth( EventData * ed );
+  virtual bool MakeEventTruth( EventData * ed );   
+EventDumperMCTruthTopXAOD<TopXAODParticles, TopXAODPartons>  * m_dumper_mctruth;
+
+   TChain                     * m_particles;
+   TChain                     * m_partons;
+   TopXAODParticles * m_ntuple_particle;
+   TopXAODPartons   * m_ntuple_parton;
 
 };
 

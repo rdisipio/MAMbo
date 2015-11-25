@@ -5,6 +5,29 @@
 NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParameters ):
   NtupleWrapper< TopXAOD >( analysisParameters )
 {
+  unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
+   if( !isMCSignal ) return;
+
+   // open truth ntuples
+   const string mcfilename        = m_config.custom_params_string["mcfile"];
+   const string treename_particle = m_config.custom_params_string["treename_particle"];
+   const string	treename_parton   = m_config.custom_params_string["treename_parton"];
+
+   cout << "INFO: MC partons " << treename_parton << " tree read from " << mcfilename << endl;
+   m_partons   = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() );
+   cout << "INFO: MC partons tree has " << m_partons->GetEntries() << " entries" << endl;
+
+   cout << "INFO: MC particles " <<  treename_particle << " tree read from " << mcfilename << endl;
+   m_particles = HelperFunctions::LoadChain( mcfilename.c_str(), treename_particle.c_str() );
+   cout	<< "INFO: MC particles tree has " << m_particles->GetEntries() << " entries" << endl;
+
+   m_ntuple_particle = new TopXAODParticles( m_particles );
+   m_ntuple_parton   = new TopXAODPartons( m_partons );
+
+   m_dumper_mctruth = new EventDumperMCTruthTopXAOD<TopXAODParticles, TopXAODPartons>(); 
+   m_dumper_mctruth->SetNtupleParticle( m_ntuple_particle ); 
+   m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
+   m_dumper_mctruth->SetAnalysisParameters( analysisParameters );
 }
 
 /////////////////////////////////////////////
@@ -12,7 +35,9 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
 
 NtupleWrapperTopXAOD::~NtupleWrapperTopXAOD()
 {
-
+	delete m_ntuple_particle;
+	delete m_ntuple_parton;
+	delete m_dumper_mctruth;
 }
 
 /////////////////////////////////////////////
@@ -241,7 +266,15 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
 bool NtupleWrapperTopXAOD::MakeEventTruth( EventData * ed )
 {
   bool success = true;
+ unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
+  if( !isMCSignal ) return success;
+  
+  m_dumper_mctruth->GetEntryWithIndex( ed->info.runNumber, ed->info.eventNumber );
 
+  m_dumper_mctruth->DumpEventLeptons( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventMET( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventJets( this->m_ntuple_particle, ed );
+  m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
   return success;
 }
 
