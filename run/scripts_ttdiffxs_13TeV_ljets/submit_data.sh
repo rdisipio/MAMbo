@@ -13,10 +13,11 @@ do
   for list in `ls filelists_TTDIFFXS_3/ | grep user.amenga`
   do
     run=`echo $list | cut -d. -f3`
-    tag=${analysis}.data.${stream}.${run}.${ch}
+    topology=Resolved
+    tag=${analysis}.data.${stream}.${run}.${ch}.${topology}
 
     jobname=${tag}
-    paramfile=realdata_${ch}.xml
+    paramfile=realdata_${topology}_${ch}.xml
 
     filelist=filelists_TTDIFFXS_3/$list
     mkdir -p output/nominal
