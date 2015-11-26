@@ -1,0 +1,18 @@
+<analysis name="TTbarBoosted">
+  <ntuple>TopXAOD</ntuple>
+  <branches>control/branch_list_TopMiniSLResolved.txt</branches>
+  <tree>nominal</tree>
+  <histograms>control/histograms_TTbarBoosted_baseline.xml</histograms>
+  <cutflow>BoostedSL</cutflow>
+  <channel>Muon</channel>
+  <parameters>
+<!--    <param name="pTmin"             type="numeric" value="20." /> 
+    <param name="etaMax"            type="numeric" value="2.5" />
+    <param name="isMCSignal"        type="flag"    value="0" />
+    <param name="isRealData"        type="flag"    value="0" />
+    <param name="isWjets"           type="flag"    value="0" />
+    <param name="isQCD"             type="flag"    value="0" />
+    <param name="scale_syst"        type="string"  value="NOMINAL" /> -->
+    <param name="tagger"            type="string"  value="topTag80" /> 
+  </parameters>
+</analysis>
