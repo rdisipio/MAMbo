@@ -144,15 +144,16 @@ class EventDumperMCTruthTopXAOD
         {
    	     if( ntuple->jet_pt->at(i) < 25 * GeV ) continue;
    	     if( fabs(ntuple->jet_eta->at(i)) > 2.5 ) continue;
-	     cout << "ed->truth_jets.n " << ed->truth_jets.n << endl;
+	     /* cout << "ed->truth_jets.n " << ed->truth_jets.n << endl; */
 	     TLorentzVector jet;
 	     jet.SetPtEtaPhiE( ntuple->jet_pt->at(i),
 	     ntuple->jet_eta->at(i),
 	     ntuple->jet_phi->at(i),
 	     ntuple->jet_e->at(i) );
 	     HelperFunctions::DumpParticleToEventData( jet, &ed->truth_jets );
-	     cout << "ed->truth_jets.pT.size() " << ed->truth_jets.pT.size() << endl;
+	     /* cout << "ed->truth_jets.pT.size() " << ed->truth_jets.pT.size() << endl; */
 	     ed->truth_jets.index.push_back( jindex );
+	   
 	     const int nBhadrons = ntuple->jet_nGhosts_bHadron->at(i);
 	     if( nBhadrons > 0 ) 
 	     { 
@@ -180,7 +181,25 @@ class EventDumperMCTruthTopXAOD
 			   ntuple->ljet_e->at(i) );
 		HelperFunctions::DumpParticleToEventData( jet, &ed->truth_fjets );
 		jindex++;
-/*	 const int nBhadrons = ntuple->ljet_nGhosts_bHadron->at(i);
+
+		////--Tagging and substructures properties of the Large-R jet--/////
+		const double sd12 = ntuple->ljet_sd12->at(i);
+		ed->truth_fjets.property["sd12"].push_back( sd12 );
+		
+		const double tau32 = ntuple->ljet_tau32->at(i);
+		ed->truth_fjets.property["tau32"].push_back( tau32 );
+		
+		const double tau21 = ntuple->ljet_tau21->at(i);
+		ed->truth_fjets.property["tau21"].push_back( tau21 );
+		
+		const int topTag50 = ntuple->ljet_topTag50->at(i);
+		ed->truth_fjets.property["topTag50"].push_back(topTag50 );
+		
+		const int topTag80 = ntuple->ljet_topTag80->at(i);
+		ed->truth_fjets.property["topTag80"].push_back(topTag80);
+		
+		
+		/*	 const int nBhadrons = ntuple->ljet_nGhosts_bHadron->at(i);
 	 if( nBhadrons > 0 ) { 
 	    HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );
 	    ed->truth_bjets.index.push_back( i );
@@ -260,7 +279,7 @@ class EventDumperMCTruthTopXAOD
        isDileptonic = ( nthad == 0 ) ? 1 : 0;
        ed->property["isDileptonic"] = isDileptonic;
 
-       cout << "DEBUG: isDileptonic: " << isDileptonic << endl;
+       /* cout << "DEBUG: isDileptonic: " << isDileptonic << endl; */
 
 
 // JK and now also W bosons:
