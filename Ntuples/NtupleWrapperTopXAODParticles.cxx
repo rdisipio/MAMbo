@@ -63,6 +63,12 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
   ed->info.mcWeight        = GET_VALUE( weight_mc ); //MC@NLO ??
 //  ed->info.mcWeight = 1.; // bug in D3PD2MiniSL? All zeros. Can't use MC@NLO at the moment.
   if( fabs(ed->info.mcWeight) < 1e-4 ) ed->info.mcWeight = 1.;
+  SET_PROPERTY( passed_resolved_ejets_4j2b );
+  SET_PROPERTY( passed_resolved_mujets_4j2b );
+  SET_PROPERTY( passed_boosted_ejets_1fj0b );
+  SET_PROPERTY( passed_boosted_mujets_1fj0b );
+
+
 
 //PDF info are currently not available at particle level (see TTDIFFXS-32)
 /*
