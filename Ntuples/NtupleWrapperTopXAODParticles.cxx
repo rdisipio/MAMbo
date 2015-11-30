@@ -67,8 +67,11 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
   SET_PROPERTY( passed_resolved_mujets_4j2b );
   SET_PROPERTY( passed_boosted_ejets_1fj0b );
   SET_PROPERTY( passed_boosted_mujets_1fj0b );
-
-
+  
+  ed->property["passed_particle_resolved_ejets_4j2b" = GET_VALUE( passed_resolved_ejets_4j2b );
+  ed->property["passed_particle_resolved_mujets_4j2b" = GET_VALUE( passed_resolved_mujets_4j2b );
+  ed->property["passed_particle_resolved_ejets_1fj0b" = GET_VALUE( passed_resolved_ejets_1fj0b );  
+  ed->property["passed_particle_resolved_mujets_1fj0b" = GET_VALUE( passed_resolved_ejets_1fj0b );
 
 //PDF info are currently not available at particle level (see TTDIFFXS-32)
 /*
