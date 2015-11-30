@@ -323,6 +323,11 @@ class EventDumperMCTruthTopXAOD
        ed->property["isDileptonicW"] = isDileptonic;
 
 
+  ed->property["passed_particle_resolved_ejets_4j2b" ] = ntuple_particles-> passed_resolved_ejets_4j2b;
+  ed->property["passed_particle_resolved_mujets_4j2b" ] = ntuple_particles-> passed_resolved_mujets_4j2b;
+  ed->property["passed_particle_boosted_ejets_1fj0b" ] = ntuple_particles-> passed_boosted_ejets_1fj0b;  
+  ed->property["passed_particle_boosted_mujets_1fj0b" ] = ntuple_particles-> passed_boosted_mujets_1fj0b;
+
        return success;
     };
 };
