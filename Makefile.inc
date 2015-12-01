@@ -41,12 +41,12 @@ LIBS = $(ROOTLIBS) $(XMLLIBS)
 
 .cxx.o:
 	$(CC) $(CFLAGS) -c $<
-
+ARCH=x86_64-slc6-gcc47-opt
 ifdef MAMBO_USE_ANALYSISTOP
 CFLAGS += -D__MOMA__
+ARCH=$(ROOTCORECONFIG)
 include $(MAMBODIR)/MoMA/Makefile.rootcore.inc 
 
-ARCH=x86_64-slc6-gcc47-opt
 
 CFLAGS += -I$(MAMBODIR)/MoMA
 LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA

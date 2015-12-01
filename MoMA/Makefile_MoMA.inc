@@ -1,6 +1,6 @@
 include $(MAMBODIR)/Makefile.inc
 
-ifdef ROOTCOREDIR
+ifdef ROOTCOREBIN
 CFLAGS += -D__MOMA__
 include Makefile.rootcore.inc
 endif

@@ -148,9 +148,9 @@ namespace PhysicsHelperFunctions {
 
       double bestwmass = 999.e9;
       
-      cout << "Building top reco with " << Njets << " jets. Target is " << m_target << "\n";
-      if( m_target == kReco ) cout << "Njets is " << Njets << ",  m_p_ed->jets.index.size() is " <<  m_p_ed->jets.index.size() << endl;
-      else cout << "Njets is " << Njets << ",  m_p_ed->truth_jets.index.size() is " <<  m_p_ed->truth_jets.index.size() << endl;
+     // cout << "Building top reco with " << Njets << " jets. Target is " << m_target << "\n";
+     // if( m_target == kReco ) cout << "Njets is " << Njets << ",  m_p_ed->jets.index.size() is " <<  m_p_ed->jets.index.size() << endl;
+     // else cout << "Njets is " << Njets << ",  m_p_ed->truth_jets.index.size() is " <<  m_p_ed->truth_jets.index.size() << endl;
       for( int i = 0; i < Njets; ++i ) //debug
       {
 	if( m_target == kReco )

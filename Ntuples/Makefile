@@ -15,7 +15,7 @@ endif
 DEPS_TopMiniSLResolved := TopMiniSLResolvedParticles.o TopMiniSLResolvedPartons.o
 DEPS_TopMiniSLResolvedParticles := TopMiniSLResolvedPartons.o
 
-DEPS_TopXAOD := TopXAODParticles.o TopXAODPartons.o
+DEPS_TopXAOD := TopXAODParticles.o TopXAODPartons.o sumWeights.o
 DEPS_TopXAODParticles := TopXAODPartons.o
 
 # do not change what follows unless you know what you're doing

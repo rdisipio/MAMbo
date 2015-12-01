@@ -4,11 +4,39 @@ NtupleWrapperTopXAODParticles::NtupleWrapperTopXAODParticles( const AnalysisPara
   NtupleWrapper< TopXAODParticles >( analysisParameters ), 
   m_partons(NULL), m_ntuple_parton(NULL)
 {
+
+#ifdef __MOMA__
+   m_moma = MoMATool::GetHandle();
+   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
+#endif
+
    m_dumper_mctruth = new EventDumperMCTruthTopXAOD<TopXAODParticles, TopXAODPartons>();    
    m_dumper_mctruth->SetAnalysisParameters( analysisParameters );
    m_dumper_mctruth->SetNtupleParticle( this->m_ntuple, false );
 
    unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
+   m_lumi = 1;
+   m_lumiWeight = 1;
+   m_doLumiReweight = m_config.custom_params_flag["lumi_reweight"] ;
+   if( m_doLumiReweight ) 
+   {   
+  	  const string nEventsFilename        = m_config.custom_params_string["lumifile"]; 
+  	  if( nEventsFilename == "" )
+  	  {
+  	  	cout << "Error: asking for lumi_reweight, but the file containing the number of events has not been provided\n";
+  	  	cout << "Lumi reweight will not be applied\n";
+  	  	m_doLumiReweight = false;
+  	  }
+  	  else
+  	  {
+  	  	m_lumi = m_config.custom_params_numeric[ "luminosity" ];
+  	  	ifstream in( nEventsFilename );
+  	  	int id;
+  	  	in >> id >> m_nEvents;
+	 	 cout << "Sample " << id << " contains " << m_nEvents << " events\n"; 
+	 }	  
+ 	
+   }  
 
    if( isMCSignal ) {
       // open truth ntuples
@@ -35,6 +63,8 @@ NtupleWrapperTopXAODParticles::NtupleWrapperTopXAODParticles( const AnalysisPara
    if( !m_ntuple_parton )   throw std::runtime_error( "ERROR: NtupleWrapperTopXAODParticles: invalid partons ROOT tree." );
 
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
+   
+   
 
 //   cout<<"Event Number "<<m_ntuple_particle->eventNumber<<endl;
 
@@ -64,11 +94,12 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
 //  ed->info.mcWeight = 1.; // bug in D3PD2MiniSL? All zeros. Can't use MC@NLO at the moment.
   if( fabs(ed->info.mcWeight) < 1e-4 ) ed->info.mcWeight = 1.;
   
-  ed->property["passed_particle_resolved_ejets_4j2b" ] = GET_VALUE( passed_resolved_ejets_4j2b );
+  m_dumper_mctruth->DumpEventCutflows( this->m_ntuple, ed );
+/*  ed->property["passed_particle_resolved_ejets_4j2b" ] = GET_VALUE( passed_resolved_ejets_4j2b );
   ed->property["passed_particle_resolved_mujets_4j2b" ] = GET_VALUE( passed_resolved_mujets_4j2b );
   ed->property["passed_particle_boosted_ejets_1fj0b" ] = GET_VALUE( passed_boosted_ejets_1fj0b );  
   ed->property["passed_particle_boosted_mujets_1fj0b" ] = GET_VALUE( passed_boosted_mujets_1fj0b );
-
+*/
 //PDF info are currently not available at particle level (see TTDIFFXS-32)
 /*
   ed->property["pdf_pdf1"]  = GET_VALUE( mcevt_pdf1 );
@@ -79,6 +110,18 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
   ed->property["pdf_x2"]    = GET_VALUE( mcevt_pdf_x2 );
   ed->property["pdf_scale"] = GET_VALUE( mcevt_pdf_scale );
 */
+ #ifdef __MOMA__
+   if( m_doLumiReweight ) 
+   {
+
+   	m_lumiWeight = m_moma->GetLumiWeight( ed->info.mcChannelNumber, m_nEvents, m_lumi);
+   	cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
+   	ed->info.mcWeight *= m_lumiWeight;
+   }
+#endif  
+
+
+
   return success;
 }
 

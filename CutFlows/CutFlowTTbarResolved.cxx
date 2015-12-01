@@ -62,8 +62,9 @@ bool CutFlowTTbarResolved::Initialize() {
         const string syst = m_config->custom_params_string["scale_syst"];
 
         cout << "INFO: Scale factor systematic: " << syst << endl;
-
+/*
 #ifdef __MOMA__
+
         m_syst_type = NOMINAL;
 
         if( syst == "NOMINAL" )            m_syst_type = NOMINAL;
@@ -88,8 +89,8 @@ bool CutFlowTTbarResolved::Initialize() {
 
         m_moma->SetSystematicType( m_syst_type );
 
-#endif /* __MOMA__ */
-
+#endif // __MOMA__ 
+*/
         if( syst.find("PDF") == 0 ) {
 #ifndef __USE_LHAPDF__
              throw runtime_error( "Requested systematic shift of type PDF but LHAPDF is not set. Please recompile against LHAPDF.\n" );
@@ -294,14 +295,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
          const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
          const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
-#ifdef __MOMA__
+/*#ifdef __MOMA__
            const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); // to be changed!!
 //         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
-#else
+#else*/
          const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
-#endif
+//#endif
 
 #ifdef __USE_LHAPDF__
          const double scaleFactor_PDF  = GetPDFWeight( ed );
@@ -958,7 +959,7 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
     cout << "WARNING: Cannot assign fake weights without ATLAS ROOTCORE. Please setup ROOTCORE and compile the MoMA extension." << endl;
 
 #else
-    int rc_channel = m_config->channel;
+ /*   int rc_channel = m_config->channel;
 
     MMEvent  rc_event;
     rc_event.njets = ed->jets.n;
@@ -1014,7 +1015,7 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
     qcd_weight = m_moma->GetFakesWeight( rc_channel, rc_event, rc_lepton, tight );
 //    qcd_weight = m_moma->GetFakesWeight( rc_channel, tight, rc_lepton.pt, rc_lepton.eta, fabs(rc_lepton.eta), rc_lepton.dR, rc_lepton.dRpt, rc_event.jetpt, rc_event.njets, rc_event.ntag, rc_lepton.trigger );
 
-//    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " SumET = " << rc_event.sumet << " QCD_w = " << qcd_weight << endl;
+//    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " SumET = " << rc_event.sumet << " QCD_w = " << qcd_weight << endl;*/
 #endif  
 
     return qcd_weight;

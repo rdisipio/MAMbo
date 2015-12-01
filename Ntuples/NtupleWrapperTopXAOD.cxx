@@ -5,11 +5,44 @@
 NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParameters ):
   NtupleWrapper< TopXAOD >( analysisParameters )
 {
+#ifdef __MOMA__
+   m_moma = MoMATool::GetHandle();
+   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
+#endif
+  unsigned long isData = m_config.custom_params_flag[ "isRealData" ];
+
+  if( isData ) return;
+    
+   m_lumi = 1;
+   m_lumiWeight = 1;
+   m_doLumiReweight = m_config.custom_params_flag["lumi_reweight"] ;
+   if( m_doLumiReweight ) 
+   {   
+  	  const string nEventsFilename        = m_config.custom_params_string["lumifile"]; 
+  	  if( nEventsFilename == "" )
+  	  {
+  	  	cout << "Error: asking for lumi_reweight, but the file containing the number of events has not been provided\n";
+  	  	cout << "Lumi reweight will not be applied\n";
+  	  	m_doLumiReweight = false;
+  	  }
+  	  else
+  	  {
+  	  	m_lumi = m_config.custom_params_numeric[ "luminosity" ];
+  	  	ifstream in( nEventsFilename );
+  	  	int id;
+  	  	in >> id >> m_nEvents;
+	 	 cout << "Sample " << id << " contains " << m_nEvents << " events\n"; 
+	 }	  
+ 	
+   }
+
+   
+
   unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
    if( !isMCSignal ) return;
-
+  const string mcfilename        = m_config.custom_params_string["mcfile"]; 
+ 
    // open truth ntuples
-   const string mcfilename        = m_config.custom_params_string["mcfile"];
    const string treename_particle = m_config.custom_params_string["treename_particle"];
    const string	treename_parton   = m_config.custom_params_string["treename_parton"];
 
@@ -28,6 +61,9 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
    m_dumper_mctruth->SetNtupleParticle( m_ntuple_particle ); 
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
    m_dumper_mctruth->SetAnalysisParameters( analysisParameters );
+   
+   
+   
 }
 
 /////////////////////////////////////////////
@@ -52,6 +88,17 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->info.mcChannelNumber = GET_VALUE( mcChannelNumber );
   ed->info.mcWeight        = GET_VALUE( weight_mc );
 //  ed->info.mcWeight        = 1.0; // no mcWeight??
+
+ #ifdef __MOMA__
+   if( m_doLumiReweight ) 
+   {
+
+   	m_lumiWeight = m_moma->GetLumiWeight( ed->info.mcChannelNumber, m_nEvents, m_lumi);
+   	cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
+   	ed->info.mcWeight *= m_lumiWeight;
+   }
+#endif  
+
 
   SET_PROPERTY( passed_resolved_ejets_4j2b );
   SET_PROPERTY( passed_resolved_mujets_4j2b );
@@ -276,6 +323,8 @@ bool NtupleWrapperTopXAOD::MakeEventTruth( EventData * ed )
   m_dumper_mctruth->DumpEventMET( this->m_ntuple_particle, ed );
   m_dumper_mctruth->DumpEventJets( this->m_ntuple_particle, ed );
   m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
+  m_dumper_mctruth->DumpEventCutflows( this->m_ntuple_particle, ed );
+ // m_ntuple_parton->MakeEventInfo( ed );
   return success;
 }
 

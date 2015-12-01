@@ -1,9 +1,9 @@
-ROOTCOREINCS = -I$(ROOTCOREDIR)/include
-ROOTCORELIBS = $(ROOTCOREDIR)/lib/$(ARCH)
+ROOTCOREINCS = -I$(ROOTCOREBIN)/include
+ROOTCORELIBS = $(ROOTCOREBIN)/lib/$(ARCH)
 
-ROOTCORETOOLS += FakesMacros 
-ROOTCORETOOLS += CalibrationDataInterface 
-
+#ROOTCORETOOLS += FakesMacros 
+#ROOTCORETOOLS += CalibrationDataInterface 
+ROOTCORETOOLS += TopDataPreparation
 #ROOTCORETOOLS += egammaAnalysisUtils egammaEvent
 #ROOTCORETOOLS += FakesTriggerUtils
 #ROOTCORETOOLS += MissingETUtility METAnalysisCommon METSystematics METTrackUtil

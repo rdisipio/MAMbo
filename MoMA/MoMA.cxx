@@ -1,16 +1,17 @@
 #include "MoMA.h"
 
 MoMATool::MoMATool() :
-  m_debug(false), m_fakes_weighter_el( NULL ), m_fakes_weighter_mu( NULL ), 
-  m_btag_weighter( NULL ), m_CDIindex_SF(NULL), m_CDIindex_Eff(NULL)
+  m_debug(false)/*, m_fakes_weighter_el( NULL ), m_fakes_weighter_mu( NULL ), 
+  m_btag_weighter( NULL ), m_CDIindex_SF(NULL), m_CDIindex_Eff(NULL)*/
 {
-  InitializeBTagWeights();
+//  InitializeBTagWeights();
+  InitializeLumiWeights();
 }
 
 
 //////////////////////////////////////////
 
-
+/*
 void MoMATool::InitializeBTagWeights()
 {
    const string mamboDir = getenv( "MAMBODIR" );
@@ -56,15 +57,44 @@ void MoMATool::InitializeBTagWeights()
    }
   
 }
+*/
+/////
+
+
+void MoMATool::InitializeLumiWeights()
+{
+	string rootcoreDir = string( getenv("ROOTCOREBIN") ) + "/data/TopDataPreparation/XSection-MC15-13TeV-fromSusyGrp.data";
+	m_lumiSvc = SampleXsectionSvc::svc( rootcoreDir.c_str());
+	m_lumiWeight = -1;
+}
+
+double MoMATool::GetLumiWeight( int runNumber, float nEvents, float lumi )
+{
+	if( m_lumiWeight < 0 )
+	{
+		double xs;
+		if( m_xs_syst_type == XS_NOMINAL ) xs = m_lumiSvc->sampleXsection()->getXsection(runNumber);
+		else if( m_xs_syst_type == XS_UP ) xs = m_lumiSvc->sampleXsection()->getXsectionUp( runNumber );
+		else xs = m_lumiSvc->sampleXsection()->getXsectionDown( runNumber );
+		double lumiGen = nEvents / xs;
+		cout << "Debug: double MoMATool::GetLumiWeight: xs = " << xs << ", lumi " << lumi << ", nEvents " << nEvents << " lumigen " << lumiGen << endl;
+		m_lumiWeight = lumi / lumiGen;
+	}
+	return m_lumiWeight;
+}
+
+
 
 MoMATool::~MoMATool()
 {
-  delete m_fakes_weighter_el;
-  delete m_fakes_weighter_mu;
+  //delete m_fakes_weighter_el;
+//  delete m_fakes_weighter_mu;
 
-  delete m_btag_weighter;
-  delete m_CDIindex_SF;
-  delete m_CDIindex_Eff;
+  //delete m_btag_weighter;
+  //delete m_CDIindex_SF;
+ // delete m_CDIindex_Eff;
+  
+  //delete m_lumiSvc;
 }
 
 
@@ -81,7 +111,7 @@ MoMATool * MoMATool::GetHandle()
 
 ///////////////////////////////////////////
 
-
+/*
 void MoMATool::InitializeFakesWeights()
 {
    if( m_fakes_weighter_el ) throw runtime_error( "ERROR: MoMA: trying to re-initialize fakes weights.\n" );
@@ -142,10 +172,10 @@ void MoMATool::InitializeFakesWeights()
 
 }
 
-
+*/
 ///////////////////////////////////////////
 
-
+/*
 double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLepton& lepton, bool tight )
 {
   double w = 1.;
@@ -181,9 +211,9 @@ double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLept
   return w;
 }
 
-
+*/
 ///////////////////////////////////////////
-
+/*
 
 double MoMATool::GetFakesWeight( int channel, bool tight, double lep_pt, double lep_eta, double el_cl_eta, double dR_lj_min,
                                    double pTdR_lj_min, double jet_pt0, int jet_n, int nJet_tagged, int trigger)
@@ -198,15 +228,15 @@ double MoMATool::GetFakesWeight( int channel, bool tight, double lep_pt, double 
       F = m_fakes_weighter_el->GetFakeEff();
    }
    else {
-      w = m_fakes_weighter_mu->GetFakesWeightLJetsDefault( tight, lep_pt, lep_eta, std::fabs(lep_eta)/*unused*/, dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger );
+      w = m_fakes_weighter_mu->GetFakesWeightLJetsDefault( tight, lep_pt, lep_eta, std::fabs(lep_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger );
    }
 
    cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
 
    return w;
-}
+}*/
 
-
+/*
 double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut, SYSTEMATIC_TYPE syst_type ) const
 {
    if( !ed ) throw runtime_error( "MoMA::GetBTagWeight(): Invalid pointer to event data.\n" );
@@ -294,4 +324,4 @@ double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut, SYSTEMATIC
    }
 
    return weight;
-}
+}*/

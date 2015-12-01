@@ -10,7 +10,9 @@
 #include "EventDumperLeptons.h"
 #include "EventDumperJets.h"
 #include "EventDumperMCTruthTopXAOD.h"
-
+#ifdef __MOMA__
+#include "MoMA/MoMA.h"
+#endif 
 #define DUMP_RESOLVED
 
 class NtupleWrapperTopXAODParticles : public NtupleWrapper< TopXAODParticles > 
@@ -34,6 +36,16 @@ class NtupleWrapperTopXAODParticles : public NtupleWrapper< TopXAODParticles >
 
    TChain                     * m_partons;
    TopXAODPartons   * m_ntuple_parton;
+   float m_nEvents;
+   float m_lumi;
+   float m_lumiWeight;
+   bool m_doLumiReweight;
+   
+   
+   #ifdef __MOMA__
+    MoMATool                * m_moma;
+    SYSTEMATIC_TYPE           m_syst_type;
+#endif
 };
 
 typedef NtupleWrapperPluginFactory< NtupleWrapperTopXAODParticles > NtupleWrapperPluginFactory_TopXAODParticles;
