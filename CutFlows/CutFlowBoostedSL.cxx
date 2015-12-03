@@ -38,13 +38,12 @@ bool CutFlowBoostedSL::Initialize() {
 bool CutFlowBoostedSL::Apply( EventData * ed)
 {
   bool success = true;
-
+  
   CutFlow::Start();
   
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
   unsigned long isRealData = m_config->custom_params_flag["isRealData"];
- 
-
+  
   //////MANAGE THE WEIGHTS//////////////////////////////////////////
   double weight_reco_level     = 1.;
   double weight_particle_level = 1.;
@@ -61,7 +60,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   // THis is what we have now (TO BE FIXED with nedeed wrights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;
-   
+  
   // in 8 TeV analysis we had only PILEUP and ZVERTEX
   weight_particle_level *= scaleFactor_PILEUP; // * scaleFactor_ZVERTEX;
   
@@ -76,9 +75,38 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   // Apply selections 
   const bool passedRecoSelection     = PassedCutFlowReco( ed );
   const bool passedParticleSelection =  isRealData ? false : PassedCutFlowParticle( ed );
+  if (!passedParticleSelection && !passedRecoSelection)
+    return success;
+  
+  if( passedRecoSelection ) { ///RECO ONLY
+  
+    int index = ed->property["RecoHadTopJetCandidate"];
+    m_hm->GetHistogram( "reco/1fj1b/topH/pt_topH" )->Fill( ed->fjets.pT.at(index) / GeV, weight_reco_level);
+    m_hm->GetHistogram( "reco/1fj1b/topH/eta" )->Fill( ed->fjets.eta.at(index), weight_reco_level );
+    m_hm->GetHistogram( "reco/1fj1b/topH/m" )->Fill( ed->fjets.m.at(index) / GeV, weight_reco_level );   
+    m_hm->GetHistogram( "reco/1fj1b/topH/phi" )->Fill( ed->fjets.phi.at(index), weight_reco_level );
+    
+  }
+  
+  if(!isRealData){
+    if (passedRecoSelection && passedParticleSelection){ ////RECO && PARTICLE
+      int recoindex = ed->property["RecoHadTopJetCandidate"];
+      int particleindex = ed->property["ParticleHadTopJetCandidate"];
+      
+      m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_pt_topH", ed->fjets.pT.at(recoindex) / GeV,  ed->truth_fjets.pT.at(particleindex)/ GeV,  weight_reco_level);
+      
+      
+      ///Top particle
+      m_hm->GetHistogram( "particle/1fj1b/topH/pt_topH" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
+      m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex) / GeV, weight_particle_level );
+      m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) / GeV, weight_particle_level );
+      m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex) / GeV, weight_particle_level );
+    }
+    
+  }
   
   
-
+  
   return success;
 }
 
@@ -147,8 +175,9 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
       if(topTag == 1 && (ed->fjets.pT.at(lj) > 300 * GeV) && fabs(ed->fjets.eta.at(lj)) < 2){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	HadTopJetCandidate = lj;
-	
-	m_hm->GetHistogram( "reco/1fj1b/topJet/pt" )->Fill( ed->fjets.pT.at(lj) / GeV, weight );
+    	ed->property["RecoHadTopJetCandidate"] = lj;
+
+
 	break;
       }
     }
@@ -164,7 +193,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
     if (!control) {
        cout<<"WARNING the lepton selection coud be broken!"<<endl;
-       exit(1);
+       return !passed;
     }
  
    //Define the lepton to use during selection
@@ -176,7 +205,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
    //**************** Exist a jet with deltaPhi(lep,HadTopJetCandidate)>1*************************
     double dPhi_lepljet = PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi());
-    m_hm->GetHistogram( "reco/1fj1b/topH_lep/DeltaPhi" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
+    m_hm->GetHistogram( "reco/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
     if ( dPhi_lepljet < 1) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
     
@@ -210,8 +239,8 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     for ( auto &ltj : jet_farFromHadTopJetCandidate ){
       
       double dR = PhysicsHelperFunctions::deltaR(lepton.Eta(),ed->jets.eta.at(ltj),lepton.Phi(),ed->jets.phi.at(ltj));
-      	m_hm->GetHistogram("reco/1fj1b/topH_smallJ/DeltaR")->Fill( PhysicsHelperFunctions::deltaR(ed->fjets.eta.at(HadTopJetCandidate),ed->jets.eta.at(ltj), ed->fjets.phi.at(HadTopJetCandidate),ed->jets.phi.at(ltj)), weight );
-	m_hm->GetHistogram("reco/1fj1b/lep_smallJ/DeltaR")->Fill( dR , weight );
+      	m_hm->GetHistogram("reco/1fj1b/topH/DeltaR_smallJ")->Fill( PhysicsHelperFunctions::deltaR(ed->fjets.eta.at(HadTopJetCandidate),ed->jets.eta.at(ltj), ed->fjets.phi.at(HadTopJetCandidate),ed->jets.phi.at(ltj)), weight );//
+      	m_hm->GetHistogram("reco/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
 	if (dR < 1.5) {
 	  LepTopJetCandidate.push_back(ltj);
 	  
@@ -223,7 +252,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     if(LepTopJetCandidate.size() == 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
     
-    m_hm->GetHistogram( "reco/1fj1b/topH/pt" )->Fill( ed->fjets.pT.at(HadTopJetCandidate) / GeV, weight );
+    
   
    
     // deltaPhi between the HadTopJetCandidate and lepton ;
@@ -254,6 +283,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 
     const int    el_n  = ed->truth_electrons.n; 
     const int    mu_n  = ed->truth_muons.n; 
+    const int    bjet_n = ed->truth_bjets.n;
     const int    jet_n  = ed->truth_jets.n;
     const int    fjet_n = ed->truth_fjets.n;   
     const double ETmiss = ed->MET_truth.et;
@@ -307,8 +337,8 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
       if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	HadTopJetCandidate = lj;
-	
-	m_hm->GetHistogram( "particle/1fj1b/topJet/pt" )->Fill( ed->truth_fjets.pT.at(lj) / GeV, weight );
+	ed->property["ParticleHadTopJetCandidate"] = lj;
+
 
 	break;
       }
@@ -323,7 +353,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
     if (!control) {
       cout<<"WARNING the lepton selection coud be broken!"<<endl;
-       exit(1);
+      return !passed;
     }
     
     //Define the lepton to use during selection
@@ -335,19 +365,15 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
    //**************** Exist a jet with deltaPhi(lep,HadTopJetCandidate)>1*************************
     double dPhi_lepljet = PhysicsHelperFunctions::deltaPhi(ed->truth_fjets.phi.at(HadTopJetCandidate),lepton.Phi());
-    m_hm->GetHistogram( "particle/1fj1b/topH_lep/DeltaPhi" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->truth_fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
+    m_hm->GetHistogram( "particle/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->truth_fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
     if ( dPhi_lepljet < 1) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
     
     
     //**************** Exist b-jet in the event*************************
+    if (bjet_n < 1)        return !passed;
+    PassedCut( "LPLUSJETS", "particle_unweight" );
     
-    // vector<int> btagged_jet;    
-    // for( int bj = 0 ; bj < jet_n ; ++bj ) {
-    //   if(ed->truth_jets.property["mv2c20"].at(bj) > -0.4434 ) btagged_jet.push_back(bj);
-    // }
-    // if(btagged_jet.size() == 0) return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight");
     
     
    //**************** Exist a jet with deltaR(HadTopJetCandidate,jet)>1.5*************************
@@ -369,8 +395,8 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     for ( auto &ltj : jet_farFromHadTopJetCandidate ){
       
       double dR = PhysicsHelperFunctions::deltaR(lepton.Eta(),ed->truth_jets.eta.at(ltj),lepton.Phi(),ed->truth_jets.phi.at(ltj));
-      	m_hm->GetHistogram("particle/1fj1b/topH_smallJ/DeltaR")->Fill( PhysicsHelperFunctions::deltaR(ed->truth_fjets.eta.at(HadTopJetCandidate),ed->truth_jets.eta.at(ltj), ed->truth_fjets.phi.at(HadTopJetCandidate),ed->truth_jets.phi.at(ltj)), weight );
-   	m_hm->GetHistogram("particle/1fj1b/lep_smallJ/DeltaR")->Fill( dR , weight );
+      m_hm->GetHistogram("particle/1fj1b/topH/DeltaR_smallJ")->Fill( PhysicsHelperFunctions::deltaR(ed->truth_fjets.eta.at(HadTopJetCandidate),ed->truth_jets.eta.at(ltj), ed->truth_fjets.phi.at(HadTopJetCandidate),ed->truth_jets.phi.at(ltj)), weight );
+      m_hm->GetHistogram("particle/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
    	if (dR < 1.5) {
    	  LepTopJetCandidate.push_back(ltj);
 	  
@@ -382,8 +408,6 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     if(LepTopJetCandidate.size() == 0) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
     
-    m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( ed->truth_fjets.pT.at(HadTopJetCandidate) / GeV, weight );
- 
 
 
 
