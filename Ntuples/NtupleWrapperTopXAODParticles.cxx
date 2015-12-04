@@ -45,11 +45,11 @@ NtupleWrapperTopXAODParticles::NtupleWrapperTopXAODParticles( const AnalysisPara
 
       cout << "INFO: MC tree read from " << mcfilename << endl;
       // JK && JK      m_partons = HelperFunctions::LoadChain( mcfilename.c_str(), treename_parton.c_str() ); // this line is responsible for empty parton tree, flanked by next line 
-      m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, "partons" );
+      m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, treename_parton );
    }
-   else {
-      m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, "partons" );
-   }
+   // else {
+      // m_partons = HelperFunctions::LoadChain( analysisParameters.fileListName, treename_parton );
+   // }
 
    if( !m_partons ) {
      cout << "WARNING: no partons tree found in the file list" << endl;
