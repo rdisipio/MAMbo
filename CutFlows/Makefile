@@ -2,7 +2,7 @@ include ../Makefile.inc
 
 # modify the following line CUTFLOWS = ... according to your needs
 # to add more ntuples, lauch bin/
-CUTFLOWS  += Dummy TTbarResolved TTbarResolvedParticleLevel
+CUTFLOWS  += Dummy TTbarResolved TTbarResolvedParticleLevel BoostedSL BoostedSLParticle
 #CUTFLOWS      = TTHTo2LeptonsSS
 #CUTFLOWS     = BoostedSL FakeRateZjet FakeRateZel FakeRateZfjet
 
