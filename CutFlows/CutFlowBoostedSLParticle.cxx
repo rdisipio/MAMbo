@@ -46,9 +46,9 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
   
   
   // in 8 TeV analysis we had only PILEUP and ZVERTEX
-  weight_particle_level *= scaleFactor_PILEUP; // * scaleFactor_ZVERTEX;
+  //weight_particle_level *= scaleFactor_PILEUP; // * scaleFactor_ZVERTEX;
   
-  
+  //cout<<"Weights:  "<<weight_particle_level<<endl;
   //Set the weights as event properties so we can call in the selections
   ed->property["weight_particle_level"] = weight_particle_level;
   
@@ -64,8 +64,8 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
       
       ///Top particle
       m_hm->GetHistogram( "particle/1fj1b/topH/pt_topH" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
-      m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex) / GeV, weight_particle_level );
-      m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) / GeV, weight_particle_level );
+      m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex), weight_particle_level );
+      m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) , weight_particle_level );
       m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex) / GeV, weight_particle_level );
     }
    
@@ -114,8 +114,8 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
     
     const double weight = ed->property["weight_particle_level"];
     
-    const bool passed_boosted_ejets = ed->property["passed_boosted_ejets_1fj0b"]; ///Preselection done in AT for el-channel
-    const bool passed_boosted_mujets = ed->property["passed_boosted_mujets_1fj0b"]; ///Preselection done in AT for mu-channel  
+    const bool passed_boosted_ejets = ed->property["passed_particle_boosted_ejets_1fj0b"]; ///Preselection done in AT for el-channel
+    const bool passed_boosted_mujets = ed->property["passed_particle_boosted_mujets_1fj0b"]; ///Preselection done in AT for mu-channel  
       
       
     //****************All event passing analysis top selection *************************
@@ -199,13 +199,13 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "LPLUSJETS", "particle_unweight");
     
     
-    //**************** Exist a jet with deltaR(lepton,jet)<1.5*************************
+    //**************** Exist a jet with deltaR(lepton,jet)<2.0*************************
     for ( auto &ltj : jet_farFromHadTopJetCandidate ){
       
       double dR = PhysicsHelperFunctions::deltaR(lepton.Eta(),ed->truth_jets.eta.at(ltj),lepton.Phi(),ed->truth_jets.phi.at(ltj));
       m_hm->GetHistogram("particle/1fj1b/topH/DeltaR_smallJ")->Fill( PhysicsHelperFunctions::deltaR(ed->truth_fjets.eta.at(HadTopJetCandidate),ed->truth_jets.eta.at(ltj), ed->truth_fjets.phi.at(HadTopJetCandidate),ed->truth_jets.phi.at(ltj)), weight );
       m_hm->GetHistogram("particle/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
-   	if (dR < 1.5) {
+   	if (dR < 2.0) {
    	  LepTopJetCandidate.push_back(ltj);
 	  
    	}

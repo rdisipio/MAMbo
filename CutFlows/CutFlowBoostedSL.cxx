@@ -19,7 +19,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "reco_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
     SetCutName("LPLUSJETS", "reco_unweight", 3, "Exist b-jet in the event                    ");
     SetCutName("LPLUSJETS", "reco_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(lepton,jet)<1.5     ");
+    SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2     ");
 
     AddCounterName("LPLUSJETS", "particle_unweight", 5 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events after Analysis Top Cuts          ");
@@ -27,7 +27,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
     SetCutName("LPLUSJETS", "particle_unweight", 3, "Exist b-jet in the event                    ");
     SetCutName("LPLUSJETS", "particle_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<1.5     ");
+    SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2     ");
 
     
     return success;
@@ -235,13 +235,13 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     PassedCut( "LPLUSJETS", "reco_unweight");
     
     
-    //**************** Exist a jet with deltaR(lepton,jet)<1.5*************************
+    //**************** Exist a jet with deltaR(lepton,jet)<2.0*************************
     for ( auto &ltj : jet_farFromHadTopJetCandidate ){
       
       double dR = PhysicsHelperFunctions::deltaR(lepton.Eta(),ed->jets.eta.at(ltj),lepton.Phi(),ed->jets.phi.at(ltj));
       	m_hm->GetHistogram("reco/1fj1b/topH/DeltaR_smallJ")->Fill( PhysicsHelperFunctions::deltaR(ed->fjets.eta.at(HadTopJetCandidate),ed->jets.eta.at(ltj), ed->fjets.phi.at(HadTopJetCandidate),ed->jets.phi.at(ltj)), weight );//
       	m_hm->GetHistogram("reco/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
-	if (dR < 1.5) {
+	if (dR < 2.0) {
 	  LepTopJetCandidate.push_back(ltj);
 	  
 	}
@@ -391,13 +391,13 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "LPLUSJETS", "particle_unweight");
     
     
-    //**************** Exist a jet with deltaR(lepton,jet)<1.5*************************
+    //**************** Exist a jet with deltaR(lepton,jet)<2.0*************************
     for ( auto &ltj : jet_farFromHadTopJetCandidate ){
       
       double dR = PhysicsHelperFunctions::deltaR(lepton.Eta(),ed->truth_jets.eta.at(ltj),lepton.Phi(),ed->truth_jets.phi.at(ltj));
       m_hm->GetHistogram("particle/1fj1b/topH/DeltaR_smallJ")->Fill( PhysicsHelperFunctions::deltaR(ed->truth_fjets.eta.at(HadTopJetCandidate),ed->truth_jets.eta.at(ltj), ed->truth_fjets.phi.at(HadTopJetCandidate),ed->truth_jets.phi.at(ltj)), weight );
       m_hm->GetHistogram("particle/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
-   	if (dR < 1.5) {
+   	if (dR < 2.0) {
    	  LepTopJetCandidate.push_back(ltj);
 	  
    	}
