@@ -109,8 +109,8 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
   CutFlow::Start();
 
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
-  unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
-
+  //unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
+  string decay = m_config->custom_params_string["decay"];
   // dileptonic filter
   // flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
   int EventIsDileptonic = ed->property["isDileptonic"];
@@ -119,7 +119,7 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 
   // RDS+MR
   if( isMCSignal ) {
-    if( (isDilepton==0) && (EventIsDileptonic==1) ) return success;
+    if( decay == "ljets" && EventIsDileptonic != 0 ) return success;
   }
 
 

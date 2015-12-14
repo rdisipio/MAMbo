@@ -49,8 +49,9 @@ bool CutFlowTTbarResolved::Initialize() {
 
     // just for info purposes here:
     int isMCSignal = (int) m_config->custom_params_flag["isMCSignal"];
-    int isDilepton = (int) m_config->custom_params_flag["isDilepton"];
-    cout << "INFO: signal flags: " << " isMCSignal=" << isMCSignal << " isDilepton=" << isDilepton << endl;
+  //  int isDilepton = (int) m_config->custom_params_flag["isDilepton"];
+    string decay = m_config->custom_params_string["decay"];
+    cout << "INFO: signal flags: " << " isMCSignal=" << isMCSignal << " decay=" << decay << endl;
 
     unsigned long isRealData = m_config->custom_params_flag["isRealData"];
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
@@ -215,7 +216,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     CutFlow::Start();
 
     const unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
-    const unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
+   //const unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
+    string decay = m_config->custom_params_string["decay"];
     const unsigned long isRealData = m_config->custom_params_flag["isRealData"];
     const unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     const unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
@@ -368,7 +370,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
     //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
 
     if( isMCSignal ) {
-       if( ( isDilepton == 0 ) && ( EventIsDileptonic == 1 ) ) return success;
+       if( ( decay == "ljets" ) && ( EventIsDileptonic == 1 ) ) return success;
     }
 
     //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
