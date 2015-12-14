@@ -10,6 +10,9 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
    cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
 #endif
   unsigned long isData = m_config.custom_params_flag[ "isRealData" ];
+  m_ntuple_particle = NULL;
+  m_ntuple_parton = NULL;
+  m_dumper_mctruth = NULL;
 
   if( isData ) return;
     
@@ -71,9 +74,9 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
 
 NtupleWrapperTopXAOD::~NtupleWrapperTopXAOD()
 {
-	delete m_ntuple_particle;
-	delete m_ntuple_parton;
-	delete m_dumper_mctruth;
+	SAFE_DELETE( m_ntuple_particle );
+	SAFE_DELETE( m_ntuple_parton );
+	SAFE_DELETE( m_dumper_mctruth );
 }
 
 /////////////////////////////////////////////
