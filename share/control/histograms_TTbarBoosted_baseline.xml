@@ -22,7 +22,7 @@
     <Variable name="pt" title="p_{T} [GeV]">
       <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="lep"/> 
     </Variable>
-    <Variable name="pt_topH" title="p_{T} [GeV]">
+    <Variable name="pt" title="p_{T} [GeV]">
       <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="eta" title="#eta">
@@ -45,7 +45,6 @@
   </Variables>        
   
   <Histos>
-    <TH1F variable="pt_topH" binId="0"/>
     <TH1F variable="pt" binId="0"/>
     <TH1F variable="eta" binId="0"/>
     <TH1F variable="phi" binId="0"/>
@@ -55,7 +54,7 @@
     
     
     
-    <Matrix variable="pt_topH" binId="0"/>
+    <Matrix variable="pt" binId="0"/>
   </Histos>
   
 </histograms>
