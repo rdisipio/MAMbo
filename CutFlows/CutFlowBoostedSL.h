@@ -28,7 +28,8 @@ class CutFlowBoostedSL : public CutFlow
  protected:
   bool PassedCutFlowReco( EventData * ed  = NULL); 
   bool PassedCutFlowParticle(EventData * ed = NULL);
- 
+  void FillHistogramsRecoToParton(      EventData * ed = NULL, const double weight = 1. );
+  
  protected:
 #ifdef __MOMA__
     MoMATool                * m_moma;

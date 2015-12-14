@@ -19,7 +19,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "reco_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
     SetCutName("LPLUSJETS", "reco_unweight", 3, "Exist b-jet in the event                    ");
     SetCutName("LPLUSJETS", "reco_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2     ");
+    SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
 
     AddCounterName("LPLUSJETS", "particle_unweight", 5 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events after Analysis Top Cuts          ");
@@ -27,7 +27,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
     SetCutName("LPLUSJETS", "particle_unweight", 3, "Exist b-jet in the event                    ");
     SetCutName("LPLUSJETS", "particle_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2     ");
+    SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
 
     
     return success;
@@ -75,13 +75,14 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   // Apply selections 
   const bool passedRecoSelection     = PassedCutFlowReco( ed );
   const bool passedParticleSelection =  isRealData ? false : PassedCutFlowParticle( ed );
+  
   if (!passedParticleSelection && !passedRecoSelection)
     return success;
   
   if( passedRecoSelection ) { ///RECO ONLY
   
     int index = ed->property["RecoHadTopJetCandidate"];
-    m_hm->GetHistogram( "reco/1fj1b/topH/pt_topH" )->Fill( ed->fjets.pT.at(index) / GeV, weight_reco_level);
+    m_hm->GetHistogram( "reco/1fj1b/topH/pt" )->Fill( ed->fjets.pT.at(index) / GeV, weight_reco_level);
     m_hm->GetHistogram( "reco/1fj1b/topH/eta" )->Fill( ed->fjets.eta.at(index), weight_reco_level );
     m_hm->GetHistogram( "reco/1fj1b/topH/m" )->Fill( ed->fjets.m.at(index) / GeV, weight_reco_level );   
     m_hm->GetHistogram( "reco/1fj1b/topH/phi" )->Fill( ed->fjets.phi.at(index), weight_reco_level );
@@ -93,11 +94,11 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
       int recoindex = ed->property["RecoHadTopJetCandidate"];
       int particleindex = ed->property["ParticleHadTopJetCandidate"];
       
-      m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_pt_topH", ed->fjets.pT.at(recoindex) / GeV,  ed->truth_fjets.pT.at(particleindex)/ GeV,  weight_reco_level);
+      m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_pt", ed->fjets.pT.at(recoindex) / GeV,  ed->truth_fjets.pT.at(particleindex)/ GeV,  weight_reco_level);
       
       
       ///Top particle
-      m_hm->GetHistogram( "particle/1fj1b/topH/pt_topH" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
+      m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
       m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex) / GeV, weight_particle_level );
       m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) / GeV, weight_particle_level );
       m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex) / GeV, weight_particle_level );
@@ -105,7 +106,10 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
     
   }
   
-  
+  if( passedRecoSelection ) { ///RECO ONLY FOR PARTON STUFF
+     FillHistogramsRecoToParton(ed, weight_reco_level);
+    
+  }
   
   return success;
 }
@@ -415,6 +419,40 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
   
 
 }
+
+void CutFlowBoostedSL::FillHistogramsRecoToParton( EventData * ed, const double weight )
+  {
+    
+   
+    // parton level
+    int ilep, ihad;
+   
+    const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
+    if( isHadronic ) {
+      ihad = 0;
+      ilep = 1;
+    }
+    else {
+      ihad = 1;
+      ilep = 0;
+    }
+    
+    
+    
+    Particle partonTopH(ed->mctruth, ihad);
+    
+     // reco level fjet index
+    int index = ed->property["RecoHadTopJetCandidate"];
+    
+    //  reco > parton MMatrix
+    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_pt", ed->fjets.pT.at(index)/ GeV, partonTopH.pt / GeV, weight);
+    
+    
+  }
+
+
+
+
 /////////////////////////////////////////
 
 // Plugin

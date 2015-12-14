@@ -53,20 +53,27 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
   ed->property["weight_particle_level"] = weight_particle_level;
   
   
-  // Apply selections 
+  ///////Parton top distributions/////////////////////
+  FillHistogramsParton( ed, weight_particle_level );
+
+  // Apply particle level selection 
   const bool passedParticleSelection =  PassedCutFlowParticle( ed );
   if (!passedParticleSelection)
     return success;
   
   
-    if (passedParticleSelection){ ////RECO && PARTICLE
+    if (passedParticleSelection){ 
       int particleindex = ed->property["ParticleHadTopJetCandidate"];      
       
       ///Top particle
-      m_hm->GetHistogram( "particle/1fj1b/topH/pt_topH" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
+      m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
       m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex), weight_particle_level );
       m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) , weight_particle_level );
       m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex) / GeV, weight_particle_level );
+      
+      FillHistogramsParticleToParton( ed, weight_particle_level );
+	
+
     }
    
   
@@ -223,6 +230,67 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
   
 
 }
+
+
+void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, const double weight )
+  {
+    
+   
+    // parton level
+    int ilep, ihad;
+   
+    const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
+    if( isHadronic ) {
+      ihad = 0;
+      ilep = 1;
+    }
+    else {
+      ihad = 1;
+      ilep = 0;
+    }
+    
+    
+    
+    Particle partonTopH(ed->mctruth, ihad);
+    
+       
+    // particle level fjet index
+    int particleindex = ed->property["ParticleHadTopJetCandidate"];
+    
+    //  particle > parton MMatrix
+    m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_pt",  ed->truth_fjets.pT.at(particleindex) / GeV, partonTopH.pt / GeV, weight);
+    
+    
+  }
+
+void CutFlowBoostedSLParticle::FillHistogramsParton( EventData * ed, const double weight )
+  {
+
+    // parton level
+    int ilep, ihad;
+   
+    const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
+    if( isHadronic ) {
+      ihad = 0;
+      ilep = 1;
+    }
+    else {
+      ihad = 1;
+      ilep = 0;
+    }
+    
+    
+    
+    Particle partonTopH(ed->mctruth, ihad);
+   
+    //parton TopH
+    m_hm->GetHistogram( "parton/1fj1b/topH/pt" )->Fill(  partonTopH.pt / GeV, weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/eta")->Fill(  partonTopH.eta     , weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/phi")->Fill(  partonTopH.phi     , weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/m"  )->Fill(  partonTopH.m       , weight);
+ 
+
+  }
 /////////////////////////////////////////
 
 // Plugin
