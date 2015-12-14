@@ -1,1 +1,1 @@
-/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/bin/MAMbo-setenv.sh
+/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/bin/MAMbo-setenv.sh
