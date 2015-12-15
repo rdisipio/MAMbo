@@ -118,6 +118,80 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->property["scaleFactor_BTAG_85"]     = GET_VALUE( weight_bTagSF_85 );
   ed->property["scaleFactor_LEPTON"]   = GET_VALUE( weight_leptonSF );
   ed->property["scaleFactor_PILEUP"]   = GET_VALUE( weight_pileup );
+  
+
+//temporary
+ed->property["scaleFactor_pileup_UP"] = GET_VALUE( weight_pileup_UP );
+ed->property["scaleFactor_pileup_DOWN"] = GET_VALUE( weight_pileup_DOWN );
+ed->property["scaleFactor_leptonSF_EL_SF_Trigger_UP"] = GET_VALUE( weight_leptonSF_EL_SF_Trigger_UP );
+ed->property["scaleFactor_leptonSF_EL_SF_Trigger_DOWN"] = GET_VALUE( weight_leptonSF_EL_SF_Trigger_DOWN );
+ed->property["scaleFactor_leptonSF_EL_SF_Reco_UP"] = GET_VALUE( weight_leptonSF_EL_SF_Reco_UP );
+ed->property["scaleFactor_leptonSF_EL_SF_Reco_DOWN"] = GET_VALUE( weight_leptonSF_EL_SF_Reco_DOWN );
+ed->property["scaleFactor_leptonSF_EL_SF_ID_UP"] = GET_VALUE( weight_leptonSF_EL_SF_ID_UP );
+ed->property["scaleFactor_leptonSF_EL_SF_ID_DOWN"] = GET_VALUE( weight_leptonSF_EL_SF_ID_DOWN );
+ed->property["scaleFactor_leptonSF_EL_SF_Isol_UP"] = GET_VALUE( weight_leptonSF_EL_SF_Isol_UP );
+ed->property["scaleFactor_leptonSF_EL_SF_Isol_DOWN"] = GET_VALUE( weight_leptonSF_EL_SF_Isol_DOWN );
+ed->property["scaleFactor_leptonSF_MU_SF_Trigger_STAT_UP"] = GET_VALUE( weight_leptonSF_MU_SF_Trigger_STAT_UP );
+ed->property["scaleFactor_leptonSF_MU_SF_Trigger_STAT_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_Trigger_STAT_DOWN );
+ed->property["scaleFactor_leptonSF_MU_SF_Trigger_SYST_UP"] = GET_VALUE( weight_leptonSF_MU_SF_Trigger_SYST_UP );
+ed->property["scaleFactor_leptonSF_MU_SF_Trigger_SYST_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_Trigger_SYST_DOWN );
+ed->property["scaleFactor_leptonSF_MU_SF_ID_STAT_UP"] = GET_VALUE( weight_leptonSF_MU_SF_ID_STAT_UP );
+ed->property["scaleFactor_leptonSF_MU_SF_ID_STAT_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_ID_STAT_DOWN );
+ed->property["scaleFactor_leptonSF_MU_SF_ID_SYST_UP"] = GET_VALUE( weight_leptonSF_MU_SF_ID_SYST_UP );
+ed->property["scaleFactor_leptonSF_MU_SF_ID_SYST_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_ID_SYST_DOWN );
+ed->property["scaleFactor_leptonSF_MU_SF_Isol_STAT_UP"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_STAT_UP );
+ed->property["scaleFactor_leptonSF_MU_SF_Isol_STAT_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_STAT_DOWN );
+ed->property["scaleFactor_leptonSF_MU_SF_Isol_SYST_UP"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_SYST_UP );
+ed->property["scaleFactor_leptonSF_MU_SF_Isol_SYST_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_SYST_DOWN );
+ed->property["scaleFactor_indiv_SF_EL_Trigger"] = GET_VALUE( weight_indiv_SF_EL_Trigger );
+ed->property["scaleFactor_indiv_SF_EL_Trigger_UP"] = GET_VALUE( weight_indiv_SF_EL_Trigger_UP );
+ed->property["scaleFactor_indiv_SF_EL_Trigger_DOWN"] = GET_VALUE( weight_indiv_SF_EL_Trigger_DOWN );
+ed->property["scaleFactor_indiv_SF_EL_Reco"] = GET_VALUE( weight_indiv_SF_EL_Reco );
+ed->property["scaleFactor_indiv_SF_EL_Reco_UP"] = GET_VALUE( weight_indiv_SF_EL_Reco_UP );
+ed->property["scaleFactor_indiv_SF_EL_Reco_DOWN"] = GET_VALUE( weight_indiv_SF_EL_Reco_DOWN );
+ed->property["scaleFactor_indiv_SF_EL_ID"] = GET_VALUE( weight_indiv_SF_EL_ID );
+ed->property["scaleFactor_indiv_SF_EL_ID_UP"] = GET_VALUE( weight_indiv_SF_EL_ID_UP );
+ed->property["scaleFactor_indiv_SF_EL_ID_DOWN"] = GET_VALUE( weight_indiv_SF_EL_ID_DOWN );
+ed->property["scaleFactor_indiv_SF_EL_Isol"] = GET_VALUE( weight_indiv_SF_EL_Isol );
+ed->property["scaleFactor_indiv_SF_EL_Isol_UP"] = GET_VALUE( weight_indiv_SF_EL_Isol_UP );
+ed->property["scaleFactor_indiv_SF_EL_Isol_DOWN"] = GET_VALUE( weight_indiv_SF_EL_Isol_DOWN );
+ed->property["scaleFactor_indiv_SF_MU_Trigger"] = GET_VALUE( weight_indiv_SF_MU_Trigger );
+ed->property["scaleFactor_indiv_SF_MU_Trigger_STAT_UP"] = GET_VALUE( weight_indiv_SF_MU_Trigger_STAT_UP );
+ed->property["scaleFactor_indiv_SF_MU_Trigger_STAT_DOWN"] = GET_VALUE( weight_indiv_SF_MU_Trigger_STAT_DOWN );
+ed->property["scaleFactor_indiv_SF_MU_Trigger_SYST_UP"] = GET_VALUE( weight_indiv_SF_MU_Trigger_SYST_UP );
+ed->property["scaleFactor_indiv_SF_MU_Trigger_SYST_DOWN"] = GET_VALUE( weight_indiv_SF_MU_Trigger_SYST_DOWN );
+ed->property["scaleFactor_indiv_SF_MU_ID"] = GET_VALUE( weight_indiv_SF_MU_ID );
+ed->property["scaleFactor_indiv_SF_MU_ID_STAT_UP"] = GET_VALUE( weight_indiv_SF_MU_ID_STAT_UP );
+ed->property["scaleFactor_indiv_SF_MU_ID_STAT_DOWN"] = GET_VALUE( weight_indiv_SF_MU_ID_STAT_DOWN );
+ed->property["scaleFactor_indiv_SF_MU_ID_SYST_UP"] = GET_VALUE( weight_indiv_SF_MU_ID_SYST_UP );
+ed->property["scaleFactor_indiv_SF_MU_ID_SYST_DOWN"] = GET_VALUE( weight_indiv_SF_MU_ID_SYST_DOWN );
+ed->property["scaleFactor_indiv_SF_MU_Isol"] = GET_VALUE( weight_indiv_SF_MU_Isol );
+ed->property["scaleFactor_indiv_SF_MU_Isol_STAT_UP"] = GET_VALUE( weight_indiv_SF_MU_Isol_STAT_UP );
+ed->property["scaleFactor_indiv_SF_MU_Isol_STAT_DOWN"] = GET_VALUE( weight_indiv_SF_MU_Isol_STAT_DOWN );
+ed->property["scaleFactor_indiv_SF_MU_Isol_SYST_UP"] = GET_VALUE( weight_indiv_SF_MU_Isol_SYST_UP );
+ed->property["scaleFactor_indiv_SF_MU_Isol_SYST_DOWN"] = GET_VALUE( weight_indiv_SF_MU_Isol_SYST_DOWN );
+ed->property["scaleFactor_bTagSF_77_eigenvars_B_up"] = GET_VALUE( weight_bTagSF_77_eigenvars_B_up );
+ed->property["scaleFactor_bTagSF_77_eigenvars_C_up"] = GET_VALUE( weight_bTagSF_77_eigenvars_C_up );
+ed->property["scaleFactor_bTagSF_77_eigenvars_Light_up"] = GET_VALUE( weight_bTagSF_77_eigenvars_Light_up );
+ed->property["scaleFactor_bTagSF_77_eigenvars_B_down"] = GET_VALUE( weight_bTagSF_77_eigenvars_B_down );
+ed->property["scaleFactor_bTagSF_77_eigenvars_C_down"] = GET_VALUE( weight_bTagSF_77_eigenvars_C_down );
+ed->property["scaleFactor_bTagSF_77_eigenvars_Light_down"] = GET_VALUE( weight_bTagSF_77_eigenvars_Light_down );
+ed->property["scaleFactor_bTagSF_77_extrapolation_up"] = GET_VALUE( weight_bTagSF_77_extrapolation_up );
+ed->property["scaleFactor_bTagSF_77_extrapolation_down"] = GET_VALUE( weight_bTagSF_77_extrapolation_down );
+ed->property["scaleFactor_bTagSF_77_extrapolation_from_charm_up"] = GET_VALUE( weight_bTagSF_77_extrapolation_from_charm_up );
+ed->property["scaleFactor_bTagSF_77_extrapolation_from_charm_down"] = GET_VALUE( weight_bTagSF_77_extrapolation_from_charm_down );
+ed->property["scaleFactor_bTagSF_85_eigenvars_B_up"] = GET_VALUE( weight_bTagSF_85_eigenvars_B_up );
+ed->property["scaleFactor_bTagSF_85_eigenvars_C_up"] = GET_VALUE( weight_bTagSF_85_eigenvars_C_up );
+ed->property["scaleFactor_bTagSF_85_eigenvars_Light_up"] = GET_VALUE( weight_bTagSF_85_eigenvars_Light_up );
+ed->property["scaleFactor_bTagSF_85_eigenvars_B_down"] = GET_VALUE( weight_bTagSF_85_eigenvars_B_down );
+ed->property["scaleFactor_bTagSF_85_eigenvars_C_down"] = GET_VALUE( weight_bTagSF_85_eigenvars_C_down );
+ed->property["scaleFactor_bTagSF_85_eigenvars_Light_down"] = GET_VALUE( weight_bTagSF_85_eigenvars_Light_down );
+ed->property["scaleFactor_bTagSF_85_extrapolation_up"] = GET_VALUE( weight_bTagSF_85_extrapolation_up );
+ed->property["scaleFactor_bTagSF_85_extrapolation_down"] = GET_VALUE( weight_bTagSF_85_extrapolation_down );
+ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_up"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_up );
+ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_down"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_down );
+
+  
 
   return success;
 }
