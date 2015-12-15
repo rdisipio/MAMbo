@@ -30,6 +30,7 @@ public :
    Float_t         weight_pileup;
    Float_t         weight_leptonSF;
    Float_t         weight_bTagSF_77;
+   Float_t         weight_bTagSF_85;
    Float_t         weight_pileup_UP;
    Float_t         weight_pileup_DOWN;
    Float_t         weight_leptonSF_EL_SF_Trigger_UP;
@@ -89,6 +90,16 @@ public :
    Float_t         weight_bTagSF_77_extrapolation_down;
    Float_t         weight_bTagSF_77_extrapolation_from_charm_up;
    Float_t         weight_bTagSF_77_extrapolation_from_charm_down;
+     vector<float>   *weight_bTagSF_85_eigenvars_B_up;
+   vector<float>   *weight_bTagSF_85_eigenvars_C_up;
+   vector<float>   *weight_bTagSF_85_eigenvars_Light_up;
+   vector<float>   *weight_bTagSF_85_eigenvars_B_down;
+   vector<float>   *weight_bTagSF_85_eigenvars_C_down;
+   vector<float>   *weight_bTagSF_85_eigenvars_Light_down;
+   Float_t         weight_bTagSF_85_extrapolation_up;
+   Float_t         weight_bTagSF_85_extrapolation_down;
+   Float_t         weight_bTagSF_85_extrapolation_from_charm_up;
+   Float_t         weight_bTagSF_85_extrapolation_from_charm_down; 
    ULong64_t       eventNumber;
    UInt_t          runNumber;
    UInt_t          mcChannelNumber;
@@ -159,6 +170,7 @@ public :
    TBranch        *b_weight_pileup;   //!
    TBranch        *b_weight_leptonSF;   //!
    TBranch        *b_weight_bTagSF_77;   //!
+   TBranch        *b_weight_bTagSF_85;   //!
    TBranch        *b_weight_pileup_UP;   //!
    TBranch        *b_weight_pileup_DOWN;   //!
    TBranch        *b_weight_leptonSF_EL_SF_Trigger_UP;   //!
@@ -218,6 +230,16 @@ public :
    TBranch        *b_weight_bTagSF_77_extrapolation_down;   //!
    TBranch        *b_weight_bTagSF_77_extrapolation_from_charm_up;   //!
    TBranch        *b_weight_bTagSF_77_extrapolation_from_charm_down;   //!
+   TBranch        *b_weight_bTagSF_85_eigenvars_B_up;   //!
+   TBranch        *b_weight_bTagSF_85_eigenvars_C_up;   //!
+   TBranch        *b_weight_bTagSF_85_eigenvars_Light_up;   //!
+   TBranch        *b_weight_bTagSF_85_eigenvars_B_down;   //!
+   TBranch        *b_weight_bTagSF_85_eigenvars_C_down;   //!
+   TBranch        *b_weight_bTagSF_85_eigenvars_Light_down;   //!
+   TBranch        *b_weight_bTagSF_85_extrapolation_up;   //!
+   TBranch        *b_weight_bTagSF_85_extrapolation_down;   //!
+   TBranch        *b_weight_bTagSF_85_extrapolation_from_charm_up;   //!
+   TBranch        *b_weight_bTagSF_85_extrapolation_from_charm_down;   //!
    TBranch        *b_eventNumber;   //!
    TBranch        *b_runNumber;   //!
    TBranch        *b_mcChannelNumber;   //!
@@ -354,6 +376,12 @@ void TopXAOD::Init(TTree *tree)
    weight_bTagSF_77_eigenvars_B_down = 0;
    weight_bTagSF_77_eigenvars_C_down = 0;
    weight_bTagSF_77_eigenvars_Light_down = 0;
+   weight_bTagSF_85_eigenvars_B_up = 0;
+   weight_bTagSF_85_eigenvars_C_up = 0;
+   weight_bTagSF_85_eigenvars_Light_up = 0;
+   weight_bTagSF_85_eigenvars_B_down = 0;
+   weight_bTagSF_85_eigenvars_C_down = 0;
+   weight_bTagSF_85_eigenvars_Light_down = 0;
    el_pt = 0;
    el_eta = 0;
    el_cl_eta = 0;
@@ -410,6 +438,7 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("weight_pileup", &weight_pileup, &b_weight_pileup);
    fChain->SetBranchAddress("weight_leptonSF", &weight_leptonSF, &b_weight_leptonSF);
    fChain->SetBranchAddress("weight_bTagSF_77", &weight_bTagSF_77, &b_weight_bTagSF_77);
+   fChain->SetBranchAddress("weight_bTagSF_85", &weight_bTagSF_85, &b_weight_bTagSF_85);
    fChain->SetBranchAddress("weight_pileup_UP", &weight_pileup_UP, &b_weight_pileup_UP);
    fChain->SetBranchAddress("weight_pileup_DOWN", &weight_pileup_DOWN, &b_weight_pileup_DOWN);
    fChain->SetBranchAddress("weight_leptonSF_EL_SF_Trigger_UP", &weight_leptonSF_EL_SF_Trigger_UP, &b_weight_leptonSF_EL_SF_Trigger_UP);
@@ -469,6 +498,16 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("weight_bTagSF_77_extrapolation_down", &weight_bTagSF_77_extrapolation_down, &b_weight_bTagSF_77_extrapolation_down);
    fChain->SetBranchAddress("weight_bTagSF_77_extrapolation_from_charm_up", &weight_bTagSF_77_extrapolation_from_charm_up, &b_weight_bTagSF_77_extrapolation_from_charm_up);
    fChain->SetBranchAddress("weight_bTagSF_77_extrapolation_from_charm_down", &weight_bTagSF_77_extrapolation_from_charm_down, &b_weight_bTagSF_77_extrapolation_from_charm_down);
+   fChain->SetBranchAddress("weight_bTagSF_85_eigenvars_B_up", &weight_bTagSF_85_eigenvars_B_up, &b_weight_bTagSF_85_eigenvars_B_up);
+   fChain->SetBranchAddress("weight_bTagSF_85_eigenvars_C_up", &weight_bTagSF_85_eigenvars_C_up, &b_weight_bTagSF_85_eigenvars_C_up);
+   fChain->SetBranchAddress("weight_bTagSF_85_eigenvars_Light_up", &weight_bTagSF_85_eigenvars_Light_up, &b_weight_bTagSF_85_eigenvars_Light_up);
+   fChain->SetBranchAddress("weight_bTagSF_85_eigenvars_B_down", &weight_bTagSF_85_eigenvars_B_down, &b_weight_bTagSF_85_eigenvars_B_down);
+   fChain->SetBranchAddress("weight_bTagSF_85_eigenvars_C_down", &weight_bTagSF_85_eigenvars_C_down, &b_weight_bTagSF_85_eigenvars_C_down);
+   fChain->SetBranchAddress("weight_bTagSF_85_eigenvars_Light_down", &weight_bTagSF_85_eigenvars_Light_down, &b_weight_bTagSF_85_eigenvars_Light_down);
+   fChain->SetBranchAddress("weight_bTagSF_85_extrapolation_up", &weight_bTagSF_85_extrapolation_up, &b_weight_bTagSF_85_extrapolation_up);
+   fChain->SetBranchAddress("weight_bTagSF_85_extrapolation_down", &weight_bTagSF_85_extrapolation_down, &b_weight_bTagSF_85_extrapolation_down);
+   fChain->SetBranchAddress("weight_bTagSF_85_extrapolation_from_charm_up", &weight_bTagSF_85_extrapolation_from_charm_up, &b_weight_bTagSF_85_extrapolation_from_charm_up);
+   fChain->SetBranchAddress("weight_bTagSF_85_extrapolation_from_charm_down", &weight_bTagSF_85_extrapolation_from_charm_down, &b_weight_bTagSF_85_extrapolation_from_charm_down);
    fChain->SetBranchAddress("eventNumber", &eventNumber, &b_eventNumber);
    fChain->SetBranchAddress("runNumber", &runNumber, &b_runNumber);
    fChain->SetBranchAddress("mcChannelNumber", &mcChannelNumber, &b_mcChannelNumber);
