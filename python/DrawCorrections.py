@@ -267,7 +267,7 @@ SetAtlasStyle()
 gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
-ljets = [ 'co', 'el', 'mu']
+ljets = [ 'co' ] #, 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
@@ -275,7 +275,7 @@ ljets = [ 'co', 'el', 'mu']
 #ljets = [ 'co' ]
 
 ptag=''
-ftag=''
+ftag='nofullhad'
 
 #ptag='_incl'
 #ftag='_incl'
@@ -290,12 +290,11 @@ ftag=''
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
-rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug3/'
+rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/'
 
+ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nocut/'
 
-GenNames = [ 'PowHeg',
-             '110408.PowhegPythia_Perugia2012radHi',
-             '110407.PowhegPythia_Perugia2012radLo',
+GenNames = [ 'DiTop.410000'
          ]
 
 
@@ -310,12 +309,12 @@ for ll in ljets:
     pfiles = []
 
     for genname in GenNames:
-        rfile = TFile('%shistograms_%s_%s%s.root' % (rpath, genname, ll, ftag, ), 'read')
+        rfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nominal.%s.histograms.root' % (rpath, genname, ll, ftag, ), 'read')
         _files.append(rfile)
         rfiles.append(rfile)
         print 'Opened file %s' % (rfile.GetName(),)
         
-        pfile = TFile('%shistograms_%s_%s_particle%s.root' % (rpath, genname, ll, ptag, ), 'read')
+        pfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nocut.%s.histograms.root' % (ppath, genname, ll, ftag, ), 'read')
         _files.append(pfile)
         pfiles.append(pfile)
         print 'Opened file %s' % (pfile.GetName(),)

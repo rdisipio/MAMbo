@@ -2,8 +2,10 @@
 <document>
 <histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
 <samples>
-  <sample name="DiTop"     file="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.13TeV_ljets_resolved.DiTop_410000.el.nominal.histograms.root" />
-  <sample name="SingleTop" file="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.13TeV_ljets_resolved.SingleTop.el.nominal.histograms.root" />
-  <sample name="Wjets"     file="nominal/mc15_13TeV_25ns.DAOD_TOPQ1.13TeV_ljets_resolved.Wjets.el.nominal.histograms.root" />
+  <sample name="DiTop"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root" />
+  <sample name="SingleTop" file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Stop_co.root" />
+  <sample name="Wjets"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Wjets_co.root" />
+  <sample name="Zjets"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Zjets_co.root" />
+  <sample name="Diboson"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Diboson_co.root" />
 </samples>
 </document>

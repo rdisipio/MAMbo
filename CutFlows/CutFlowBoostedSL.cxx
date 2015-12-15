@@ -57,7 +57,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   ///const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
   const double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"]; 
   //  const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; 
-  const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
+  const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"]; //to be changed with 85 once the new ntuples are ready
   
   // THis is what we have now (TO BE FIXED with nedeed wrights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;

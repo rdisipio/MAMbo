@@ -166,4 +166,42 @@
   <histogram hpath="reco/4j2b/difference/R_Wt_had" />
   <histogram hpath="reco/4j2b/difference/Discriminant" />
 
+  <histogram hpath="reco/cutflow/3j_incl_2b_incl/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_2b_incl/met_pt_2"        xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_2b_incl/jet_n"           xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_2b_incl/jet_pt"          xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_2b_incl/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_2b_incl/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_1b_incl/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_1b_incl/met_pt_2"        xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_1b_incl/jet_n"           xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_1b_incl/jet_pt"          xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_1b_incl/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_1b_incl/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+
+
+<histogram hpath="reco/cutflow/3j_incl_0b_incl/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_0b_incl/met_pt_2"        xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_0b_incl/jet_n"           xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_0b_incl/jet_pt"          xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/3j_incl_0b_incl/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/3j_incl_0b_incl/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+
+  <histogram hpath="reco/cutflow/4j_excl_0b_excl/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/4j_excl_0b_excl/met_pt_2"        xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <histogram hpath="reco/cutflow/4j_excl_0b_excl/jet_n"           xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/4j_excl_0b_excl/jet_pt"          xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/4j_excl_0b_excl/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/4j_excl_0b_excl/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+
+  <histogram hpath="reco/cutflow/4j_excl_1b_excl/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/4j_excl_1b_excl/met_pt_2"        xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <histogram hpath="reco/cutflow/4j_excl_1b_excl/jet_n"           xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/4j_excl_1b_excl/jet_pt"          xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <histogram hpath="reco/cutflow/4j_excl_1b_excl/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <histogram hpath="reco/cutflow/4j_excl_1b_excl/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+
+
+
+
 </histograms>

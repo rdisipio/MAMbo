@@ -303,7 +303,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else*/
-         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG"];
+         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"];
 //#endif
 
 #ifdef __USE_LHAPDF__

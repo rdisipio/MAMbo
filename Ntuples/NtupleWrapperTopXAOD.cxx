@@ -114,7 +114,8 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   SET_PROPERTY( HLT_e24_lhmedium_L1EM18VH );
   SET_PROPERTY( HLT_e120_lhloose );
 
-  ed->property["scaleFactor_BTAG"]     = GET_VALUE( weight_bTagSF_77 );
+  ed->property["scaleFactor_BTAG_77"]     = GET_VALUE( weight_bTagSF_77 );
+  ed->property["scaleFactor_BTAG_85"]     = GET_VALUE( weight_bTagSF_85 );
   ed->property["scaleFactor_LEPTON"]   = GET_VALUE( weight_leptonSF );
   ed->property["scaleFactor_PILEUP"]   = GET_VALUE( weight_pileup );
 
