@@ -27,7 +27,7 @@ class CutFlowBoostedSLParticle : public CutFlow
 
  protected:
   bool PassedCutFlowParticle(EventData * ed = NULL);
-  void FillHistogramsParton( EventData * ed = NULL, const double weight = 1. );
+  bool FillHistogramsParton( EventData * ed = NULL, const double weight = 1. );
   void FillHistogramsParticleToParton( EventData * ed = NULL, const double weight = 1.);
  protected:
 #ifdef __MOMA__
