@@ -13,13 +13,14 @@ bool CutFlowBoostedSLParticle::Initialize() {
     bool success = true;
 
     AddChannel("LPLUSJETS");  
-    AddCounterName("LPLUSJETS", "particle_unweight", 5 );
+    AddCounterName("LPLUSJETS", "particle_unweight", 6 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events after Analysis Top Cuts          ");
     SetCutName("LPLUSJETS", "particle_unweight", 1, "A tagged Large-R jet                        ");
     SetCutName("LPLUSJETS", "particle_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
     SetCutName("LPLUSJETS", "particle_unweight", 3, "Exist b-jet in the event                    ");
     SetCutName("LPLUSJETS", "particle_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
     SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<1.5     ");
+    SetCutName("LPLUSJETS", "particle_unweight", 6, "Bjet matched with a top                     ");
 
     
     return success;
@@ -54,7 +55,7 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
   
   
   ///////Parton top distributions/////////////////////
-  FillHistogramsParton( ed, weight_particle_level );
+  bool passedPartonSelection = FillHistogramsParton( ed, weight_particle_level );
 
   // Apply particle level selection 
   const bool passedParticleSelection =  PassedCutFlowParticle( ed );
@@ -71,7 +72,7 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
       m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) , weight_particle_level );
       m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex) / GeV, weight_particle_level );
       
-      FillHistogramsParticleToParton( ed, weight_particle_level );
+     if(passedPartonSelection) FillHistogramsParticleToParton( ed, weight_particle_level );
 	
 
     }
@@ -149,7 +150,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
 	exit(1);
       }
       //cout<<"property topTag "<<topTag<<endl;
-      if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
+      if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && (tau32 < 0.75)){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	HadTopJetCandidate = lj;
 	ed->property["ParticleHadTopJetCandidate"] = lj;
@@ -224,6 +225,36 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "LPLUSJETS", "particle_unweight");
     
 
+    //*************** Position of b-jet *********************************
+    bool btag_hadronicside=false;
+    bool btag_leptonicside=false;
+    
+   
+    for(int bj = 0; bj<bjet_n; bj++)
+    {
+      double dR = PhysicsHelperFunctions::deltaR(ed->truth_fjets.eta.at(HadTopJetCandidate),ed->truth_bjets.eta.at(bj),ed->truth_fjets.phi.at(HadTopJetCandidate),ed->truth_bjets.phi.at(bj));
+      if(dR <= 1.0) {
+	btag_hadronicside = true;
+	break;
+	
+      }
+    }
+    
+    for(int bj = 0; bj<bjet_n; bj++)
+    {
+      for ( auto &ltj : LepTopJetCandidate ){
+	if(ed->truth_bjets.index.at(bj) == ed->truth_jets.index.at(ltj))
+	{
+	  btag_leptonicside=true;
+	  break;
+	}
+	
+      }
+      if(btag_leptonicside) break;
+    }
+    
+    //if (!btag_hadronicside && !btag_leptonicside) return !passed;
+    PassedCut( "LPLUSJETS", "particle_unweight");
 
 
   return passed;
@@ -263,12 +294,15 @@ void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, c
     
   }
 
-void CutFlowBoostedSLParticle::FillHistogramsParton( EventData * ed, const double weight )
+  bool CutFlowBoostedSLParticle::FillHistogramsParton( EventData * ed, const double weight )
   {
-
+    
     // parton level
     int ilep, ihad;
-   
+    
+    bool isDileptonic = ed->property["isDileptonic"];
+    if(isDileptonic) return false;
+    
     const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
     if( isHadronic ) {
       ihad = 0;
@@ -282,14 +316,14 @@ void CutFlowBoostedSLParticle::FillHistogramsParton( EventData * ed, const doubl
     
     
     Particle partonTopH(ed->mctruth, ihad);
-   
+    if(partonTopH.pt < 300000 ) return false;
     //parton TopH
     m_hm->GetHistogram( "parton/1fj1b/topH/pt" )->Fill(  partonTopH.pt / GeV, weight);
     m_hm->GetHistogram( "parton/1fj1b/topH/eta")->Fill(  partonTopH.eta     , weight);
     m_hm->GetHistogram( "parton/1fj1b/topH/phi")->Fill(  partonTopH.phi     , weight);
-    m_hm->GetHistogram( "parton/1fj1b/topH/m"  )->Fill(  partonTopH.m       , weight);
- 
-
+    m_hm->GetHistogram( "parton/1fj1b/topH/m"  )->Fill(  partonTopH.m  / GeV, weight);
+    
+    return true;
   }
 /////////////////////////////////////////
 
