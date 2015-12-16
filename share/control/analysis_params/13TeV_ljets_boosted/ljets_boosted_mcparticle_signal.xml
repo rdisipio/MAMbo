@@ -1,10 +1,10 @@
 <analysis name="TTbarBoosted">
-  <ntuple>TopXAOD</ntuple>
+  <ntuple>TopXAODParticles</ntuple>
   <branches>control/branch_list_TopMiniSLResolved.txt</branches>
-  <tree>nominal</tree>
+  <tree>particleLevel</tree>
   <histograms>control/histograms_TTbarBoosted_baseline.xml</histograms>
   <cutflow>BoostedSLParticle</cutflow>
-  <channel>muon</channel>
+  <channel>electron</channel>
   <parameters>
     <param name="isMCSignal"        type="flag"    value="1" />
     <param name="isRealData"        type="flag"    value="0" />
