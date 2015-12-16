@@ -1,7 +1,7 @@
 <analysis name="TTbarResolved">
   <ntuple>TopXAOD</ntuple>
   <branches>control/branch_list_TopMiniSLResolved.txt</branches>
-  <tree>nominal</tree>
+  <tree>@SYST@</tree>
   <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolved</cutflow>
   <channel>@CHANNEL@</channel>

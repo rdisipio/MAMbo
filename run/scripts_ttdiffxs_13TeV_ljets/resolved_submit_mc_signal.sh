@@ -4,8 +4,9 @@ analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
 systs="nominal nocut"
+systs=`cat systematics.dat`
 decays="nofullhad ljets"
-
+decays="nofullhad"
 for syst in $systs
 do
 	for decay in $decays
@@ -59,7 +60,10 @@ do
 
 				# 	 params=Resolved13TeV_${ch}.${syst}.${decay}.${batchid}.xml
 				#          cp Resolved13TeV.xml.template ${params}
-
+				if [ $syst != "nocut" ]
+				then
+					sed -i "s|@SYST@|${syst}|"     ${params}
+				fi
 				sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
 				sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
 				sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}

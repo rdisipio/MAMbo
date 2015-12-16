@@ -40,6 +40,7 @@ class NtupleWrapperTopXAOD : public NtupleWrapper< TopXAOD >
    float m_lumi;
    float m_lumiWeight;
    bool m_doLumiReweight;
+   std::string m_treeName;
    
    
    #ifdef __MOMA__

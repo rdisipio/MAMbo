@@ -235,7 +235,7 @@ def PrintLegend( lparams, histograms ):
 
     leg.SetTextFont( 42 )
 
-    leg.AddEntry( histograms['data'], samples_configuration['data'].description, "lep" )
+    leg.AddEntry( histograms['data'], samples_configuration['data'].description + "(" + "{:.0f}".format( histograms['data'].Integral( "width") ) + ")", "lep" )
 
     ordered_samples = [ "" for i in range( len(histograms) ) ]
 
@@ -247,7 +247,11 @@ def PrintLegend( lparams, histograms ):
     ordered_samples = [ s for s in ordered_samples if s != "" ]    
 
     for sample in ordered_samples:
+       if sample != "uncertainty":
+         leg.AddEntry( histograms[sample], samples_configuration[sample].description + "(" + "{:.1f}".format(  histograms[sample].Integral( "width" ) ) + ")", "f" )
+         continue
        leg.AddEntry( histograms[sample], samples_configuration[sample].description, "f" )
+         
   
     leg.Draw()
     leg.SetY1( leg.GetY1() - lparams['height'] * leg.GetNRows() )
