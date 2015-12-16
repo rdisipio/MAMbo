@@ -6,6 +6,8 @@
 #include <map>
 #include <fstream>
 #include <iostream>
+#define SAFE_DELETE(x) if( x != NULL ) delete x
+
 
 class CutflowPrinter
 {
@@ -24,7 +26,7 @@ class CutflowPrinter
 	public:
 		CutflowPrinter();
 		CutflowPrinter( const std::string& infilename );
-		~CutflowPrinter(){};
+		~CutflowPrinter();
 		void SetInFileListName( const std::string& );
 		void SetCutflowListFileName( const std::string& );
 		void SetOutRootFileName( const std::string& );

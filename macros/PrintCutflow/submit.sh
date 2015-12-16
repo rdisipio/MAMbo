@@ -13,5 +13,15 @@ do
 	echo "Doing $filelist"
 	outrootfile="cutflow/root/`echo $filelist | sed s/.txt/.root/`"
 	outtextfile="cutflow/text/$filelist"
-	./PrintCutflow $filelistdir/$filelist cutFlows.txt $outrootfile $outtextfile
+	script="jobs/`echo $filelist | sed s/.txt/.sh/`"
+#cat > $script << EOF
+##!/bin/bash
+#./PrintCutflow $filelistdir/$filelist cutFlows.txt $outrootfile $outtextfile
+#EOF	
+cat > $script << EOF
+#!/bin/bash
+./PrintCutflow $filelistdir/$filelist cutFlows.txt $outrootfile $outtextfile
+
+EOF
+qsub -q T3_BO_LOCAL $script	
 done

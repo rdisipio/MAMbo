@@ -3,12 +3,26 @@ using namespace std;
 
 CutflowPrinter::CutflowPrinter()
 {
+	m_rootOutFile = NULL;
 }
 
 CutflowPrinter::CutflowPrinter( const std::string& infilename )
 {
 	m_inFileListName = infilename;
+	m_rootOutFile = NULL;
 }
+
+CutflowPrinter::~CutflowPrinter()
+{
+	for( auto& cutflow: h_cutflows )
+	{
+		SAFE_DELETE( cutflow.second );
+	}
+	SAFE_DELETE( m_rootOutFile );
+
+}
+
+
 
 void CutflowPrinter::SetInFileListName( const std::string& infilename )
 {
