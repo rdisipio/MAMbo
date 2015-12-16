@@ -52,13 +52,45 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   weight_reco_level     = ed->info.mcWeight;
   weight_particle_level = ed->info.mcWeight;
   
-  const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
+  double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
   // const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
   ///const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
-  const double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"]; 
+  double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"]; 
   //  const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; 
-  const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"]; //to be changed with 85 once the new ntuples are ready
+  double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"]; //to be changed with 85 once the new ntuples are ready
   
+  if( m_config->custom_params_string.count( "scale_syst" )  )
+  {
+    string syst = m_config->custom_params_string[ "scale_syst" ];
+    
+    if( syst.find( "lepton" ) != string::npos )
+    {
+      scaleFactor_LEPTON = ed->property[syst]; 
+    }
+    
+  }
+  if( m_config->custom_params_string.count( "scale_syst" )  )
+  {
+    string syst = m_config->custom_params_string[ "scale_syst" ];
+    
+    if( syst.find( "bTag" ) != string::npos )
+    {
+      scaleFactor_BTAG = ed->property[ syst];  
+    }
+    
+  }
+  
+  if( m_config->custom_params_string.count( "scale_syst" )  )
+  {
+    string syst = m_config->custom_params_string[ "scale_syst" ];
+    
+    if( syst.find( "pileup" ) != string::npos )
+    {
+      scaleFactor_PILEUP = ed->property[ syst];  
+    }
+    
+  }
+
   // THis is what we have now (TO BE FIXED with nedeed wrights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;
   
@@ -503,13 +535,15 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight )
   m_hm->GetHistogram( "reco/1fj1b/topH/phi" )->Fill( fjets.Phi(), weight);  
   m_hm->GetHistogram( "reco/1fj1b/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
   m_hm->GetHistogram( "reco/1fj1b/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
-
-  //     m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd12"].at(index) / GeV, weight);
-  //     m_hm->GetHistogram( "reco/1fj1b/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(index), weight);
-  //     m_hm->GetHistogram( "reco/1fj1b/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(index), weight);
-  //     m_hm->GetHistogram( "reco/1fj1b/lep/pt" )->Fill( ed->lep.at(0), weight);
-  //     for( int sj = 0 ; sj < jet_n ; ++sj ) {
-  //       m_hm->GetHistogram( "reco/1fj1b/smallJ/pt" )->Fill( ed->jets.pt.at(sj), weight_reco);
+  
+//   m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd12"].at(recoindex) / GeV, weight);
+//   m_hm->GetHistogram( "reco/1fj1b/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(recoindex), weight);
+//   m_hm->GetHistogram( "reco/1fj1b/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(recoindex), weight);
+//   double lep_pT = m_config->channel == kElectron ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
+//   m_hm->GetHistogram( "reco/1fj1b/lep/pt" )->Fill( lep_pT / GeV, weight);
+//   for( unsigned int sj = 0 ; sj < ed->jets.pT.size() ; ++sj ) {
+//     m_hm->GetHistogram( "reco/1fj1b/smallJ/pt" )->Fill( ed->jets.pT.at(sj), weight);
+//  }
 }
 
 void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weight )
