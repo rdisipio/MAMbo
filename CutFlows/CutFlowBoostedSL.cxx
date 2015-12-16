@@ -374,8 +374,10 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
       
-      //cout<<"property topTag "<<topTag<<endl;
-      if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 85 * GeV) && tau32 < 0.75 ){
+      //cout<<"property topTag "<<topTag<<endl; 
+
+      /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
+      if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	if( HadTopJetCandidate == -1 ) {
 	  HadTopJetCandidate = lj;
@@ -492,14 +494,15 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight )
 {
   
-  int index = ed->property["RecoHadTopJetCandidate"];
+  int recoindex = ed->property["RecoHadTopJetCandidate"];
+  TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
   
-  m_hm->GetHistogram( "reco/1fj1b/topH/pt" )->Fill( ed->fjets.pT.at(index) / GeV, weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/eta" )->Fill( ed->fjets.eta.at(index), weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/m" )->Fill( ed->fjets.m.at(index) / GeV, weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/phi" )->Fill( ed->fjets.phi.at(index), weight);
-
-
+  m_hm->GetHistogram( "reco/1fj1b/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
+  m_hm->GetHistogram( "reco/1fj1b/topH/eta" )->Fill( fjets.Eta(), weight);
+  m_hm->GetHistogram( "reco/1fj1b/topH/m" )->Fill( fjets.M() / GeV, weight);
+  m_hm->GetHistogram( "reco/1fj1b/topH/phi" )->Fill( fjets.Phi(), weight);  
+  m_hm->GetHistogram( "reco/1fj1b/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
+  m_hm->GetHistogram( "reco/1fj1b/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
 
   //     m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd12"].at(index) / GeV, weight);
   //     m_hm->GetHistogram( "reco/1fj1b/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(index), weight);
@@ -513,13 +516,15 @@ void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weig
 {
 
       int particleindex = ed->property["ParticleHadTopJetCandidate"];
-          
-      ///Top particle
-      m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight);
-      m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex), weight);
-      m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) / GeV, weight);
-      m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex), weight);
+      TLorentzVector truth_fjets = HelperFunctions::MakeFourMomentum( ed->truth_fjets, particleindex );
 
+      ///Top particle
+      m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( truth_fjets.Pt() / GeV, weight);
+      m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( truth_fjets.Eta(), weight);
+      m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill(   truth_fjets.M() / GeV, weight);
+      m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( truth_fjets.Phi(), weight);
+      m_hm->GetHistogram( "particle/1fj1b/topH/rapidity" )->Fill(truth_fjets.Rapidity(), weight);
+      m_hm->GetHistogram( "particle/1fj1b/topH/absrap" )->Fill( fabs(truth_fjets.Rapidity()), weight);
 
 
 }
@@ -527,10 +532,14 @@ void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weig
 void CutFlowBoostedSL::FillMatrixRecoToParticle( EventData * ed, const double weight )
 {
   int recoindex = ed->property["RecoHadTopJetCandidate"];
-  int particleindex = ed->property["ParticleHadTopJetCandidate"];
-  
-  m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_pt", ed->fjets.pT.at(recoindex) / GeV,  ed->truth_fjets.pT.at(particleindex)/ GeV,  weight);
+  TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
 
+  int particleindex = ed->property["ParticleHadTopJetCandidate"];
+  TLorentzVector truth_fjets = HelperFunctions::MakeFourMomentum( ed->truth_fjets, particleindex );
+
+  m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_pt", fjets.Pt() / GeV,  truth_fjets.Pt()/ GeV,  weight);
+  m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_rapidity", fjets.Rapidity(),  truth_fjets.Rapidity(),  weight);
+  m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_absrap", fabs(fjets.Rapidity()),  fabs(truth_fjets.Rapidity()),  weight);
 
 }
 
@@ -551,16 +560,15 @@ void CutFlowBoostedSL::FillMatrixRecoToParton( EventData * ed, const double weig
     }
     
     
+    int recoindex = ed->property["RecoHadTopJetCandidate"];
+    TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
     
-    Particle partonTopH(ed->mctruth, ihad);
-    
-     // reco level fjet index
-    int index = ed->property["RecoHadTopJetCandidate"];
-    
+    TLorentzVector partonTopH = HelperFunctions::MakeFourMomentum(ed->mctruth, ihad);
+     
     //  reco > parton MMatrix
-    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_pt", ed->fjets.pT.at(index)/ GeV, partonTopH.pt / GeV, weight);
-  
-
+    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_pt", fjets.Pt() / GeV, partonTopH.Pt() / GeV, weight);
+    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_rapidity", fjets.Rapidity(),  partonTopH.Rapidity(),  weight);
+    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
   }
 
 

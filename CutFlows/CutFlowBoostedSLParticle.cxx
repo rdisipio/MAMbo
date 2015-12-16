@@ -63,20 +63,15 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
     return success;
   
   
-    if (passedParticleSelection){ 
-      int particleindex = ed->property["ParticleHadTopJetCandidate"];      
-      
-      ///Top particle
-      m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( ed->truth_fjets.pT.at(particleindex) / GeV, weight_particle_level);
-      m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( ed->truth_fjets.eta.at(particleindex), weight_particle_level );
-      m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill( ed->truth_fjets.m.at(particleindex) , weight_particle_level );
-      m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( ed->truth_fjets.phi.at(particleindex) / GeV, weight_particle_level );
-      
-     if(passedPartonSelection) FillHistogramsParticleToParton( ed, weight_particle_level );
-	
-
-    }
-   
+  if (passedParticleSelection){ 
+    
+    FillHistogramsParticle(ed, weight_particle_level);
+    
+    if(passedPartonSelection) FillHistogramsParticleToParton( ed, weight_particle_level );
+    
+    
+  }
+  
   
   
   
@@ -150,6 +145,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
 	exit(1);
       }
       //cout<<"property topTag "<<topTag<<endl;
+      /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
       if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && (tau32 < 0.75)){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	HadTopJetCandidate = lj;
@@ -262,7 +258,22 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
 
 }
 
-
+void CutFlowBoostedSLParticle::FillHistogramsParticle( EventData * ed, const double weight )
+{
+  
+  int particleindex = ed->property["ParticleHadTopJetCandidate"];
+  TLorentzVector truth_fjets = HelperFunctions::MakeFourMomentum( ed->truth_fjets, particleindex );
+  
+  ///Top particle
+  m_hm->GetHistogram( "particle/1fj1b/topH/pt" )->Fill( truth_fjets.Pt() / GeV, weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/eta" )->Fill( truth_fjets.Eta(), weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/m" )->Fill(   truth_fjets.M() / GeV, weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( truth_fjets.Phi(), weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/rapidity" )->Fill(truth_fjets.Rapidity(), weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/absrap" )->Fill( fabs(truth_fjets.Rapidity()), weight);
+  
+  
+}
 void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, const double weight )
   {
     
@@ -280,17 +291,16 @@ void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, c
       ilep = 0;
     }
     
+    TLorentzVector partonTopH = HelperFunctions::MakeFourMomentum(ed->mctruth, ihad);
     
-    
-    Particle partonTopH(ed->mctruth, ihad);
-    
-       
     // particle level fjet index
     int particleindex = ed->property["ParticleHadTopJetCandidate"];
-    
+    TLorentzVector truth_fjets = HelperFunctions::MakeFourMomentum( ed->truth_fjets, particleindex );
+
     //  particle > parton MMatrix
-    m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_pt",  ed->truth_fjets.pT.at(particleindex) / GeV, partonTopH.pt / GeV, weight);
-    
+    m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_pt",  truth_fjets.Pt() / GeV, partonTopH.Pt() / GeV, weight);
+    m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_rapidity", truth_fjets.Rapidity(),  partonTopH.Rapidity(),  weight);
+    m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_absrap", fabs(truth_fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
     
   }
 
@@ -313,15 +323,16 @@ void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, c
       ilep = 0;
     }
     
-    
-    
-    Particle partonTopH(ed->mctruth, ihad);
-    if(partonTopH.pt < 300000 ) return false;
+    TLorentzVector partonTopH = HelperFunctions::MakeFourMomentum(ed->mctruth, ihad);
+    if(partonTopH.Pt() < 300000 ) return false;
+
     //parton TopH
-    m_hm->GetHistogram( "parton/1fj1b/topH/pt" )->Fill(  partonTopH.pt / GeV, weight);
-    m_hm->GetHistogram( "parton/1fj1b/topH/eta")->Fill(  partonTopH.eta     , weight);
-    m_hm->GetHistogram( "parton/1fj1b/topH/phi")->Fill(  partonTopH.phi     , weight);
-    m_hm->GetHistogram( "parton/1fj1b/topH/m"  )->Fill(  partonTopH.m  / GeV, weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/pt" )->Fill(  partonTopH.Pt() / GeV, weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/eta")->Fill(  partonTopH.Eta()     , weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/phi")->Fill(  partonTopH.Phi()     , weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/m"  )->Fill(  partonTopH.M()  / GeV, weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/rapidity"  )->Fill( partonTopH.Rapidity()  / GeV, weight);
+    m_hm->GetHistogram( "parton/1fj1b/topH/absrap"    )->Fill( fabs(partonTopH.Rapidity())  / GeV, weight);
     
     return true;
   }
