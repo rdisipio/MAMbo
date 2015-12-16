@@ -13,7 +13,7 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
   m_ntuple_particle = NULL;
   m_ntuple_parton = NULL;
   m_dumper_mctruth = NULL;
-  m_treeName = m_config.custom_params_string["tree"];
+  m_treeName = m_config.treeName;
 
   if( isData ) return;
     
@@ -94,11 +94,12 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 //  ed->info.mcWeight        = 1.0; // no mcWeight??
 
  #ifdef __MOMA__
+   
    if( m_doLumiReweight ) 
    {
 
    	m_lumiWeight = m_moma->GetLumiWeight( ed->info.mcChannelNumber, m_nEvents, m_lumi);
-   	cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
+   	if(!(ed->info.eventNumber%100)) cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
    	ed->info.mcWeight *= m_lumiWeight;
    }
 #endif  
@@ -115,12 +116,11 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   SET_PROPERTY( HLT_e24_lhmedium_L1EM18VH );
   SET_PROPERTY( HLT_e120_lhloose );
 
-  ed->property["scaleFactor_BTAG_77"]     = GET_VALUE( weight_bTagSF_77 );
-  ed->property["scaleFactor_BTAG_85"]     = GET_VALUE( weight_bTagSF_85 );
+  ed->property["scaleFactor_BTAG_77"]  = GET_VALUE( weight_bTagSF_77 );
+  ed->property["scaleFactor_BTAG_85"]  = GET_VALUE( weight_bTagSF_85 );
   ed->property["scaleFactor_LEPTON"]   = GET_VALUE( weight_leptonSF );
   ed->property["scaleFactor_PILEUP"]   = GET_VALUE( weight_pileup );
-  
-
+ 
 //temporary
   if( m_treeName == "nominal" )
   {
