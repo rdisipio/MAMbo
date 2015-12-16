@@ -25,6 +25,12 @@
     <Variable name="pt" title="p_{T} [GeV]">
       <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
+    <Variable name="rapidity" title="rapidity y_{t}">
+      <Bin id="0" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0,0.4,0.8,1.1,1.4,1.8,2.5" particle="topH"/> <!--previusly used binning-->
+    </Variable>
+    <Variable name="absrap" title="abs rapidity |y_{t}|">
+      <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="topH"/> 
+      </Variable>
     <Variable name="eta" title="#eta">
       <Bin id="0" nbins="30" xmin="-3" xmax="3"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
@@ -32,7 +38,7 @@
       <Bin id="0" nbins="30" xmin="-3" xmax="3"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="m" title="m [GeV]">
-      <Bin id="0" nbins="30" xmin="0" xmax="3" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="30" xmin="0" xmax="300" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="DeltaR_smallJ" title="#Delta R">
       <Bin id="0" nbins="30" xmin="0" xmax="3" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
@@ -49,12 +55,16 @@
     <TH1F variable="eta" binId="0"/>
     <TH1F variable="phi" binId="0"/>
     <TH1F variable="m" binId="0"/>
+    <TH1F variable="absrap" binId="0"/>
+    <TH1F variable="rapidity" binId="0"/>
     <TH1F variable="DeltaR_smallJ" binId="0"/>
     <TH1F variable="DeltaPhi_lep" binId="0"/>
     
     
     
     <Matrix variable="pt" binId="0"/>
+    <Matrix variable="absrap" binId="0"/>
+    <Matrix variable="rapidity" binId="0"/>
   </Histos>
   
 </histograms>
