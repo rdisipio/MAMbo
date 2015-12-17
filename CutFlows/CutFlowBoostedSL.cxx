@@ -76,7 +76,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
 	{
 		scaleFactor_PILEUP = ed->property[ syst];  
 	}
-	else
+	else if( syst != "NOMINAL" )
 	{
 		throw runtime_error( "Unknown scale syst " + syst );
 	}

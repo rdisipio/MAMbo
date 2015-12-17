@@ -332,7 +332,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	  {
 	    scaleFactor_PILEUP = ed->property[ syst];  
 	  }
-	  else
+	  else if( syst != "NOMINAL" )
 	  {
 	  	throw runtime_error( "Unknown scale syst " + syst );
 	  }
@@ -686,6 +686,14 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 */
 
     // 0 all events
+    const bool passed_resolved_ejets = ed->property["passed_resolved_ejets_4j2b"]; ///Preselection done in AT for el-channel
+    const bool passed_resolved_mujets = ed->property["passed_resolved_mujets_4j2b"]; ///Preselection done in AT for mu-channel  
+      
+      
+    //****************All event passing analysis top selection *************************
+    const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );     
+    if( !analysistop_cutflow )   return !passed;
+    
     PassedCut( "LPLUSJETS", "reco_weighted", weight );
     PassedCut( "LPLUSJETS", "reco_unweight");
 //    FillHistogramsControlPlotsReco( values );
