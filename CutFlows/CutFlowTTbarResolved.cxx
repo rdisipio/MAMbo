@@ -288,11 +288,11 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
 
 
-         const double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
+          double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
 //         const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
 //         const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
-         const double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"];
-         const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
+          double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"];
+          double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
 //         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
          const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
@@ -303,7 +303,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else*/
-         const double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"];
+         double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"];
 //#endif
 
 #ifdef __USE_LHAPDF__
@@ -314,9 +314,28 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
         const double scaleFactor_PDF = 1.0;
 #endif
 
-
-      // to be fixed
-      weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP;
+	
+	if( m_config->custom_params_string.count( "scale_syst" )  )
+	{
+	  string syst = m_config->custom_params_string[ "scale_syst" ];
+	  if( syst.find( "lepton" ) != string::npos )
+	  {
+	    scaleFactor_LEPTON = ed->property[syst]; 
+	  }
+	  
+	  if( syst.find( "bTag" ) != string::npos )
+	  {
+	    scaleFactor_BTAG = ed->property[ syst];  
+	  }
+	  
+	  if( syst.find( "pileup" ) != string::npos )
+	  {
+	    scaleFactor_PILEUP = ed->property[ syst];  
+	  }
+	}	
+	
+	// to be fixed
+	weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP;
 
 /*
        weight_reco_level *=
