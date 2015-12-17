@@ -61,24 +61,28 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   if( m_config->custom_params_string.count( "scale_syst" )  )
   {
-    string syst = m_config->custom_params_string[ "scale_syst" ];
-    
-    if( syst.find( "lepton" ) != string::npos )
-    {
-      scaleFactor_LEPTON = ed->property[syst]; 
-    }
-    
-    if( syst.find( "bTag" ) != string::npos )
-    {
-      scaleFactor_BTAG = ed->property[ syst];  
-    }
-    
-    if( syst.find( "pileup" ) != string::npos )
-    {
-      scaleFactor_PILEUP = ed->property[ syst];  
-    }
-    
-  }
+	string syst = m_config->custom_params_string[ "scale_syst" ];
+	if( syst.find( "lepton" ) != string::npos )
+	{
+		scaleFactor_LEPTON = ed->property[syst]; 
+	}
+	
+	else if( syst.find( "bTag" ) != string::npos )
+	{
+		scaleFactor_BTAG = ed->property[ syst];  
+	}
+
+	else if( syst.find( "pileup" ) != string::npos )
+	{
+		scaleFactor_PILEUP = ed->property[ syst];  
+	}
+	else
+	{
+		throw runtime_error( "Unknown scale syst " + syst );
+	}
+
+  }	
+	
 
   // THis is what we have now (TO BE FIXED with nedeed wrights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;

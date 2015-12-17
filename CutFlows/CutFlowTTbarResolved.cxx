@@ -323,15 +323,20 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	    scaleFactor_LEPTON = ed->property[syst]; 
 	  }
 	  
-	  if( syst.find( "bTag" ) != string::npos )
+	  else if( syst.find( "bTag" ) != string::npos )
 	  {
 	    scaleFactor_BTAG = ed->property[ syst];  
 	  }
 	  
-	  if( syst.find( "pileup" ) != string::npos )
+	  else if( syst.find( "pileup" ) != string::npos )
 	  {
 	    scaleFactor_PILEUP = ed->property[ syst];  
 	  }
+	  else
+	  {
+	  	throw runtime_error( "Unknown scale syst " + syst );
+	  }
+	  
 	}	
 	
 	// to be fixed

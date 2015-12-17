@@ -122,7 +122,7 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->property["scaleFactor_PILEUP"]   = GET_VALUE( weight_pileup );
  
 //temporary
-  if( m_treeName == "nominal" )
+  if( m_config.custom_params_flag[ "isRealData" ] == 0 && m_treeName == "nominal" )
   {
 	ed->property["scaleFactor_pileup_UP"] = GET_VALUE( weight_pileup_UP );
 	ed->property["scaleFactor_pileup_DOWN"] = GET_VALUE( weight_pileup_DOWN );
