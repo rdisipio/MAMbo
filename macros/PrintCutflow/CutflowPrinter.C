@@ -1,29 +1,41 @@
 #include "CutflowPrinter.h"
 using namespace std;
-
 CutflowPrinter::CutflowPrinter()
 {
 	m_rootOutFile = NULL;
+	
+	m_cutflowTitles = { { "cutflow", "Unweighted" }, { "cutflow_mc",	"MC weights" },
+ 				{ "cutflow_mc_pu",	"MC*PU weights" },
+ 				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
+ 				{ "cutflow_scale_factors", "ScaleFactors" }
+ 				};
+
 }
 
 CutflowPrinter::CutflowPrinter( const std::string& infilename )
 {
 	m_inFileListName = infilename;
 	m_rootOutFile = NULL;
+	m_cutflowTitles = { { "cutflow", "Unweighted" }, { "cutflow_mc",	"MC weights" },
+ 				{ "cutflow_mc_pu",	"MC*PU weights" },
+ 				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
+ 				{ "cutflow_scale_factors", "ScaleFactors" }
+ 				};
+	
+	
 }
 
 CutflowPrinter::~CutflowPrinter()
 {
-	for( auto& cutflow: h_cutflows )
+	for( auto& cutflowVect: h_cutflows )
 	{
-		SAFE_DELETE( cutflow.second );
+		for( auto& cutflow: cutflowVect.second )
+		{
+			SAFE_DELETE( cutflow );
+		}
 	}
 	SAFE_DELETE( m_rootOutFile );
-
 }
-
-
-
 void CutflowPrinter::SetInFileListName( const std::string& infilename )
 {
 	m_inFileListName = infilename;
@@ -89,16 +101,24 @@ void CutflowPrinter::ReadCutflow()
 		cout << "Loading cutflow from " << filename << endl;
 		for( const auto& cutflow: m_cutflowList )
 		{
-		
-			TH1D * h_temp = (TH1D*) f_temp->Get( ( cutflow + "/cutflow" ).c_str() )->Clone();
-			h_temp->SetDirectory( 0 );
-			if( file_counter == 0 )
-			{
-				h_temp->SetName( cutflow.c_str() );
-				h_temp->SetTitle( cutflow.c_str() );
-				h_cutflows[cutflow] = h_temp ;
+			int cutflowType = 0;
+			for( const auto& cutflowTitle: m_cutflowTitles ) 
+			{	
+				TH1D * h_temp = (TH1D*) f_temp->Get( ( cutflow + "/" +cutflowTitle.first ).c_str() )->Clone();
+				h_temp->SetDirectory( 0 );
+				if( file_counter == 0 )
+				{
+					h_temp->SetName( ( cutflow + "_" + cutflowTitle.first ).c_str() );
+					h_temp->SetTitle( ( cutflow + "" + cutflowTitle.second ) .c_str() );
+					h_cutflows[cutflow].push_back( h_temp ) ;
+				}
+				else
+				{
+					 h_cutflows[cutflow].at(cutflowType)->Add( h_temp );
+					 delete h_temp;
+				}
+				cutflowType++;
 			}
-			else h_cutflows[cutflow]->Add( h_temp );
 			cutflow_counter++;
 		}
 		f_temp->Close();
@@ -116,7 +136,8 @@ void CutflowPrinter::WriteToRoot()
 	m_rootOutFile = TFile::Open( m_rootOutFileName.c_str(), "RECREATE" );
 	for( auto& cutflow: h_cutflows )
 	{
-		cutflow.second->SetDirectory( m_rootOutFile );
+		for( auto& cutflowHist: cutflow.second )
+			cutflowHist->SetDirectory( m_rootOutFile );
 	}
 	m_rootOutFile->Write();
 }
@@ -125,9 +146,13 @@ void CutflowPrinter::WriteToText()
 	m_textOutFile.open( m_textOutFileName.c_str()  );
 	for( const auto& cutflow: h_cutflows )
 	{
-		m_textOutFile << cutflow.second->GetName() << endl;
-		for( int i = 1; i <= cutflow.second->GetNbinsX(); ++i ) m_textOutFile << cutflow.second->GetXaxis()->GetBinLabel(i) << ":\t" << cutflow.second->GetBinContent(i) << endl;
-		m_textOutFile << endl;
+		for( auto& cutflowHist: cutflow.second )
+		{
+			m_textOutFile << cutflowHist->GetTitle() << endl;
+			for( int i = 1; i <= cutflowHist->GetNbinsX(); ++i ) m_textOutFile << cutflowHist->GetXaxis()->GetBinLabel(i) << ":\t" << cutflowHist->GetBinContent(i) << endl;
+			m_textOutFile << endl;
+			m_textOutFile << "======================\n"; 
+		}
 		m_textOutFile << "======================\n"; 
 	}	
 }

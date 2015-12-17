@@ -12,7 +12,8 @@
 class CutflowPrinter
 {
 	private:
-		std::map< std::string, TH1D*> h_cutflows;
+		std::map< std::string, std::vector< TH1D* > > h_cutflows;
+		std::map< std::string, std::string > m_cutflowTitles;
 		std::vector< std::string > m_cutflowList;
 		std::string m_cutflowListFileName;
 		std::ifstream m_cutflowListFile;
