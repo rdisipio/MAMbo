@@ -68,21 +68,10 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
       scaleFactor_LEPTON = ed->property[syst]; 
     }
     
-  }
-  if( m_config->custom_params_string.count( "scale_syst" )  )
-  {
-    string syst = m_config->custom_params_string[ "scale_syst" ];
-    
     if( syst.find( "bTag" ) != string::npos )
     {
       scaleFactor_BTAG = ed->property[ syst];  
     }
-    
-  }
-  
-  if( m_config->custom_params_string.count( "scale_syst" )  )
-  {
-    string syst = m_config->custom_params_string[ "scale_syst" ];
     
     if( syst.find( "pileup" ) != string::npos )
     {
@@ -578,32 +567,32 @@ void CutFlowBoostedSL::FillMatrixRecoToParticle( EventData * ed, const double we
 }
 
 void CutFlowBoostedSL::FillMatrixRecoToParton( EventData * ed, const double weight )
-  {
-    
-    // parton level
-    int ilep, ihad;
-   
-    const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
-    if( isHadronic ) {
-      ihad = 0;
-      ilep = 1;
-    }
-    else {
-      ihad = 1;
-      ilep = 0;
-    }
-    
-    
-    int recoindex = ed->property["RecoHadTopJetCandidate"];
-    TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
-    
-    TLorentzVector partonTopH = HelperFunctions::MakeFourMomentum(ed->mctruth, ihad);
-     
-    //  reco > parton MMatrix
-    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_pt", fjets.Pt() / GeV, partonTopH.Pt() / GeV, weight);
-    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_rapidity", fjets.Rapidity(),  partonTopH.Rapidity(),  weight);
-    m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
+{
+  
+  // parton level
+  int ilep, ihad;
+  
+  const bool isHadronic = ed->mctruth.property["isHadronic"].at(0);
+  if( isHadronic ) {
+    ihad = 0;
+    ilep = 1;
   }
+  else {
+    ihad = 1;
+    ilep = 0;
+  }
+  
+  
+  int recoindex = ed->property["RecoHadTopJetCandidate"];
+  TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
+  
+  TLorentzVector partonTopH = HelperFunctions::MakeFourMomentum(ed->mctruth, ihad);
+  
+  //  reco > parton MMatrix
+  m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_pt", fjets.Pt() / GeV, partonTopH.Pt() / GeV, weight);
+  m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_rapidity", fjets.Rapidity(),  partonTopH.Rapidity(),  weight);
+  m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
+}
 
 
 
