@@ -12,6 +12,8 @@ CutFlowBoostedSL::~CutFlowBoostedSL()
 bool CutFlowBoostedSL::Initialize() {
     bool success = true;
 
+    m_rand = new TRandom3( 0 ); 
+
     AddChannel("LPLUSJETS");  
     AddCounterName("LPLUSJETS", "reco_unweight", 6 );
     SetCutName("LPLUSJETS", "reco_unweight", 0, "All Events after Analysis Top Cuts          ");
@@ -82,9 +84,9 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
 	}
 
   }	
-	
-
-  // THis is what we have now (TO BE FIXED with nedeed wrights)
+ 
+   
+  // THis is what we have now (TO BE FIXED with nedeed weights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;
   
   // in 8 TeV analysis we had only PILEUP and ZVERTEX for now we use 1
@@ -111,19 +113,39 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
 
   if (!passedParticleSelection && !passedRecoSelection)
     return success;
+
+  /////FOR CLOSURE///////////////////
+  bool fillHistos = true;
+  bool splitSample =  m_config->custom_params_string.count("splitSample");
+ 
+  if (isMCSignal and splitSample) {
+    bool splitSampleInvert =  false;
+    if (m_config->custom_params_string.count("splitSampleInvert"))
+	splitSampleInvert = not (m_config->custom_params_string["splitSampleInvert"] == "0" or m_config->custom_params_string["splitSampleInvert"] == "false");
+    // cout << "splitSample and Invert? " << splitSample << " " << splitSampleInvert << endl;
+    fillHistos =   (m_rand -> Integer(2)); // this or not;)
+    if (splitSampleInvert)
+      fillHistos = not fillHistos;
+    
+    if (not fillHistos)
+      return success;
+  }
   
   if( passedRecoSelection ) { ///RECO ONLY  ----  FILL FOR ALL MC AND DATA
-    FillHistogramsReco(ed, weight_reco_level);
+    if (fillHistos)
+      FillHistogramsReco(ed, weight_reco_level);
   }
   
   if(!isRealData){
     if (passedRecoSelection && passedParticleSelection){ ////RECO && PARTICLE ---- FILL ONLY FOR MC SIGNAL
-      FillHistogramsParticle(ed, weight_particle_level);
-      FillMatrixRecoToParticle(ed, weight_reco_level);	
-      
+      if (fillHistos){
+	FillHistogramsParticle(ed, weight_particle_level);
+	FillMatrixRecoToParticle(ed, weight_reco_level);	
+      }
     }
     if( passedRecoSelection && isMCSignal ) { ///RECO ONLY FOR PARTON STUFF ---- FILL ONLY FOR MC SIGNAL
-      FillMatrixRecoToParton(ed, weight_reco_level);
+      if (fillHistos)
+	FillMatrixRecoToParton(ed, weight_reco_level);
       
     }
   }
@@ -264,7 +286,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
       	m_hm->GetHistogram("reco/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
 	if (dR < 2.0) {
 	  LepTopJetCandidate.push_back(ltj);
-	  
+	 
 	}
 	
     }
@@ -469,7 +491,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
       m_hm->GetHistogram("particle/1fj1b/lep/DeltaR_smallJ")->Fill( dR , weight );
    	if (dR < 2.0) {
    	  LepTopJetCandidate.push_back(ltj);
-	  
+	
    	}
 	
     }

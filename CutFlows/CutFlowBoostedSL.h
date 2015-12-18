@@ -2,7 +2,7 @@
 #define __CF_BOOSTED_SL_H__
 
 #include "ICutFlow.h"
-
+#include "TRandom3.h"
 #include "PhysicsHelperFunctions.h"
 
 #include "EventData.h"
@@ -40,6 +40,9 @@ class CutFlowBoostedSL : public CutFlow
 #endif
     
 private:
+
+    TRandom3 *m_rand; 
+
 };
 
 typedef CutFlowPluginFactory< CutFlowBoostedSL > CutFlowPluginFactory_BoostedSL;
