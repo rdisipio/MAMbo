@@ -40,6 +40,28 @@ do
 
 		for ch in el mu
 		do
+			if [ $ch == "el" ]
+			then
+				#check if it's a muon systematic
+				if [[ $syst == MUON* ]]
+				then 
+					echo "Muon systematic for el channel: $syst"
+					continue
+				fi
+
+				
+			fi
+			if [ $ch == "mu" ]
+			then
+				#check if it's a muon systematic
+				if [[ $syst == EG* ]]
+				then 
+					echo "Electron systematic for mu channel: $syst"
+					continue
+				fi
+
+				
+			fi			
 			echo "INFO: submitting DiTop dsid=$dsid channel ${ch} decay ${decay}"
 
 			[ $ch == "el" ] && ch_tag="electron"	

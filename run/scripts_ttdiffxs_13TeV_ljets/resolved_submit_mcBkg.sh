@@ -13,7 +13,7 @@ do
    [ $ch == "el" ] && ch_tag="electron"
    [ $ch == "mu" ] && ch_tag="muon"
       
-   filelist=AllBkg.txt
+   filelist=AllBkgNew.txt
 
    while read flist           
      do 
@@ -30,7 +30,7 @@ do
          outfile=${syst}/${tag}.histograms.root
          jobname=${tag}
  	 params=$PWD/Resolved13TeV.${dsid}.${ch}.${syst}.xml
-	 cp Resolved13TevBkg.xml.template ${params}
+	 cp Resolved13TeVBkg.xml.template ${params}
 
          sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
          sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
