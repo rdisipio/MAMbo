@@ -3,7 +3,7 @@
   <branches>control/branch_list_TopMiniSLResolved.txt</branches>
   <tree>nominal</tree>
   <histograms>control/histograms_TTbarBoosted_baseline.xml</histograms>
-  <cutflow>TTbarResolved</cutflow>
+  <cutflow>BoostedSL</cutflow>
   <channel>@CHANNEL@</channel>
   <parameters>
     <param name="isMCSignal"        type="flag"    value="1" />
