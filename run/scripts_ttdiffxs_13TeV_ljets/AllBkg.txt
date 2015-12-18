@@ -162,6 +162,9 @@
 410014.PowhegPythiaEvtGen.e3753_s2608_s2183_r6869_r6282_p2442.list  
 410015.PowhegPythiaEvtGen.e3753_s2608_s2183_r6869_r6282_p2442.list
 410016.PowhegPythiaEvtGen.e3753_s2608_s2183_r6869_r6282_p2442.list
+#schan
+410025.PowhegPythiaEvtGen.e3998_s2608_s2183_r6869_r6282_p2442.list
+410026.PowhegPythiaEvtGen.e3998_s2608_s2183_r6869_r6282_p2442.list
 ##Diboson
 361081.Sherpa_CT10_WplvWmqq.e3836_s2608_s2183_r6869_r6282_p2442.list
 361082.Sherpa_CT10_WpqqWmlv.e3836_s2608_s2183_r6869_r6282_p2442.list
