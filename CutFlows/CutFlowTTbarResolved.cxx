@@ -57,12 +57,35 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 
-	
+    m_bTagSF_name = "scaleFactor_BTAG_77";
+    m_leptonSF_name = "scaleFactor_LEPTON" ;
+    m_pileupSF_name = "scaleFactor_PILEUP";	
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
 
         const string syst = m_config->custom_params_string["scale_syst"];
 
         cout << "INFO: Scale factor systematic: " << syst << endl;
+        if( syst.find( "lepton" ) != string::npos )
+        {
+	    m_leptonSF_name = syst;   
+	}
+	  
+	else if( syst.find( "bTag" ) != string::npos )
+	{
+	    m_bTagSF_name = syst;  
+	}
+	  
+	else if( syst.find( "pileup" ) != string::npos )
+	{
+	    m_pileupSF_name = syst;
+	}
+	else if( syst != "NOMINAL" )
+	{
+	  	throw runtime_error( "Unknown scale syst " + syst );
+	}
+	  
+    	
+	        
 /*
 #ifdef __MOMA__
 
@@ -288,10 +311,10 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
 
 
-          double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
+          double scaleFactor_PILEUP     = ed->property[  m_pileupSF_name ];
 //         const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
 //         const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
-          double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"];
+          double scaleFactor_LEPTON     = ed->property[ m_leptonSF_name];
           double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
 //         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
@@ -303,7 +326,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else*/
-         double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"];
+         double scaleFactor_BTAG       = ed->property[ m_bTagSF_name];
 //#endif
 
 #ifdef __USE_LHAPDF__
@@ -315,30 +338,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 #endif
 
 	
-	if( m_config->custom_params_string.count( "scale_syst" )  )
-	{
-	  string syst = m_config->custom_params_string[ "scale_syst" ];
-	  if( syst.find( "lepton" ) != string::npos )
-	  {
-	    scaleFactor_LEPTON = ed->property[syst]; 
-	  }
-	  
-	  else if( syst.find( "bTag" ) != string::npos )
-	  {
-	    scaleFactor_BTAG = ed->property[ syst];  
-	  }
-	  
-	  else if( syst.find( "pileup" ) != string::npos )
-	  {
-	    scaleFactor_PILEUP = ed->property[ syst];  
-	  }
-	  else if( syst != "NOMINAL" )
-	  {
-	  	throw runtime_error( "Unknown scale syst " + syst );
-	  }
-	  
-	}	
-	
+
 	// to be fixed
 	weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP;
 

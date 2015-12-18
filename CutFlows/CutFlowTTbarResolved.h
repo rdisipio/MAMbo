@@ -73,7 +73,9 @@ class CutFlowTTbarResolved : public CutFlow
     PseudoTopMatching       * m_pseudotop_matching_reco2particle;
     PseudoTopMatching       * m_pseudotop_matching_reco2parton;
     PseudoTopMatching       * m_pseudotop_matching_particle2parton;
-
+    string m_bTagSF_name;
+    string m_leptonSF_name;
+    string m_pileupSF_name;
 #ifdef __MOMA__
     MoMATool                * m_moma;
     SYSTEMATIC_TYPE           m_syst_type;
@@ -90,6 +92,7 @@ private:
     vector<string> m_alias;
     TRandom3 *m_rand; 
     std::map < string, double > m_VarField;
+    
 
 };
 
