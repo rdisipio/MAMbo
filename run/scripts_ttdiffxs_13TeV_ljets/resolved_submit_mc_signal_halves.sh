@@ -8,6 +8,7 @@ systs="nominal"
 decays="nofullhad ljets"
 decays="nofullhad"
 for i in 0 1
+do
 	for syst in $systs
 	do
 		for decay in $decays

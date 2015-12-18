@@ -42,6 +42,9 @@ class CutFlowBoostedSL : public CutFlow
 private:
 
     TRandom3 *m_rand; 
+    string m_bTagSF_name;
+    string m_leptonSF_name;
+    string m_pileupSF_name;
 
 };
 

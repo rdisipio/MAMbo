@@ -33,6 +33,35 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
     SetCutName("LPLUSJETS", "particle_unweight", 6, "Bjet matched with a top                     ");
     
+    
+    m_bTagSF_name = "scaleFactor_BTAG_77"; //to be changed to 85 once it's available
+    m_leptonSF_name = "scaleFactor_LEPTON" ;
+    m_pileupSF_name = "scaleFactor_PILEUP";	
+    if( m_config->custom_params_string.count( "scale_syst" ) ) {
+
+        const string syst = m_config->custom_params_string["scale_syst"];
+
+        cout << "INFO: Scale factor systematic: " << syst << endl;
+        if( syst.find( "lepton" ) != string::npos )
+        {
+	    m_leptonSF_name = syst;   
+	}
+	  
+	else if( syst.find( "bTag" ) != string::npos )
+	{
+	    m_bTagSF_name = syst;  
+	}
+	  
+	else if( syst.find( "pileup" ) != string::npos )
+	{
+	    m_pileupSF_name = syst;
+	}
+	else if( syst != "NOMINAL" )
+	{
+	  	throw runtime_error( "Unknown scale syst " + syst );
+	}  
+    }	 
+       
     return success;
 }
 
@@ -54,37 +83,12 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   weight_reco_level     = ed->info.mcWeight;
   weight_particle_level = ed->info.mcWeight;
   
-  double scaleFactor_PILEUP     = ed->property["scaleFactor_PILEUP"];
+  double scaleFactor_PILEUP     = ed->property[ m_pileupSF_name ];
   // const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
   ///const double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
-  double scaleFactor_LEPTON     = ed->property["scaleFactor_LEPTON"]; 
+  double scaleFactor_LEPTON     = ed->property[ m_leptonSF_name ]; 
   //  const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; 
-  double scaleFactor_BTAG       = ed->property["scaleFactor_BTAG_77"]; //to be changed with 85 once the new ntuples are ready
-  
-  if( m_config->custom_params_string.count( "scale_syst" )  )
-  {
-	string syst = m_config->custom_params_string[ "scale_syst" ];
-	if( syst.find( "lepton" ) != string::npos )
-	{
-		scaleFactor_LEPTON = ed->property[syst]; 
-	}
-	
-	else if( syst.find( "bTag" ) != string::npos )
-	{
-		scaleFactor_BTAG = ed->property[ syst];  
-	}
-
-	else if( syst.find( "pileup" ) != string::npos )
-	{
-		scaleFactor_PILEUP = ed->property[ syst];  
-	}
-	else if( syst != "NOMINAL" )
-	{
-		throw runtime_error( "Unknown scale syst " + syst );
-	}
-
-  }	
- 
+  double scaleFactor_BTAG       = ed->property[ m_bTagSF_name ]; 
    
   // THis is what we have now (TO BE FIXED with nedeed weights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;
