@@ -20,10 +20,21 @@
   
   <Variables>
     <Variable name="pt" title="p_{T} [GeV]">
-      <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="lep"/> 
-    </Variable>
-    <Variable name="pt" title="p_{T} [GeV]">
+      <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,600" particle="lep"/> 
       <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="11" edges="25,50,75,100,125,150,200,250,300,400,600,800" particle="smallJ"/> 
+    </Variable>
+     <Variable name="d12" title="#sqrt{d_{12}} [GeV]">
+      <Bin id="0" nbins="19" xmin="10" xmax="200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+    </Variable>
+    <Variable name="d23" title="#sqrt{d_{12}} [GeV]">
+      <Bin id="0" nbins="19" xmin="10" xmax="200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+    </Variable>
+     <Variable name="tau32" title="#sqrt{d_{12}} [GeV]">
+      <Bin id="0" nbins="20" xmin="0" xmax="1" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+    </Variable>
+    <Variable name="tau21" title="#sqrt{d_{12}} [GeV]">
+      <Bin id="0" nbins="20" xmin="0" xmax="1" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="rapidity" title="rapidity y_{t}">
       <Bin id="0" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0,0.4,0.8,1.1,1.4,1.8,2.5" particle="topH"/> <!--previusly used binning-->
@@ -55,6 +66,10 @@
     <TH1F variable="eta" binId="0"/>
     <TH1F variable="phi" binId="0"/>
     <TH1F variable="m" binId="0"/>
+    <TH1F variable="d12" binId="0"/>
+    <TH1F variable="d23" binId="0"/>
+    <TH1F variable="tau32" binId="0"/>
+    <TH1F variable="tau21" binId="0"/>
     <TH1F variable="absrap" binId="0"/>
     <TH1F variable="rapidity" binId="0"/>
     <TH1F variable="DeltaR_smallJ" binId="0"/>
@@ -65,6 +80,7 @@
     <Matrix variable="pt" binId="0"/>
     <Matrix variable="absrap" binId="0"/>
     <Matrix variable="rapidity" binId="0"/>
+    <Matrix variable="tau32" binId="0"/>
   </Histos>
   
 </histograms>
