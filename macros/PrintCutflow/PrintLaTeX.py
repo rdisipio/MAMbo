@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# jk 22.12.2015
+
 import os, sys, math
 
 from ROOT import *
@@ -21,7 +23,7 @@ for ljet in ljets:
       print ' & %s ' % (fname.replace('.root', ''),),
       rfile = TFile(path+fname, "read")
       flist.append(rfile)
-      histo = rfile.Get('passed_resolved_ejets_4j2b_cutflow')
+      histo = rfile.Get('passed_resolved_' + ljet +'_4j2b_cutflow')
       histos.append(histo)
   print '\\\\ '
 
@@ -29,7 +31,9 @@ for ljet in ljets:
   #print histos
   ref=0
   for i in range(1, histos[ref].GetNbinsX()+1):
-    print '%s ' % (histos[ref].GetXaxis().GetBinLabel(i), ),
+    cutname = histos[ref].GetXaxis().GetBinLabel(i)
+    cutname = cutname.replace('_', '\_').replace('==', '$=$').replace('>=', r'$\geq$'), 
+    print '%s ' % (cutname, ),
     for isample in range(0,len(flist)):
       print ' & %7.0f' % (histos[isample].GetBinContent(i), ),
     print ' \\\\ '
