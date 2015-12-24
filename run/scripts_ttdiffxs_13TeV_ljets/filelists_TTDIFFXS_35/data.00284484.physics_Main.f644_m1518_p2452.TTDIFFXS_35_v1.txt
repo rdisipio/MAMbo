@@ -1,0 +1,7 @@
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000011.ljets.output.root
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000012.ljets.output.root
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000013.ljets.output.root.2
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000014.ljets.output.root.2
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000015.ljets.output.root
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000016.ljets.output.root.2
+/gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_35/user.amenga.00284484.physics_Main.DAOD_TOPQ1.f644_m1518_p2452.TTDIFFXS_35_v1_ljets.output.root/user.amenga.7256367._000017.ljets.output.root

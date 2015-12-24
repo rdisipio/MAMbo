@@ -1,0 +1,1 @@
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/0b/01/user.mromano.7266706._000001.ljets.output.root
