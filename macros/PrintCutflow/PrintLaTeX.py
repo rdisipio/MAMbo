@@ -28,7 +28,7 @@ for topo in topos:
         flist.append(rfile)
 
         ### !!! to move to passed_*cutflow_mc for MC !!!!
-        hname = 'passed_' + topo + '_' + ljet +'_' + topos[topo] + '_scale_factors'
+        hname = 'passed_' + topo + '_' + ljet +'_' + topos[topo]# + '_scale_factors'
         #if fname.find('data') < 0 and fname.find('DATA') and fname.find('Data'):
         #  hname = hname + ''
         #print hname
