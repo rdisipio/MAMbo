@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarBoosted/histograms_backgrounds.xml" />
+<samples>
+  <sample name="DiTop"     file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/nominal_el.root" >
+  <syst name="EL_SF_ID" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_ID_DOWN.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_ID_UP.root" />
+  </syst>
+  <syst name="EL_SF_Isol" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_Isol_DOWN.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_Isol_UP.root" />
+  </syst>
+  <syst name="EL_SF_Reco" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_Reco_DOWN.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_Reco_UP.root" />
+  </syst>
+  <syst name="EL_SF_Trig" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_Trigger_DOWN.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_leptonSF_EL_SF_Trigger_UP.root" />
+  </syst>
+  <syst name="SF_Pileup" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_pileup_DOWN.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_scaleFactor_pileup_UP.root" />
+  </syst>
+ <!-- <syst name="LARGERJET_JET_Top_CrossCalib" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_JET_Top_CrossCalib__1down.root" />
+  <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_JET_Top_CrossCalib__1up.root" />
+  </syst>
+  <syst name="LARGERJET_JET_Top_Run1" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_JET_Top_Run1__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_JET_Top_Run1__1up.root" />
+  </syst>-->
+  <syst name="LARGERJET_SplitScales1_JET_Top_CrossCalib" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_CrossCalib__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_CrossCalib__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales1_JET_Top_Run1_mass" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_Run1_mass__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_Run1_mass__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales1_JET_Top_Run1_pT" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_Run1_pT__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_Run1_pT__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales1_JET_Top_Run1_Tau32" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_Run1_Tau32__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales1_JET_Top_Run1_Tau32__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales2_JET_Top_CrossCalib_mass" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_CrossCalib_mass__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_CrossCalib_mass__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales2_JET_Top_CrossCalib_pT" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_CrossCalib_pT__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_CrossCalib_pT__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales2_JET_Top_CrossCalib_Tau32" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_CrossCalib_Tau32__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_CrossCalib_Tau32__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales2_JET_Top_Run1_mass" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_Run1_mass__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_Run1_mass__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales2_JET_Top_Run1_pT" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_Run1_pT__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_Run1_pT__1up.root" />
+  </syst>
+  <syst name="LARGERJET_SplitScales2_JET_Top_Run1_Tau32" type="two_sided" >
+    <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_Run1_Tau32__1down.root" />
+    <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/el_LARGERJET_SplitScales2_JET_Top_Run1_Tau32__1up.root" />
+  </syst>
+</sample>
+<sample name="SingleTop" file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/Stop_el.root" />
+<sample name="Wjets"     file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/Wjets_el.root" />
+<sample name="Zjets"     file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/Zjets_el.root" />
+<sample name="Diboson"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_35_all/Diboson_el.root" />
+</samples>
+</document>
