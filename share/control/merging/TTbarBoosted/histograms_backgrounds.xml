@@ -1,0 +1,7 @@
+<histograms>
+  <histogram hpath="reco/1fj1b/topH/pt" />
+  <histogram hpath="reco/1fj1b/topH/eta" />
+  <histogram hpath="reco/1fj1b/topH/m" />
+  <histogram hpath="reco/1fj1b/topH/rapidity" />
+  <histogram hpath="reco/1fj1b/topH/absrap" />
+</histograms>
