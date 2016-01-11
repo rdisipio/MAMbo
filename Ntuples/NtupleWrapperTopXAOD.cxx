@@ -225,7 +225,7 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 	ed->property["scaleFactor_bTagSF_77_extrapolation_down"] = GET_VALUE( weight_bTagSF_77_extrapolation_down );
 	ed->property["scaleFactor_bTagSF_77_extrapolation_from_charm_up"] = GET_VALUE( weight_bTagSF_77_extrapolation_from_charm_up );
 	ed->property["scaleFactor_bTagSF_77_extrapolation_from_charm_down"] = GET_VALUE( weight_bTagSF_77_extrapolation_from_charm_down );
-	/*ed->property["scaleFactor_bTagSF_85_eigenvars_B_0_up"] = GET_VALUE_VECTOR( weight_bTagSF_85_eigenvars_B_up, 0 );
+	ed->property["scaleFactor_bTagSF_85_eigenvars_B_0_up"] = GET_VALUE_VECTOR( weight_bTagSF_85_eigenvars_B_up, 0 );
 	ed->property["scaleFactor_bTagSF_85_eigenvars_B_0_down"] = GET_VALUE_VECTOR( weight_bTagSF_85_eigenvars_B_down, 0 );
 	ed->property["scaleFactor_bTagSF_85_eigenvars_B_1_up"] = GET_VALUE_VECTOR( weight_bTagSF_85_eigenvars_B_up, 1 );
 	ed->property["scaleFactor_bTagSF_85_eigenvars_B_1_down"] = GET_VALUE_VECTOR( weight_bTagSF_85_eigenvars_B_down, 1 );
@@ -276,7 +276,7 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 	ed->property["scaleFactor_bTagSF_85_extrapolation_up"] = GET_VALUE( weight_bTagSF_85_extrapolation_up );
 	ed->property["scaleFactor_bTagSF_85_extrapolation_down"] = GET_VALUE( weight_bTagSF_85_extrapolation_down );
 	ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_up"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_up );
-	ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_down"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_down );*///Commented out until we get the new ntuples
+	ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_down"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_down );
 }
   
 
