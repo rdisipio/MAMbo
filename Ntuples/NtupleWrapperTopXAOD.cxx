@@ -146,6 +146,10 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 	ed->property["scaleFactor_leptonSF_MU_SF_Isol_STAT_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_STAT_DOWN );
 	ed->property["scaleFactor_leptonSF_MU_SF_Isol_SYST_UP"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_SYST_UP );
 	ed->property["scaleFactor_leptonSF_MU_SF_Isol_SYST_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_Isol_SYST_DOWN );
+	ed->property["scaleFactor_leptonSF_MU_SF_TTVA_STAT_UP"] = GET_VALUE( weight_leptonSF_MU_SF_TTVA_STAT_UP );
+	ed->property["scaleFactor_leptonSF_MU_SF_TTVA_STAT_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_TTVA_STAT_DOWN );
+	ed->property["scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP"] = GET_VALUE( weight_leptonSF_MU_SF_TTVA_SYST_UP );
+	ed->property["scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN"] = GET_VALUE( weight_leptonSF_MU_SF_TTVA_SYST_DOWN );
 	ed->property["scaleFactor_indiv_SF_EL_Trigger"] = GET_VALUE( weight_indiv_SF_EL_Trigger );
 	ed->property["scaleFactor_indiv_SF_EL_Trigger_UP"] = GET_VALUE( weight_indiv_SF_EL_Trigger_UP );
 	ed->property["scaleFactor_indiv_SF_EL_Trigger_DOWN"] = GET_VALUE( weight_indiv_SF_EL_Trigger_DOWN );
@@ -173,6 +177,11 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 	ed->property["scaleFactor_indiv_SF_MU_Isol_STAT_DOWN"] = GET_VALUE( weight_indiv_SF_MU_Isol_STAT_DOWN );
 	ed->property["scaleFactor_indiv_SF_MU_Isol_SYST_UP"] = GET_VALUE( weight_indiv_SF_MU_Isol_SYST_UP );
 	ed->property["scaleFactor_indiv_SF_MU_Isol_SYST_DOWN"] = GET_VALUE( weight_indiv_SF_MU_Isol_SYST_DOWN );
+	ed->property["scaleFactor_indiv_SF_MU_TTVA"] = GET_VALUE( weight_indiv_SF_MU_TTVA );
+	ed->property["scaleFactor_indiv_SF_MU_TTVA_STAT_UP"] = GET_VALUE( weight_indiv_SF_MU_TTVA_STAT_UP );
+	ed->property["scaleFactor_indiv_SF_MU_TTVA_STAT_DOWN"] = GET_VALUE( weight_indiv_SF_MU_TTVA_STAT_DOWN );
+	ed->property["scaleFactor_indiv_SF_MU_TTVA_SYST_UP"] = GET_VALUE( weight_indiv_SF_MU_TTVA_SYST_UP );
+	ed->property["scaleFactor_indiv_SF_MU_TTVA_SYST_DOWN"] = GET_VALUE( weight_indiv_SF_MU_TTVA_SYST_DOWN );	
 	ed->property["scaleFactor_bTagSF_77_eigenvars_B_0_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_up, 0 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_B_0_down"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_down, 0 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_B_1_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_up, 1 );
