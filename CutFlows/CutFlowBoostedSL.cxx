@@ -33,7 +33,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
     SetCutName("LPLUSJETS", "particle_unweight", 6, "Bjet matched with a top                     ");
     
-    m_bTagSF_name = "scaleFactor_BTAG_77"; //to be changed to 85 once it's available
+    m_bTagSF_name = "scaleFactor_BTAG_85"; //to be changed to 85 once it's available
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
