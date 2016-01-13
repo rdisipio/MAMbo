@@ -25,6 +25,11 @@ root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Unfold/tt_d
 root -b -q -l 'Migra.C("")
 
 
+13 TeV:
+root -b -q -l 'Migra.C("/afs/cern.ch/work/m/mromano/public/Diff13TeV/Migrations/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root", "el")'
+root -b -q -l 'Migra.C("/afs/cern.ch/work/m/mromano/public/Diff13TeV/Migrations/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
+root -b -q -l 'Migra.C("/afs/cern.ch/work/m/mromano/public/Diff13TeV/Migrations/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
+
 In case of further questions send an e-mail to: josef.pacalt@cern.ch
 
 Enjoy!
