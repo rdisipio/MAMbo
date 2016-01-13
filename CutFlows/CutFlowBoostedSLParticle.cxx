@@ -249,7 +249,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
       if(btag_leptonicside) break;
     }
     
-    //if (!btag_hadronicside && !btag_leptonicside) return !passed;
+    if (!btag_hadronicside && !btag_leptonicside) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
 
 
@@ -271,6 +271,16 @@ void CutFlowBoostedSLParticle::FillHistogramsParticle( EventData * ed, const dou
   m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( truth_fjets.Phi(), weight);
   m_hm->GetHistogram( "particle/1fj1b/topH/rapidity" )->Fill(truth_fjets.Rapidity(), weight);
   m_hm->GetHistogram( "particle/1fj1b/topH/absrap" )->Fill( fabs(truth_fjets.Rapidity()), weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/d12" )->Fill( ed->truth_fjets.property["sd12"].at(particleindex) / GeV, weight);
+  //m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/tau32" )->Fill( ed->truth_fjets.property["tau32"].at(particleindex) , weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/tau21" )->Fill( ed->truth_fjets.property["tau21"].at(particleindex) , weight);
+  double lep_pT = m_config->channel == kElectron ? ed->truth_electrons.pT.at(0) : ed->truth_muons.pT.at(0);
+  m_hm->GetHistogram( "particle/1fj1b/lep/pt" )->Fill( lep_pT / GeV, weight);
+  for( unsigned int sj = 0 ; sj < ed->jets.pT.size() ; ++sj ) {
+    m_hm->GetHistogram( "particle/1fj1b/smallJ/pt" )->Fill( ed->jets.pT.at(sj), weight);
+  }
+  
   
   
 }
@@ -301,7 +311,7 @@ void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, c
     m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_pt",  truth_fjets.Pt() / GeV, partonTopH.Pt() / GeV, weight);
     m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_rapidity", truth_fjets.Rapidity(),  partonTopH.Rapidity(),  weight);
     m_hm->FillMatrices( "particle/1fj1b/topH/Matrix_particle_parton_absrap", fabs(truth_fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
-    
+        
   }
 
   bool CutFlowBoostedSLParticle::FillHistogramsParton( EventData * ed, const double weight )
@@ -334,6 +344,7 @@ void CutFlowBoostedSLParticle::FillHistogramsParticleToParton( EventData * ed, c
     m_hm->GetHistogram( "parton/1fj1b/topH/rapidity"  )->Fill( partonTopH.Rapidity()  / GeV, weight);
     m_hm->GetHistogram( "parton/1fj1b/topH/absrap"    )->Fill( fabs(partonTopH.Rapidity())  / GeV, weight);
     
+
     return true;
   }
 /////////////////////////////////////////
