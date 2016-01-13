@@ -124,15 +124,18 @@ def DivideByBinWidth_graph( g ):
 def DivideByBinWidth( hlist ):
     for sample, h in hlist.iteritems():
 
+        print "h integral of %s before division: %f " % (h.GetName(),  h.Integral())
+
         if h.Class() in [ TH1F.Class(), TH1D.Class(), TH1I.Class() ]:
-           if not HasVariableBinWidths_TH1(h): continue
+ #          if not HasVariableBinWidths_TH1(h): continue
            DivideByBinWidth_histogram( h )
         elif h.Class() in [ TGraph.Class(), TGraphErrors.Class(), TGraphAsymmErrors.Class() ]: 
-           if not HasVariableBinWidths_graph(h): continue
+#           if not HasVariableBinWidths_graph(h): continue
            DivideByBinWidth_graph( h )
         else:
            print "ERROR: cannot divide by bin widht. Object", h.GetName(), "is of an unknown class"
 
+        print "h integral of %s after division: %f " % (h.GetName(),  h.Integral())
 
 #########################################################
 
@@ -253,7 +256,8 @@ def DrawRatio( data, prediction, xtitle = "" ):
 
     # tt diffxs 7 TeV: [ 0.4, 1.6 ]    
     frame = gPad.DrawFrame( xmin, 0.7, xmax, 1.3 )
-    
+    #frame = gPad.DrawFrame( xmin, 0.5, xmax, 1.5 )
+
     frame.GetXaxis().SetNdivisions(508)
     frame.GetYaxis().SetNdivisions(504)
     
