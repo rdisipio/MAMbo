@@ -1,8 +1,8 @@
-<analysis name="TTbarBoosted">
+<analysis name="TTbarResolved">
   <ntuple>TopXAOD</ntuple>
   <branches>control/branch_list_TopMiniSLResolved.txt</branches>
   <tree>nominal</tree>
-  <histograms>control/histograms_TTbarBoosted_baseline.xml</histograms>
+  <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
   <cutflow>TTbarResolved</cutflow>
   <channel>@CHANNEL@</channel>
   <parameters>
@@ -16,7 +16,7 @@
     <param name="decay"             type="string"    value="nofullhad" />
     <param name="treename_particle" type="string"  value="particleLevel" />
     <param name="treename_parton"   type="string"  value="truth"   />
-    <param name="luminosity"        type="numeric" value="3342.58" />
+    <param name="luminosity"        type="numeric" value="3209" />
     <param name="splitSample"       type="string" value="1" />
     <param name="splitSampleInvert" type="string" value="0" />
 

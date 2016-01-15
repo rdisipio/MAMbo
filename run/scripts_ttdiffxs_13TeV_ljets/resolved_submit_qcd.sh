@@ -14,10 +14,10 @@ do
   do
     run=`echo $list | cut -d. -f2`
     topology=Resolved
-    tag=${analysis}.data.${stream}.${run}.${ch}.${topology}
+    tag=${analysis}.qcd.${stream}.${run}.${ch}.${topology}
 
     jobname=${tag}
-    paramfile=$PWD/control/analysis_params/13TeV_ljets_resolved/config/realdata_${topology}_${ch}.xml
+    paramfile=$PWD/control/analysis_params/13TeV_ljets_resolved/config/qcd_${topology}_${ch}.xml
 
     filelist=$PWD/filelists_TTDIFFXS_35/$list
     mkdir -p output/nominal

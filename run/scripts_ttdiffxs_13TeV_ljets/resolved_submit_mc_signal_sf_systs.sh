@@ -3,9 +3,8 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal"
-#systs=$(cat systematics.dat) # | grep JET`
-systs=$(cat resolved_kinematic_systematics.dat )
+systs="nominal nocut"
+systs=$(cat resolved_scale_systematics.dat) # | grep JET`
 decays="nofullhad ljets"
 decays="nofullhad"
 for syst in $systs
@@ -27,7 +26,7 @@ do
 		then
 			template=$PWD/Resolved13TeV.nocut.xml.template
 		else
-			template=$PWD/Resolved13TeV.xml.template
+			template=$PWD/Resolved13TeV.sf_syst.xml.template
 		fi
 
 		filelistdir=$PWD/filelists_TTDIFFXS_35/
@@ -45,7 +44,7 @@ do
 			if [ $ch == "el" ]
 			then
 				#check if it's a muon systematic
-				if [[ $syst == MUON* ]]
+				if [[ $syst == *MU_SF* ]]
 				then 
 					echo "Muon systematic for el channel: $syst"
 					continue
@@ -56,7 +55,7 @@ do
 			if [ $ch == "mu" ]
 			then
 				#check if it's a muon systematic
-				if [[ $syst == EG* ]]
+				if [[ $syst == *EL_SF* ]]
 				then 
 					echo "Electron systematic for mu channel: $syst"
 					continue

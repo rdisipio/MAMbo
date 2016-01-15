@@ -3,14 +3,16 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal"
-#systs=`cat systematics.dat`
+systs="nominal nocut"
+shapes="tt_rapidity tt_m tt_pt t_pt"
+#systs=$(cat systematics.dat) # | grep JET`
 decays="nofullhad ljets"
 decays="nofullhad"
-for i in 0 1
+for syst in $systs
 do
-	for syst in $systs
+	for shape in $shapes 
 	do
+		mkdir -p output/$shape/$syst
 		for decay in $decays
 		do
 			#syst=nominal
@@ -25,45 +27,24 @@ do
 
 			if [ $syst == "nocut" ]
 			then
-				template=$PWD/Resolved13TeV.nocut.xml.template
+				template=$PWD/Resolved13TeV.stress.nocut.xml.template
 			else
-				template=$PWD/Resolved13TeV.nominal.nofullhad.half${i}.xml.template
+				template=$PWD/Resolved13TeV.stress.xml.template
 			fi
 
-			filelistdir=$PWD/filelists_TTDIFFXS_3/
-			filelist=$filelistdir/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r6765_r6282_p2442.list
+			filelistdir=$PWD/filelists_TTDIFFXS_35/
+			filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v1.txt
 
-			nomalizationdir=${MAMBODIR}/share/data/NEvents13TeV/
-			nomalizationfile=${MAMBODIR}/share/data/NEvents13TeV/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r6765_r6282_p2442.evt.n
+			nomalizationdir=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/
+			nomalizationfile=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v1.evt.n
 	
-			sendOnce=0
+			sendOnce=1
 		#set -x
 
 
 			for ch in el mu
 			do
-				if [ $ch == "el" ]
-				then
-					#check if it's a muon systematic
-					if [[ $syst == MUON* ]]
-					then 
-						echo "Muon systematic for el channel: $syst"
-						continue
-					fi
-
-				
-				fi
-				if [ $ch == "mu" ]
-				then
-					#check if it's a muon systematic
-					if [[ $syst == EG* ]]
-					then 
-						echo "Electron systematic for mu channel: $syst"
-						continue
-					fi
-
-				
-				fi			
+			
 				echo "INFO: submitting DiTop dsid=$dsid channel ${ch} decay ${decay}"
 
 				[ $ch == "el" ] && ch_tag="electron"	
@@ -77,9 +58,9 @@ do
 
 					flist_mc=$( echo ${flist} | sed "s/.${ch}.txt/.mc.txt/" )
 
-					tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}.half${i}
+					tag=${analysis}.mc.DiTop.${dsid}.${ch}.${shape}.${syst}.${decay}
 
-					params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/Resolved13TeV.${ch}.${syst}.${decay}.half${i}.${batchid}.xml
+					params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/Resolved13TeV.${ch}.${shape}.${syst}.${decay}.${batchid}.xml
 					cp $template ${params}
 
 					# 	 params=Resolved13TeV_${ch}.${syst}.${decay}.${batchid}.xml
@@ -92,8 +73,8 @@ do
 					sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
 					sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
 					sed -i "s|@DECAY@|${decay}|"  ${params}
-					mkdir -p output/${syst}
-					outfile=${syst}/${tag}.histograms.root.${batchid}
+					sed -i "s|@STRESS@|${shape}|" ${params}
+					outfile=${shape}/${syst}/${tag}.histograms.root.${batchid}
 					jobname=${tag}.${batchid}
 
 					echo ${params}  

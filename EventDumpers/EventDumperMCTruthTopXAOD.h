@@ -72,6 +72,8 @@ class EventDumperMCTruthTopXAOD
     template< class T > 
     bool DumpEventCutflows( const T * ntuple, EventData * ed )
     {
+     	  ed->property["passed_particle_resolved_ejets_2j0b" ] = ntuple-> passed_resolved_ejets_2j0b;
+	  ed->property["passed_particle_resolved_mujets_2j0b" ] = ntuple-> passed_resolved_mujets_2j0b;
  	  ed->property["passed_particle_resolved_ejets_4j2b" ] = ntuple-> passed_resolved_ejets_4j2b;
 	  ed->property["passed_particle_resolved_mujets_4j2b" ] = ntuple-> passed_resolved_mujets_4j2b;
  	 ed->property["passed_particle_boosted_ejets_1fj0b" ] = ntuple-> passed_boosted_ejets_1fj0b;  

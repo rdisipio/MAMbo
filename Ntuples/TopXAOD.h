@@ -123,6 +123,8 @@ public :
    UInt_t          runNumber;
    UInt_t          mcChannelNumber;
    Float_t         mu;
+   
+   vector<char>    *el_isTight;
    vector<float>   *el_pt;
    vector<float>   *el_eta;
    vector<float>   *el_cl_eta;
@@ -133,6 +135,7 @@ public :
    vector<float>   *el_ptvarcone20;
    vector<float>   *el_d0sig;
    vector<float>   *el_delta_z0_sintheta;
+   vector<char>   *mu_isTight;
    vector<float>   *mu_pt;
    vector<float>   *mu_eta;
    vector<float>   *mu_phi;
@@ -288,6 +291,7 @@ public :
    TBranch        *b_runNumber;   //!
    TBranch        *b_mcChannelNumber;   //!
    TBranch        *b_mu;   //!
+   TBranch        *b_el_isTight;   //!   
    TBranch        *b_el_pt;   //!
    TBranch        *b_el_eta;   //!
    TBranch        *b_el_cl_eta;   //!
@@ -298,6 +302,7 @@ public :
    TBranch        *b_el_ptvarcone20;   //!
    TBranch        *b_el_d0sig;   //!
    TBranch        *b_el_delta_z0_sintheta;   //!
+   TBranch        *b_mu_isTight;   //!
    TBranch        *b_mu_pt;   //!
    TBranch        *b_mu_eta;   //!
    TBranch        *b_mu_phi;   //!
@@ -442,6 +447,7 @@ void TopXAOD::Init(TTree *tree)
    weight_bTagSF_77_eigenvars_B_down = 0;
    weight_bTagSF_77_eigenvars_C_down = 0;
    weight_bTagSF_77_eigenvars_Light_down = 0;
+   el_isTight = 0;
    el_pt = 0;
    el_eta = 0;
    el_cl_eta = 0;
@@ -452,6 +458,7 @@ void TopXAOD::Init(TTree *tree)
    el_ptvarcone20 = 0;
    el_d0sig = 0;
    el_delta_z0_sintheta = 0;
+   mu_isTight = 0;
    mu_pt = 0;
    mu_eta = 0;
    mu_phi = 0;
@@ -589,6 +596,7 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("runNumber", &runNumber, &b_runNumber);
    fChain->SetBranchAddress("mcChannelNumber", &mcChannelNumber, &b_mcChannelNumber);
    fChain->SetBranchAddress("mu", &mu, &b_mu);
+   fChain->SetBranchAddress("el_isTight", &el_isTight, &b_el_isTight);
    fChain->SetBranchAddress("el_pt", &el_pt, &b_el_pt);
    fChain->SetBranchAddress("el_eta", &el_eta, &b_el_eta);
    fChain->SetBranchAddress("el_cl_eta", &el_cl_eta, &b_el_cl_eta);
@@ -599,6 +607,7 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("el_ptvarcone20", &el_ptvarcone20, &b_el_ptvarcone20);
    fChain->SetBranchAddress("el_d0sig", &el_d0sig, &b_el_d0sig);
    fChain->SetBranchAddress("el_delta_z0_sintheta", &el_delta_z0_sintheta, &b_el_delta_z0_sintheta);
+   fChain->SetBranchAddress("mu_isTight", &mu_isTight, &b_mu_isTight);
    fChain->SetBranchAddress("mu_pt", &mu_pt, &b_mu_pt);
    fChain->SetBranchAddress("mu_eta", &mu_eta, &b_mu_eta);
    fChain->SetBranchAddress("mu_phi", &mu_phi, &b_mu_phi);

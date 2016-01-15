@@ -16,7 +16,7 @@
     <param name="decay"        type="string"    value="@DECAY@" />
     <param name="treename_particle" type="string"  value="particleLevel" />
     <param name="treename_parton"   type="string"  value="truth"   />
-    <param name="luminosity"        type="numeric" value="3342.58" />
+    <param name="luminosity"        type="numeric" value="3209" />
  </parameters>
 </analysis>
  

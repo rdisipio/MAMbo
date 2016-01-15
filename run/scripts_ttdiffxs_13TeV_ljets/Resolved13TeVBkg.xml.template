@@ -11,6 +11,6 @@
     <param name="tagger"            type="string"  value="topTag80" /> 
     <param name="lumi_reweight"     type="flag"    value="1" />
     <param name="lumifile" type="string" value="@NORMFILE@" />
-    <param name="luminosity"            type="numeric" value="3342.58" />
+    <param name="luminosity"            type="numeric" value="3209" />
  </parameters>
 </analysis>

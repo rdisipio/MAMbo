@@ -36,6 +36,8 @@ using namespace std;
 #include <TDirectory.h>
 #include <TChain.h>
 #include <TLorentzVector.h>
+#include <TF1.h>
+#include <TEfficiency.h>
 
 
 /////////////////////////////////////////////

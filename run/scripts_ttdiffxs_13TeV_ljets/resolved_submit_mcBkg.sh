@@ -3,10 +3,10 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 syst=nominal
-nomalizationfilepath=${MAMBODIR}/share/data/NEvents13TeV
-filelistdir=$PWD/filelists_TTDIFFXS_3/
+nomalizationfilepath=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/
+filelistdir=$PWD/filelists_TTDIFFXS_35/
 #paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
-
+sendOnce=0
 for ch in el mu
 do
 
@@ -22,18 +22,19 @@ do
          continue
        fi
  
-         dsid=`echo $flist | cut -d. -f1`
+         dsid=`echo $flist | cut -d. -f2`
 
-         nomalizationfile=${nomalizationfilepath}/$( echo ${flist} | sed "s/.list/.evt.n/" )
+         nomalizationfile=${nomalizationfilepath}/$( echo ${flist} | sed s/mc.// | sed "s/.txt/.evt.n/" )
     	 tag=${analysis}.mc.bkg.${dsid}.${ch}.${syst}
-         mkdir -p output/${syst}
+				mkdir -p output_TTDIFFXS_35/${syst}
          outfile=${syst}/${tag}.histograms.root
          jobname=${tag}
- 	 params=$PWD/Resolved13TeV.${dsid}.${ch}.${syst}.xml
+ 	 params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/Resolved13TeV.${dsid}.${ch}.${syst}.xml
 	 cp Resolved13TeVBkg.xml.template ${params}
 
          sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
          sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
+	sed -i "s|@SYST@|${syst}|"  ${params}
          jobname=${tag}
 
          echo ${params}  
@@ -44,6 +45,10 @@ do
 	 echo ${flist}
 	 
          MAMbo-submit.sh -p ${params} -f ${flist} -o ${outfile} -j ${jobname}
+				if [ $sendOnce -eq 1 ]
+				then
+					break
+				fi		 
      done < ${filelist}
 
 

@@ -267,7 +267,7 @@ SetAtlasStyle()
 gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
-ljets = [ 'co' ] #, 'el', 'mu']
+ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
@@ -300,7 +300,7 @@ GenNames = [ 'DiTop.410000'
 
 
 os.system('mkdir png eps pdf')
-ROOT.gROOT.SetBatch(1)
+gROOT.SetBatch(1)
 
 for ll in ljets:
 

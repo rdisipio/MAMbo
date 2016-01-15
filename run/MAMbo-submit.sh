@@ -1,1 +1,1 @@
-/home/ATLAS-T3/mromano/scratch/MAMbo/bin/MAMbo-submit.sh
+/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/bin/MAMbo-submit.sh

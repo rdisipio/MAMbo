@@ -6,9 +6,11 @@ CutFlowTTbarResolvedParticleLevel::CutFlowTTbarResolvedParticleLevel()
 
    m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
 
-   m_alias = {
-	"beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
-   };
+    
+    m_alias = {
+      "beforeCuts", "2j0b", "3j0b", "4j0b", "4j1b", "afterCuts"
+    };
+
 
 #ifdef __USE_LHAPDF__
    m_pdf = NULL;
@@ -57,43 +59,23 @@ bool CutFlowTTbarResolvedParticleLevel::Initialize()
 
     AddChannel("LPLUSJETS");
 
-    AddCounterName("LPLUSJETS", "particle_unweight", 10 );
-    SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events");
-    SetCutName("LPLUSJETS", "particle_unweight", 1, "Trigger");
-    SetCutName("LPLUSJETS", "particle_unweight", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "particle_unweight", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "particle_unweight", 4, "Lep pT > 25 GeV" );
-    if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW > 30 GeV");
-    }
-    else {
-       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW + ETmiss > 60 GeV");
-    }
-    SetCutName("LPLUSJETS", "particle_unweight", 7, "NJets >= 3");
-    SetCutName("LPLUSJETS", "particle_unweight", 8, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_unweight", 9, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_unweight", 10, "Nbtags >= 2");
+     AddCounterName("LPLUSJETS", "particle_unweight", 5 );
+    SetCutName("LPLUSJETS", "particle_unweight", 0, "All AnalysisTop Events");
+    SetCutName("LPLUSJETS", "particle_unweight", 1, "Nlep == 1 && NJets >= 2");
+    SetCutName("LPLUSJETS", "particle_unweight", 2, "NJets >= 3");
+    SetCutName("LPLUSJETS", "particle_unweight", 3, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_unweight", 4, "NbJets >= 1");
+    SetCutName("LPLUSJETS", "particle_unweight", 5, "NbJets >= 2");
+    
 
-    AddCounterName("LPLUSJETS", "particle_weighted", 10 );
-    SetCutName("LPLUSJETS", "particle_weighted", 0, "All Events");
-    SetCutName("LPLUSJETS", "particle_weighted", 1, "Trigger");
-    SetCutName("LPLUSJETS", "particle_weighted", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "particle_weighted", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "particle_weighted", 4, "Lep pT > 25 GeV" );
-    if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW > 30 GeV");
-    }
-    else {
-       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW + ETmiss > 60 GeV");
-    }
-    SetCutName("LPLUSJETS", "particle_weighted", 7, "NJets >= 3");
-    SetCutName("LPLUSJETS", "particle_weighted", 8, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_weighted", 9, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_weighted", 10, "Nbtags >= 2");
+    AddCounterName("LPLUSJETS", "particle_weighted", 5 );
+    SetCutName("LPLUSJETS", "particle_weighted", 0, "All AnalysisTop Events");
+    SetCutName("LPLUSJETS", "particle_weighted", 1, "Nlep == 1 && NJets >= 2");
+    SetCutName("LPLUSJETS", "particle_weighted", 2, "NJets >= 3");
+    SetCutName("LPLUSJETS", "particle_weighted", 3, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_weighted", 4, "NbJets >= 1");
+    SetCutName("LPLUSJETS", "particle_weighted", 5, "NbJets >= 2");    
+
 
     return success;
 }
@@ -104,94 +86,140 @@ bool CutFlowTTbarResolvedParticleLevel::Initialize()
 
 bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 {
-  bool success = true;
+	bool success = true;
 
-  CutFlow::Start();
+	CutFlow::Start();
 
-  unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
-  //unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
-  string decay = m_config->custom_params_string["decay"];
-  // dileptonic filter
-  // flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
-  int EventIsDileptonic = ed->property["isDileptonic"];
-  //cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
+	unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
+	//unsigned long isDilepton = m_config->custom_params_flag["isDilepton"];
+	string decay = m_config->custom_params_string["decay"];
+	// dileptonic filter
+	// flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
+	int EventIsDileptonic = ed->property["isDileptonic"];
+	//cout << "DEBUG: EventIsDileptonic = " << EventIsDileptonic << endl;
+	unsigned long isStressTest = 0;
+	string stressTestType = "none";
+	
+
+	double weight_particle_level = ed->info.mcWeight;	
+	if( m_config->custom_params_string.count( "stressTest" ) ) //mr
+	{
+		stressTestType = m_config->custom_params_string["stressTest"];
+		if( stressTestType != "none" && stressTestType != "tt_pt" && stressTestType != "tt_m" && stressTestType != "tt_rapidity" && stressTestType != "top_pt" )
+		{
+			cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
+			stressTestType = "none";
+		}
+		else if(  stressTestType != "none" ) isStressTest = 1;
+	}
+
+	// RDS+MR
+	if( isMCSignal ) 
+	{
+		if( decay == "ljets" && EventIsDileptonic != 0 ) return success;
+	}
+	if( isStressTest )//mr
+	{
+		TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
+		TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
+		TLorentzVector tt = t1 + t2;
+		if( stressTestType == "tt_rapidity" )
+		{
+		//Rapidity gaussian reweight
+
+			weight_particle_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+		}
+		else if( stressTestType == "tt_m" )
+		{
+			//         Mass bump"
+			double delta = tt.M() - 800000;
+			double sigma = 100000;
+
+			weight_particle_level *= 1 + 2*TMath::Exp( -1 *  pow( delta/sigma, 2) );
+		}
+		else if( stressTestType == "tt_pt" )
+		{
+			// tt pt slope
+			weight_particle_level *= 1 + tt.Pt() / 400000;
+
+		}
+		else if( stressTestType == "t_pt" )
+		{
+			//top pt slope
+			weight_particle_level *= 1 + ( t1.Pt() + t2.Pt())/ 1500000; //average of the pt
+
+		}
+	}
 
 
-  // RDS+MR
-  if( isMCSignal ) {
-    if( decay == "ljets" && EventIsDileptonic != 0 ) return success;
-  }
+	// NaN check: not needed since the lumi reweight tool already takes care of this
+	/*  if (weight_particle_level / weight_particle_level != 1.) {
+	cerr << "ERROR: NaN corrected!" << endl;
+	weight_particle_level = 1.;
+	}*/
+
+	#ifdef __USE_LHAPDF__
+	const double scaleFactor_PDF  = GetPDFWeight( ed );
+	weight_particle_level *= scaleFactor_PDF;
+	ed->property["scaleFactor_PDF"] = scaleFactor_PDF;
+	#else
+	const double scaleFactor_PDF = 1.0;
+	#endif
 
 
-  double weight_particle_level = ed->info.mcWeight;
-  // NaN check:
-  if (weight_particle_level / weight_particle_level != 1.) {
-    cerr << "ERROR: NaN corrected!" << endl;
-    weight_particle_level = 1.;
-  }
+	// apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
+	ed->property["weight_particle_level"] = weight_particle_level;
 
-#ifdef __USE_LHAPDF__
-         const double scaleFactor_PDF  = GetPDFWeight( ed );
-         weight_particle_level *= scaleFactor_PDF;
-         ed->property["scaleFactor_PDF"] = scaleFactor_PDF;
-#else
-        const double scaleFactor_PDF = 1.0;
-#endif
+	ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( "particle/cutflow/3j0b/MC_gen_weights" );
+	h->Fill( weight_particle_level );
 
+	h = (ROOT_TH1_t*)m_hm->GetHistogram( "parton/cutflow/3j0b/MC_gen_weights" );
+	h->Fill( weight_particle_level );
 
-  // apply scaleFactor_PILEUP * scaleFactor_ZVERTEX ?
-  ed->property["weight_particle_level"] = weight_particle_level;
+	const bool passedParticleSelection = PassedCutFlowParticle( ed );
 
-  ROOT_TH1_t * h = (ROOT_TH1_t*)m_hm->GetHistogram( "particle/cutflow/3j0b/MC_gen_weights" );
-  h->Fill( weight_particle_level );
+	int Debug = 0;
 
-  h = (ROOT_TH1_t*)m_hm->GetHistogram( "parton/cutflow/3j0b/MC_gen_weights" );
-  h->Fill( weight_particle_level );
-
-  const bool passedParticleSelection = PassedCutFlowParticle( ed );
-
-  int Debug = 0;
-
-  bool fillHistos = true;
-  bool fillCorrections = true;
+	bool fillHistos = true;
+	bool fillCorrections = true;
 
 
-  // there is always a parton-level top  
-  if (isMCSignal && fillHistos) {
-    if (weight_particle_level > 1.e10) {
-      cerr << "ERROR: CRAZY weight corrected!" << endl;
-      weight_particle_level = 1.;
-    }
-      
-    FillHistogramsPseudotopParton(ed, weight_particle_level);
-  }
+	// there is always a parton-level top  
+	if (isMCSignal && fillHistos) {
+	if (weight_particle_level > 1.e10) {
+	cerr << "ERROR: CRAZY weight corrected!" << endl;
+	weight_particle_level = 1.;
+	}
 
-  // nb: events could NOT pass the particle-level selection
-  //     but you could still be able to reconstruct pseudotops (i.e. 1l4j2b)
+	FillHistogramsPseudotopParton(ed, weight_particle_level);
+	}
 
-  if( !passedParticleSelection ) return success;
+	// nb: events could NOT pass the particle-level selection
+	//     but you could still be able to reconstruct pseudotops (i.e. 1l4j2b)
 
-  m_pseudotop_particle->SetEventData(ed);
+	if( !passedParticleSelection ) return success;
 
-  m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
-  m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
+	m_pseudotop_particle->SetEventData(ed);
 
-      if (Debug) {
-        cout << "    jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
-        cout << "    truth_jet_n=" << ed->truth_jets.n << " truth_bjets_n=" << ed->truth_bjets.n << endl;
-      }
+	m_pseudotop_particle->SetTarget(PseudoTopReconstruction::kTruth);
+	m_pseudotop_particle->SetChargedLepton(m_config->channel, 0);
 
-  m_pseudotop_particle->Run();
-  m_VarField["particle_HT_pseudo"] = m_pseudotop_particle->GetHt();
-  m_VarField["particle_R_lb"] = m_pseudotop_particle->GetR_lb();
-  m_VarField["particle_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();
-  m_VarField["particle_R_Wb_lep"] = m_pseudotop_particle->GetR_Wb_lep();
-  if (fillHistos) {
-     FillHistogramsPseudotopParticle(ed, weight_particle_level);
-     FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
-  }
+	if (Debug) {
+		cout << "    jet_n=" << ed->jets.n << " bjets_n=" << ed->bjets.n << endl;
+		cout << "    truth_jet_n=" << ed->truth_jets.n << " truth_bjets_n=" << ed->truth_bjets.n << endl;
+	}
 
-  return success;
+	m_pseudotop_particle->Run();
+	m_VarField["particle_HT_pseudo"] = m_pseudotop_particle->GetHt();
+	m_VarField["particle_R_lb"] = m_pseudotop_particle->GetR_lb();
+	m_VarField["particle_R_Wb_had"] = m_pseudotop_particle->GetR_Wb_had();
+	m_VarField["particle_R_Wb_lep"] = m_pseudotop_particle->GetR_Wb_lep();
+	if (fillHistos) {
+		FillHistogramsPseudotopParticle(ed, weight_particle_level);
+		FillHistogramsPseudotopResponseParticleToParton(ed, weight_particle_level);
+	}
+
+	return success;
 }
 
 
@@ -199,42 +227,27 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 /////////////////////////////////////////
 
 
-bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
+bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {     
     bool passed = true;
 
     const double weight = ed->property["weight_particle_level"];
 
-    /*
-      m_pseudotop_particle->SetEventData(ed);
-      m_pseudotop_particle->MakeChargedLepton();
-    */
-    const int    el_n  = ed->truth_electrons.n;
-    const int    mu_n  = ed->truth_muons.n;
-    
-    const bool   single_lept = ( m_config->channel == kElectron ) ?
-                                (el_n == 1)&&(mu_n==0) :
-                                (el_n == 0)&&(mu_n==1);
+    // const int hfor = int( ed->property["hfor"] );
 
+    const int    el_n  = ed->truth_electrons.n; 
+    const int    mu_n  = ed->truth_muons.n; 
+
+    const bool   single_lept = ( m_config->channel == kElectron ) ?
+				(el_n == 1)&&(mu_n==0) :
+				(el_n == 0)&&(mu_n==1);
+    
     const int    jet_n  = ed->truth_jets.n;
     const int    bjet_n = ed->truth_bjets.n;
     const double ETmiss = ed->MET_truth.et;
     const double mwt    = ed->MET_truth.mwt;
-
+    
     ControlPlotValues values;
     values.weight = weight;
-    values.lep_pt  = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.pT.at(0) : 0.;
-    /*
-      cout << "   ed->truth_leptons.n=" << ed->truth_leptons.n << " lep_pt=" << values.lep_pt << endl;
-      cout << "   ed->truth_electrons.n=" << ed->truth_electrons.n  << endl;
-      cout << "   ed->truth_muons.n=" << ed->truth_muons.n << endl;
-    */
-
-    /*
-      values.lep_eta = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.eta.at(0) : 0.;
-      values.lep_phi = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.phi.at(0) : 0.;
-      values.lep_E   = ( ed->truth_leptons.n > 0 ) ?  ed->truth_leptons.E.at(0) : 0.;
-    */
-
     if ((el_n > 0) && (mu_n == 0)) {
       values.lep_pt  = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.pT.at(0)  : 0.;
       values.lep_eta = ( ed->truth_electrons.n > 0 ) ?  ed->truth_electrons.eta.at(0) : 0.;
@@ -250,124 +263,76 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
     }
 
     values.jet_n   = ed->truth_jets.n;
-    values.bjet_n  = ed->truth_bjets.n;
+    values.bjet_n  = ed->truth_bjets.n; 
     values.fjet_n  = ed->truth_fjets.n;
     values.ETmiss  = ed->MET_truth.et;
     values.mwt     = ed->MET_truth.mwt;
 
-    /*
     for (int j = 0; j < ed->truth_jets.n; ++j) {
-        JetValues jet;
-        jet.pt  = ed->truth_jets.pT.at(j);
-        jet.eta = ed->truth_jets.eta.at(j);
-        jet.phi = ed->truth_jets.phi.at(j);
-        jet.E   = ed->truth_jets.E.at(j);
-        jet.m   = ed->truth_jets.m.at(j);
-        values.jets.push_back(&jet);
+        JetValues* jet = new JetValues();
+        jet->pt  = ed->truth_jets.pT.at(j);
+        jet->eta = ed->truth_jets.eta.at(j);
+        jet->phi = ed->truth_jets.phi.at(j);
+        jet->E   = ed->truth_jets.E.at(j);
+        jet->m   = ed->truth_jets.m.at(j); 
+        values.jets.push_back(jet);
     }
     for (int bj = 0; bj < ed->truth_bjets.n; ++bj) {
-        JetValues jet;
-        jet.pt  = ed->truth_bjets.pT.at(bj);
-        jet.eta = ed->truth_bjets.eta.at(bj);
-        jet.phi = ed->truth_bjets.phi.at(bj);
-        jet.E   = ed->truth_bjets.E.at(bj);
-        jet.m   = ed->truth_bjets.m.at(bj);
-        values.bJets.push_back(&jet);
-    }
-    */
-
-    for (int j = 0; j < ed->truth_jets.n; ++j) {
-      JetValues* jet = new JetValues();
-      jet->pt  = ed->truth_jets.pT.at(j);
-      jet->eta = ed->truth_jets.eta.at(j);
-      jet->phi = ed->truth_jets.phi.at(j);
-      jet->E   = ed->truth_jets.E.at(j);
-      jet->m   = ed->truth_jets.m.at(j);
-      values.jets.push_back(jet);
-    }
-    for (int bj = 0; bj < ed->truth_bjets.n; ++bj) {
-      JetValues* jet = new JetValues();
-      jet->pt  = ed->truth_bjets.pT.at(bj);
-      jet->eta = ed->truth_bjets.eta.at(bj);
-      jet->phi = ed->truth_bjets.phi.at(bj);
-      jet->E   = ed->truth_bjets.E.at(bj);
-      jet->m   = ed->truth_bjets.m.at(bj);
-      values.bJets.push_back(jet);
+        JetValues* jet = new JetValues();
+        jet->pt  = ed->truth_bjets.pT.at(bj);
+        jet->eta = ed->truth_bjets.eta.at(bj);
+        jet->phi = ed->truth_bjets.phi.at(bj);
+        jet->E   = ed->truth_bjets.E.at(bj);
+        jet->m   = ed->truth_bjets.m.at(bj);
+        values.bJets.push_back(jet);
     }
 
-   // 0 All events
+    // if( (hfor<0) || (hfor>3) ) return passed;
+    
+    // 0 All events
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     //    FillHistogramsControlPlotsParticle( values );
-
-    // 1 trigger 
+    
+	//1     //****************All event passing analysis top selection *************************
+    const bool passed_resolved_ejets = ed->property["passed_resolved_ejets_2j0b"]; ///Preselection done in AT for el-channel
+    const bool passed_resolved_mujets = ed->property["passed_resolved_mujets_2j0b"]; ///Preselection done in AT for mu-channel  
+    const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );   
+    cout << "Debug: 	passed_resolved_ejets = " << passed_resolved_ejets << " and el_n = " << el_n << endl;
+    cout << "Debug: 	passed_resolved_mujets = " << passed_resolved_mujets << " and mu_n = " << mu_n << endl;
+    if( !analysistop_cutflow )   return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    // 2 primary vertex
+    
+    // 2 3j0b
+    if( ed->truth_jets.n < 3 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    // 3 single lepton
-    if( !single_lept )   return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    double lep_pt = ( m_config->channel == kElectron ) ? ed->truth_electrons.pT.at(0) : ed->truth_muons.pT.at(0);
-
-    // 4 lepton pt
-    if (lep_pt < 25 * GeV) return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    // 5 ETmiss cut
-    const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
-//    if( ETmiss < met_cut ) return !passed;
-    PassedCut("LPLUSJETS", "particle_weighted", weight );
-    PassedCut("LPLUSJETS", "particle_unweight");
-
-    // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
-/*
-    if( m_config->channel == kElectron ) {
-       if( mwt < 30 * GeV) return !passed;
-    }
-    else {
-       if( (mwt + ETmiss) < 60 * GeV ) return !passed;
-    }
-*/
-    PassedCut("LPLUSJETS", "particle_weighted", weight );
-    PassedCut("LPLUSJETS", "particle_unweight");
-
-    // 7 Njets >= 3
-    if ( jet_n < 3 ) return !passed;
-    PassedCut("LPLUSJETS", "particle_weighted", weight );
-    PassedCut("LPLUSJETS", "particle_unweight");
     FillHistogramsControlPlotsParticle( values );
-
-    // 8 Njets >= 4
-    if (jet_n < 4)         return !passed;
+        
+    // 3 4j0b
+    if( ed->truth_jets.n < 4 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    // 9 Nbjets >= 1
-    if (bjet_n < 1)        return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
     FillHistogramsControlPlotsParticle( values );
-
-    // 10 Nbjets >= 2
-    if (bjet_n < 2)        return !passed;
+        
+    // 4 4j1b
+    if( ed->truth_bjets.n < 1 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
+    PassedCut( "LPLUSJETS", "particle_weighted", weight );    
     FillHistogramsControlPlotsParticle( values );
+        
+    // 5 4j2b
+    if( ed->truth_bjets.n < 2 ) return !passed;
+    PassedCut( "LPLUSJETS", "particle_unweight" );
+    PassedCut( "LPLUSJETS", "particle_weighted", weight ); 
+    FillHistogramsControlPlotsParticle( values );   
+    
 
     // flush jet values
     for(auto &it:values.jets) delete it; values.jets.clear();
     for(auto &it:values.bJets) delete it; values.bJets.clear();
-  
-
+    
     return passed;
 }
 

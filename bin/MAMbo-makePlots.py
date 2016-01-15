@@ -133,7 +133,7 @@ def ReadConfiguration( configFileName ):
       samples_configuration[name].fillstyle   = int( node.attrib.get('fillstyle') )
       samples_configuration[name].linewidth   = int( node.attrib.get('linewidth') )
 
-      if samples_configuration[name].type == SampleType.data: samples_configuration[name].description += " " + channel_tag
+      if samples_configuration[name].type == SampleType.data: samples_configuration[name].description# += " " + channel_tag
       i += 1
 
    input_files = {}
@@ -286,6 +286,34 @@ def MakeStackedHistogram( histograms ):
 ####################################################
 
 
+
+def SumPredictionHistograms( histograms ):
+   # stack = THStack( "stack", "Prediction" )
+
+    # order samples by id in reversed order
+    ordered_samples = [ "" for i in range(len(histograms)) ]
+
+    for sample in histograms.keys():
+        if samples_configuration[sample].type in [ SampleType.data, SampleType.uncertainty, SampleType.unknown ]: continue
+        id = samples_configuration[sample].id
+        ordered_samples[id] = sample
+    ordered_samples = [ s for s in ordered_samples if s != "" ]  
+    ordered_samples = ordered_samples[::-1]
+    
+    counter = 0
+    for sample in ordered_samples:
+       if counter == 0: hsum = histograms[sample].Clone( "sum" )
+       else: hsum.Add( histograms[sample] )
+       counter+=1
+
+#    stack.SetMaximum( hmax )
+
+    return hsum
+ 
+
+####################################################
+
+
 def DoPlot( plot, iLumi = 1. ):
 
     print "INFO: plotting %s with %s scale" % ( plot.hname, PlotScale.ToString(plot.scale) )
@@ -313,6 +341,8 @@ def DoPlot( plot, iLumi = 1. ):
     pad1.SetLogx(False)
 
     hstack = MakeStackedHistogram( histograms )
+    hsum = SumPredictionHistograms( histograms )
+
 
     if histograms['data'].Class() in [ TH1F.Class(), TH1D.Class() ]:
        histograms['data'].Draw()
@@ -349,8 +379,18 @@ def DoPlot( plot, iLumi = 1. ):
         'height'  : 0.048
         }
     legend = PrintLegend( lparams, histograms )
+    #kolmogorov test
+    channel_tag =  plot.tag
+    prob = "KS: %2.1f" % (hsum.KolmogorovTest( histograms['data'], "D" ))
+    l = TLatex()
+    l.SetTextSize(0.05); 
+    l.SetNDC();
+    l.SetTextColor(kBlack);
+    l.DrawLatex( 0.8, 0.961, prob );
+    l.DrawLatex( 0.4, 0.961, channel_tag );
+    
 
-    MakeATLASLabel( 0.18, 0.87, "Internal", "1.7", "13" )
+    MakeATLASLabel( 0.18, 0.87, "Internal", "3.2", "13" )
 
     ## make data/prediction ratio
 

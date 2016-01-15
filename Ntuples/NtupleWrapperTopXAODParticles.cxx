@@ -91,8 +91,18 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
   ed->info.runNumber       = GET_VALUE( runNumber );
   ed->info.mcChannelNumber = GET_VALUE( mcChannelNumber );
   ed->info.mcWeight        = GET_VALUE( weight_mc ); //MC@NLO ??
+  
+  
+  SET_PROPERTY( passed_resolved_ejets_2j0b );
+  SET_PROPERTY( passed_resolved_mujets_2j0b );
+
+  SET_PROPERTY( passed_resolved_ejets_4j2b );
+  SET_PROPERTY( passed_resolved_mujets_4j2b );
+  SET_PROPERTY( passed_boosted_ejets_1fj0b );
+  SET_PROPERTY( passed_boosted_mujets_1fj0b );
+  
 //  ed->info.mcWeight = 1.; // bug in D3PD2MiniSL? All zeros. Can't use MC@NLO at the moment.
-  if( fabs(ed->info.mcWeight) < 1e-4 ) ed->info.mcWeight = 1.;
+//  if( fabs(ed->info.mcWeight) < 1e-4 ) ed->info.mcWeight = 1.;
   
   m_dumper_mctruth->DumpEventCutflows( this->m_ntuple, ed );
 /*  ed->property["passed_particle_resolved_ejets_4j2b" ] = GET_VALUE( passed_resolved_ejets_4j2b );
@@ -115,7 +125,7 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
    {
 
    	m_lumiWeight = m_moma->GetLumiWeight( ed->info.mcChannelNumber, m_nEvents, m_lumi);
-   	cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
+	if(!(ed->info.eventNumber % 1000)) cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
    	ed->info.mcWeight *= m_lumiWeight;
    }
 #endif  

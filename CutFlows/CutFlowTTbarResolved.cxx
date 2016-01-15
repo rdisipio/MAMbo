@@ -9,7 +9,7 @@ CutFlowTTbarResolved::CutFlowTTbarResolved()
     m_pseudotop_matching_particle2parton = new PseudoTopMatching( PseudoTopMatching::kParticleToParton );
     
     m_alias = {
-      "beforeCuts", "trig", "pvtx", "lep", "pTlep", "met", "mtw", "3j0b", "4j0b", "4j1b", "afterCuts"
+      "beforeCuts", "2j0b", "3j0b", "4j0b", "4j1b", "afterCuts"
     };
 
 
@@ -138,85 +138,44 @@ bool CutFlowTTbarResolved::Initialize() {
  
     AddChannel("LPLUSJETS");
 
-    AddCounterName("LPLUSJETS", "reco_unweight", 10 );
-    SetCutName("LPLUSJETS", "reco_unweight", 0, "All Events");
-    SetCutName("LPLUSJETS", "reco_unweight", 1, "Trigger");
-    SetCutName("LPLUSJETS", "reco_unweight", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "reco_unweight", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "reco_unweight", 4, "Lep pT > 25 GeV" );
-    if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "reco_unweight", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "reco_unweight", 6, "mTW > 30 GeV");
-    }
-    else {
-       SetCutName("LPLUSJETS", "reco_unweight", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "reco_unweight", 6, "mTW + ETmiss > 60 GeV");
-    }
-    SetCutName("LPLUSJETS", "reco_unweight", 7, "NJets >= 3");
-    SetCutName("LPLUSJETS", "reco_unweight", 8, "NJets >= 4");
-    SetCutName("LPLUSJETS", "reco_unweight", 9, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "reco_unweight", 10, "Nbtags >= 2");
+    AddCounterName("LPLUSJETS", "reco_unweight", 5 );
+    SetCutName("LPLUSJETS", "reco_unweight", 0, "All AnalysisTop Events");
+    SetCutName("LPLUSJETS", "reco_unweight", 1, "Nlep == 1 && NJets >= 2");
+    SetCutName("LPLUSJETS", "reco_unweight", 2, "NJets >= 3");
+    SetCutName("LPLUSJETS", "reco_unweight", 3, "NJets >= 4");
+    SetCutName("LPLUSJETS", "reco_unweight", 4, "NbJets >= 1");
+    SetCutName("LPLUSJETS", "reco_unweight", 5, "NbJets >= 2");
+    
 
-    AddCounterName("LPLUSJETS", "reco_weighted", 10);
-    SetCutName("LPLUSJETS", "reco_weighted", 0, "All Events");
-    SetCutName("LPLUSJETS", "reco_weighted", 1, "Trigger");
-    SetCutName("LPLUSJETS", "reco_weighted", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "reco_weighted", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "reco_weighted", 4, "Lep pT > 25 GeV" );
-    if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "reco_weighted", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "reco_weighted", 6, "mTW > 30 GeV");
-    }
-    else {
-       SetCutName("LPLUSJETS", "reco_weighted", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "reco_weighted", 6, "mTW + ETmiss > 60 GeV");
-    }    
-    SetCutName("LPLUSJETS", "reco_weighted", 7, "NJets >= 3" );
-    SetCutName("LPLUSJETS", "reco_weighted", 8, "NJets >= 4" );
-    SetCutName("LPLUSJETS", "reco_weighted", 9, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "reco_weighted", 10, "Nbtags >= 2");
+    AddCounterName("LPLUSJETS", "reco_weighted", 5 );
+    SetCutName("LPLUSJETS", "reco_weighted", 0, "All AnalysisTop Events");
+    SetCutName("LPLUSJETS", "reco_weighted", 1, "Nlep == 1 && NJets >= 2");
+    SetCutName("LPLUSJETS", "reco_weighted", 2, "NJets >= 3");
+    SetCutName("LPLUSJETS", "reco_weighted", 3, "NJets >= 4");
+    SetCutName("LPLUSJETS", "reco_weighted", 4, "NbJets >= 1");
+    SetCutName("LPLUSJETS", "reco_weighted", 5, "NbJets >= 2");    
 
 
 
     if( isRealData || isWjets || isQCD ) return success;
 
-    AddCounterName("LPLUSJETS", "particle_unweight", 10 );
-    SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events");
-    SetCutName("LPLUSJETS", "particle_unweight", 1, "Trigger");
-    SetCutName("LPLUSJETS", "particle_unweight", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "particle_unweight", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "particle_unweight", 4, "Lep pT > 25 GeV" );
-    if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW > 30 GeV");
-    }
-    else {
-       SetCutName("LPLUSJETS", "particle_unweight", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "particle_unweight", 6, "mTW + ETmiss > 60 GeV");
-    }
-    SetCutName("LPLUSJETS", "particle_unweight", 7, "NJets >= 3");
-    SetCutName("LPLUSJETS", "particle_unweight", 8, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_unweight", 9, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_unweight", 10, "Nbtags >= 2");
+      AddCounterName("LPLUSJETS", "particle_unweight", 5 );
+    SetCutName("LPLUSJETS", "particle_unweight", 0, "All AnalysisTop Events");
+    SetCutName("LPLUSJETS", "particle_unweight", 1, "Nlep == 1 && NJets >= 2");
+    SetCutName("LPLUSJETS", "particle_unweight", 2, "NJets >= 3");
+    SetCutName("LPLUSJETS", "particle_unweight", 3, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_unweight", 4, "NbJets >= 1");
+    SetCutName("LPLUSJETS", "particle_unweight", 5, "NbJets >= 2");
+    
 
-    AddCounterName("LPLUSJETS", "particle_weighted", 10 );    
-    SetCutName("LPLUSJETS", "particle_weighted", 0, "All Events");
-    SetCutName("LPLUSJETS", "particle_weighted", 1, "Trigger");
-    SetCutName("LPLUSJETS", "particle_weighted", 2, "Prim. Vtx");
-    SetCutName("LPLUSJETS", "particle_weighted", 3, "SingleLepton");
-    SetCutName("LPLUSJETS", "particle_weighted", 4, "Lep pT > 25 GeV" );
-    if( m_config->channel == kElectron ) {
-       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 30 GeV");
-       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW > 30 GeV");
-    }
-    else {
-       SetCutName("LPLUSJETS", "particle_weighted", 5, "ETmiss > 20 GeV");
-       SetCutName("LPLUSJETS", "particle_weighted", 6, "mTW + ETmiss > 60 GeV");
-    }
-    SetCutName("LPLUSJETS", "particle_weighted", 7, "NJets >= 3");
-    SetCutName("LPLUSJETS", "particle_weighted", 8, "NJets >= 4");
-    SetCutName("LPLUSJETS", "particle_weighted", 9, "Nbtags >= 1");
-    SetCutName("LPLUSJETS", "particle_weighted", 10, "Nbtags >= 2");
+    AddCounterName("LPLUSJETS", "particle_weighted", 5 );
+    SetCutName("LPLUSJETS", "particle_weighted", 0, "All AnalysisTop Events");
+    SetCutName("LPLUSJETS", "particle_weighted", 1, "Nlep == 1 && NJets >= 2");
+    SetCutName("LPLUSJETS", "particle_weighted", 2, "NJets >= 3");
+    SetCutName("LPLUSJETS", "particle_weighted", 3, "NJets >= 4");
+    SetCutName("LPLUSJETS", "particle_weighted", 4, "NbJets >= 1");
+    SetCutName("LPLUSJETS", "particle_weighted", 5, "NbJets >= 2");    
+
 
     return success;
 }
@@ -290,7 +249,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 				  weight_particle_level *= 1 + tt.Pt() / 400000;
 				  weight_reco_level *= 1 + tt.Pt() / 400000;
 			  }
-			  else
+			  else if( stressTestType == "t_pt" )
 			  {
 				  //top pt slope
 				  weight_particle_level *= 1 + ( t1.Pt() + t2.Pt())/ 1500000; //average of the pt
@@ -307,8 +266,8 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 	 // some Single Top samples have buggy mc weight 
 //     if( fabs(weight_reco_level) < 1e-5 )  cout << "WARNING: very small MC weight " << weight_reco_level << endl;
-         if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
-         if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
+    //     if( fabs(weight_reco_level) < 1e-5 )     weight_reco_level     /= fabs(weight_reco_level);
+    //     if( fabs(weight_particle_level) < 1e-5 ) weight_particle_level /= fabs(weight_particle_level);
 
 
           double scaleFactor_PILEUP     = ed->property[  m_pileupSF_name ];
@@ -354,16 +313,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     //if( isWjets ) { }
 
-    if( isQCD ) {
-      double qcd_weight = GetFakesWeight( ed );
-      m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights" )->Fill( qcd_weight );
-      m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights_1" )->Fill( qcd_weight );
 
-      if( fabs(qcd_weight) > 3.0 ) qcd_weight = 0.; // see https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod
-
-      weight_reco_level     *= qcd_weight;
-      weight_particle_level *= qcd_weight; // should we?
-    }
 
 // @ BOOTSTRAP
 //    double pw = -1.;
@@ -386,6 +336,13 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
        return success;
     }
 #endif
+    // Apply selections and fill control histograms (pt, eta, etc..)
+    const bool passedRecoSelection     = PassedCutFlowReco( ed );
+    const bool passedParticleSelection = ( isRealData || isWjets || isQCD ) ? false : PassedCutFlowParticle( ed );
+
+
+    weight_particle_level = ed->property["weight_particle_level"];
+    weight_reco_level= ed->property["weight_reco_level"];
 
 
     // dileptonic filter; JK, RDS
@@ -399,9 +356,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
     //    if (fabs(weight_reco_level) > 5.) printf("WARNING: event %i has large weight_reco_level w = %f\n", ed->info.eventNumber, weight_reco_level);
 
-    // Apply selections and fill control histograms (pt, eta, etc..)
-    const bool passedRecoSelection     = PassedCutFlowReco( ed );
-    const bool passedParticleSelection = ( isRealData || isWjets || isQCD ) ? false : PassedCutFlowParticle( ed );
+
 
    
     int Debug = 0;
@@ -449,7 +404,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 
     if( passedRecoSelection ) {
-     
+    
       //     need to repeat... ???
       m_pseudotop_reco->SetEventData(ed);
       m_pseudotop_reco->SetTarget(PseudoTopReconstruction::kReco);
@@ -632,7 +587,7 @@ bool CutFlowTTbarResolved::Finalize()
 
 bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     bool passed = true;
-   
+    int isQCD = m_config->custom_params_flag["isQCD"];
 //    const int hfor = int( ed->property["hfor"] );
 
     int    jet_n  = ed->jets.n;
@@ -640,8 +595,8 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     double ETmiss = ed->MET.et;
     double mwt    = ed->MET.mwt;
     
-    const double weight = ed->property["weight_reco_level"];
- 
+    double weight = ed->property["weight_reco_level"];
+    double qcd_weight = 1;
     ControlPlotValues values;
     values.weight = weight;
     values.mu      = ed->property["mu"];
@@ -686,37 +641,18 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 */
 
     // 0 all events
-    const bool passed_resolved_ejets = ed->property["passed_resolved_ejets_4j2b"]; ///Preselection done in AT for el-channel
-    const bool passed_resolved_mujets = ed->property["passed_resolved_mujets_4j2b"]; ///Preselection done in AT for mu-channel  
-      
-      
-    //****************All event passing analysis top selection *************************
-    const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );     
-    if( !analysistop_cutflow )   return !passed;
-    
     PassedCut( "LPLUSJETS", "reco_weighted", weight );
     PassedCut( "LPLUSJETS", "reco_unweight");
 //    FillHistogramsControlPlotsReco( values );
     
-    // 1 Trigger
+    //1     //****************All event passing analysis top selection *************************
+    const bool passed_resolved_ejets = ed->property["passed_resolved_ejets_2j0b"]; ///Preselection done in AT for el-channel
+    const bool passed_resolved_mujets = ed->property["passed_resolved_mujets_2j0b"]; ///Preselection done in AT for mu-channel  
+    const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );     
+    if( !analysistop_cutflow )   return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
-
-    // 2 Prim. Vtx
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-
-    // 3 SingleLepton
-    const int    el_n  = ed->electrons.n; 
-    const int    mu_n  = ed->muons.n; 
-
-    const bool   single_lept = ( m_config->channel == kElectron ) ?
-                (el_n == 1)&&(mu_n==0) :
-                (el_n == 0)&&(mu_n==1);
-    if( !single_lept )   return !passed;
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-
+    
     if( m_config->channel == kElectron ) {
        values.lep_pt  = ed->electrons.pT.at(0);
        values.lep_eta = ed->electrons.eta.at(0);
@@ -732,40 +668,42 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
        values.lep_q   = ed->muons.q.at(0);
     }
 
-    const double lep_pt = ( m_config->channel == kElectron ) ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
+    
+    
+    
 
-    // 4 lepton pT
-    if (lep_pt < 25 * GeV) return !passed;
+    if( isQCD ) 
+    {
+      qcd_weight = GetFakesWeight( ed );
+    //  cout << "CutFlowTTbarResolved: qcd weight is " << qcd_weight << endl;
+
+      if( fabs(qcd_weight) > 3.0 ) qcd_weight = 0.; // see https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod
+
+      weight     *= qcd_weight;
+      ed->property["weight_reco_level"] *= qcd_weight;
+    }   
+
+
+
+
+
+
+
+
+    // 2) 3 jets
+    if( ed->jets.n < 3 )  return !passed;
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
-
-    // 5 ETmiss cut
-    const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
-    //if( ETmiss < met_cut ) return !passed;
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-
-    // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
-/*
-    if( m_config->channel == kElectron ) {
-       if( mwt < 30 * GeV) return !passed;
+    if (isQCD )
+    {
+	    m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights_1" )->Fill( qcd_weight );
     }
-    else {
-       if( (mwt + ETmiss) < 60 * GeV ) return !passed;
-    }
-*/
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-
+    FillHistogramsControlPlotsReco( values );    
     FillHistogramsDiagnostics( values );
-
-    // 7 Njets >= 3
-    if ( jet_n < 3 ) return !passed;
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-    FillHistogramsControlPlotsReco( values );
-
-//VS More Control Regions
+    //more control plots
+    
+    
     if (jet_n == 3 && bjet_n == 0) {
     MoreCRFillHistogramsControlPlotsReco( "3j_excl_0b_excl", values );
     }
@@ -792,50 +730,59 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     }
 
     
+
+
+
+
+
+    // 3) 4jets
+    if( ed->jets.n < 4 )  return !passed;
+    PassedCut("LPLUSJETS", "reco_weighted", weight );
+    PassedCut("LPLUSJETS", "reco_unweight");
+    FillHistogramsControlPlotsReco( values );
+        if (isQCD )
+    {
+	    m_hm->GetHistogram( "reco/cutflow/4j0b/fakes_weights" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/4j0b/fakes_weights_1" )->Fill( qcd_weight );
+    }
     if (jet_n == 4 && bjet_n == 0) {
     MoreCRFillHistogramsControlPlotsReco( "4j_excl_0b_excl", values );
     }
     
+
+    
+    
+  // 4) 1 bjets
+    if( ed->bjets.n < 1 )  return !passed;
+    PassedCut("LPLUSJETS", "reco_weighted", weight );
+    PassedCut("LPLUSJETS", "reco_unweight");
+    FillHistogramsControlPlotsReco( values );
+    if (isQCD )
+    {
+	    m_hm->GetHistogram( "reco/cutflow/4j1b/fakes_weights" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/4j1b/fakes_weights_1" )->Fill( qcd_weight );
+    }    
     if (jet_n == 4 && bjet_n == 1) {
     MoreCRFillHistogramsControlPlotsReco( "4j_excl_1b_excl", values );
+    }
+
+
+
+  // 4) 2 bjets
+    if( ed->bjets.n < 2 )  return !passed;
+    PassedCut("LPLUSJETS", "reco_weighted", weight );
+    PassedCut("LPLUSJETS", "reco_unweight");
+    FillHistogramsControlPlotsReco( values );
+    if (isQCD )
+    {
+	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights_1" )->Fill( qcd_weight );
     }
 
     if (jet_n == 4 && bjet_n >= 2) {
     MoreCRFillHistogramsControlPlotsReco( "4j_excl_2b_incl", values );
     }
 
-    // 8 Njets >= 4    
-    if ( jet_n < 4) return !passed;
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-    FillHistogramsControlPlotsReco( values );
-
-    if (jet_n >= 5 && bjet_n >= 0) {
-    MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl", values );
-    }
- 
-    if (jet_n >= 5 && bjet_n >= 1) {
-    MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl", values );
-    }
-        
-    if (jet_n >= 5 && bjet_n >= 2) {
-    MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl", values );
-    }
-
-    // 9 Nbtags >= 1
-    if (bjet_n < 1) return !passed;
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-
-    FillHistogramsControlPlotsReco( values );
-
-    // 10 Nbtags >= 2
-    if (bjet_n < 2) return !passed;
-    
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-
-    FillHistogramsControlPlotsReco( values );
 
     // flush jet values
     for(auto &it:values.jets) delete it; values.jets.clear();
@@ -913,67 +860,39 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     //    FillHistogramsControlPlotsParticle( values );
     
-    // 1 trigger 
+
+	//1     //****************All event passing analysis top selection *************************
+    const bool passed_resolved_ejets = ed->property["passed_particle_resolved_ejets_2j0b"]; ///Preselection done in AT for el-channel
+    const bool passed_resolved_mujets = ed->property["passed_particle_resolved_mujets_2j0b"]; ///Preselection done in AT for mu-channel  
+    const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );     
+    if( !analysistop_cutflow )   return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     
-    // 2 primary vertex
+    // 2 3j0b
+    if( ed->truth_jets.n < 3 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
-    
-    // 3 single lepton
-    if( !single_lept )   return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    double lep_pt = ( m_config->channel == kElectron ) ? ed->truth_electrons.pT.at(0) : ed->truth_muons.pT.at(0);
-
-    // 4 lepton pt
-    if (lep_pt < 25 * GeV) return !passed;
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-
-    // 5 ETmiss cut
-    const double met_cut = ( m_config->channel == kElectron ) ? 30*GeV : 20*GeV;
-//    if( ETmiss < met_cut ) return !passed;
-    PassedCut("LPLUSJETS", "particle_weighted", weight );
-    PassedCut("LPLUSJETS", "particle_unweight");
-
-    // 6 mTW > 30 GeV or mTW+ETmiss>60 GeV
-/* 
-    if( m_config->channel == kElectron ) {
-       if( mwt < 30 * GeV) return !passed;
-    }
-    else {
-       if( (mwt + ETmiss) < 60 * GeV ) return !passed;
-    }
-*/
-    PassedCut("LPLUSJETS", "particle_weighted", weight );
-    PassedCut("LPLUSJETS", "particle_unweight");
-
-    // 7 Njets >= 3
-    if ( jet_n < 3 ) return !passed;
-    PassedCut("LPLUSJETS", "particle_weighted", weight );
-    PassedCut("LPLUSJETS", "particle_unweight");
     FillHistogramsControlPlotsParticle( values );
         
-    // 8 Njets >= 4
-    if (jet_n < 4) return !passed;
+    // 3 4j0b
+    if( ed->truth_jets.n < 4 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     FillHistogramsControlPlotsParticle( values );
-  
-    // 9 Nbjets >= 1
-    if (bjet_n < 1)        return !passed;
+        
+    // 4 4j1b
+    if( ed->truth_bjets.n < 1 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
+    PassedCut( "LPLUSJETS", "particle_weighted", weight );    
     FillHistogramsControlPlotsParticle( values );
+        
+    // 5 4j2b
+    if( ed->truth_bjets.n < 2 ) return !passed;
+    PassedCut( "LPLUSJETS", "particle_unweight" );
+    PassedCut( "LPLUSJETS", "particle_weighted", weight ); 
+    FillHistogramsControlPlotsParticle( values );   
     
-    // 10 Nbjets >= 2
-    if (bjet_n < 2)        return !passed; 
-    PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight );
-    FillHistogramsControlPlotsParticle( values );
 
     // flush jet values
     for(auto &it:values.jets) delete it; values.jets.clear();
@@ -991,8 +910,28 @@ double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
 #ifndef __MOMA__
 
     cout << "WARNING: Cannot assign fake weights without ATLAS ROOTCORE. Please setup ROOTCORE and compile the MoMA extension." << endl;
+    return 1;
 
 #else
+    int channel =  m_config->channel;
+    //get dphi lep met
+    if( channel == 0 && ed->electrons.n < 1 ) return 1;
+    if( channel == 1 && ed->muons.n < 1 ) return 1;    
+    double phi_lep = channel == 0  ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
+    double phi_met = ed->MET.phi;
+    double et_met = ed->MET.et;
+    double dphi_met_lep = deltaPhi( phi_met, phi_lep );
+    int ntag = ed->bjets.n;
+  //  cout << "DEBUG: GetFakesWeight. Channel = " << channel << ", el_n = " << ed->electrons.n << ", mu_n = " << ed->muons.n << endl;
+    bool tight = ( channel == 0 ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
+
+     // Finally..
+    if (channel == 0 ) qcd_weight = m_moma->GetFakesWeightElectron( channel, tight,  dphi_met_lep, ntag ); // RAFAL
+    else if (channel == 1 ) qcd_weight = m_moma->GetFakesWeightMuon( channel, tight,  dphi_met_lep, et_met ); // RAFAL
+//    cout << "DEBUG: GetFakesWeight. Returning weight " << qcd_weight << endl;
+	return qcd_weight;
+
+// 8TeV code
  /*   int rc_channel = m_config->channel;
 
     MMEvent  rc_event;

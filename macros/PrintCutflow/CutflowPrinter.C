@@ -9,7 +9,10 @@ CutflowPrinter::CutflowPrinter()
  				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
  				{ "cutflow_scale_factors", "ScaleFactors" }
  				};
-
+#ifdef __MOMA__
+   m_moma = MoMATool::GetHandle();
+   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
+#endif
 }
 
 CutflowPrinter::CutflowPrinter( const std::string& infilename )
@@ -21,7 +24,10 @@ CutflowPrinter::CutflowPrinter( const std::string& infilename )
  				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
  				{ "cutflow_scale_factors", "ScaleFactors" }
  				};
-	
+	#ifdef __MOMA__
+   m_moma = MoMATool::GetHandle();
+   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
+#endif
 	
 }
 
@@ -99,6 +105,21 @@ void CutflowPrinter::ReadCutflow()
 		int cutflow_counter = 0;
 		TFile * f_temp = TFile::Open( filename.c_str() );
 		cout << "Loading cutflow from " << filename << endl;
+		float lumi_weight = 1;
+#ifdef __MOMA__
+//get sumweights tree
+		TTree * sum = (TTree*) f_temp->Get( "sumWeights" );
+		sumWeights * sumW = new sumWeights( sum );
+		sumW->GetEntry(0);
+		int runNumber = sumW->dsid;
+		string lumifileName = GetLumiFile( dsid );
+		ifstream lumifile( lumifileName.c_str() );
+		int nEvents;
+	 	lumifile >> nEvents >> nEvents;
+   	        lumi_weight = m_moma->GetLumiWeight( runNumber, nEvents, 3300);		
+   	        delete sumW;
+		
+#endif		
 		for( const auto& cutflow: m_cutflowList )
 		{
 			int cutflowType = 0;
@@ -156,4 +177,24 @@ void CutflowPrinter::WriteToText()
 		m_textOutFile << "======================\n"; 
 	}	
 }
+
+
+
+
+std::string GetLumiFile( int id )
+{
+	ifstream infile( "eventNumberFiles.db" );
+	int tempid;
+	std::string tempfilename;
+	
+	while( 1 )
+	{
+		infile >> tempfilename;
+		if( infile.eof() ) break;
+		infile >> tempid;
+		if( tempid == id ) return tempfilename;
+	}
+	throw std::runtime_error( "Run not found in eventNumberFiles.db" );
+}
+
 

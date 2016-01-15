@@ -4,7 +4,9 @@ include Makefile_MoMA.inc
 CFLAGS += -I$(MAMBODIR)/src
 
 TOOLS = MoMA
+
 SRCS = $(TOOLS:=.cxx)
+#SRCS += src/FakesWeights.cxx    src/MatrixUtils.cxx  src/MMEfficiency.cxx  src/MMEffSet.cxx  src/TopFakesMMWeightCalculator.cxx    src/TopFakesxAODUtils.cxx
 OBJS = ${SRCS:.cxx=.o}
 
 all: $(MOMA_SOLIB) install

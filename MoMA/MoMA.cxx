@@ -4,7 +4,7 @@ MoMATool::MoMATool() :
   m_debug(false)/*, m_fakes_weighter_el( NULL ), m_fakes_weighter_mu( NULL ), 
   m_btag_weighter( NULL ), m_CDIindex_SF(NULL), m_CDIindex_Eff(NULL)*/
 {
-//  InitializeBTagWeights();
+  InitializeFakesWeights();
   InitializeLumiWeights();
 }
 
@@ -66,18 +66,20 @@ void MoMATool::InitializeLumiWeights()
 	string rootcoreDir = string( getenv("ROOTCOREBIN") ) + "/data/TopDataPreparation/XSection-MC15-13TeV-fromSusyGrp.data";
 	m_lumiSvc = SampleXsectionSvc::svc( rootcoreDir.c_str());
 	m_lumiWeight = -1;
+	m_lumiRunNumber = -1;
 }
 
 double MoMATool::GetLumiWeight( int runNumber, float nEvents, float lumi )
 {
-	if( m_lumiWeight < 0 )
+	if( m_lumiWeight < 0 || m_lumiRunNumber != runNumber )
 	{
+		m_lumiRunNumber = runNumber;
 		double xs;
 		if( m_xs_syst_type == XS_NOMINAL ) xs = m_lumiSvc->sampleXsection()->getXsection(runNumber);
 		else if( m_xs_syst_type == XS_UP ) xs = m_lumiSvc->sampleXsection()->getXsectionUp( runNumber );
 		else xs = m_lumiSvc->sampleXsection()->getXsectionDown( runNumber );
 		double lumiGen = nEvents / xs;
-		cout << "Debug: double MoMATool::GetLumiWeight: xs = " << xs << ", lumi " << lumi << ", nEvents " << nEvents << " lumigen " << lumiGen << endl;
+		cout << "Debug: double MoMATool::GetLumiWeight for run " << runNumber << ": xs = " << xs << ", lumi " << lumi << ", nEvents " << nEvents << " lumigen " << lumiGen << endl;
 		m_lumiWeight = lumi / lumiGen;
 	}
 	return m_lumiWeight;
@@ -111,9 +113,22 @@ MoMATool * MoMATool::GetHandle()
 
 ///////////////////////////////////////////
 
-/*
+
 void MoMATool::InitializeFakesWeights()
 {
+	m_fakeEff_el = new  FakeEffProvider( 0,  FakeEffProvider::Type::fakeEff);
+	m_realEff_el = new  FakeEffProvider( 0,  FakeEffProvider::Type::realEff);
+
+	m_fakeEff_mu = new  FakeEffProvider( 1,  FakeEffProvider::Type::fakeEff);
+	m_realEff_mu = new  FakeEffProvider( 1,  FakeEffProvider::Type::realEff);
+
+
+
+
+
+
+
+/* 8 TeV function
    if( m_fakes_weighter_el ) throw runtime_error( "ERROR: MoMA: trying to re-initialize fakes weights.\n" );
 
    m_fakes_weighter_el = new FakesWeights();
@@ -169,10 +184,11 @@ void MoMATool::InitializeFakesWeights()
       m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
    }
 //   m_fakes_weighter_el->SetDebug(1);
+*/
 
 }
 
-*/
+
 ///////////////////////////////////////////
 
 /*
@@ -213,11 +229,30 @@ double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLept
 
 */
 ///////////////////////////////////////////
-/*
 
-double MoMATool::GetFakesWeight( int channel, bool tight, double lep_pt, double lep_eta, double el_cl_eta, double dR_lj_min,
-                                   double pTdR_lj_min, double jet_pt0, int jet_n, int nJet_tagged, int trigger)
+
+double MoMATool::GetFakesWeightElectron( int channel, bool tight, double dPhi_lep_met, int nJet_tagged  )
 {
+   double ef = 0.0;
+   double er = 0.0;
+   double delta = 0.0;
+   if( channel == 0 ) //ejets
+   {
+   	if( tight ) delta = 1;
+   	
+   	ef = m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
+   	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
+   	ef = TMath::Sqrt( ef );
+   	er = m_realEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
+   	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
+   	er = TMath::Sqrt( er );
+   }
+
+   double weight = ef * ( er - delta ) / ( er - ef );
+   
+   return weight;
+   
+   /* 8 TeV function
    double w = 1.;
    double R = -666;
    double F = -666;
@@ -234,7 +269,32 @@ double MoMATool::GetFakesWeight( int channel, bool tight, double lep_pt, double 
    cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
 
    return w;
-}*/
+   */
+}
+
+
+double MoMATool::GetFakesWeightMuon( int channel, bool tight, double dPhi_lep_met, double met  )
+{
+   double ef = 0.0;
+   double er = 0.0;
+   double delta = 0.0;
+   if( channel == 1 ) //mujets
+   {
+  	
+      if (tight) delta = 1.0;
+      ef =  m_fakeEff_mu->GetEfficiency( FakeEffProvider::Var::DPHILMET, dPhi_lep_met);
+      ef *= m_fakeEff_mu->GetEfficiency( FakeEffProvider::Var::MET, met*1e-3);
+      ef =  TMath::Sqrt(ef);
+
+      er =  m_realEff_mu->GetEfficiency( FakeEffProvider::Var::DPHILMET, dPhi_lep_met);
+      er *= m_realEff_mu->GetEfficiency( FakeEffProvider::Var::MET, met*1e-3);
+      er =  TMath::Sqrt(er);
+   }
+  
+   double weight = ef * ( er - delta ) / ( er - ef );
+   
+   return weight;
+}
 
 /*
 double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut, SYSTEMATIC_TYPE syst_type ) const

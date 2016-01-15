@@ -99,11 +99,13 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
    {
 
    	m_lumiWeight = m_moma->GetLumiWeight( ed->info.mcChannelNumber, m_nEvents, m_lumi);
-   	if(!(ed->info.eventNumber%100)) cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
+   	if(!(ed->info.eventNumber % 1000)) cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
    	ed->info.mcWeight *= m_lumiWeight;
    }
 #endif  
 
+  SET_PROPERTY( passed_resolved_ejets_2j0b );
+  SET_PROPERTY( passed_resolved_mujets_2j0b );
 
   SET_PROPERTY( passed_resolved_ejets_4j2b );
   SET_PROPERTY( passed_resolved_mujets_4j2b );
@@ -332,34 +334,41 @@ bool NtupleWrapperTopXAOD::MakeEventLeptons( EventData * ed )
   bool success = true;
 
   ed->electrons.n = m_ntuple->el_pt->size();
+ // cout << "Debug: el isTight size is " <<  m_ntuple->el_isTight->size() << endl;
   for( int i = 0 ; i < ed->electrons.n ; ++i ) {
     ed->electrons.pT.push_back(  GET_VALUE_VECTOR( el_pt,  i ) );
     ed->electrons.eta.push_back( GET_VALUE_VECTOR( el_eta, i ) );
     ed->electrons.phi.push_back( GET_VALUE_VECTOR( el_phi, i ) );
     ed->electrons.E.push_back(   GET_VALUE_VECTOR( el_e,   i ) );
     ed->electrons.q.push_back(   GET_VALUE_VECTOR( el_charge, i ) );
+    if( m_ntuple->el_isTight ) ed->electrons.property[ "tight" ].push_back( (int)GET_VALUE_VECTOR( el_isTight, i ) );
 
     ed->leptons.pT.push_back(  GET_VALUE_VECTOR( el_pt,  i ) );
     ed->leptons.eta.push_back( GET_VALUE_VECTOR( el_eta, i ) );
     ed->leptons.phi.push_back( GET_VALUE_VECTOR( el_phi, i ) );
     ed->leptons.E.push_back(   GET_VALUE_VECTOR( el_e,   i ) );
     ed->leptons.q.push_back(   GET_VALUE_VECTOR( el_charge, i ) );
+   // cout << "Debug: electron " << i+1 << " is tight = " << (int) GET_VALUE_VECTOR( el_isTight, i ) << endl;
+    if( m_ntuple->el_isTight ) ed->leptons.property[ "tight" ].push_back( (int)GET_VALUE_VECTOR( el_isTight, i ) );
   }
 
 
   ed->muons.n = m_ntuple->mu_pt->size();
+
   for( int i = 0 ; i < ed->muons.n ; ++i ) {
     ed->muons.pT.push_back(  GET_VALUE_VECTOR( mu_pt,  i ) );
     ed->muons.eta.push_back( GET_VALUE_VECTOR( mu_eta, i ) );
     ed->muons.phi.push_back( GET_VALUE_VECTOR( mu_phi, i ) );
     ed->muons.E.push_back(   GET_VALUE_VECTOR( mu_e,   i ) );
     ed->muons.q.push_back(   GET_VALUE_VECTOR( mu_charge, i	) );
+    if( m_ntuple->mu_isTight ) ed->muons.property[ "tight" ].push_back( (int)GET_VALUE_VECTOR( mu_isTight, i ) );
 
     ed->leptons.pT.push_back(  GET_VALUE_VECTOR( mu_pt,  i ) );
     ed->leptons.eta.push_back( GET_VALUE_VECTOR( mu_eta, i ) );
     ed->leptons.phi.push_back( GET_VALUE_VECTOR( mu_phi, i ) );
     ed->leptons.E.push_back(   GET_VALUE_VECTOR( mu_e,   i ) );
     ed->leptons.q.push_back(   GET_VALUE_VECTOR( mu_charge, i )	);
+    if( m_ntuple->mu_isTight ) ed->leptons.property[ "tight" ].push_back( (int)GET_VALUE_VECTOR( mu_isTight, i ) );
 
   }
   // should be re-ordered by pT. Or there is just one lepton, either el or mu?
@@ -409,7 +418,7 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
             const double mv2c20 = GET_VALUE_VECTOR(jet_mv2c20, j);
             ed->jets.property["mv2c20"].push_back( mv2c20 );
 
-            if( mv2c20 > -0.0436 ) { // 70% eff w.p.
+            if( mv2c20 > -0.4434 ) { // 77% eff w.p.
                 ed->bjets.n++;
 
                 ed->bjets.pT.push_back( jet_pT );
