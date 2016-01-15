@@ -97,6 +97,12 @@ MoMATool::~MoMATool()
  // delete m_CDIindex_Eff;
   
   //delete m_lumiSvc;
+  delete 	m_fakeEff_el;
+  delete	m_realEff_el;
+
+  delete	m_fakeEff_mu;
+  delete	m_realEff_mu;
+  
 }
 
 
