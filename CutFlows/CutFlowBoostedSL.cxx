@@ -2,10 +2,18 @@
 
 CutFlowBoostedSL::CutFlowBoostedSL()
 {
+  
+  #ifdef __MOMA__
+  m_moma = MoMATool::GetHandle();
+  cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
+  #endif
 }
 
 CutFlowBoostedSL::~CutFlowBoostedSL()
 {
+  #ifdef __MOMA__
+  SAFE_DELETE( m_moma );
+  #endif
 }
 /////////////////////////////////////////
 
@@ -33,7 +41,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
     SetCutName("LPLUSJETS", "particle_unweight", 6, "Bjet matched with a top                     ");
     
-    m_bTagSF_name = "scaleFactor_BTAG_85"; //to be changed to 85 once it's available
+    m_bTagSF_name = "scaleFactor_BTAG_77"; 
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
@@ -74,6 +82,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
   unsigned long isRealData = m_config->custom_params_flag["isRealData"];
+  unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
   
   //////MANAGE THE WEIGHTS//////////////////////////////////////////
   double weight_reco_level     = 1.;
@@ -97,9 +106,8 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   ///weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
   
   // Set to  1 for data
-  if(isRealData) weight_reco_level = 1;   
+  if(isRealData || isQCD) weight_reco_level = 1;   
   
-  //Set the weights as event properties so we can call in the selections
   ed->property["weight_reco_level"]     = weight_reco_level;
   ed->property["weight_particle_level"] = weight_particle_level;
   
@@ -107,6 +115,9 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   // Apply selections 
   const bool passedRecoSelection     = PassedCutFlowReco( ed );
   const bool passedParticleSelection =  !isMCSignal ? false : PassedCutFlowParticle( ed );
+  
+  //Set the weights after QCD 
+  weight_reco_level = ed->property["weight_reco_level"] ;
   
   ////////CHECKING WEIGHTS///////////////////////////////////////////////
   //  cout<< " scaleFactor_BTAG      "  <<  scaleFactor_BTAG    << endl;
@@ -137,7 +148,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   if( passedRecoSelection ) { ///RECO ONLY  ----  FILL FOR ALL MC AND DATA
     if (fillHistos)
-      FillHistogramsReco(ed, weight_reco_level);
+      FillHistogramsReco(ed, weight_reco_level, "1fj1b");
   }
   
   if(!isRealData){
@@ -199,8 +210,17 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     const bool  single_lept = ( m_config->channel == kElectron )  ?  ( passed_boosted_ejets) : ( passed_boosted_mujets );     
     if( !single_lept )   return !passed;
     
-    PassedCut( "LPLUSJETS", "reco_unweight");  
+    PassedCut( "LPLUSJETS", "reco_unweight"); 
     
+    //****************Evaluation of QCD weight
+    unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
+    if(isQCD){
+      double qcd_weight = GetFakesWeight( ed );       
+      weight     *= qcd_weight;
+      ed->property["weight_reco_level"] *= qcd_weight;
+      m_hm->GetHistogram( "reco/QCDcontrol/topH/QCDweight" )->Fill(qcd_weight, 1. );
+      FillHistogramsReco(ed, weight, "QCDcontrol");
+    }
     //**************** Exist a tagged Large-R jet with pT>300000 and |eta|<2 *************************
     
     
@@ -542,27 +562,35 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
   
 
 }
-void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight )
+void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, string selection )
 {
   
   int recoindex = ed->property["RecoHadTopJetCandidate"];
   TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
   
-  m_hm->GetHistogram( "reco/1fj1b/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/eta" )->Fill( fjets.Eta(), weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/m" )->Fill( fjets.M() / GeV, weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/phi" )->Fill( fjets.Phi(), weight);  
-  m_hm->GetHistogram( "reco/1fj1b/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/eta" )->Fill( fjets.Eta(), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/m" )->Fill( fjets.M() / GeV, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/phi" )->Fill( fjets.Phi(), weight);  
+  m_hm->GetHistogram( "reco/"+selection+"/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
   
-  m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd12"].at(recoindex) / GeV, weight);
-//m_hm->GetHistogram( "reco/1fj1b/topH/d23" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(recoindex), weight);
-  m_hm->GetHistogram( "reco/1fj1b/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(recoindex), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/d12" )->Fill( ed->fjets.property["sd12"].at(recoindex) / GeV, weight);
+//m_hm->GetHistogram( "reco/"+selection+"/topH/d23" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(recoindex), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(recoindex), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/met/phi" )->Fill(ed->MET.phi, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/met/pt" )->Fill(ed->MET.et, weight);
   double lep_pT = m_config->channel == kElectron ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
-  m_hm->GetHistogram( "reco/1fj1b/lep/pt" )->Fill( lep_pT / GeV, weight);
+  double lep_phi = m_config->channel == kElectron ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
+  double lep_eta= m_config->channel == kElectron ? ed->electrons.eta.at(0) : ed->muons.eta.at(0);
+  m_hm->GetHistogram( "reco/"+selection+"/lep/pt" )->Fill( lep_pT / GeV, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/lep/phi" )->Fill( lep_phi, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/lep/eta" )->Fill( lep_eta, weight);
   for( unsigned int sj = 0 ; sj < ed->jets.pT.size() ; ++sj ) {
-    m_hm->GetHistogram( "reco/1fj1b/smallJ/pt" )->Fill( ed->jets.pT.at(sj), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/smallJ/pt" )->Fill( ed->jets.pT.at(sj), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/smallJ/phi" )->Fill( ed->jets.phi.at(sj), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/smallJ/eta" )->Fill( ed->jets.eta.at(sj), weight);
  }
 }
 
@@ -586,8 +614,8 @@ void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weig
       m_hm->GetHistogram( "particle/1fj1b/topH/tau21" )->Fill( ed->truth_fjets.property["tau21"].at(particleindex) , weight);
       double lep_pT = m_config->channel == kElectron ? ed->truth_electrons.pT.at(0) : ed->truth_muons.pT.at(0);
       m_hm->GetHistogram( "particle/1fj1b/lep/pt" )->Fill( lep_pT / GeV, weight);
-      for( unsigned int sj = 0 ; sj < ed->jets.pT.size() ; ++sj ) {
-	m_hm->GetHistogram( "particle/1fj1b/smallJ/pt" )->Fill( ed->jets.pT.at(sj), weight);
+      for( unsigned int sj = 0 ; sj < ed->truth_jets.pT.size() ; ++sj ) {
+	m_hm->GetHistogram( "particle/1fj1b/smallJ/pt" )->Fill( ed->truth_jets.pT.at(sj), weight);
  }
 
 }
@@ -636,8 +664,38 @@ void CutFlowBoostedSL::FillMatrixRecoToParton( EventData * ed, const double weig
   m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
 }
 
+double CutFlowBoostedSL::GetFakesWeight( EventData * ed ) {
 
+    double qcd_weight = 1.;
+ 
+#ifndef __MOMA__
 
+    cout << "WARNING: Cannot assign fake weights without ATLAS ROOTCORE. Please setup ROOTCORE and compile the MoMA extension." << endl;
+    return 1;
+
+#else
+    int channel =  m_config->channel;
+    //get dphi lep met
+    if( channel == 0 && ed->electrons.n < 1 ) return 1;
+    if( channel == 1 && ed->muons.n < 1 ) return 1;    
+    double phi_lep = channel == 0  ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
+    double phi_met = ed->MET.phi;
+    double et_met = ed->MET.et;
+    double dphi_met_lep = deltaPhi( phi_met, phi_lep );
+    int ntag = ed->bjets.n;
+  //  cout << "DEBUG: GetFakesWeight. Channel = " << channel << ", el_n = " << ed->electrons.n << ", mu_n = " << ed->muons.n << endl;
+    bool tight = ( channel == 0 ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
+
+     // Finally..
+    if (channel == 0 ) qcd_weight = m_moma->GetFakesWeightElectron( channel, tight,  dphi_met_lep, ntag ); // RAFAL
+    else if (channel == 1 ) qcd_weight = m_moma->GetFakesWeightMuon( channel, tight,  dphi_met_lep, et_met ); // RAFAL
+    cout << "DEBUG: GetFakesWeight. Returning weight " << qcd_weight << endl;
+    return qcd_weight;
+
+#endif  
+
+    return qcd_weight;
+}
 
 /////////////////////////////////////////
 
