@@ -8,6 +8,7 @@
   <Level> <!--Region-->
     <Type name="1fj0b" />
     <Type name="1fj1b" />
+    <Type name="QCDcontrol" />
     <Type name="cutflow" />
   </Level>
   
@@ -16,11 +17,18 @@
     <Type name="topL" inFolder="1fj1b"/>
     <Type name="lep" inFolder="1fj1b"/>
     <Type name="smallJ" inFolder="1fj1b"/>
+    <Type name="met" inFolder="1fj1b"/>
+     <Type name="topH" inFolder="QCDcontrol"/>
+    <Type name="topL" inFolder="QCDcontrol"/>
+    <Type name="lep" inFolder="QCDcontrol"/>
+    <Type name="smallJ" inFolder="QCDcontrol"/>
+    <Type name="met" inFolder="QCDcontrol"/>
   </Level>
   
   <Variables>
     <Variable name="pt" title="p_{T} [GeV]">
       <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,600" particle="lep"/> 
+      <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,600" particle="met"/> 
       <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
       <Bin id="0" nbins="11" edges="25,50,75,100,125,150,200,250,300,400,600,800" particle="smallJ"/> 
     </Variable>
@@ -59,6 +67,9 @@
     <Variable name="DeltaPhi_lep" title="#Delta #phi">
       <Bin id="0" nbins="30" xmin="0" xmax="3" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
+    <Variable name="QCDweight" title="weight">
+      <Bin id="0" nbins="100" xmin="-1" xmax="1" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+    </Variable>
   </Variables>        
   
   <Histos>
@@ -74,6 +85,7 @@
     <TH1F variable="rapidity" binId="0"/>
     <TH1F variable="DeltaR_smallJ" binId="0"/>
     <TH1F variable="DeltaPhi_lep" binId="0"/>
+    <TH1F variable="QCDweight" binId="0"/>
     
     
     
