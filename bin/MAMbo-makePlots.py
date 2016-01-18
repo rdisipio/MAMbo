@@ -343,6 +343,7 @@ def DoPlot( plot, iLumi = 1. ):
     hstack = MakeStackedHistogram( histograms )
     hsum = SumPredictionHistograms( histograms )
 
+ 
 
     if histograms['data'].Class() in [ TH1F.Class(), TH1D.Class() ]:
        histograms['data'].Draw()
@@ -352,6 +353,9 @@ def DoPlot( plot, iLumi = 1. ):
 
     histograms['uncertainty'].Draw( 'e2 same' )
     histograms['data'].Draw("e p same" )
+
+    #Redrowing Axis to be visible
+    pad0.RedrawAxis()
 
     tag_scale = ""
     if plot.scale == PlotScale.linear:
@@ -392,6 +396,7 @@ def DoPlot( plot, iLumi = 1. ):
 
     MakeATLASLabel( 0.18, 0.87, "Internal", "3.2", "13" )
 
+   
     ## make data/prediction ratio
 
     pad1.cd()
