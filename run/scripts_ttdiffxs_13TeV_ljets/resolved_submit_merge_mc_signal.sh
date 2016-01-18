@@ -3,8 +3,8 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal nocut"
-systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat`
+systs="nominal"
+systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat | egrep -e "EG|MUONS"`
 decays="nofullhad ljets"
 decays="nofullhad"
 for syst in $systs
