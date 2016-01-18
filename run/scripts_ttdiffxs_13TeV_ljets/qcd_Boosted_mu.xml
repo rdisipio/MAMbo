@@ -4,7 +4,7 @@
   <tree>nominal_Loose</tree>
   <histograms>control/histograms_TTbarBoosted_baseline.xml</histograms>
   <cutflow>BoostedSL</cutflow>
-  <channel>Muon</channel>
+  <channel>muon</channel>
   <parameters>
     <param name="isMCSignal"        type="flag"    value="0" />
     <param name="isRealData"        type="flag"    value="0" />
