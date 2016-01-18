@@ -3,7 +3,7 @@
 analysis=tt_diffxs_13TeV
 
 sourcedir=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets
-prod=prod35
+prod="prod35"
 
 for ch in el mu
 do
@@ -22,10 +22,10 @@ do
     paramfile=${sourcedir}/qcd_${topology}_${ch}.xml
 
     #filelist=${sourcedir}/filelists_TTDIFFXS_3/$list
-    mkdir -p ${MAMBODIR}/run/output/QCD_${prod35}
+    mkdir -p ${MAMBODIR}/run/output/QCD_${prod}
     outfile=QCD_${prod}/${tag}.histograms.root
    # echo $outfile
-   MAMbo-submit.sh -p ${paramfile} -f ${list} -o ${outfile} -j ${jobname}
+   ../bin/MAMbo-submit.sh -p ${paramfile} -f ${list} -o ${outfile} -j ${jobname}
   done
 
 done
