@@ -18,30 +18,35 @@
     <Type name="lep" inFolder="1fj1b"/>
     <Type name="smallJ" inFolder="1fj1b"/>
     <Type name="met" inFolder="1fj1b"/>
-     <Type name="topH" inFolder="QCDcontrol"/>
+    <Type name="bjet" inFolder="1fj1b"/>
+    <Type name="largejet" inFolder="1fj1b"/>
+    <Type name="topH" inFolder="QCDcontrol"/>
     <Type name="topL" inFolder="QCDcontrol"/>
     <Type name="lep" inFolder="QCDcontrol"/>
     <Type name="smallJ" inFolder="QCDcontrol"/>
     <Type name="met" inFolder="QCDcontrol"/>
+    <Type name="bjet" inFolder="QCDcontrol"/>
+    <Type name="largejet" inFolder="QCDcontrol"/>
   </Level>
   
   <Variables>
     <Variable name="pt" title="p_{T} [GeV]">
-      <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,600" particle="lep"/> 
-      <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,600" particle="met"/> 
-      <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
       <Bin id="0" nbins="11" edges="25,50,75,100,125,150,200,250,300,400,600,800" particle="smallJ"/> 
+      <Bin id="0" nbins="25" xmin="0" xmax="500" particle="met"/> 
+      <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,500" particle="lep"/> 
+      <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="32" xmin="200" xmax="1000" particle="largejet"/> 
     </Variable>
-     <Variable name="d12" title="#sqrt{d_{12}} [GeV]">
+    <Variable name="d12" title="#sqrt{d_{12}} [GeV]">
       <Bin id="0" nbins="19" xmin="10" xmax="200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+    </Variable>    
+    <Variable name="d23" title="#sqrt{d_{23}} [GeV]">
+      <Bin id="0" nbins="20" xmin="0" xmax="70" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
-    <Variable name="d23" title="#sqrt{d_{12}} [GeV]">
-      <Bin id="0" nbins="19" xmin="10" xmax="200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
-    </Variable>
-     <Variable name="tau32" title="#sqrt{d_{12}} [GeV]">
+    <Variable name="tau32" title="#tau_{32} ">
       <Bin id="0" nbins="20" xmin="0" xmax="1" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
-    <Variable name="tau21" title="#sqrt{d_{12}} [GeV]">
+    <Variable name="tau21" title="#tau_{21} ">
       <Bin id="0" nbins="20" xmin="0" xmax="1" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="rapidity" title="rapidity y_{t}">
@@ -49,15 +54,23 @@
     </Variable>
     <Variable name="absrap" title="abs rapidity |y_{t}|">
       <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="topH"/> 
-      </Variable>
+      <Bin id="1" nbins="24" xmin="0" xmax="2.5"  particle="topH"/> 
+      <Bin id="2" nbins="250" xmin="0" xmax="2.5"  particle="topH"/> 
+    </Variable>
+    <Variable name="Number" title="Number of jets">
+      <Bin id="0" nbins="5" xmin="-0.5" xmax="4.5" particle="bjet"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="8" xmin="-0.5" xmax="8.5" particle="smallJ"/>
+      <Bin id="0" nbins="4" xmin="-0.5" xmax="3.5" particle="topH"/>
+      <Bin id="0" nbins="4" xmin="-0.5" xmax="3.5" particle="largejet"/> 
+    </Variable> 
     <Variable name="eta" title="#eta">
-      <Bin id="0" nbins="30" xmin="-3" xmax="3"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="20" xmin="-2.5" xmax="2.5"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="phi" title="#phi">
-      <Bin id="0" nbins="30" xmin="-3" xmax="3"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="10" xmin="-2.5" xmax="2.5"/> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="m" title="m [GeV]">
-      <Bin id="0" nbins="30" xmin="0" xmax="300" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="30" xmin="0" xmax="300" /> <!--ATLAS 8TeV boosted edges-->
     </Variable>
     <Variable name="DeltaR_smallJ" title="#Delta R">
       <Bin id="0" nbins="30" xmin="0" xmax="3" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
@@ -65,7 +78,8 @@
       <!--<Bin id="1" nbins="30" xmin="0" xmax="3" particle="lep_smallJ"/>--> 
     </Variable>
     <Variable name="DeltaPhi_lep" title="#Delta #phi">
-      <Bin id="0" nbins="30" xmin="0" xmax="3" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="15" xmin="0" xmax="2.5" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="15" xmin="0" xmax="2.5" particle="largejet"/> <!--ATLAS 8TeV boosted edges--> 
     </Variable>
     <Variable name="QCDweight" title="weight">
       <Bin id="0" nbins="100" xmin="-1" xmax="1" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
@@ -82,15 +96,20 @@
     <TH1F variable="tau32" binId="0"/>
     <TH1F variable="tau21" binId="0"/>
     <TH1F variable="absrap" binId="0"/>
+    <TH1F variable="absrap" binId="1"/>
+    <TH1F variable="absrap" binId="2"/>
     <TH1F variable="rapidity" binId="0"/>
     <TH1F variable="DeltaR_smallJ" binId="0"/>
     <TH1F variable="DeltaPhi_lep" binId="0"/>
+    <TH1F variable="Number" binId="0"/>
     <TH1F variable="QCDweight" binId="0"/>
     
     
     
     <Matrix variable="pt" binId="0"/>
     <Matrix variable="absrap" binId="0"/>
+    <Matrix variable="absrap" binId="1"/>
+    <Matrix variable="absrap" binId="2"/>
     <Matrix variable="rapidity" binId="0"/>
     <Matrix variable="tau32" binId="0"/>
   </Histos>
