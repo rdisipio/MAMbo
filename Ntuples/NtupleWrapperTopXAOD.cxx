@@ -472,6 +472,9 @@ bool NtupleWrapperTopXAOD::MakeEventJets( EventData * ed )
       ////--Tagging and substructures properties of the Large-R jet--/////
       const double sd12 = GET_VALUE_VECTOR(ljet_sd12, lj);
       ed->fjets.property["sd12"].push_back( sd12 );
+
+      const double sd23 = GET_VALUE_VECTOR(ljet_sd23, lj);
+      ed->fjets.property["sd23"].push_back( sd23 );
       
       const double tau32 = GET_VALUE_VECTOR(ljet_tau32, lj);
       ed->fjets.property["tau32"].push_back( tau32 );
