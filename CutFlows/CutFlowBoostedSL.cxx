@@ -216,11 +216,15 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
     if(isQCD){
       double qcd_weight = GetFakesWeight( ed );       
-      weight     *= qcd_weight;
+      if(qcd_weight != 0)
+	weight     *= qcd_weight;
+      else
+	cout<<"WARNING:: QCD weight 0"<<endl;
       ed->property["weight_reco_level"] *= qcd_weight;
       m_hm->GetHistogram( "reco/QCDcontrol/topH/QCDweight" )->Fill(qcd_weight, 1. );
-      FillHistogramsReco(ed, weight, "QCDcontrol");
+      
     }
+    FillHistogramsReco(ed, weight, "QCDcontrol");
     //**************** Exist a tagged Large-R jet with pT>300000 and |eta|<2 *************************
     
     
@@ -272,7 +276,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
    //**************** Exist a jet with deltaPhi(lep,HadTopJetCandidate)>1*************************
     double dPhi_lepljet = PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi());
-    m_hm->GetHistogram( "reco/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
+    //m_hm->GetHistogram( "reco/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
     if ( dPhi_lepljet < 1) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
     
@@ -481,7 +485,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
    //**************** Exist a jet with deltaPhi(lep,HadTopJetCandidate)>1*************************
     double dPhi_lepljet = PhysicsHelperFunctions::deltaPhi(ed->truth_fjets.phi.at(HadTopJetCandidate),lepton.Phi());
-    m_hm->GetHistogram( "particle/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->truth_fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
+    //m_hm->GetHistogram( "particle/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->truth_fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
     if ( dPhi_lepljet < 1) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
     
@@ -567,31 +571,52 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
   
   int recoindex = ed->property["RecoHadTopJetCandidate"];
   TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
-  
+ 
   m_hm->GetHistogram( "reco/"+selection+"/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/eta" )->Fill( fjets.Eta(), weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/m" )->Fill( fjets.M() / GeV, weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/phi" )->Fill( fjets.Phi(), weight);  
   m_hm->GetHistogram( "reco/"+selection+"/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
-  
+  m_hm->GetHistogram( "reco/"+selection+"/topH/absrap_1" )->Fill( fabs(fjets.Rapidity()), weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/absrap_2" )->Fill( fabs(fjets.Rapidity()), weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/d12" )->Fill( ed->fjets.property["sd12"].at(recoindex) / GeV, weight);
-//m_hm->GetHistogram( "reco/"+selection+"/topH/d23" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/d23" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(recoindex), weight);
   m_hm->GetHistogram( "reco/"+selection+"/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(recoindex), weight);
+ 
   m_hm->GetHistogram( "reco/"+selection+"/met/phi" )->Fill(ed->MET.phi, weight);
-  m_hm->GetHistogram( "reco/"+selection+"/met/pt" )->Fill(ed->MET.et, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/met/pt" )->Fill(ed->MET.et /GeV, weight);
   double lep_pT = m_config->channel == kElectron ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
   double lep_phi = m_config->channel == kElectron ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
   double lep_eta= m_config->channel == kElectron ? ed->electrons.eta.at(0) : ed->muons.eta.at(0);
+ 
   m_hm->GetHistogram( "reco/"+selection+"/lep/pt" )->Fill( lep_pT / GeV, weight);
   m_hm->GetHistogram( "reco/"+selection+"/lep/phi" )->Fill( lep_phi, weight);
   m_hm->GetHistogram( "reco/"+selection+"/lep/eta" )->Fill( lep_eta, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/topH/DeltaPhi_lep" )->Fill( deltaPhi( fjets.Phi(),lep_phi) , weight);
+  m_hm->GetHistogram( "reco/"+selection+"/largejet/Number" )->Fill( ed->fjets.pT.size(), weight);
+  int toptaggedjet = 0;
+  for( unsigned int fj = 0 ; fj < ed->fjets.pT.size() ; ++fj ) {
+    if( ed->fjets.pT.at(fj)<300000 || fabs(ed->fjets.eta.at(fj)) > 2) continue;
+    m_hm->GetHistogram( "reco/"+selection+"/largejet/DeltaPhi_lep" )->Fill( deltaPhi( ed->fjets.phi.at(fj),lep_phi) , weight);
+    m_hm->GetHistogram( "reco/"+selection+"/largejet/pt" )->Fill( ed->fjets.pT.at(fj) / GeV, weight);
+    m_hm->GetHistogram( "reco/"+selection+"/largejet/eta" )->Fill( ed->fjets.eta.at(fj), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/largejet/phi" )->Fill( ed->fjets.phi.at(fj), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/largejet/m" )->Fill( ed->fjets.m.at(fj) / GeV, weight);
+    if( ed->fjets.property[m_config->custom_params_string["tagger"].c_str()].at(fj) == 1) 
+      toptaggedjet++;
+  }
+ 
+  m_hm->GetHistogram( "reco/"+selection+"/topH/Number" )->Fill(toptaggedjet , weight);
+  m_hm->GetHistogram( "reco/"+selection+"/smallJ/Number" )->Fill(ed->jets.pT.size() , weight);
   for( unsigned int sj = 0 ; sj < ed->jets.pT.size() ; ++sj ) {
-    m_hm->GetHistogram( "reco/"+selection+"/smallJ/pt" )->Fill( ed->jets.pT.at(sj), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/smallJ/pt" )->Fill( ed->jets.pT.at(sj) /GeV, weight);
     m_hm->GetHistogram( "reco/"+selection+"/smallJ/phi" )->Fill( ed->jets.phi.at(sj), weight);
     m_hm->GetHistogram( "reco/"+selection+"/smallJ/eta" )->Fill( ed->jets.eta.at(sj), weight);
  }
+
+   m_hm->GetHistogram( "reco/"+selection+"/bjet/Number" )->Fill(ed->bjets.pT.size() , weight);
 }
 
 void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weight )
@@ -681,6 +706,7 @@ double CutFlowBoostedSL::GetFakesWeight( EventData * ed ) {
     double phi_lep = channel == 0  ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
     double phi_met = ed->MET.phi;
     double et_met = ed->MET.et;
+    cout<<"met "<<et_met<<endl;
     double dphi_met_lep = deltaPhi( phi_met, phi_lep );
     int ntag = ed->bjets.n;
   //  cout << "DEBUG: GetFakesWeight. Channel = " << channel << ", el_n = " << ed->electrons.n << ", mu_n = " << ed->muons.n << endl;
