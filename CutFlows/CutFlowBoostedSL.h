@@ -32,7 +32,7 @@ class CutFlowBoostedSL : public CutFlow
   void FillHistogramsParticle(EventData * ed = NULL, const double weight = 1. );
   void FillMatrixRecoToParticle(EventData * ed = NULL, const double weight = 1. );
   void FillMatrixRecoToParton(EventData * ed = NULL, const double weight = 1. );
-  double GetFakesWeight( EventData * ed );
+  double GetFakesWeight( EventData * ed, int Nparameter = 2 );
  protected:
 #ifdef __MOMA__
     MoMATool                * m_moma;
