@@ -53,6 +53,7 @@ class MoMATool
        // double GetFakesWeight( int channel, bool tight, double lep_pt, double lep_eta, double el_cl_eta, double dR_lj_min, 
          //                          double pTdR_lj_min, double jet_pt0, int jet_n, int nJet_tagged, int trigger);
 	double GetFakesWeightElectron( int channel, bool tight, double dPhi_lep_met, int nJet_tagged ); // RAFAL
+	double GetFakesWeightElectron( int channel, bool tight, double dPhi_lep_met, int nJet_tagged, double pt_lep, double eta_lep ); // RAFAL
 	double GetFakesWeightMuon( int channel, bool tight, double dPhi_lep_met, double  met ); // RAFAL
 	//double GetBTagWeight( EventData * ed, const double mv1_cut = 0.7892, SYSTEMATIC_TYPE syst_type = NOMINAL ) const;
 	

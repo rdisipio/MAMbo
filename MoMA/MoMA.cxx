@@ -278,6 +278,50 @@ double MoMATool::GetFakesWeightElectron( int channel, bool tight, double dPhi_le
    */
 }
 
+double MoMATool::GetFakesWeightElectron( int channel, bool tight, double dPhi_lep_met, int nJet_tagged, double pt_lep, double eta_lep  )
+{
+   double ef = 0.0;
+   double er = 0.0;
+   double delta = 0.0;
+   if( channel == 0 ) //ejets
+   {
+   	if( tight ) delta = 1;
+   	
+   	ef = m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
+   	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
+	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::LPT, pt_lep);
+	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::LETA, eta_lep,true);
+   	ef = TMath::Power( ef, 0.25 );
+   	er = m_realEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
+   	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
+	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::LPT, pt_lep);
+	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::LETA, eta_lep, true);
+   	er = TMath::Power( er, 0.25 );
+   }
+   double weight = ef * ( er - delta ) / ( er - ef );
+   
+   return weight;
+   
+   /* 8 TeV function
+   double w = 1.;
+   double R = -666;
+   double F = -666;
+
+   if( channel == FakesWeights::EJETS ) {
+      w = m_fakes_weighter_el->GetFakesWeightLJetsDefault( tight, lep_pt, el_cl_eta, fabs(el_cl_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger ); 
+      R = m_fakes_weighter_el->GetRealEff();
+      F = m_fakes_weighter_el->GetFakeEff();
+   }
+   else {
+      w = m_fakes_weighter_mu->GetFakesWeightLJetsDefault( tight, lep_pt, lep_eta, std::fabs(lep_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger );
+   }
+
+   cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
+
+   return w;
+   */
+}
+
 
 double MoMATool::GetFakesWeightMuon( int channel, bool tight, double dPhi_lep_met, double met  )
 {
