@@ -689,7 +689,7 @@ void CutFlowBoostedSL::FillMatrixRecoToParton( EventData * ed, const double weig
   m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
 }
 
-double CutFlowBoostedSL::GetFakesWeight( EventData * ed ) {
+double CutFlowBoostedSL::GetFakesWeight( EventData * ed, int Nparameter ) {
 
     double qcd_weight = 1.;
  
@@ -706,16 +706,28 @@ double CutFlowBoostedSL::GetFakesWeight( EventData * ed ) {
     double phi_lep = channel == 0  ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
     double phi_met = ed->MET.phi;
     double et_met = ed->MET.et;
-    cout<<"met "<<et_met<<endl;
     double dphi_met_lep = deltaPhi( phi_met, phi_lep );
     int ntag = ed->bjets.n;
-  //  cout << "DEBUG: GetFakesWeight. Channel = " << channel << ", el_n = " << ed->electrons.n << ", mu_n = " << ed->muons.n << endl;
+
+    double eta_lep  = channel == 0  ? ed->electrons.eta.at(0) : ed->muons.eta.at(0);
+    double pt_lep  = channel == 0  ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
+    
+    //  cout << "DEBUG: GetFakesWeight. Channel = " << channel << ", el_n = " << ed->electrons.n << ", mu_n = " << ed->muons.n << endl;
     bool tight = ( channel == 0 ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
 
-     // Finally..
-    if (channel == 0 ) qcd_weight = m_moma->GetFakesWeightElectron( channel, tight,  dphi_met_lep, ntag ); // RAFAL
-    else if (channel == 1 ) qcd_weight = m_moma->GetFakesWeightMuon( channel, tight,  dphi_met_lep, et_met ); // RAFAL
-    cout << "DEBUG: GetFakesWeight. Returning weight " << qcd_weight << endl;
+    if (Nparameter==2) {
+      // Finally..
+      if (channel == 0 ) qcd_weight = m_moma->GetFakesWeightElectron( channel, tight,  dphi_met_lep, ntag ); // RAFAL
+      else if (channel == 1 ) qcd_weight = m_moma->GetFakesWeightMuon( channel, tight,  dphi_met_lep, et_met ); // RAFAL
+      cout << "DEBUG: GetFakesWeight. Returning weight " << qcd_weight << endl;
+    }
+    else if (Nparameter==4){
+      if (channel == 0 ) qcd_weight = m_moma->GetFakesWeightElectron( channel, tight,  dphi_met_lep, ntag, pt_lep, eta_lep  ); // RAFAL
+      else if (channel == 1 ) qcd_weight = m_moma->GetFakesWeightMuon( channel, tight,  dphi_met_lep, et_met ); // RAFAL
+      cout << "DEBUG: GetFakesWeight. Returning weight " << qcd_weight << endl;
+    }
+    else cout<<"WARNING::At the moment the supported number of parameters for QCD efficiency is 2 or 4"<<endl;
+
     return qcd_weight;
 
 #endif  
