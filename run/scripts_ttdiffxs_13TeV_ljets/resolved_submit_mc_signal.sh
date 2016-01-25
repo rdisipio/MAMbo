@@ -3,9 +3,9 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal"
+systs="nominal nocut"
 #systs=$(cat systematics.dat) # | grep JET`
-systs=$(cat resolved_kinematic_systematics.dat )
+#systs=$(cat resolved_kinematic_systematics.dat )
 decays="nofullhad ljets"
 decays="nofullhad"
 for syst in $systs
@@ -31,10 +31,10 @@ do
 		fi
 
 		filelistdir=$PWD/filelists_TTDIFFXS_35/
-		filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v1.txt
+		filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.txt
 
 		nomalizationdir=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/
-		nomalizationfile=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v1.evt.n
+		nomalizationfile=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.evt.n
 	
 		sendOnce=0
 	#set -x
@@ -48,7 +48,7 @@ do
 				if [[ $syst == MUON* ]]
 				then 
 					echo "Muon systematic for el channel: $syst"
-					continue
+		#			continue
 				fi
 
 				
@@ -59,7 +59,7 @@ do
 				if [[ $syst == EG* ]]
 				then 
 					echo "Electron systematic for mu channel: $syst"
-					continue
+		#			continue
 				fi
 
 				

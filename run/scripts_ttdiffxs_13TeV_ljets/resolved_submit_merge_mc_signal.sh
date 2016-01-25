@@ -3,8 +3,9 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal"
-systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat | egrep -e "EG|MUONS"`
+systs="nominal nocut"
+#systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat | egrep -e "EG|MUONS"`
+systs=`cat  resolved_scale_systematics.dat | grep lepton`
 decays="nofullhad ljets"
 decays="nofullhad"
 for syst in $systs
@@ -32,8 +33,9 @@ do
 		
 		hadd -f output/$syst/${analysis}.mc.DiTop.${dsid}.co.${syst}.${decay}.histograms.root output/$syst/${analysis}.mc.DiTop.${dsid}.el.${syst}.${decay}.histograms.root output/$syst/${analysis}.mc.DiTop.${dsid}.mu.${syst}.${decay}.histograms.root
 EOF
-#		cat $script
-		qsub -q T3_BO_LOCAL $script
+		chmod +x $script
+		./$script
+#		qsub -q T3_BO_LOCAL $script
 	done
 
 
