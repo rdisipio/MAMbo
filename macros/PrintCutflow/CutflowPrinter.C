@@ -9,10 +9,7 @@ CutflowPrinter::CutflowPrinter()
  				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
  				{ "cutflow_scale_factors", "ScaleFactors" }
  				};
-#ifdef __MOMA__
-   m_moma = MoMATool::GetHandle();
-   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
-#endif
+
 }
 
 CutflowPrinter::CutflowPrinter( const std::string& infilename )
@@ -24,10 +21,7 @@ CutflowPrinter::CutflowPrinter( const std::string& infilename )
  				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
  				{ "cutflow_scale_factors", "ScaleFactors" }
  				};
-	#ifdef __MOMA__
-   m_moma = MoMATool::GetHandle();
-   cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
-#endif
+	
 	
 }
 
@@ -105,42 +99,43 @@ void CutflowPrinter::ReadCutflow()
 		int cutflow_counter = 0;
 		TFile * f_temp = TFile::Open( filename.c_str() );
 		cout << "Loading cutflow from " << filename << endl;
-		float lumi_weight = 1;
-#ifdef __MOMA__
-//get sumweights tree
-		TTree * sum = (TTree*) f_temp->Get( "sumWeights" );
-		sumWeights * sumW = new sumWeights( sum );
-		sumW->GetEntry(0);
-		int runNumber = sumW->dsid;
-		string lumifileName = GetLumiFile( dsid );
-		ifstream lumifile( lumifileName.c_str() );
-		int nEvents;
-	 	lumifile >> nEvents >> nEvents;
-   	        lumi_weight = m_moma->GetLumiWeight( runNumber, nEvents, 3300);		
-   	        delete sumW;
-		
-#endif		
-		for( const auto& cutflow: m_cutflowList )
-		{
-			int cutflowType = 0;
-			for( const auto& cutflowTitle: m_cutflowTitles ) 
-			{	
-				TH1D * h_temp = (TH1D*) f_temp->Get( ( cutflow + "/" +cutflowTitle.first ).c_str() )->Clone();
-				h_temp->SetDirectory( 0 );
-				if( file_counter == 0 )
-				{
-					h_temp->SetName( ( cutflow + "_" + cutflowTitle.first ).c_str() );
-					h_temp->SetTitle( ( cutflow + "" + cutflowTitle.second ) .c_str() );
-					h_cutflows[cutflow].push_back( h_temp ) ;
+		try
+		{		
+			for( const auto& cutflow: m_cutflowList )
+			{
+				int cutflowType = 0;
+				for( const auto& cutflowTitle: m_cutflowTitles ) 
+				{	
+					if( (TH1D*) f_temp->Get( ( cutflow + "/" +cutflowTitle.first ).c_str() ) == NULL)
+					{
+						throw cutflow + "/" +cutflowTitle.first;
+						break;					
+					}
+					TH1D * h_temp = (TH1D*) f_temp->Get( ( cutflow + "/" +cutflowTitle.first ).c_str() )->Clone();
+					
+					h_temp->SetDirectory( 0 );
+					
+					
+					if( file_counter == 0 )
+					{
+						h_temp->SetName( ( cutflow + "_" + cutflowTitle.first ).c_str() );
+						h_temp->SetTitle( ( cutflow + " " + cutflowTitle.second ) .c_str() );
+						h_cutflows[cutflow].push_back( h_temp ) ;
+					}
+					else
+					{
+						 h_cutflows[cutflow].at(cutflowType)->Add( h_temp );
+						 delete h_temp;
+					}
+					cutflowType++;
 				}
-				else
-				{
-					 h_cutflows[cutflow].at(cutflowType)->Add( h_temp );
-					 delete h_temp;
-				}
-				cutflowType++;
+				cutflow_counter++;
 			}
-			cutflow_counter++;
+		}
+		catch (string e)
+		{
+				cerr << "Cannot access " << e << " in " << f_temp->GetPath() << ". Skipping this file.\n" << endl;
+
 		}
 		f_temp->Close();
 		delete f_temp;
@@ -162,6 +157,9 @@ void CutflowPrinter::WriteToRoot()
 	}
 	m_rootOutFile->Write();
 }
+
+
+
 void CutflowPrinter::WriteToText()
 {
 	m_textOutFile.open( m_textOutFileName.c_str()  );
@@ -170,31 +168,11 @@ void CutflowPrinter::WriteToText()
 		for( auto& cutflowHist: cutflow.second )
 		{
 			m_textOutFile << cutflowHist->GetTitle() << endl;
-			for( int i = 1; i <= cutflowHist->GetNbinsX(); ++i ) m_textOutFile << cutflowHist->GetXaxis()->GetBinLabel(i) << ":\t" << cutflowHist->GetBinContent(i) << endl;
+			for( int i = 1; i <= cutflowHist->GetNbinsX(); ++i ) m_textOutFile << cutflowHist->GetXaxis()->GetBinLabel(i) << ":\t" <<  setiosflags(ios::fixed) << setprecision(1) << cutflowHist->GetBinContent(i) << endl;
 			m_textOutFile << endl;
 			m_textOutFile << "======================\n"; 
 		}
 		m_textOutFile << "======================\n"; 
 	}	
 }
-
-
-
-
-std::string GetLumiFile( int id )
-{
-	ifstream infile( "eventNumberFiles.db" );
-	int tempid;
-	std::string tempfilename;
-	
-	while( 1 )
-	{
-		infile >> tempfilename;
-		if( infile.eof() ) break;
-		infile >> tempid;
-		if( tempid == id ) return tempfilename;
-	}
-	throw std::runtime_error( "Run not found in eventNumberFiles.db" );
-}
-
 
