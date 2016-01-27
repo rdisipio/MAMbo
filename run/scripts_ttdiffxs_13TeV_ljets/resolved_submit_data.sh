@@ -4,13 +4,13 @@ analysis=tt_diffxs_13TeV
 
 sourcedir=$PWD
 
-
+filelistdir=filelists_TTDIFFXS_55/
 for ch in el mu
 do
 #  [[ ${ch} == "el" ]] && stream="Egamma"
 #  [[ ${ch} == "mu" ]] && stream="Muons"
   stream="Main"
-  for list in `ls filelists_TTDIFFXS_35/ | grep data`
+  for list in `ls ${filelistdir}/ | grep data`
   do
     run=`echo $list | cut -d. -f2`
     topology=Resolved
@@ -19,7 +19,7 @@ do
     jobname=${tag}
     paramfile=$PWD/control/analysis_params/13TeV_ljets_resolved/config/realdata_${topology}_${ch}.xml
 
-    filelist=$PWD/filelists_TTDIFFXS_35/$list
+    filelist=$PWD/${filelistdir}/$list
     mkdir -p output/nominal
     outfile=nominal/${tag}.histograms.root
 

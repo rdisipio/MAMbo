@@ -18,6 +18,7 @@
 #include <LHAPDF/LHAPDF.h>
 #endif
 
+#include "ScalerFakes.h"
 using namespace PhysicsHelperFunctions;
 
 class CutFlowTTbarResolved : public CutFlow
@@ -34,7 +35,7 @@ class CutFlowTTbarResolved : public CutFlow
   bool PassedCutFlowReco(     EventData * ed = NULL );
   bool PassedCutFlowParticle( EventData * ed = NULL );
 
-  double GetFakesWeight( EventData * ed = NULL );
+  //double GetFakesWeight( EventData * ed = NULL );
   double GetPDFWeight( EventData * ed = NULL );
 
   void MoreCRFillHistogramsControlPlotsReco( string mystr, ControlPlotValues& values );
@@ -86,6 +87,7 @@ class CutFlowTTbarResolved : public CutFlow
 
     LHAPDF::PDF * m_pdf;
 #endif 
+	ScalerFakes * m_scalerFakes;
     
 private:
 

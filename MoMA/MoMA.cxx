@@ -4,7 +4,6 @@ MoMATool::MoMATool() :
   m_debug(false)/*, m_fakes_weighter_el( NULL ), m_fakes_weighter_mu( NULL ), 
   m_btag_weighter( NULL ), m_CDIindex_SF(NULL), m_CDIindex_Eff(NULL)*/
 {
-  InitializeFakesWeights();
   InitializeLumiWeights();
 }
 
@@ -97,11 +96,6 @@ MoMATool::~MoMATool()
  // delete m_CDIindex_Eff;
   
   //delete m_lumiSvc;
-  delete 	m_fakeEff_el;
-  delete	m_realEff_el;
-
-  delete	m_fakeEff_mu;
-  delete	m_realEff_mu;
   
 }
 
@@ -119,80 +113,6 @@ MoMATool * MoMATool::GetHandle()
 
 ///////////////////////////////////////////
 
-
-void MoMATool::InitializeFakesWeights()
-{
-	m_fakeEff_el = new  FakeEffProvider( 0,  FakeEffProvider::Type::fakeEff);
-	m_realEff_el = new  FakeEffProvider( 0,  FakeEffProvider::Type::realEff);
-
-	m_fakeEff_mu = new  FakeEffProvider( 1,  FakeEffProvider::Type::fakeEff);
-	m_realEff_mu = new  FakeEffProvider( 1,  FakeEffProvider::Type::realEff);
-
-
-
-
-
-
-
-/* 8 TeV function
-   if( m_fakes_weighter_el ) throw runtime_error( "ERROR: MoMA: trying to re-initialize fakes weights.\n" );
-
-   m_fakes_weighter_el = new FakesWeights();
-   m_fakes_weighter_mu = new FakesWeights();
-
-   const string dataDir  = getenv( "ROOTCOREDIR" );
-
-   m_fakes_weighter_el->SetDataPath( dataDir + "/data/FakesMacros" );
-   m_fakes_weighter_mu->SetDataPath( dataDir + "/data/FakesMacros" );
-
-   if(      m_syst_type == QCD_MM_EL_FAKE_MC_UP ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "MCup" );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
-   }
-   else if( m_syst_type == QCD_MM_EL_FAKE_MC_DOWN ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "MCdown" );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );       
-   }
-   else if( m_syst_type == QCD_MM_EL_FAKE_ALTERNATE ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "CRfake" );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
-   }
-   else if( m_syst_type == QCD_MM_EL_REAL_ALTERNATE ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "CRreal" );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
-   }
-   else if( m_syst_type == QCD_MM_EL_PAR_ALTERNATE ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS, "EffPar" );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
-   }
-   else if( m_syst_type == QCD_MM_MU_FAKE_MC_UP ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "MCup" );
-   }
-   else if( m_syst_type == QCD_MM_MU_FAKE_MC_DOWN ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "MCdown" );
-   }
-   else if( m_syst_type == QCD_MM_MU_FAKE_ALTERNATE ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "CRfake" );
-   }
-   else if( m_syst_type == QCD_MM_MU_REAL_ALTERNATE ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "CRreal" );
-   }
-   else if( m_syst_type == QCD_MM_MU_PAR_ALTERNATE ) {
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS, "EffPar" );
-   }
-   else { // Nominal or non QCD
-      m_fakes_weighter_el->SetupWeighterDefault( FakesWeights::EJETS );
-      m_fakes_weighter_mu->SetupWeighterDefault( FakesWeights::MUJETS );
-   }
-//   m_fakes_weighter_el->SetDebug(1);
-*/
-
-}
 
 
 ///////////////////////////////////////////
@@ -237,114 +157,6 @@ double MoMATool::GetFakesWeight( int channel, const MMEvent& event, const MMLept
 ///////////////////////////////////////////
 
 
-double MoMATool::GetFakesWeightElectron( int channel, bool tight, double dPhi_lep_met, int nJet_tagged  )
-{
-   double ef = 0.0;
-   double er = 0.0;
-   double delta = 0.0;
-   if( channel == 0 ) //ejets
-   {
-   	if( tight ) delta = 1;
-   	
-   	ef = m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
-   	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
-   	ef = TMath::Sqrt( ef );
-   	er = m_realEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
-   	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
-   	er = TMath::Sqrt( er );
-   }
-
-   double weight = ef * ( er - delta ) / ( er - ef );
-   
-   return weight;
-   
-   /* 8 TeV function
-   double w = 1.;
-   double R = -666;
-   double F = -666;
-
-   if( channel == FakesWeights::EJETS ) {
-      w = m_fakes_weighter_el->GetFakesWeightLJetsDefault( tight, lep_pt, el_cl_eta, fabs(el_cl_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger ); 
-      R = m_fakes_weighter_el->GetRealEff();
-      F = m_fakes_weighter_el->GetFakeEff();
-   }
-   else {
-      w = m_fakes_weighter_mu->GetFakesWeightLJetsDefault( tight, lep_pt, lep_eta, std::fabs(lep_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger );
-   }
-
-   cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
-
-   return w;
-   */
-}
-
-double MoMATool::GetFakesWeightElectron( int channel, bool tight, double dPhi_lep_met, int nJet_tagged, double pt_lep, double eta_lep  )
-{
-   double ef = 0.0;
-   double er = 0.0;
-   double delta = 0.0;
-   if( channel == 0 ) //ejets
-   {
-   	if( tight ) delta = 1;
-   	
-   	ef = m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
-   	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
-	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::LPT, pt_lep);
-	ef *= m_fakeEff_el->GetEfficiency( FakeEffProvider::Var::LETA, eta_lep,true);
-   	ef = TMath::Power( ef, 0.25 );
-   	er = m_realEff_el->GetEfficiency( FakeEffProvider::Var::DPHILMET,dPhi_lep_met ) ;
-   	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::NBTAG, nJet_tagged, true );
-	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::LPT, pt_lep);
-	er *= m_realEff_el->GetEfficiency( FakeEffProvider::Var::LETA, eta_lep, true);
-   	er = TMath::Power( er, 0.25 );
-   }
-   double weight = ef * ( er - delta ) / ( er - ef );
-   
-   return weight;
-   
-   /* 8 TeV function
-   double w = 1.;
-   double R = -666;
-   double F = -666;
-
-   if( channel == FakesWeights::EJETS ) {
-      w = m_fakes_weighter_el->GetFakesWeightLJetsDefault( tight, lep_pt, el_cl_eta, fabs(el_cl_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger ); 
-      R = m_fakes_weighter_el->GetRealEff();
-      F = m_fakes_weighter_el->GetFakeEff();
-   }
-   else {
-      w = m_fakes_weighter_mu->GetFakesWeightLJetsDefault( tight, lep_pt, lep_eta, std::fabs(lep_eta), dR_lj_min, pTdR_lj_min, jet_pt0, jet_n, nJet_tagged, trigger );
-   }
-
-   cout << "DEBUG: r = " << R << " f = " << F << " w = " << w << endl;
-
-   return w;
-   */
-}
-
-
-double MoMATool::GetFakesWeightMuon( int channel, bool tight, double dPhi_lep_met, double met  )
-{
-   double ef = 0.0;
-   double er = 0.0;
-   double delta = 0.0;
-   if( channel == 1 ) //mujets
-   {
-  	
-      if (tight) delta = 1.0;
-      ef =  m_fakeEff_mu->GetEfficiency( FakeEffProvider::Var::DPHILMET, dPhi_lep_met);
-      ef *= m_fakeEff_mu->GetEfficiency( FakeEffProvider::Var::MET, met*1e-3);
-      ef =  TMath::Sqrt(ef);
-
-      er =  m_realEff_mu->GetEfficiency( FakeEffProvider::Var::DPHILMET, dPhi_lep_met);
-      er *= m_realEff_mu->GetEfficiency( FakeEffProvider::Var::MET, met*1e-3);
-      er =  TMath::Sqrt(er);
-   }
-  
-   double weight = ef * ( er - delta ) / ( er - ef );
-   
-   return weight;
-}
 
 /*
 double MoMATool::GetBTagWeight( EventData * ed, const double mv1_cut, SYSTEMATIC_TYPE syst_type ) const

@@ -3,7 +3,8 @@
 /**
  * Fake (and real) lepton efficiency provider.
  */
- 
+#ifndef __FAKESEFFPROVIDER_H__
+#define  __FAKESEFFPROVIDER_H__
 #include "Commons.h" 
  
 class FakeEffProvider {
@@ -164,3 +165,6 @@ double FakeEffProvider::GetEfficiency2D(int var, float xvalue, float yvalue, boo
       exit(EXIT_FAILURE);
   }
 }
+
+
+#endif

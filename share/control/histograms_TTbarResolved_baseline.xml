@@ -454,8 +454,8 @@
             <Bin id="0" nbins="8" xmin="0.5" xmax="8.5" />
        </Variable>       
        <Variable name="fakes_weights" title="Fake Leptons MM weight" folder="cutflow">
-            <Bin id="0" nbins="20" xmin="-10." xmax="10." />
-            <Bin id="1" nbins="200" xmin="-10." xmax="10." />
+            <Bin id="0" nbins="20" xmin="-3." xmax="3." />
+            <Bin id="1" nbins="200" xmin="-3." xmax="3." />
        </Variable>
        <Variable name="MC_gen_weights" title="MC Generator weights" folder="cutflow">
             <Bin id="0" nbins="7" xmin="-3.5" xmax="3.5" />

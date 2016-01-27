@@ -40,6 +40,7 @@ CutFlowTTbarResolved::~CutFlowTTbarResolved() {
    SAFE_DELETE( m_pdf );
 #endif
 
+	SAFE_DELETE( m_scalerFakes )
 }  
 
 /////////////////////////////////////////
@@ -56,6 +57,10 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isRealData = m_config->custom_params_flag["isRealData"];
     unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
+	if( isQCD)
+	{
+		m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, 2);
+	}
 
     m_bTagSF_name = "scaleFactor_BTAG_77";
     m_leptonSF_name = "scaleFactor_LEPTON" ;
@@ -674,11 +679,11 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 
     if( isQCD ) 
     {
-      qcd_weight = GetFakesWeight( ed );
+      qcd_weight = m_scalerFakes->GetFakesWeight( ed );
     //  cout << "CutFlowTTbarResolved: qcd weight is " << qcd_weight << endl;
 
       if( fabs(qcd_weight) > 3.0 ) qcd_weight = 0.; // see https://twiki.cern.ch/twiki/bin/view/AtlasProtected/TopMatrixMethod
-
+      values.weight *= qcd_weight;
       weight     *= qcd_weight;
       ed->property["weight_reco_level"] *= qcd_weight;
     }   
@@ -740,7 +745,7 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     PassedCut("LPLUSJETS", "reco_weighted", weight );
     PassedCut("LPLUSJETS", "reco_unweight");
     FillHistogramsControlPlotsReco( values );
-        if (isQCD )
+    if (isQCD )
     {
 	    m_hm->GetHistogram( "reco/cutflow/4j0b/fakes_weights" )->Fill( qcd_weight );
 	    m_hm->GetHistogram( "reco/cutflow/4j0b/fakes_weights_1" )->Fill( qcd_weight );
@@ -890,7 +895,7 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
     // 5 4j2b
     if( ed->truth_bjets.n < 2 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
-    PassedCut( "LPLUSJETS", "particle_weighted", weight ); 
+    PassedCut( "LPLUSJETS", "particle_weighted", weight );  
     FillHistogramsControlPlotsParticle( values );   
     
 
@@ -902,98 +907,6 @@ bool CutFlowTTbarResolved::PassedCutFlowParticle(EventData * ed) {
 }
 
 /////////////////////////////////////////
-
-double CutFlowTTbarResolved::GetFakesWeight( EventData * ed ) {
-
-    double qcd_weight = 1.;
- 
-#ifndef __MOMA__
-
-    cout << "WARNING: Cannot assign fake weights without ATLAS ROOTCORE. Please setup ROOTCORE and compile the MoMA extension." << endl;
-    return 1;
-
-#else
-    int channel =  m_config->channel;
-    //get dphi lep met
-    if( channel == 0 && ed->electrons.n < 1 ) return 1;
-    if( channel == 1 && ed->muons.n < 1 ) return 1;    
-    double phi_lep = channel == 0  ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
-    double phi_met = ed->MET.phi;
-    double et_met = ed->MET.et;
-    double dphi_met_lep = deltaPhi( phi_met, phi_lep );
-    int ntag = ed->bjets.n;
-  //  cout << "DEBUG: GetFakesWeight. Channel = " << channel << ", el_n = " << ed->electrons.n << ", mu_n = " << ed->muons.n << endl;
-    bool tight = ( channel == 0 ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
-
-     // Finally..
-    if (channel == 0 ) qcd_weight = m_moma->GetFakesWeightElectron( channel, tight,  dphi_met_lep, ntag ); // RAFAL
-    else if (channel == 1 ) qcd_weight = m_moma->GetFakesWeightMuon( channel, tight,  dphi_met_lep, et_met ); // RAFAL
-//    cout << "DEBUG: GetFakesWeight. Returning weight " << qcd_weight << endl;
-	return qcd_weight;
-
-// 8TeV code
- /*   int rc_channel = m_config->channel;
-
-    MMEvent  rc_event;
-    rc_event.njets = ed->jets.n;
-
-    rc_event.ntag  = ed->bjets.n;
-//    rc_event.ntag  = 0;
-//    rc_event.ntag  = ( ed->bjets.n > 0 ) ? 1 : 0;
-
-    rc_event.jetpt = ed->jets.pT.at(0) / GeV ; // leading jet (used only by electrons)
-    rc_event.sumet = ed->MET.sumet / GeV;
-    rc_event.met   = ed->MET.et / GeV;
-
-    MMLepton rc_lepton;
-    rc_lepton.pt  = ed->leptons.pT.at(0) / GeV;
-    rc_lepton.eta = ( rc_channel == FakesWeights::EJETS ) ? ed->electrons.property["el_cl_eta"].at(0) : ed->muons.eta.at(0);
-    rc_lepton.eta = fabs( rc_lepton.eta ); 
-    
-    double hthad        = 0.;
-    double dR_lj_min    = 1e10; // distance between the electron and the closest jet
-    double pTdR_lj_min  = 0.; //pT/dR (lepton-closest jet)
-    for( size_t j = 0 ; j < ed->jets.n ; ++j ) {
-	const double jet_pT = ed->jets.pT.at(j) / GeV;
-
-	hthad += jet_pT;
-
-        double dR_lj = ( rc_channel == FakesWeights::EJETS ) ? 
-                       PhysicsHelperFunctions::DeltaR( ed->electrons, 0, ed->jets, j ) :
-                       PhysicsHelperFunctions::DeltaR( ed->muons, 0, ed->jets, j );                       
- 
-        //cout << "Nj = " << ed->jets.n  << " j_ind = " << j << " dR_lj = " << dR_lj << " dR_lj_min = " << dR_lj_min << endl;
-
-        if( dR_lj < dR_lj_min ) {
-          dR_lj_min   = dR_lj;
-          pTdR_lj_min = jet_pT / dR_lj;
-        }
-    }
-
-    rc_event.hthad    = hthad;
-    rc_lepton.dR      = dR_lj_min;
-    rc_lepton.dRpt    = pTdR_lj_min; 
-
-    const double lep_phi = ed->leptons.phi.at(0);
-    const double met_phi = ed->MET.phi;
-    double dPhi          = PhysicsHelperFunctions::Phi_mphi_phi( lep_phi - met_phi );
-    rc_lepton.dPhi       = fabs( dPhi );
-
-    int trigger = ed->leptons.property["trigMatch"].at(0); // which trigger the lepton is mathced to, and it's value should be (use lep_trigMatch in MiniSL)
-    rc_lepton.trigger = trigger;    // 1,2 or 3, or even adding the info on the prescaled trigger (so +4)
-
-    bool tight = ( rc_channel == FakesWeights::EJETS ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
-
-    // Finally..
-    qcd_weight = m_moma->GetFakesWeight( rc_channel, rc_event, rc_lepton, tight );
-//    qcd_weight = m_moma->GetFakesWeight( rc_channel, tight, rc_lepton.pt, rc_lepton.eta, fabs(rc_lepton.eta), rc_lepton.dR, rc_lepton.dRpt, rc_event.jetpt, rc_event.njets, rc_event.ntag, rc_lepton.trigger );
-
-//    cout << "ch: " << rc_channel << " tight = " << tight << " pT = " << rc_lepton.pt << " |eta_l| = " << rc_lepton.eta << " dR_lj_min = " << rc_lepton.dR << " dPhi_l_MET = " << rc_lepton.dPhi << " trigger = " << rc_lepton.trigger << " SumET = " << rc_event.sumet << " QCD_w = " << qcd_weight << endl;*/
-#endif  
-
-    return qcd_weight;
-}
-
 
 ////////////////////////////////////////////////
 
