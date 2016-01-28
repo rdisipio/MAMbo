@@ -21,9 +21,15 @@
         <Type name="WL" inFolder="4j2b,matching"/>
         <Type name="WH" inFolder="4j2b,matching"/>
         <Type name="difference" inFolder="4j2b"/>
+        <Type name="2j0b" inFolder="cutflow"/>
         <Type name="3j0b" inFolder="cutflow"/>
         <Type name="4j0b" inFolder="cutflow"/>
         <Type name="4j1b" inFolder="cutflow"/>
+        <Type name="2j0b_lowmet" inFolder="cutflow"/>
+        <Type name="3j0b_lowmet" inFolder="cutflow"/>
+        <Type name="4j0b_lowmet" inFolder="cutflow"/>
+        <Type name="4j1b_lowmet" inFolder="cutflow"/>
+        <Type name="afterCuts_lowmet" inFolder="cutflow"/>
         <Type name="afterCuts" inFolder="cutflow"/>        
         <Type name="3j_incl_2b_incl" inFolder="cutflow"/>
         <Type name="3j_incl_1b_incl" inFolder="cutflow"/>
@@ -37,6 +43,18 @@
         <Type name="4j_excl_2b_incl" inFolder="cutflow"/>
         <Type name="4j_excl_1b_excl" inFolder="cutflow"/>
         <Type name="4j_excl_0b_excl" inFolder="cutflow"/>
+        <Type name="3j_incl_2b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="3j_incl_1b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="3j_incl_0b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="5j_incl_2b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="5j_incl_1b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="5j_incl_0b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="3j_excl_2b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="3j_excl_1b_excl_lowmet" inFolder="cutflow"/>
+        <Type name="3j_excl_0b_excl_lowmet" inFolder="cutflow"/>
+        <Type name="4j_excl_2b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="4j_excl_1b_excl_lowmet" inFolder="cutflow"/>
+        <Type name="4j_excl_0b_excl_lowmet" inFolder="cutflow"/>
     </Level>
     <Variables>
         <Variable name="pt" title="p_{T} [GeV]" folder="4j2b" >

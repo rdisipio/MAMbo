@@ -593,6 +593,7 @@ bool CutFlowTTbarResolved::Finalize()
 bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     bool passed = true;
     int isQCD = m_config->custom_params_flag["isQCD"];
+	float minMet = 30000;
 //    const int hfor = int( ed->property["hfor"] );
 
     int    jet_n  = ed->jets.n;
@@ -686,9 +687,19 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
       values.weight *= qcd_weight;
       weight     *= qcd_weight;
       ed->property["weight_reco_level"] *= qcd_weight;
+	    m_hm->GetHistogram( "reco/cutflow/2j0b/fakes_weights" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/2j0b/fakes_weights_1" )->Fill( qcd_weight );
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/2j0b_lowmet/fakes_weights" )->Fill( qcd_weight );
+			m_hm->GetHistogram( "reco/cutflow/2j0b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
+		}
     }   
 
 
+    FillHistogramsControlPlotsReco( values );    
+    FillHistogramsDiagnostics( values );
 
 
 
@@ -702,7 +713,13 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     if (isQCD )
     {
 	    m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights" )->Fill( qcd_weight );
-	    m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights_1" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/3j0b/fakes_weights_1" )->Fill( qcd_weight );		
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/3j0b_lowmet/fakes_weights" )->Fill( qcd_weight );
+			m_hm->GetHistogram( "reco/cutflow/3j0b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
+		}
     }
     FillHistogramsControlPlotsReco( values );    
     FillHistogramsDiagnostics( values );
@@ -735,7 +752,34 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     }
 
     
+   
+	if( values.ETmiss < minMet )
+	{
+		if (jet_n == 3 && bjet_n == 0) {
+		MoreCRFillHistogramsControlPlotsReco( "3j_excl_0b_excl_lowmet", values );
+		}
+		
+		if (jet_n == 3 && bjet_n == 1) {
+		MoreCRFillHistogramsControlPlotsReco( "3j_excl_1b_excl_lowmet", values );
+		}
+		
+		if (jet_n == 3 && bjet_n >= 2) {
+		MoreCRFillHistogramsControlPlotsReco( "3j_excl_2b_incl_lowmet", values );
+		}
 
+
+		if (jet_n >= 3 && bjet_n >= 0) {
+		MoreCRFillHistogramsControlPlotsReco( "3j_incl_0b_incl_lowmet", values );
+		}
+
+		if (jet_n >= 3 && bjet_n >= 1) {
+		MoreCRFillHistogramsControlPlotsReco( "3j_incl_1b_incl_lowmet", values );
+		}
+
+		if (jet_n >= 3 && bjet_n >= 2) {
+		MoreCRFillHistogramsControlPlotsReco( "3j_incl_2b_incl_lowmet", values );
+		}
+	}
 
 
 
@@ -749,12 +793,23 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     {
 	    m_hm->GetHistogram( "reco/cutflow/4j0b/fakes_weights" )->Fill( qcd_weight );
 	    m_hm->GetHistogram( "reco/cutflow/4j0b/fakes_weights_1" )->Fill( qcd_weight );
-    }
-    if (jet_n == 4 && bjet_n == 0) {
-    MoreCRFillHistogramsControlPlotsReco( "4j_excl_0b_excl", values );
+    	if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/4j0b_lowmet/fakes_weights" )->Fill( qcd_weight );
+			m_hm->GetHistogram( "reco/cutflow/4j0b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
+		}
     }
     
-
+    if (jet_n == 4 && bjet_n == 0) {
+		MoreCRFillHistogramsControlPlotsReco( "4j_excl_0b_excl", values );
+    	if( values.ETmiss < minMet )
+		{
+			MoreCRFillHistogramsControlPlotsReco( "4j_excl_0b_excl_lowmet", values );
+			
+		}
+	
+	}
     
     
   // 4) 1 bjets
@@ -765,10 +820,21 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     if (isQCD )
     {
 	    m_hm->GetHistogram( "reco/cutflow/4j1b/fakes_weights" )->Fill( qcd_weight );
-	    m_hm->GetHistogram( "reco/cutflow/4j1b/fakes_weights_1" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/4j1b/fakes_weights_1" )->Fill( qcd_weight );		
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/4j1b_lowmet/fakes_weights" )->Fill( qcd_weight );
+			m_hm->GetHistogram( "reco/cutflow/4j1b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
+		}
     }    
     if (jet_n == 4 && bjet_n == 1) {
-    MoreCRFillHistogramsControlPlotsReco( "4j_excl_1b_excl", values );
+		MoreCRFillHistogramsControlPlotsReco( "4j_excl_1b_excl", values );
+    	if( values.ETmiss < minMet )
+		{
+			MoreCRFillHistogramsControlPlotsReco( "4j_excl_1b_excl_lowmet", values );
+			
+		}
     }
 
 
@@ -781,11 +847,22 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     if (isQCD )
     {
 	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights" )->Fill( qcd_weight );
-	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights_1" )->Fill( qcd_weight );
+	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights_1" )->Fill( qcd_weight );		
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/afterCuts_lowmet/fakes_weights" )->Fill( qcd_weight );
+			m_hm->GetHistogram( "reco/cutflow/afterCuts_lowmet/fakes_weights_1" )->Fill( qcd_weight );
+		}
     }
 
     if (jet_n == 4 && bjet_n >= 2) {
-    MoreCRFillHistogramsControlPlotsReco( "4j_excl_2b_incl", values );
+		MoreCRFillHistogramsControlPlotsReco( "4j_excl_2b_incl", values );
+    	if( values.ETmiss < minMet )
+		{
+			MoreCRFillHistogramsControlPlotsReco( "4j_excl_2b_incl_lowmet", values );
+			
+		}
     }
 
 
@@ -949,6 +1026,11 @@ void CutFlowTTbarResolved::FillHistogramsControlPlotsReco( ControlPlotValues& va
     const int cut = GetLastPassedCut( "LPLUSJETS", "reco_weighted" ) - 1;    
     string path = "reco/cutflow/" + m_alias[cut] + "/";    
     FillHistograms(path, values);   
+	if( values.ETmiss < 30000 )
+	{
+		path = "reco/cutflow/" + m_alias[cut] + "_lowmet/"; 
+		FillHistograms(path, values);   
+	}
 } 
   
 //VS
