@@ -1,0 +1,1 @@
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/02/cc/user.amenga.7516899._000001.ljets.output.root

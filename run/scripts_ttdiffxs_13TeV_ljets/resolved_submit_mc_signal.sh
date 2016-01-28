@@ -5,9 +5,10 @@ analysis=tt_diffxs_13TeV
 
 systs="nominal nocut"
 #systs=$(cat systematics.dat) # | grep JET`
-#systs=$(cat resolved_kinematic_systematics.dat )
+systs=$(cat resolved_kinematic_systematics.dat )
 decays="nofullhad ljets"
 decays="nofullhad"
+production=TTDIFFXS_55
 for syst in $systs
 do
 	mkdir -p output/$syst
@@ -30,11 +31,11 @@ do
 			template=$PWD/Resolved13TeV.xml.template
 		fi
 
-		filelistdir=$PWD/filelists_TTDIFFXS_35/
-		filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.txt
+		filelistdir=$PWD/filelists_${production}/
+		filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
 
-		nomalizationdir=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/
-		nomalizationfile=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.evt.n
+		nomalizationdir=${MAMBODIR}/share/data/NEvents_${production}/
+		nomalizationfile=${MAMBODIR}/share/data/NEvents_${production}/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.evt.n
 	
 		sendOnce=0
 	#set -x
@@ -92,7 +93,7 @@ do
 				sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
 				sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
 				sed -i "s|@DECAY@|${decay}|"  ${params}
-				mkdir -p output_TTDIFFXS_35/${syst}
+				mkdir -p output_${production}/${syst}
 				outfile=${syst}/${tag}.histograms.root.${batchid}
 				jobname=${tag}.${batchid}
 

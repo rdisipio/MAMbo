@@ -3,10 +3,11 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 syst=nominal
-nomalizationfilepath=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35/
-filelistdir=$PWD/filelists_TTDIFFXS_35/
+nomalizationfilepath=${MAMBODIR}/share/data/NEvents_${production}/
+filelistdir=$PWD/filelists_${production}/
 #paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 sendOnce=0
+production=TTDIFFXS_55
 for ch in el mu
 do
 
@@ -26,7 +27,7 @@ do
 
          nomalizationfile=${nomalizationfilepath}/$( echo ${flist} | sed s/mc.// | sed "s/.txt/.evt.n/" )
     	 tag=${analysis}.mc.bkg.${dsid}.${ch}.${syst}
-				mkdir -p output_TTDIFFXS_35/${syst}
+	mkdir -p output_${production}/${syst}
          outfile=${syst}/${tag}.histograms.root
          jobname=${tag}
  	 params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/Resolved13TeV.${dsid}.${ch}.${syst}.xml
