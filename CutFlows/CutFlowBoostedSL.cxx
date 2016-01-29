@@ -581,7 +581,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, string selection )
 {
   
-  int recoindex; 
+  int recoindex=-1; 
   
   //Define what is the hadronic top without a tagger
   if (selection != "1fj1b"){
@@ -594,21 +594,22 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
   else
     recoindex= ed->property["RecoHadTopJetCandidate"];
   
-  TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
  
-  m_hm->GetHistogram( "reco/"+selection+"/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/eta" )->Fill( fjets.Eta(), weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/m" )->Fill( fjets.M() / GeV, weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/phi" )->Fill( fjets.Phi(), weight);  
-  m_hm->GetHistogram( "reco/"+selection+"/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/absrap_1" )->Fill( fabs(fjets.Rapidity()), weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/absrap_2" )->Fill( fabs(fjets.Rapidity()), weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/d12" )->Fill( ed->fjets.property["sd12"].at(recoindex) / GeV, weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/d23" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(recoindex), weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(recoindex), weight);
- 
+  if(recoindex != -1){
+    TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
+    m_hm->GetHistogram( "reco/"+selection+"/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/eta" )->Fill( fjets.Eta(), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/m" )->Fill( fjets.M() / GeV, weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/phi" )->Fill( fjets.Phi(), weight);  
+    m_hm->GetHistogram( "reco/"+selection+"/topH/rapidity" )->Fill( fjets.Rapidity(), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/absrap" )->Fill( fabs(fjets.Rapidity()), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/absrap_1" )->Fill( fabs(fjets.Rapidity()), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/absrap_2" )->Fill( fabs(fjets.Rapidity()), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/d12" )->Fill( ed->fjets.property["sd12"].at(recoindex) / GeV, weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/d23" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/tau32" )->Fill( ed->fjets.property["tau32"].at(recoindex), weight);
+    m_hm->GetHistogram( "reco/"+selection+"/topH/tau21" )->Fill( ed->fjets.property["tau21"].at(recoindex), weight);
+  }
   m_hm->GetHistogram( "reco/"+selection+"/met/phi" )->Fill(ed->MET.phi, weight);
   m_hm->GetHistogram( "reco/"+selection+"/met/pt" )->Fill(ed->MET.et /GeV, weight);
   double lep_pT = m_config->channel == kElectron ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
@@ -618,7 +619,7 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
   m_hm->GetHistogram( "reco/"+selection+"/lep/pt" )->Fill( lep_pT / GeV, weight);
   m_hm->GetHistogram( "reco/"+selection+"/lep/phi" )->Fill( lep_phi, weight);
   m_hm->GetHistogram( "reco/"+selection+"/lep/eta" )->Fill( lep_eta, weight);
-  m_hm->GetHistogram( "reco/"+selection+"/topH/DeltaPhi_lep" )->Fill( deltaPhi( fjets.Phi(),lep_phi) , weight);
+  if(recoindex != -1) m_hm->GetHistogram( "reco/"+selection+"/topH/DeltaPhi_lep" )->Fill( deltaPhi( ed->fjets.phi.at(recoindex),lep_phi) , weight);
   m_hm->GetHistogram( "reco/"+selection+"/largejet/Number" )->Fill( ed->fjets.pT.size(), weight);
   int toptaggedjet = 0;
   for( unsigned int fj = 0 ; fj < ed->fjets.pT.size() ; ++fj ) {
@@ -631,7 +632,6 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
     if( ed->fjets.property[m_config->custom_params_string["tagger"].c_str()].at(fj) == 1) 
       toptaggedjet++;
   }
- 
   m_hm->GetHistogram( "reco/"+selection+"/topH/Number" )->Fill(toptaggedjet , weight);
   m_hm->GetHistogram( "reco/"+selection+"/smallJ/Number" )->Fill(ed->jets.pT.size() , weight);
   for( unsigned int sj = 0 ; sj < ed->jets.pT.size() ; ++sj ) {
@@ -640,7 +640,7 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
     m_hm->GetHistogram( "reco/"+selection+"/smallJ/eta" )->Fill( ed->jets.eta.at(sj), weight);
  }
 
-   m_hm->GetHistogram( "reco/"+selection+"/bjet/Number" )->Fill(ed->bjets.pT.size() , weight);
+  // m_hm->GetHistogram( "reco/"+selection+"/bjet/Number" )->Fill(ed->bjets.pT.size() , weight);
 }
 
 void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weight )
