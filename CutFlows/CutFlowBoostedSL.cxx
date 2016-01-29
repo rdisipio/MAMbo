@@ -14,7 +14,7 @@ CutFlowBoostedSL::~CutFlowBoostedSL()
   #ifdef __MOMA__
   SAFE_DELETE( m_moma );
   #endif
-	SAFE_DELETE( m_scalerFakes )
+  SAFE_DELETE( m_scalerFakes )
 }
 /////////////////////////////////////////
 
@@ -45,17 +45,17 @@ bool CutFlowBoostedSL::Initialize() {
     m_bTagSF_name = "scaleFactor_BTAG_77"; 
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	
-	
-	
+    
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
-	if( isQCD)
-	{
-		int nParameters = 2;
-		if( m_config->channel == 0 ) nParameters = 4;
-		m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, nParameters);
-	}
-
-	
+    if( isQCD)
+    {
+      int nParameters = 2;
+      if( m_config->channel == 0 ) nParameters = 4;
+      m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, nParameters);
+    }
+    
+    
+    
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
 
         const string syst = m_config->custom_params_string["scale_syst"];
@@ -227,7 +227,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     //****************Evaluation of QCD weight
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
     if(isQCD){
-      double qcd_weight = m_scalerFakes->GetFakesWeight( ed );       
+      double qcd_weight = m_scalerFakes->GetFakesWeight( ed );
       if(qcd_weight != 0)
 	weight     *= qcd_weight;
       else
@@ -581,7 +581,19 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, string selection )
 {
   
-  int recoindex = ed->property["RecoHadTopJetCandidate"];
+  int recoindex; 
+  
+  //Define what is the hadronic top without a tagger
+  if (selection != "1fj1b"){
+    for( unsigned int fj = 0 ; fj < ed->fjets.pT.size() ; ++fj ) {
+      if( ed->fjets.pT.at(fj)<300000 || fabs(ed->fjets.eta.at(fj)) > 2) continue;
+      recoindex = fj;
+      break;
+    } 
+  }
+  else
+    recoindex= ed->property["RecoHadTopJetCandidate"];
+  
   TLorentzVector fjets = HelperFunctions::MakeFourMomentum( ed->fjets, recoindex );
  
   m_hm->GetHistogram( "reco/"+selection+"/topH/pt" )->Fill( fjets.Pt() / GeV, weight);
@@ -644,7 +656,8 @@ void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weig
       m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( truth_fjets.Phi(), weight);
       m_hm->GetHistogram( "particle/1fj1b/topH/rapidity" )->Fill(truth_fjets.Rapidity(), weight);
       m_hm->GetHistogram( "particle/1fj1b/topH/absrap" )->Fill( fabs(truth_fjets.Rapidity()), weight);
-      
+       m_hm->GetHistogram( "particle/1fj1b/topH/absrap_1" )->Fill( fabs(truth_fjets.Rapidity()), weight);
+        m_hm->GetHistogram( "particle/1fj1b/topH/absrap_2" )->Fill( fabs(truth_fjets.Rapidity()), weight);
       m_hm->GetHistogram( "particle/1fj1b/topH/d12" )->Fill( ed->truth_fjets.property["sd12"].at(particleindex) / GeV, weight);
       //m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
       m_hm->GetHistogram( "particle/1fj1b/topH/tau32" )->Fill( ed->truth_fjets.property["tau32"].at(particleindex) , weight);
@@ -700,6 +713,8 @@ void CutFlowBoostedSL::FillMatrixRecoToParton( EventData * ed, const double weig
   m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
   m_hm->FillMatrices( "reco/1fj1b/topH/Matrix_reco_parton_absrap", fabs(fjets.Rapidity()),  fabs(partonTopH.Rapidity()),  weight);
 }
+
+
 
 /////////////////////////////////////////
 
