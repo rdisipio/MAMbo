@@ -194,8 +194,8 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 	ed->property["scaleFactor_bTagSF_77_eigenvars_B_3_down"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_down, 3 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_B_4_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_up, 4 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_B_4_down"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_down, 4 );
-	ed->property["scaleFactor_bTagSF_77_eigenvars_B_5_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_up, 5 );
-	ed->property["scaleFactor_bTagSF_77_eigenvars_B_5_down"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_down, 5 );
+//	ed->property["scaleFactor_bTagSF_77_eigenvars_B_5_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_up, 5 );
+//	ed->property["scaleFactor_bTagSF_77_eigenvars_B_5_down"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_B_down, 5 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_C_0_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_C_up, 0 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_C_0_down"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_C_down, 0 );
 	ed->property["scaleFactor_bTagSF_77_eigenvars_C_1_up"] = GET_VALUE_VECTOR( weight_bTagSF_77_eigenvars_C_up, 1 );
