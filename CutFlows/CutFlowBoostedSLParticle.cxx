@@ -271,6 +271,8 @@ void CutFlowBoostedSLParticle::FillHistogramsParticle( EventData * ed, const dou
   m_hm->GetHistogram( "particle/1fj1b/topH/phi" )->Fill( truth_fjets.Phi(), weight);
   m_hm->GetHistogram( "particle/1fj1b/topH/rapidity" )->Fill(truth_fjets.Rapidity(), weight);
   m_hm->GetHistogram( "particle/1fj1b/topH/absrap" )->Fill( fabs(truth_fjets.Rapidity()), weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/absrap_1" )->Fill( fabs(truth_fjets.Rapidity()), weight);
+  m_hm->GetHistogram( "particle/1fj1b/topH/absrap_2" )->Fill( fabs(truth_fjets.Rapidity()), weight);
   m_hm->GetHistogram( "particle/1fj1b/topH/d12" )->Fill( ed->truth_fjets.property["sd12"].at(particleindex) / GeV, weight);
   //m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
   m_hm->GetHistogram( "particle/1fj1b/topH/tau32" )->Fill( ed->truth_fjets.property["tau32"].at(particleindex) , weight);
