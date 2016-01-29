@@ -1,8 +1,10 @@
+
 #!/bin/bash
 
 analysis=tt_diffxs_13TeV
-#outtag=TTbarResolved_resolved
 syst=nominal
+production=TTDIFFXS_55
+
 
 #paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 
@@ -12,7 +14,13 @@ dsid=410000
 decay=ljets
 [ ! -z $2 ] && decay=$2
 
-nomalizationfile=${MAMBODIR}/share/data/NEvents13TeV/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.evt.n
+
+
+normalizationdir=${MAMBODIR}/share/data/NEvents_${production}
+normalizationfile=$normalizationdir/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.evt.n
+
+
+
 
 for ch in el mu
 do
@@ -22,9 +30,12 @@ do
      [ $ch == "mu" ] && ch_tag="muon"
       
           
-     filelist=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_35/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.txt
-     filelist_mc=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_35/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.txt
+#     filelist=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_35/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.txt
+#     filelist_mc=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_35/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_35_v2.txt
 
+     filelistdir=$PWD/filelists_${production}/	
+     filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+     filelist_mc=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
 
      for flist in $(ls ${filelist}.??)
      do
@@ -54,7 +65,7 @@ do
 
          sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
          sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
-         sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
+         sed -i "s|@NORMFILE@|${normalizationfile}|"  ${params}
          mkdir -p ${MAMBODIR}/run/output/${syst}
          outfile=${syst}/${tag}.histograms.root.${batchid}
          jobname=${tag}.${batchid}
