@@ -14,7 +14,7 @@ do
    [ $ch == "el" ] && ch_tag="electron"
    [ $ch == "mu" ] && ch_tag="muon"
       
-   filelist=AllBkgNew.txt
+   filelist=AllBkgTTDIFFXS_55.txt
 
    while read flist           
      do 
