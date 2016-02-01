@@ -3,10 +3,10 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 syst=nominal
-normalizationfilepath=${MAMBODIR}/share/data/NEvents_TTDIFFXS_35
-filedir=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_35
+production=TTDIFFXS_55
+normalizationfilepath=${MAMBODIR}/share/data/NEvents_${production}/
+filedir=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_${production}/
 #paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
-#lumi=3342.58
 lumi=3209.05
 
 decay=ljets
@@ -18,7 +18,7 @@ do
    [ $ch == "el" ] && ch_tag="electron"
    [ $ch == "mu" ] && ch_tag="muon"
       
-   filelist=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/AllBkg.txt
+   filelist=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/AllBkg${production}.txt
 
    while read flist           
      do 
@@ -27,12 +27,11 @@ do
          continue
        fi
  
-         dsids=`echo $flist | cut -d. -f1`
+         dsids=`echo $flist | cut -d. -f2`
 
          inputfile=`ls ${filedir}/mc.${dsids}.*`
 
-         normalizationfile=`echo $inputfile | cut -d/ -f11 | sed "s/mc./ /"`
-         normalizationfile=${normalizationfilepath}/$( echo ${normalizationfile} | sed "s/.txt/.evt.n/" )
+	 normalizationfile=${normalizationfilepath}/$( echo ${flist} | sed s/mc.// | sed "s/.txt/.evt.n/" )
          echo "normfile: ${normalizationfile}"
 
     	 tag=${analysis}.mc.bkg.${dsids}.${ch}.${decay}
@@ -44,17 +43,18 @@ do
          sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
          sed -i "s|@NORMFILE@|${normalizationfile}|"  ${params}
          sed -i "s|@LUMI@|${lumi}|" ${params}  
-         mkdir -p ${MAMBODIR}/run/output/BackGroundMC_prod35
-         outfile=BackGroundMC_prod35/${tag}.histograms.root
+
+         mkdir -p ${MAMBODIR}/run/output/BackGroundMC_${production}
+         outfile=BackGroundMC_${production}/${tag}.histograms.root
          jobname=${tag}".sh"
 
-         echo ${params}  
-         
-       
-	 echo "Submitting ${jobname}"
-	 echo ${inputfile}
-	 
-         MAMbo-submit.sh -p ${params} -f ${inputfile} -o ${outfile} -j ${jobname}
+
+      	 echo "config ${params}"
+#	 echo "input ${inputfile}"
+#	 echo "output ${outfile}"
+#	 echo "Submitting ${jobname}"
+
+        MAMbo-submit.sh -p ${params} -f ${inputfile} -o ${outfile} -j ${jobname}
      done < ${filelist}
 
      echo
