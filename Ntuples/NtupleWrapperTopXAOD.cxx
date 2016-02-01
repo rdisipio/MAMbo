@@ -124,7 +124,7 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
   ed->property["scaleFactor_PILEUP"]   = GET_VALUE( weight_pileup );
  
 //temporary
-  if( m_config.custom_params_flag[ "isRealData" ] == 0 && m_treeName == "nominal" )
+  if( ( m_config.custom_params_flag[ "isRealData" ] == 0 && m_config.custom_params_flag[ "isQCD" ] == 0) && m_treeName == "nominal" )
   {
 	ed->property["scaleFactor_pileup_UP"] = GET_VALUE( weight_pileup_UP );
 	ed->property["scaleFactor_pileup_DOWN"] = GET_VALUE( weight_pileup_DOWN );
@@ -334,7 +334,7 @@ bool NtupleWrapperTopXAOD::MakeEventLeptons( EventData * ed )
   bool success = true;
 
   ed->electrons.n = m_ntuple->el_pt->size();
- // cout << "Debug: el isTight size is " <<  m_ntuple->el_isTight->size() << endl;
+   //if( m_ntuple->el_isTight) cout << "Debug: el isTight size is " <<  m_ntuple->el_isTight->size() << endl;
   for( int i = 0 ; i < ed->electrons.n ; ++i ) {
     ed->electrons.pT.push_back(  GET_VALUE_VECTOR( el_pt,  i ) );
     ed->electrons.eta.push_back( GET_VALUE_VECTOR( el_eta, i ) );
