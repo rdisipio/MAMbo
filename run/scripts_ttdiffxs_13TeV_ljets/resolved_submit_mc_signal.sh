@@ -3,9 +3,9 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal"
+systs="nominal nocut"
 #systs=$(cat systematics.dat) # | grep JET`
-systs=$(cat resolved_kinematic_systematics.dat | grep 19)
+#systs=$(cat resolved_kinematic_systematics.dat | grep 19)
 decays="nofullhad ljets"
 decays="nofullhad"
 production=TTDIFFXS_55
@@ -22,12 +22,13 @@ do
 		samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
 
 		[ ! -z $1 ] && samples=$(cat $1)
+		echo "Running on $samples"
 		for sample in $samples
 		do
 			filelistdir=$PWD/filelists_${production}/
-			filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+			filelist=$filelistdir/$sample
 
-			dsid=$(echo $sample | cut -d. -f1)
+			dsid=$(echo $sample | cut -d. -f2)
 			normalizationfile=$(echo $sample | sed s/mc.// | sed s/txt/evt.n/)
 			nomalizationdir=${MAMBODIR}/share/data/NEvents_${production}/
 			nomalizationfile=${normalizationdir}/${normalizationfile}
