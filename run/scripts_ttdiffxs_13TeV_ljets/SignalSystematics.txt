@@ -1,0 +1,6 @@
+mc.410000.PowhegPythiaEvtGen.e3698_a766_a810_r6282_p2516.TTDIFFXS_55_v2.txt
+mc.410001.PowhegPythiaEvtGen.e3783_s2608_r7326_r6282_p2516.TTDIFFXS_55_v2.txt
+mc.410002.PowhegPythiaEvtGen.e3783_s2608_r7326_r6282_p2516.TTDIFFXS_55_v2.txt
+mc.410003.aMcAtNloHerwigppEvtGen.e4441_a766_a810_r6282_p2516.TTDIFFXS_55_v2.txt
+mc.410004.PowhegHerwigppEvtGen.e3836_a766_a810_r6282_p2516.TTDIFFXS_55_v2.txt
+
