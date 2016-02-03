@@ -87,7 +87,7 @@ do
 					if [[ $simulationtype == "s"* ]]
 					then
 						echo full sim!
-						tag=${analysis}.mc.FS.DiTop.${dsid}.${ch}.${syst}.${decay}
+						tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
 					else
 						tag=${analysis}.mc.AFII.DiTop.${dsid}.${ch}.${syst}.${decay}
 					fi
