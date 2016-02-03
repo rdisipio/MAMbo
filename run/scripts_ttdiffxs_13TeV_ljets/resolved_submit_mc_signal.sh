@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#set -x
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
@@ -75,15 +75,22 @@ do
 				[ $ch == "mu" ] && ch_tag="muon"
 
 				filelist_mc=$filelist
+				gridtag=$(echo $sample | cut -d. -f4 )
+				simulationtype=$(echo $gridtag | cut -d_ -f2)
 
 				for flist in $(ls ${filelist}.??)
 				do
 					batchid=$(echo ${flist} | grep -oE "[^.]+$")
 
 					flist_mc=$( echo ${flist} | sed "s/.${ch}.txt/.mc.txt/" )
-
-					tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
-
+					
+					if [[ $simulationtype == "s"* ]]
+					then
+						echo full sim!
+						tag=${analysis}.mc.FS.DiTop.${dsid}.${ch}.${syst}.${decay}
+					else
+						tag=${analysis}.mc.AFII.DiTop.${dsid}.${ch}.${syst}.${decay}
+					fi
 					params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/${tag}.${batchid}.xml
 					cp $template ${params}
 
