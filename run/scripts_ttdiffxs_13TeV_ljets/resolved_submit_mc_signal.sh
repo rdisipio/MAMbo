@@ -41,7 +41,7 @@ do
 			fi
 
 		
-			sendOnce=1
+			sendOnce=0
 		#set -x
 
 
@@ -84,7 +84,7 @@ do
 
 					tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
 
-					params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/Resolved13TeV.${ch}.${syst}.${decay}.${batchid}.xml
+					params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/${tag}.${batchid}.xml
 					cp $template ${params}
 
 					# 	 params=Resolved13TeV_${ch}.${syst}.${decay}.${batchid}.xml
