@@ -105,7 +105,8 @@ if __name__ == "__main__":
    sample_Name=["DiTop", "Wjets", "SingleTop", "Diboson", "Zjets", "Multijet", "data"]
    for sample in sample_Name: 
      nbins = hlist[sample].GetNbinsX()
-     print sample.rjust(9), "   ", repr(hlist[sample].GetBinContent(nbins)).rjust(7).ljust( 7)[:7], " +/- ",repr(hlist[sample].GetBinError(nbins)).rjust(7).ljust( 7)[:7];
+     uncertainty = 100 * hlist[sample].GetBinError(nbins) / hlist[sample].GetBinContent(nbins)
+     print sample.rjust(9), "   ", repr(hlist[sample].GetBinContent(nbins)).rjust(7).ljust( 7)[:7], " +/- ",repr(hlist[sample].GetBinError(nbins)).rjust(7).ljust( 7)[:7], " ( +/- ", repr(uncertainty).rjust(7).ljust( 7)[:7], " )"
    
  
 
