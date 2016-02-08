@@ -32,6 +32,15 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "reco_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
     SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
     SetCutName("LPLUSJETS", "reco_unweight", 6, "Bjet matched with a top                     ");
+    
+    AddCounterName("LPLUSJETS", "reco_weighted", 6 );
+    SetCutName("LPLUSJETS", "reco_weighted", 0, "All Events after Analysis Top Cuts          ");
+    SetCutName("LPLUSJETS", "reco_weighted", 1, "A tagged Large-R jet                        ");
+    SetCutName("LPLUSJETS", "reco_weighted", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
+    SetCutName("LPLUSJETS", "reco_weighted", 3, "Exist b-jet in the event                    ");
+    SetCutName("LPLUSJETS", "reco_weighted", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
+    SetCutName("LPLUSJETS", "reco_weighted", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
+    SetCutName("LPLUSJETS", "reco_weighted", 6, "Bjet matched with a top                     ");
 
     AddCounterName("LPLUSJETS", "particle_unweight", 6 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events after Analysis Top Cuts          ");
@@ -47,11 +56,14 @@ bool CutFlowBoostedSL::Initialize() {
     m_pileupSF_name = "scaleFactor_PILEUP";	
     
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
-    if( isQCD)
+    if(isQCD)
     {
       int nParameters = 2;
-      if( m_config->channel == 0 ) nParameters = 4;
-      m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, nParameters);
+      string method = "MM";
+      if( m_config->custom_params_string.count("FakesEvaluationMethod")) method = m_config->custom_params_string["FakesEvaluationMethod"];
+      cout<<"Config name "<<method;
+      //if( m_config->channel == 0 ) nParameters = 4;
+      m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, nParameters, method);
     }
     
     
@@ -123,10 +135,15 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   ed->property["weight_reco_level"]     = weight_reco_level;
   ed->property["weight_particle_level"] = weight_particle_level;
   
-  
+//   const bool passedRecoSelectionWjet  = PassedCutFlowRecoControlWjets( ed ); 
+//   if(passedRecoSelectionWjet){
+//     FillHistogramsReco(ed, weight_reco_level, "WJETcontrol");
+//   }
   // Apply selections 
   const bool passedRecoSelection     = PassedCutFlowReco( ed );
   const bool passedParticleSelection =  !isMCSignal ? false : PassedCutFlowParticle( ed );
+  
+ 
   
   //Set the weights after QCD 
   weight_reco_level = ed->property["weight_reco_level"] ;
@@ -187,7 +204,6 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
 bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
   bool passed = true;
   
-  
   //The tagger name is taken from the configuration xml
     string Tagger = "none";
   
@@ -223,11 +239,13 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     if( !single_lept )   return !passed;
     
     PassedCut( "LPLUSJETS", "reco_unweight"); 
+    PassedCut( "LPLUSJETS", "reco_weighted",weight); 
     
     //****************Evaluation of QCD weight
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
     if(isQCD){
       double qcd_weight = m_scalerFakes->GetFakesWeight( ed );
+      cout<<"Qcd weight "<<qcd_weight<<endl;
       if(qcd_weight != 0)
 	weight     *= qcd_weight;
       else
@@ -267,7 +285,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
-    
+    PassedCut( "LPLUSJETS", "reco_weighted",weight); 
     
     
     
@@ -291,7 +309,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     //m_hm->GetHistogram( "reco/1fj1b/topH/DeltaPhi_lep" )->Fill(PhysicsHelperFunctions::deltaPhi(ed->fjets.phi.at(HadTopJetCandidate),lepton.Phi()), weight );
     if ( dPhi_lepljet < 1) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
-    
+    PassedCut( "LPLUSJETS", "reco_weighted",weight); 
     
     //**************** Exist b-jet in the event*************************
     
@@ -301,6 +319,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     }
     if(btagged_jet.size() == 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
+    PassedCut( "LPLUSJETS", "reco_weighted",weight); 
     
     
    //**************** Exist a jet with deltaR(HadTopJetCandidate,jet)>1.5*************************
@@ -316,6 +335,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
     if(jet_farFromHadTopJetCandidate.size() == 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
+    PassedCut( "LPLUSJETS", "reco_weighted",weight); 
     
     
     //**************** Exist a jet with deltaR(lepton,jet)<2.0*************************
@@ -334,6 +354,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
   
     if(LepTopJetCandidate.size() == 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
+    PassedCut( "LPLUSJETS", "reco_weighted",weight); 
     
     
     //*************** Position of b-jet *********************************
@@ -366,6 +387,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
     if (!btag_hadronicside && !btag_leptonicside) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
+    PassedCut( "LPLUSJETS", "reco_weighted", weight); 
    
     // deltaPhi between the HadTopJetCandidate and lepton ;
      //// Splitting the lepton channel /////////////////
@@ -578,6 +600,48 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
   
 
 }
+
+bool  CutFlowBoostedSL::PassedCutFlowRecoControlWjets(EventData * ed) {
+  bool passed = true;
+  
+  //The tagger name is taken from the configuration xml
+    string Tagger = "none";
+  
+     if( m_config->custom_params_string.count( "tagger" ) )
+     {
+       Tagger=m_config->custom_params_string["tagger"].c_str();
+    }
+    
+    //Read from EventData information on object needed for selection
+    int    el_n   = ed->electrons.n; 
+    int    mu_n   = ed->muons.n; 
+    int    jet_n  = ed->jets.n;
+    int    bjet_n = ed->bjets.n;
+    int    fjet_n = ed->fjets.n;
+    double ETmiss = ed->MET.et;
+    double mwt    = ed->MET.mwt;
+
+    
+     //Initialize the index of the Hadronic topjetCandidate
+    int HadTopJetCandidate = -1;
+     //Container of small-R jet that pass requirements on the dR with lepton and HadTopJetCandidate
+    vector<int> LepTopJetCandidate;
+
+    double weight = ed->property["weight_reco_level"];
+    
+    
+    const bool passed_boosted_ejets = ed->property["passed_boosted_ejets_1fj0b"]; ///Preselection done in AT for el-channel
+    const bool passed_boosted_mujets = ed->property["passed_boosted_mujets_1fj0b"]; ///Preselection done in AT for mu-channel  
+      
+      
+    //****************All event passing analysis top selection *************************
+    const bool  single_lept = ( m_config->channel == kElectron )  ?  ( passed_boosted_ejets) : ( passed_boosted_mujets );     
+    if( !single_lept )   return !passed;
+    
+    if( mwt+ETmiss < 80000 ) return !passed;
+    if( bjet_n > 0 )   return !passed;
+}
+
 void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, string selection )
 {
   
@@ -640,7 +704,7 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
     m_hm->GetHistogram( "reco/"+selection+"/smallJ/eta" )->Fill( ed->jets.eta.at(sj), weight);
  }
 
-  // m_hm->GetHistogram( "reco/"+selection+"/bjet/Number" )->Fill(ed->bjets.pT.size() , weight);
+   m_hm->GetHistogram( "reco/"+selection+"/bjet/Number" )->Fill(ed->bjets.pT.size() , weight);
 }
 
 void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weight )
