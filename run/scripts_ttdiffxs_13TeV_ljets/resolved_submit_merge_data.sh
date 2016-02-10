@@ -8,7 +8,7 @@ systs="qcd"
 #systs=`cat  resolved_scale_systematics.dat | grep lepton`
 decays="nofullhad ljets"
 decays="nofullhad"
-methods="MM MMM"
+methods="MM"
 for method in $methods
 do
 	for syst in $systs
@@ -31,8 +31,8 @@ do
 	#!/bin/bash
 			#tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
 		#	tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.$method.histograms.root.40
-		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.$method.histograms.root resolvedQCD/${analysis}.${syst}.Main.00*.el.Resolved.$method.histograms.root
-		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.$method.histograms.root resolvedQCD/${analysis}.${syst}.Main.00*.mu.Resolved.$method.histograms.root
+		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.00*.el.Resolved.$method.histograms.root
+		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.00*.mu.Resolved.$method.histograms.root
 		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.co.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.$method.histograms.root 
 
 EOF

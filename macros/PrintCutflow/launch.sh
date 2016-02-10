@@ -1,12 +1,12 @@
 #!/bin/bash
 set -x
-filelistdir="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_35"
+filelistdir="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_55"
 #/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_3"
 mkdir -p cutflow/root
 mkdir -p cutflow/text
 mkdir jobs
 cd $filelistdir
-lists=`ls -r  *txt | grep v2`
+lists=`ls -r  *txt | grep v2 | grep 410000`
 cd -
 for filelist in $lists
 do

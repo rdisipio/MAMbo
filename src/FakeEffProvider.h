@@ -6,19 +6,22 @@
 #ifndef __FAKESEFFPROVIDER_H__
 #define  __FAKESEFFPROVIDER_H__
 #include "Commons.h" 
-
 class FakeEffProvider {
   
 public:
   FakeEffProvider(int channel, int type=Type::fakeEff); //channel: e=0, mu=1
   ~FakeEffProvider() {}
   enum Type {fakeEff, realEff, tightEff};
-  enum Var {NJETS, NBTAG, LPT, LETA, JET1PT, MINDRLJET, DPHILMET, MET, TWODIM_PT_ETA};
+  enum Var {NJETS, NBTAG, LPT, LETA, JET1PT, MINDRLJET, DPHILMET, MET, 
+            TWODIM_PT_ETA, TWODIM_PT_DPHI, TWODIM_PT_NBTAG, TWODIM_PT_MET,
+            TWODIM_DPHI_NBTAG, TWODIM_DPHI_MET, TWODIM_DPHI_ETA,
+            TWODIM_NJETS_NBTAG
+           };
   double GetEfficiency(int var, float value, bool binned=false);
   double GetEfficiency2D(int var, float xvalue, float yvalue, bool binned=false);
-   TFile* m_file;
+
 private:
- 
+  TFile* m_file;
   std::map<int, TEfficiency*> m_hist;
   std::map<int, TF1*> m_func;
   
@@ -31,7 +34,7 @@ private:
 FakeEffProvider::FakeEffProvider(int channel, int type) {
  TString prefix;
   string basePath = string( getenv( "MAMBODIR" ) ) + "/share/data/FakeEfficiencies";
-  cout << "Debug: FakeEffProvider - base path is " << basePath << endl;
+   cout << "Debug: FakeEffProvider - base path is " << basePath << endl;
   if (channel == 0) {
     if (type==Type::tightEff)
       m_file = TFile::Open( (basePath + "/tight_eff_e.root").c_str());
@@ -50,7 +53,7 @@ FakeEffProvider::FakeEffProvider(int channel, int type) {
     prefix += "mu_";
   } else {
     Error("Utils::FakeEffProvider", "Wrong channel number!");
-    throw std::runtime_error( "error4" );
+    throw std::runtime_error( "Wrong channel number!" );
   }
     cout << "Debug: FakeEffProvider - Opened file " << m_file->GetPath()  << endl;
   
@@ -73,12 +76,19 @@ FakeEffProvider::FakeEffProvider(int channel, int type) {
   m_func[Var::MET]       = dynamic_cast<TF1*>(m_file->Get( (TString("functions/")+prefix+"met_Eff").Data() ));
   
   //2D histograms
-  if (type==Type::fakeEff)
+  if (type==Type::fakeEff) {
     m_hist[Var::TWODIM_PT_ETA]  = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_pt_eta").Data() ));
+    m_hist[Var::TWODIM_PT_DPHI]     = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_pt_dphi").Data() ));
+    m_hist[Var::TWODIM_PT_NBTAG]    = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_pt_nbtag").Data() ));
+    m_hist[Var::TWODIM_PT_MET]      = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_pt_met").Data() ));
+    m_hist[Var::TWODIM_DPHI_NBTAG]  = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_dphi_nbtag").Data() ));
+    m_hist[Var::TWODIM_DPHI_MET]    = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_dphi_met").Data() ));
+    m_hist[Var::TWODIM_DPHI_ETA]    = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_dphi_eta").Data() ));
+    m_hist[Var::TWODIM_NJETS_NBTAG] = dynamic_cast<TEfficiency*>(m_file->Get( (TString("histograms/")+prefix+"2D_njets_nbtag").Data() ));
+  }
   
 }
 
-//_______________________________________________________________________________________________________
 int FakeEffProvider::GetRightBin(TEfficiency* eff, double v) {
   
   const TH1* h = eff->GetTotalHistogram();
@@ -108,19 +118,15 @@ int FakeEffProvider::GetRightBin(TEfficiency* eff, double v) {
     return h->FindFixBin(v);
 }
 
-//_______________________________________________________________________________________________________
 double FakeEffProvider::GetEfficiency(int var, float value, bool binned) {
-   
   if (binned) { //binned efficiency
-   
     std::map<int, TEfficiency*>::iterator it = m_hist.find(var);
     if (it==m_hist.end() || (*it).second==0) {
-       Error("Utils::FakeEffProvider", TString::Format("Efficiency function for variable %d not found",var).Data() );
+      Error("Utils::FakeEffProvider", TString::Format("Efficiency histogram for variable %d not found",var).Data() );
        throw std::runtime_error( "error" );
-    }
+	   }
     else {
       TEfficiency* eff = (*it).second;
-     
       return eff->GetEfficiency( GetRightBin(eff, value) );
     }
   }
@@ -137,12 +143,11 @@ double FakeEffProvider::GetEfficiency(int var, float value, bool binned) {
   }
 }
 
-//_______________________________________________________________________________________________________
 int FakeEffProvider::GetRightBin2D(TEfficiency* eff, double vx, double vy) {
   
-  //~ std::cout << "DEBUG: FakeEffProvider::GetRightBin2D called with x = " << vx << ",  y = " << vy << std::endl;
-  
   const TH1* h = eff->GetTotalHistogram();
+  // this doesn't necessarily mean the efficiency is well defined and calculated in this bin:
+  // (see FakeEffProvider::GetRightBin for the better way to check this, not implemented here for 2D case)
   double x_min = h->GetXaxis()->GetBinLowEdge(h->FindFirstBinAbove(0,1));
   double x_max = h->GetXaxis()->GetBinLowEdge(h->FindLastBinAbove(0,1)+1);
   double y_min = h->GetYaxis()->GetBinLowEdge(h->FindFirstBinAbove(0,2));
@@ -165,22 +170,11 @@ int FakeEffProvider::GetRightBin2D(TEfficiency* eff, double vx, double vy) {
   else if (vy >= y_max) {
     vy=h->GetYaxis()->GetBinLowEdge(h->GetNbinsY());
   }
-  
-  //~ std::cout << "DEBUG: FakeEffProvider::GetRightBin2D: returning bin number " << h->FindFixBin(vx,vy) << std::endl;
-  //~ std::cout << "DEBUG: FakeEffProvider::GetRightBin2D: bin range: x=("
-       //~ << h->GetXaxis()->GetBinLowEdge(h->GetXaxis()->FindFixBin(vx))
-       //~ << ", "
-       //~ << h->GetXaxis()->GetBinLowEdge(h->GetXaxis()->FindFixBin(vx)+1)
-       //~ << "), y=("
-       //~ << h->GetYaxis()->GetBinLowEdge(h->GetYaxis()->FindFixBin(vy))
-       //~ << ", "
-       //~ << h->GetYaxis()->GetBinLowEdge(h->GetYaxis()->FindFixBin(vy)+1)
-       //~ << ")" << std::endl;
+
   return h->FindFixBin(vx,vy);
   
 }
 
-//_______________________________________________________________________________________________________
 double FakeEffProvider::GetEfficiency2D(int var, float xvalue, float yvalue, bool binned) {
   if (binned) {
     std::map<int, TEfficiency*>::iterator it = m_hist.find(var);
@@ -190,11 +184,7 @@ double FakeEffProvider::GetEfficiency2D(int var, float xvalue, float yvalue, boo
     }
     else {
       TEfficiency* eff = (*it).second;
-      //~ std::cout << "DEBUG: FakeEffProvider::GetEfficiency2D: using efficiency from " << eff->GetName() << std::endl;
-      //~ std::cout << "DEBUG: FakeEffProvider::GetEfficiency2D: x = " << xvalue << ",  y = " << yvalue << std::endl;
       double result = eff->GetEfficiency( GetRightBin2D(eff, xvalue, yvalue) );
-      //~ std::cout << "DEBUG: FakeEffProvider::GetEfficiency2D: returning eff = " << result << std::endl;
-      //~ return eff->GetEfficiency( GetRightBin2D(eff, xvalue, yvalue) );
       return result;
     }
     
@@ -204,5 +194,6 @@ double FakeEffProvider::GetEfficiency2D(int var, float xvalue, float yvalue, boo
      throw std::runtime_error( "error3" );
   }
 }
+
 
 #endif

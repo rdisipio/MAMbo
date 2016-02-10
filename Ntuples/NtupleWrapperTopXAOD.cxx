@@ -33,9 +33,18 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
   	  {
   	  	m_lumi = m_config.custom_params_numeric[ "luminosity" ];
   	  	ifstream in( nEventsFilename );
-  	  	int id;
-  	  	in >> id >> m_nEvents;
-	 	 cout << "Sample " << id << " contains " << m_nEvents << " events\n"; 
+		if( !in.good() )
+		{
+			cout << "Error: asking for lumi_reweight, but the file containing the number of events (" << nEventsFilename << " cannot be opened\n";
+			cout << "Lumi reweight will not be applied\n";
+			m_doLumiReweight = false;			
+		}
+		else
+		{
+			int id;
+			in >> id >> m_nEvents;
+			cout << "Sample " << id << " contains " << m_nEvents << " events\n"; 
+		}
 	 }	  
  	
    }

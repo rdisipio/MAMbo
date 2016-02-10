@@ -59,9 +59,12 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 	if( isQCD)
 	{
-		m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, 2);
-	}
-
+		string method = "MM";
+	
+		if( m_config->custom_params_string.count("FakesEvaluationMethod")) method = m_config->custom_params_string["FakesEvaluationMethod"];
+		m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, 2, method);
+   
+ }
     m_bTagSF_name = "scaleFactor_BTAG_77";
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	

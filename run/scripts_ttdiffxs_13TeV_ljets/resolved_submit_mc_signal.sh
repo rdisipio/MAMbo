@@ -30,8 +30,8 @@ do
 
 			dsid=$(echo $sample | cut -d. -f2)
 			normalizationfile=$(echo $sample | sed s/mc.// | sed s/txt/evt.n/)
-			nomalizationdir=${MAMBODIR}/share/data/NEvents_${production}/
-			nomalizationfile=${normalizationdir}/${normalizationfile}
+			normalizationdir=${MAMBODIR}/share/data/NEvents_${production}/
+			normalizationfile=${normalizationdir}/${normalizationfile}
 			
 			if [ $syst == "nocut" ]
 			then
@@ -102,7 +102,7 @@ do
 					fi
 					sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
 					sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
-					sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
+					sed -i "s|@NORMFILE@|${normalizationfile}|"  ${params}
 					sed -i "s|@DECAY@|${decay}|"  ${params}
 					mkdir -p output_${production}/${syst}
 					outfile=${syst}/${tag}.histograms.root.${batchid}

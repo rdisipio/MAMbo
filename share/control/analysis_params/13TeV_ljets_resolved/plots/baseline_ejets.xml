@@ -1,4 +1,4 @@
-7<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document>
 <plots tag="el" latex="electron+jets" >
   <plot hpath="reco/cutflow/3j_incl_2b_incl/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
@@ -46,6 +46,25 @@
   <plot hpath="reco/cutflow/afterCuts/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
   <plot hpath="reco/cutflow/afterCuts/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
 
+<!--
+  <plot hpath="reco/cutflow/3j_incl_1b_incl/mtw"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />  
+<plot hpath="reco/cutflow/3j_incl_1b_incl/mtw_2"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <plot hpath="reco/cutflow/3j_incl_2b_incl/mtw"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+<plot hpath="reco/cutflow/3j_incl_2b_incl/mtw_2"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+
+  <plot hpath="reco/cutflow/3j_incl_0b_incl/mtw"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+<plot hpath="reco/cutflow/3j_incl_0b_incl/mtw_2"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+
+-->
+
+  <plot hpath="reco/cutflow/afterCuts/mtw"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+<plot hpath="reco/cutflow/afterCuts/mtw_2"        xtitle="m_{T}^{W} [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+
+
+
+
+
+
 
 
   <plot hpath="reco/4j2b/difference/HT_ttbar"          xtitle="H_{T}^{t#bar{t}} [GeV]" ytitle="Events / GeV" scale="log" />
@@ -91,12 +110,12 @@
 </samples>
 <inputfiles>
   <file sample="data" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.data.Main.AllPeriod.el.Resolved.histograms.root"    />
-  <file	sample="DiTop"		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_35/nominal/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root"       />
-  <file	sample="SingleTop" 	    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_35//nominal/Stop_el.root"   />
-  <file	sample="Wjets" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_35//nominal/Wjets_el.root"       />
-  <file	sample="Diboson" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_35//nominal/Diboson_el.root"       />
-  <file	sample="Zjets" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal_TTDIFFXS_35//Zjets_el.root"       />
-  <file sample="Fakes" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.histograms.root"    />
+  <file	sample="DiTop"		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root"       />
+  <file	sample="SingleTop" 	    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output//nominal/Stop_el.root"   />
+  <file	sample="Wjets" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output//nominal/Wjets_el.root"       />
+  <file	sample="Diboson" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output//nominal/Diboson_el.root"       />
+  <file	sample="Zjets" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal//Zjets_el.root"       />
+  <file sample="Fakes" 		    path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root"    />
   <file	sample="uncertainty"	path="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/el.uncertainty.histograms.root" />
 </inputfiles>
 </document>

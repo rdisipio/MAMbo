@@ -127,6 +127,7 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
   double met = ed->MET.et;		
   
   int ntag = ed->bjets.n;
+  int njet = ed->jets.n;
   double delta = 0, ef = 0, er = 0, et = 0;
   if( m_channel == 0 ) //electrons case
   {
@@ -136,19 +137,16 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
     double pt_lep = ed->electrons.pT.at(0);
     double eta_lep = ed->electrons.eta.at(0);
     double phi_lep = ed->electrons.phi.at(0);
-    
-    ef = m_fakeEff->GetEfficiency(FakeEffProvider::Var::NBTAG, ntag, true);
-    ef *= m_fakeEff->GetEfficiency(FakeEffProvider::Var::DPHILMET, abs(deltaPhi(phi_met,phi_lep)), true);
-    ef *= m_fakeEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
-    ef *= m_fakeEff->GetEfficiency(FakeEffProvider::Var::LETA, abs(eta_lep), true);
-    ef = TMath::Power(ef,0.25);
-    
-    er = m_realEff->GetEfficiency(FakeEffProvider::Var::NBTAG, ntag, true);
-    er *=  m_realEff->GetEfficiency(FakeEffProvider::Var::DPHILMET, abs(deltaPhi(phi_met,phi_lep)), true);
-    er *= m_realEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
-    er *= m_realEff->GetEfficiency(FakeEffProvider::Var::LETA, abs(eta_lep), true);
-    er = TMath::Power(er,0.25);
+    double dPhi_met_lep = deltaPhi( phi_met, phi_lep );
+	
+    ef = m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_DPHI, pt_lep*1e-3, abs(dPhi_met_lep), true);
+    ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_DPHI_ETA, abs(dPhi_met_lep), abs(eta_lep), true);
+    ef = TMath::Sqrt(ef);
 
+    ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_NJETS_NBTAG, njet, ntag, true);
+    ef /= 0.2905118; // divide by average fake efficiency
+
+    er = m_realEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);	
     
   }
   else if( m_channel == 1)

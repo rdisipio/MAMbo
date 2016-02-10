@@ -14,11 +14,11 @@ do
    [ $ch == "el" ] && ch_tag="electron"
    [ $ch == "mu" ] && ch_tag="muon"
       
-   filelist=AllBkgTTDIFFXS_55.txt
+   filelist=AllBkgTTDIFFXS_55_Stop.txt
 
    while read flist           
      do 
-  
+       
        if [[ "x$flist" == "x#"* ]]; then
          continue
        fi
