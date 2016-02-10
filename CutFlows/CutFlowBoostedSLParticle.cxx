@@ -35,6 +35,19 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
   CutFlow::Start();
   
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
+  unsigned long isStressTest = 0;
+  string stressTestType = "none";
+  
+  if( m_config->custom_params_string.count( "stressTest" ) ) //mr
+  {
+    stressTestType = m_config->custom_params_string["stressTest"];
+    if( stressTestType != "none" && stressTestType != "tt_m" && stressTestType != "pt_t")
+    {
+      cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
+      stressTestType = "none";
+    }
+    else if(  stressTestType != "none" ) isStressTest = 1;
+  }
   
   //////MANAGE THE WEIGHTS//////////////////////////////////////////
   double weight_particle_level = 1.;
@@ -51,6 +64,28 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
   
   //cout<<"Weights:  "<<weight_particle_level<<endl;
   //Set the weights as event properties so we can call in the selections
+  
+  //Adding the stress Test
+  if( isStressTest )
+  {
+    TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
+    TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
+    TLorentzVector tt = t1 + t2;
+    if( stressTestType == "tt_m" )
+    {
+      if(tt.M() > 400000) cout<<"weight_particle_level "<<weight_particle_level;
+      weight_particle_level *= (0.9 + 0.00036 *  tt.M()/GeV);
+      if(tt.M() > 400000) cout<<"weight_particle_level "<<weight_particle_level<<endl;
+      
+    }
+     if( stressTestType == "pt_t" )
+    {
+      double pt_average = (t1.Pt() + t2.Pt()) / 2.  ;
+      weight_particle_level *= (1.0 +  1/600. * (pt_average/GeV - 200.));
+     
+    }
+    
+  }
   ed->property["weight_particle_level"] = weight_particle_level;
   
   

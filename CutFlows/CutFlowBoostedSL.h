@@ -29,6 +29,7 @@ class CutFlowBoostedSL : public CutFlow
  protected:
   bool PassedCutFlowReco( EventData * ed  = NULL); 
   bool PassedCutFlowParticle(EventData * ed = NULL);
+  bool PassedCutFlowRecoControlWjets(EventData * ed = NULL);
   void FillHistogramsReco(EventData * ed = NULL, const double weight = 1., std::string selection = "1fj1b" );
   void FillHistogramsParticle(EventData * ed = NULL, const double weight = 1. );
   void FillMatrixRecoToParticle(EventData * ed = NULL, const double weight = 1. );

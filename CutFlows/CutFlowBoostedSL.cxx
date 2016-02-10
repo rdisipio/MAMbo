@@ -108,6 +108,20 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   unsigned long isRealData = m_config->custom_params_flag["isRealData"];
   unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
   
+  unsigned long isStressTest = 0;
+  string stressTestType = "none";
+  
+  if( m_config->custom_params_string.count( "stressTest" ) ) //mr
+  {
+    stressTestType = m_config->custom_params_string["stressTest"];
+    if( stressTestType != "none" && stressTestType != "tt_m" && stressTestType != "pt_t" )
+    {
+      cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
+      stressTestType = "none";
+    }
+    else if(  stressTestType != "none" ) isStressTest = 1;
+  }
+  
   //////MANAGE THE WEIGHTS//////////////////////////////////////////
   double weight_reco_level     = 1.;
   double weight_particle_level = 1.;
@@ -131,6 +145,33 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   // Set to  1 for data
   if(isRealData || isQCD) weight_reco_level = 1;   
+  
+  if( !isRealData && !isQCD ) {
+    
+    if( isStressTest )//mr
+    {
+      TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
+      TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
+      TLorentzVector tt = t1 + t2;
+      if( stressTestType == "tt_m" )
+      {
+	if(tt.M() > 400000) cout<<"weight_reco_level "<<weight_reco_level;
+	weight_reco_level *= (0.9 + 0.00036 *  tt.M()/GeV);
+	weight_particle_level *= (0.9 + 0.00036 *  tt.M()/GeV);
+        if(tt.M() > 400000) cout<<" weight_reco_level "<<weight_reco_level<<endl;
+	
+      }
+      if( stressTestType == "pt_t" )
+      {
+	double pt_average = (t1.Pt() + t2.Pt()) / 2.;  
+	weight_reco_level *= (1.0 +  1/600. * (pt_average/GeV - 200));
+	weight_particle_level *= (1.0 +  1/600. * (pt_average/GeV - 200));
+	
+	
+      }
+       
+    }
+  }
   
   ed->property["weight_reco_level"]     = weight_reco_level;
   ed->property["weight_particle_level"] = weight_particle_level;
