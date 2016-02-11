@@ -34,7 +34,7 @@
       <Bin id="0" nbins="11" edges="25,50,75,100,125,150,200,250,300,400,600,800" particle="smallJ"/> 
       <Bin id="0" nbins="25" xmin="0" xmax="500" particle="met"/> 
       <Bin id="0" nbins="10" edges="25,50,75,100,125,150,200,250,300,400,500" particle="lep"/> 
-      <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1200" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
+      <Bin id="0" nbins="8" edges="300,350,400,450,500,550,650,750,1500" particle="topH"/> <!--ATLAS 8TeV boosted edges-->
       <Bin id="0" nbins="32" xmin="200" xmax="1000" particle="largejet"/> 
     </Variable>
     <Variable name="d12" title="#sqrt{d_{12}} [GeV]">
@@ -53,7 +53,7 @@
       <Bin id="0" nbins="12" edges="-2.5,-1.8,-1.4,-1.1,-0.8,-0.4,0,0.4,0.8,1.1,1.4,1.8,2.5" particle="topH"/> <!--previusly used binning-->
     </Variable>
     <Variable name="absrap" title="abs rapidity |y_{t}|">
-      <Bin id="0" nbins="6" edges="0,0.4,0.8,1.1,1.4,1.8,2.5" particle="topH"/> 
+      <Bin id="0" nbins="10" edges="0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0" particle="topH"/> 
       <Bin id="1" nbins="24" xmin="0" xmax="2.5"  particle="topH"/> 
       <Bin id="2" nbins="250" xmin="0" xmax="2.5"  particle="topH"/> 
     </Variable>
