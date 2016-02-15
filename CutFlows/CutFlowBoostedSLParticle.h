@@ -35,7 +35,7 @@ class CutFlowBoostedSLParticle : public CutFlow
     MoMATool                * m_moma;
     SYSTEMATIC_TYPE           m_syst_type;
 #endif
-    
+    string m_PDFSF_name;  
 private:
 };
 

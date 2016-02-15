@@ -46,7 +46,8 @@ private:
     string m_bTagSF_name;
     string m_leptonSF_name;
     string m_pileupSF_name;
-	ScalerFakes * m_scalerFakes;
+    string m_PDFSF_name;
+    ScalerFakes * m_scalerFakes;
     
 
 };
