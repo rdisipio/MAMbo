@@ -51,10 +51,7 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
     SetCutName("LPLUSJETS", "particle_unweight", 6, "Bjet matched with a top                     ");
     
-    m_bTagSF_name = "scaleFactor_BTAG_77"; 
-    m_leptonSF_name = "scaleFactor_LEPTON" ;
-    m_pileupSF_name = "scaleFactor_PILEUP";	
-    
+   
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
     if(isQCD)
     {
@@ -67,9 +64,12 @@ bool CutFlowBoostedSL::Initialize() {
     }
     
     
-    
+    m_bTagSF_name = "scaleFactor_BTAG_77"; 
+    m_leptonSF_name = "scaleFactor_LEPTON" ;
+    m_pileupSF_name = "scaleFactor_PILEUP";	
+    m_PDFSF_name = ""; 
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
-
+      
         const string syst = m_config->custom_params_string["scale_syst"];
 
         cout << "INFO: Scale factor systematic: " << syst << endl;
@@ -87,10 +87,23 @@ bool CutFlowBoostedSL::Initialize() {
 	{
 	    m_pileupSF_name = syst;
 	}
+	else if( syst.find("PDF") != string::npos )
+ 	  {
+	    StringVector_t params_pdf;
+	    HelperFunctions::Tokenize( syst, params_pdf, ":" );
+	    if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" ); 
+	    
+	    cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl; 
+	    
+	    m_PDFSF_name = params_pdf[1] + "_" +  params_pdf[2];
+	    
+	    
+	  } // PDF
+	
 	else if( syst != "NOMINAL" )
-	{
-	  	throw runtime_error( "Unknown scale syst " + syst );
-	}  
+	  {
+	    throw runtime_error( "Unknown scale syst " + syst );
+	  }  
     }	 
     
     return success;
@@ -136,6 +149,11 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   //  const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; 
   const double scaleFactor_BTAG       = ed->property[ m_bTagSF_name ]; 
    
+
+  const double scaleFactor_PDF        = m_PDFSF_name == "" ? 1 : ed->property[ m_PDFSF_name];
+  weight_reco_level     *= scaleFactor_PDF;
+  weight_particle_level *= scaleFactor_PDF;
+
    
   // THis is what we have now (TO BE FIXED with nedeed weights)
   weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;

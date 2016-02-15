@@ -12,6 +12,25 @@ CutFlowBoostedSLParticle::~CutFlowBoostedSLParticle()
 bool CutFlowBoostedSLParticle::Initialize() {
     bool success = true;
 
+    m_PDFSF_name = "";
+    if( m_config->custom_params_string.count( "scale_syst" ) ) {
+      
+      const string syst = m_config->custom_params_string["scale_syst"];
+      
+      if( syst.find("PDF") != string::npos ) 
+	{
+             StringVector_t params_pdf;
+             HelperFunctions::Tokenize( syst, params_pdf, ":" );
+	     if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" ); 
+	     
+             cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl; 
+	    
+	     m_PDFSF_name = params_pdf[1] + "_" +  params_pdf[2];
+
+        } // PDF
+    }
+
+
     AddChannel("LPLUSJETS");  
     AddCounterName("LPLUSJETS", "particle_unweight", 6 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events after Analysis Top Cuts          ");
@@ -86,6 +105,12 @@ bool CutFlowBoostedSLParticle::Apply( EventData * ed)
     }
     
   }
+
+  double scaleFactor_PDF        = m_PDFSF_name == "" ? 1 : ed->property[ m_PDFSF_name];
+  ed->property["scaleFactor_PDF"] = scaleFactor_PDF;
+  
+  weight_particle_level *= scaleFactor_PDF;
+
   ed->property["weight_particle_level"] = weight_particle_level;
   
   
