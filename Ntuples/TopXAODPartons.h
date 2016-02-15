@@ -42,6 +42,11 @@ public :
    vector<float>   *PDFinfo_Q;
    vector<float>   *PDFinfo_XF1;
    vector<float>   *PDFinfo_XF2;
+   vector<float>   *PDF4LHC15_nlo_asvar;
+   vector<float>   *PDF4LHC15_nlo_30;
+   vector<float>   *MMHT2014nlo68cl;
+   vector<float>   *NNPDF30_nlo_as_0118;
+   vector<float>   *CT14nlo;   
    Int_t           MC_Wdecay2_from_t_pdgId;
    Int_t           MC_Wdecay2_from_tbar_pdgId;
    Int_t           MC_Wdecay1_from_tbar_pdgId;
@@ -112,6 +117,11 @@ public :
    TBranch        *b_PDFinfo_Q;   //!
    TBranch        *b_PDFinfo_XF1;   //!
    TBranch        *b_PDFinfo_XF2;   //!
+   TBranch        *b_PDF4LHC15_nlo_asvar;   //!
+   TBranch        *b_PDF4LHC15_nlo_30;   //!
+   TBranch        *b_MMHT2014nlo68cl;   //!
+   TBranch        *b_NNPDF30_nlo_as_0118;   //!
+   TBranch        *b_CT14nlo;   //!   
    TBranch        *b_MC_Wdecay2_from_t_pdgId;   //!
    TBranch        *b_MC_Wdecay2_from_tbar_pdgId;   //!
    TBranch        *b_MC_Wdecay1_from_tbar_pdgId;   //!
@@ -242,6 +252,11 @@ void TopXAODPartons::Init(TTree *tree)
    PDFinfo_Q = 0;
    PDFinfo_XF1 = 0;
    PDFinfo_XF2 = 0;
+   PDF4LHC15_nlo_asvar = 0;
+   PDF4LHC15_nlo_30 = 0;
+   MMHT2014nlo68cl = 0;
+   NNPDF30_nlo_as_0118 = 0;
+   CT14nlo = 0;   
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -264,6 +279,11 @@ void TopXAODPartons::Init(TTree *tree)
    fChain->SetBranchAddress("PDFinfo_Q", &PDFinfo_Q, &b_PDFinfo_Q);
    fChain->SetBranchAddress("PDFinfo_XF1", &PDFinfo_XF1, &b_PDFinfo_XF1);
    fChain->SetBranchAddress("PDFinfo_XF2", &PDFinfo_XF2, &b_PDFinfo_XF2);
+   fChain->SetBranchAddress("PDF4LHC15_nlo_asvar", &PDF4LHC15_nlo_asvar, &b_PDF4LHC15_nlo_asvar);
+   fChain->SetBranchAddress("PDF4LHC15_nlo_30", &PDF4LHC15_nlo_30, &b_PDF4LHC15_nlo_30);
+   fChain->SetBranchAddress("MMHT2014nlo68cl", &MMHT2014nlo68cl, &b_MMHT2014nlo68cl);
+   fChain->SetBranchAddress("NNPDF30_nlo_as_0118", &NNPDF30_nlo_as_0118, &b_NNPDF30_nlo_as_0118);
+   fChain->SetBranchAddress("CT14nlo", &CT14nlo, &b_CT14nlo);
    fChain->SetBranchAddress("MC_Wdecay2_from_t_pdgId", &MC_Wdecay2_from_t_pdgId, &b_MC_Wdecay2_from_t_pdgId);
    fChain->SetBranchAddress("MC_Wdecay2_from_tbar_pdgId", &MC_Wdecay2_from_tbar_pdgId, &b_MC_Wdecay2_from_tbar_pdgId);
    fChain->SetBranchAddress("MC_Wdecay1_from_tbar_pdgId", &MC_Wdecay1_from_tbar_pdgId, &b_MC_Wdecay1_from_tbar_pdgId);

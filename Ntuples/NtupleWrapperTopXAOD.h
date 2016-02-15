@@ -40,6 +40,7 @@ class NtupleWrapperTopXAOD : public NtupleWrapper< TopXAOD >
    float m_lumi;
    float m_lumiWeight;
    bool m_doLumiReweight;
+   bool m_doPDFReweight;
    std::string m_treeName;
    
    

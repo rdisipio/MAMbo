@@ -48,7 +48,7 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
 	 }	  
  	
    }
-
+   
    
 
   unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
@@ -75,7 +75,12 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
    m_dumper_mctruth->SetAnalysisParameters( analysisParameters );
    
-   
+   m_doPDFReweight = false;
+   if(  m_config.custom_params_string.count( "scale_syst" ) )
+   {
+	    const string syst = m_config.custom_params_string["scale_syst"];
+		m_doPDFReweight = syst.find("PDF") != string::npos;
+   }
    
 }
 
@@ -520,6 +525,14 @@ bool NtupleWrapperTopXAOD::MakeEventTruth( EventData * ed )
   m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
   m_dumper_mctruth->DumpEventCutflows( this->m_ntuple_particle, ed );
  // m_ntuple_parton->MakeEventInfo( ed );
+ //cout << "m_doPDFReweight is " << m_doPDFReweight << endl;
+  if( m_doPDFReweight ) //mr
+  {
+	  m_dumper_mctruth->DumpEventPDFWeights( this->m_ntuple_parton, ed ); //can be optimized (dumping only the selected pdf weight)
+  }
+ 
+ 
+ 
   return success;
 }
 

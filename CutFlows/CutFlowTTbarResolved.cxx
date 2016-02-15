@@ -12,7 +12,7 @@ CutFlowTTbarResolved::CutFlowTTbarResolved()
       "beforeCuts", "2j0b", "3j0b", "4j0b", "4j1b", "afterCuts"
     };
 
-
+   
 #ifdef __MOMA__
    m_moma = MoMATool::GetHandle();
    cout << "INFO: ATLAS ROOTCORE detected. MoMA tool initialized." << endl;
@@ -68,6 +68,7 @@ bool CutFlowTTbarResolved::Initialize() {
     m_bTagSF_name = "scaleFactor_BTAG_77";
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	
+	m_PDFSF_name = "";
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
 
         const string syst = m_config->custom_params_string["scale_syst"];
@@ -87,6 +88,23 @@ bool CutFlowTTbarResolved::Initialize() {
 	{
 	    m_pileupSF_name = syst;
 	}
+	else if( syst.find("PDF") == 0 ) 
+	{
+             StringVector_t params_pdf;
+             HelperFunctions::Tokenize( syst, params_pdf, ":" );
+ 	         if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" ); 
+
+             cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl; 
+
+#ifndef __USE_LHAPDF__
+			 m_PDFSF_name = params_pdf[1] + "_" +  params_pdf[2];
+            
+#else
+             int imem = atoi( params_pdf[2].c_str() );
+             m_pdf = LHAPDF::mkPDF( params_pdf[1], imem );
+
+#endif /* __USE_LHAPDF__ */
+        } // PDF
 	else if( syst != "NOMINAL" )
 	{
 	  	throw runtime_error( "Unknown scale syst " + syst );
@@ -123,21 +141,7 @@ bool CutFlowTTbarResolved::Initialize() {
 
 #endif // __MOMA__ 
 */
-        if( syst.find("PDF") == 0 ) {
-#ifndef __USE_LHAPDF__
-             throw runtime_error( "Requested systematic shift of type PDF but LHAPDF is not set. Please recompile against LHAPDF.\n" );
-#else
-             StringVector_t params_pdf;
-             HelperFunctions::Tokenize( syst, params_pdf, ":" );
- 	     if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" ); 
 
-             cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl; 
-
-             int imem = atoi( params_pdf[2].c_str() );
-             m_pdf = LHAPDF::mkPDF( params_pdf[1], imem );
-
-#endif /* __USE_LHAPDF__ */
-        } // PDF
 
     }    
 
@@ -282,18 +286,18 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 //         const double scaleFactor_ELE        = ed->property["scaleFactor_ELE"];
 //         const double scaleFactor_MUON       = ed->property["scaleFactor_MUON"];
           double scaleFactor_LEPTON     = ed->property[ m_leptonSF_name];
-          double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
+          double scaleFactor_BTAG       = ed->property[ m_bTagSF_name];
+  //        double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
 //         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
-         const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
-         const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
+  //       const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
+ //        const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
 /*#ifdef __MOMA__
            const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); // to be changed!!
 //         const double scaleFactor_BTAG       = ( m_syst_type == NOMINAL ) ? ed->property["scaleFactor_BTAG"] : m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); 
 //         const double scaleFactor_BTAG_ntup  = ed->property["scaleFactor_BTAG"]; 
 //         cout << "DEBUG: btagsf(OTF) = " << scaleFactor_BTAG << "  |  btagsf(NTUP) = " << scaleFactor_BTAG_ntup << endl;
 #else*/
-         double scaleFactor_BTAG       = ed->property[ m_bTagSF_name];
 //#endif
 
 #ifdef __USE_LHAPDF__
@@ -301,11 +305,14 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          weight_reco_level     *= scaleFactor_PDF;
          weight_particle_level *= scaleFactor_PDF;
 #else
-        const double scaleFactor_PDF = 1.0;
+         const double scaleFactor_PDF        = m_PDFSF_name == "" ? 1 : ed->property[ m_PDFSF_name];
+         weight_reco_level     *= scaleFactor_PDF;
+         weight_particle_level *= scaleFactor_PDF;
+	
 #endif
 
 	
-
+   // cout  << "Debug: pdf weight for " << m_PDFSF_name << " is " << scaleFactor_PDF << endl;
 	// to be fixed
 	weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP;
 

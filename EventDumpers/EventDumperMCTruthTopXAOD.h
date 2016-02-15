@@ -348,6 +348,53 @@ class EventDumperMCTruthTopXAOD
 
        return success;
     };
+	///////////////////////////
+    template< class T >
+    bool DumpEventPDFWeights( const T * ntuple_partons, EventData * ed )
+    {
+       int success = true;
+	   //PDF4LHC15_nlo_asvar
+	   for( int i = 0; i < ntuple_partons->PDF4LHC15_nlo_asvar->size(); ++i )
+	   {
+		   char weight_name[ 100 ];
+		   sprintf( weight_name, "PDF4LHC15_nlo_asvar_%i", i );
+		//   cout << "Adding variation " << i << " to set PDF4LHC15_nlo_asvar: " << weight_name << " = " << ntuple_partons->PDF4LHC15_nlo_asvar->at( i ) << endl;
+		   ed->property[ weight_name ] = ntuple_partons->PDF4LHC15_nlo_asvar->at( i );
+	   }
+	   
+	   for( int i = 0; i < ntuple_partons->PDF4LHC15_nlo_30->size(); ++i )
+	   {
+		   char weight_name[ 100 ];
+		   sprintf( weight_name, "PDF4LHC15_nlo_30_%i", i );
+   		   ed->property[ weight_name ] = ntuple_partons->PDF4LHC15_nlo_30->at( i );
+
+	   }
+	   for( int i = 0; i < ntuple_partons->MMHT2014nlo68cl->size(); ++i )
+	   {
+		   char weight_name[ 100 ];
+		   sprintf( weight_name, "MMHT2014nlo68cl_%i", i );
+		   ed->property[ weight_name ] = ntuple_partons->MMHT2014nlo68cl->at( i );
+	   }
+	   for( int i = 0; i < ntuple_partons->NNPDF30_nlo_as_0118->size(); ++i )
+	   {
+		   char weight_name[ 100 ];
+		   sprintf( weight_name, "NNPDF30_nlo_as_0118_%i", i );
+		   ed->property[ weight_name ] = ntuple_partons->NNPDF30_nlo_as_0118->at( i );
+	   }
+	   for( int i = 0; i < ntuple_partons->CT14nlo->size(); ++i )
+	   {
+		   char weight_name[ 100 ];
+		   sprintf( weight_name, "CT14nlo_%i", i );
+		   ed->property[ weight_name ] = ntuple_partons->CT14nlo->at( i );
+	   }
+	   
+	   
+
+       return success;
+    };
+	
+	
+	
 };
 
 #endif /** __eVENTDUMPER_MCTRUTH_TOPMINISL_RESOLVED_H__ */

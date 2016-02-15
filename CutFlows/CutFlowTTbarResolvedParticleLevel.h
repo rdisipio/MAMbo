@@ -59,7 +59,7 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
 
     LHAPDF::PDF * m_pdf;
 #endif
-
+	string m_PDFSF_name;
  private:
    vector<string> m_alias;
    std::map < string, double > m_VarField;

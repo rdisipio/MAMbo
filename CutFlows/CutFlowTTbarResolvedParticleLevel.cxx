@@ -36,25 +36,28 @@ bool CutFlowTTbarResolvedParticleLevel::Initialize()
 {
     bool success = true;
 
+	m_PDFSF_name = "";
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
 
       const string syst = m_config->custom_params_string["scale_syst"];
 
-      if( syst.find("PDF") == 0 ) {
+    if( syst.find("PDF") == 0 ) 
+	{
+             StringVector_t params_pdf;
+             HelperFunctions::Tokenize( syst, params_pdf, ":" );
+ 	         if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" ); 
+
+             cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl; 
+
 #ifndef __USE_LHAPDF__
-        throw runtime_error( "Requested systematic shift of type PDF but LHAPDF is not set. Please recompile against LHAPDF.\n" );
+			 m_PDFSF_name = params_pdf[1] + "_" +  params_pdf[2];
+            
 #else
-        StringVector_t params_pdf;
-        HelperFunctions::Tokenize( syst, params_pdf, ":" );
-        if( params_pdf.size() != 3 ) throw runtime_error( "PDF parameters malformed. Format should be PDF:SET:VARIATION\n" );
-
-        cout << "INFO: PDF reweighting on-the-fly: set: " << params_pdf[1] << " variation: " << params_pdf[2]  << endl;
-
-        int imem = atoi( params_pdf[2].c_str() );
-        m_pdf = LHAPDF::mkPDF( params_pdf[1], imem );
+             int imem = atoi( params_pdf[2].c_str() );
+             m_pdf = LHAPDF::mkPDF( params_pdf[1], imem );
 
 #endif /* __USE_LHAPDF__ */
-      } // PDF
+        } // PDF
     }
 
     AddChannel("LPLUSJETS");
@@ -163,7 +166,9 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 	weight_particle_level *= scaleFactor_PDF;
 	ed->property["scaleFactor_PDF"] = scaleFactor_PDF;
 	#else
-	const double scaleFactor_PDF = 1.0;
+		  double scaleFactor_PDF        = m_PDFSF_name == "" ? 1 : ed->property[ m_PDFSF_name];
+		weight_particle_level *= scaleFactor_PDF;
+		ed->property["scaleFactor_PDF"] = scaleFactor_PDF;
 	#endif
 
 
@@ -298,8 +303,8 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
     const bool passed_resolved_ejets = ed->property["passed_resolved_ejets_2j0b"]; ///Preselection done in AT for el-channel
     const bool passed_resolved_mujets = ed->property["passed_resolved_mujets_2j0b"]; ///Preselection done in AT for mu-channel  
     const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );   
-    cout << "Debug: 	passed_resolved_ejets = " << passed_resolved_ejets << " and el_n = " << el_n << endl;
-    cout << "Debug: 	passed_resolved_mujets = " << passed_resolved_mujets << " and mu_n = " << mu_n << endl;
+  //  cout << "Debug: 	passed_resolved_ejets = " << passed_resolved_ejets << " and el_n = " << el_n << endl;
+//    cout << "Debug: 	passed_resolved_mujets = " << passed_resolved_mujets << " and mu_n = " << mu_n << endl;
     if( !analysistop_cutflow )   return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );

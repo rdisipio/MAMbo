@@ -40,7 +40,7 @@ class NtupleWrapperTopXAODParticles : public NtupleWrapper< TopXAODParticles >
    float m_lumi;
    float m_lumiWeight;
    bool m_doLumiReweight;
-   
+   bool m_doPDFReweight;
    
    #ifdef __MOMA__
     MoMATool                * m_moma;

@@ -64,7 +64,13 @@ NtupleWrapperTopXAODParticles::NtupleWrapperTopXAODParticles( const AnalysisPara
 
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
    
-   
+      
+   m_doPDFReweight = false;
+   if(  m_config.custom_params_string.count( "scale_syst" ) )
+   {
+	    const string syst = m_config.custom_params_string["scale_syst"];
+		m_doPDFReweight = syst.find("PDF") != string::npos ;
+   }
 
 //   cout<<"Event Number "<<m_ntuple_particle->eventNumber<<endl;
 
@@ -128,7 +134,8 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
 	if(!(ed->info.eventNumber % 1000)) cout << "Debug: lumiweight for event " << ed->info.eventNumber << ", run " << ed->info.runNumber << " is " << m_lumiWeight << endl;
    	ed->info.mcWeight *= m_lumiWeight;
    }
-#endif  
+#endif 
+ 
 
 
 
@@ -203,6 +210,11 @@ bool NtupleWrapperTopXAODParticles::MakeEventTruth( EventData * ed )
   m_dumper_mctruth->DumpEventMET( this->m_ntuple, ed );
   m_dumper_mctruth->DumpEventJets( this->m_ntuple, ed );
   m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
+  if( m_doPDFReweight ) //mr
+  {
+	  m_dumper_mctruth->DumpEventPDFWeights( this->m_ntuple_parton, ed ); //can be optimized (dumping only the selected pdf weight)
+  }
+ 
 
   return success;
 }
