@@ -41,7 +41,7 @@ bool CutFlowTTbarResolvedParticleLevel::Initialize()
 
       const string syst = m_config->custom_params_string["scale_syst"];
 
-    if( syst.find("PDF") == 0 ) 
+    if( syst.find("PDF") != string::npos ) 
 	{
              StringVector_t params_pdf;
              HelperFunctions::Tokenize( syst, params_pdf, ":" );

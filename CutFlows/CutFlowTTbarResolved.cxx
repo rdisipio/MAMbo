@@ -88,7 +88,7 @@ bool CutFlowTTbarResolved::Initialize() {
 	{
 	    m_pileupSF_name = syst;
 	}
-	else if( syst.find("PDF") == 0 ) 
+	else if( syst.find("PDF") != string::npos ) 
 	{
              StringVector_t params_pdf;
              HelperFunctions::Tokenize( syst, params_pdf, ":" );
