@@ -99,6 +99,8 @@ do
 					if [ $syst != "nocut" ]
 					then
 						sed -i "s|@SYST@|${syst}|"     ${params}
+					else
+						sed -i "s|@SYST@|NOMINAL|"     ${params}
 					fi
 					sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
 					sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}

@@ -9,7 +9,7 @@
     <param name="isMCSignal"        type="flag"    value="1" />
     <param name="isRealData"        type="flag"    value="0" /> 
     <param name="tagger"            type="string"  value="topTag80" />
-    <param name="scale_syst"        type="string"  value="NOMINAL" /> 
+    <param name="scale_syst"        type="string"  value="@SYST@" /> 
     <param name="lumi_reweight"     type="flag"    value="1" />
     <param name="lumifile"          type="string"  value="@NORMFILE@" />
     <param name="mcfile"            type="string"  value="@MCFILELIST@" />
