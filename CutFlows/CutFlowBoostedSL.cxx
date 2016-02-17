@@ -523,55 +523,55 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
        //**************** Exist a tagged Large-R jet with pT>300000 and |eta|<2 *************************
     
-     vector<int> FatJets;
-    for( int lj = 0 ; lj < fjet_n ; ++lj ) {
-      const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
-      const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
-      const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
-     
-      
-      int topTag = 0;
-      if(Tagger != "none")
-      topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
-      else 
-      {
-	cout<<"FATAL::Top Tagger not set in config file"<<endl;
-	exit(1);
-      }
-      //cout<<"property topTag "<<topTag<<endl;
-      if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
-	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
-	if( HadTopJetCandidate == -1 ) {
-	  HadTopJetCandidate = lj;
-	  ed->property["ParticleHadTopJetCandidate"] = lj;
-	}
-	FatJets.push_back(lj);
-
-	
-      }
-    }
-    
-    
-//     vector<int> FatJets;
+//      vector<int> FatJets;
 //     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
 //       const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
 //       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
 //       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
+//      
 //       
-//       //cout<<"property topTag "<<topTag<<endl; 
-// 
-//       /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
-//       if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
+//       int topTag = 0;
+//       if(Tagger != "none")
+//       topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
+//       else 
+//       {
+// 	cout<<"FATAL::Top Tagger not set in config file"<<endl;
+// 	exit(1);
+//       }
+//       //cout<<"property topTag "<<topTag<<endl;
+//       if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
 // 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 // 	if( HadTopJetCandidate == -1 ) {
 // 	  HadTopJetCandidate = lj;
 // 	  ed->property["ParticleHadTopJetCandidate"] = lj;
 // 	}
 // 	FatJets.push_back(lj);
+// 
 // 	
-// 	//break;
 //       }
 //     }
+//     
+    
+    vector<int> FatJets;
+    for( int lj = 0 ; lj < fjet_n ; ++lj ) {
+      const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
+      const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
+      const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
+      
+      //cout<<"property topTag "<<topTag<<endl; 
+
+      /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
+      if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
+	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
+	if( HadTopJetCandidate == -1 ) {
+	  HadTopJetCandidate = lj;
+	  ed->property["ParticleHadTopJetCandidate"] = lj;
+	}
+	FatJets.push_back(lj);
+	
+	//break;
+      }
+    }
     
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
