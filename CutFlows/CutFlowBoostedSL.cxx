@@ -127,7 +127,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   if( m_config->custom_params_string.count( "stressTest" ) ) //mr
   {
     stressTestType = m_config->custom_params_string["stressTest"];
-    if( stressTestType != "none" && stressTestType != "tt_m" && stressTestType != "pt_t" )
+    if( stressTestType != "none" && stressTestType != "tt_m" && stressTestType != "t_pt" && stressTestType != "tt_mBump" && stressTestType != "tt_rapidity" )
     {
       cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
       stressTestType = "none";
@@ -166,7 +166,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   if( !isRealData && !isQCD ) {
     
-    if( isStressTest )//mr
+    if( isStressTest )
     {
       TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
       TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
@@ -174,20 +174,33 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
       if( stressTestType == "tt_m" )
       {
 	if(tt.M() > 400000) cout<<"weight_reco_level "<<weight_reco_level;
-	weight_reco_level *= (0.9 + 0.00036 *  tt.M()/GeV);
-	weight_particle_level *= (0.9 + 0.00036 *  tt.M()/GeV);
+	weight_reco_level *= (0.9 + tt.M()/(700 * GeV));
+	weight_particle_level *= (0.9 + tt.M()/(700 * GeV));
         if(tt.M() > 400000) cout<<" weight_reco_level "<<weight_reco_level<<endl;
 	
       }
-      if( stressTestType == "pt_t" )
+      if( stressTestType == "t_pt" )
       {
+	
 	double pt_average = (t1.Pt() + t2.Pt()) / 2.;  
-	weight_reco_level *= (1.0 +  1/600. * (pt_average/GeV - 200));
-	weight_particle_level *= (1.0 +  1/600. * (pt_average/GeV - 200));
+	weight_reco_level *= (1.0 +  1/400. * (pt_average/GeV - 200));
+	weight_particle_level *= (1.0 +  1/400. * (pt_average/GeV - 200));
 	
 	
       }
-       
+       if( stressTestType == "tt_mBump" )
+      {
+	double delta = tt.M() - 800000;
+	double sigma = 100000;
+	weight_reco_level *= 1 + 2 * TMath::Exp( -1 * pow( delta/sigma, 2) );
+	weight_particle_level *= 1 + 2*TMath::Exp( -1 *  pow( delta/sigma, 2) );
+      }
+      if( stressTestType == "tt_rapidity" )
+      {
+	//Rapidity gaussian reweight
+	weight_reco_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+	weight_particle_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+      }
     }
   }
   
@@ -305,10 +318,9 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     if(isQCD){
       double qcd_weight = m_scalerFakes->GetFakesWeight( ed );
       cout<<"Qcd weight "<<qcd_weight<<endl;
-      if(qcd_weight != 0)
-	weight     *= qcd_weight;
-      else
-	cout<<"WARNING:: QCD weight 0"<<endl;
+      
+      weight     *= qcd_weight;
+      if(qcd_weight == 0) cout<<"WARNING:: QCD weight 0"<<endl;
       ed->property["weight_reco_level"] *= qcd_weight;
       m_hm->GetHistogram( "reco/QCDcontrol/topH/QCDweight" )->Fill(qcd_weight, 1. );
       
@@ -511,51 +523,55 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
        //**************** Exist a tagged Large-R jet with pT>300000 and |eta|<2 *************************
     
-    
-//     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
-//       const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
-//       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
-//       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
-//      
-//       
-//       int topTag = 0;
-//       if(Tagger != "none")
-//       topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
-//       else 
-//       {
-// 	cout<<"FATAL::Top Tagger not set in config file"<<endl;
-// 	exit(1);
-//       }
-//       //cout<<"property topTag "<<topTag<<endl;
-//       if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
-// 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
-// 	HadTopJetCandidate = lj;
-// 	ed->property["ParticleHadTopJetCandidate"] = lj;
-// 
-// 
-// 	break;
-//       }
-//     }
-    vector<int> FatJets;
+     vector<int> FatJets;
     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
       const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
+     
       
-      //cout<<"property topTag "<<topTag<<endl; 
-
-      /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
-      if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
+      int topTag = 0;
+      if(Tagger != "none")
+      topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
+      else 
+      {
+	cout<<"FATAL::Top Tagger not set in config file"<<endl;
+	exit(1);
+      }
+      //cout<<"property topTag "<<topTag<<endl;
+      if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	if( HadTopJetCandidate == -1 ) {
 	  HadTopJetCandidate = lj;
 	  ed->property["ParticleHadTopJetCandidate"] = lj;
 	}
 	FatJets.push_back(lj);
+
 	
-	//break;
       }
     }
+    
+    
+//     vector<int> FatJets;
+//     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
+//       const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
+//       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
+//       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
+//       
+//       //cout<<"property topTag "<<topTag<<endl; 
+// 
+//       /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
+//       if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
+// 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
+// 	if( HadTopJetCandidate == -1 ) {
+// 	  HadTopJetCandidate = lj;
+// 	  ed->property["ParticleHadTopJetCandidate"] = lj;
+// 	}
+// 	FatJets.push_back(lj);
+// 	
+// 	//break;
+//       }
+//     }
     
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
