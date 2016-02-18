@@ -121,7 +121,7 @@ do
 				fi
 
 			
-				sendOnce=1
+				sendOnce=0
 			#set -x
 
 

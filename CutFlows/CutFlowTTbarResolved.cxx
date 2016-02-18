@@ -857,7 +857,11 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     if (isQCD )
     {
 	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights" )->Fill( qcd_weight );
-	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights_1" )->Fill( qcd_weight );		
+	    m_hm->GetHistogram( "reco/cutflow/afterCuts/fakes_weights_1" )->Fill( qcd_weight );
+		if( fabs( qcd_weight ) < 1.e-3)
+		{
+			cout << "Very small qcd weight: " << std::setprecision(6) << std::fixed << qcd_weight << endl;
+		}
 		if( values.ETmiss < minMet )
 		{
 			
