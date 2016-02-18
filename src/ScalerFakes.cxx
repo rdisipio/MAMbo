@@ -142,7 +142,7 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
 	{
 		
 		ef = m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_DPHI, pt_lep*1e-3, abs(dPhi_met_lep), true);
-		ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_ETA, abs(pt_lep), abs(eta_lep), true);
+		ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_ETA, pt_lep*1e-3 , abs(eta_lep), true);
 		ef = TMath::Sqrt(ef);
 
 		ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_NJETS_NBTAG, njet, ntag, true);
