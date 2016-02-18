@@ -163,7 +163,8 @@ int FakeEffProvider::GetRightBin2D(TEfficiency* eff, double vx, double vy) {
   else if (vx >= x_max) {
     vx=h->GetXaxis()->GetBinLowEdge(h->GetNbinsX());
   }
-  else if (vy < y_min) {
+  
+ if (vy < y_min) {
     Warning("Utils::FakeEffProvider", "GetRightBin2D: vy < y_min !!! returning value from the first y-bin");
     vy=y_min;
   }
