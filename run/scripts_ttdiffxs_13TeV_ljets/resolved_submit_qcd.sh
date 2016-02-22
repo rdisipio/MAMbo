@@ -7,7 +7,7 @@ sourcedir=$PWD
 filelistdir=filelists_TTDIFFXS_55
 for method in MM
 do
-	for ch in el mu
+	for ch in el
 	do
 	#  [[ ${ch} == "el" ]] && stream="Egamma"
 	#  [[ ${ch} == "mu" ]] && stream="Muons"

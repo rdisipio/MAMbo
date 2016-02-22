@@ -1,9 +1,89 @@
 #!/bin/bash
 
+function MakePDFSysts
+{
+
+	systs=""
+	#ct14nlo
+	for i in {0..56}
+	do
+		if [ $# == 1 ]
+		then
+			if [ $1 != "ct14nlo" ]
+			then
+				break
+			fi
+		fi
+		systs="PDF_CT14nlo_${i}_nominal ${systs}"		
+		systs="PDF_CT14nlo_${i}_nocut ${systs}"		
+	done
+	#NNPDF30_nlo_as_0118
+	for i in {0..100}
+	do
+		if [ $# == 1 ]
+		then
+			if [ $1 != "NNPDF30_nlo_as_0118" ]
+			then
+				break
+			fi
+		fi	
+		systs="PDF_NNPDF30_nlo_as_0118_${i}_nominal ${systs}"
+		systs="PDF_NNPDF30_nlo_as_0118_${i}_nocut ${systs}"
+	done
+	#MMHT2014nlo68cl
+	for i in {0..50}
+	do
+		if [ $# == 1 ]
+		then
+			if [ $1 != "MMHT2014nlo68cl" ]
+			then
+				break
+			fi
+		fi	
+		systs="PDF_MMHT2014nlo68cl_${i}_nominal ${systs}"
+		systs="PDF_MMHT2014nlo68cl_${i}_nocut ${systs}"
+	done
+	#PDF4LHC15_nlo_30
+	for i in {0..30}
+	do
+		if [ $# == 1 ]
+		then
+			if [ $1 != "PDF4LHC15_nlo_30" ]
+			then
+				break
+			fi
+		fi
+		systs="PDF4LHC15_nlo_30_${i}_nominal ${systs}"
+		systs="PDF4LHC15_nlo_30_${i}_nocut ${systs}"
+	done
+	#PDF4LHC15_nlo_asvar
+	for i in {0..1}
+	do
+		if [ $# == 1 ]
+		then
+			if [ $1 != "PDF4LHC15_nlo_asvar" ]
+			then
+				break
+			fi
+		fi
+		systs="PDF4LHC15_nlo_asvar_${i}_nominal ${systs}"
+		systs="PDF4LHC15_nlo_asvar_${i}_nocut ${systs}"
+	done
+	echo $systs
+}
+
+
+pdfsysts=`MakePDFSysts PDF4LHC15_nlo_30`
+
+
+
+
+
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
 systs="nocut"
+systs=$pdfsysts
 #systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat | grep extra`
 # | egrep -e "EG|MUONS"`
 #systs=`cat  resolved_scale_systematics.dat | grep lepton`
@@ -51,8 +131,8 @@ do
 	
 EOF
 			chmod +x $script
-			./$script
-#			qsub -q T3_BO_LOCAL $script
+	#		./$script
+			qsub -q T3_BO_LOCAL $script
 		done
 
 
