@@ -163,13 +163,14 @@ def AddOverflowToLastBin_TH1( h ):
    h.SetBinContent( N, yNew )
    h.SetBinError( N, eNew )
 
-
+norm = False
 ####################################################
 
 
 def FetchHistograms():
     histograms = {}
-
+   
+    
     for sample, sample_config in samples_configuration.iteritems():
        infile = input_files[sample]
        if infile == None:
@@ -281,9 +282,61 @@ def MakeStackedHistogram( histograms ):
 #    stack.SetMaximum( hmax )
 
     return stack
- 
-
 ####################################################
+
+
+def MakeStackedHistogram( histograms , normaliztion_factor ):
+    stack = THStack( "stack", "Prediction" )
+
+    # order samples by id in reversed order
+    ordered_samples = [ "" for i in range(len(histograms)) ]
+
+    for sample in histograms.keys():
+        if samples_configuration[sample].type in [ SampleType.data, SampleType.uncertainty, SampleType.unknown ]: continue
+        id = samples_configuration[sample].id
+        ordered_samples[id] = sample
+    ordered_samples = [ s for s in ordered_samples if s != "" ]  
+    ordered_samples = ordered_samples[::-1]
+
+    for sample in ordered_samples:
+       histograms[sample].Scale(1./normaliztion_factor)
+       stack.Add( histograms[sample] )
+
+#    stack.SetMaximum( hmax )
+
+    return stack
+
+#####################################################  
+#def NormalizeDataUnc( histograms):
+
+         
+    #IntegralData = histograms['data'].Integral("width")
+    #if IntegralData !=0 :       
+       #histograms['data'].Scale(1./IntegralData)   
+  
+    #count = 0
+    #ScaleUnc= histograms['DiTop'].Integral("width")
+    #if ScaleUnc != 0:
+       #while count < (histograms['DiTop'].GetNbinsX()):
+         #histograms['uncertainty'].SetPoint(count, hsum.GetBinCenter(count+1) , hsum.GetBinContent(count+1))
+         #histograms['uncertainty'].SetPointError(count, histograms['uncertainty'].GetErrorXhigh(count),histograms['uncertainty'].GetErrorXlow(count), histograms['uncertainty'].GetErrorYhigh(count) * (1./ScaleUnc), histograms['uncertainty'].GetErrorYlow(count) * (1./ScaleUnc))
+         #count += 1
+  
+######################################################
+#def SubtractBackground( histograms ):
+    
+    #h = histograms['DiTop'].Clone()
+    #for sample in histograms.keys():
+        #if samples_configuration[sample].type in [ SampleType.data, SampleType.signal, SampleType.uncertainty, SampleType.unknown ]: continue
+        #h.Add(histograms[sample])
+    
+    #IntegralSignal = h.Integral("width")
+    #if IntegralSignal != 0 :
+      #h.Scale(1/IntegralSignal)
+
+    #return h
+
+#####################################################
 
 
 
@@ -315,20 +368,21 @@ def SumPredictionHistograms( histograms ):
 
 
 def DoPlot( plot, iLumi = 1. ):
-
+    global norm
     print "INFO: plotting %s with %s scale" % ( plot.hname, PlotScale.ToString(plot.scale) )
 
     histograms = FetchHistograms()
 
     #ScaleToIntegratedLuminosity( histograms, iLumi )
 
+   
     DivideByBinWidth( histograms )
-
     SetHistogramsStyle( histograms )
 
-    sfmax = 1.4 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 100.
+    sfmax = 2.2 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 100.
     sfmin = 0.0 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 1e-2
     SetMaximum( histograms, 'data', sfmax, sfmin )
+    
 
     histograms['data'].GetYaxis().SetTitle( plot.ytitle )
 
@@ -340,11 +394,24 @@ def DoPlot( plot, iLumi = 1. ):
     pad1.SetLogy(False)
     pad1.SetLogx(False)
 
-    hstack = MakeStackedHistogram( histograms )
+    normalize=1.
     hsum = SumPredictionHistograms( histograms )
-
- 
-
+    if norm == True:
+     StackIntegral = hsum.Integral("width")
+     if StackIntegral != 0:
+       normalize = StackIntegral
+     DataIntegral = histograms['data'].Integral("width")
+     if DataIntegral != 0:
+        histograms['data'].Scale(1./DataIntegral)
+     SetMaximum( histograms, 'data', sfmax, sfmin )
+     for bin in range(hsum.GetNbinsX()):
+        histograms['uncertainty'].SetPoint(bin, hsum.GetBinCenter(bin+1), hsum.GetBinContent(bin+1)/normalize)      
+        histograms['uncertainty'].SetPointError(bin, histograms['uncertainty'].GetErrorXhigh(bin),histograms['uncertainty'].GetErrorXlow(bin), histograms['uncertainty'].GetErrorYhigh(bin) /normalize, histograms['uncertainty'].GetErrorYlow(bin)/normalize)
+    
+    hstack = MakeStackedHistogram( histograms, normalize )
+  
+    
+      
     if histograms['data'].Class() in [ TH1F.Class(), TH1D.Class() ]:
        histograms['data'].Draw()
        hstack.Draw( 'hist same' )
@@ -400,14 +467,17 @@ def DoPlot( plot, iLumi = 1. ):
     ## make data/prediction ratio
 
     pad1.cd()
+    
 
-    frame, tot_unc, ratio = DrawRatio( histograms['data'], histograms['uncertainty'], plot.xtitle )    
+    frame, tot_unc, ratio = DrawRatio( histograms['data'], histograms['uncertainty'], plot.xtitle )
+       
 
     if plot.scale in [ PlotScale.bilog, PlotScale.logx ]: 
        pad1.SetLogx(True)
        pad1.SetLogy(False)
        frame.GetXaxis().SetMoreLogLabels(True)
        frame.GetXaxis().SetNoExponent(True)
+       
 
     ## save image
 
@@ -425,11 +495,16 @@ if __name__ == "__main__":
    parser = optparse.OptionParser( usage = "%prog [options] configfile.xml" )
    parser.add_option( "-b", "--batch", help="Batch mode [%default]", dest="batch", default=True )
    parser.add_option( "-l", "--lumi",  help="Integrated luminosity [%default]", dest="ilumi", default=20300 )
+   parser.add_option( "-n", "--normalization",  help="Normalize Sample", dest="normalization", default=False )
    (opts, args) = parser.parse_args()
  
    if opts.batch:
         gROOT.SetBatch(True)
-
+   
+   norm=False
+   if opts.normalization:
+        norm=True
+       
    configFileName = sys.argv[-1]
 
    plots_configuration, samples_configuration, input_files = ReadConfiguration( configFileName )
