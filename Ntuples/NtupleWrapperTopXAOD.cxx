@@ -14,6 +14,9 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
   m_ntuple_parton = NULL;
   m_dumper_mctruth = NULL;
   m_treeName = m_config.treeName;
+  m_doLumiReweight = 0;
+  m_lumi = 1;
+  m_lumiWeight = 1;
 
   if( isData ) return;
     
@@ -48,7 +51,7 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
 	 }	  
  	
    }
-   
+
    
 
   unsigned long isMCSignal = m_config.custom_params_flag["isMCSignal"];
@@ -75,12 +78,7 @@ NtupleWrapperTopXAOD::NtupleWrapperTopXAOD( const AnalysisParams_t analysisParam
    m_dumper_mctruth->SetNtupleParton( m_ntuple_parton ); 
    m_dumper_mctruth->SetAnalysisParameters( analysisParameters );
    
-   m_doPDFReweight = false;
-   if(  m_config.custom_params_string.count( "scale_syst" ) )
-   {
-	    const string syst = m_config.custom_params_string["scale_syst"];
-		m_doPDFReweight = syst.find("PDF") != string::npos;
-   }
+   
    
 }
 
@@ -356,6 +354,7 @@ bool NtupleWrapperTopXAOD::MakeEventLeptons( EventData * ed )
     ed->electrons.E.push_back(   GET_VALUE_VECTOR( el_e,   i ) );
     ed->electrons.q.push_back(   GET_VALUE_VECTOR( el_charge, i ) );
     if( m_ntuple->el_isTight ) ed->electrons.property[ "tight" ].push_back( (int)GET_VALUE_VECTOR( el_isTight, i ) );
+    if( m_ntuple->el_cl_eta )  ed->electrons.property[ "el_cl_eta" ].push_back(GET_VALUE_VECTOR( el_cl_eta, i ) );
 
     ed->leptons.pT.push_back(  GET_VALUE_VECTOR( el_pt,  i ) );
     ed->leptons.eta.push_back( GET_VALUE_VECTOR( el_eta, i ) );
@@ -364,6 +363,7 @@ bool NtupleWrapperTopXAOD::MakeEventLeptons( EventData * ed )
     ed->leptons.q.push_back(   GET_VALUE_VECTOR( el_charge, i ) );
    // cout << "Debug: electron " << i+1 << " is tight = " << (int) GET_VALUE_VECTOR( el_isTight, i ) << endl;
     if( m_ntuple->el_isTight ) ed->leptons.property[ "tight" ].push_back( (int)GET_VALUE_VECTOR( el_isTight, i ) );
+    if( m_ntuple->el_cl_eta )  ed->leptons.property[ "el_cl_eta" ].push_back(GET_VALUE_VECTOR( el_cl_eta, i ) );
   }
 
 
@@ -525,14 +525,6 @@ bool NtupleWrapperTopXAOD::MakeEventTruth( EventData * ed )
   m_dumper_mctruth->DumpEventMCTruth( this->m_ntuple_parton, ed );
   m_dumper_mctruth->DumpEventCutflows( this->m_ntuple_particle, ed );
  // m_ntuple_parton->MakeEventInfo( ed );
- //cout << "m_doPDFReweight is " << m_doPDFReweight << endl;
-  if( m_doPDFReweight ) //mr
-  {
-	  m_dumper_mctruth->DumpEventPDFWeights( this->m_ntuple_parton, ed ); //can be optimized (dumping only the selected pdf weight)
-  }
- 
- 
- 
   return success;
 }
 
