@@ -1,6 +1,7 @@
 #!/bin/bash
 
 analysis=tt_diffxs_13TeV
+production=TTDIFFXS_55
 
 dsid=410000
 [ ! -z $1 ] && dsid=$1
@@ -8,8 +9,10 @@ dsid=410000
 decay=ljets
 [ ! -z $2 ] && decay=$2
 
-nomalizationfile=${MAMBODIR}/share/data/NEvents13TeV/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r6765_r6282_p2442.evt.n
-sysname_file=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/ScaleFactorSys_boosted.txt
+normalizationdir=${MAMBODIR}/share/data/NEvents_${production}
+normalizationfile=$normalizationdir/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.evt.n
+sysname_file=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/boosted_reduced_systematics.txt
+lumi=3209.05
 
 for ch in el mu
 do
@@ -21,19 +24,24 @@ do
      [ $ch == "el" ] && ch_sys="_MU_"
      [ $ch == "mu" ] && ch_sys="_EL_"
       
-     filelist=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_3/generator.txt
-     filelist_mc=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/filelists_TTDIFFXS_3/generator.txt
+     filelistdir=${MAMBODIR}"/run/scripts_ttdiffxs_13TeV_ljets/filelists_"${production}
+     filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+     filelist_mc=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
 
      while read syst 
      do
+     
+       sys_name="NOMINAL"
+       tree_name="nominal"
+       
        for flist in $(ls ${filelist}.??)
        do
           if [[ "x$syst" == "x#"* ]]; then
              continue
           fi
-          if [[ ${syst} == *${ch_sys}* ]]; then
-             continue
-          fi
+#           if [[ ${syst} == *${ch_sys}* ]]; then
+#              continue
+#           fi
      
           batchid=$(echo ${flist} | grep -oE "[^.]+$")
 
@@ -44,14 +52,23 @@ do
 
  	  params=${MAMBODIR}/run/Boosted13TeV_${ch}.${syst}.${decay}.${batchid}.xml
           cp ${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/Boosted13TeV.sys.xml.template ${params}
+          
+          if [[ ${syst} == "scaleFactor_"* ]]; then
+           sys_name=${syst}
+          else
+           tree_name=${syst}
+          fi
 
           sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
           sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
-          sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
-          sed -i "s|@SYST@|${syst}|"  ${params}
+          sed -i "s|@NORMFILE@|${normalizationfile}|"  ${params}
+          sed -i "s|@LUMI@|${lumi}|" ${params}
+          sed -i "s|@TREE@|${tree_name}|"  ${params}
+          sed -i "s|@SYST@|${sys_name}|"  ${params}
          
-          mkdir -p ${MAMBODIR}/run/output/${syst}
-          outfile=${syst}/${tag}.histograms.root.${batchid}
+          outdir="prod_55_newBinning/"${syst}
+          mkdir -p ${MAMBODIR}/run/output/${outdir}
+          outfile=${outdir}/${tag}.histograms.root.${batchid}
           jobname=${tag}.${batchid}
 
           echo ${params}  
