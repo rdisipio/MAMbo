@@ -29,7 +29,7 @@ hpath="LPLUSJETS_cutflow_reco_weighted"
 hpath_data="LPLUSJETS_cutflow_reco_unweight"
 ########################################
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+#the configuration is the same used for MAMbo-makePlots.py
 
 def ReadConfiguration( configFileName ):
    with open( configFileName, 'rt') as f:
