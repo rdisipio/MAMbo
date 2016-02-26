@@ -299,28 +299,14 @@ def MakeStackedHistogram( histograms , normaliztion_factor ):
     ordered_samples = ordered_samples[::-1]
 
     for sample in ordered_samples:
-       histograms[sample].Scale(1./normaliztion_factor)
+       histograms[sample].Scale(normaliztion_factor)
        stack.Add( histograms[sample] )
 
 #    stack.SetMaximum( hmax )
 
     return stack
 
-#####################################################  
-#def NormalizeDataUnc( histograms):
 
-         
-    #IntegralData = histograms['data'].Integral("width")
-    #if IntegralData !=0 :       
-       #histograms['data'].Scale(1./IntegralData)   
-  
-    #count = 0
-    #ScaleUnc= histograms['DiTop'].Integral("width")
-    #if ScaleUnc != 0:
-       #while count < (histograms['DiTop'].GetNbinsX()):
-         #histograms['uncertainty'].SetPoint(count, hsum.GetBinCenter(count+1) , hsum.GetBinContent(count+1))
-         #histograms['uncertainty'].SetPointError(count, histograms['uncertainty'].GetErrorXhigh(count),histograms['uncertainty'].GetErrorXlow(count), histograms['uncertainty'].GetErrorYhigh(count) * (1./ScaleUnc), histograms['uncertainty'].GetErrorYlow(count) * (1./ScaleUnc))
-         #count += 1
   
 ######################################################
 #def SubtractBackground( histograms ):
@@ -398,15 +384,12 @@ def DoPlot( plot, iLumi = 1. ):
     hsum = SumPredictionHistograms( histograms )
     if norm == True:
      StackIntegral = hsum.Integral("width")
-     if StackIntegral != 0:
-       normalize = StackIntegral
      DataIntegral = histograms['data'].Integral("width")
-     if DataIntegral != 0:
-        histograms['data'].Scale(1./DataIntegral)
-     SetMaximum( histograms, 'data', sfmax, sfmin )
+     if  StackIntegral != 0 :
+       normalize = DataIntegral/StackIntegral
      for bin in range(hsum.GetNbinsX()):
-        histograms['uncertainty'].SetPoint(bin, hsum.GetBinCenter(bin+1), hsum.GetBinContent(bin+1)/normalize)      
-        histograms['uncertainty'].SetPointError(bin, histograms['uncertainty'].GetErrorXhigh(bin),histograms['uncertainty'].GetErrorXlow(bin), histograms['uncertainty'].GetErrorYhigh(bin) /normalize, histograms['uncertainty'].GetErrorYlow(bin)/normalize)
+        histograms['uncertainty'].SetPoint(bin, hsum.GetBinCenter(bin+1), hsum.GetBinContent(bin+1) * normalize)      
+        histograms['uncertainty'].SetPointError(bin, histograms['uncertainty'].GetErrorXhigh(bin),histograms['uncertainty'].GetErrorXlow(bin), histograms['uncertainty'].GetErrorYhigh(bin) * normalize, histograms['uncertainty'].GetErrorYlow(bin) * normalize)
     
     hstack = MakeStackedHistogram( histograms, normalize )
   
