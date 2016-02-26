@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <histograms file="control/analysis_params/13TeV_ljets_boosted/histograms_backgrounds.xml" />
+  <samples>
+    <sample name="DiTop"     file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/nominal_sum.root" >
+      
+      <!-- SCALE FACTOR SYST  (lep+trig+pileup) -->
+<!--      <syst name="EL_SF_ID" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_ID_DOWN.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_ID_UP.root" />
+      </syst>
+      <syst name="EL_SF_Isol" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_Isol_DOWN.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_Isol_UP.root" />
+      </syst>
+      <syst name="EL_SF_Reco" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_Reco_DOWN.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_Reco_UP.root" />
+      </syst>
+      <syst name="EL_SF_Trig" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_Trigger_DOWN.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_scaleFactor_leptonSF_EL_SF_Trigger_UP.root" />
+      </syst>-->
+      <syst name="SF_Pileup" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_pileup_DOWN.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_pileup_UP.root" />
+      </syst>
+      
+      <!-- SCALE FACTOR SYST  (btag)-->
+      <syst name="bTagSF_77_eigenvars_B_0" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_0_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_0_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_B_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_1_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_1_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_B_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_2_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_2_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_B_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_3_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_3_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_B_4" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_4_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_4_up.root" />
+       </syst> 
+       <!--<syst name="bTagSF_77_eigenvars_B_5" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_5_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_B_5_up.root" />
+       </syst> --> 
+       <syst name="bTagSF_77_eigenvars_C_0" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_0_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_0_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_C_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_1_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_1_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_C_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_2_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_2_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_C_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_3_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_C_3_up.root" />
+      </syst>
+        <syst name="bTagSF_77_eigenvars_Light_0" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_0_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_0_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_Light_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_1_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_1_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_Light_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_2_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_2_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_Light_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_3_down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_3_up.root" />
+      </syst>
+       <syst name="bTagSF_77_eigenvars_Light_4" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_4_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_4_up.root" />
+       </syst> 
+       <syst name="bTagSF_77_eigenvars_Light_5" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_5_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_5_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_6" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_6_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_6_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_7" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_7_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_7_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_8" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_8_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_8_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_9" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_9_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_9_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_10" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_10_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_10_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_11" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_11_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_11_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_12" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_12_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_12_up.root" />
+       </syst>
+       <syst name="bTagSF_77_eigenvars_Light_13" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_13_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_eigenvars_Light_13_up.root" />
+       </syst>
+       <syst name="bTagSF_77_extrapolation_from_charm" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_extrapolation_from_charm_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_extrapolation_from_charm_up.root" />
+       </syst>
+       <syst name="bTagSF_77_extrapolation" type="two_sided" >
+	 <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_extrapolation_down.root" />
+	 <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_scaleFactor_bTagSF_77_extrapolation_up.root" />
+       </syst>
+       
+      <!-- LARGE-R JET  SYST   -->
+     
+      <!-- <syst name="LARGERJET_JET_Top_CrossCalib" type="two_sided" >
+	   <shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_JET_Top_CrossCalib__1down.root" />
+	   <shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_JET_Top_CrossCalib__1up.root" />
+      </syst>
+      <syst name="LARGERJET_JET_Top_Run1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_JET_Top_Run1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_JET_Top_Run1__1up.root" />
+      </syst>-->
+      
+<!--      <syst name="LARGERJET_SplitScales1_JET_Top_CrossCalib" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_CrossCalib__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_CrossCalib__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales1_JET_Top_Run1_mass" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_Run1_mass__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_Run1_mass__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales1_JET_Top_Run1_pT" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_Run1_pT__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_Run1_pT__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales1_JET_Top_Run1_Tau32" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_Run1_Tau32__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales1_JET_Top_Run1_Tau32__1up.root" />
+      </syst>-->
+      <syst name="LARGERJET_SplitScales2_JET_Top_CrossCalib_mass" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_CrossCalib_mass__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_CrossCalib_mass__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales2_JET_Top_CrossCalib_pT" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_CrossCalib_pT__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_CrossCalib_pT__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales2_JET_Top_CrossCalib_Tau32" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_CrossCalib_Tau32__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_CrossCalib_Tau32__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales2_JET_Top_Run1_mass" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_Run1_mass__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_Run1_mass__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales2_JET_Top_Run1_pT" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_Run1_pT__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_Run1_pT__1up.root" />
+      </syst>
+      <syst name="LARGERJET_SplitScales2_JET_Top_Run1_Tau32" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_Run1_Tau32__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_LARGERJET_SplitScales2_JET_Top_Run1_Tau32__1up.root" />
+      </syst>
+      <syst name="EG_RESOLUTION_ALL" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_EG_RESOLUTION_ALL__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_EG_RESOLUTION_ALL__1up.root" />
+      </syst>
+      <syst name="EG_SCALE_ALL" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_EG_SCALE_ALL__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_EG_SCALE_ALL__1up.root" />
+      </syst>
+      <!-- SMALL JET  SYST   -->
+      <syst name="JET_19NP_JET_BJES_Response" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_BJES_Response__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_BJES_Response__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_EffectiveNP_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_1__1up.root" />
+      </syst> 
+      <!--<syst name="JET_19NP_JET_EffectiveNP" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP__1up.root" />
+      </syst> -->
+      <syst name="JET_19NP_JET_EffectiveNP_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_2__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_2__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_EffectiveNP_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_3__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_3__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_EffectiveNP_4" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_4__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_4__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_EffectiveNP_6restTerm" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_6restTerm__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EffectiveNP_6restTerm__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_EtaIntercalibration_Modelling" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EtaIntercalibration_Modelling__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EtaIntercalibration_Modelling__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_EtaIntercalibration_TotalStat" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EtaIntercalibration_TotalStat__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_EtaIntercalibration_TotalStat__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_Flavor_Composition" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Flavor_Composition__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Flavor_Composition__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_Flavor_Response" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Flavor_Response__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Flavor_Response__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_GroupedNP_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_GroupedNP_1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_GroupedNP_1__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_Pileup_OffsetMu" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_OffsetMu__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_OffsetMu__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_Pileup_OffsetNPV" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_OffsetNPV__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_OffsetNPV__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_Pileup_PtTerm" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_PtTerm__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_PtTerm__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_Pileup_RhoTopology" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_RhoTopology__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_Pileup_RhoTopology__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_PunchThrough_MC15" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_PunchThrough_MC15__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_PunchThrough_MC15__1up.root" />
+      </syst> 
+      <syst name="JET_19NP_JET_SingleParticle_HighPt" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_SingleParticle_HighPt__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_19NP_JET_SingleParticle_HighPt__1up.root" />
+      </syst> 
+      
+      
+      
+      <!-- 3 NP scenario sys -->
+     <!-- <syst name="JET_NPScenario1_JET_GroupedNP_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_NPScenario1_JET_GroupedNP_1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario1_JET_GroupedNP_1__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario1_JET_GroupedNP_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario1_JET_GroupedNP_2__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario1_JET_GroupedNP_2__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario1_JET_GroupedNP_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario1_JET_GroupedNP_3__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario1_JET_GroupedNP_3__1up.root" />
+      </syst>  -->
+     <!-- <syst name="JET_NPScenario2_JET_GroupedNP_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario2_JET_GroupedNP_1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario2_JET_GroupedNP_1__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario2_JET_GroupedNP_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario2_JET_GroupedNP_2__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario2_JET_GroupedNP_2__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario2_JET_GroupedNP_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario2_JET_GroupedNP_3__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario2_JET_GroupedNP_3__1up.root" />
+      </syst> 
+      <syst name="JET_NPScenario3_JET_GroupedNP_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario3_JET_GroupedNP_1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario3_JET_GroupedNP_1__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario3_JET_GroupedNP_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario3_JET_GroupedNP_2__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario3_JET_GroupedNP_2__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario3_JET_GroupedNP_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario3_JET_GroupedNP_3__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario3_JET_GroupedNP_3__1up.root" />
+      </syst> 
+      <syst name="JET_NPScenario4_JET_GroupedNP_1" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario4_JET_GroupedNP_1__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario4_JET_GroupedNP_1__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario3_JET_GroupedNP_2" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario4_JET_GroupedNP_2__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario4_JET_GroupedNP_2__1up.root" />
+      </syst>
+      <syst name="JET_NPScenario3_JET_GroupedNP_3" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario4_JET_GroupedNP_3__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_35_all_updated/sum_JET_NPScenario4_JET_GroupedNP_3__1up.root" />
+      </syst> -->
+
+      <!-- OTHER  SYST   -->
+      <syst name="JET_JER_SINGLE_NP" type="one_sided" >
+        <shift side="single" file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_JET_JER_SINGLE_NP__1up.root" />
+      </syst>
+      <syst name="MET_SoftTrk_ResoPara" type="one_sided" >
+	<shift side="single" file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MET_SoftTrk_ResoPara.root" />
+      </syst>
+      <syst name="MET_SoftTrk_ResoPerp" type="one_sided" >
+	<shift side="single" file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MET_SoftTrk_ResoPerp.root" />
+      </syst>      
+      <syst name="MET_SoftTrk_Scale" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MET_SoftTrk_ScaleDown.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MET_SoftTrk_ScaleUp.root" />
+      </syst> 
+      <syst name="MUONS_ID" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MUONS_ID__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MUONS_ID__1up.root" />
+      </syst> 
+      <syst name="MUONS_MS" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MUONS_MS__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MUONS_MS__1up.root" />
+      </syst> 
+      <syst name="MUONS_SCALE" type="two_sided" >
+	<shift side="down"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MUONS_SCALE__1down.root" />
+	<shift side="up"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/sum_MUONS_SCALE__1up.root" />
+      </syst>        
+    </sample>
+
+    <sample name="SingleTop" file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/Stop_sum.root" />
+    <sample name="Wjets"     file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/Wjets_sum.root" />
+    <sample name="Zjets"     file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/Zjets_sum.root" />
+    <sample name="Diboson"   file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/Diboson_sum.root" />
+    <sample name="Multijet"  file="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/output/prod_55_newBinning_all/QCD_sum.root" />
+  </samples>
+</document>
