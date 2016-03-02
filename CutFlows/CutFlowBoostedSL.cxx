@@ -257,6 +257,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
       if (fillHistos){
 	FillHistogramsParticle(ed, weight_particle_level);
 	FillMatrixRecoToParticle(ed, weight_reco_level);	
+
       }
     }
     if( passedRecoSelection && isMCSignal ) { ///RECO ONLY FOR PARTON STUFF ---- FILL ONLY FOR MC SIGNAL
@@ -337,21 +338,21 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
       
       int topTag = 0;
       if(Tagger != "none")
-      topTag = ed->fjets.property[Tagger.c_str()].at(lj);
+	topTag = ed->fjets.property[Tagger.c_str()].at(lj);
       else 
-      {
+	{
 	cout<<"FATAL::Top Tagger not set in config file"<<endl;
 	exit(1);
-      }
+	}
       //cout<<"property topTag "<<topTag<<endl;
       if(topTag == 1 && (ed->fjets.pT.at(lj) > 300 * GeV) && fabs(ed->fjets.eta.at(lj)) < 2){
 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	HadTopJetCandidate = lj;
-    	ed->property["RecoHadTopJetCandidate"] = lj;
-
-
+	ed->property["RecoHadTopJetCandidate"] = lj;
+	
+	
 	break;
-      }
+	}
     }
     
     if(HadTopJetCandidate < 0) return !passed;
@@ -510,10 +511,9 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     vector<int> LepTopJetCandidate;
     
     const double weight = ed->property["weight_particle_level"];
-    
-    const bool passed_boosted_ejets = ed->property["passed_boosted_ejets_1fj0b"]; ///Preselection done in AT for el-channel
-    const bool passed_boosted_mujets = ed->property["passed_boosted_mujets_1fj0b"]; ///Preselection done in AT for mu-channel  
-      
+   
+    const bool passed_boosted_ejets = ed->property["passed_particle_boosted_ejets_1fj0b"]; ///Preselection done in AT for el-channel
+    const bool passed_boosted_mujets = ed->property["passed_particle_boosted_mujets_1fj0b"]; ///Preselection done in AT for mu-channel  
       
     //****************All event passing analysis top selection *************************
     const bool  single_lept = ( m_config->channel == kElectron )  ?  ( passed_boosted_ejets) : ( passed_boosted_mujets );     
@@ -523,34 +523,34 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
        //**************** Exist a tagged Large-R jet with pT>300000 and |eta|<2 *************************
     
-//      vector<int> FatJets;
-//     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
-//       const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
-//       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
-//       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
-//      
-//       
-//       int topTag = 0;
-//       if(Tagger != "none")
-//       topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
-//       else 
-//       {
-// 	cout<<"FATAL::Top Tagger not set in config file"<<endl;
-// 	exit(1);
-//       }
-//       //cout<<"property topTag "<<topTag<<endl;
-//       if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
-// 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
-// 	if( HadTopJetCandidate == -1 ) {
-// 	  HadTopJetCandidate = lj;
-// 	  ed->property["ParticleHadTopJetCandidate"] = lj;
-// 	}
-// 	FatJets.push_back(lj);
-// 
-// 	
-//       }
-//     }
-//     
+    //  vector<int> FatJets;
+    // for( int lj = 0 ; lj < fjet_n ; ++lj ) {
+    //   const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
+    //   const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
+    //   const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
+     
+      
+    //   int topTag = 0;
+    //   if(Tagger != "none")
+    //   topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
+    //   else 
+    //   {
+    // 	cout<<"FATAL::Top Tagger not set in config file"<<endl;
+    // 	exit(1);
+    //   }
+    //   //cout<<"property topTag "<<topTag<<endl;
+    //   if(topTag == 1 && (ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2){
+    // 	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
+    // 	if( HadTopJetCandidate == -1 ) {
+    // 	  HadTopJetCandidate = lj;
+    // 	  ed->property["ParticleHadTopJetCandidate"] = lj;
+    // 	}
+    // 	FatJets.push_back(lj);
+
+	
+    //   }
+    // }
+    
     
     vector<int> FatJets;
     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
@@ -562,14 +562,14 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 
       /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
       if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
-	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
-	if( HadTopJetCandidate == -1 ) {
-	  HadTopJetCandidate = lj;
-	  ed->property["ParticleHadTopJetCandidate"] = lj;
-	}
-	FatJets.push_back(lj);
+    	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
+    	if( HadTopJetCandidate == -1 ) {
+    	  HadTopJetCandidate = lj;
+    	  ed->property["ParticleHadTopJetCandidate"] = lj;
+    	}
+    	FatJets.push_back(lj);
 	
-	//break;
+    	//break;
       }
     }
     
@@ -821,6 +821,13 @@ void CutFlowBoostedSL::FillMatrixRecoToParticle( EventData * ed, const double we
   m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_rapidity", fjets.Rapidity(),  truth_fjets.Rapidity(),  weight);
   m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_absrap", fabs(fjets.Rapidity()),  fabs(truth_fjets.Rapidity()),  weight);
   m_hm->FillMatrices("reco/1fj1b/topH/Matrix_reco_particle_tau32", ed->fjets.property["tau32"].at(recoindex),  ed->truth_fjets.property["tau32"].at(particleindex),  weight);
+  
+  if ( false ) {
+    ofstream File;
+    File.open( "MatrixEventListBolognaNew.txt", fstream::app );
+    File<<"RunNumber =  "<<   ed->info.runNumber  <<" EventNumber = "<<  ed->info.eventNumber  << " Reco Pt = " << fjets.Pt()/GeV <<" PL Pt = "<< truth_fjets.Pt()/GeV <<endl;      
+    File.close();
+  }
 
 }
 
