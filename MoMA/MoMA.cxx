@@ -77,8 +77,9 @@ double MoMATool::GetLumiWeight( int runNumber, float nEvents, float lumi )
 		if( m_xs_syst_type == XS_NOMINAL ) xs = m_lumiSvc->sampleXsection()->getXsection(runNumber);
 		else if( m_xs_syst_type == XS_UP ) xs = m_lumiSvc->sampleXsection()->getXsectionUp( runNumber );
 		else xs = m_lumiSvc->sampleXsection()->getXsectionDown( runNumber );
-		double lumiGen = nEvents / xs;
-		cout << "Debug: double MoMATool::GetLumiWeight for run " << runNumber << ": xs = " << xs << ", lumi " << lumi << ", nEvents " << nEvents << " lumigen " << lumiGen << endl;
+                double kFactor =  m_lumiSvc->sampleXsection()->getKfactor( runNumber );
+		double lumiGen = nEvents / ( xs * kFactor );
+		cout << "Debug: double MoMATool::GetLumiWeight for run " << runNumber << ": xs = " << xs << ", kfactor = " << kFactor << " lumi " << lumi << ", nEvents " << nEvents << " lumigen " << lumiGen << endl;
 		m_lumiWeight = lumi / lumiGen;
 	}
 	return m_lumiWeight;
