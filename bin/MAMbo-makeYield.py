@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
    hlist = GatherHistograms(samples_configuration)
  
-   sample_Name=["DiTop", "Wjets", "SingleTop", "Diboson", "Zjets", "Multijet", "data"]
+   sample_Name=["DiTop", "Wjets", "SingleTop", "Diboson", "Zjets", "Fakes", "data"]
    for sample in sample_Name: 
      nbins = hlist[sample].GetNbinsX()
      uncertainty = 100 * hlist[sample].GetBinError(nbins) / hlist[sample].GetBinContent(nbins)

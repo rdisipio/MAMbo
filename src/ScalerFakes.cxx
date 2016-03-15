@@ -130,19 +130,19 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
   int njets = ed->jets.n; 
   double jet_pt = ed->jets.pT.at(0);
   double delta = 0, ef = 0, er = 0, et = 0;
-
-  
-  
+  double dPhi_met_lep = -1;
+  double pt_lep = -1;
+  double eta_lep = -1000;
   
   if( m_channel == 0 ) //electrons case
   {
     
     if (tight) delta = 1.0;
     
-    double pt_lep = ed->electrons.pT.at(0);
-    double eta_lep =ed->electrons.eta.at(0);
+    pt_lep = ed->electrons.pT.at(0);
+    eta_lep =ed->electrons.eta.at(0);
     double phi_lep = ed->electrons.phi.at(0);
-    double dPhi_met_lep = deltaPhi( phi_met, phi_lep );
+     dPhi_met_lep = deltaPhi( phi_met, phi_lep );
 	double ef_highpt=0;
     double er_highpt=0;
     ef = m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_DPHI, pt_lep*1e-3, abs(dPhi_met_lep), true);
@@ -197,9 +197,10 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
   else if( m_channel == 1)
   {
     if (tight) delta = 1.0;
-    double pt_lep = ed->muons.pT.at(0);
+    pt_lep = ed->muons.pT.at(0);
     double phi_lep = ed->muons.phi.at(0);
-    double dPhi_met_lep = deltaPhi( phi_met, phi_lep );
+	 eta_lep =ed->muons.eta.at(0);
+     dPhi_met_lep = deltaPhi( phi_met, phi_lep );
     
     ef  = m_fakeEff->GetEfficiency(FakeEffProvider::Var::DPHILMET, abs(dPhi_met_lep),true);
     ef *= m_fakeEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
@@ -212,7 +213,11 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
   // END OF MUON EFFICIENCIES
 
   }
+  
+  
   double fakesWeight = (ef)*(er-delta)/(er-ef);
+  //cout << "Debug: " << ed->info.runNumber << " " << ed->info.eventNumber <<
+//" " << tight << " " << njets << " " << nbtag << " " << pt_lep*1e-3 << " " << abs(eta_lep) << " " <<  abs(dPhi_met_lep) <<  " " << ef <<  " " << er << " "  <<fakesWeight << endl;
   if(fakesWeight == 0) {
     cout<<ed->electrons.eta.at(0)<<endl;
     cout<<" er "<<er<<" ef "<<ef<<endl;

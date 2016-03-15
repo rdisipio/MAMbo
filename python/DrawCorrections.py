@@ -62,7 +62,7 @@ TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ],
                'R_Wt_had' : [  'p_{T}^{W,had} / p_{T}^{t,had}', '' ],
                'R_Wt_lep' : [  'p_{T}^{W,lep} / p_{T}^{t,lep}', '' ],
                }
-CorrNames = { 'eff' : 'Efficiency correction f_{eff}', 
+CorrNames = { 'eff' : 'Efficiency #varepsilon', 
               'match' : 'Matching correction f_{match}', 
               'acc' : 'Acceptance correction f_{acc}' }
 
@@ -147,7 +147,7 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
     print '    RMS check: %f ' % (h_part.GetRMS(),)
     print '    RMS check: %f ' % (h_match_p.GetRMS(),)
-    eff = MakeRatio( h_part,  h_match_p, False)
+    eff = MakeRatio( h_match_p, h_part,  False)
 
     print '  Making acc...'
     print '    RMS check: %f %f' % (h_rp.GetRMS(), h_reco.GetRMS())
@@ -231,7 +231,7 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
         title=CorrNames[tag] + ';' + xtitle# + ';' + ytitle
         if count == 0:
             if icorr == 0:
-                tmp = next_tmp(xmin, xmax, title, 0., 24.)
+                tmp = next_tmp(xmin, xmax, title, 0., 1.)
                 #tmp.GetXaxis().SetTitle(xtitle)
                 SetStyle(tmp, xtitle, ytitle)
             else:

@@ -68,6 +68,7 @@ bool CutFlowTTbarResolved::Initialize() {
     m_bTagSF_name = "scaleFactor_BTAG_77";
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	
+    m_jvtSF_name = "scaleFactor_JVT";	
 	m_PDFSF_name = "";
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
 
@@ -87,6 +88,11 @@ bool CutFlowTTbarResolved::Initialize() {
 	else if( syst.find( "pileup" ) != string::npos )
 	{
 	    m_pileupSF_name = syst;
+	}
+	  
+	else if( syst.find( "jvt" ) != string::npos )
+	{
+	    m_jvtSF_name = syst;
 	}
 	else if( syst.find("PDF") != string::npos ) 
 	{
@@ -290,7 +296,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
   //        double scaleFactor_TRIGGER    = ed->property["scaleFactor_TRIGGER"];
 //         const double scaleFactor_WJETSNORM  = ed->property["scaleFactor_WJETSNORM"];
 //         const double scaleFactor_WJETSSHAPE = ed->property["scaleFactor_WJETSSHAPE"];
-  //       const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; // should be always 1 now!
+        const double scaleFactor_JVT      = ed->property[m_jvtSF_name]; 
  //        const double scaleFactor_ZVERTEX    = ed->property["scaleFactor_ZVERTEX"];
 /*#ifdef __MOMA__
            const double scaleFactor_BTAG       = m_moma->GetBTagWeight( ed, 0.7892, m_syst_type ); // to be changed!!
@@ -314,7 +320,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 	
    // cout  << "Debug: pdf weight for " << m_PDFSF_name << " is " << scaleFactor_PDF << endl;
 	// to be fixed
-	weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP;
+	weight_reco_level *= scaleFactor_BTAG * scaleFactor_LEPTON * scaleFactor_PILEUP * scaleFactor_JVT;
 
 /*
        weight_reco_level *=

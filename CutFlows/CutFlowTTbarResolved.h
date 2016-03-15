@@ -77,7 +77,8 @@ class CutFlowTTbarResolved : public CutFlow
     string m_bTagSF_name;
     string m_leptonSF_name;
     string m_pileupSF_name;
-	string m_PDFSF_name;
+    string m_jvtSF_name;
+    string m_PDFSF_name;
 #ifdef __MOMA__
     MoMATool                * m_moma;
     SYSTEMATIC_TYPE           m_syst_type;

@@ -233,10 +233,10 @@ def SetHistogramsStyle( hlist ):
 def PrintLegend( lparams, histograms ):
     # todo: font must be helvetica (42?)
     leg = MakeLegend( lparams )
-
+    nbins = histograms['data'].GetNbinsX()
     leg.SetTextFont( 42 )
 
-    leg.AddEntry( histograms['data'], samples_configuration['data'].description + "(" + "{:.0f}".format( histograms['data'].Integral( "width") ) + ")", "lep" )
+    leg.AddEntry( histograms['data'], samples_configuration['data'].description + "(" + "{:.0f}".format( histograms['data'].Integral( 1, nbins, "width") ) + ")", "lep" )
 
     ordered_samples = [ "" for i in range( len(histograms) ) ]
 
@@ -249,7 +249,7 @@ def PrintLegend( lparams, histograms ):
 
     for sample in ordered_samples:
        if sample != "uncertainty":
-         leg.AddEntry( histograms[sample], samples_configuration[sample].description + "(" + "{:.1f}".format(  histograms[sample].Integral( "width" ) ) + ")", "f" )
+         leg.AddEntry( histograms[sample], samples_configuration[sample].description + "(" + "{:.1f}".format(  histograms[sample].Integral( 1, nbins, "width" ) ) + ")", "f" )
          continue
        leg.AddEntry( histograms[sample], samples_configuration[sample].description, "f" )
          
@@ -367,6 +367,7 @@ def DoPlot( plot, iLumi = 1. ):
 
     sfmax = 2.2 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 100.
     sfmin = 0.0 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 1e-2
+    print histograms.keys()
     SetMaximum( histograms, 'data', sfmax, sfmin )
     
 
@@ -382,9 +383,10 @@ def DoPlot( plot, iLumi = 1. ):
 
     normalize=1.
     hsum = SumPredictionHistograms( histograms )
+    nbins = hsum.GetNbinsX()
     if norm == True:
-     StackIntegral = hsum.Integral("width")
-     DataIntegral = histograms['data'].Integral("width")
+     StackIntegral = hsum.Integral(1, nbins, "width")
+     DataIntegral = histograms['data'].Integral(1, nbins, "width")
      if  StackIntegral != 0 :
        normalize = DataIntegral/StackIntegral
      for bin in range(hsum.GetNbinsX()):

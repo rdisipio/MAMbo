@@ -66,7 +66,9 @@ bool CutFlowBoostedSL::Initialize() {
     
     m_bTagSF_name = "scaleFactor_BTAG_77"; 
     m_leptonSF_name = "scaleFactor_LEPTON" ;
-    m_pileupSF_name = "scaleFactor_PILEUP";	
+    m_pileupSF_name = "scaleFactor_PILEUP";	    
+    m_jvtSF_name = "scaleFactor_JVT";	
+
     m_PDFSF_name = ""; 
     if( m_config->custom_params_string.count( "scale_syst" ) ) {
       
@@ -86,6 +88,11 @@ bool CutFlowBoostedSL::Initialize() {
 	else if( syst.find( "pileup" ) != string::npos )
 	{
 	    m_pileupSF_name = syst;
+	}
+	  
+	else if( syst.find( "jvt" ) != string::npos )
+	{
+	    m_jvtSF_name = syst;
 	}
 	else if( syst.find("PDF") != string::npos )
  	  {
@@ -148,7 +155,8 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   const double scaleFactor_LEPTON     = ed->property[ m_leptonSF_name ]; 
   //  const double scaleFactor_JVFSF      = ed->property["scaleFactor_JVFSF"]; 
   const double scaleFactor_BTAG       = ed->property[ m_bTagSF_name ]; 
-   
+  const double scaleFactor_JVT      = ed->property[m_jvtSF_name]; 
+ 
 
   const double scaleFactor_PDF        = m_PDFSF_name == "" ? 1 : ed->property[ m_PDFSF_name];
   weight_reco_level     *= scaleFactor_PDF;
@@ -156,7 +164,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
 
    
   // THis is what we have now (TO BE FIXED with nedeed weights)
-  weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG;
+  weight_reco_level *= scaleFactor_PILEUP * scaleFactor_LEPTON * scaleFactor_BTAG * scaleFactor_JVT;
   
   // in 8 TeV analysis we had only PILEUP and ZVERTEX for now we use 1
   ///weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;

@@ -45,7 +45,8 @@ private:
     TRandom3 *m_rand; 
     string m_bTagSF_name;
     string m_leptonSF_name;
-    string m_pileupSF_name;
+    string m_pileupSF_name;    
+    string m_jvtSF_name;
     string m_PDFSF_name;
     ScalerFakes * m_scalerFakes;
     

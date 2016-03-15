@@ -41,6 +41,8 @@ public :
    Float_t         weight_leptonSF;
    Float_t         weight_bTagSF_85;
    Float_t         weight_bTagSF_77;
+   Float_t         weight_bTagSF_70;
+   Float_t         weight_jvt;
    Float_t         weight_pileup_UP;
    Float_t         weight_pileup_DOWN;
    Float_t         weight_leptonSF_EL_SF_Trigger_UP;
@@ -119,6 +121,18 @@ public :
    Float_t         weight_bTagSF_77_extrapolation_down;
    Float_t         weight_bTagSF_77_extrapolation_from_charm_up;
    Float_t         weight_bTagSF_77_extrapolation_from_charm_down;
+   vector<float>   *weight_bTagSF_70_eigenvars_B_up;
+   vector<float>   *weight_bTagSF_70_eigenvars_C_up;
+   vector<float>   *weight_bTagSF_70_eigenvars_Light_up;
+   vector<float>   *weight_bTagSF_70_eigenvars_B_down;
+   vector<float>   *weight_bTagSF_70_eigenvars_C_down;
+   vector<float>   *weight_bTagSF_70_eigenvars_Light_down;
+   Float_t         weight_bTagSF_70_extrapolation_up;
+   Float_t         weight_bTagSF_70_extrapolation_down;
+   Float_t         weight_bTagSF_70_extrapolation_from_charm_up;
+   Float_t         weight_bTagSF_70_extrapolation_from_charm_down;
+   Float_t         weight_jvt_UP;
+   Float_t         weight_jvt_DOWN;
    ULong64_t       eventNumber;
    UInt_t          runNumber;
    UInt_t          mcChannelNumber;
@@ -173,10 +187,20 @@ public :
    Int_t           passed_resolved_mujets_4j0b;
    Int_t           passed_resolved_mujets_4j1b;
    Int_t           passed_resolved_mujets_4j2b;
+   Int_t           passed_boosted_ejets_1fj0b_noMET;
    Int_t           passed_boosted_ejets_1fj0b;
    Int_t           passed_boosted_ejets_1fj1b;
+   Int_t           passed_boosted_mujets_1fj0b_noMET;
    Int_t           passed_boosted_mujets_1fj0b;
    Int_t           passed_boosted_mujets_1fj1b;
+   Int_t           passed_resolved_ejets_5je2be;
+   Int_t           passed_resolved_mujets_5je2be;
+   Int_t           passed_resolved_ejets_5je3be;
+   Int_t           passed_resolved_mujets_5je3be;
+   Int_t           passed_resolved_ejets_5ji2be;
+   Int_t           passed_resolved_mujets_5ji2be;
+   Int_t           passed_resolved_ejets_5ji3bi;
+   Int_t           passed_resolved_mujets_5ji3bi;
    Char_t          HLT_mu20_iloose_L1MU15;
    Char_t          HLT_mu50;
    Char_t          HLT_e60_lhmedium;
@@ -209,6 +233,8 @@ public :
    TBranch        *b_weight_leptonSF;   //!
    TBranch        *b_weight_bTagSF_85;   //!
    TBranch        *b_weight_bTagSF_77;   //!
+   TBranch        *b_weight_bTagSF_70;   //!
+   TBranch        *b_weight_jvt;   //!
    TBranch        *b_weight_pileup_UP;   //!
    TBranch        *b_weight_pileup_DOWN;   //!
    TBranch        *b_weight_leptonSF_EL_SF_Trigger_UP;   //!
@@ -287,6 +313,18 @@ public :
    TBranch        *b_weight_bTagSF_77_extrapolation_down;   //!
    TBranch        *b_weight_bTagSF_77_extrapolation_from_charm_up;   //!
    TBranch        *b_weight_bTagSF_77_extrapolation_from_charm_down;   //!
+   TBranch        *b_weight_bTagSF_70_eigenvars_B_up;   //!
+   TBranch        *b_weight_bTagSF_70_eigenvars_C_up;   //!
+   TBranch        *b_weight_bTagSF_70_eigenvars_Light_up;   //!
+   TBranch        *b_weight_bTagSF_70_eigenvars_B_down;   //!
+   TBranch        *b_weight_bTagSF_70_eigenvars_C_down;   //!
+   TBranch        *b_weight_bTagSF_70_eigenvars_Light_down;   //!
+   TBranch        *b_weight_bTagSF_70_extrapolation_up;   //!
+   TBranch        *b_weight_bTagSF_70_extrapolation_down;   //!
+   TBranch        *b_weight_bTagSF_70_extrapolation_from_charm_up;   //!
+   TBranch        *b_weight_bTagSF_70_extrapolation_from_charm_down;   //!
+   TBranch        *b_weight_jvt_UP;   //!
+   TBranch        *b_weight_jvt_DOWN;   //!
    TBranch        *b_eventNumber;   //!
    TBranch        *b_runNumber;   //!
    TBranch        *b_mcChannelNumber;   //!
@@ -340,10 +378,20 @@ public :
    TBranch        *b_passed_resolved_mujets_4j0b;   //!
    TBranch        *b_passed_resolved_mujets_4j1b;   //!
    TBranch        *b_passed_resolved_mujets_4j2b;   //!
+   TBranch        *b_passed_boosted_ejets_1fj0b_noMET;   //!
    TBranch        *b_passed_boosted_ejets_1fj0b;   //!
    TBranch        *b_passed_boosted_ejets_1fj1b;   //!
+   TBranch        *b_passed_boosted_mujets_1fj0b_noMET;   //!
    TBranch        *b_passed_boosted_mujets_1fj0b;   //!
    TBranch        *b_passed_boosted_mujets_1fj1b;   //!
+   TBranch        *b_passed_resolved_ejets_5je2be;   //!
+   TBranch        *b_passed_resolved_mujets_5je2be;   //!
+   TBranch        *b_passed_resolved_ejets_5je3be;   //!
+   TBranch        *b_passed_resolved_mujets_5je3be;   //!
+   TBranch        *b_passed_resolved_ejets_5ji2be;   //!
+   TBranch        *b_passed_resolved_mujets_5ji2be;   //!
+   TBranch        *b_passed_resolved_ejets_5ji3bi;   //!
+   TBranch        *b_passed_resolved_mujets_5ji3bi;   //!
    TBranch        *b_HLT_mu20_iloose_L1MU15;   //!
    TBranch        *b_HLT_mu50;   //!
    TBranch        *b_HLT_e60_lhmedium;   //!
@@ -447,6 +495,12 @@ void TopXAOD::Init(TTree *tree)
    weight_bTagSF_77_eigenvars_B_down = 0;
    weight_bTagSF_77_eigenvars_C_down = 0;
    weight_bTagSF_77_eigenvars_Light_down = 0;
+   weight_bTagSF_70_eigenvars_B_up = 0;
+   weight_bTagSF_70_eigenvars_C_up = 0;
+   weight_bTagSF_70_eigenvars_Light_up = 0;
+   weight_bTagSF_70_eigenvars_B_down = 0;
+   weight_bTagSF_70_eigenvars_C_down = 0;
+   weight_bTagSF_70_eigenvars_Light_down = 0;
    el_isTight = 0;
    el_pt = 0;
    el_eta = 0;
@@ -514,6 +568,8 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("weight_leptonSF", &weight_leptonSF, &b_weight_leptonSF);
    fChain->SetBranchAddress("weight_bTagSF_85", &weight_bTagSF_85, &b_weight_bTagSF_85);
    fChain->SetBranchAddress("weight_bTagSF_77", &weight_bTagSF_77, &b_weight_bTagSF_77);
+   fChain->SetBranchAddress("weight_bTagSF_70", &weight_bTagSF_70, &b_weight_bTagSF_70);
+   fChain->SetBranchAddress("weight_jvt", &weight_jvt, &b_weight_jvt);
    fChain->SetBranchAddress("weight_pileup_UP", &weight_pileup_UP, &b_weight_pileup_UP);
    fChain->SetBranchAddress("weight_pileup_DOWN", &weight_pileup_DOWN, &b_weight_pileup_DOWN);
    fChain->SetBranchAddress("weight_leptonSF_EL_SF_Trigger_UP", &weight_leptonSF_EL_SF_Trigger_UP, &b_weight_leptonSF_EL_SF_Trigger_UP);
@@ -592,6 +648,18 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("weight_bTagSF_77_extrapolation_down", &weight_bTagSF_77_extrapolation_down, &b_weight_bTagSF_77_extrapolation_down);
    fChain->SetBranchAddress("weight_bTagSF_77_extrapolation_from_charm_up", &weight_bTagSF_77_extrapolation_from_charm_up, &b_weight_bTagSF_77_extrapolation_from_charm_up);
    fChain->SetBranchAddress("weight_bTagSF_77_extrapolation_from_charm_down", &weight_bTagSF_77_extrapolation_from_charm_down, &b_weight_bTagSF_77_extrapolation_from_charm_down);
+   fChain->SetBranchAddress("weight_bTagSF_70_eigenvars_B_up", &weight_bTagSF_70_eigenvars_B_up, &b_weight_bTagSF_70_eigenvars_B_up);
+   fChain->SetBranchAddress("weight_bTagSF_70_eigenvars_C_up", &weight_bTagSF_70_eigenvars_C_up, &b_weight_bTagSF_70_eigenvars_C_up);
+   fChain->SetBranchAddress("weight_bTagSF_70_eigenvars_Light_up", &weight_bTagSF_70_eigenvars_Light_up, &b_weight_bTagSF_70_eigenvars_Light_up);
+   fChain->SetBranchAddress("weight_bTagSF_70_eigenvars_B_down", &weight_bTagSF_70_eigenvars_B_down, &b_weight_bTagSF_70_eigenvars_B_down);
+   fChain->SetBranchAddress("weight_bTagSF_70_eigenvars_C_down", &weight_bTagSF_70_eigenvars_C_down, &b_weight_bTagSF_70_eigenvars_C_down);
+   fChain->SetBranchAddress("weight_bTagSF_70_eigenvars_Light_down", &weight_bTagSF_70_eigenvars_Light_down, &b_weight_bTagSF_70_eigenvars_Light_down);
+   fChain->SetBranchAddress("weight_bTagSF_70_extrapolation_up", &weight_bTagSF_70_extrapolation_up, &b_weight_bTagSF_70_extrapolation_up);
+   fChain->SetBranchAddress("weight_bTagSF_70_extrapolation_down", &weight_bTagSF_70_extrapolation_down, &b_weight_bTagSF_70_extrapolation_down);
+   fChain->SetBranchAddress("weight_bTagSF_70_extrapolation_from_charm_up", &weight_bTagSF_70_extrapolation_from_charm_up, &b_weight_bTagSF_70_extrapolation_from_charm_up);
+   fChain->SetBranchAddress("weight_bTagSF_70_extrapolation_from_charm_down", &weight_bTagSF_70_extrapolation_from_charm_down, &b_weight_bTagSF_70_extrapolation_from_charm_down);
+   fChain->SetBranchAddress("weight_jvt_UP", &weight_jvt_UP, &b_weight_jvt_UP);
+   fChain->SetBranchAddress("weight_jvt_DOWN", &weight_jvt_DOWN, &b_weight_jvt_DOWN);
    fChain->SetBranchAddress("eventNumber", &eventNumber, &b_eventNumber);
    fChain->SetBranchAddress("runNumber", &runNumber, &b_runNumber);
    fChain->SetBranchAddress("mcChannelNumber", &mcChannelNumber, &b_mcChannelNumber);
@@ -645,10 +713,20 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("passed_resolved_mujets_4j0b", &passed_resolved_mujets_4j0b, &b_passed_resolved_mujets_4j0b);
    fChain->SetBranchAddress("passed_resolved_mujets_4j1b", &passed_resolved_mujets_4j1b, &b_passed_resolved_mujets_4j1b);
    fChain->SetBranchAddress("passed_resolved_mujets_4j2b", &passed_resolved_mujets_4j2b, &b_passed_resolved_mujets_4j2b);
+   fChain->SetBranchAddress("passed_boosted_ejets_1fj0b_noMET", &passed_boosted_ejets_1fj0b_noMET, &b_passed_boosted_ejets_1fj0b_noMET);
    fChain->SetBranchAddress("passed_boosted_ejets_1fj0b", &passed_boosted_ejets_1fj0b, &b_passed_boosted_ejets_1fj0b);
    fChain->SetBranchAddress("passed_boosted_ejets_1fj1b", &passed_boosted_ejets_1fj1b, &b_passed_boosted_ejets_1fj1b);
+   fChain->SetBranchAddress("passed_boosted_mujets_1fj0b_noMET", &passed_boosted_mujets_1fj0b_noMET, &b_passed_boosted_mujets_1fj0b_noMET);
    fChain->SetBranchAddress("passed_boosted_mujets_1fj0b", &passed_boosted_mujets_1fj0b, &b_passed_boosted_mujets_1fj0b);
    fChain->SetBranchAddress("passed_boosted_mujets_1fj1b", &passed_boosted_mujets_1fj1b, &b_passed_boosted_mujets_1fj1b);
+   fChain->SetBranchAddress("passed_resolved_ejets_5je2be", &passed_resolved_ejets_5je2be, &b_passed_resolved_ejets_5je2be);
+   fChain->SetBranchAddress("passed_resolved_mujets_5je2be", &passed_resolved_mujets_5je2be, &b_passed_resolved_mujets_5je2be);
+   fChain->SetBranchAddress("passed_resolved_ejets_5je3be", &passed_resolved_ejets_5je3be, &b_passed_resolved_ejets_5je3be);
+   fChain->SetBranchAddress("passed_resolved_mujets_5je3be", &passed_resolved_mujets_5je3be, &b_passed_resolved_mujets_5je3be);
+   fChain->SetBranchAddress("passed_resolved_ejets_5ji2be", &passed_resolved_ejets_5ji2be, &b_passed_resolved_ejets_5ji2be);
+   fChain->SetBranchAddress("passed_resolved_mujets_5ji2be", &passed_resolved_mujets_5ji2be, &b_passed_resolved_mujets_5ji2be);
+   fChain->SetBranchAddress("passed_resolved_ejets_5ji3bi", &passed_resolved_ejets_5ji3bi, &b_passed_resolved_ejets_5ji3bi);
+   fChain->SetBranchAddress("passed_resolved_mujets_5ji3bi", &passed_resolved_mujets_5ji3bi, &b_passed_resolved_mujets_5ji3bi);
    fChain->SetBranchAddress("HLT_mu20_iloose_L1MU15", &HLT_mu20_iloose_L1MU15, &b_HLT_mu20_iloose_L1MU15);
    fChain->SetBranchAddress("HLT_mu50", &HLT_mu50, &b_HLT_mu50);
    fChain->SetBranchAddress("HLT_e60_lhmedium", &HLT_e60_lhmedium, &b_HLT_e60_lhmedium);
