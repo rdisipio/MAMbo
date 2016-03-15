@@ -3,18 +3,18 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 syst=nominal
+production=TTDIFFXS_62
 nomalizationfilepath=${MAMBODIR}/share/data/NEvents_${production}/
 filelistdir=$PWD/filelists_${production}/
 #paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 sendOnce=0
-production=TTDIFFXS_55
 for ch in el mu
 do
 
    [ $ch == "el" ] && ch_tag="electron"
    [ $ch == "mu" ] && ch_tag="muon"
       
-   filelist=AllBkgTTDIFFXS_55_Stop.txt
+   filelist=AllBkgTTDIFFXS_62.txt
 
    while read flist           
      do 

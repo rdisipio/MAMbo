@@ -7,7 +7,7 @@ systs="nominal nocut"
 systs=$(cat resolved_scale_systematics.dat | grep extra) # | grep JET`
 decays="nofullhad ljets"
 decays="nofullhad"
-production=TTDIFFXS_55
+production=TTDIFFXS_62
 for syst in $systs
 do
 	mkdir -p output/$syst
@@ -31,10 +31,10 @@ do
 		fi
 
 		filelistdir=$PWD/filelists_${production}/
-		filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+		filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
 
 		nomalizationdir=${MAMBODIR}/share/data/NEvents_${production}/
-		nomalizationfile=${MAMBODIR}/share/data/NEvents_${production}/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.evt.n
+		nomalizationfile=${MAMBODIR}/share/data/NEvents_${production}/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.evt.n
 	
 		sendOnce=0
 	#set -x

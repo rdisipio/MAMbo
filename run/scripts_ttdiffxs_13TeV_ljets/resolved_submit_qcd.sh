@@ -4,7 +4,7 @@ analysis=tt_diffxs_13TeV
 
 sourcedir=$PWD
 
-filelistdir=filelists_TTDIFFXS_55
+filelistdir=filelists_TTDIFFXS_62
 for method in MM
 do
 	for ch in el mu

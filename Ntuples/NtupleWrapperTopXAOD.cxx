@@ -387,7 +387,11 @@ bool NtupleWrapperTopXAOD::MakeEventMET( EventData * ed )
   //  ed->MET.etx   = 0.;
   //  ed->MET.ety   = 0.;
 //  ed->MET.sumet = GET_VALUE( met_sumet  );
-//  ed->MET.mwt   = GET_VALUE( mwt );
+  //
+  double lep_pt = ed->leptons.pT.at(0);
+  double dPhi = ed->leptons.phi.at(0) - ed->MET.phi;
+
+  ed->MET.mwt   = sqrt(lep_pt * ed->MET.et * cos( dPhi ) );
 
   return success;
 }

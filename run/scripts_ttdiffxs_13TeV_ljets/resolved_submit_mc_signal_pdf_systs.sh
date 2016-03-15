@@ -81,7 +81,7 @@ systs="nominal nocut"
 #systs=$(cat resolved_kinematic_systematics.dat | grep 19)
 decays="nofullhad ljets"
 decays="nofullhad"
-production=TTDIFFXS_55
+production=TTDIFFXS_62
 
 
 
@@ -100,7 +100,7 @@ do
 			#paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}	
 
 			
-			samples=mc.410003.aMcAtNloHerwigppEvtGen.e4441_a766_a810_r6282_p2516.TTDIFFXS_55_v2.txt
+			samples=mc.410003.aMcAtNloHerwigppEvtGen.e4441_a766_a810_r6282_p2516.TTDIFFXS_62_v5.txt
 
 			echo "Running on $samples"
 			for sample in $samples

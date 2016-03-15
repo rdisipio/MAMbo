@@ -8,7 +8,7 @@ systs="nominal nocut"
 #systs=$(cat resolved_kinematic_systematics.dat | grep 19)
 decays="nofullhad ljets"
 decays="nofullhad"
-production=TTDIFFXS_55
+production=TTDIFFXS_62
 for syst in $systs
 do
 	mkdir -p output/$syst
@@ -19,7 +19,7 @@ do
 		#paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}	
 
 		
-		samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+		samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
 
 		[ ! -z $1 ] && samples=$(cat $1)
 		echo "Running on $samples"
