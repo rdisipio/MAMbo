@@ -1,0 +1,12 @@
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/3d/f5/user.amenga.7892073._000007.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/2c/ac/user.amenga.7892073._000005.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/f1/62/user.amenga.7892073._000012.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/47/f2/user.amenga.7892073._000008.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/cd/9c/user.amenga.7892073._000001.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/38/aa/user.amenga.7892073._000006.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/a7/09/user.amenga.7892073._000003.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/89/2f/user.amenga.7892073._000009.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/43/3c/user.amenga.7892073._000004.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/b4/f1/user.amenga.7892073._000011.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/e0/23/user.amenga.7892073._000010.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/amenga/41/4e/user.amenga.7892073._000002.ljets.output.root

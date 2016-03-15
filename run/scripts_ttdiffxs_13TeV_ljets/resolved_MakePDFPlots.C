@@ -127,5 +127,5 @@ int main( int nargs, char **args )
 	h_totalUp->Draw( "hist same" );
 	h_pdf[0]->Draw( "hist same" );
 	legend->Draw();
-	c->Print( ( particle + "_" + variable + "_" + level + ".png" ).c_str() );
+	c->Print( ( particle + "_" + variable + "_" + level + ".pdf" ).c_str() );
 }

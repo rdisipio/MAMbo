@@ -1,0 +1,12 @@
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/9d/e7/user.mromano.7900374._000012.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/88/d4/user.mromano.7900374._000009.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/9c/d2/user.mromano.7900374._000010.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/65/57/user.mromano.7900374._000007.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/40/aa/user.mromano.7900374._000004.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/f0/46/user.mromano.7900374._000002.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/a1/49/user.mromano.7900374._000006.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/5e/94/user.mromano.7900374._000008.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/58/e4/user.mromano.7900374._000001.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/f4/19/user.mromano.7900374._000005.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/9e/0a/user.mromano.7900374._000011.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/e2/3a/user.mromano.7900374._000003.ljets.output.root

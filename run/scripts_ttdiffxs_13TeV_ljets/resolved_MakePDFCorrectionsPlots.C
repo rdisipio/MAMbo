@@ -55,7 +55,7 @@ int main( int nargs, char **args )
 		h_pdf_eff[i] = h_pdf_response[i]->ProjectionY( histoname, 1, nbins );
 		
 		
-	sprintf( temp, "output/PDF4LHC15_nlo_30_%i_%s/tt_diffxs_13TeV.mc.AFII.DiTop.410003.co.PDF4LHC15_nlo_30_%i_%s.nofullhad.histograms.root", i, "nocut", i, "nocut");
+                sprintf( temp, "output/PDF4LHC15_nlo_30_%i_%s/tt_diffxs_13TeV.mc.AFII.DiTop.410003.co.PDF4LHC15_nlo_30_%i_%s.nofullhad.histograms.root", i, "nocut", i, "nocut");
 		cout << "Opening " << temp << endl;
 		particle_pdfPaths[ i ] = string( temp );
 		particle_pdfFiles[ i ] = TFile::Open( temp );
@@ -116,7 +116,7 @@ int main( int nargs, char **args )
 	
 	
 	
-		TFile * particle_ct10File = TFile::Open( particle_ct10path.c_str() );	
+        TFile * particle_ct10File = TFile::Open( particle_ct10path.c_str() );	
 	TH1D * h_ct10_particle = (TH1D*) particle_ct10File->Get( particle_histoPath.c_str() )->Clone();
 	
 
@@ -206,7 +206,7 @@ int main( int nargs, char **args )
 	h_eff_totalUp->Draw( "hist same" );
 	h_pdf_eff[0]->Draw( "hist same" );
 	legend->Draw();
-	c->Print( ( "eff_" + particle + "_" + variable + ".png" ).c_str() );
+	c->Print( ( "eff_" + particle + "_" + variable + ".pdf" ).c_str() );
 	
 	//h_alpgen_num
 	legend->Clear();
@@ -230,7 +230,7 @@ int main( int nargs, char **args )
 	h_acc_totalUp->Draw( "hist same" );
 	h_pdf_acc[0]->Draw( "hist same" );
 	legend->Draw();
-	c->Print( ( "acc_" + particle + "_" + variable + ".png" ).c_str() );	
+	c->Print( ( "acc_" + particle + "_" + variable + ".pdf" ).c_str() );	
 	
 	
 }
