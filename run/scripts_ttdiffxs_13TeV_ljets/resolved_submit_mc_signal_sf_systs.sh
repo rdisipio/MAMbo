@@ -4,7 +4,8 @@ analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
 systs="nominal nocut"
-systs=$(cat resolved_scale_systematics.dat | grep extra) # | grep JET`
+systs=$(tac resolved_scale_systematics.dat  | grep jvt )
+
 decays="nofullhad ljets"
 decays="nofullhad"
 production=TTDIFFXS_62
