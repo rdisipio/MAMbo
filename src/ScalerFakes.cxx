@@ -14,10 +14,31 @@ ScalerFakes::ScalerFakes( int channel, int nParameters, string method)
   m_channel = channel;
   m_method = method;
   m_nParameters = nParameters;
-  m_fakeEff = new  FakeEffProvider(m_channel,FakeEffProvider::Type::fakeEff);
-  m_realEff = new  FakeEffProvider(m_channel,FakeEffProvider::Type::realEff);
-  m_tightEff = new FakeEffProvider(m_channel,FakeEffProvider::Type::tightEff);
 
+
+
+  string syst_str = "nominal";
+  int syst_fakeEff = FakeEffProvider::Systematic::nominal;
+  int syst_realEff = FakeEffProvider::Systematic::nominal;
+  if (syst_str.compare("fakes_realEff_stat_D")==0)
+    syst_realEff = FakeEffProvider::Systematic::stat_D;
+  else if (syst_str.compare("fakes_realEff_stat_U")==0)
+    syst_realEff = FakeEffProvider::Systematic::stat_U;
+  else if (syst_str.compare("fakes_fakeEff_stat_D")==0)
+    syst_fakeEff = FakeEffProvider::Systematic::stat_D;
+  else if (syst_str.compare("fakes_fakeEff_stat_U")==0)
+    syst_fakeEff = FakeEffProvider::Systematic::stat_U;
+  else if (syst_str.compare("fakes_fakeEff_MCscale_D")==0)
+    syst_fakeEff = FakeEffProvider::Systematic::fakeEff_MCscale_D;
+  else if (syst_str.compare("fakes_fakeEff_MCscale_U")==0)
+    syst_fakeEff = FakeEffProvider::Systematic::fakeEff_MCscale_U;
+  else if (syst_str.compare("fakes_fakeEff_CR_S")==0)
+    syst_fakeEff = FakeEffProvider::Systematic::fakeEff_CR_S;
+  else if (syst_str.compare("nominal")!=0)
+    Warning("NominalSelector::Begin", "Unrecognised NominalSelector Systematic option! Nominal will be used.");
+  
+  m_fakeEff  = new FakeEffProvider(m_channel, FakeEffProvider::Type::fakeEff, syst_fakeEff);
+  m_realEff  = new FakeEffProvider(m_channel, FakeEffProvider::Type::realEff, syst_realEff);
   
 }
 
@@ -26,7 +47,7 @@ ScalerFakes::~ScalerFakes( )
 {
   delete m_fakeEff;
   delete m_realEff;
-  delete m_tightEff;
+  //delete m_tightEff;
 }
 
 ScalerFakes * ScalerFakes::GetHandle( int channel, int nParameters, string method )
@@ -142,9 +163,11 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
     pt_lep = ed->electrons.pT.at(0);
     eta_lep =ed->electrons.eta.at(0);
     double phi_lep = ed->electrons.phi.at(0);
-     dPhi_met_lep = deltaPhi( phi_met, phi_lep );
-	double ef_highpt=0;
+    dPhi_met_lep = deltaPhi( phi_met, phi_lep );
+    double ef_highpt=0;
     double er_highpt=0;
+    
+    
     ef = m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_DPHI, pt_lep*1e-3, abs(dPhi_met_lep), true);
     ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_ETA, pt_lep*1e-3, abs(eta_lep), true);
     ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_JET1PT_DPHI, jet_pt*1e-3, abs(dPhi_met_lep), true);
@@ -199,8 +222,47 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
     if (tight) delta = 1.0;
     pt_lep = ed->muons.pT.at(0);
     double phi_lep = ed->muons.phi.at(0);
-	 eta_lep =ed->muons.eta.at(0);
-     dPhi_met_lep = deltaPhi( phi_met, phi_lep );
+    eta_lep =ed->muons.eta.at(0);
+    dPhi_met_lep = deltaPhi( phi_met, phi_lep );
+    
+    
+        // HIGH-PT EFFICIENCIES
+     double ef_highpt=0;
+    double er_highpt=0;
+    ef = m_fakeEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
+    ef_highpt = ef;
+    
+    er = m_realEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
+    er_highpt = er;   
+    
+     // LOW-PT EFFICIENCIES
+    double ef_lowpt=0;
+    double er_lowpt=0;
+    ef  = m_fakeEff->GetEfficiency(FakeEffProvider::Var::MET, met*1e-3, true);
+    ef *= m_fakeEff->GetEfficiency2D(FakeEffProvider::Var::TWODIM_PT_DPHI, pt_lep*1e-3, abs(dPhi_met_lep), true);
+    ef =  TMath::Sqrt(ef);
+    ef_lowpt = ef;
+    
+    er =  m_realEff->GetEfficiency(FakeEffProvider::Var::DPHILMET, abs(dPhi_met_lep),true);
+    er *= m_realEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
+    er =  TMath::Sqrt(er);
+    er_lowpt = er;
+    
+    // MERGE LOW- AND HIGH-PT
+    double x = pt_lep*1e-3;
+    double fhigh = 1./(1+exp(-(x-60.)/10.));
+    ef = (1.-fhigh)*ef_lowpt + fhigh*ef_highpt;
+    er = (1.-fhigh)*er_lowpt + fhigh*er_highpt;   
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    //old
     
     ef  = m_fakeEff->GetEfficiency(FakeEffProvider::Var::DPHILMET, abs(dPhi_met_lep),true);
     ef *= m_fakeEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
@@ -208,13 +270,22 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
     
     er =  m_realEff->GetEfficiency(FakeEffProvider::Var::DPHILMET, abs(dPhi_met_lep),true);
     er *= m_realEff->GetEfficiency(FakeEffProvider::Var::LPT, pt_lep*1e-3, true);
-    er =  TMath::Sqrt(er);
+    er =  TMath::Sqrt(er);*/
     
   // END OF MUON EFFICIENCIES
 
   }
   
-  
+    // some tricks to correct unphysical efficiency values -- should be rare!
+  if (ef>1) {
+    ef = 1;
+  }
+  if (er>1) {
+    er = 1;
+  }
+  if (ef>=0.99*er) {
+    ef = 0.99*er;
+  }
   double fakesWeight = (ef)*(er-delta)/(er-ef);
   //cout << "Debug: " << ed->info.runNumber << " " << ed->info.eventNumber <<
 //" " << tight << " " << njets << " " << nbtag << " " << pt_lep*1e-3 << " " << abs(eta_lep) << " " <<  abs(dPhi_met_lep) <<  " " << ef <<  " " << er << " "  <<fakesWeight << endl;
