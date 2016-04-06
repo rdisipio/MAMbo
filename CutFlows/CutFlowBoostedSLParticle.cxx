@@ -172,6 +172,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
 
 
     //Initialize the index of the Hadronic topjetCandidate
+    int NgoodLJetCandidate = 0;
     int HadTopJetCandidate = -1;
      //Container of small-R jet that pass requirements on the dR with lepton and HadTopJetCandidate
     vector<int> LepTopJetCandidate;
@@ -198,7 +199,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
       
       
       int topTag = 0;
-      int NgoodLJetCandidate = 0;
+      
       if(Tagger != "none")
       topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
       else 

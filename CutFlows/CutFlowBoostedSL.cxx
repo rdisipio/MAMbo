@@ -314,6 +314,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
 
     
      //Initialize the index of the Hadronic topjetCandidate
+    int NgoodLJetCandidate = 0;
     int HadTopJetCandidate = -1;
      //Container of small-R jet that pass requirements on the dR with lepton and HadTopJetCandidate
     vector<int> LepTopJetCandidate;
@@ -355,7 +356,6 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
       //const int topTag50 = ed->fjets.property["topTag50"].at(lj);
       
       int topTag = 0;
-      int NgoodLJetCandidate = 0;
       if(Tagger != "none")
 	topTag = ed->fjets.property[Tagger.c_str()].at(lj);
       else 
@@ -531,6 +531,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 
 
     //Initialize the index of the Hadronic topjetCandidate
+    int NgoodLJetCandidate = 0;
     int HadTopJetCandidate = -1;
      //Container of small-R jet that pass requirements on the dR with lepton and HadTopJetCandidate
     vector<int> LepTopJetCandidate;
@@ -584,7 +585,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
       
       //cout<<"property topTag "<<topTag<<endl; 
-      int NgoodLJetCandidate = 0;
+      
       if(ed->truth_fjets.m.at(lj) > 50 * GeV && ed->truth_fjets.pT.at(lj) < 1500 * GeV){
 	NgoodLJetCandidate++;
 	/////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
@@ -731,6 +732,7 @@ bool  CutFlowBoostedSL::PassedCutFlowRecoControlWjets(EventData * ed) {
     
      //Initialize the index of the Hadronic topjetCandidate
     int HadTopJetCandidate = -1;
+    int NgoodLJetCandidate = 0;
      //Container of small-R jet that pass requirements on the dR with lepton and HadTopJetCandidate
     vector<int> LepTopJetCandidate;
 
