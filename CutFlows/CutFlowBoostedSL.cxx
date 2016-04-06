@@ -24,32 +24,35 @@ bool CutFlowBoostedSL::Initialize() {
     m_rand = new TRandom3( 0 ); 
 
     AddChannel("LPLUSJETS");  
-    AddCounterName("LPLUSJETS", "reco_unweight", 6 );
+    AddCounterName("LPLUSJETS", "reco_unweight", 7 );
     SetCutName("LPLUSJETS", "reco_unweight", 0, "All Events after Analysis Top Cuts          ");
-    SetCutName("LPLUSJETS", "reco_unweight", 1, "A tagged Large-R jet                        ");
-    SetCutName("LPLUSJETS", "reco_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
-    SetCutName("LPLUSJETS", "reco_unweight", 3, "Exist b-jet in the event                    ");
-    SetCutName("LPLUSJETS", "reco_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
-    SetCutName("LPLUSJETS", "reco_unweight", 6, "Bjet matched with a top                     ");
+    SetCutName("LPLUSJETS", "reco_unweight", 1, "A Large-R jet with m>50 GeV & pt<1.5 TeV    "); 
+    SetCutName("LPLUSJETS", "reco_unweight", 2, "A tagged Large-R jet                        ");
+    SetCutName("LPLUSJETS", "reco_unweight", 3, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
+    SetCutName("LPLUSJETS", "reco_unweight", 4, "Exist b-jet in the event                    ");
+    SetCutName("LPLUSJETS", "reco_unweight", 5, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
+    SetCutName("LPLUSJETS", "reco_unweight", 6, "Exist a jet with deltaR(lepton,jet)<2       ");
+    SetCutName("LPLUSJETS", "reco_unweight", 7, "Bjet matched with a top                     ");
     
-    AddCounterName("LPLUSJETS", "reco_weighted", 6 );
+    AddCounterName("LPLUSJETS", "reco_weighted", 7 );
     SetCutName("LPLUSJETS", "reco_weighted", 0, "All Events after Analysis Top Cuts          ");
-    SetCutName("LPLUSJETS", "reco_weighted", 1, "A tagged Large-R jet                        ");
-    SetCutName("LPLUSJETS", "reco_weighted", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
-    SetCutName("LPLUSJETS", "reco_weighted", 3, "Exist b-jet in the event                    ");
-    SetCutName("LPLUSJETS", "reco_weighted", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "reco_weighted", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
-    SetCutName("LPLUSJETS", "reco_weighted", 6, "Bjet matched with a top                     ");
+    SetCutName("LPLUSJETS", "reco_weighted", 1, "A Large-R jet with m>50 GeV & pt<1.5 TeV    "); 
+    SetCutName("LPLUSJETS", "reco_weighted", 2, "A tagged Large-R jet                        ");
+    SetCutName("LPLUSJETS", "reco_weighted", 3, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
+    SetCutName("LPLUSJETS", "reco_weighted", 4, "Exist b-jet in the event                    ");
+    SetCutName("LPLUSJETS", "reco_weighted", 5, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
+    SetCutName("LPLUSJETS", "reco_weighted", 6, "Exist a jet with deltaR(lepton,jet)<2       ");
+    SetCutName("LPLUSJETS", "reco_weighted", 7, "Bjet matched with a top                     ");
 
-    AddCounterName("LPLUSJETS", "particle_unweight", 6 );
+    AddCounterName("LPLUSJETS", "particle_unweight", 7 );
     SetCutName("LPLUSJETS", "particle_unweight", 0, "All Events after Analysis Top Cuts          ");
-    SetCutName("LPLUSJETS", "particle_unweight", 1, "A tagged Large-R jet                        ");
-    SetCutName("LPLUSJETS", "particle_unweight", 2, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
-    SetCutName("LPLUSJETS", "particle_unweight", 3, "Exist b-jet in the event                    ");
-    SetCutName("LPLUSJETS", "particle_unweight", 4, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
-    SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(lepton,jet)<2       ");
-    SetCutName("LPLUSJETS", "particle_unweight", 6, "Bjet matched with a top                     ");
+    SetCutName("LPLUSJETS", "particle_unweight", 1, "A Large-R jet with m>50 GeV & pt<1.5 TeV    "); 
+    SetCutName("LPLUSJETS", "particle_unweight", 2, "A tagged Large-R jet                        ");
+    SetCutName("LPLUSJETS", "particle_unweight", 3, "Exist a jet with deltaPhi(lep,Large-R jet)>1");
+    SetCutName("LPLUSJETS", "particle_unweight", 4, "Exist b-jet in the event                    ");
+    SetCutName("LPLUSJETS", "particle_unweight", 5, "Exist a jet with deltaR(Large-R jet,jet)>1.5");
+    SetCutName("LPLUSJETS", "particle_unweight", 6, "Exist a jet with deltaR(lepton,jet)<2       ");
+    SetCutName("LPLUSJETS", "particle_unweight", 7, "Bjet matched with a top                     ");
     
    
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
@@ -258,6 +261,13 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   if( passedRecoSelection ) { ///RECO ONLY  ----  FILL FOR ALL MC AND DATA
     if (fillHistos)
       FillHistogramsReco(ed, weight_reco_level, "1fj1b");
+    if (false) {
+      ofstream File;
+      File.open( "EventListBolognaWeights_el.txt", fstream::app );
+      File<<"RunNumber =  "<<   ed->info.runNumber  <<" EventNumber = " << ed->info.eventNumber << "   Total weight = " << weight_reco_level << "   Lumiweight = " << ed->info.mcWeight << "  SF_PU  = "  <<  scaleFactor_PILEUP   << " SF_LEP  ="  <<  scaleFactor_LEPTON   << "   SF_BTAG  = "  <<  scaleFactor_BTAG << "   N_BJET   = "  << ed->bjets.n    << endl;      
+      
+      File.close();
+    }
   }
   
   if(!isRealData){
@@ -353,16 +363,19 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
 	exit(1);
 	}
       //cout<<"property topTag "<<topTag<<endl;
-      if(topTag == 1 && (ed->fjets.pT.at(lj) > 300 * GeV) && fabs(ed->fjets.eta.at(lj)) < 2){
-	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
-	HadTopJetCandidate = lj;
-	ed->property["RecoHadTopJetCandidate"] = lj;
-	
-	
-	break;
+      if(ed->fjets.m.at(lj) > 50 * GeV && ed->fjets.pT.at(lj) < 1500 * GeV){
+	PassedCut( "LPLUSJETS", "reco_unweight");
+	PassedCut( "LPLUSJETS", "reco_weighted",weight);
+	if(topTag == 1 && (ed->fjets.pT.at(lj) > 300 * GeV) && fabs(ed->fjets.eta.at(lj)) < 2){
+	  //The first Large-R jet found has the highest pT, become the HadTopJetCandidate
+	  HadTopJetCandidate = lj;
+	  ed->property["RecoHadTopJetCandidate"] = lj;
+	  
+	  
+	  break;
 	}
+      }
     }
-    
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
     PassedCut( "LPLUSJETS", "reco_weighted",weight); 
@@ -555,7 +568,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     // 	}
     // 	FatJets.push_back(lj);
 
-	
+    
     //   }
     // }
     
@@ -567,24 +580,27 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
       
       //cout<<"property topTag "<<topTag<<endl; 
-
-      /////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
-      if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
-    	//The first Large-R jet found has the highest pT, become the HadTopJetCandidate
-    	if( HadTopJetCandidate == -1 ) {
-    	  HadTopJetCandidate = lj;
-    	  ed->property["ParticleHadTopJetCandidate"] = lj;
-    	}
-    	FatJets.push_back(lj);
-	
-    	//break;
+      
+      if(ed->truth_fjets.m.at(lj) > 50 * GeV && ed->truth_fjets.pT.at(lj) < 1500 * GeV){
+	PassedCut( "LPLUSJETS", "particle_unweight");
+	/////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
+	if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
+	  //The first Large-R jet found has the highest pT, become the HadTopJetCandidate
+	  if( HadTopJetCandidate == -1 ) {
+	    HadTopJetCandidate = lj;
+	    ed->property["ParticleHadTopJetCandidate"] = lj;
+	  }
+	  FatJets.push_back(lj);
+	  
+	  //break;
+	}
       }
     }
-    
+
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
     
-   
+    
     const bool control = ( m_config->channel == kElectron ) ? (el_n >= 1 && ed->truth_electrons.pT.at(0)>25000) : (mu_n >= 1 && ed->truth_muons.pT.at(0)>25000);
     
     
