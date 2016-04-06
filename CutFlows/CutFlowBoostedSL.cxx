@@ -355,6 +355,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
       //const int topTag50 = ed->fjets.property["topTag50"].at(lj);
       
       int topTag = 0;
+      int NgoodLJetCandidate = 0;
       if(Tagger != "none")
 	topTag = ed->fjets.property[Tagger.c_str()].at(lj);
       else 
@@ -364,8 +365,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
 	}
       //cout<<"property topTag "<<topTag<<endl;
       if(ed->fjets.m.at(lj) > 50 * GeV && ed->fjets.pT.at(lj) < 1500 * GeV){
-	PassedCut( "LPLUSJETS", "reco_unweight");
-	PassedCut( "LPLUSJETS", "reco_weighted",weight);
+	NgoodLJetCandidate++;
 	if(topTag == 1 && (ed->fjets.pT.at(lj) > 300 * GeV) && fabs(ed->fjets.eta.at(lj)) < 2){
 	  //The first Large-R jet found has the highest pT, become the HadTopJetCandidate
 	  HadTopJetCandidate = lj;
@@ -376,6 +376,10 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
 	}
       }
     }
+    if(NgoodLJetCandidate < 1) return !passed;
+    PassedCut( "LPLUSJETS", "reco_unweight");
+    PassedCut( "LPLUSJETS", "reco_weighted",weight);
+
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "reco_unweight");
     PassedCut( "LPLUSJETS", "reco_weighted",weight); 
@@ -580,9 +584,9 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
       
       //cout<<"property topTag "<<topTag<<endl; 
-      
+      int NgoodLJetCandidate = 0;
       if(ed->truth_fjets.m.at(lj) > 50 * GeV && ed->truth_fjets.pT.at(lj) < 1500 * GeV){
-	PassedCut( "LPLUSJETS", "particle_unweight");
+	NgoodLJetCandidate++;
 	/////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
 	if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && tau32 < 0.75 ){
 	  //The first Large-R jet found has the highest pT, become the HadTopJetCandidate
@@ -596,6 +600,10 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
 	}
       }
     }
+    
+    if(NgoodLJetCandidate < 1) return !passed;
+    PassedCut( "LPLUSJETS", "particle_unweight");
+  
 
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");

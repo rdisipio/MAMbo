@@ -198,6 +198,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
       
       
       int topTag = 0;
+      int NgoodLJetCandidate = 0;
       if(Tagger != "none")
       topTag = ed->truth_fjets.property[Tagger.c_str()].at(lj);
       else 
@@ -207,7 +208,7 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
       }
       //cout<<"property topTag "<<topTag<<endl;
       if(ed->truth_fjets.m.at(lj) > 50 * GeV && ed->truth_fjets.pT.at(lj) < 1500 * GeV){
-	PassedCut( "LPLUSJETS", "particle_unweight");
+	NgoodLJetCandidate++;
 	/////////////------- LARGE-R MASS >100  & tau32 < 0.75 as tagging requirement at Particle Level ---------//////////////
 	if((ed->truth_fjets.pT.at(lj) > 300 * GeV) && fabs(ed->truth_fjets.eta.at(lj)) < 2 && (ed->truth_fjets.m.at(lj) > 100. * GeV) && (tau32 < 0.75)){
 	  /////////////------- Tagger required at Particle Level ---------//////////////
@@ -222,6 +223,10 @@ bool  CutFlowBoostedSLParticle::PassedCutFlowParticle(EventData * ed) {
 	}
       }
     }
+
+    if(NgoodLJetCandidate < 1) return !passed;
+    PassedCut( "LPLUSJETS", "particle_unweight");
+
     if(HadTopJetCandidate < 0) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight");
     
