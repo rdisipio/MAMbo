@@ -80,12 +80,12 @@ def GetTag(objname, varname):
     return tag
 
 
-def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
     h_part = rfile.Get(Paths[0] + path)
     return h_part.GetXaxis().GetXmax()
-def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
     h_part = rfile.Get(Paths[0] + path)
@@ -93,7 +93,7 @@ def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'
 
 
 #################
-def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
 
@@ -112,21 +112,11 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
 
-    print '        %s' %(Paths[2] + path)
-    # h_match_p = rfile.Get(Paths[2] + path)
-    # fix by Marino:
-    h_match_p = h_matrix.ProjectionY( "particle_recoandparticle", 1, h_matrix.GetNbinsY() )
 
-    print '        %s' %(Paths[3] + path)
-    h_match_r = rfile.Get(Paths[3] + path)
+    h_recoandparticle_p = h_matrix.ProjectionY( "particle_recoandparticle", 1, h_matrix.GetNbinsY() )
+    h_recoandparticle_r = h_matrix.ProjectionX( "reco_recoandparticle", 1, h_matrix.GetNbinsY() )
 
-    print '        %s' %(Paths[4] + path)
-    h_rp = rfile.Get(Paths[4] + path)
-    # fix by Marino:
-    # h_rp = h_matrix.ProjectionX( "reco_recoandparticle", 1, h_matrix.GetNbinsX() )
-    
-#    xtitle=h_rp.GetXaxis().GetTitle()
-#    ytitle=h_rp.GetYaxis().GetTitle()
+
 
     PrintBinContent(h_part)
     #PrintBinContent(h_pnr)
@@ -134,21 +124,21 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '  Making eff...'
     #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
     print '    RMS check: %f ' % (h_part.GetRMS(),)
-    print '    RMS check: %f ' % (h_match_p.GetRMS(),)
-    eff = MakeRatio( h_match_p, h_part,  False)
+    print '    RMS check: %f ' % (h_recoandparticle_p.GetRMS(),)
+    eff = MakeRatio( h_recoandparticle_p, h_part,  False)
 
     print '  Making acc...'
-    print '    RMS check: %f %f' % (h_rp.GetRMS(), h_reco.GetRMS())
-    acc = MakeRatio( h_rp, h_reco, False)
-    CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
+    print '    RMS check: %f %f' % (h_recoandparticle_r.GetRMS(), h_reco.GetRMS())
+    acc = MakeRatio( h_recoandparticle_r, h_reco, False)
+    CheckAcc(acc,'%s %s' % (h_reco.GetName(),h_recoandparticle_r.GetTitle()) ) 
 
  
-    if icorr == 0: return eff,h_part,h_match_p
-    if icorr == 1: return acc,h_rp,h_reco
+    if icorr == 0: return eff,h_part,h_recoandparticle_p
+    if icorr == 1: return acc,h_recoandparticle_r,h_reco
     return
 
 #################
-def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
     print '  Drawing %s/%s/%s' % (basepath,objname,varname)
 
     tag = ''
@@ -250,7 +240,7 @@ SetAtlasStyle()
 gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
-ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
+ljets = [ 'sum' ] #, 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
@@ -273,9 +263,9 @@ ftag='nofullhad'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
-rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/'
+rpath='/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_62_all/'
 
-ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nocut/'
+ppath='/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/prod_62_all/'
 
 GenNames = [ 'DiTop.410000'
          ]
@@ -292,12 +282,12 @@ for ll in ljets:
     pfiles = []
 
     for genname in GenNames:
-        rfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nominal.%s.histograms.root' % (rpath, genname, ll, ftag, ), 'read')
+        rfile = TFile('%s/nominal_%s.root' % (rpath, ll ), 'read')
         _files.append(rfile)
         rfiles.append(rfile)
         print 'Opened file %s' % (rfile.GetName(),)
         
-        pfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nocut.%s.histograms.root' % (ppath, genname, ll, ftag, ), 'read')
+        pfile = TFile('%s/nocut_%s.root' % (ppath, ll ), 'read')
         _files.append(pfile)
         pfiles.append(pfile)
         print 'Opened file %s' % (pfile.GetName(),)
@@ -305,7 +295,7 @@ for ll in ljets:
 
 
     Obj = ['topH']
-    Var = ['pt' 
+    Var = ['pt', 
            'absrap']
 
     for obj in Obj:

@@ -372,10 +372,12 @@ def MakeRatio( data, prediction, setgr = True ):
            dy_d = data.GetBinError( n+1 ) 
         
         #print '    setting point %i: %f' % (i,y_data/y_mc,)
-
-        ratio.SetPoint( i, x_data, y_data/y_mc )
+        ratio.Divide(data,prediction,"cl=0.683 b(1,1) mode")
+        for n in range( nbins):
+                print "Bin %i: err = %f" % (n, ratio.GetErrorYhigh(n) )
+      #  ratio.SetPoint( i, x_data, y_data/y_mc )
         
-        ratio.SetPointError( i, bw/2, bw/2, dy_d/y_mc, dy_u/y_mc )
+      #  ratio.SetPointError( i, bw/2, bw/2, dy_d/y_mc, dy_u/y_mc )
         
         i += 1
     return ratio
