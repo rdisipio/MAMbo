@@ -1,0 +1,12 @@
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/a6/83/user.mromano.8283148._000012.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/74/68/user.mromano.8283148._000006.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/e2/5f/user.mromano.8283148._000007.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/b3/71/user.mromano.8283148._000008.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/35/49/user.mromano.8283148._000004.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/05/7e/user.mromano.8283148._000005.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/98/90/user.mromano.8283148._000002.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/ad/d4/user.mromano.8283148._000003.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/84/fe/user.mromano.8283148._000010.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/49/07/user.mromano.8283148._000009.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/59/ee/user.mromano.8283148._000011.ljets.output.root
+root://golias100.farm.particle.cz/dpm/farm.particle.cz/home/atlas/atlaslocalgroupdisk/rucio/user/mromano/1a/01/user.mromano.8283148._000001.ljets.output.root

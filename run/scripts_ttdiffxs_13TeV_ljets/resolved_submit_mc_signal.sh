@@ -3,11 +3,12 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-#systs="nominal nocut"
+systs="nominal nocut"
 #systs=$(cat systematics.dat) # | grep JET`
 systs="nominal nocut $(cat resolved_kinematic_systematics.dat )"
 decays="nofullhad ljets"
 decays="nofullhad"
+systs="nominal nocut"
 production=TTDIFFXS_62
 for syst in $systs
 do

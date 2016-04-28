@@ -8,7 +8,7 @@ shapes="tt_rapidity tt_m tt_pt t_pt"
 #systs=$(cat systematics.dat) # | grep JET`
 decays="nofullhad ljets"
 decays="nofullhad"
-production=TTDIFFXS_55
+production=TTDIFFXS_62
 for syst in $systs
 do
 	for shape in $shapes 
@@ -32,7 +32,7 @@ do
 			else
 				template=$PWD/Resolved13TeV.stress.xml.template
 			fi
-			samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+			samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
 			for sample in $samples
 			do
 
@@ -76,7 +76,7 @@ do
 						fi
 						sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
 						sed -i "s|@MCFILELIST@|${flist_mc}|"  ${params}
-						sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
+						sed -i "s|@NORMFILE@|${normalizationfile}|"  ${params}
 						sed -i "s|@DECAY@|${decay}|"  ${params}
 						sed -i "s|@STRESS@|${shape}|" ${params}
 						outfile=${shape}/${syst}/${tag}.histograms.root.${batchid}

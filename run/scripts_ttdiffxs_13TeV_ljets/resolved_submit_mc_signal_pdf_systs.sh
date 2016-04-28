@@ -100,7 +100,7 @@ do
 			#paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}	
 
 			
-			samples=mc.410003.aMcAtNloHerwigppEvtGen.e4441_a766_a810_r6282_p2516.TTDIFFXS_62_v5.txt
+			samples=mc.410003.aMcAtNloHerwigppEvtGen.e4441_s2726_r7326_r6282_p2516.TTDIFFXS_62_v5.txt
 
 			echo "Running on $samples"
 			for sample in $samples

@@ -3,14 +3,11 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="qcd"
+systs="data"
 #systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat | egrep -e "EG|MUONS"`
 #systs=`cat  resolved_scale_systematics.dat | grep lepton`
 decays="nofullhad ljets"
 decays="nofullhad"
-methods="MM"
-for method in $methods
-do
 	for syst in $systs
 	do
 		
@@ -30,10 +27,10 @@ do
 		cat > $script << EOF
 	#!/bin/bash
 			#tag=${analysis}.mc.DiTop.${dsid}.${ch}.${syst}.${decay}
-		#	tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.$method.histograms.root.40
-		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.00*.el.Resolved.$method.histograms.root
-		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.00*.mu.Resolved.$method.histograms.root
-		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.co.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.$method.histograms.root output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.$method.histograms.root 
+		#	tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root.40
+		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.histograms.root output/nominal/${analysis}.${syst}.Main.00*.el.Resolved.histograms.root
+		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.histograms.root output/nominal/${analysis}.${syst}.Main.00*.mu.Resolved.histograms.root
+		hadd -f output/nominal/${analysis}.${syst}.Main.${dsid}.co.Resolved.histograms.root output/nominal/${analysis}.${syst}.Main.${dsid}.el.Resolved.histograms.root output/nominal/${analysis}.${syst}.Main.${dsid}.mu.Resolved.histograms.root 
 
 EOF
 		chmod +x $script

@@ -84,14 +84,15 @@ analysis=tt_diffxs_13TeV
 
 systs="nocut"
 systs=$pdfsysts
-#systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat | grep extra`
+systs="nominal nocut `cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat`"
 # | egrep -e "EG|MUONS"`
 #systs=`cat  resolved_scale_systematics.dat | grep lepton`
 decays="nofullhad ljets"
 decays="nofullhad"
-
-production=TTDIFFXS_55
-samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+#systs=$(cat failedsysts.txt )
+production=TTDIFFXS_62
+samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
+systs="nominal nocut"
 [ ! -z $1 ] && samples=$(cat $1)
 
 for sample in $samples
@@ -130,7 +131,7 @@ do
 			fi	
 	
 EOF
-			chmod +x $script
+	#		chmod +x $script
 	#		./$script
 			qsub -q T3_BO_LOCAL $script
 		done
