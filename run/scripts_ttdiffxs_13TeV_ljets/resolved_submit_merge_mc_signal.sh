@@ -93,6 +93,7 @@ decays="nofullhad"
 production=TTDIFFXS_62
 samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
 systs="nominal nocut"
+systs=$pdfsysts
 [ ! -z $1 ] && samples=$(cat $1)
 
 for sample in $samples
