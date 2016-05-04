@@ -22,7 +22,7 @@ do
         do
                 batchid=hadd.$b.$syst        
 		script=../jobs/$batchid.sh
-                f=$b.runs
+                f=$b.run
                 cat > $script << EOF
                 #!/bin/bash
                 set -x
