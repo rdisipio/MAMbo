@@ -63,7 +63,7 @@ EOF
         do
                 for p in $stopProcesses
                 do
-                        f=Stop_\${p}.runs
+                        f=Stop_\${p}.run
                         runs=\`cat \$f\`
                         echo "Runs \$runs"
                         roots=""
