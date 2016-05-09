@@ -1,0 +1,19 @@
+<analysis name="TTbarResolved">
+<!-- <ntuple>TopMiniSLResolved</ntuple> -->
+ <ntuple>TopXAOD</ntuple>
+  <branches>control/branch_list_TopMiniSLResolved.txt</branches>
+  <tree>nominal</tree>
+  <histograms>control/histograms_TTbarResolved_baseline.xml</histograms>
+  <cutflow>TTbarResolved</cutflow>
+  <channel>muon</channel>
+  <parameters>
+    <param name="pTmin"             type="numeric" value="20." />
+    <param name="etaMax"            type="numeric" value="2.5" />
+    <param name="isRealData"        type="flag"    value="0" />
+    <param name="isMCSignal"        type="flag"    value="0" />
+    <param name="isWjets"           type="flag"    value="0" />
+    <param name="lumi_reweight"     type="flag"    value="1" /> 
+    <param name="lumifile"          type="string" value="MAMBODIR/share/data/NEvents_TTDIFFXS_62/LUMIFILE" />
+    <param name="luminosity"        type="numeric" value="3209" />
+  </parameters>
+</analysis>
