@@ -40,4 +40,3 @@
 /gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/f2/87/user.mromano.7900242._000038.ljets.output.root
 /gpfs_data/storm/atlas/localgroupdisk/rucio/user/mromano/04/fc/user.mromano.7900242._000018.ljets.output.root
 /gpfs_data/local/atlas/mromano/Diff13TeV/minintuples_TTDIFFXS_62/user.mromano.410012.PowhegPythiaEvtGen.DAOD_TOPQ1.e3824_s2608_s2183_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root.69277525/user.mromano.7900242._000014.ljets.output.root
-
