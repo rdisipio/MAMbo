@@ -1,0 +1,5 @@
+user.amenga:user.amenga.410000.PowhegPythiaEvtGen.DAOD_TOPQ1.e3698_s2608_s2183_r7267_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.amenga:user.amenga.410001.PowhegPythiaEvtGen.DAOD_TOPQ1.e3783_s2608_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.amenga:user.amenga.410002.PowhegPythiaEvtGen.DAOD_TOPQ1.e3783_s2608_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.amenga:user.amenga.410003.aMcAtNloHerwigppEvtGen.DAOD_TOPQ1.e4441_s2726_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.amenga:user.amenga.410500.PowhegPythia8EvtGen.DAOD_TOPQ1.e4797_s2726_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/

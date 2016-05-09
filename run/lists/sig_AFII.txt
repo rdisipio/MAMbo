@@ -1,0 +1,3 @@
+user.amenga:user.amenga.410000.PowhegPythiaEvtGen.DAOD_TOPQ1.e3698_a766_a810_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.amenga:user.amenga.410003.aMcAtNloHerwigppEvtGen.DAOD_TOPQ1.e4441_a766_a810_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.amenga:user.amenga.410004.PowhegHerwigppEvtGen.DAOD_TOPQ1.e3836_a766_a810_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
