@@ -1,1 +1,1 @@
-/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/bin/MAMbo-setenv.sh
+/home/qitek/scratch0/MAMbo_13TeV/MAMbo/bin/MAMbo-setenv.sh
