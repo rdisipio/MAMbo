@@ -12,7 +12,8 @@ path=os.environ['PWD']
 #Systs = [ 'nominal' ]
 Systs = [  ]
 
-fnames = ['scripts_ttdiffxs_13TeV_ljets/resolved_kinematic_systematics.dat', 'scripts_ttdiffxs_13TeV_ljets/resolved_scale_systematics.dat' ]
+fnames = ['scripts_ttdiffxs_13TeV_ljets/resolved_kinematic_systematics.dat' ]
+# TO BE SUPPORTED!!! , 'scripts_ttdiffxs_13TeV_ljets/resolved_scale_systematics.dat' ]
 for fname in fnames:
     infile = open(fname, 'r')
     for line in infile.readlines():
