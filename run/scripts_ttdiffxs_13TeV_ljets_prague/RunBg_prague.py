@@ -22,6 +22,9 @@ for fname in fnames:
 
 #print Systs
 
+# STEErING!!!
+requireTag = True
+dsidTag = 'mc.361'
 
 BgList = []
 fname = 'scripts_ttdiffxs_13TeV_ljets/AllBkgTTDIFFXS_62.txt'
@@ -29,6 +32,8 @@ infile = open(fname)
 for line in infile.readlines():
     mline = line[:-1]
     if mline != '':
+        if requireTag and mline.find(dsidTag) < 0:
+            continue
         tokens = mline.split('.')
         BgList.append(tokens[1])
 #print BgList
