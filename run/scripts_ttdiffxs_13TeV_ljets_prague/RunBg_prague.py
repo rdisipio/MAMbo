@@ -23,7 +23,7 @@ for fname in fnames:
 
 #print Systs
 
-# STEErING!!!
+# STEERING!!!
 requireTag = True
 dsidTag = 'mc.361'
 
@@ -41,14 +41,15 @@ for line in infile.readlines():
 
 
 for syst in Systs:
+    print 'Processing syst %s' % (syst,)
     outdir = baseoutdir + '/' + syst
     os.system('mkdir -p %s' % (outdir,))
     
     for ljet in Ljets:
                    
-        
+        print '  Processing %s' % (ljet,)
         for bgid in BgList:
-    
+            print 'Processing %s' % (bgid,)
             for flist in os.popen('ls lists/list__*.txt | grep %s' % (bgid,)).readlines():
 
 

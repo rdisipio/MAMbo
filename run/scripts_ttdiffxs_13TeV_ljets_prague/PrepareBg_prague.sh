@@ -10,6 +10,7 @@
 
 # Zjets:
 for id in `cat scripts_ttdiffxs_13TeV_ljets/Zjets.run | grep 361` ; do
+  echo "Processing $id ..."
   list=_submit_bg_${id}
   # all but JES!!!
   # cat _submit_bg.sh | grep ${id} | grep -v JET_19NP > ${list}.sh
