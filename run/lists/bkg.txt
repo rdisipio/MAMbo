@@ -170,3 +170,7 @@ user.mromano:user.mromano.410114.MadGraphPythia8EvtGen.DAOD_TOPQ1.e4632_s2726_r7
 user.mromano:user.mromano.410115.MadGraphPythia8EvtGen.DAOD_TOPQ1.e4632_s2726_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
 user.mromano:user.mromano.410116.MadGraphPythia8EvtGen.DAOD_TOPQ1.e4632_s2726_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
 user.mromano:user.mromano.410050.MadGraphPythiaEvtGen.DAOD_TOPQ1.e4279_s2608_s2183_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.mromano:user.mromano.361407.Sherpa.DAOD_TOPQ1.e4133_s2608_s2183_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.mromano:user.mromano.361409.Sherpa.DAOD_TOPQ1.e4133_s2608_s2183_r7326_r6282_p2516.TTDIFFXS_62_v5_ljets.output.root/
+user.mromano:user.mromano.361422.Sherpa.DAOD_TOPQ1.e3733_s2608_s2183_r7267_r6282_p2460.TTDIFFXS_62_v5_ljets.output.root/
+user.mromano:user.mromano.361426.Sherpa.DAOD_TOPQ1.e3733_s2608_s2183_r7326_r6282_p2460.TTDIFFXS_62_v5_ljets.output.root/
