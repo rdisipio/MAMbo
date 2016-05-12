@@ -7,6 +7,7 @@ Ljets = ['el', 'mu']
 basecfg='analysis_params_TTbarResolved_mcsignal_ll_eos.xml'
 path=os.environ['PWD']
 mambodir=os.environ['MAMBODIR']
+user=os.environ['USER']
 outdir='/raid7_atlas2/%s/mambo_out' % (user,)
 
 dsid = '410000'

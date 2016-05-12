@@ -1,6 +1,7 @@
 #!/bin/bash
 
-for list in  sig bkg ; do
+#for list in  bgk_missing.txt sig bkg ; do
+for list in  bkg_missing  ; do
   for sample in `cat ${list}.txt` ; do
     tag=`echo $sample | cut -d \. -f 4,5`
     echo $sample $tag
@@ -13,7 +14,7 @@ for list in  sig_AFII ; do
   for sample in `cat ${list}.txt` ; do
     tag=`echo $sample | cut -d \. -f 4,5`
     echo $sample $tag
-    rucio list-file-replicas --rse PRAGUELCG2_LOCALGROUPDISK --proto root ${sample} | awk '/root:/{print $(NF-1)}' > list_${uid}_${tag}_AFII.txt
+    ###!!!rucio list-file-replicas --rse PRAGUELCG2_LOCALGROUPDISK --proto root ${sample} | awk '/root:/{print $(NF-1)}' > list_${uid}_${tag}_AFII.txt
   done
 done
 
@@ -23,6 +24,6 @@ for list in  np ; do
   for sample in `cat ${list}.txt` ; do
     tag=`echo $sample | cut -d \. -f 4,5`
     echo $sample $tag
-    rucio list-file-replicas --rse PRAGUELCG2_LOCALGROUPDISK --proto root ${sample}/ | awk '/root:/{print $(NF-1)}' > list_${uid}_${tag}.txt
+    ###!!!rucio list-file-replicas --rse PRAGUELCG2_LOCALGROUPDISK --proto root ${sample}/ | awk '/root:/{print $(NF-1)}' > list_${uid}_${tag}.txt
   done
 done

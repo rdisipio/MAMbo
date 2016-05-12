@@ -10,7 +10,8 @@ basecfg='analysis_params_TTbarResolved_bg_ll_eos.xml'
 path=os.environ['PWD']
 
 #Systs = [ 'nominal' ]
-Systs = [  ]
+#Systs = [ 'JET_JER_SINGLE_NP__1up' ]
+Systs = [ '' ]
 
 fnames = ['scripts_ttdiffxs_13TeV_ljets/resolved_kinematic_systematics.dat' ]
 # TO BE SUPPORTED!!! , 'scripts_ttdiffxs_13TeV_ljets/resolved_scale_systematics.dat' ]
@@ -23,8 +24,9 @@ for fname in fnames:
 
 #print Systs
 
-# STEERING!!!
+### STEERING!!!
 requireTag = True
+# Zjets ONLY, and some CT10 ballast, too;)
 dsidTag = 'mc.361'
 
 BgList = []
