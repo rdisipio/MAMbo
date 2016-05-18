@@ -9,23 +9,28 @@ Ljets = ['el', 'mu']
 basecfg='analysis_params_TTbarResolved_bg_ll_eos.xml'
 path=os.environ['PWD']
 
-#Systs = [ 'nominal' ]
-#Systs = [ 'JET_JER_SINGLE_NP__1up' ]
-Systs = [ '' ]
+# just nominal:
+Systs = [ 'nominal' ]
+
+
+# systematics:
+# Systs = [ 'JET_JER_SINGLE_NP__1up' ]
+# Systs = [ '' ]
 
 fnames = ['scripts_ttdiffxs_13TeV_ljets/resolved_kinematic_systematics.dat' ]
 # TO BE SUPPORTED!!! , 'scripts_ttdiffxs_13TeV_ljets/resolved_scale_systematics.dat' ]
 for fname in fnames:
     infile = open(fname, 'r')
     for line in infile.readlines():
-        Systs.append(line[:-1].replace('\t', '').replace(' ','')) # OMG;)
+        ###!!!Systs.append(line[:-1].replace('\t', '').replace(' ','')) # OMG;)
         pass
     infile.close()
 
 #print Systs
 
 ### STEERING!!!
-requireTag = True
+requireTag = False
+# requireTag = True
 # Zjets ONLY, and some CT10 ballast, too;)
 dsidTag = 'mc.361'
 
