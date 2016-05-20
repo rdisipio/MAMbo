@@ -14,7 +14,8 @@
 for id in `cat scripts_ttdiffxs_13TeV_ljets/ttV.run scripts_ttdiffxs_13TeV_ljets/Diboson.run` ; do
    echo "*** Submitting jobs for dsid ${id}"
    ls _submit*${id}_a??
-   ###!!!./scripts_ttdiffxs_13TeV_ljets_prague/Qsub.sh ${id}_a
+   ###!!!
+   ./scripts_ttdiffxs_13TeV_ljets_prague/Qsub.sh ${id}_a
    #echo "Sleeping ${delay}s...zzz..."
    #sleep $delay
 done
