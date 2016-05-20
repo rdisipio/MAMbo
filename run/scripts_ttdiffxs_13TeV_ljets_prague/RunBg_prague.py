@@ -22,7 +22,7 @@ fnames = ['scripts_ttdiffxs_13TeV_ljets/resolved_kinematic_systematics.dat' ]
 for fname in fnames:
     infile = open(fname, 'r')
     for line in infile.readlines():
-        ###!!!Systs.append(line[:-1].replace('\t', '').replace(' ','')) # OMG;)
+        Systs.append(line[:-1].replace('\t', '').replace(' ','')) # OMG;)
         pass
     infile.close()
 
