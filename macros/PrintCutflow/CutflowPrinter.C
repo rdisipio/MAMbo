@@ -7,7 +7,8 @@ CutflowPrinter::CutflowPrinter()
 	m_cutflowTitles = { { "cutflow", "Unweighted" }, { "cutflow_mc",	"MC weights" },
  				{ "cutflow_mc_pu",	"MC*PU weights" },
  				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
- 				{ "cutflow_scale_factors", "ScaleFactors" }
+ 				{ "cutflow_scale_factors", "ScaleFactors" }, 
+                        //        {"cutflow_particle_level", "ParticleLevel"}
  				};
 
 }
@@ -19,7 +20,8 @@ CutflowPrinter::CutflowPrinter( const std::string& infilename )
 	m_cutflowTitles = { { "cutflow", "Unweighted" }, { "cutflow_mc",	"MC weights" },
  				{ "cutflow_mc_pu",	"MC*PU weights" },
  				{ "cutflow_mc_pu_zvtx",	"MC*PU*ZVtx weights" },
- 				{ "cutflow_scale_factors", "ScaleFactors" }
+ 				{ "cutflow_scale_factors", "ScaleFactors" }, 
+                      //          {"cutflow_particle_level", "ParticleLevel"}
  				};
 	
 	

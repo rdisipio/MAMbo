@@ -248,33 +248,60 @@ class EventDumperMCTruthTopXAOD
   //     if( ntops > 2 ) cout << "WARNING: event " << ntuple_partons->eventNumber << " has too many top quarks in the MC event record: " << ntops << endl;
 
        int nthad = 0;
-       TLorentzVector ttbar, t, tbar;
+       TLorentzVector ttbar, t, tbar, W_plus, W_minus, b, bbar;
        int n_good_tops = 0;
 
-	double t_pt = ntuple_partons->MC_t_beforeFSR_pt;
+	double W_plus_pt =     ntuple_partons->MC_W_from_t_pt;
+	double W_plus_eta =     ntuple_partons->MC_W_from_t_eta;
+	double W_plus_phi =     ntuple_partons->MC_W_from_t_phi;
+	double W_plus_m =     ntuple_partons->MC_W_from_t_m;
+	W_plus.SetPtEtaPhiM( W_plus_pt, W_plus_eta, W_plus_phi, W_plus_m );
+	double b_pt =     ntuple_partons->MC_b_from_t_pt;
+	double b_eta =     ntuple_partons->MC_b_from_t_eta;
+	double b_phi =     ntuple_partons->MC_b_from_t_phi;
+	double b_m =     ntuple_partons->MC_b_from_t_m;
+	b.SetPtEtaPhiM( b_pt, b_eta, b_phi, b_m );
+	double W_minus_pt =     ntuple_partons->MC_W_from_tbar_pt;
+	double W_minus_eta =     ntuple_partons->MC_W_from_tbar_eta;
+	double W_minus_phi =     ntuple_partons->MC_W_from_tbar_phi;
+	double W_minus_m =     ntuple_partons->MC_W_from_tbar_m;
+	W_minus.SetPtEtaPhiM( W_minus_pt, W_minus_eta, W_minus_phi, W_minus_m );
+	double bbar_pt =     ntuple_partons->MC_b_from_tbar_pt;
+	double bbar_eta =     ntuple_partons->MC_b_from_tbar_eta;
+	double bbar_phi =     ntuple_partons->MC_b_from_tbar_phi;
+	double bbar_m =     ntuple_partons->MC_b_from_tbar_m;
+	bbar.SetPtEtaPhiM( bbar_pt, bbar_eta, bbar_phi, bbar_m );
+	
+	
+	t = W_plus + b;
+  	n_good_tops++;
+	float t_q = 1;
+	tbar = W_plus + bbar;
+  	n_good_tops++;
+	float tbar_q = -1;
+	ttbar = t + tbar;
+	int t_isHadronic = fabs( ntuple_partons->MC_Wdecay2_from_t_pdgId ) < 6 ? true : false; //if one decay product of the W is a quark, the other decay product has to be a quark
+	int tbar_isHadronic = fabs( ntuple_partons->MC_Wdecay2_from_tbar_pdgId ) < 6 ? true : false; //if one decay product of the W is a quark, the other decay product has to be a quark
+
+	HelperFunctions::DumpTruthParticleToEventData( t, 6, 2, 0, t_q, &ed->mctruth );
+	ed->mctruth.property["isHadronic"].push_back( t_isHadronic );
+	HelperFunctions::DumpTruthParticleToEventData( t, -6, 2, 0, tbar_q, &ed->mctruth );
+	ed->mctruth.property["isHadronic"].push_back( tbar_isHadronic );
+	
+	   
+	/*double t_pt = ntuple_partons->MC_t_beforeFSR_pt;
 	double t_eta = ntuple_partons->MC_t_beforeFSR_eta;
 	double t_phi = ntuple_partons->MC_t_beforeFSR_phi;
 	double t_m = ntuple_partons->MC_t_beforeFSR_m;
-	float t_q = 1;
-	int t_isHadronic = fabs( ntuple_partons->MC_Wdecay2_from_t_pdgId ) < 6 ? true : false; //if one decay product of the W is a quark, the other decay product has to be a quark
-  	n_good_tops++;
 	t.SetPtEtaPhiM( t_pt, t_eta, t_phi, t_m );
-	HelperFunctions::DumpTruthParticleToEventData( t, 6, 2, 0, t_q, &ed->mctruth );
-	ed->mctruth.property["isHadronic"].push_back( t_isHadronic );
 
 	double tbar_pt = ntuple_partons->MC_tbar_beforeFSR_pt;
 	double tbar_eta = ntuple_partons->MC_tbar_beforeFSR_eta;
 	double tbar_phi = ntuple_partons->MC_tbar_beforeFSR_phi;
 	double tbar_m = ntuple_partons->MC_tbar_beforeFSR_m;
-	float tbar_q = -1;
-	int tbar_isHadronic = fabs( ntuple_partons->MC_Wdecay2_from_tbar_pdgId ) < 6 ? true : false; //if one decay product of the W is a quark, the other decay product has to be a quark
-  	n_good_tops++;
-	tbar.SetPtEtaPhiM( tbar_pt, tbar_eta, tbar_phi, tbar_m );
-	HelperFunctions::DumpTruthParticleToEventData( t, -6, 2, 0, tbar_q, &ed->mctruth );
-	ed->mctruth.property["isHadronic"].push_back( tbar_isHadronic );
+	tbar.SetPtEtaPhiM( tbar_pt, tbar_eta, tbar_phi, tbar_m );*/
 
 
-       ttbar = t + tbar;
 /*
        if( ntops > 2 ) {
          cout << "DEBUG: top     pT=" << top.Pt()/GeV << " eta=" << top.Eta() << " m=" << top.M()/GeV << endl;

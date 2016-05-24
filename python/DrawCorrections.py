@@ -257,6 +257,7 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
     can.Print('pdf/' + canname + '.pdf')
+    can.Print('C/' + canname + '.C' )
 
 ####################################################
 ####################################################
@@ -290,16 +291,16 @@ ftag='nofullhad'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
-rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/'
+rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nominal/'
 
-ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nocut/'
+ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nocut/'
 
 GenNames = [ 'DiTop.410000'
          ]
 
 
 
-os.system('mkdir png eps pdf')
+os.system('mkdir C png eps pdf')
 gROOT.SetBatch(1)
 
 for ll in ljets:

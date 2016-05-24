@@ -41,6 +41,7 @@ CutFlowTTbarResolved::~CutFlowTTbarResolved() {
 #endif
 
 	SAFE_DELETE( m_scalerFakes )
+	SAFE_DELETE( m_scalerWjets )
 }  
 
 /////////////////////////////////////////
@@ -59,12 +60,20 @@ bool CutFlowTTbarResolved::Initialize() {
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
 	if( isQCD)
 	{
-		string method = "MM";
+		string qcd_syst = "nominal";
 	
-		if( m_config->custom_params_string.count("FakesEvaluationMethod")) method = m_config->custom_params_string["FakesEvaluationMethod"];
-		m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, 2, method);
+		if( m_config->custom_params_string.count("FakesSystematic")) qcd_syst = m_config->custom_params_string["FakesSystematic"];
+		m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, qcd_syst);
    
- }
+	}
+	if( isWjets)
+	{
+		string wjets_syst = "nominal";
+	
+		if( m_config->custom_params_string.count("WjetsSystematic")) wjets_syst = m_config->custom_params_string["WjetsSystematic"];
+		m_scalerWjets = ScalerWjets::GetHandle( m_config->channel, wjets_syst );
+   
+	}
     m_bTagSF_name = "scaleFactor_BTAG_77";
     m_leptonSF_name = "scaleFactor_LEPTON" ;
     m_pileupSF_name = "scaleFactor_PILEUP";	
@@ -244,30 +253,31 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 		 if( isStressTest )//mr
 		 {
-              TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
-              TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
-              TLorentzVector tt = t1 + t2;
+                          TLorentzVector t1 = Particle(ed->mctruth, 0).MakeLorentz();
+                          TLorentzVector t2 = Particle(ed->mctruth, 1).MakeLorentz();
+                          TLorentzVector tt = t1 + t2;
 			  if( stressTestType == "tt_rapidity" )
 			  {
 				  //Rapidity gaussian reweight
-				  weight_reco_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
-				  weight_particle_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+				  weight_reco_level *= 1 - 0.8 * TMath::Exp( -1 * pow( tt.Rapidity()/0.2, 2) );
+				  weight_particle_level *= 1 - 0.8 * TMath::Exp( -1 * pow( tt.Rapidity()/0.2, 2) );
 			  }
 			  else if( stressTestType == "tt_m" )
 			  {
 				  //         Mass bump"
-				  double delta = tt.M() - 800000;
+				  double delta = tt.M() - 500000;
 				  double sigma = 100000;
-				  weight_reco_level *= 1 + 2 * TMath::Exp( -1 * pow( delta/sigma, 2) );
-				  weight_particle_level *= 1 + 2*TMath::Exp( -1 *  pow( delta/sigma, 2) );
+				  double ratio = delta / sigma;
+				  weight_reco_level *= 1 + 2 * TMath::Exp( -1 *ratio*ratio );
+				  weight_particle_level *= 1 + 2*TMath::Exp( -1 *ratio*ratio );
 			  }
 			  else if( stressTestType == "tt_pt" )
 			  {
 				  // tt pt slope
-				  weight_particle_level *= 1 + tt.Pt() / 400000;
-				  weight_reco_level *= 1 + tt.Pt() / 400000;
+				  weight_particle_level *= 1 + tt.Pt() / 600000;
+				  weight_reco_level *= 1 + tt.Pt() / 600000;
 			  }
-			  else if( stressTestType == "t_pt" )
+			  else 
 			  {
 				  //top pt slope
 				  weight_particle_level *= 1 + ( t1.Pt() + t2.Pt())/ 1500000; //average of the pt
@@ -308,10 +318,32 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
 
 #ifdef __USE_LHAPDF__
          const double scaleFactor_PDF  = GetPDFWeight( ed );
+         cout << "scale factor PDF " << scaleFactor_PDF << endl;
+         if( scaleFactor_PDF < 1.e-10 )
+         {
+                 char message[100];
+                 sprintf( message, "PDF weight too small: %f\n", scaleFactor_PDF);
+                 cout << "WARNING: " << message;
+         }
          weight_reco_level     *= scaleFactor_PDF;
          weight_particle_level *= scaleFactor_PDF;
 #else
+         if( m_PDFSF_name != "" && ed->property.find(m_PDFSF_name) ==  ed->property.end() )
+         {
+                char message[100];
+                 sprintf( message, "PDF weight not found: %s", m_PDFSF_name.c_str());
+                 throw std::runtime_error( message );
+         }  
+       
          const double scaleFactor_PDF        = m_PDFSF_name == "" ? 1 : ed->property[ m_PDFSF_name];
+         // const double scaleFactor_PDF  = GetPDFWeight( ed );
+        // cout << "Scale factor PDF (" << m_PDFSF_name << ") " << scaleFactor_PDF << endl;
+         if( scaleFactor_PDF < 1.e-10 )
+         {
+                 char message[100];
+                 sprintf( message, "PDF weight too small: %f\n", scaleFactor_PDF);
+                 cout << "WARNING: " << message;
+         }
          weight_reco_level     *= scaleFactor_PDF;
          weight_particle_level *= scaleFactor_PDF;
 	
@@ -332,7 +364,6 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
          // weight_particle_level *= scaleFactor_PILEUP * scaleFactor_ZVERTEX;
     }
 
-    //if( isWjets ) { }
 
 
 
@@ -609,6 +640,7 @@ bool CutFlowTTbarResolved::Finalize()
 bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     bool passed = true;
     int isQCD = m_config->custom_params_flag["isQCD"];
+    int isWjets = m_config->custom_params_flag["isWjets"];
 	float minMet = 30000;
 //    const int hfor = int( ed->property["hfor"] );
 
@@ -619,6 +651,7 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     
     double weight = ed->property["weight_reco_level"];
     double qcd_weight = 1;
+	double wjets_weight = 1;
     ControlPlotValues values;
     values.weight = weight;
     values.mu      = ed->property["mu"];
@@ -711,7 +744,27 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 			m_hm->GetHistogram( "reco/cutflow/2j0b_lowmet/fakes_weights" )->Fill( qcd_weight );
 			m_hm->GetHistogram( "reco/cutflow/2j0b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
 		}
-    }   
+    } 	
+	
+    if( isWjets ) 
+	{
+		int njets = ed->jets.n;
+		int nbjets = ed->bjets.n;
+		wjets_weight     = m_scalerWjets->GetWjetsWeight( njets, nbjets );      
+		values.weight *= wjets_weight;
+        weight     *= wjets_weight;
+        ed->property["weight_reco_level"] *= wjets_weight;
+	    m_hm->GetHistogram( "reco/cutflow/2j0b/wjets_weights" )->Fill( wjets_weight );
+	    m_hm->GetHistogram( "reco/cutflow/2j0b/wjets_weights_1" )->Fill( wjets_weight );
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/2j0b_lowmet/wjets_weights" )->Fill( wjets_weight );
+			m_hm->GetHistogram( "reco/cutflow/2j0b_lowmet/wjets_weights_1" )->Fill( wjets_weight );
+		}
+
+		
+	}
 
 
     FillHistogramsControlPlotsReco( values );    
@@ -737,6 +790,20 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 			m_hm->GetHistogram( "reco/cutflow/3j0b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
 		}
     }
+	
+    if( isWjets ) 
+	{
+	    m_hm->GetHistogram( "reco/cutflow/3j0b/wjets_weights" )->Fill( wjets_weight );
+	    m_hm->GetHistogram( "reco/cutflow/3j0b/wjets_weights_1" )->Fill( wjets_weight );
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/3j0b_lowmet/wjets_weights" )->Fill( wjets_weight );
+			m_hm->GetHistogram( "reco/cutflow/3j0b_lowmet/wjets_weights_1" )->Fill( wjets_weight );
+		}
+		
+	}
+
     FillHistogramsControlPlotsReco( values );    
     FillHistogramsDiagnostics( values );
     //more control plots
@@ -816,6 +883,18 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 			m_hm->GetHistogram( "reco/cutflow/4j0b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
 		}
     }
+    if( isWjets ) 
+	{
+	    m_hm->GetHistogram( "reco/cutflow/4j0b/wjets_weights" )->Fill( wjets_weight );
+	    m_hm->GetHistogram( "reco/cutflow/4j0b/wjets_weights_1" )->Fill( wjets_weight );
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/4j0b_lowmet/wjets_weights" )->Fill( wjets_weight );
+			m_hm->GetHistogram( "reco/cutflow/4j0b_lowmet/wjets_weights_1" )->Fill( wjets_weight );
+		}
+		
+	}
     
     if (jet_n == 4 && bjet_n == 0) {
 		MoreCRFillHistogramsControlPlotsReco( "4j_excl_0b_excl", values );
@@ -844,6 +923,21 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 			m_hm->GetHistogram( "reco/cutflow/4j1b_lowmet/fakes_weights_1" )->Fill( qcd_weight );
 		}
     }    
+	
+    if( isWjets ) 
+	{
+	    m_hm->GetHistogram( "reco/cutflow/4j1b/wjets_weights" )->Fill( wjets_weight );
+	    m_hm->GetHistogram( "reco/cutflow/4j1b/wjets_weights_1" )->Fill( wjets_weight );
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/4j1b_lowmet/wjets_weights" )->Fill( wjets_weight );
+			m_hm->GetHistogram( "reco/cutflow/4j1b_lowmet/wjets_weights_1" )->Fill( wjets_weight );
+		}
+		
+	}
+	
+	
     if (jet_n == 4 && bjet_n == 1) {
 		MoreCRFillHistogramsControlPlotsReco( "4j_excl_1b_excl", values );
     	if( values.ETmiss < minMet )
@@ -875,6 +969,20 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 			m_hm->GetHistogram( "reco/cutflow/afterCuts_lowmet/fakes_weights_1" )->Fill( qcd_weight );
 		}
     }
+	
+	
+    if( isWjets ) 
+	{
+	    m_hm->GetHistogram( "reco/cutflow/afterCuts/wjets_weights" )->Fill( wjets_weight );
+	    m_hm->GetHistogram( "reco/cutflow/afterCuts/wjets_weights_1" )->Fill( wjets_weight );
+		if( values.ETmiss < minMet )
+		{
+			
+			m_hm->GetHistogram( "reco/cutflow/afterCuts_lowmet/wjets_weights" )->Fill( wjets_weight );
+			m_hm->GetHistogram( "reco/cutflow/afterCuts_lowmet/wjets_weights_1" )->Fill( wjets_weight );
+		}
+		
+	}
 
     if (jet_n == 4 && bjet_n >= 2) {
 		MoreCRFillHistogramsControlPlotsReco( "4j_excl_2b_incl", values );

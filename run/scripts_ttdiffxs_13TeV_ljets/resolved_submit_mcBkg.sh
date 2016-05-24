@@ -2,13 +2,18 @@
 #set -x
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
-systs=nominal
+systs="wjets_stat wjets_syst"
+#systs="nominal wjets_stat wjets_syst $(cat resolved_*_systematics.dat )"
+isWjets=0
+wjetsRuns=$(cat Wjets.run )
+wjetsSyst=nominal
 production=TTDIFFXS_62
 nomalizationfilepath=${MAMBODIR}/share/data/NEvents_${production}/
 filelistdir=$PWD/filelists_${production}/
 #paramsdir=${MAMBODIR}/share/control/analysis_params/${outtag}
 sendOnce=0
 for syst in $systs
+do
         if [[ $syst == "scale"* ]]
         then
                 template=Resolved13TeVBkg.sf_syst.xml.template
@@ -22,6 +27,9 @@ for syst in $systs
            [ $ch == "mu" ] && ch_tag="muon"
               
            filelist=AllBkgTTDIFFXS_62.txt
+          # filelist=missingZ.txt
+          # filelist=ttVList.txt
+           filelist=WjetList.txt
 
            while read flist           
              do 
@@ -38,11 +46,35 @@ for syst in $systs
                  outfile=${syst}/${tag}.histograms.root
                  jobname=${tag}
                  params=$PWD/control/analysis_params/13TeV_ljets_resolved/config/Resolved13TeV.${dsid}.${ch}.${syst}.xml
-                 cp  ${params}
-
+                 cp $template  ${params}
+				 
+				wjetsSyst=nominal
+				isWjets=0
+				 if [[ ${wjetsRuns} == *"${dsid}"* ]]
+				 then
+					echo "It's a wjets sample!"
+					isWjets=1
+				  fi
+				  
+				  systname=$syst
+				  if [[ $syst == "wjets"* ]]
+				  then
+						if [ $isWjets == "0" ]
+						then
+							echo $syst asked for non-wjet run $dsid, skipping
+							continue
+						fi
+					    wjetsSyst=$(echo $syst | sed s/wjets_//)
+						echo Wjets syst $wjetsSyst
+						systname="nominal"
+						
+				   fi
+				 
                  sed -i "s|@CHANNEL@|${ch_tag}|"     ${params}
                  sed -i "s|@NORMFILE@|${nomalizationfile}|"  ${params}
-                 sed -i "s|@SYST@|${syst}|"  ${params}
+                 sed -i "s|@SYST@|${systname}|"  ${params}
+                 sed -i "s|@ISWJETS@|${isWjets}|"  ${params}
+                 sed -i "s|@WJETSSYST@|${wjetsSyst}|"  ${params}
                  jobname=${tag}
 
                  echo ${params}  

@@ -475,6 +475,11 @@
             <Bin id="0" nbins="20" xmin="-3." xmax="3." />
             <Bin id="1" nbins="200" xmin="-3." xmax="3." />
        </Variable>
+       <Variable name="wjets_weights" title="Wjets charge asymmetry  weight" folder="cutflow">
+            <Bin id="0" nbins="20" xmin="-3." xmax="3." />
+            <Bin id="1" nbins="200" xmin="-3." xmax="3." />
+       </Variable>
+
        <Variable name="MC_gen_weights" title="MC Generator weights" folder="cutflow">
             <Bin id="0" nbins="7" xmin="-3.5" xmax="3.5" />
        </Variable>
@@ -646,7 +651,12 @@
         <TH1F variable="flav_comp_incl" binId="0"/>
         <TH1F variable="fakes_weights"  binId="0"/>
         <TH1F variable="fakes_weights"  binId="1"/>
-        <TH1F variable="MC_gen_weights" binId="0"/>
+        
+        <TH1F variable="wjets_weights"  binId="1"/>
+
+        <TH1F variable="wjets_weights"  binId="0"/>
+
+	<TH1F variable="MC_gen_weights" binId="0"/>
     </Histos>    
     
   <!--TH1F name="vxp_nTracks"   title="No. of tracks per pv" nbins="20"  xmin="0" xmax="20" /-->

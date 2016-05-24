@@ -13,5 +13,9 @@
     <param name="lumifile" type="string" value="@NORMFILE@" />
     <param name="luminosity"            type="numeric" value="3209" />
     <param name="scale_syst"        type="string"  value="@SYST@" />
+
+       <param name="isWjets"        type="flag"    value="@ISWJETS@" />
+   <param name="WjetsSystematic"  type="string"  value="@WJETSSYST@" />
+
  </parameters>
 </analysis>

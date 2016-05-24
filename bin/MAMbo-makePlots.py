@@ -163,7 +163,7 @@ def AddOverflowToLastBin_TH1( h ):
    h.SetBinContent( N, yNew )
    h.SetBinError( N, eNew )
 
-norm = False
+norm = True
 ####################################################
 
 
@@ -486,9 +486,9 @@ if __name__ == "__main__":
    if opts.batch:
         gROOT.SetBatch(True)
    
-   norm=False
-   if opts.normalization:
-        norm=True
+   norm=True
+#   if opts.normalization:
+#        norm=True
        
    configFileName = sys.argv[-1]
 

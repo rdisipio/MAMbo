@@ -11,21 +11,22 @@
 class ScalerFakes
 {
 	private:
-		ScalerFakes( int channel, int m_nParameters, string m_method );
+		ScalerFakes( int channel, std::string systematic = "nominal" );
+		ScalerFakes( int channel, int nparamters, std::string systematic = "nominal" ){};
 		int m_channel;
 		FakeEffProvider * m_fakeEff, * m_realEff, *m_tightEff;
-		int m_nParameters;
-		string m_method;
+		std::string m_systematic;
 		static ScalerFakes * m_instance;
 		
 	public:
 		virtual ~ScalerFakes();
-		static ScalerFakes * GetHandle( int channel, int m_nParameters = 2, string m_method = "MM" );
+		static ScalerFakes * GetHandle( int channel, std::string systematic = "nominal" );
+		static ScalerFakes * GetHandle( int channel, int nParameters, std::string systematic = "nominal" );
 		int GetChannel() { return m_channel;};
-		int GetNParameters(){ return m_nParameters;};
+		string GetSystematic(){ return m_systematic;};
 		double GetFakesWeight(  EventData * ed );
 		double GetFakesWeightMM(  EventData * ed );
-		double GetFakesWeightMMM(  EventData * ed );
+		double GetFakesWeightMMM(  EventData * ed ); //depecrated
 };
 
 

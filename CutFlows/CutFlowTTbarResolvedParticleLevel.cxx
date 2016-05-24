@@ -108,12 +108,16 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 	if( m_config->custom_params_string.count( "stressTest" ) ) //mr
 	{
 		stressTestType = m_config->custom_params_string["stressTest"];
-		if( stressTestType != "none" && stressTestType != "tt_pt" && stressTestType != "tt_m" && stressTestType != "tt_rapidity" && stressTestType != "top_pt" )
+		if( stressTestType != "none" && stressTestType != "tt_pt" && stressTestType != "tt_m" && stressTestType != "tt_rapidity" && stressTestType != "t_pt" )
 		{
-			cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
+			//cout << "Warning: stress test type " << stressTestType << " is unknown, setting it to \"none\"\n";
 			stressTestType = "none";
 		}
-		else if(  stressTestType != "none" ) isStressTest = 1;
+		else if(  stressTestType != "none" )
+		{
+			isStressTest = 1;
+			//cout << "Stress test type = " << stressTestType << endl;
+		}
 	}
 
 	// RDS+MR
@@ -130,29 +134,31 @@ bool CutFlowTTbarResolvedParticleLevel::Apply( EventData * ed )
 		{
 		//Rapidity gaussian reweight
 
-			weight_particle_level *= 1 - 0.4 * TMath::Exp( -1 * pow( tt.Rapidity()/0.3, 2) );
+			weight_particle_level *= 1 - 0.8 * TMath::Exp( -1 * pow( tt.Rapidity()/0.2, 2) );
 		}
 		else if( stressTestType == "tt_m" )
 		{
 			//         Mass bump"
-			double delta = tt.M() - 800000;
+			double delta = fabs(tt.M() - 500000);
 			double sigma = 100000;
+			// cout << "delta = " << delta << " sigma " << sigma << " mass " << tt.M() << " exp factor " << 2*TMath::Exp( -1 *  pow( delta/sigma, 2)  )<< endl;
 
 			weight_particle_level *= 1 + 2*TMath::Exp( -1 *  pow( delta/sigma, 2) );
 		}
 		else if( stressTestType == "tt_pt" )
 		{
 			// tt pt slope
-			weight_particle_level *= 1 + tt.Pt() / 400000;
+			weight_particle_level *= 1 + tt.Pt() / 600000;
 
 		}
-		else if( stressTestType == "t_pt" )
+		else
 		{
 			//top pt slope
 			weight_particle_level *= 1 + ( t1.Pt() + t2.Pt())/ 1500000; //average of the pt
 
 		}
 	}
+//	cout << "weight_particle_level " << weight_particle_level << endl;
 
 
 	// NaN check: not needed since the lumi reweight tool already takes care of this
@@ -309,7 +315,38 @@ bool CutFlowTTbarResolvedParticleLevel::PassedCutFlowParticle(EventData * ed) {
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );
     
-    // 2 3j0b
+/*    //Printout for steffen:
+ std::cout << " DEBUG :: lepton -- (1)"
+   << " pt :: > " <<  values.lep_pt
+   << " eta :: > "<<  values.lep_eta
+   << " phi :: > "<<  values.lep_phi
+   << std::endl;
+
+   if(values.jet_n>0)
+ for( int j = 0; j < values.jet_n; ++j )
+ {
+   std::cout << " DEBUG :: jets (R=0.4) -- (" << j+1 <<")"
+     << " pt :: > " << values.jets[j]->pt
+     << " eta :: > "<< values.jets[j]->eta
+     << " phi :: > "<< values.jets[j]->phi
+     << std::endl;
+}
+   if(values.bjet_n>0)
+   {
+        for( int j = 0; j < values.bjet_n; ++j )
+        std::cout << " DEBUG :: jets (R=0.4) -- (" <<  j+1 <<")"
+        << " pt :: > " << values.bJets[j]->pt
+                << " eta :: > "<< values.bJets[j]->eta
+        << " phi :: > "<< values.bJets[j]->phi
+        << std::endl;
+   }
+      
+    
+    
+    
+  */
+
+  // 2 3j0b
     if( ed->truth_jets.n < 3 ) return !passed;
     PassedCut( "LPLUSJETS", "particle_unweight" );
     PassedCut( "LPLUSJETS", "particle_weighted", weight );

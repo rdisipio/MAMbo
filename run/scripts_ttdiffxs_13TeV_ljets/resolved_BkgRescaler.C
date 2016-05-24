@@ -6,21 +6,36 @@ void resolved_BkgRescaler(string filename, string bkg){
   string RegionNameArray[]={"4j2b","cutflow"};
   std::vector<std::string> RegionName;
   RegionName.assign(RegionNameArray,RegionNameArray+2);
-  double sf_zjets = 1.2;
-  double sf_diboson = 1.2;
-  double sf_stop = 1.3;
+  double sf_zjets = 1.48;
+  double sf_diboson = 1.48;
+  double sf_ttV = 1.14;
+  double sf_stop_wt = 1.053;
+  double sf_stop_schan = 1.048;
+  double sf_stop_tchan = 1.05;
   double sf = 1;
   if( bkg == "Zjets" )
   {
          sf = sf_zjets; 
   }
-  else if( bkg == "Stop")
+  else if( bkg == "Stop_Wt")
   {
-         sf = sf_stop;
+         sf = sf_stop_wt;
+  }
+  else if( bkg == "Stop_schan")
+  {
+         sf = sf_stop_schan;
+  }
+  else if( bkg == "Stop_tchan")
+  {
+         sf = sf_stop_tchan;
   }
   else if( bkg == "Diboson")
   {
          sf = sf_diboson;
+  }
+  else if( bkg == "ttV")
+  {
+         sf = sf_ttV;
   }
  
   
@@ -29,6 +44,16 @@ void resolved_BkgRescaler(string filename, string bkg){
   //   ParticleName.assign(ParticleNameArray,ParticleNameArray+6);
   //   
   //   
+  
+  //reweight cutflow
+  
+  // TH1D * h_cutflow = (TH1D*) f->Get( "LPLUSJETS_cutflow_reco_weighted")->Clone();
+  TH1F * h_cutflow = (TH1F*) f->Get( "LPLUSJETS_cutflow_reco_weighted");
+  float before =  h_cutflow->Integral();
+  h_cutflow->Scale( sf );
+  f->cd();
+  // f->Delete("LPLUSJETS_cutflow_reco_weighted;1");
+  // h_cutflow->Write("LPLUSJETS_cutflow_reco_weighted");
   
   for(unsigned int j = 0; j<RegionName.size(); j++){
     f->cd(("reco/"+RegionName[j]).c_str());
@@ -50,14 +75,15 @@ void resolved_BkgRescaler(string filename, string bkg){
            
 	
 	
-	bool loop = true;
+	bool loop = false;
 	TObject* tmp = Elements.Next();
 	
 	if (!tmp) break;
 	string name = tmp->GetName();
 	
 	if( first == name) break;
-	TH1F* thisHisto = (TH1F*) f->Get((path+"/"+name).c_str())->Clone();
+	// TH1F* thisHisto = (TH1F*) f->Get((path+"/"+name).c_str())->Clone();
+	TH1F* thisHisto = (TH1F*) f->Get((path+"/"+name).c_str());
 	cout <<  "Rescaling " << thisHisto->GetName() << " by " << sf << endl;
 	thisHisto->Scale( sf );
 	
@@ -74,5 +100,9 @@ void resolved_BkgRescaler(string filename, string bkg){
       
     }
   }
-  f->Close();
+  
+  cout << "Integral before rescaling" << before << endl;
+  cout << "Integral before closing: " << ((TH1D*) f->Get( "LPLUSJETS_cutflow_reco_weighted"))->Integral() << endl;
+ f->Write(); 
+ f->Close();
 }

@@ -22,11 +22,7 @@
 <syst name="bTagSF_77_eigenvars_B_4" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_4_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_B_4_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_4_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_B_4_down.nofullhad.histograms.root" />
-</syst><!-- 
-<syst name="bTagSF_77_eigenvars_B_5" type="two_sided" >
-<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_5_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_B_5_up.nofullhad.histograms.root" />
-<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_5_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_B_5_down.nofullhad.histograms.root" />
-</syst> -->
+</syst> 
 <syst name="bTagSF_77_eigenvars_C_0" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_0_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_C_0_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_0_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_C_0_down.nofullhad.histograms.root" />
@@ -78,11 +74,11 @@
 <syst name="bTagSF_77_eigenvars_Light_4" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_4_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_4_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_4_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_4_down.nofullhad.histograms.root" />
-</syst>
+</syst> 
 <syst name="bTagSF_77_eigenvars_Light_5" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_5_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_5_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_5_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_5_down.nofullhad.histograms.root" />
-</syst>
+</syst> 
 <syst name="bTagSF_77_eigenvars_Light_6" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_6_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_6_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_6_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_6_down.nofullhad.histograms.root" />
@@ -98,6 +94,18 @@
 <syst name="bTagSF_77_eigenvars_Light_9" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_9_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_9_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_9_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_eigenvars_Light_9_down.nofullhad.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_extrapolation" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_extrapolation_up.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_extrapolation_down.nofullhad.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_extrapolation_from_charm" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_from_charm_up/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_extrapolation_from_charm_up.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_from_charm_down/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_bTagSF_77_extrapolation_from_charm_down.nofullhad.histograms.root" />
+</syst> 
+<syst name="jvt" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_jvt_UP/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_jvt_UP.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_jvt_DOWN/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_jvt_DOWN.nofullhad.histograms.root" />
 </syst> 
 <syst name="leptonSF_EL_SF_ID" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_ID_UP/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_leptonSF_EL_SF_ID_UP.nofullhad.histograms.root" />
@@ -146,7 +154,7 @@
 <syst name="leptonSF_MU_SF_TTVA_SYST" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN.nofullhad.histograms.root" />
-</syst>
+</syst> 
 <syst name="pileup" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_pileup_UP/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_pileup_UP.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_pileup_DOWN/tt_diffxs_13TeV.mc.DiTop.410000.co.scaleFactor_pileup_DOWN.nofullhad.histograms.root" />
@@ -203,10 +211,6 @@
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Flavor_Response__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_Flavor_Response__1up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Flavor_Response__1down/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_Flavor_Response__1down.nofullhad.histograms.root" />
 </syst> 
-<syst name="JET_19NP_JET_GroupedNP_1" type="two_sided" >
-<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_GroupedNP_1__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_GroupedNP_1__1up.nofullhad.histograms.root" />
-<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_GroupedNP_1__1down/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_GroupedNP_1__1down.nofullhad.histograms.root" />
-</syst> 
 <syst name="JET_19NP_JET_Pileup_OffsetMu" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_OffsetMu__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_Pileup_OffsetMu__1up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_OffsetMu__1down/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_Pileup_OffsetMu__1down.nofullhad.histograms.root" />
@@ -231,7 +235,6 @@
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_SingleParticle_HighPt__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_SingleParticle_HighPt__1up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_SingleParticle_HighPt__1down/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_19NP_JET_SingleParticle_HighPt__1down.nofullhad.histograms.root" />
 </syst> 
-
 <syst name="MUONS_ID" type="two_sided" >
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_ID__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.MUONS_ID__1up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_ID__1down/tt_diffxs_13TeV.mc.DiTop.410000.co.MUONS_ID__1down.nofullhad.histograms.root" />
@@ -244,21 +247,30 @@
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_SCALE__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.MUONS_SCALE__1up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_SCALE__1down/tt_diffxs_13TeV.mc.DiTop.410000.co.MUONS_SCALE__1down.nofullhad.histograms.root" />
 </syst> 
+<syst name="JET_JER_SINGLE_NP__1up" type="one_sided" >
+<shift side="single"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_JER_SINGLE_NP__1up/tt_diffxs_13TeV.mc.DiTop.410000.co.JET_JER_SINGLE_NP__1up.nofullhad.histograms.root" />
+</syst> 
+<syst name="MET_SoftTrk_ResoPara" type="one_sided" >
+<shift side="single"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ResoPara/tt_diffxs_13TeV.mc.DiTop.410000.co.MET_SoftTrk_ResoPara.nofullhad.histograms.root" />
+</syst> 
+<syst name="MET_SoftTrk_ResoPerp" type="one_sided" >
+<shift side="single"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ResoPerp/tt_diffxs_13TeV.mc.DiTop.410000.co.MET_SoftTrk_ResoPerp.nofullhad.histograms.root" />
+</syst> 
+<syst name="MET_SoftTrk_Scale" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ScaleUp/tt_diffxs_13TeV.mc.DiTop.410000.co.MET_SoftTrk_ScaleUp.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ScaleDown/tt_diffxs_13TeV.mc.DiTop.410000.co.MET_SoftTrk_ScaleDown.nofullhad.histograms.root" />
+</syst> 
+
 
 
 </sample>
-   <sample name="SingleTop" file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Stop_co.root" />
-  <sample name="Wjets"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Wjets_co.root" />
-  <sample name="Zjets"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Zjets_co.root" />
-  <sample name="Diboson"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/Diboson_co.root" />
-  <sample name="Fakes"     file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.qcd.Main.AllPeriod.co.Resolved.MM.histograms.root" />
   
 </samples>
 </document>
 
 <!--
     <syst name="@SYST@" type="two_sided" >
-        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110404.el.@SYST@_up.histograms.root" />
-        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110404.el.@SYST@_down.histograms.root" />
+        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.DiTop.110404.co.@SYST@_up.histograms.root" />
+        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.DiTop.110404.co.@SYST@_down.histograms.root" />
     </syst>
 -->

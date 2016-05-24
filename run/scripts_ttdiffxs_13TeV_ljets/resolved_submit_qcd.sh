@@ -3,11 +3,21 @@
 analysis=tt_diffxs_13TeV
 
 sourcedir=$PWD
-
+method=MM
 filelistdir=filelists_TTDIFFXS_62
-for method in MM
+systs="fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
+
+
+
+
+
+
+
+template=$PWD/control/analysis_params/13TeV_ljets_resolved/config/qcd_Resolved_MM.xml.template
+
+for syst in $systs
 do
-	for ch in el mu
+	for ch in electron muon
 	do
 	#  [[ ${ch} == "el" ]] && stream="Egamma"
 	#  [[ ${ch} == "mu" ]] && stream="Muons"
@@ -18,12 +28,17 @@ do
 		topology=Resolved
 		tag=${analysis}.qcd.${stream}.${run}.${ch}.${topology}.$method
 
-		jobname=${tag}
-		paramfile=$PWD/control/analysis_params/13TeV_ljets_resolved/config/qcd_${topology}_${ch}_$method.xml
+		jobname=${tag}.$syst
+		
+		paramfile=$PWD/control/analysis_params/13TeV_ljets_resolved/config/qcd_${topology}_${ch}_${method}_$syst.xml
+		cp $template $paramfile
+		sed -i.bak s/@CHANNEL@/$ch/g $paramfile
+		sed -i.bak s/@SYST@/$syst/g $paramfile
+		
 
 		filelist=$PWD/${filelistdir}/$list
-		mkdir -p output_newMM/nominal
-		outfile=nominal/${tag}.histograms.root
+		mkdir -p output/$syst
+		outfile=$syst/${tag}.histograms.root
 
 		MAMbo-submit.sh -p ${paramfile} -f ${filelist} -o ${outfile} -j ${jobname}
 		

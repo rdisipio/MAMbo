@@ -12,5 +12,9 @@
     <param name="lumi_reweight"     type="flag"    value="1" />
     <param name="lumifile" type="string" value="@NORMFILE@" />
     <param name="luminosity"            type="numeric" value="3209" />
+       <param name="isWjets"        type="flag"    value="@ISWJETS@" />
+   <param name="WjetsSystematic"  type="string"  value="@WJETSSYST@" />
+
+
  </parameters>
 </analysis>

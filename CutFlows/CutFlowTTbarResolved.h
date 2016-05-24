@@ -19,6 +19,7 @@
 #endif
 
 #include "ScalerFakes.h"
+#include "ScalerWjets.h"
 using namespace PhysicsHelperFunctions;
 
 class CutFlowTTbarResolved : public CutFlow
@@ -90,6 +91,7 @@ class CutFlowTTbarResolved : public CutFlow
     LHAPDF::PDF * m_pdf;
 #endif 
 	ScalerFakes * m_scalerFakes;
+	ScalerWjets * m_scalerWjets;
     
 private:
 

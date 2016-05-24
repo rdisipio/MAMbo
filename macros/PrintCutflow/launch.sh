@@ -6,7 +6,7 @@ mkdir -p cutflow/root
 mkdir -p cutflow/text
 mkdir jobs
 cd $filelistdir
-lists=`ls -r  *txt | grep v2 | grep 410000`
+lists=`ls -r  *txt | grep -i alldata`
 cd -
 for filelist in $lists
 do

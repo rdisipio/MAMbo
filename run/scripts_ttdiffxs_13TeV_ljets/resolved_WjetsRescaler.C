@@ -1,29 +1,14 @@
-void WjetsRescaler(string filename, string channel){
+void resolved_WjetsRescaler(string target_filename, string reference_filename){
   
-  TFile *f = new TFile(filename.c_str(), "update");
+  TFile *f_target = new TFile(target_filename.c_str(), "update");
+  TFile *f_reference = new TFile(reference_filename.c_str());
+  TH1D * h_reference, * h_target;
  // TFile *f_out = new TFile(newfilename.c_str());
   
   string RegionNameArray[]={"4j2b","cutflow"};
   std::vector<std::string> RegionName;
   RegionName.assign(RegionNameArray,RegionNameArray+2);
-  double sf_el_pretag = 0.937; // ± 0.085;
-  double sf_el_tag = 1.202;// ± 0.111
-  double sf_mu_pretag = 0.892;// ± 0.062
-  double sf_mu_tag = 1.115;// ± 0.078
   double sf = 1;
-  double sf_tag = 1;
-  double sf_pretag = 1;
-  if( channel == "el" )
-  {
-          sf_tag = sf_el_tag;
-          sf_pretag = sf_el_pretag;
-  }
-  else if( channel == "mu" )
-  {
-          sf_tag = sf_mu_tag;
-          sf_pretag = sf_mu_pretag;
-  }
- 
   
   //   string ParticleNameArray[]={"topH","lep","smallJ","met","bjet","largejet"};
   //   std::vector<std::string> ParticleName;
@@ -31,8 +16,19 @@ void WjetsRescaler(string filename, string channel){
   //   
   //   
   
-  for(unsigned int j = 0; j<RegionName.size(); j++){
-    f->cd(("reco/"+RegionName[j]).c_str());
+  h_reference = (TH1D*) f_reference->Get( "LPLUSJETS_cutflow_reco_weighted");
+  h_target = (TH1D*) f_target->Get( "LPLUSJETS_cutflow_reco_weighted");
+  TH1D * h_cut = h_target;
+  double oldIntegral = h_target->Integral();
+  
+  // h_reference->Copy( *h_target );
+  for( int i = 1; i <= h_reference->GetNbinsX(); ++i )
+  {
+	  h_target->SetBinContent( i, h_reference->GetBinContent(i) );
+  }
+  
+ for(unsigned int j = 0; j<RegionName.size(); j++){
+    f_target->cd(("reco/"+RegionName[j]).c_str());
     
     //Iteration on directories in Reco
     TListIter ParticleName(gDirectory->GetListOfKeys());
@@ -41,42 +37,40 @@ void WjetsRescaler(string filename, string channel){
       
       cout<<currentParticleName<<endl;
       string path = "reco/"+RegionName[j]+"/"+currentParticleName;
-      f->cd(path.c_str());
+      f_target->cd(path.c_str());
       TListIter Elements(gDirectory->GetListOfKeys());
       
       //Iteration on histogram in each subdirectory 
       string first=""; 
       int counter=0;
       for (int l=0;;l++){
-              sf = sf_tag;
+           
 	
 	
-	bool loop = true;
+	bool loop = false;
 	TObject* tmp = Elements.Next();
 	
 	if (!tmp) break;
 	string name = tmp->GetName();
 	
 	if( first == name) break;
-	
-	if (name.find("Matrix") != string::npos || name.find("weight") != string::npos) continue;
-	if( path.find( "4j0b" ) != string::npos ) sf = sf_pretag;
-	TH1F* thisHisto = (TH1F*) f->Get((path+"/"+name).c_str())->Clone();
-	cout <<  "Rescaling " << thisHisto->GetName() << " by " << sf << endl;
-	thisHisto->Scale( sf );
-	
-	if(loop == true) {
-	  
-	  gDirectory->Delete((name+";1").c_str());
-	  thisHisto->Write((name).c_str());
-	  if(counter==0) first = name;
-	  counter++;
-	}
+	// TH1F* thisHisto = (TH1F*) f->Get((path+"/"+name).c_str())->Clone();
+	h_target = (TH1D*) f_target->Get((path+"/"+name).c_str());
+	h_reference = (TH1D*) f_reference->Get((path+"/"+name).c_str());
+	sf = h_reference->Integral(-1, -1) / h_target->Integral(-1, -1);
+//	cout <<  "Rescaling " << h_target->GetName() << " by " << sf << endl;
+	h_target->Scale( sf );
+	h_target->Write( (path+"/"+name).c_str());
 	
 	
       }  
       
     }
   }
-  f->Close();
+  f_target->Write();
+  
+  double newIntegral = h_cut->Integral();
+  cout << oldIntegral << " " << newIntegral << endl;
+  f_target->Close();
+  f_reference->Close();
 }

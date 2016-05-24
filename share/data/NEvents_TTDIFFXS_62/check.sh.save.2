@@ -1,0 +1,25 @@
+#!/bin/bash
+# set -x
+ls *evt.n  | while read a
+do 
+  run=`echo $a | cut -d. -f1`
+  
+ # echo $run
+  tag=`echo $a | cut -d. -f3`
+  oldfile="ls `echo $a | sed s/TTDIFFXS_62_v5/TTDIFFXS_55_v2`
+ # echo $a $oldfile
+ nlines=`echo $oldfile | wc -l`
+ echo $nlines
+ if [ ! -e $oldfile ]
+  then 
+       continue
+ fi
+# cat $a
+# cat $oldfile
+  newevents=`cat $a | sed s/$run//g`
+  oldevents=`cat $oldfile | sed s/$run//g`
+  echo "$run : $newevents  $oldevents"
+ done
+
+ 
+410120.PowhegPythiaEvtGen.e4373_s2608_r6869_r6282_p2516.TTDIFFXS_55_v2.evt.n

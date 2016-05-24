@@ -8,13 +8,18 @@ analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
 systs="nocut"
-systs="nominal `cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat`"
+systs="`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat` wjets_stat wjets_syst"
 decays="nofullhad ljets"
 decays="nofullhad"
 production=TTDIFFXS_62
 backgrounds="Wjets Zjets Diboson ttV" #single top is special and needs to be trated separately
+backgrounds="Zjets"
+systs="nominal"
+
+skipStop=1
+
 channels="el mu"
-systs=nominal
+#systs="nominal"
 for syst in $systs
 do
         dir=output/$syst
@@ -53,6 +58,10 @@ EOF
                 chmod +x $script
                 bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
         done
+	if [ $skipStop != "0" ]
+	then
+		continue
+	fi
         #single top is special...
         batchid=hadd.Stop.$syst        
         script=../jobs/$batchid.sh   
