@@ -43,8 +43,8 @@ for topo in topos:
         ### 'passed_' + topo + '_' + ljet +'_' + topos[topo]# + '_scale_factors'
 
         # 25.5.2016
-        hname = 'LPLUSJETS_cutflow_reco_unweight' 
-        # hname = 'LPLUSJETS_cutflow_reco_weighted' 
+        #hname = 'LPLUSJETS_cutflow_reco_unweight' 
+        hname = 'LPLUSJETS_cutflow_reco_weighted' 
 
         #if fname.find('data') < 0 and fname.find('DATA') and fname.find('Data'):
         #  hname = hname + ''
@@ -62,5 +62,5 @@ for topo in topos:
       cutname = cutname.replace('_', '\_').replace('==', '$=$').replace('>=', r'$\geq$'), 
       print '%s ' % (cutname, ),
       for isample in range(0,len(flist)):
-        print ' & %6.0f' % (histos[isample].GetBinContent(i), ),
+        print ' & %3.3f' % (histos[isample].GetBinContent(i), ),
       print ' \\\\ '
