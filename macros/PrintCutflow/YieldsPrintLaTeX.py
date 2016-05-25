@@ -6,15 +6,16 @@ import os, sys, math
 
 from ROOT import *
 
-path = '/afs/cern.ch/work/m/mromano/public/Diff13TeV/output/'
+#path = '/afs/cern.ch/work/m/mromano/public/Diff13TeV/output/'
+path = '/afs/cern.ch/work/q/qitek/nominal/'
 
 ljets = ['el', 'mu', 'co']
 label = ['\\ejets{}', '\mujets{}', '\\ljets{}']
 
 
 #ljets = [ 'co']
-topos = {#'resolved' : '4j2b', 
-         'boosted' : '1fj1b' 
+topos = {'resolved' : '4j2b', 
+         #'boosted' : '1fj1b' 
 }
 
 
@@ -46,9 +47,12 @@ for topo in topos:
                   ['Stop' + '_' + ljet, 'singletop'],
                   ['Wjets' + '_' + ljet, '$W$+jets'],
                   ['Zjets' + '_' + ljet, '$Z$+jets'],
-                  ['tt_diffxs_13TeV.qcd.Main.AllPeriod.' + ljet + '.Resolved.histograms', 'Multijet'],
-                  ['tt_diffxs_13TeV.mc.DiTop.410000.' +  ljet + '.nominal.nofullhad.histograms', '$\\ttbar{}$ signal'],
-                  ['tt_diffxs_13TeV.data.Main.AllPeriod.' + ljet + '.Resolved.histograms', 'Data'] ]
+                  ['ttV' + '_' + ljet, '$t\\bar{t}+V$'],
+                  ['histograms_PowHeg_'+ ljet, '$t\\bar{t}$'],
+                  #['tt_diffxs_13TeV.qcd.Main.AllPeriod.' + ljet + '.Resolved.histograms', 'Multijet'],
+                  #['tt_diffxs_13TeV.mc.DiTop.410000.' +  ljet + '.nominal.nofullhad.histograms', '$\\ttbar{}$ signal'],
+                  #['tt_diffxs_13TeV.data.Main.AllPeriod.' + ljet + '.Resolved.histograms', 'Data'] 
+    ]
 
 
     flist = []

@@ -240,7 +240,7 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
  // double y = 0.93;
   ATLAS_LABEL( 0.16, 0.80, kBlack );
   myText( 0.31, 0.80, kBlack, " Simulation" );
-  myText( 0.16, 0.74, kBlack, " Preliminary" );
+  ///myText( 0.16, 0.74, kBlack, " Internal" );
 
   //const double rho = h->GetCorrelationFactor();
   //sprintf( buf, "correlation: %3.2f", rho );
@@ -339,8 +339,8 @@ void basic_plot_par( const char * hname, const char * htitle = "", TString chann
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.95, kBlack );
-  myText( 0.19, 0.95, kBlack, " Simulation Preliminary   l+jets" );
-  //myText( 0.19, 0.95, kBlack, " Simulation l+jets" );
+  ///myText( 0.19, 0.95, kBlack, " Simulation Internal   l+jets" );
+  myText( 0.19, 0.95, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -441,8 +441,8 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
-  //myText( 0.21, 0.92, kBlack, " Simulation" );
+  ///myText( 0.21, 0.92, kBlack, " Simulation Internal" );
+  myText( 0.21, 0.92, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 

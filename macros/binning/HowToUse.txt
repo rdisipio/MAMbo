@@ -24,12 +24,16 @@ root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Unfold/tt_d
 
 root -b -q -l 'Migra.C("")
 
+JK 8 TeV rerun: 9.5.2016
+root -b -q -l 'Migra.C("/afs/cern.ch/user/q/qitek/public/TopDiff8/tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root", "el")'
+root -b -q -l 'Migra.C("/afs/cern.ch/user/q/qitek/public/TopDiff8/tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root", "mu")'
+root -b -q -l 'Migra.C("/afs/cern.ch/user/q/qitek/public/TopDiff8/tt_diffxs_8TeV.mc.DiTop.110404.co.nominal.nofullhad.histograms.root", "co")'
+
 
 JK 13 TeV:
-root -b -q -l 'Migra.C("/afs/cern.ch/work/m/mromano/public/Diff13TeV/output_mc15b/nominal/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root", "el")'
-root -b -q -l 'Migra.C("/afs/cern.ch/work/m/mromano/public/Diff13TeV/output_mc15b/nominal/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
-root -b -q -l 'Migra.C("/afs/cern.ch/work/m/mromano/public/Diff13TeV/output_mc15b/nominal/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
-
+root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root", "el")'
+root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
+root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
 
 In case of further questions send an e-mail to: 
 josef.pacalt@cern.ch
