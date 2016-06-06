@@ -15,6 +15,7 @@ CutFlowBoostedSL::~CutFlowBoostedSL()
   SAFE_DELETE( m_moma );
   #endif
   SAFE_DELETE( m_scalerFakes )
+  SAFE_DELETE( m_scalerWjets )  
 }
 /////////////////////////////////////////
 
@@ -55,16 +56,27 @@ bool CutFlowBoostedSL::Initialize() {
     SetCutName("LPLUSJETS", "particle_unweight", 7, "Bjet matched with a top                     ");
     
    
+    
+    
+    unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
-    if(isQCD)
-    {
-      int nParameters = 2;
-      string method = "MM";
-      if( m_config->custom_params_string.count("FakesEvaluationMethod")) method = m_config->custom_params_string["FakesEvaluationMethod"];
-      cout<<"Config name "<<method;
-      //if( m_config->channel == 0 ) nParameters = 4;
-      m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, nParameters, method);
-    }
+    if( isQCD)
+	{
+	  string qcd_syst = "nominal";
+	  
+	  if( m_config->custom_params_string.count("FakesSystematic")) qcd_syst = m_config->custom_params_string["FakesSystematic"];
+	  m_scalerFakes = ScalerFakes::GetHandle( m_config->channel, qcd_syst);
+	  
+	}
+    if( isWjets)
+      {
+	string wjets_syst = "nominal";
+	
+	if( m_config->custom_params_string.count("WjetsSystematic")) wjets_syst = m_config->custom_params_string["WjetsSystematic"];
+	m_scalerWjets = ScalerWjets::GetHandle( m_config->channel, wjets_syst );
+	    
+      }
+    
     
     
     m_bTagSF_name = "scaleFactor_BTAG_77"; 
@@ -129,6 +141,7 @@ bool CutFlowBoostedSL::Apply( EventData * ed)
   
   unsigned long isMCSignal = m_config->custom_params_flag["isMCSignal"];
   unsigned long isRealData = m_config->custom_params_flag["isRealData"];
+  unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
   unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
   
   unsigned long isStressTest = 0;
@@ -335,17 +348,32 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
     
     //****************Evaluation of QCD weight
     unsigned long isQCD      = m_config->custom_params_flag["isQCD"];
+    unsigned long isWjets    = m_config->custom_params_flag["isWjets"];
+
     if(isQCD){
+
+      cout<<"Event number "<< ed->info.eventNumber <<endl;
       double qcd_weight = m_scalerFakes->GetFakesWeight( ed );
       cout<<"Qcd weight "<<qcd_weight<<endl;
-      
+     
       weight     *= qcd_weight;
       if(qcd_weight == 0) cout<<"WARNING:: QCD weight 0"<<endl;
       ed->property["weight_reco_level"] *= qcd_weight;
       m_hm->GetHistogram( "reco/QCDcontrol/topH/QCDweight" )->Fill(qcd_weight, 1. );
       
     }
+    if( isWjets ) 
+      {
+	  int njets = ed->jets.n;
+	  int nbjets = ed->bjets.n;
+	  double wjets_weight     = m_scalerWjets->GetWjetsWeight( njets, nbjets );      
+	  weight     *= wjets_weight;
+	  ed->property["weight_reco_level"] *= wjets_weight;
+	  
+      }
+
     FillHistogramsReco(ed, weight, "QCDcontrol");
+    if(jet_n > 0) FillHistogramsReco(ed, weight, "QCDcontrol2");
     //**************** Exist a tagged Large-R jet with pT>300000 and |eta|<2 *************************
     
     
@@ -785,6 +813,7 @@ void CutFlowBoostedSL::FillHistogramsReco( EventData * ed, const double weight, 
   }
   m_hm->GetHistogram( "reco/"+selection+"/met/phi" )->Fill(ed->MET.phi, weight);
   m_hm->GetHistogram( "reco/"+selection+"/met/pt" )->Fill(ed->MET.et /GeV, weight);
+  m_hm->GetHistogram( "reco/"+selection+"/met/mtw" )->Fill(ed->MET.mwt /GeV, weight);
   double lep_pT = m_config->channel == kElectron ? ed->electrons.pT.at(0) : ed->muons.pT.at(0);
   double lep_phi = m_config->channel == kElectron ? ed->electrons.phi.at(0) : ed->muons.phi.at(0);
   double lep_eta= m_config->channel == kElectron ? ed->electrons.eta.at(0) : ed->muons.eta.at(0);

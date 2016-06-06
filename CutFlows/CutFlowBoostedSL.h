@@ -13,6 +13,7 @@
 #endif 
 
 #include "ScalerFakes.h"
+#include "ScalerWjets.h"
 
 using namespace PhysicsHelperFunctions;
 
@@ -48,8 +49,8 @@ private:
     string m_pileupSF_name;    
     string m_jvtSF_name;
     string m_PDFSF_name;
-    ScalerFakes * m_scalerFakes;
-    
+    ScalerFakes *m_scalerFakes;
+    ScalerWjets *m_scalerWjets;
 
 };
 
