@@ -1,7 +1,7 @@
 #!/bin/bash
 
 analysis=tt_diffxs_13TeV
-production=TTDIFFXS_55
+production=TTDIFFXS_62
 
 dsid=410000
 [ ! -z $1 ] && dsid=$1
@@ -10,8 +10,9 @@ decay=ljets
 [ ! -z $2 ] && decay=$2
 
 normalizationdir=${MAMBODIR}/share/data/NEvents_${production}
-normalizationfile=$normalizationdir/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.evt.n
+normalizationfile=$normalizationdir/410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.evt.n
 sysname_file=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/boosted_reduced_systematics.txt
+#sysname_file=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets/boosted_el_systematics.txt
 lumi=3209.05
 
 for ch in el mu
@@ -25,8 +26,8 @@ do
      [ $ch == "mu" ] && ch_sys="_EL_"
       
      filelistdir=${MAMBODIR}"/run/scripts_ttdiffxs_13TeV_ljets/filelists_"${production}
-     filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
-     filelist_mc=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v2.txt
+     filelist=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
+     filelist_mc=$filelistdir/mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
 
      while read syst 
      do
@@ -65,8 +66,8 @@ do
           sed -i "s|@LUMI@|${lumi}|" ${params}
           sed -i "s|@TREE@|${tree_name}|"  ${params}
           sed -i "s|@SYST@|${sys_name}|"  ${params}
-         
-          outdir="prod_55_newBinning/"${syst}
+          
+          outdir="prod_62_systnew/"${syst}
           mkdir -p ${MAMBODIR}/run/output/${outdir}
           outfile=${outdir}/${tag}.histograms.root.${batchid}
           jobname=${tag}.${batchid}

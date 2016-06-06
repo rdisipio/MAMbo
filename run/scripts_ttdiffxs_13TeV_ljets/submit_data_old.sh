@@ -4,24 +4,24 @@ analysis=tt_diffxs_13TeV
 
 sourcedir=$PWD
 
-filelistdir=filelists_TTDIFFXS_62/
+
 for ch in el mu
 do
 #  [[ ${ch} == "el" ]] && stream="Egamma"
 #  [[ ${ch} == "mu" ]] && stream="Muons"
   stream="Main"
-  for list in `ls ${filelistdir}/ | grep data`
+  for list in `ls filelists_TTDIFFXS_3/ | grep user.amenga`
   do
-    run=`echo $list | cut -d. -f2`
-    topology=Boosted
+    run=`echo $list | cut -d. -f3`
+    topology=Resolved
     tag=${analysis}.data.${stream}.${run}.${ch}.${topology}
 
     jobname=${tag}
-    paramfile=$PWD/realdata_${topology}_${ch}.xml
+    paramfile=realdata_${topology}_${ch}.xml
 
-    filelist=$PWD/${filelistdir}/$list
-    mkdir -p output/data
-    outfile=data/${tag}.histograms.root
+    filelist=filelists_TTDIFFXS_3/$list
+    mkdir -p output/nominal
+    outfile=output/nominal/${tag}.histograms.root
 
     MAMbo-submit.sh -p ${paramfile} -f ${filelist} -o ${outfile} -j ${jobname}
   done
