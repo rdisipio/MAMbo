@@ -26,7 +26,7 @@ from MAMboPlottingToolkit import *
 
 Col = [kOrange+10, kBlue+2, kViolet-1 ]
 
-Paths = ['particle', 'reco', 'matched_p', 'matched_r', 'reco_and_particle_r']
+Paths = ['particle', 'reco', 'bla', 'bla', 'particle']
 
 ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
 
@@ -63,7 +63,7 @@ TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ],
                'R_Wt_lep' : [  'p_{T}^{W,lep} / p_{T}^{t,lep}', '' ],
                }
 CorrNames = { 'eff' : 'Efficiency #varepsilon', 
-              'match' : 'Matching correction f_{match}', 
+              #'match' : 'Matching correction f_{match}', 
               'acc' : 'Acceptance correction f_{acc}' }
 
 
@@ -92,12 +92,12 @@ def GetTag(objname, varname):
     return tag
 
 
-def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fjb'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
     h_part = rfile.Get(Paths[0] + path)
     return h_part.GetXaxis().GetXmax()
-def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1f1b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
     h_part = rfile.Get(Paths[0] + path)
@@ -105,7 +105,7 @@ def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'
 
 
 #################
-def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
     tag = GetTag(objname, varname)
     path =  '/' + basepath + '/' + objname + '/' + varname+tag
 
@@ -124,13 +124,13 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '        %s' %(Paths[1] + path)
     h_reco = rfile.Get(Paths[1] + path)
 
-    print '        %s' %(Paths[2] + path)
+    #print '        %s' %(Paths[2] + path)
     # h_match_p = rfile.Get(Paths[2] + path)
     # fix by Marino:
     h_match_p = h_matrix.ProjectionY( "particle_recoandparticle", 1, h_matrix.GetNbinsY() )
 
-    print '        %s' %(Paths[3] + path)
-    h_match_r = rfile.Get(Paths[3] + path)
+    #print '        %s' %(Paths[3] + path)
+    #h_match_r = rfile.Get(Paths[3] + path)
 
     print '        %s' %(Paths[4] + path)
     h_rp = rfile.Get(Paths[4] + path)
@@ -146,31 +146,32 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
     print '  Making eff...'
     #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
     print '    RMS check: %f ' % (h_part.GetRMS(),)
-    print '    RMS check: %f ' % (h_match_p.GetRMS(),)
+    #print '    RMS check: %f ' % (h_match_p.GetRMS(),)
     eff = MakeRatio( h_match_p, h_part,  False)
 
     print '  Making acc...'
-    print '    RMS check: %f %f' % (h_rp.GetRMS(), h_reco.GetRMS())
+    print '    RMS check: %f ' % (h_rp.GetRMS(), )
+    print '    RMS check: %f ' % (h_reco.GetRMS())
     acc = MakeRatio( h_rp, h_reco, False)
     CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
 
-    print '  Making match...'
-    print '    RMS check: %f %f' % (h_match_r.GetRMS(), h_rp.GetRMS())
-    match = MakeRatio( h_match_r,  h_rp, False)
+    #print '  Making match...'
+    #print '    RMS check: %f %f' % (h_match_r.GetRMS(), h_rp.GetRMS())
+    #match = MakeRatio( h_match_r,  h_rp, False)
 
     if icorr == 0: return eff,h_part,h_match_p
     if icorr == 1: return acc,h_rp,h_reco
-    if icorr == 2: return match,h_match_r,h_rp
+    #if icorr == 2: return match,h_match_r,h_rp
     return
 
 #################
-def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr = 0, basepath = '4j2b'):
+def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
     print '  Drawing %s/%s/%s' % (basepath,objname,varname)
 
     tag = ''
     if icorr == 0: tag = 'eff'
     if icorr == 1: tag = 'acc'
-    if icorr == 2: tag = 'match'
+    #if icorr == 2: tag = 'match'
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
     can = TCanvas(canname, canname, 1, 1, 800, 800)
@@ -255,10 +256,10 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     #myText(0.335, 0.88, kBlack, "Simulation Preliminary");
     myText(0.335, 0.88, kBlack, "Simulation");
 
-    can.Print('eps/' + canname + '.eps')
-    can.Print('png/' + canname + '.png')
-    can.Print('pdf/' + canname + '.pdf')
-    can.Print('C/' + canname + '.C' )
+    can.Print('eps/' + canname + '_boosted.eps')
+    can.Print('png/' + canname + '_boosted.png')
+    can.Print('pdf/' + canname + '_boosted.pdf')
+    can.Print('C/' + canname + '_boosted.C' )
 
 ####################################################
 ####################################################
@@ -277,7 +278,7 @@ ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
 #ljets = [ 'co' ]
 
 ptag=''
-ftag='nofullhad'
+ftag=''
 
 #ptag='_incl'
 #ftag='_incl'
@@ -285,16 +286,8 @@ ftag='nofullhad'
 
 #ptag='_fixed_new'
 #ftag='_fixed_new'
-#rpath = '/afs/cern.ch/work/q/qitek/TopResolved_8TeV_MAMbo/MAMbo/run/incl/'
-#rpath='/home/qitek/qitek/public/MCsigHalves/OldWhad/'
-#rpath='/home/qitek/qitek/public/MCsigHalves/NewWhad/'
-#rpath='/home/qitek/qitek/public/MCsigHalves/NoDileptonInSignal/'
-#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
-#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
-#rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
-rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nominal/'
-
-ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nocut/'
+ppath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
+rpath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
 
 GenNames = [ 'DiTop.410000'
          ]
@@ -311,12 +304,12 @@ for ll in ljets:
     pfiles = []
 
     for genname in GenNames:
-        rfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nominal.%s.histograms.root' % (rpath, genname, ll, ftag, ), 'read')
+        rfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nominal%s.histograms.root' % (rpath, genname, ll, ftag, ), 'read')
         _files.append(rfile)
         rfiles.append(rfile)
         print 'Opened file %s' % (rfile.GetName(),)
         
-        pfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nocut.%s.histograms.root' % (ppath, genname, ll, ftag, ), 'read')
+        pfile = TFile('%stt_diffxs_13TeV.mc.%s.%s.nocut%s.histograms.root' % (ppath, genname, ll, ftag, ), 'read')
         _files.append(pfile)
         pfiles.append(pfile)
         print 'Opened file %s' % (pfile.GetName(),)
@@ -327,15 +320,18 @@ for ll in ljets:
            #'topL',
            #'WH', 
            #'WL',
-           'tt']
-    Var = ['pt', 'm', 
-           'absrap']
+           #'tt'
+    ]
+    Var = ['pt', 
+           # 'm', 
+           'absrap'
+    ]
 
     for obj in Obj:
         for var in Var:
             DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
             DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
-            DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
+            #DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
             pass
 
 
@@ -349,12 +345,12 @@ for ll in ljets:
                'R_Wt_had' 
     ]
 
-    for obj in SpecObj:
-        for var in SpecVar:
-            DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
-            DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
-            DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
-            pass
+    #for obj in SpecObj:
+    #    for var in SpecVar:
+    #        DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
+    #        DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
+    #        #DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
+    #        pass
 
     
 #

@@ -220,7 +220,7 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
         SetStyle(tmp, xtitle, ytitle)
        # next_tmp(xmin, xmax, title, 0., 24.)
     else:
-        tmp = next_tmp(xmin, xmax, title)
+        tmp = next_tmp(xmin, xmax, title, 0., 1.2)
         SetStyle(tmp, xtitle, ytitle)
 
     tmp.GetYaxis().SetTitleOffset(1.6)
@@ -229,8 +229,9 @@ def DrawCorrection(ll, rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0
     corr.Draw('P')
     _corrs.append(corr)
 
-    ATLAS_LABEL(0.16, 0.96, kBlack)
-    myText(0.335, 0.96, kBlack, "Simulation Preliminary");
+    ATLAS_LABEL(0.16, 0.89, kBlack)
+    #myText(0.335, 0.89, kBlack, "Simulation Preliminary");
+    myText(0.335, 0.89, kBlack, "Simulation");
 
     can.Print('eps_parton/' + canname + '.eps')
     can.Print('png_parton/' + canname + '.png')
@@ -276,7 +277,7 @@ rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/Aug10_ljets/'
 
 
 os.system('mkdir png_parton eps_parton pdf_parton')
-ROOT.gROOT.SetBatch(0)
+ROOT.gROOT.SetBatch(1)
 
 for ll in ljets:
 
