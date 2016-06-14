@@ -2,7 +2,7 @@
 
 analysis=tt_diffxs_13TeV
 methods="MM"
-systs="nominal fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
+systs="nominal fakes_WT_Modelling fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
 dirQcd="QCD_prod62"
  
 for method in $methods
