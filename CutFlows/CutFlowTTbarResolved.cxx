@@ -705,27 +705,8 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
     const bool passed_resolved_mujets = ed->property["passed_resolved_mujets_2j0b"]; ///Preselection done in AT for mu-channel  
     const bool  analysistop_cutflow = ( m_config->channel == kElectron )  ?  ( passed_resolved_ejets) : ( passed_resolved_mujets );     
     if( !analysistop_cutflow )   return !passed;
-    PassedCut("LPLUSJETS", "reco_weighted", weight );
-    PassedCut("LPLUSJETS", "reco_unweight");
-    
-    if( m_config->channel == kElectron ) {
-       values.lep_pt  = ed->electrons.pT.at(0);
-       values.lep_eta = ed->electrons.eta.at(0);
-       values.lep_phi = ed->electrons.phi.at(0);
-       values.lep_E   = ed->electrons.E.at(0);
-       values.lep_q   = ed->electrons.q.at(0);
-    }
-    else {
-       values.lep_pt  = ed->muons.pT.at(0);
-       values.lep_eta = ed->muons.eta.at(0);
-       values.lep_phi = ed->muons.phi.at(0);
-       values.lep_E   = ed->muons.E.at(0);
-       values.lep_q   = ed->muons.q.at(0);
-    }
 
-    
-    
-    
+
 
     if( isQCD ) 
     {
@@ -750,7 +731,7 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 	{
 		int njets = ed->jets.n;
 		int nbjets = ed->bjets.n;
-		wjets_weight     = m_scalerWjets->GetWjetsWeight( njets, nbjets );      
+		wjets_weight     = m_scalerWjets->GetWjetsWeight( ed );      
 		values.weight *= wjets_weight;
         weight     *= wjets_weight;
         ed->property["weight_reco_level"] *= wjets_weight;
@@ -766,6 +747,28 @@ bool CutFlowTTbarResolved::PassedCutFlowReco(EventData * ed) {
 		
 	}
 
+
+    PassedCut("LPLUSJETS", "reco_weighted", weight );
+    PassedCut("LPLUSJETS", "reco_unweight");
+    
+    if( m_config->channel == kElectron ) {
+       values.lep_pt  = ed->electrons.pT.at(0);
+       values.lep_eta = ed->electrons.eta.at(0);
+       values.lep_phi = ed->electrons.phi.at(0);
+       values.lep_E   = ed->electrons.E.at(0);
+       values.lep_q   = ed->electrons.q.at(0);
+    }
+    else {
+       values.lep_pt  = ed->muons.pT.at(0);
+       values.lep_eta = ed->muons.eta.at(0);
+       values.lep_phi = ed->muons.phi.at(0);
+       values.lep_E   = ed->muons.E.at(0);
+       values.lep_q   = ed->muons.q.at(0);
+    }
+
+    
+    
+    
 
     FillHistogramsControlPlotsReco( values );    
     FillHistogramsDiagnostics( values );

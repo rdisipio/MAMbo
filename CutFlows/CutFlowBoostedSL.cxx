@@ -366,7 +366,7 @@ bool  CutFlowBoostedSL::PassedCutFlowReco(EventData * ed) {
       {
 	  int njets = ed->jets.n;
 	  int nbjets = ed->bjets.n;
-	  double wjets_weight     = m_scalerWjets->GetWjetsWeight( njets, nbjets );      
+	  double wjets_weight     = m_scalerWjets->GetWjetsWeight( ed );      
 	  weight     *= wjets_weight;
 	  ed->property["weight_reco_level"] *= wjets_weight;
 	  
