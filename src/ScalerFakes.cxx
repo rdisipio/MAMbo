@@ -13,7 +13,7 @@ ScalerFakes::ScalerFakes( int channel, string systematic)
 {
   m_channel = channel;
   m_systematic = systematic;
-
+  m_doWTSyst = false;
 
   int syst_fakeEff = FakeEffProvider::Systematic::nominal;
   int syst_realEff = FakeEffProvider::Systematic::nominal;
@@ -31,13 +31,18 @@ ScalerFakes::ScalerFakes( int channel, string systematic)
     syst_fakeEff = FakeEffProvider::Systematic::fakeEff_MCscale_U;
   else if (m_systematic.compare("fakes_fakeEff_CR_S")==0)
     syst_fakeEff = FakeEffProvider::Systematic::fakeEff_CR_S;
-  else if (m_systematic.compare("nominal")!=0)
+  else if (m_systematic.compare("fakes_WT_Modelling")==0)
+  {
+    m_doWTSyst=true;
+    cout<<"Evaluating sys on fakes_WT_Modelling"<<endl;
+  }
+   else if (m_systematic.compare("nominal")!=0)
     Warning("NominalSelector::Begin", "Unrecognised NominalSelector Systematic option! Nominal will be used.");
   
   cout << "Calling new FakeEffProvider(m_channel, FakeEffProvider::Type::fakeEff, syst_fakeEff) with paramters " << m_channel << " " << FakeEffProvider::Type::fakeEff << " " <<   syst_fakeEff << endl;
   m_fakeEff  = new FakeEffProvider(m_channel, FakeEffProvider::Type::fakeEff, syst_fakeEff);
   m_realEff  = new FakeEffProvider(m_channel, FakeEffProvider::Type::realEff, syst_realEff);
-  
+  cout<<"here"<<endl;
 }
 
 
@@ -141,6 +146,10 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
   double qcd_weight = 1;
   if( m_channel == 0 && ed->electrons.n < 1 ) return qcd_weight;
   if( m_channel == 1 && ed->muons.n < 1 ) return qcd_weight;
+  if(ed->jets.pT.size() == 0) return qcd_weight;
+  
+  if (m_doWTSyst && ed->MET.mwt > 150000. ) // Boosted systematics on the mismodelling of MTW
+     return 0.;
   
   const bool tight = ( m_channel == 0 ) ? ed->electrons.property["tight"].at(0) : ed->muons.property["tight"].at(0);
   
@@ -236,13 +245,15 @@ double ScalerFakes::GetFakesWeightMM( EventData * ed)
     ef = 0.99*er;
   }
   double fakesWeight = (ef)*(er-delta)/(er-ef);
+
+  
   //cout << "Debug: " << ed->info.runNumber << " " << ed->info.eventNumber <<
 //" " << tight << " " << njets << " " << nbtag << " " << pt_lep*1e-3 << " " << abs(eta_lep) << " " <<  abs(dPhi_met_lep) <<  " " << ef <<  " " << er << " "  <<fakesWeight << endl;
-  if(fakesWeight == 0) {
-    cout<<ed->electrons.eta.at(0)<<endl;
-    cout<<" er "<<er<<" ef "<<ef<<endl;
-    
-  }
+//   if(fakesWeight == 0) {
+//     cout<<ed->electrons.eta.at(0)<<endl;
+//     cout<<" er "<<er<<" ef "<<ef<<endl;
+//     
+//   }
   return fakesWeight;
 }
 
