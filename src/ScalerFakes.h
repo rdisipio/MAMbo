@@ -17,6 +17,7 @@ class ScalerFakes
 		FakeEffProvider * m_fakeEff, * m_realEff, *m_tightEff;
 		std::string m_systematic;
 		static ScalerFakes * m_instance;
+		bool m_doWTSyst;
 		
 	public:
 		virtual ~ScalerFakes();
@@ -27,6 +28,7 @@ class ScalerFakes
 		double GetFakesWeight(  EventData * ed );
 		double GetFakesWeightMM(  EventData * ed );
 		double GetFakesWeightMMM(  EventData * ed ); //depecrated
+		
 };
 
 
