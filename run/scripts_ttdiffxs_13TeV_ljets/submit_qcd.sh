@@ -4,7 +4,8 @@ analysis=tt_diffxs_13TeV
 
 sourcedir=${MAMBODIR}/run/scripts_ttdiffxs_13TeV_ljets
 prod="prod62"
-systs="nominal fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
+systs="nominal fakes_WT_Modelling fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
+#systs="fakes_WT_Modelling"
 #systs="nominal"
 
 for ch in el mu 
@@ -36,7 +37,7 @@ do
 	  mkdir -p ${MAMBODIR}/run/output/QCD_${prod}/${syst}
 	  outfile=QCD_${prod}/${syst}/${tag}.histograms.root
       # echo $outfile
-	 # MAMbo-submit.sh -p ${paramfile} -f ${list} -o ${outfile} -j ${jobname}
+	  MAMbo-submit.sh -p ${paramfile} -f ${list} -o ${outfile} -j ${jobname}
       done
   done
   
