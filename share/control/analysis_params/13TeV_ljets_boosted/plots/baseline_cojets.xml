@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<plots tag="sum" latex="l+jets" >
+ 
+ <!-- <plot hpath="reco/cutflow/afterCuts/lep_pt"          xtitle="Lepton transverse momentum [GeV]"              ytitle="Events / GeV"  scale="logx" />
+  <plot hpath="reco/cutflow/afterCuts/met_pt_2"        xtitle="Missing transverse energy [GeV]"               ytitle="Events / 5 GeV"  scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_n"           xtitle="Jet multiplicity" ytitle="Events" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/jet_pt"          xtitle="Jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+  <plot hpath="reco/cutflow/afterCuts/bjet_n"          xtitle="b-Jet multiplicity" ytitle="Events" scale="linear" />
+  <plot hpath="reco/cutflow/afterCuts/bjet1_pt"        xtitle="Leading b-jet transverse momentum [GeV]"         ytitle="Events / GeV"  scale="logx" />
+
+
+
+  <plot hpath="reco/4j2b/difference/HT_ttbar"          xtitle="H_{T}^{t#bar{t}} [GeV]" ytitle="Events / GeV" scale="log" />
+  <plot hpath="reco/4j2b/difference/absPout"           xtitle="|p_{out}^{t#bar{t}}| [GeV]"      ytitle="Events / GeV" scale="log" />
+  <plot hpath="reco/4j2b/difference/Chi_ttbar"         xtitle="#chi^{t#bar{t}}" ytitle="Events / Unit #chi^{t#bar{t}}" scale="bilog" />
+  <plot hpath="reco/4j2b/difference/Yboost"            xtitle="y_{boost}^{t#bar{t}}" ytitle="Events / Unit y_{boost}^{t#bar{t}}" scale="linear" />
+  <plot hpath="reco/4j2b/difference/dPhi_ttbar"        xtitle="#Delta #phi^{t#bar{t}} [rad]" ytitle="Events / rad" scale="linear" />
+  <plot hpath="reco/4j2b/difference/R_Wt_had"          xtitle="R_{Wt}^{had}" ytitle="Events / Unit R_{Wt}^{had}" scale="linear" /> 
+  <plot hpath="reco/4j2b/difference/R_Wt_lep"          xtitle="R_{Wt}^{lep}" ytitle="Events / Unit R_{Wt}^{lep}" scale="linear" />
+  <plot hpath="reco/4j2b/topL/pt"                      xtitle="p_{T}^{t,lep} [GeV]" ytitle="Events / GeV"  scale="linear" />-->
+ 
+  <plot hpath="reco/1fj1b/topH/pt"                       xtitle=" p_{T}^{t,had} [GeV]" ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/1fj1b/topH/eta"                      xtitle=" #eta^{t,had}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/m"                        xtitle=" m^{t,had} [GeV]"     ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/1fj1b/topH/phi"                      xtitle=" #phi^{t,had}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/rapidity"                 xtitle=" y^{t,had}"           ytitle="Events / Unit Rapidity"  scale="linear"    />
+  <plot hpath="reco/1fj1b/topH/absrap"                   xtitle=" |y^{t,had}|"         ytitle="Events / Unit Rapidity" scale="linear" />
+  <plot hpath="reco/1fj1b/topH/absrap_1"                 xtitle=" |y^{t,had}|"         ytitle="Events / Unit Rapidity" scale="linear" />
+  <plot hpath="reco/1fj1b/topH/absrap_2"                 xtitle=" |y^{t,had}|"         ytitle="Events / Unit Rapidity" scale="linear" />
+  <plot hpath="reco/1fj1b/topH/tau32"                    xtitle=" #tau_{32}^{t,had}"        ytitle="Events / Unit #tau_{32}"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/tau21"                    xtitle=" #tau_{21}^{t,had}"        ytitle="Events / Unit #tau_{21}"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/d12"                      xtitle=" #sqrt{d}_{12}^{t,had} [GeV]"        ytitle="Events / GeV "  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/d23"                      xtitle=" #sqrt{d}_{23}^{t,had} [GeV]"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/DeltaR_smallJ"            xtitle=" #Delta (R) (small-R jet, Hadronic top jet candidate)"        ytitle="Events"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/DeltaPhi_lep"             xtitle=" #Delta (#phi) (lepton, Hadronic top jet candidate)"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/topH/Number"                   xtitle=" Number of tagged large-R jet"        ytitle="Events / Unit Number"  scale="linear" />
+  <plot hpath="reco/1fj1b/smallJ/pt"                     xtitle=" p_{T}^{small-R jet} [GeV]"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/smallJ/Number"                 xtitle=" Number of small-R jets"        ytitle="Events / Unit Number"  scale="linear" />
+  <plot hpath="reco/1fj1b/smallJ/eta"                    xtitle=" #eta^{small-R jet}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/1fj1b/smallJ/phi"                    xtitle=" #phi^{small-R jet}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/1fj1b/lep/eta"                       xtitle=" #eta^{lep}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/1fj1b/lep/phi"                       xtitle=" #phi^{lep}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/1fj1b/lep/pt"                        xtitle=" p_{T}^{lep} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/met/phi"                       xtitle=" Missing Transverse Energy #phi" ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/1fj1b/met/pt"                        xtitle=" Missing Transverse Energy [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/met/mtw"                       xtitle=" W Transverse Mass [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/largejet/eta"                  xtitle=" #eta^{large-R jet}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/1fj1b/largejet/pt"                   xtitle=" p_{T}^{large-R jet}"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/largejet/phi"                  xtitle=" #phi^{large-R jet}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/1fj1b/largejet/m"                    xtitle=" m^{large-R jet} [GeV]"     ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/1fj1b/largejet/DeltaPhi_lep"         xtitle=" #Delta (#phi) (lepton, large-R jet)"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/1fj1b/largejet/Number"               xtitle=" Number of large-R jets"        ytitle="Events / Unit Number"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/pt"                  xtitle=" p_{T}^{t,had} [GeV]" ytitle="Events / GeV"  scale="log" />
+  <plot hpath="reco/QCDcontrol/topH/eta"                 xtitle=" #eta^{t,had}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/m"                   xtitle=" m^{t,had} [GeV]"     ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/QCDcontrol/topH/phi"                 xtitle=" #phi^{t,had}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/rapidity"            xtitle=" y^{t,had}"           ytitle="Events / Unit Rapidity"  scale="linear"    />
+  <plot hpath="reco/QCDcontrol/topH/absrap"              xtitle=" |y^{t,had}|"         ytitle="Events / Unit Rapidity" scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/absrap_1"            xtitle=" |y^{t,had}|"         ytitle="Events / Unit Rapidity" scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/absrap_2"            xtitle=" |y^{t,had}|"         ytitle="Events / Unit Rapidity" scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/tau32"               xtitle=" #tau_{32}^{t,had}"        ytitle="Events / Unit #tau_{32}"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/tau21"               xtitle=" #tau_{21}^{t,had}"        ytitle="Events / Unit #tau_{21}"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/d12"                 xtitle=" #sqrt{d}_{12}^{t,had} [GeV]"        ytitle="Events / GeV "  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/d23"                 xtitle=" #sqrt{d}_{23}^{t,had} [GeV]"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/DeltaR_smallJ"       xtitle=" #Delta (R) (small-R jet, Hadronic top jet candidate)"        ytitle="Events"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/DeltaPhi_lep"        xtitle=" #Delta (#phi) (lepton, Hadronic top jet candidate)"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/topH/Number"              xtitle=" Number of tagged large-R jet"        ytitle="Events / Unit Number"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/smallJ/pt"                xtitle=" p_{T}^{small-R jet} [GeV]"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/smallJ/Number"            xtitle=" Number of small-R jets"        ytitle="Events / Unit Number"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/smallJ/eta"               xtitle=" #eta^{small-R jet}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/smallJ/phi"               xtitle=" #phi^{small-R jet}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/lep/eta"                  xtitle=" #eta^{lep}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/lep/phi"                  xtitle=" #phi^{lep}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/lep/pt"                   xtitle=" p_{T}^{lep} [GeV]" ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/met/phi"                  xtitle=" Missing Transverse Energy #phi" ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/met/pt"                   xtitle=" Missing Transverse Energy [GeV]" ytitle="Events / [GeV]"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/met/mtw"                  xtitle=" W Transverse Mass [GeV]"   ytitle="Events / GeV"  scale="linear" /> 
+  <plot hpath="reco/QCDcontrol/largejet/eta"             xtitle=" #eta^{large-R jet}"        ytitle="Events / Unit #eta"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/largejet/pt"              xtitle=" p_{T}^{large-R jet}"        ytitle="Events / GeV"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/largejet/phi"             xtitle=" #phi^{large-R jet}"        ytitle="Events / Unit #phi"  scale="linear" />
+  <plot hpath="reco/QCDcontrol/largejet/m"               xtitle=" m^{large-R jet} [GeV]"     ytitle="Events / GeV"  scale="linear"    />
+  <plot hpath="reco/QCDcontrol/largejet/DeltaPhi_lep"    xtitle=" #Delta (#phi) (lepton, large-R jet)"        ytitle="Events / GeV"  scale="linear" />
+  
+  </plots>
+<samples>
+  <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
+  <sample name="DiTop"       type="signal"      description="t#bar{t}"                  color="1"     fillstyle="1001" linewidth="2" />
+  <sample name="SingleTop"   type="background"  description="Single top"          	color="62"    fillstyle="1001" linewidth="2" />
+  <sample name="Wjets"       type="background"  description="W+jets"              	color="92"    fillstyle="1001" linewidth="2" /> 
+  <sample name="Zjets"       type="background"  description="Z+jets"              	color="07"    fillstyle="1001" linewidth="2" /> 
+  <sample name="Diboson"     type="background"  description="Diboson"              	color="96"    fillstyle="1001" linewidth="2" /> 
+  <sample name="ttV"         type="background"  description="ttV"                       color="8"    fillstyle="1001" linewidth="2" />  
+  <sample name="Multijet"    type="background"  description="Multijet"   	        color="619"   fillstyle="1001" linewidth="2" /> 
+  <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. unc."   	color="1"     fillstyle="3004" linewidth="2" /> 
+</samples>
+<inputfiles>
+  
+  <file sample="data" 		    path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/data/Data_co.root"    />
+  <file	sample="DiTop"		    path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.histograms.root"       />
+  <file	sample="SingleTop" 	    path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.Stop.co.nominal.histograms.root"   />
+  <file	sample="Wjets" 		    path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.Wjets.co.nominal.histograms.root"       />
+  <file	sample="Diboson"            path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.Diboson.co.nominal.histograms.root"       />
+  <file	sample="Zjets" 		    path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.Zjets.co.nominal.histograms.root"       />
+  <file sample="ttV"                path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.ttV.co.nominal.histograms.root"       />	
+  <file	sample="Multijet"           path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.QCD.AllPeriod.co.Boosted.MM.nominal.histograms.root"       />
+  <file	sample="uncertainty"	    path="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/co_uncertainty.histograms.root" /> 
+
+	
+
+
+</inputfiles>
+</document>
