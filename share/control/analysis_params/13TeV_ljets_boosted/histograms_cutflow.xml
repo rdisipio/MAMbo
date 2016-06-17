@@ -1,0 +1,4 @@
+<histograms>
+  <histogram hpath="LPLUSJETS_cutflow_reco_unweight" />
+  <histogram hpath="LPLUSJETS_cutflow_reco_weighted" />
+</histograms>
