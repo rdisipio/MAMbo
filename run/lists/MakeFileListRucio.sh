@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# http://www.farm.particle.cz/twiki/bin/view/ATLAS/UsefulRucioCommands
+# you need:
+# localSetupRucioClients
+
 for list in  sig bkg ; do
   for sample in `cat ${list}.txt` ; do
     tag=`echo $sample | cut -d \. -f 4,5`

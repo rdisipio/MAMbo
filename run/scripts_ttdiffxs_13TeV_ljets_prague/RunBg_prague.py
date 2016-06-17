@@ -97,7 +97,7 @@ for syst in Systs:
 
 
 
-                out='%s/histograms_PowHeg_%s_%s.root' % (outdir,tag, ljet,)
+                out='%s/histograms_%s_%s.root' % (outdir,tag, ljet,)
                 cmd='cd %s ; . setup_AnalysisRelease_prague.sh ; cd run ; runMAMbo -p %s/run/control/%s -f %s/%s -o %s' % (mambodir, mambodir, newcfg, path, flist, out,)
                 print cmd
             
