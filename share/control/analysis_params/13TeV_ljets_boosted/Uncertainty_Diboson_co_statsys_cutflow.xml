@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <histograms file="control/analysis_params/13TeV_ljets_boosted/histograms_cutflow.xml" />
+  <samples>
+    <sample name="DiTop"     file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/output/nominal/tt_diffxs_13TeV.mc.Diboson.co.nominal.histograms.root" >
+      <syst name="bTagSF_77_eigenvars_B_0" type="two_sided" >
+	<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_0_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_0_up.histograms.root" />
+	<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_0_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_0_down.histograms.root" />
+    </syst> 
+      <syst name="bTagSF_77_eigenvars_B_1" type="two_sided" >
+	<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_1_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_1_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_1_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_1_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_B_2" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_2_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_2_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_2_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_2_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_B_3" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_3_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_3_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_3_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_3_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_B_4" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_4_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_4_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_B_4_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_B_4_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_C_0" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_0_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_0_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_0_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_0_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_C_1" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_1_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_1_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_1_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_1_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_C_2" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_2_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_2_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_2_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_2_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_C_3" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_3_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_3_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_C_3_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_C_3_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_0" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_0_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_0_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_0_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_0_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_10" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_10_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_10_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_10_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_10_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_11" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_11_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_11_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_11_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_11_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_12" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_12_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_12_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_12_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_12_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_13" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_13_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_13_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_13_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_13_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_1" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_1_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_1_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_1_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_1_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_2" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_2_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_2_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_2_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_2_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_3" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_3_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_3_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_3_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_3_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_4" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_4_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_4_up.histograms.root" />
+      <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_4_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_4_down.histograms.root" />
+    </syst> 
+    <syst name="bTagSF_77_eigenvars_Light_5" type="two_sided" >
+      <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_5_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_5_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_5_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_5_down.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_eigenvars_Light_6" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_6_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_6_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_6_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_6_down.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_eigenvars_Light_7" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_7_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_7_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_7_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_7_down.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_eigenvars_Light_8" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_8_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_8_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_8_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_8_down.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_eigenvars_Light_9" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_9_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_9_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_eigenvars_Light_9_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_eigenvars_Light_9_down.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_extrapolation" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_extrapolation_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_extrapolation_down.histograms.root" />
+</syst> 
+<syst name="bTagSF_77_extrapolation_from_charm" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_from_charm_up/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_extrapolation_from_charm_up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_bTagSF_77_extrapolation_from_charm_down/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_bTagSF_77_extrapolation_from_charm_down.histograms.root" />
+</syst> 
+
+<!-- LARGE-R JET  SYST  (Medium) -->
+   <syst name="LARGERJET_Medium_JET_Rtrk_Baseline" type="two_sided" >
+     <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Rtrk_Baseline__1up/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Rtrk_Baseline__1up.histograms.root" />
+     <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Rtrk_Baseline__1down/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Rtrk_Baseline__1down.histograms.root" />
+      </syst>
+  
+   <syst name="LARGERJET_Medium_JET_Rtrk_Tracking" type="two_sided" >
+     <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Rtrk_Tracking__1up/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Rtrk_Tracking__1up.histograms.root" />
+     <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Rtrk_Tracking__1down/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Rtrk_Tracking__1down.histograms.root" />
+   </syst>
+   <syst name="LARGERJET_Medium_JET_Rtrk_Modelling" type="two_sided" >
+     <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Rtrk_Modelling__1up/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Rtrk_Modelling__1up.histograms.root" />
+     <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Rtrk_Modelling__1down/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Rtrk_Modelling__1down.histograms.root" />
+   </syst>
+   <syst name="LARGERJET_Medium_JET_Top_CrossCalib_Tau32" type="two_sided" >
+     <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Top_CrossCalib_Tau32__1up/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Top_CrossCalib_Tau32__1up.histograms.root" />
+     <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Top_CrossCalib_Tau32__1down/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Top_CrossCalib_Tau32__1down.histograms.root" />
+   </syst>
+   <syst name="LARGERJET_Medium_JET_Top_Run1_Tau32" type="two_sided" >
+     <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Top_Run1_Tau32__1up/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Top_Run1_Tau32__1up.histograms.root" />
+     <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/LARGERJET_Medium_JET_Top_Run1_Tau32__1down/tt_diffxs_13TeV.mc.Diboson.co.LARGERJET_Medium_JET_Top_Run1_Tau32__1down.histograms.root" /> 
+   </syst>
+   
+   <syst name="jvt" type="two_sided" >
+     <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_jvt_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_jvt_UP.histograms.root" />
+     <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_jvt_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_jvt_DOWN.histograms.root" />
+   </syst> 
+   
+
+<syst name="leptonSF_EL_SF_ID" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_ID_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_ID_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_ID_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_ID_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_EL_SF_Isol" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_Isol_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_Isol_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_Isol_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_Isol_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_EL_SF_Reco" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_Reco_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_Reco_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_Reco_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_Reco_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_EL_SF_Trigger" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_Trigger_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_Trigger_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_EL_SF_Trigger_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_EL_SF_Trigger_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_ID_STAT" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_ID_STAT_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_ID_STAT_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_ID_STAT_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_ID_STAT_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_ID_SYST" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_ID_SYST_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_ID_SYST_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_ID_SYST_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_ID_SYST_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_Isol_STAT" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Isol_STAT_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Isol_STAT_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Isol_STAT_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Isol_STAT_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_Isol_SYST" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Isol_SYST_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Isol_SYST_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Isol_SYST_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Isol_SYST_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_Trigger_STAT" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Trigger_STAT_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Trigger_STAT_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Trigger_STAT_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Trigger_STAT_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_Trigger_SYST" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Trigger_SYST_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Trigger_SYST_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_Trigger_SYST_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_Trigger_SYST_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_TTVA_STAT" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_TTVA_STAT_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_TTVA_STAT_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_TTVA_STAT_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_TTVA_STAT_DOWN.histograms.root" />
+</syst> 
+<syst name="leptonSF_MU_SF_TTVA_SYST" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN.histograms.root" />
+</syst> 
+<syst name="pileup" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_pileup_UP/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_pileup_UP.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/scaleFactor_pileup_DOWN/tt_diffxs_13TeV.mc.Diboson.co.scaleFactor_pileup_DOWN.histograms.root" />
+</syst> 
+<syst name="EG_RESOLUTION_ALL" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/EG_RESOLUTION_ALL__1up/tt_diffxs_13TeV.mc.Diboson.co.EG_RESOLUTION_ALL__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/EG_RESOLUTION_ALL__1down/tt_diffxs_13TeV.mc.Diboson.co.EG_RESOLUTION_ALL__1down.histograms.root" />
+</syst> 
+<syst name="EG_SCALE_ALL" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/EG_SCALE_ALL__1up/tt_diffxs_13TeV.mc.Diboson.co.EG_SCALE_ALL__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/EG_SCALE_ALL__1down/tt_diffxs_13TeV.mc.Diboson.co.EG_SCALE_ALL__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_BJES_Response" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_BJES_Response__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_BJES_Response__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_BJES_Response__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_BJES_Response__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EffectiveNP_1" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_1__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_1__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_1__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_1__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EffectiveNP_2" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_2__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_2__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_2__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_2__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EffectiveNP_3" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_3__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_3__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_3__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_3__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EffectiveNP_4" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_4__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_4__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_4__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_4__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EffectiveNP_5" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_5__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_5__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_5__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_5__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EffectiveNP_6restTerm" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_6restTerm__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_6restTerm__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EffectiveNP_6restTerm__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EffectiveNP_6restTerm__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EtaIntercalibration_Modelling" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EtaIntercalibration_Modelling__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EtaIntercalibration_Modelling__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EtaIntercalibration_Modelling__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EtaIntercalibration_Modelling__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_EtaIntercalibration_TotalStat" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EtaIntercalibration_TotalStat__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EtaIntercalibration_TotalStat__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_EtaIntercalibration_TotalStat__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_EtaIntercalibration_TotalStat__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_Flavor_Composition" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Flavor_Composition__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Flavor_Composition__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Flavor_Composition__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Flavor_Composition__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_Flavor_Response" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Flavor_Response__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Flavor_Response__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Flavor_Response__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Flavor_Response__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_Pileup_OffsetMu" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_OffsetMu__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_OffsetMu__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_OffsetMu__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_OffsetMu__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_Pileup_OffsetNPV" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_OffsetNPV__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_OffsetNPV__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_OffsetNPV__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_OffsetNPV__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_Pileup_PtTerm" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_PtTerm__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_PtTerm__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_PtTerm__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_PtTerm__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_Pileup_RhoTopology" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_RhoTopology__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_RhoTopology__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_Pileup_RhoTopology__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_Pileup_RhoTopology__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_PunchThrough_MC15" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_PunchThrough_MC15__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_PunchThrough_MC15__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_PunchThrough_MC15__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_PunchThrough_MC15__1down.histograms.root" />
+</syst> 
+<syst name="JET_19NP_JET_SingleParticle_HighPt" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_SingleParticle_HighPt__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_SingleParticle_HighPt__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_19NP_JET_SingleParticle_HighPt__1down/tt_diffxs_13TeV.mc.Diboson.co.JET_19NP_JET_SingleParticle_HighPt__1down.histograms.root" />
+</syst> 
+<syst name="MUONS_ID" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_ID__1up/tt_diffxs_13TeV.mc.Diboson.co.MUONS_ID__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_ID__1down/tt_diffxs_13TeV.mc.Diboson.co.MUONS_ID__1down.histograms.root" />
+</syst> 
+<syst name="MUONS_MS" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_MS__1up/tt_diffxs_13TeV.mc.Diboson.co.MUONS_MS__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_MS__1down/tt_diffxs_13TeV.mc.Diboson.co.MUONS_MS__1down.histograms.root" />
+</syst> 
+<syst name="MUONS_SCALE" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_SCALE__1up/tt_diffxs_13TeV.mc.Diboson.co.MUONS_SCALE__1up.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MUONS_SCALE__1down/tt_diffxs_13TeV.mc.Diboson.co.MUONS_SCALE__1down.histograms.root" />
+</syst> 
+<syst name="JET_JER_SINGLE_NP__1up" type="one_sided" >
+<shift side="single"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/JET_JER_SINGLE_NP__1up/tt_diffxs_13TeV.mc.Diboson.co.JET_JER_SINGLE_NP__1up.histograms.root" />
+</syst> 
+<syst name="MET_SoftTrk_ResoPara" type="one_sided" >
+<shift side="single"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ResoPara/tt_diffxs_13TeV.mc.Diboson.co.MET_SoftTrk_ResoPara.histograms.root" />
+</syst> 
+<syst name="MET_SoftTrk_ResoPerp" type="one_sided" >
+<shift side="single"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ResoPerp/tt_diffxs_13TeV.mc.Diboson.co.MET_SoftTrk_ResoPerp.histograms.root" />
+</syst> 
+<syst name="MET_SoftTrk_Scale" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ScaleUp/tt_diffxs_13TeV.mc.Diboson.co.MET_SoftTrk_ScaleUp.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/MET_SoftTrk_ScaleDown/tt_diffxs_13TeV.mc.Diboson.co.MET_SoftTrk_ScaleDown.histograms.root" />
+</syst> 
+ 
+<syst name="Stop_up" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Stop_up/tt_diffxs_13TeV.mc.Diboson.co.Stop_up.histograms.root" 
+/>
+</syst>
+<syst name="Diboson_up" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Diboson_up/tt_diffxs_13TeV.mc.Diboson.co.Diboson_up.histograms.root" 
+/>
+</syst>
+<syst name="Zjets_up" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Zjets_up/tt_diffxs_13TeV.mc.Diboson.co.Zjets_up.histograms.root" 
+/>
+</syst>
+<syst name="ttV_up" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/ttV_up/tt_diffxs_13TeV.mc.Diboson.co.ttV_up.histograms.root" 
+/>
+
+</syst>
+<syst name="wjets_stat" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/wjets_stat/tt_diffxs_13TeV.mc.Diboson.co.wjets_stat.histograms.root" 
+/>
+</syst>
+<syst name="wjets_syst" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/wjets_syst/tt_diffxs_13TeV.mc.Diboson.co.wjets_syst.histograms.root" 
+/>
+</syst>
+
+<syst name="fakes_fakeEff_CR_S" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_CR_S/tt_diffxs_13TeV.mc.Diboson.co.fakes_fakeEff_CR_S.histograms.root" 
+/>
+</syst>
+
+
+<syst name="fakes_realEff_stat" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_realEff_stat_U/tt_diffxs_13TeV.mc.Diboson.co.fakes_realEff_stat_U.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_realEff_stat_D/tt_diffxs_13TeV.mc.Diboson.co.fakes_realEff_stat_D.histograms.root" />
+</syst> 
+
+
+<syst name="fakes_fakeEff_stat" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_stat_U/tt_diffxs_13TeV.mc.Diboson.co.fakes_fakeEff_stat_U.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_stat_D/tt_diffxs_13TeV.mc.Diboson.co.fakes_fakeEff_stat_D.histograms.root" />
+</syst> 
+
+<syst name="fakes_fakeEff_MCscale" type="two_sided" >
+  <shift side="up"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_MCscale_U/tt_diffxs_13TeV.mc.Diboson.co.fakes_fakeEff_MCscale_U.histograms.root" />
+  <shift side="down"   file="/home/ATLAS-T3/mengarelli/Analysis13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_MCscale_D/tt_diffxs_13TeV.mc.Diboson.co.fakes_fakeEff_MCscale_D.histograms.root" />
+</syst> 
+
+
+    </sample>
+    
+  </samples>
+</document>
