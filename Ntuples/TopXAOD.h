@@ -219,6 +219,10 @@ public :
    vector<float>   *ljet_sd23;
    vector<int>     *ljet_topTag50;
    vector<int>     *ljet_topTag80;
+   
+   Bool_t          is_WplusC;
+   Bool_t          is_WplusCC;
+   
 
    // List of branches
    TBranch        *b_PDFinfo_X1;   //!
@@ -410,6 +414,10 @@ public :
    TBranch        *b_ljet_sd23;   //!
    TBranch        *b_ljet_topTag50;   //!
    TBranch        *b_ljet_topTag80;   //!
+   
+   
+   TBranch        *b_is_WplusC;   //!
+   TBranch        *b_is_WplusCC;   //!
 
    TopXAOD(TTree *tree=0);
    virtual ~TopXAOD();
@@ -745,6 +753,8 @@ void TopXAOD::Init(TTree *tree)
    fChain->SetBranchAddress("ljet_sd23", &ljet_sd23, &b_ljet_sd23);
    fChain->SetBranchAddress("ljet_topTag50", &ljet_topTag50, &b_ljet_topTag50);
    fChain->SetBranchAddress("ljet_topTag80", &ljet_topTag80, &b_ljet_topTag80);
+   fChain->SetBranchAddress("is_WplusC", &is_WplusC, &b_is_WplusC);
+   fChain->SetBranchAddress("is_WplusCC", &is_WplusCC, &b_is_WplusCC);
    Notify();
 }
 

@@ -361,7 +361,11 @@ bool NtupleWrapperTopXAOD::MakeEventInfo( EventData * ed )
 	ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_up"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_up );
 	ed->property["scaleFactor_bTagSF_85_extrapolation_from_charm_down"] = GET_VALUE( weight_bTagSF_85_extrapolation_from_charm_down );
 }
-  
+  if( m_config.custom_params_flag[ "isWjets" ] == 1 )
+  {
+          ed->property[ "is_WplusC"] = GET_VALUE( is_WplusC );
+          ed->property[ "is_WplusCC"] = GET_VALUE( is_WplusCC );         
+  }
 
   return success;
 }

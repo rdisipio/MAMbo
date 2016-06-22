@@ -61,6 +61,20 @@ class CutFlowTTbarResolvedParticleLevel : public CutFlow
 #endif
 	string m_PDFSF_name;
  private:
+ 
+ 
+ 
+	unsigned long m_isMCSignal ;// m_config->custom_params_flag["isMCSignal"];
+	//unsigned long isDilepton ;// m_config->custom_params_flag["isDilepton"];
+	std::string m_decay ;// m_config->custom_params_string["decay"];
+	// dileptonic filter
+	// flag set in EventDumpers/EventDumperMCTruthTopMiniSLResolved.h
+	unsigned long m_EventIsDileptonic ;// ed->property["isDileptonic"];
+	//cout << "DEBUG: EventIsDileptonic ;// " << EventIsDileptonic << endl;
+	unsigned long m_isStressTest ;// 0;
+	std::string m_stressTestType ;// "none";
+ 
+ 
    vector<string> m_alias;
    std::map < string, double > m_VarField;
 

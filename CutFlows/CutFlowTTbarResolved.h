@@ -98,6 +98,14 @@ private:
     vector<string> m_alias;
     TRandom3 *m_rand; 
     std::map < string, double > m_VarField;
+
+    unsigned long m_isMCSignal;// = m_config->custom_params_flag["isMCSignal"];
+    unsigned long m_isRealData;// = m_config->custom_params_flag["isRealData"];
+    unsigned long m_isWjets;//    = m_config->custom_params_flag["isWjets"];
+    unsigned long m_isQCD;//      = m_config->custom_params_flag["isQCD"];  
+       std::string m_decay;
+    unsigned long m_isStressTest;
+    std::string m_stressTestType;
     
 
 };
