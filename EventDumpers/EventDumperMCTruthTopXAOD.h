@@ -187,6 +187,7 @@ class EventDumperMCTruthTopXAOD
 
 	const int fjet_n = ntuple->ljet_pt->size();
 	jindex = 0;
+        
         for( int i = 0 ; i < fjet_n ; ++i ) 
         {
 
@@ -201,8 +202,8 @@ class EventDumperMCTruthTopXAOD
 		jindex++;
 
 		////--Tagging and substructures properties of the Large-R jet--/////
-		const double sd12 = ntuple->ljet_sd12->at(i);
-		ed->truth_fjets.property["sd12"].push_back( sd12 );
+		//const double sd12 = ntuple->ljet_sd12->at(i);
+		//ed->truth_fjets.property["sd12"].push_back( sd12 );
 		
 		const double tau32 = ntuple->ljet_tau32->at(i);
 		ed->truth_fjets.property["tau32"].push_back( tau32 );
@@ -216,9 +217,8 @@ class EventDumperMCTruthTopXAOD
 		const int topTag80 = ntuple->ljet_topTag80->at(i);
 		ed->truth_fjets.property["topTag80"].push_back(topTag80);
 		
-		
 		/*	 const int nBhadrons = ntuple->ljet_nGhosts_bHadron->at(i);
-	 if( nBhadrons > 0 ) { 
+	 if( nBhadrons > 0 ) {   
 	    HelperFunctions::DumpParticleToEventData( jet, &ed->truth_bjets );
 	    ed->truth_bjets.index.push_back( i );
          }*/
