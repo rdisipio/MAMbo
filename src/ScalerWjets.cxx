@@ -222,17 +222,19 @@ double ScalerWjets::GetWjetsWeight( EventData * ed){
 
         int njets = ed->jets.n;
         int nbjets = ed->bjets.n;
-        double is_WplusC = ed->property[ "is_WplusC"];
-        double is_WplusCC = ed->property[ "is_WplusCC"];
-        bool isB     = std::find(m_bList.begin(), m_bList.end(),  ed->info.mcChannelNumber) != m_bList.end();
-        bool isLight = std::find(m_lightList.begin(), m_lightList.end(),  ed->info.mcChannelNumber) != m_lightList.end();
+        int is_WplusC = (int) ed->property[ "is_WplusC"];
+        int is_WplusCC = (int) ed->property[ "is_WplusCC"];
+        int isB     = ( std::find(m_bList.begin(), m_bList.end(),  ed->info.mcChannelNumber) != m_bList.end() );
+        int isLight = ( std::find(m_lightList.begin(), m_lightList.end(),  ed->info.mcChannelNumber) != m_lightList.end() );
         //check coherence of the flags
         if( ( is_WplusC && is_WplusCC ) || (isLight && (is_WplusC || is_WplusCC || isB )  ) )
         {
-                char msg[100];
-                sprintf( msg, "ScalerWjets::GetWjetsWeight - ERROR: wrong HF flags for event %i, run number %i.\n is_WplusC = %i, is_WplusCC = %i, is_WplusB = %i, isLight = %i. Only one of these flags can be true.\n",
-                ed->info.eventNumber, ed->info.mcChannelNumber, is_WplusC, is_WplusCC, isB, isLight );
-                throw runtime_error( msg );
+                 //char msg[100];
+                printf(  "ScalerWjets::GetWjetsWeight - WARNING: inconsistent HF flags for event %i, run number %i.\n is_WplusC = %i, is_WplusCC = %i, is_WplusB = %i, isLight = %i. Only one of these flags can be true.\n",  ed->info.eventNumber, ed->info.mcChannelNumber, is_WplusC, is_WplusCC, isB, isLight );
+                // throw runtime_error( msg );
+				//print only a warning
+				
+
         }
         int x = njets <= 4 ? njets+1 : 5;
         int y = nbjets <= 1 ? nbjets+1 : 2;
