@@ -608,7 +608,7 @@ bool  CutFlowBoostedSL::PassedCutFlowParticle(EventData * ed) {
     
     vector<int> FatJets;
     for( int lj = 0 ; lj < fjet_n ; ++lj ) {
-      const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
+      //const double sd12  = ed->truth_fjets.property["sd12"].at(lj);
       const double tau32 = ed->truth_fjets.property["tau32"].at(lj);
       const double tau21 = ed->truth_fjets.property["tau21"].at(lj);
       
@@ -860,7 +860,7 @@ void CutFlowBoostedSL::FillHistogramsParticle( EventData * ed, const double weig
       m_hm->GetHistogram( "particle/1fj1b/topH/absrap" )->Fill( fabs(truth_fjets.Rapidity()), weight);
        m_hm->GetHistogram( "particle/1fj1b/topH/absrap_1" )->Fill( fabs(truth_fjets.Rapidity()), weight);
         m_hm->GetHistogram( "particle/1fj1b/topH/absrap_2" )->Fill( fabs(truth_fjets.Rapidity()), weight);
-      m_hm->GetHistogram( "particle/1fj1b/topH/d12" )->Fill( ed->truth_fjets.property["sd12"].at(particleindex) / GeV, weight);
+      //m_hm->GetHistogram( "particle/1fj1b/topH/d12" )->Fill( ed->truth_fjets.property["sd12"].at(particleindex) / GeV, weight);
       //m_hm->GetHistogram( "reco/1fj1b/topH/d12" )->Fill( ed->fjets.property["sd23"].at(recoindex) / GeV, weight);
       m_hm->GetHistogram( "particle/1fj1b/topH/tau32" )->Fill( ed->truth_fjets.property["tau32"].at(particleindex) , weight);
       m_hm->GetHistogram( "particle/1fj1b/topH/tau21" )->Fill( ed->truth_fjets.property["tau21"].at(particleindex) , weight);
