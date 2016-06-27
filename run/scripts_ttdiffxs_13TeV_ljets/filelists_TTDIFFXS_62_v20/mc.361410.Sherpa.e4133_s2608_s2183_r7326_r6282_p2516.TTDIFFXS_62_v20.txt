@@ -1,0 +1,3 @@
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/eb/91/user.ffabbri.8804429._000002.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/a5/b9/user.ffabbri.8804429._000003.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/55/eb/user.ffabbri.8804429._000004.ljets.output.root
