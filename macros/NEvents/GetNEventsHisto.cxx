@@ -45,4 +45,3 @@ int main( int nargs, char ** args)
  }
 
  
- 410000 19225397.0168204
