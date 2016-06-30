@@ -1,0 +1,11 @@
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/15/43/user.ffabbri.8813367._000011.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/e8/0e/user.ffabbri.8813367._000005.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/c8/62/user.ffabbri.8813367._000001.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/f6/80/user.ffabbri.8813367._000002.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/3b/2c/user.ffabbri.8813367._000006.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/66/92/user.ffabbri.8813367._000003.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/a9/13/user.ffabbri.8813367._000007.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/34/09/user.ffabbri.8813367._000008.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/6a/b2/user.ffabbri.8813367._000004.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/7b/ba/user.ffabbri.8813367._000009.ljets.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/e0/83/user.ffabbri.8813367._000010.ljets.output.root
