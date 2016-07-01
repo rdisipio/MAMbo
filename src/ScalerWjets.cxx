@@ -256,149 +256,149 @@ std::vector<double> ScalerWjets::GetWJetsSF(std::string Folder, bool isEl){
       Output = {1.1878, 1.0066, 1.2025, 0.534, 0.784, 1.144, 0.554, 0.813, 1.186, 0.583, 0.856, 1.248};
     else if(Folder == "JET_JER_SINGLE_NP__1up")
       Output = {1.2026, 1.044, 1.19, 0.069, 0.989, 1.152, 0.072, 1.043, 1.215, 0.079, 1.14, 1.328};
-    else if(Folder == "leptonSF_EL_SF_Trigger_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Trigger_UP")
       Output = {1.1837, 0.9997, 1.1685, 0.626, 0.732, 1.145, 0.647, 0.757, 1.184, 0.676, 0.791, 1.237};
-    else if(Folder == "leptonSF_EL_SF_Trigger_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Trigger_DOWN")
       Output = {1.2016, 1.015, 1.1872, 0.63, 0.735, 1.144, 0.652, 0.76, 1.182, 0.68, 0.793, 1.234};
-    else if(Folder == "leptonSF_EL_SF_Reco_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Reco_UP")
       Output = {1.1878, 1.0027, 1.1726, 0.63, 0.73, 1.145, 0.652, 0.755, 1.184, 0.68, 0.788, 1.236};
-    else if(Folder == "leptonSF_EL_SF_Reco_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Reco_DOWN")
       Output = {1.1974, 1.0119, 1.183, 0.626, 0.737, 1.144, 0.647, 0.762, 1.182, 0.676, 0.796, 1.235};
-    else if(Folder == "leptonSF_EL_SF_ID_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_ID_UP")
       Output = {1.1804, 0.9966, 1.165, 0.627, 0.729, 1.146, 0.649, 0.754, 1.185, 0.678, 0.788, 1.238};
-    else if(Folder == "leptonSF_EL_SF_ID_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_ID_DOWN")
       Output = {1.2051, 1.0182, 1.1904, 0.629, 0.738, 1.143, 0.65, 0.763, 1.181, 0.679, 0.796, 1.233};
-    else if(Folder == "leptonSF_EL_SF_Isol_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Isol_UP")
       Output = {1.1887, 1.0037, 1.1739, 0.63, 0.731, 1.145, 0.651, 0.756, 1.184, 0.68, 0.789, 1.236};
-    else if(Folder == "leptonSF_EL_SF_Isol_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Isol_DOWN")
       Output = {1.1966, 1.0104, 1.1817, 0.626, 0.737, 1.144, 0.647, 0.762, 1.182, 0.676, 0.795, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Trigger_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_STAT_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Trigger_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_STAT_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Trigger_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_SYST_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Trigger_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_SYST_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_ID_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_STAT_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_ID_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_STAT_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_ID_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_SYST_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_ID_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_SYST_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Isol_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_STAT_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Isol_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_STAT_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Isol_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_SYST_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_Isol_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_SYST_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_TTVA_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_STAT_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_TTVA_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_STAT_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_TTVA_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "leptonSF_MU_SF_TTVA_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN")
       Output = {1.1927, 1.0072, 1.1779, 0.628, 0.734, 1.144, 0.649, 0.758, 1.183, 0.678, 0.792, 1.235};
-    else if(Folder == "bTagSF_77_extrapolation_up")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_up")
       Output = {1.1847, 1.0086, 1.1787, 0.634, 0.74, 1.142, 0.655, 0.764, 1.18, 0.684, 0.797, 1.231};
-    else if(Folder == "bTagSF_77_extrapolation_down")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_down")
       Output = {1.1859, 1.0104, 1.1809, 0.635, 0.74, 1.142, 0.656, 0.764, 1.179, 0.684, 0.797, 1.23};
-    else if(Folder == "bTagSF_77_extrapolation_from_charm_up")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_from_charm_up")
       Output = {1.1856, 1.0099, 1.1813, 0.617, 0.747, 1.143, 0.637, 0.772, 1.181, 0.666, 0.807, 1.234};
-    else if(Folder == "bTagSF_77_extrapolation_from_charm_down")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_from_charm_down")
       Output = {1.1847, 1.0097, 1.179, 0.653, 0.733, 1.141, 0.674, 0.756, 1.178, 0.702, 0.788, 1.227};
-    else if(Folder == "jvt_UP")
+    else if(Folder == "scaleFactor_jvt_UP")
       Output = {1.1402, 0.9536, 1.0964, 0.658, 0.705, 1.15, 0.679, 0.728, 1.187, 0.708, 0.758, 1.238};
-    else if(Folder == "jvt_DOWN")
+    else if(Folder == "scaleFactor_jvt_DOWN")
       Output = {1.2422, 1.0668, 1.2682, 0.603, 0.766, 1.139, 0.624, 0.792, 1.177, 0.652, 0.828, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_0")
       Output = {1.205, 1.0262, 1.1983, 0.634, 0.746, 1.14, 0.655, 0.77, 1.177, 0.683, 0.803, 1.228};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_1")
       Output = {1.1889, 1.0121, 1.1829, 0.634, 0.742, 1.141, 0.655, 0.767, 1.179, 0.683, 0.8, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_2")
       Output = {1.1805, 1.0058, 1.1752, 0.639, 0.736, 1.143, 0.66, 0.76, 1.18, 0.688, 0.793, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_3")
       Output = {1.1855, 1.01, 1.1803, 0.635, 0.739, 1.142, 0.656, 0.763, 1.18, 0.684, 0.797, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_4")
       Output = {1.1852, 1.0098, 1.1802, 0.635, 0.74, 1.142, 0.656, 0.764, 1.179, 0.684, 0.797, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_0")
       Output = {1.1659, 0.9939, 1.1615, 0.637, 0.733, 1.144, 0.657, 0.757, 1.181, 0.686, 0.79, 1.233};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_1")
       Output = {1.1816, 1.0067, 1.1766, 0.636, 0.737, 1.143, 0.657, 0.761, 1.18, 0.685, 0.794, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_2")
       Output = {1.1899, 1.0139, 1.1854, 0.631, 0.743, 1.142, 0.652, 0.768, 1.179, 0.68, 0.801, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_3")
       Output = {1.1851, 1.0097, 1.1794, 0.634, 0.74, 1.142, 0.655, 0.764, 1.179, 0.683, 0.798, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_4")
       Output = {1.1853, 1.0099, 1.1795, 0.635, 0.74, 1.142, 0.656, 0.764, 1.179, 0.684, 0.797, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_0")
       Output = {1.2807, 1.0893, 1.2828, 0.533, 0.785, 1.144, 0.553, 0.814, 1.186, 0.581, 0.856, 1.248};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_1")
       Output = {1.1691, 0.9961, 1.1634, 0.647, 0.735, 1.142, 0.667, 0.758, 1.179, 0.696, 0.791, 1.228};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_2")
       Output = {1.1768, 1.003, 1.1705, 0.655, 0.731, 1.142, 0.676, 0.754, 1.178, 0.704, 0.786, 1.227};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_3")
       Output = {1.1905, 1.0137, 1.1854, 0.628, 0.743, 1.142, 0.649, 0.767, 1.18, 0.677, 0.801, 1.232};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_0")
       Output = {1.1032, 0.9412, 1.0928, 0.721, 0.704, 1.14, 0.742, 0.725, 1.173, 0.768, 0.751, 1.215};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_1")
       Output = {1.2018, 1.0235, 1.1966, 0.623, 0.745, 1.142, 0.643, 0.77, 1.18, 0.672, 0.804, 1.233};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_2")
       Output = {1.1937, 1.0168, 1.1898, 0.614, 0.749, 1.143, 0.635, 0.774, 1.181, 0.664, 0.809, 1.234};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_3")
       Output = {1.1801, 1.0053, 1.1746, 0.641, 0.737, 1.142, 0.662, 0.761, 1.179, 0.69, 0.793, 1.229};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_0")
       Output = {1.3139, 1.1213, 1.2991, 0.799, 0.717, 1.123, 0.818, 0.734, 1.15, 0.84, 0.755, 1.181};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_1")
       Output = {1.1838, 1.0074, 1.1739, 0.678, 0.721, 1.141, 0.699, 0.743, 1.177, 0.727, 0.773, 1.223};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_2")
       Output = {1.174, 1.0007, 1.1699, 0.632, 0.736, 1.144, 0.653, 0.761, 1.181, 0.681, 0.794, 1.233};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_3")
       Output = {1.1885, 1.013, 1.1856, 0.617, 0.749, 1.142, 0.637, 0.774, 1.18, 0.666, 0.808, 1.233};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_4")
       Output = {1.1839, 1.009, 1.1796, 0.623, 0.744, 1.143, 0.644, 0.769, 1.18, 0.672, 0.803, 1.233};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_5")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_5")
       Output = {1.1856, 1.0098, 1.1797, 0.644, 0.736, 1.142, 0.665, 0.76, 1.179, 0.693, 0.792, 1.229};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_6")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_6")
       Output = {1.1857, 1.0101, 1.1801, 0.643, 0.736, 1.142, 0.664, 0.76, 1.179, 0.692, 0.793, 1.229};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_7")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_7")
       Output = {1.1865, 1.0104, 1.1814, 0.631, 0.742, 1.142, 0.652, 0.766, 1.18, 0.68, 0.799, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_8")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_8")
       Output = {1.1851, 1.0092, 1.18, 0.628, 0.742, 1.142, 0.649, 0.767, 1.18, 0.677, 0.801, 1.232};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_9")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_9")
       Output = {1.1854, 1.01, 1.18, 0.635, 0.74, 1.142, 0.656, 0.764, 1.179, 0.685, 0.797, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_10")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_10")
       Output = {1.1852, 1.0092, 1.1794, 0.634, 0.74, 1.142, 0.654, 0.765, 1.179, 0.683, 0.798, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_11")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_11")
       Output = {1.1852, 1.0098, 1.1797, 0.634, 0.74, 1.142, 0.655, 0.764, 1.179, 0.683, 0.797, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_0")
       Output = {1.0788, 0.9169, 1.081, 0.472, 0.759, 1.162, 0.491, 0.79, 1.211, 0.521, 0.838, 1.284};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_1")
       Output = {1.1868, 1.0117, 1.1857, 0.592, 0.758, 1.143, 0.612, 0.785, 1.182, 0.641, 0.822, 1.238};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_2")
       Output = {1.1967, 1.02, 1.1904, 0.638, 0.743, 1.141, 0.658, 0.767, 1.177, 0.687, 0.8, 1.228};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_3")
       Output = {1.182, 1.0061, 1.1742, 0.653, 0.731, 1.142, 0.674, 0.754, 1.179, 0.702, 0.786, 1.228};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_4")
       Output = {1.1864, 1.0112, 1.1806, 0.647, 0.735, 1.142, 0.668, 0.759, 1.178, 0.696, 0.791, 1.228};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_5")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_5")
       Output = {1.1848, 1.0091, 1.1798, 0.626, 0.743, 1.142, 0.646, 0.768, 1.18, 0.675, 0.802, 1.232};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_6")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_6")
       Output = {1.1848, 1.0091, 1.1796, 0.627, 0.743, 1.142, 0.647, 0.768, 1.18, 0.676, 0.801, 1.232};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_7")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_7")
       Output = {1.1841, 1.0086, 1.1783, 0.638, 0.738, 1.142, 0.659, 0.762, 1.179, 0.688, 0.794, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_8")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_8")
       Output = {1.1854, 1.0099, 1.1798, 0.642, 0.737, 1.142, 0.662, 0.761, 1.179, 0.691, 0.793, 1.229};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_9")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_9")
       Output = {1.1851, 1.0097, 1.1796, 0.634, 0.74, 1.142, 0.655, 0.764, 1.179, 0.683, 0.797, 1.231};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_10")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_10")
       Output = {1.1851, 1.0097, 1.18, 0.636, 0.739, 1.142, 0.657, 0.763, 1.179, 0.685, 0.796, 1.23};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_11")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_11")
       Output = {1.1852, 1.0097, 1.1796, 0.635, 0.74, 1.142, 0.656, 0.764, 1.179, 0.685, 0.797, 1.23};
     else if(Folder == "CA_up")
       Output = {1.195, 1.0223, 1.1977, 0.675, 0.698, 1.149, 0.697, 0.721, 1.186, 0.725, 0.75, 1.234};
@@ -521,149 +521,149 @@ std::vector<double> ScalerWjets::GetWJetsSF(std::string Folder, bool isEl){
       Output = {1.2754, 1.161, 1.1461, 0.362, 1.126, 1.064, 0.373, 1.161, 1.096, 0.396, 1.23, 1.162};
     else if(Folder == "JET_JER_SINGLE_NP__1up")
       Output = {1.304, 1.1327, 1.1, 0.165, 1.162, 1.083, 0.172, 1.21, 1.128, 0.185, 1.302, 1.213};
-    else if(Folder == "leptonSF_EL_SF_Trigger_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Trigger_UP")
      Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_Trigger_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Trigger_DOWN")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_Reco_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Reco_UP")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_Reco_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Reco_DOWN")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_ID_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_ID_UP")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_ID_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_ID_DOWN")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_Isol_UP")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Isol_UP")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_EL_SF_Isol_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_EL_SF_Isol_DOWN")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_MU_SF_Trigger_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_STAT_UP")
       Output = {1.2521, 1.1204, 1.1189, 0.455, 1.081, 1.063, 0.468, 1.111, 1.092, 0.492, 1.168, 1.148};
-    else if(Folder == "leptonSF_MU_SF_Trigger_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_STAT_DOWN")
       Output = {1.2891, 1.1533, 1.1515, 0.45, 1.09, 1.061, 0.462, 1.12, 1.09, 0.486, 1.177, 1.146};
-    else if(Folder == "leptonSF_MU_SF_Trigger_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_SYST_UP")
       Output = {1.2623, 1.1286, 1.1277, 0.456, 1.082, 1.062, 0.469, 1.112, 1.092, 0.493, 1.168, 1.147};
-    else if(Folder == "leptonSF_MU_SF_Trigger_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Trigger_SYST_DOWN")
       Output = {1.2779, 1.1431, 1.1418, 0.449, 1.088, 1.061, 0.461, 1.119, 1.091, 0.485, 1.176, 1.147};
-    else if(Folder == "leptonSF_MU_SF_ID_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_STAT_UP")
       Output = {1.2674, 1.1332, 1.1322, 0.454, 1.084, 1.062, 0.466, 1.114, 1.092, 0.49, 1.171, 1.147};
-    else if(Folder == "leptonSF_MU_SF_ID_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_STAT_DOWN")
       Output = {1.2728, 1.1389, 1.1372, 0.451, 1.086, 1.062, 0.464, 1.116, 1.091, 0.488, 1.174, 1.147};
-    else if(Folder == "leptonSF_MU_SF_ID_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_SYST_UP")
       Output = {1.2647, 1.1309, 1.1292, 0.455, 1.083, 1.062, 0.467, 1.113, 1.092, 0.491, 1.17, 1.148};
-    else if(Folder == "leptonSF_MU_SF_ID_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_ID_SYST_DOWN")
       Output = {1.2756, 1.1412, 1.1399, 0.45, 1.087, 1.062, 0.463, 1.118, 1.091, 0.487, 1.175, 1.147};
-    else if(Folder == "leptonSF_MU_SF_Isol_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_STAT_UP")
       Output = {1.2694, 1.1359, 1.1343, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_MU_SF_Isol_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_STAT_DOWN")
       Output = {1.2708, 1.1368, 1.1352, 0.452, 1.085, 1.062, 0.465, 1.116, 1.091, 0.489, 1.173, 1.147};
-    else if(Folder == "leptonSF_MU_SF_Isol_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_SYST_UP")
       Output = {1.2665, 1.1324, 1.1316, 0.454, 1.084, 1.062, 0.466, 1.114, 1.092, 0.49, 1.171, 1.147};
-    else if(Folder == "leptonSF_MU_SF_Isol_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_Isol_SYST_DOWN")
       Output = {1.2738, 1.1396, 1.1379, 0.451, 1.086, 1.062, 0.464, 1.116, 1.091, 0.488, 1.174, 1.147};
-    else if(Folder == "leptonSF_MU_SF_TTVA_STAT_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_STAT_UP")
       Output = {1.2687, 1.1342, 1.1333, 0.453, 1.084, 1.062, 0.466, 1.114, 1.092, 0.49, 1.171, 1.147};
-    else if(Folder == "leptonSF_MU_SF_TTVA_STAT_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_STAT_DOWN")
       Output = {1.2715, 1.1378, 1.1363, 0.452, 1.086, 1.062, 0.464, 1.116, 1.091, 0.488, 1.173, 1.147};
-    else if(Folder == "leptonSF_MU_SF_TTVA_SYST_UP")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_SYST_UP")
      Output = {1.2692, 1.1357, 1.1342, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "leptonSF_MU_SF_TTVA_SYST_DOWN")
+    else if(Folder == "scaleFactor_leptonSF_MU_SF_TTVA_SYST_DOWN")
       Output = {1.271, 1.1371, 1.1355, 0.452, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_extrapolation_up")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_up")
       Output = {1.2696, 1.1358, 1.1344, 0.452, 1.085, 1.062, 0.465, 1.115, 1.091, 0.488, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_extrapolation_down")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_down")
       Output = {1.2706, 1.1368, 1.1353, 0.453, 1.085, 1.062, 0.466, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_extrapolation_from_charm_up")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_from_charm_up")
       Output = {1.2679, 1.1343, 1.1336, 0.464, 1.08, 1.062, 0.477, 1.11, 1.091, 0.501, 1.165, 1.145};
-    else if(Folder == "bTagSF_77_extrapolation_from_charm_down")
+    else if(Folder == "scaleFactor_bTagSF_77_extrapolation_from_charm_down")
       Output = {1.2723, 1.1376, 1.1362, 0.441, 1.09, 1.062, 0.454, 1.121, 1.092, 0.477, 1.179, 1.149};
-    else if(Folder == "jvt_UP")
+    else if(Folder == "scaleFactor_jvt_UP")
       Output = {1.2168, 1.0774, 1.0576, 0.459, 1.073, 1.065, 0.472, 1.103, 1.094, 0.496, 1.159, 1.15};
-    else if(Folder == "jvt_DOWN")
+    else if(Folder == "scaleFactor_jvt_DOWN")
       Output = {1.3262, 1.1984, 1.2174, 0.446, 1.097, 1.059, 0.459, 1.128, 1.089, 0.482, 1.186, 1.145};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_0")
       Output = {1.2904, 1.1553, 1.1532, 0.452, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_1")
       Output = {1.2736, 1.1393, 1.1379, 0.453, 1.085, 1.062, 0.466, 1.116, 1.091, 0.489, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_2")
       Output = {1.2655, 1.1314, 1.1305, 0.453, 1.084, 1.062, 0.466, 1.115, 1.091, 0.49, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_3")
       Output = {1.2703, 1.1367, 1.1351, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_up_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_up_4")
       Output = {1.27, 1.1365, 1.1348, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_0")
       Output = {1.2503, 1.1179, 1.1167, 0.453, 1.085, 1.062, 0.466, 1.115, 1.091, 0.49, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_1")
       Output = {1.2666, 1.1325, 1.1312, 0.452, 1.085, 1.062, 0.465, 1.115, 1.092, 0.488, 1.172, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_2")
       Output = {1.2747, 1.1407, 1.1392, 0.452, 1.086, 1.062, 0.464, 1.116, 1.091, 0.488, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_3")
       Output = {1.2699, 1.136, 1.1343, 0.452, 1.085, 1.062, 0.465, 1.116, 1.091, 0.489, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_B_down_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_B_down_4")
       Output = {1.2701, 1.1365, 1.1349, 0.453, 1.085, 1.062, 0.465, 1.115, 1.091, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_0")
       Output = {1.379, 1.2325, 1.2294, 0.283, 1.167, 1.064, 0.292, 1.207, 1.099, 0.312, 1.287, 1.173};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_1")
       Output = {1.2509, 1.1186, 1.1175, 0.481, 1.071, 1.062, 0.494, 1.1, 1.09, 0.518, 1.153, 1.143};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_2")
       Output = {1.2618, 1.1287, 1.1273, 0.468, 1.078, 1.062, 0.481, 1.107, 1.09, 0.505, 1.163, 1.145};
-    else if(Folder == "bTagSF_77_eigenvars_C_up_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_up_3")
       Output = {1.2762, 1.1411, 1.1396, 0.441, 1.09, 1.062, 0.454, 1.121, 1.092, 0.477, 1.18, 1.149};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_0")
       Output = {1.177, 1.0542, 1.0537, 0.608, 1.016, 1.058, 0.622, 1.038, 1.082, 0.645, 1.077, 1.122};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_1")
       Output = {1.2901, 1.1533, 1.1512, 0.423, 1.099, 1.062, 0.435, 1.131, 1.093, 0.459, 1.192, 1.152};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_2")
       Output = {1.2785, 1.1433, 1.1416, 0.437, 1.092, 1.062, 0.449, 1.123, 1.092, 0.473, 1.182, 1.15};
-    else if(Folder == "bTagSF_77_eigenvars_C_down_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_C_down_3")
       Output = {1.264, 1.1309, 1.1294, 0.464, 1.08, 1.062, 0.476, 1.11, 1.091, 0.5, 1.165, 1.146};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_0")
       Output = {1.3955, 1.2522, 1.251, 0.716, 0.992, 1.048, 0.728, 1.009, 1.066, 0.748, 1.036, 1.095};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_1")
       Output = {1.2705, 1.136, 1.1344, 0.468, 1.079, 1.061, 0.481, 1.108, 1.09, 0.505, 1.163, 1.144};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_2")
       Output = {1.2594, 1.1259, 1.1241, 0.426, 1.094, 1.063, 0.438, 1.126, 1.094, 0.462, 1.186, 1.153};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_3")
       Output = {1.2715, 1.1373, 1.1366, 0.458, 1.083, 1.062, 0.471, 1.113, 1.091, 0.494, 1.169, 1.146};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_4")
       Output = {1.2686, 1.1344, 1.1334, 0.447, 1.087, 1.062, 0.46, 1.117, 1.092, 0.483, 1.175, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_5")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_5")
       Output = {1.2712, 1.1372, 1.1356, 0.454, 1.085, 1.062, 0.467, 1.115, 1.091, 0.49, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_6")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_6")
       Output = {1.2709, 1.137, 1.1352, 0.452, 1.085, 1.062, 0.465, 1.116, 1.091, 0.489, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_7")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_7")
       Output = {1.2711, 1.1373, 1.1355, 0.456, 1.084, 1.062, 0.468, 1.114, 1.091, 0.492, 1.171, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_8")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_8")
       Output = {1.2699, 1.1356, 1.1343, 0.449, 1.087, 1.062, 0.462, 1.117, 1.092, 0.485, 1.175, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_9")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_9")
       Output = {1.2703, 1.1364, 1.1346, 0.454, 1.084, 1.062, 0.467, 1.114, 1.091, 0.49, 1.171, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_10")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_10")
       Output = {1.2701, 1.1355, 1.134, 0.452, 1.086, 1.062, 0.464, 1.116, 1.091, 0.488, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_up_11")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_up_11")
       Output = {1.2701, 1.1362, 1.1348, 0.452, 1.085, 1.062, 0.465, 1.116, 1.091, 0.488, 1.173, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_0")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_0")
       Output = {1.1653, 1.0383, 1.0372, 0.207, 1.166, 1.076, 0.215, 1.211, 1.118, 0.232, 1.302, 1.202};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_1")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_1")
       Output = {1.2697, 1.1361, 1.1352, 0.437, 1.091, 1.062, 0.449, 1.122, 1.093, 0.473, 1.182, 1.15};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_2")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_2")
       Output = {1.2811, 1.1464, 1.145, 0.479, 1.076, 1.061, 0.492, 1.104, 1.089, 0.516, 1.158, 1.142};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_3")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_3")
       Output = {1.2687, 1.1346, 1.1331, 0.447, 1.087, 1.062, 0.459, 1.118, 1.092, 0.483, 1.176, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_4")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_4")
       Output = {1.2716, 1.1377, 1.1365, 0.458, 1.083, 1.062, 0.471, 1.113, 1.091, 0.494, 1.169, 1.146};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_5")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_5")
       Output = {1.269, 1.1345, 1.1334, 0.451, 1.085, 1.062, 0.464, 1.116, 1.092, 0.488, 1.173, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_6")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_6")
       Output = {1.2693, 1.1349, 1.1342, 0.453, 1.085, 1.062, 0.465, 1.115, 1.092, 0.489, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_7")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_7")
       Output = {1.2691, 1.1346, 1.1333, 0.449, 1.086, 1.062, 0.462, 1.117, 1.092, 0.486, 1.174, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_8")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_8")
       Output = {1.2703, 1.1363, 1.1346, 0.456, 1.084, 1.062, 0.469, 1.114, 1.091, 0.493, 1.17, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_9")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_9")
       Output = {1.2701, 1.1356, 1.1344, 0.451, 1.086, 1.062, 0.464, 1.116, 1.092, 0.487, 1.173, 1.148};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_10")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_10")
       Output = {1.2701, 1.1363, 1.1346, 0.453, 1.085, 1.062, 0.466, 1.115, 1.091, 0.49, 1.172, 1.147};
-    else if(Folder == "bTagSF_77_eigenvars_Light_down_11")
+    else if(Folder == "scaleFactor_bTagSF_77_eigenvars_Light_down_11")
       Output = {1.2701, 1.1363, 1.1346, 0.453, 1.085, 1.062, 0.466, 1.115, 1.091, 0.49, 1.172, 1.147};
     else if (Folder == "CA_up")
       Output = {1.2832, 1.1512, 1.1528, 0.452, 1.061, 1.07, 0.465, 1.092, 1.101, 0.489, 1.149, 1.158};
