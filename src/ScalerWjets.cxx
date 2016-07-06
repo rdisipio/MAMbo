@@ -123,25 +123,27 @@ double ScalerWjets::GetWjetsWeight( EventData * ed){
 				
 
         }
-        int x = njets <= 4 ? njets-2 : 2;
+        int x = njets < 4 ? 3*(1+njets%2) : 9;
+	int xCA = njets <= 4 ? njets-2 : 2;
 	std::cout<<"Njet "<<njets<<" Nbjet"<<nbjets<<std::endl;
 	
 	std::vector<double> EventWeights = m_weights;
 	
-	if( nbjets < 1 || x < 0 ) 
+	if( nbjets < 1 || njets < 2 ) 
 	{ 
-	   x=0;
-	   std::vector<double> tmp{1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.};
-	   EventWeights = tmp;
+	   if( m_systematic == "CA_up" ) return 1.5;
+           if( m_systematic == "CA_down" ) return 0.;
+           return 1; 
 	}
 	
-	double CA_weight = EventWeights[m_CA+x];
+	double CA_weight = EventWeights[xCA];
         double HF_weight = 1;
         if( is_WplusC ) HF_weight = EventWeights[m_Kc+x];
         else if( is_WplusCC || isB ) HF_weight = EventWeights[m_Kbb+x];
         else if( isLight ) HF_weight = EventWeights[m_Klight+x];
 	
-	
+	m_CA_weight=CA_weight;
+	m_HF_weight=HF_weight;
 	std::cout<<std::endl<<"Weights "<<CA_weight<<" "<<HF_weight<<std::endl;
         return CA_weight * HF_weight;
 }
@@ -412,6 +414,38 @@ std::vector<double> ScalerWjets::GetWJetsSF(std::string Folder, bool isEl){
       Output = {1.1809, 1.0051, 1.1781, 0.607, 0.707, 1.157, 0.629, 0.733, 1.198, 0.659, 0.767, 1.255};
     else if(Folder == "Flight_down")
       Output = {1.1816, 1.0088, 1.169, 0.773, 0.712, 1.129, 0.793, 0.73, 1.158, 0.817, 0.752, 1.193};
+    else if(Folder == "MCNorm_zjets")
+      Output = {1.1854, 1.0084, 1.1825, 0.628, 0.659, 1.169, 0.652, 0.683, 1.212, 0.682, 0.715, 1.269} ;
+    else if(Folder == "MCNorm_diboson")
+      Output = {1.1813, 1.0075, 1.1757, 0.69, 0.707, 1.144, 0.712, 0.729, 1.179, 0.739, 0.757, 1.224} ;
+    else if(Folder == "MCNorm_ttV")
+      Output = {1.1813, 1.007, 1.1733, 0.688, 0.709, 1.143, 0.71, 0.731, 1.178, 0.737, 0.76, 1.224} ;
+    else if(Folder == "MCNorm_singleTop")
+      Output = {1.1746, 1.0013, 1.1667, 0.689, 0.704, 1.145, 0.71, 0.726, 1.18, 0.738, 0.754, 1.226} ;
+    else if(Folder == "fakes_fakeEff_CR_S")
+      Output = {1.1685, 0.9966, 1.1591, 0.768, 0.634, 1.155, 0.79, 0.653, 1.189, 0.817, 0.675, 1.228} ;
+    else if(Folder == "fakes_fakeEff_MCscale_D")
+      Output = {1.138, 0.9717, 1.1257, 0.946, 0.446, 1.187, 0.972, 0.458, 1.219, 0.993, 0.468, 1.245} ;
+    else if(Folder == "fakes_fakeEff_MCscale_U")
+      Output = {1.2267, 1.044, 1.2268, 0.438, 0.966, 1.101, 0.453, 0.999, 1.139, 0.479, 1.055, 1.203} ;
+    else if(Folder == "fakes_fakeEff_stat_D")
+      Output = {1.1936, 1.0169, 1.1875, 0.621, 0.781, 1.131, 0.641, 0.805, 1.167, 0.668, 0.84, 1.218} ;
+    else if(Folder == "fakes_fakeEff_stat_U")
+      Output = {1.1687, 0.9971, 1.1596, 0.76, 0.635, 1.156, 0.782, 0.653, 1.19, 0.809, 0.676, 1.231} ;
+    else if(Folder == "fakes_realEff_stat_D")
+      Output = {1.1819, 1.0075, 1.174, 0.687, 0.713, 1.142, 0.708, 0.735, 1.177, 0.736, 0.763, 1.223} ;
+    else if(Folder == "fakes_realEff_stat_U")
+      Output = {1.1807, 1.0066, 1.1731, 0.69, 0.706, 1.144, 0.711, 0.728, 1.179, 0.739, 0.756, 1.225} ;
+    else if(Folder == "fakes_MTWModelling")
+      Output = {0.8656, 0.7539, 0.8667, 3.185, -1.817, 1.554, 3.166, -1.807, 1.545, 2.848, -1.625, 1.39} ;
+    else if(Folder == "QCDNorm_down_30")
+        Output = {1.2759, 1.085, 1.2899, 0.181, 1.224, 1.06, 0.188, 1.271, 1.1, 0.202, 1.365, 1.182} ;
+   else if(Folder == "QCDNorm_down_50")
+        Output = {1.3391, 1.1359, 1.374, -0.118, 1.526, 1.01, -0.123, 1.592, 1.054, -0.135, 1.745, 1.156} ;
+   else if(Folder == "QCDNorm_up_30")
+        Output = {1.0866, 0.9303, 1.0702, 1.285, 0.106, 1.241, 1.313, 0.108, 1.268, 1.314, 0.108, 1.269} ;
+   else if(Folder == "QCDNorm_up_50")
+        Output = {1.0234, 0.8792, 1.0073, 1.744, -0.359, 1.317, 1.771, -0.364, 1.337, 1.724, -0.355, 1.301} ;
     else
       Output = {1.1812, 1.007, 1.1732, 0.689, 0.709, 1.143, 0.71, 0.731, 1.178, 0.738, 0.76, 1.224};  // default back to nominal
     
@@ -677,6 +711,40 @@ std::vector<double> ScalerWjets::GetWJetsSF(std::string Folder, bool isEl){
       Output = {1.2696, 1.1353, 1.134, 0.389, 1.073, 1.076, 0.402, 1.107, 1.111, 0.425, 1.172, 1.176};
     else if (Folder == "Flight_down")
       Output = {1.2684, 1.1347, 1.134, 0.552, 1.072, 1.05, 0.565, 1.096, 1.074, 0.588, 1.141, 1.118};
+        else if(Folder == "MCNorm_zjets")
+      Output = {1.2593, 1.1289, 1.1292, 0.517, 1.008, 1.076, 0.531, 1.036, 1.105, 0.556, 1.085, 1.157} ;
+    else if(Folder == "MCNorm_diboson")
+      Output = {1.269, 1.1347, 1.1344, 0.471, 1.071, 1.063, 0.484, 1.1, 1.093, 0.508, 1.155, 1.147} ;
+    else if(Folder == "MCNorm_ttV")
+      Output = {1.2689, 1.1351, 1.1335, 0.47, 1.072, 1.063, 0.483, 1.102, 1.092, 0.507, 1.156, 1.147} ;
+    else if(Folder == "MCNorm_singleTop")
+      Output = {1.262, 1.1291, 1.1279, 0.471, 1.07, 1.064, 0.484, 1.099, 1.093, 0.508, 1.154, 1.147} ;
+    else if(Folder == "fakes_fakeEff_CR_S")
+      Output = {1.2495, 1.1199, 1.1213, 0.559, 0.968, 1.081, 0.574, 0.994, 1.111, 0.6, 1.037, 1.16} ;
+    else if(Folder == "fakes_fakeEff_MCscale_D")
+      Output = {1.2678, 1.1345, 1.1335, 0.476, 1.066, 1.064, 0.489, 1.095, 1.093, 0.513, 1.149, 1.147} ;
+    else if(Folder == "fakes_fakeEff_MCscale_U")
+      Output = {1.2702, 1.1364, 1.1348, 0.464, 1.079, 1.062, 0.477, 1.108, 1.091, 0.501, 1.164, 1.146} ;
+    else if(Folder == "fakes_fakeEff_stat_D")
+      Output = {1.2709, 1.1373, 1.1359, 0.459, 1.083, 1.062, 0.471, 1.112, 1.091, 0.495, 1.169, 1.146} ;
+    else if(Folder == "fakes_fakeEff_stat_U")
+      Output = {1.2667, 1.1344, 1.1331, 0.484, 1.061, 1.064, 0.497, 1.089, 1.093, 0.522, 1.142, 1.146} ;
+    else if(Folder == "fakes_realEff_stat_D")
+      Output = {1.2693, 1.1355, 1.1343, 0.471, 1.074, 1.062, 0.484, 1.103, 1.091, 0.508, 1.158, 1.145} ;
+    else if(Folder == "fakes_realEff_stat_U")
+      Output = {1.2685, 1.135, 1.1343, 0.47, 1.07, 1.064, 0.483, 1.1, 1.093, 0.507, 1.155, 1.147} ;
+    else if(Folder == "fakes_MTWModelling")
+      Output = {1.1745, 1.0622, 1.076, 1.008, 0.536, 1.144, 1.03, 0.548, 1.169, 1.042, 0.554, 1.183} ;
+    else if(Folder == "QCDNorm_down_30")
+        Output = {1.2973, 1.157, 1.1519, 0.324, 1.218, 1.041, 0.334, 1.253, 1.071, 0.354, 1.329, 1.136} ;
+   else if(Folder == "QCDNorm_down_50")
+        Output = {1.3161, 1.1722, 1.164, 0.231, 1.311, 1.027, 0.237, 1.35, 1.057, 0.254, 1.442, 1.129} ;
+
+   else if(Folder == "QCDNorm_up_30")
+        Output = {1.2406, 1.1134, 1.1165, 0.623, 0.92, 1.086, 0.639, 0.944, 1.114, 0.664, 0.98, 1.157} ;
+
+   else if(Folder == "QCDNorm_up_50")
+        Output = {1.2218, 1.0991, 1.1052, 0.728, 0.815, 1.102, 0.747, 0.835, 1.129, 0.77, 0.861, 1.164} ;
     else
       Output = {1.2689, 1.1352, 1.1345, 0.47, 1.072, 1.063, 0.483, 1.102, 1.092, 0.507, 1.156, 1.146}; // default back to nominal
     

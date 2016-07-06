@@ -17,10 +17,11 @@ class ScalerWjets
                 std::vector<int> m_bList;
 		
 		unsigned const int m_CA=0;
-		unsigned const int m_Kbb=3;
-                unsigned const int m_Kc=6;
-		unsigned const int m_Klight=9;
-
+		unsigned const int m_Kbb=0;
+                unsigned const int m_Kc=1;
+		unsigned const int m_Klight=2;
+		double m_HF_weight = 0.;
+                double m_CA_weight = 0.;
 		
 	public:
 		virtual ~ScalerWjets();
@@ -29,6 +30,8 @@ class ScalerWjets
 		std::string GetSystematic() { return m_systematic;};
 		double GetWjetsWeight(  EventData *);
 		std::vector<double> GetWJetsSF(std::string Folder, bool isEl);
+		double GetCA(){return m_CA_weight;};
+		double GetHF(){return m_HF_weight;};
 };
 
 
