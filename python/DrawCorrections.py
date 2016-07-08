@@ -253,7 +253,9 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
 
     ATLAS_LABEL(0.16, 0.88, kBlack)
     #myText(0.335, 0.88, kBlack, "Simulation Preliminary");
-    myText(0.335, 0.88, kBlack, "Simulation");
+    myText(0.335, 0.88, kBlack, "Simulation Internal");
+    #myText(0.335, 0.88, kBlack, "Simulation");
+    myText(0.16, 0.82, kBlack, "Resolved");
 
     can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
@@ -270,6 +272,7 @@ gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
 ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
+#ljets = [ 'el', 'mu' ] #, 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
@@ -292,9 +295,14 @@ ftag='nofullhad'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/incl/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/June27/'
 #rpath='/afs/cern.ch/user/q/qitek/public/MCsigHalves/July17/'
-rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nominal/'
 
-ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nocut/'
+# mr:
+#rpath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nominal/'
+#ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nocut/'
+
+# afs:
+rpath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-allsysts/nominal/'
+ppath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-allsysts/nocut/'
 
 GenNames = [ 'DiTop.410000'
          ]

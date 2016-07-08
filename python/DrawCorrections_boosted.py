@@ -254,7 +254,9 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
 
     ATLAS_LABEL(0.16, 0.88, kBlack)
     #myText(0.335, 0.88, kBlack, "Simulation Preliminary");
-    myText(0.335, 0.88, kBlack, "Simulation");
+    myText(0.335, 0.88, kBlack, "Simulation Internal");
+    #myText(0.335, 0.88, kBlack, "Simulation");
+    myText(0.16, 0.82, kBlack, "Boosted");
 
     can.Print('eps/' + canname + '_boosted.eps')
     can.Print('png/' + canname + '_boosted.png')
