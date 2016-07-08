@@ -148,7 +148,7 @@ void normalize_rows( TH2D * h )
 }
 
 
-void basic_plot( const char * hname, const char * htitle = "", TString channel = "co")
+void basic_plot( const char * hname, const char * htitle = "", TString channel = "co", TString topotag = "Resolved")
 {
    
 
@@ -239,8 +239,9 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.16, 0.80, kBlack );
-  myText( 0.31, 0.80, kBlack, " Simulation" );
-  ///myText( 0.16, 0.74, kBlack, " Internal" );
+  myText( 0.31, 0.80, kBlack, " Simulation Internal" );
+  //  myText( 0.31, 0.74, kBlack, " Internal" );
+  myText( 0.16, 0.74, kBlack, topotag );
 
   //const double rho = h->GetCorrelationFactor();
   //sprintf( buf, "correlation: %3.2f", rho );
@@ -339,8 +340,8 @@ void basic_plot_par( const char * hname, const char * htitle = "", TString chann
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.95, kBlack );
-  ///myText( 0.19, 0.95, kBlack, " Simulation Internal   l+jets" );
-  myText( 0.19, 0.95, kBlack, " Simulation" );
+  // OBSOLETE  myText( 0.19, 0.95, kBlack, " Simulation Internal   l+jets" );
+  //myText( 0.19, 0.95, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -441,8 +442,9 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
 //  double x = 0.45;
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
-  ///myText( 0.21, 0.92, kBlack, " Simulation Internal" );
-  myText( 0.21, 0.92, kBlack, " Simulation" );
+  // obsolete?
+  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
+  //myText( 0.21, 0.92, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -457,96 +459,106 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
   c->SaveAs( pname );
 }
 
-void Migra(TString input, TString channel)
+void Migra(TString input, TString channel, TString topo = "4j2b")
 {
 
   TFile *in=new TFile(input,"read");
 
-
-
+  if (topo == "4j2b") {
+    TString topotag = "Resolved";
    //reco to particle matrices
-  basic_plot("reco/4j2b/topL/Matrix_reco_particle_pt","p_{T}^{t,lep} [GeV]", channel);
-//  basic_plot("reco/4j2b/WL/Matrix_reco_particle_pt","p_{T}^{W,lep} [GeV]", channel);
-//  basic_plot("reco/4j2b/WH/Matrix_reco_particle_pt","p_{T}^{W,had} [GeV]", channel);
-//  basic_plot("reco/4j2b/WH/Matrix_reco_particle_absrap","|y|_{W,had}", channel);
-//  basic_plot("reco/4j2b/WL/Matrix_reco_particle_absrap","|y|_{W,lep}", channel);
-  basic_plot("reco/4j2b/topL/Matrix_reco_particle_m","m_{t,lep}", channel);
-  basic_plot("reco/4j2b/topH/Matrix_reco_particle_m","m_{t,had}", channel); 
-  basic_plot("reco/4j2b/topL/Matrix_reco_particle_absrap","|y|_{t,lep}", channel);
-  basic_plot("reco/4j2b/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]", channel);
-  basic_plot("reco/4j2b/topH/Matrix_reco_particle_absrap","|y|_{t,had}", channel);
-  basic_plot("reco/4j2b/tt/Matrix_reco_particle_pt","p_{T}^{t#bar{t}} [GeV]", channel);
-  basic_plot("reco/4j2b/tt/Matrix_reco_particle_m","m_{t#bar{t}}", channel);
-  basic_plot("reco/4j2b/tt/Matrix_reco_particle_absrap","|y|_{t#bar{t}}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_Pout","p_{out}^{t#bar{t}} [GeV]", channel);
-  //basic_plot("reco/4j2b/difference/Matrix_reco_particle_absPout","|p_{out}^{t#bar{t}}| [GeV]", channel);  
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_z_ttbar","z_{t#bar{t}}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_dPhi_ttbar","#Delta#phi_{t#bar{t}}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_HT_ttbar","H_{T}^{t#bar{t}} [GeV]", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_HT_pseudo","H_{T}^{pseudo} [GeV]", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_Chi_ttbar","#chi_{t#bar{t}}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_Yboost","y_{boost}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_R_Wb_had","p_{T}^{W,had}/p_{T}^{b,had}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_R_Wb_lep","p_{T}^{W,lep}/p_{T}^{b,lep}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_R_Wt_had","p_{T}^{W,had}/p_{T}^{t,had}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_R_Wt_lep","p_{T}^{W,lep}/p_{T}^{t,lep}", channel);
-  basic_plot("reco/4j2b/difference/Matrix_reco_particle_R_lb","(p_{T}^{Wj1}+p_{T}^{Wj2})/(p_{T}^{bj1}+p_{T}^{bj2})", channel);
+  basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_pt","p_{T}^{t,lep} [GeV]", channel, topotag);
+//  basic_plot("reco/" + topo + "/WL/Matrix_reco_particle_pt","p_{T}^{W,lep} [GeV]", channel, topotag);
+//  basic_plot("reco/" + topo + "/WH/Matrix_reco_particle_pt","p_{T}^{W,had} [GeV]", channel, topotag);
+//  basic_plot("reco/" + topo + "/WH/Matrix_reco_particle_absrap","|y|_{W,had}", channel, topotag);
+//  basic_plot("reco/" + topo + "/WL/Matrix_reco_particle_absrap","|y|_{W,lep}", channel, topotag);
+  basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_m","m_{t,lep}", channel, topotag);
+  basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_m","m_{t,had}", channel, topotag); 
+  basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_absrap","|y|_{t,lep}", channel, topotag);
+  basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]", channel, topotag);
+  basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y|_{t,had}", channel, topotag);
+  basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_pt","p_{T}^{t#bar{t}} [GeV]", channel, topotag);
+  basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_m","m_{t#bar{t}}", channel, topotag);
+  basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_absrap","|y|_{t#bar{t}}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_Pout","p_{out}^{t#bar{t}} [GeV]", channel, topotag);
+  //basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_absPout","|p_{out}^{t#bar{t}}| [GeV]", channel, topotag);  
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_z_ttbar","z_{t#bar{t}}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_dPhi_ttbar","#Delta#phi_{t#bar{t}}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_HT_ttbar","H_{T}^{t#bar{t}} [GeV]", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_HT_pseudo","H_{T}^{pseudo} [GeV]", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_Chi_ttbar","#chi_{t#bar{t}}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_Yboost","y_{boost}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_Wb_had","p_{T}^{W,had}/p_{T}^{b,had}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_Wb_lep","p_{T}^{W,lep}/p_{T}^{b,lep}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_Wt_had","p_{T}^{W,had}/p_{T}^{t,had}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_Wt_lep","p_{T}^{W,lep}/p_{T}^{t,lep}", channel, topotag);
+  basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_lb","(p_{T}^{Wj1}+p_{T}^{Wj2})/(p_{T}^{bj1}+p_{T}^{bj2})", channel, topotag);
   
-//   basic_plot("reco/4j2b/topL/Matrix_reco_particle_px","p_{x}^{lep} [GeV]", channel);
-//   basic_plot("reco/4j2b/topL/Matrix_reco_particle_py","p_{y}^{lep} [GeV]", channel);
-//   basic_plot("reco/4j2b/topL/Matrix_reco_particle_pz","p_{z}^{lep} [GeV]", channel);
-//   basic_plot("reco/4j2b/topH/Matrix_reco_particle_px","p_{x}^{had} [GeV]", channel);
-//   basic_plot("reco/4j2b/topH/Matrix_reco_particle_py","p_{y}^{had} [GeV]", channel);
-//   basic_plot("reco/4j2b/topH/Matrix_reco_particle_pz","p_{z}^{had} [GeV]", channel);
+//   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_px","p_{x}^{lep} [GeV]", channel, topotag);
+//   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_py","p_{y}^{lep} [GeV]", channel, topotag);
+//   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_pz","p_{z}^{lep} [GeV]", channel, topotag);
+//   basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_px","p_{x}^{had} [GeV]", channel, topotag);
+//   basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_py","p_{y}^{had} [GeV]", channel, topotag);
+//   basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pz","p_{z}^{had} [GeV]", channel, topotag);
 // 
 //   //parton to particle matrices
-  basic_plot_par("particle/4j2b/topL/Matrix_particle_parton_pt","p_{T}^{t,lep} [GeV]", channel);
-//  basic_plot_par("particle/4j2b/WL/Matrix_particle_parton_pt","p_{T}^{W,lep} [GeV]", channel);
-//  basic_plot_par("particle/4j2b/WH/Matrix_particle_parton_pt","p_{T}^{W,had} [GeV]", channel);
-//  basic_plot_par("particle/4j2b/WL/Matrix_particle_parton_absrap","|y|_{W,lep}", channel);
-//  basic_plot_par("particle/4j2b/WH/Matrix_particle_parton_absrap","|y|_{W,had}", channel); 
-  basic_plot_par("particle/4j2b/topL/Matrix_particle_parton_absrap","|y|_{t,lep}", channel);
-  basic_plot_par("particle/4j2b/topH/Matrix_particle_parton_pt","p_{T}^{t,had} [GeV]", channel);
-  basic_plot_par("particle/4j2b/topH/Matrix_particle_parton_absrap","|y|_{t,had}", channel);
-  basic_plot_par("particle/4j2b/tt/Matrix_particle_parton_pt","p_{T}^{t#bar{t}} [GeV]", channel);
-  basic_plot_par("particle/4j2b/tt/Matrix_particle_parton_m","m_{t#bar{t}}", channel);
-  basic_plot_par("particle/4j2b/tt/Matrix_particle_parton_absrap","|y|_{t#bar{t}}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_Pout","p_{out}^{t#bar{t}} [GeV]", channel);
-  //basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_absPout","|p_{out}^{t#bar{t}}| [GeV]", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_z_ttbar","z_{t#bar{t}}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_dPhi_ttbar","#Delta#phi_{t#bar{t}}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_HT_ttbar","H_{T}^{t#bar{t}} [GeV]", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_Chi_ttbar","#chi_{t#bar{t}}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_Yboost","y_{boost}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_R_Wb_had","p_{T}^{W,had}/p_{T}^{b,had}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_R_Wb_lep","p_{T}^{W,lep}/p_{T}^{b,lep}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_R_Wt_had","p_{T}^{W,had}/p_{T}^{t,had}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_R_Wt_lep","p_{T}^{W,lep}/p_{T}^{t,lep}", channel);
-  basic_plot_par("particle/4j2b/difference/Matrix_particle_parton_R_lb","(p_{T}^{Wj1}+p_{T}^{Wj2})/(p_{T}^{bj1}+p_{T}^{bj2})", channel);
-//   basic_plot_par("particle/4j2b/topL/Matrix_particle_parton_px","p_{x}^{lep} [GeV]", channel);
-//   basic_plot_par("particle/4j2b/topL/Matrix_particle_parton_py","p_{y}^{lep} [GeV]", channel);
-//   basic_plot_par("particle/4j2b/topL/Matrix_particle_parton_pz","p_{z}^{lep} [GeV]", channel);
-//   basic_plot_par("particle/4j2b/topH/Matrix_particle_parton_px","p_{x}^{had} [GeV]", channel);
-//   basic_plot_par("particle/4j2b/topH/Matrix_particle_parton_py","p_{y}^{had} [GeV]", channel);
-//   basic_plot_par("particle/4j2b/topH/Matrix_particle_parton_pz","p_{z}^{had} [GeV]", channel);
+  basic_plot_par("particle/" + topo + "/topL/Matrix_particle_parton_pt","p_{T}^{t,lep} [GeV]", channel, topotag);
+//  basic_plot_par("particle/" + topo + "/WL/Matrix_particle_parton_pt","p_{T}^{W,lep} [GeV]", channel, topotag);
+//  basic_plot_par("particle/" + topo + "/WH/Matrix_particle_parton_pt","p_{T}^{W,had} [GeV]", channel, topotag);
+//  basic_plot_par("particle/" + topo + "/WL/Matrix_particle_parton_absrap","|y|_{W,lep}", channel, topotag);
+//  basic_plot_par("particle/" + topo + "/WH/Matrix_particle_parton_absrap","|y|_{W,had}", channel, topotag); 
+  basic_plot_par("particle/" + topo + "/topL/Matrix_particle_parton_absrap","|y|_{t,lep}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/topH/Matrix_particle_parton_pt","p_{T}^{t,had} [GeV]", channel, topotag);
+  basic_plot_par("particle/" + topo + "/topH/Matrix_particle_parton_absrap","|y|_{t,had}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/tt/Matrix_particle_parton_pt","p_{T}^{t#bar{t}} [GeV]", channel, topotag);
+  basic_plot_par("particle/" + topo + "/tt/Matrix_particle_parton_m","m_{t#bar{t}}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/tt/Matrix_particle_parton_absrap","|y|_{t#bar{t}}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_Pout","p_{out}^{t#bar{t}} [GeV]", channel, topotag);
+  //basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_absPout","|p_{out}^{t#bar{t}}| [GeV]", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_z_ttbar","z_{t#bar{t}}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_dPhi_ttbar","#Delta#phi_{t#bar{t}}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_HT_ttbar","H_{T}^{t#bar{t}} [GeV]", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_Chi_ttbar","#chi_{t#bar{t}}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_Yboost","y_{boost}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_R_Wb_had","p_{T}^{W,had}/p_{T}^{b,had}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_R_Wb_lep","p_{T}^{W,lep}/p_{T}^{b,lep}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_R_Wt_had","p_{T}^{W,had}/p_{T}^{t,had}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_R_Wt_lep","p_{T}^{W,lep}/p_{T}^{t,lep}", channel, topotag);
+  basic_plot_par("particle/" + topo + "/difference/Matrix_particle_parton_R_lb","(p_{T}^{Wj1}+p_{T}^{Wj2})/(p_{T}^{bj1}+p_{T}^{bj2})", channel, topotag);
+//   basic_plot_par("particle/" + topo + "/topL/Matrix_particle_parton_px","p_{x}^{lep} [GeV]", channel, topotag);
+//   basic_plot_par("particle/" + topo + "/topL/Matrix_particle_parton_py","p_{y}^{lep} [GeV]", channel, topotag);
+//   basic_plot_par("particle/" + topo + "/topL/Matrix_particle_parton_pz","p_{z}^{lep} [GeV]", channel, topotag);
+//   basic_plot_par("particle/" + topo + "/topH/Matrix_particle_parton_px","p_{x}^{had} [GeV]", channel, topotag);
+//   basic_plot_par("particle/" + topo + "/topH/Matrix_particle_parton_py","p_{y}^{had} [GeV]", channel, topotag);
+//   basic_plot_par("particle/" + topo + "/topH/Matrix_particle_parton_pz","p_{z}^{had} [GeV]", channel, topotag);
   
   //reco to parton matrices
-  basic_plot_rp("reco/4j2b/topL/Matrix_reco_parton_pt_5","p_{T}^{t,lep} [GeV]", channel);
-//  basic_plot_rp("reco/4j2b/WL/Matrix_reco_parton_pt_5","p_{T}^{W,lep} [GeV]", channel);
-//  basic_plot_rp("reco/4j2b/WH/Matrix_reco_parton_pt_5","p_{T}^{H,lep} [GeV]", channel);
-//  basic_plot_rp("reco/4j2b/WL/Matrix_reco_parton_absrap_5","|y|_{W,lep}", channel);
-//  basic_plot_rp("reco/4j2b/WH/Matrix_reco_parton_absrap_5","|y|_{W,had}", channel);
-  basic_plot_rp("reco/4j2b/topL/Matrix_reco_parton_absrap_5","|y|_{t,lep}", channel);
-  basic_plot_rp("reco/4j2b/topH/Matrix_reco_parton_pt_5","p_{T}^{t,had} [GeV]", channel);
-  basic_plot_rp("reco/4j2b/topH/Matrix_reco_parton_absrap_5","|y|_{t,had}", channel);
-  basic_plot_rp("reco/4j2b/tt/Matrix_reco_parton_pt_5","p_{T}^{t#bar{t}} [GeV]", channel);
-  basic_plot_rp("reco/4j2b/tt/Matrix_reco_parton_m_5","m_{t#bar{t}}", channel);
-  basic_plot_rp("reco/4j2b/tt/Matrix_reco_parton_absrap_5","|y|_{t#bar{t}}", channel);
-  basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_Pout_5","p_{out}^{t#bar{t}} [GeV]", channel);
-  //basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_absPout_5","|p_{out}^{t#bar{t}}| [GeV]", channel); 
-  basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_z_ttbar_5","z_{t#bar{t}}", channel);
-  basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_dPhi_ttbar_5","#Delta#phi_{t#bar{t}}", channel);
-  basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_HT_ttbar_5","H_{T}^{t#bar{t}} [GeV]", channel);
-  basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_Chi_ttbar_5","#chi_{t#bar{t}}", channel);
-  basic_plot_rp("reco/4j2b/difference/Matrix_reco_parton_Yboost_5","y_{boost}", channel);
+  basic_plot_rp("reco/" + topo + "/topL/Matrix_reco_parton_pt_5","p_{T}^{t,lep} [GeV]", channel, topotag);
+//  basic_plot_rp("reco/" + topo + "/WL/Matrix_reco_parton_pt_5","p_{T}^{W,lep} [GeV]", channel, topotag);
+//  basic_plot_rp("reco/" + topo + "/WH/Matrix_reco_parton_pt_5","p_{T}^{H,lep} [GeV]", channel, topotag);
+//  basic_plot_rp("reco/" + topo + "/WL/Matrix_reco_parton_absrap_5","|y|_{W,lep}", channel, topotag);
+//  basic_plot_rp("reco/" + topo + "/WH/Matrix_reco_parton_absrap_5","|y|_{W,had}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/topL/Matrix_reco_parton_absrap_5","|y|_{t,lep}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/topH/Matrix_reco_parton_pt_5","p_{T}^{t,had} [GeV]", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/topH/Matrix_reco_parton_absrap_5","|y|_{t,had}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/tt/Matrix_reco_parton_pt_5","p_{T}^{t#bar{t}} [GeV]", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/tt/Matrix_reco_parton_m_5","m_{t#bar{t}}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/tt/Matrix_reco_parton_absrap_5","|y|_{t#bar{t}}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_Pout_5","p_{out}^{t#bar{t}} [GeV]", channel, topotag);
+  //basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_absPout_5","|p_{out}^{t#bar{t}}| [GeV]", channel, topotag); 
+  basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_z_ttbar_5","z_{t#bar{t}}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_dPhi_ttbar_5","#Delta#phi_{t#bar{t}}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_HT_ttbar_5","H_{T}^{t#bar{t}} [GeV]", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_Chi_ttbar_5","#chi_{t#bar{t}}", channel, topotag);
+  basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_Yboost_5","y_{boost}", channel, topotag);
+
+  } else {
+    // boosted:
+    // 1fj1b:
+    TString topotag = "Boosted";
+    basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]", channel, topotag);
+    basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y|_{t,had}", channel, topotag);
+
+  }
+
 }

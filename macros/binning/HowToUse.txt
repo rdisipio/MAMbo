@@ -35,6 +35,12 @@ root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20
 root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
 root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
 
+boosted: 
+root -b -q -l 'Migra.C("/afs/cern.ch/user/a/amenga/public/ForJiri/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "el", "1fj1b")'
+root -b -q -l 'Migra.C("/afs/cern.ch/user/a/amenga/public/ForJiri/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "mu", "1fj1b")'
+root -b -q -l 'Migra.C("/afs/cern.ch/user/a/amenga/public/ForJiri/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "co", "1fj1b")'
+
+
 In case of further questions send an e-mail to: 
 josef.pacalt@cern.ch
 jiri.kvita@cern.ch
