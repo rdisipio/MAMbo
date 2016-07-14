@@ -277,16 +277,20 @@ file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_tt
 />
 
 </syst>
-<syst name="wjets_stat" type="one_sided" > 
- <shift side="single" 
-file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/wjets_stat/tt_diffxs_13TeV.mc.Wjets.co.wjets_stat.nofullhad.histograms.root" 
-/>
+<syst name="CA" type="two_sided" > 
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/CA_up/tt_diffxs_13TeV.mc.Wjets.co.CA_up.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/CA_down/tt_diffxs_13TeV.mc.Wjets.co.CA_down.nofullhad.histograms.root" />
 </syst>
-<syst name="wjets_syst" type="one_sided" > 
- <shift side="single" 
-file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/wjets_syst/tt_diffxs_13TeV.mc.Wjets.co.wjets_syst.nofullhad.histograms.root" 
-/>
+<syst name="Fcc" type="two_sided" > 
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Fcc_up/tt_diffxs_13TeV.mc.Wjets.co.Fcc_up.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Fcc_down/tt_diffxs_13TeV.mc.Wjets.co.Fcc_down.nofullhad.histograms.root" />
 </syst>
+<syst name="Flight" type="two_sided" > 
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Flight_up/tt_diffxs_13TeV.mc.Wjets.co.Flight_up.nofullhad.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Flight_down/tt_diffxs_13TeV.mc.Wjets.co.Flight_down.nofullhad.histograms.root" />
+</syst>
+
+
 </sample>
 
 </samples>

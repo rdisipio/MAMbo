@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_cutflow.xml" />
 <samples>
   <sample name="TotalPrediction"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.mc.TotalPrediction.co.nominal.nofullhad.histograms.root" >
 <syst name="bTagSF_77_eigenvars_B_0" type="two_sided" >
@@ -323,7 +323,6 @@ file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_tt
 file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Fakes_up/tt_diffxs_13TeV.mc.TotalPrediction.co.Fakes_up.nofullhad.histograms.root" 
 />
 </syst>
-
 </sample>
 
 </samples>

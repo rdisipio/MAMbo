@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<histograms file="control/merging/TTbarResolved_resolved/histograms_cutflow.xml" />
+<samples>
+  <sample name="Fakes"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" >
+
+
+<syst name="fakes_realEff_stat" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_realEff_stat_U/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_realEff_stat_D/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" />
+</syst> 
+
+
+<syst name="fakes_fakeEff_stat" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_stat_U/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_stat_D/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" />
+</syst> 
+
+<syst name="fakes_fakeEff_MCscale" type="two_sided" >
+<shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_MCscale_U/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" />
+<shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_MCscale_D/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" />
+</syst> 
+
+
+
+<syst name="fakes_fakeEff_CR_S" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_CR_S/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" 
+/>
+</syst>
+
+<syst name="Fakes_up" type="one_sided" > 
+ <shift side="single" 
+file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Fakes_up/tt_diffxs_13TeV.qcd.Main.AllPeriod.el.Resolved.MM.histograms.root" 
+/>
+</syst>
+</sample>
+
+</samples>
+</document>
+
+<!--
+    <syst name="@SYST@" type="two_sided" >
+        <shift side="up"   file="@SYST@_up/tt_diffxs_8TeV.mc.110404.el.@SYST@_up.histograms.root" />
+        <shift side="down" file="@SYST@_down/tt_diffxs_8TeV.mc.110404.el.@SYST@_down.histograms.root" />
+    </syst>
+-->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<plots tag="mu" latex="#mu+jets" >
+<plots tag="mu" latex="$#mu$+jets" >
 
 
   <plot hpath="reco/4j2b/difference/HT_ttbar"          xtitle="H_{T}^{t#bar{t}} [GeV]" ytitle="Events / GeV" scale="log" />
@@ -1091,17 +1091,17 @@
   
   
 </plots>
+
+
 <samples>
   <sample name="data"        type="data"        description="Data"                	color="1"     fillstyle="0"    linewidth="0" />
-  <sample name="DiTop"       type="signal"      description="t#bar{t}"              color="1"     fillstyle="1001" linewidth="2" />
+  <sample name="DiTop"       type="signal"      description="t#bar{t}"                  color="1"     fillstyle="1001" linewidth="2" />
   <sample name="SingleTop"   type="background"  description="Single top"          	color="62"    fillstyle="1001" linewidth="2" />
   <sample name="Wjets"       type="background"  description="W+jets"              	color="92"    fillstyle="1001" linewidth="2" /> 
-  <sample name="Zjets"       type="background"  description="Z+jets"              	color="07"    fillstyle="1001" linewidth="2" /> 
-  <sample name="Diboson"     type="background"  description="Diboson"              	color="96"    fillstyle="1001" linewidth="2" /> 
-    <sample name="ttV"     type="background"  description="t#bar{t}V"              	color="8"    fillstyle="1001" linewidth="2" /> 
-
-  <sample name="Fakes"	     type="background"    description="Fakes"	color="609"    fillstyle="1001" linewidth="2" />
-
+  <sample name="Zjets"       type="background"  description="Z+jets"              	color="95"    fillstyle="1001" linewidth="2" /> 
+  <sample name="Diboson"     type="background"  description="Diboson"              	color="5"    fillstyle="1001" linewidth="2" /> 
+  <sample name="ttV"         type="background"  description="ttV"                       color="907"    fillstyle="1001" linewidth="2" />  
+  <sample name="Fakes"    type="background"  description="Multijet"   	        color="619"   fillstyle="1001" linewidth="2" /> 
   <sample name="uncertainty" type="uncertainty" description="Stat.+Syst. unc."   	color="1"     fillstyle="3004" linewidth="2" /> 
 </samples>
 <inputfiles>

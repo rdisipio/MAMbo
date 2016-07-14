@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
-<histograms file="control/merging/TTbarResolved_resolved/histograms_backgrounds.xml" />
+<histograms file="control/merging/TTbarResolved_resolved/histograms_cutflow.xml" />
 <samples>
   <sample name="TotalPrediction"     file="/gpfs_data/local/atlas/mromano/Diff13TeV/Code/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/nominal/tt_diffxs_13TeV.mc.TotalPrediction.el.nominal.nofullhad.histograms.root" >
 <syst name="bTagSF_77_eigenvars_B_0" type="two_sided" >
@@ -280,7 +280,7 @@ file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_tt
  <shift side="single" 
 file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/ttV_up/tt_diffxs_13TeV.mc.TotalPrediction.el.ttV_up.nofullhad.histograms.root" 
 />
-</syst>
+
 <syst name="CA" type="two_sided" > 
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/CA_up/tt_diffxs_13TeV.mc.TotalPrediction.el.CA_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/CA_down/tt_diffxs_13TeV.mc.TotalPrediction.el.CA_down.nofullhad.histograms.root" />
@@ -293,6 +293,7 @@ file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_tt
 <shift side="up"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Flight_up/tt_diffxs_13TeV.mc.TotalPrediction.el.Flight_up.nofullhad.histograms.root" />
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Flight_down/tt_diffxs_13TeV.mc.TotalPrediction.el.Flight_down.nofullhad.histograms.root" />
 </syst>
+
 <syst name="fakes_fakeEff_CR_S" type="one_sided" > 
  <shift side="single" 
 file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_CR_S/tt_diffxs_13TeV.mc.TotalPrediction.el.fakes_fakeEff_CR_S.nofullhad.histograms.root" 
@@ -318,14 +319,11 @@ file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_tt
 <shift side="down"   file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/fakes_fakeEff_MCscale_D/tt_diffxs_13TeV.mc.TotalPrediction.el.fakes_fakeEff_MCscale_D.nofullhad.histograms.root" />
 </syst> 
 
-
-
 <syst name="Fakes_up" type="one_sided" > 
  <shift side="single" 
 file="/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/Fakes_up/tt_diffxs_13TeV.mc.TotalPrediction.el.Fakes_up.nofullhad.histograms.root" 
 />
 </syst>
-
 </sample>
 
 </samples>
