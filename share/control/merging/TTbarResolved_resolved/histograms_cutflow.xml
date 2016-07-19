@@ -15,6 +15,20 @@
 
 
 
+
+  <histogram hpath="reco/cutflow/2j0b/mtw" />
+  <histogram hpath="reco/cutflow/3j0b/mtw" />
+  <histogram hpath="reco/cutflow/4j0b/mtw" />
+  <histogram hpath="reco/cutflow/4j1b/mtw" />
+  <histogram hpath="reco/cutflow/afterCuts/mtw" />
+
+
+  <histogram hpath="reco/cutflow/2j0b_lowmet/mtw" />
+  <histogram hpath="reco/cutflow/3j0b_lowmet/mtw" />
+  <histogram hpath="reco/cutflow/4j0b_lowmet/mtw" />
+  <histogram hpath="reco/cutflow/4j1b_lowmet/mtw" />
+  <histogram hpath="reco/cutflow/afterCuts_lowmet/mtw" />
+
   
   
   

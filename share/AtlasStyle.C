@@ -15,7 +15,6 @@ void SetAtlasStyle ()
   if ( atlasStyle==0 ) atlasStyle = AtlasStyle();
   gROOT->SetStyle("ATLAS");
   gROOT->ForceStyle();
-  gStyle->SetPalette(1);
 }
 
 TStyle* AtlasStyle() 
@@ -37,14 +36,16 @@ TStyle* AtlasStyle()
   atlasStyle->SetPaperSize(20,26);
 
   // set margin sizes
-  atlasStyle->SetPadTopMargin(0.05);
-  atlasStyle->SetPadRightMargin(0.05); // 0.05
+  // hack for chi2 labels
+  //  atlasStyle->SetPadTopMargin(0.05);
+  atlasStyle->SetPadTopMargin(0.06);
+  atlasStyle->SetPadRightMargin(0.05);
   atlasStyle->SetPadBottomMargin(0.16);
-  atlasStyle->SetPadLeftMargin(0.12); // 0.16
+  atlasStyle->SetPadLeftMargin(0.16);
 
   // set title offsets (for axis label)
-  atlasStyle->SetTitleXOffset(1.2); // 1.4
-  atlasStyle->SetTitleYOffset(1.25); // 1.4
+  atlasStyle->SetTitleXOffset(1.4);
+  atlasStyle->SetTitleYOffset(1.4);
 
   // use large fonts
   //Int_t font=72; // Helvetica italics

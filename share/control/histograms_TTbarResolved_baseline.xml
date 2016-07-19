@@ -481,7 +481,7 @@
        </Variable>
 
        <Variable name="MC_gen_weights" title="MC Generator weights" folder="cutflow">
-            <Bin id="0" nbins="7" xmin="-3.5" xmax="3.5" />
+            <Bin id="0" nbins="100" xmin="-3.5" xmax="3.5" />
        </Variable>
 
   </Variables>        
