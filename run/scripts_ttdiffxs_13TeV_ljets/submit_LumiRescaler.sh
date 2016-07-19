@@ -5,7 +5,7 @@ patterns="DiTop Wjets Zjets Diboson ttV Stop"
 rm -v lumiList.txt
 
 
-list=`find output/Stop_up -name "tt_diffxs_13TeV.mc.DiTop*.root" -o -name "tt_diffxs_13TeV.mc.Wjets*.root" -o -name "tt_diffxs_13TeV.mc.Zjets*.root" -o -name "tt_diffxs_13TeV.mc.Diboson*.root" -o -name "tt_diffxs_13TeV.mc.ttV*.root" -o -name "tt_diffxs_13TeV.mc.Stop*.root" -type f`
+list=`find output/ -name "tt_diffxs_13TeV.mc.DiTop*.root" -o -name "tt_diffxs_13TeV.mc.Wjets*.root" -o -name "tt_diffxs_13TeV.mc.Zjets*.root" -o -name "tt_diffxs_13TeV.mc.Diboson*.root" -o -name "tt_diffxs_13TeV.mc.ttV*.root" -o -name "tt_diffxs_13TeV.mc.Stop*.root" -type f`
 for f in $list
 do
         echo "$f"
