@@ -209,7 +209,7 @@ def ScaleToIntegratedLuminosity( histograms, iLumi = 1. ):
 ####################################################
 
 
-def SetHistogramsStyle( hlist ):
+def SetHistogramsStyle( hlist, Integer=0 ):
     for sample, h in hlist.iteritems():
        col  = samples_configuration[sample].color
        fs   = samples_configuration[sample].fillstyle
@@ -224,7 +224,7 @@ def SetHistogramsStyle( hlist ):
        if type == SampleType.uncertainty:
           SetTH1FStyle(	h, color=col, markersize=0, markerstyle=0, linewidth=0, fillcolor=col, fillstyle=fs )
 
-    SetAxesStyle( hlist.values() )
+    SetAxesStyle( hlist.values(), Integer )
 
 
 ####################################################
@@ -365,10 +365,12 @@ def DoPlot( plot, iLumi = 1. ):
     histograms = FetchHistograms()
 
     #ScaleToIntegratedLuminosity( histograms, iLumi )
-
+    Integer=0
+    if "_n" in plot.hname:
+      Integer=1
    
     DivideByBinWidth( histograms )
-    SetHistogramsStyle( histograms )
+    SetHistogramsStyle( histograms, Integer )
 
     sfmax = 1.9 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 100.
     sfmin = 0.1 if plot.scale in [ PlotScale.linear, PlotScale.logx ] else 1e-2
@@ -456,14 +458,15 @@ def DoPlot( plot, iLumi = 1. ):
     channel_tag =  plot.tag
     prob = "KS: %2.1f" % (hsum.KolmogorovTest( histograms['data'], "D" ))
     t = TLatex()
-    t.SetTextSize(0.04); 
+    t.SetTextAlign(9);
+    t.SetTextSize(0.06); 
     t.SetNDC();
     t.SetTextColor(kBlack);
    # l.DrawLatex( 0.8, 0.961, prob );
     
 
     MakeATLASLabel( 0.21, 0.87, "Internal", "3.2", "13" )
-    t.DrawLatex( 0.21, 0.775, opts.region );
+    t.DrawLatex( 0.21, 0.735, opts.region );
    # t.DrawLatex( 0.2, 0.63, opts.region )
    
     ## make data/prediction ratio
@@ -471,7 +474,7 @@ def DoPlot( plot, iLumi = 1. ):
     pad1.cd()
     
     fs = samples_configuration["uncertainty"].fillstyle
-    frame, tot_unc, ratio, norm1 = DrawRatio( histograms['data'], histograms['uncertainty'], plot.xtitle , fs)
+    frame, tot_unc, ratio, norm1 = DrawRatio( histograms['data'], histograms['uncertainty'], plot.xtitle , fs, Integer)
        
 
     if plot.scale in [ PlotScale.bilog, PlotScale.logx ]: 
