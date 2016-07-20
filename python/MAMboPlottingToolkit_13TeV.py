@@ -194,23 +194,23 @@ def MakeATLASLabel( x, y, status = "Internal", iLumi = "21", ECM = "8" ):
  #set labels....
   l1 = TLatex()
   l1.SetTextAlign(9)
-  l1.SetTextSize(0.04)
+  l1.SetTextSize(0.06)
   l1.SetNDC()
   text = "#sqrt{s} = %s TeV, %s fb^{-1}" % ( ECM, iLumi )
-  l1.DrawLatex(0.21, 0.825, text)
+  l1.DrawLatex(0.21, 0.80, text)
 
 
   l2 = TLatex()
   l2.SetTextAlign(9)
   l2.SetTextFont(72)
-  l2.SetTextSize(0.04)
+  l2.SetTextSize(0.06)
   l2.SetNDC()
-  l2.DrawLatex(0.21, 0.880, "ATLAS")
+  l2.DrawLatex(0.21, 0.865, "ATLAS")
   l3 = TLatex()
   l3.SetTextAlign(9)
-  l3.SetTextSize(0.04)
+  l3.SetTextSize(0.06)
   l3.SetNDC()
-  l3.DrawLatex(0.31, 0.880,  status)
+  l3.DrawLatex(0.35, 0.865,  status)
 
 
 
@@ -234,13 +234,13 @@ def MakeATLASLabel( x, y, status = "Internal", iLumi = "21", ECM = "8" ):
 def MakeLegend( params ):
     # leg = TLegend( params['xoffset'], params['yoffset'], params['xoffset'] + params['width'], params['yoffset'] )
     pad0.cd()
-    leg = TLegend(0.69, 0.53, 0.90, 0.91)
+    leg = TLegend(0.60, 0.50, 0.90, 0.91)
 
     leg.SetFillColor(0);
     leg.SetLineColor(0);
     leg.SetBorderSize(0);
-    leg.SetTextFont(72);
-    leg.SetTextSize(0.035);
+    leg.SetTextFont(42);
+    leg.SetTextSize(0.05);
     return leg
 
 
@@ -262,7 +262,7 @@ def SetTH1FStyle( h, color = kBlack, linewidth = 1, fillcolor = 0, fillstyle = 0
 #########################################################
 
 
-def SetAxesStyle( hlist ):
+def SetAxesStyle( hlist, Integer=0 ):
 
 
     for h in hlist:
@@ -282,7 +282,9 @@ def SetAxesStyle( hlist ):
       h.GetXaxis().SetLabelSize( 0 )
       h.GetXaxis().SetNoExponent( 1 )
       h.GetXaxis().SetTitleOffset( 2.5 )
-
+      
+      if Integer==1:
+        h.GetXaxis().SetNdivisions(h.GetXaxis().GetNbins() + 1);
 
 
 #########################################################
@@ -301,7 +303,7 @@ def SetMaximum( histograms, key = 'data', sfmax = 1.3, sfmin = 0. ):
 
 
 
-def DrawRatio( data, prediction, xtitle = "", fillstyle=3354 ):
+def DrawRatio( data, prediction, xtitle = "", fillstyle=3354, Integer=0 ):
     #global frame, tot_unc, ratio
     
     if data.Class() in [ TGraph().Class(), TGraphErrors.Class(), TGraphAsymmErrors().Class() ]:
@@ -349,13 +351,16 @@ def DrawRatio( data, prediction, xtitle = "", fillstyle=3354 ):
     frame.GetYaxis().SetTitleSize(33)
     frame.GetXaxis().SetTitleOffset(4.85)
     frame.GetYaxis().SetTitleOffset(1.85)
-    frame.GetYaxis().SetTitle("Data/Pred")
+    frame.GetYaxis().SetTitle(" Data/Pred.")
     frame.GetXaxis().SetNdivisions(505)
     frame.GetYaxis().SetNdivisions(505)
     frame.GetYaxis().CenterTitle(0)
     frame.GetYaxis().SetRangeUser(0.65, 1.35)
     frame.GetXaxis().SetTitle( xtitle )
     
+    if Integer==1:
+      Number = data.GetXaxis().GetNbins()
+      frame.GetXaxis().SetNdivisions(Number,0,0)
     
     frame.Draw()
    
