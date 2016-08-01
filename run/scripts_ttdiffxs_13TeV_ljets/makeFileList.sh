@@ -43,7 +43,7 @@ do
         fi
         
     echo $destination
-    echo "" > destination
+    echo "" > $destination
     
     for file in $files
     do
