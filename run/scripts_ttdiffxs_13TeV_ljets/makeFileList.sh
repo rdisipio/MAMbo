@@ -10,13 +10,18 @@ pattern=$1
 dest=$2
 mkdir -p $dest
 datasets=$(rucio list-dids $pattern | grep "CONTAINER")
-datasets=$(echo $datasets | cut -d"|" -f2)
 #datasets_nouser=$(echo $datasets | cut -d":" -f2)
-echo $datasets
 
-for d in $datasets
+for d in ${datasets[@]}
 
 do
+
+    if [[ $d != "user."* ]]; then
+      continue
+    fi
+    
+    echo $d
+
     destination=""
     
     files=$(rucio list-file-replicas --rse INFN-BOLOGNA-T3_LOCALGROUPDISK $d | awk '/srm:/{print $(NF-1)}' )
