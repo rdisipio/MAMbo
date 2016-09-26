@@ -1,0 +1,62 @@
+<histograms>
+  <Level> <!--Level-->
+    <Type name="reco" />                 <!-- Passed: reco, binned in reco-->
+    <Type name="particle" />             <!-- Passed: particle, binned in reco-->
+    <Type name="parton" />
+  </Level>
+  
+  <Level> <!--Region-->
+    <Type name="passed_0t0b" />
+    <Type name="passed_0t1b" />
+    <Type name="passed_0t2b" />
+
+    <Type name="passed_1t0b" />
+    <Type name="passed_1t1b" />
+    <Type name="passed_1t2b" />
+
+    <Type name="passed_2t0b" />
+    <Type name="passed_2t1b" />
+    <Type name="passed_2t2b" />
+  </Level>
+
+  <Level> <!--Particle-->
+    <Type name="xET"   inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+    <Type name="bjet"  inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+    <Type name="ak4"   inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+    <Type name="ak10"  inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+
+    <Type name="t1" inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+    <Type name="t2" inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+    <Type name="tt" inFolder="passed_0t0b,passed_0t1b,passed_0t2b,passed_1t0b,passed_1t1b,passed_1t2b,passed_2t0b,passed_2t1b,passed_2t2b"/>
+  </Level>
+
+  <Variables>
+
+     <Variable name="pt" title="p_{T} [GeV]">
+        <Bin id="0" nbins="6" edges="500, 550, 600, 650, 750, 900, 1200"                particle="t1"/> 
+        <Bin id="0" nbins="9" edges="350, 400, 450, 500, 550, 600, 650, 750, 900, 1200" particle="t2"/> 
+        <Bin id="0" nbins="6" edges="0, 35, 75, 125, 170, 225, 800"                     particle="tt" />
+     </Variable>
+     <Variable name="tau32" title="#tau_{32} ">
+      <Bin id="0" nbins="20" xmin="0" xmax="1" particle="t1,t2"/> 
+    </Variable>
+    <Variable name="tau21" title="#tau_{21} ">
+      <Bin id="0" nbins="20" xmin="0" xmax="1" particle="t1,t2"/> 
+    </Variable>
+    <Variable name="absrap" title="rapidity y_{t}">
+      <Bin id="0" nbins="5" edges="0.0, 0.4, 0.8, 1.2, 1.6, 2.0" particle="t1,t2,tt"/>
+    </Variable>
+    <Variable name="Multiplicity" title="Number of jets">
+      <Bin id="0" nbins="5" xmin="-0.5" xmax="4.5" particle="bjet"/> 
+      <Bin id="0" nbins="8" xmin="-0.5" xmax="8.5" particle="ak4"/>
+      <Bin id="0" nbins="4" xmin="-0.5" xmax="3.5" particle="ak10"/> 
+    </Variable> 
+
+  </Variables>        
+  
+  <Histos>
+    <TH1F variable="pt" binId="0"/>
+  </Histos>
+  
+</histograms>
+

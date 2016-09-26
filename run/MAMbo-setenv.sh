@@ -1,1 +1,1 @@
-/home/qitek/scratch0/MAMbo_13TeV/MAMbo/bin/MAMbo-setenv.sh
+/afs/cern.ch/work/d/disipio/public/ttbar_diffxs_13TeV/MAMbo/bin/MAMbo-setenv.sh
