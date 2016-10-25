@@ -1,9 +1,10 @@
 #!/bin/bash
 
-backgrounds="" #single top is special
+backgrounds="Zjets ttV Diboson" #single top is special
 channels="el mu co"
 set -x
 skipStop=0
+backgrounds="Fakes Zjets Diboson ttV"
 
 
 for c in $channels
@@ -13,6 +14,11 @@ do
 		nominal="output/nominal/tt_diffxs_13TeV.mc.$b.$c.nominal.nofullhad.histograms.root"
 
                 path="output/${b}_up/tt_diffxs_13TeV.mc.$b.$c.${b}_up.nofullhad.histograms.root"
+				if [ $b == "Fakes" ]
+				then
+							nominal="output/nominal/tt_diffxs_13TeV.qcd.Main.AllPeriod.$c.Resolved.MM.histograms.root"
+							path="output/${b}_up/tt_diffxs_13TeV.qcd.Main.AllPeriod.$c.Resolved.MM.histograms.root"
+				fi
                 cp -v $nominal $path
               #cp -v $path.backup $path
                # continue
@@ -24,8 +30,8 @@ do
           
 A
                 chmod +x $script
-               ./$script
-           #             bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
+#               ./$script
+                        bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
 
         done
 	if [ $skipStop != "0" ]
@@ -59,8 +65,8 @@ A
                 chmod +x $script
                 echo ./$script
              
-                 ./$script
-   #                    bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
+           #      ./$script
+                       bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
 
         
 done

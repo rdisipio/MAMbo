@@ -12,6 +12,7 @@ void resolved_BkgRescaler(string filename, string bkg){
   double sf_stop_wt = 1.053;
   double sf_stop_schan = 1.048;
   double sf_stop_tchan = 1.05;
+  double sf_fakes = 1.50;
   double sf = 1;
   if( bkg == "Zjets" )
   {
@@ -37,6 +38,10 @@ void resolved_BkgRescaler(string filename, string bkg){
   {
          sf = sf_ttV;
   }
+  else if( bkg == "Fakes")
+  {
+         sf = sf_fakes;
+  }
  
   
   //   string ParticleNameArray[]={"topH","lep","smallJ","met","bjet","largejet"};
@@ -47,7 +52,6 @@ void resolved_BkgRescaler(string filename, string bkg){
   
   //reweight cutflow
   
-  // TH1D * h_cutflow = (TH1D*) f->Get( "LPLUSJETS_cutflow_reco_weighted")->Clone();
   TH1F * h_cutflow = (TH1F*) f->Get( "LPLUSJETS_cutflow_reco_weighted");
   float before =  h_cutflow->Integral();
   h_cutflow->Scale( sf );
