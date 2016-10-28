@@ -429,17 +429,17 @@ std::vector<double> ScalerWjets::GetWJetsSF(std::string Folder, bool isEl){
       Output = {0.967,0.824,0.994,0.896,0.964,1.028,0.903,0.971,1.036,0.913,0.981,1.047};
     else if(Folder == "CA_4incl_down")
       Output = {0.967,0.824,0.924,0.896,0.964,1.028,0.903,0.971,1.036,0.913,0.981,1.047};
-    else if(Folder == "F_bb_cc_up")
+    else if(Folder == "Fcc_up")
       Output = {0.967,0.824,0.959,1.337,0.964,1.028,1.347,0.971,1.036,1.362,0.981,1.047};
-    else if(Folder == "F_bb_cc_down")
+    else if(Folder == "Fcc_down")
       Output = {0.967,0.824,0.959,0.455,0.964,1.028,0.459,0.971,1.036,0.464,0.981,1.047};
     else if(Folder == "Fc_up")
       Output = {0.967,0.824,0.959,0.896,1.225,1.028,0.903,1.234,1.036,0.913,1.247,1.047};
     else if(Folder == "Fc_down")
       Output = {0.967,0.824,0.959,0.896,0.703,1.028,0.903,0.708,1.036,0.913,0.715,1.047};
-    else if(Folder == "F_light_up")
+    else if(Folder == "Flight_up")
       Output = {0.967,0.824,0.959,0.896,0.964,1.039,0.903,0.971,1.047,0.913,0.981,1.059};
-    else if(Folder == "F_light_down")
+    else if(Folder == "Flight_down")
       Output = {0.967,0.824,0.959,0.896,0.964,1.017,0.903,0.971,1.025,0.913,0.981,1.035};
     else if(Folder == "MCNorm_zjets" || Folder == "Zjets_up")
       Output = {0.954,0.81,0.955,0.907,0.88,1.053,0.916,0.889,1.064,0.928,0.9,1.077};
@@ -750,17 +750,17 @@ if(Folder == "MET_SoftTrk_ResoPara")
       Output = {1.042,0.944,0.961,0.813,1.307,0.934,0.810,1.302,0.930,0.817,1.314,0.939};
     else if(Folder == "CA_4incl_down")
       Output = {1.042,0.944,0.889,0.813,1.307,0.934,0.810,1.302,0.930,0.817,1.314,0.939};
-    else if(Folder == "F_bb_cc_up")
+    else if(Folder == "Fcc_up")
       Output = {1.042,0.944,0.925,1.136,1.307,0.934,1.132,1.302,0.930,1.141,1.314,0.939};
-    else if(Folder == "F_bb_cc_down")
+    else if(Folder == "Fcc_down")
       Output = {1.042,0.944,0.925,0.490,1.307,0.934,0.488,1.302,0.930,0.493,1.314,0.939};
     else if(Folder == "Fc_up")
       Output = {1.042,0.944,0.925,0.813,1.460,0.934,0.810,1.454,0.930,0.817,1.468,0.939};
     else if(Folder == "Fc_down")
       Output = {1.042,0.944,0.925,0.813,1.154,0.934,0.810,1.150,0.930,0.817,1.160,0.939};
-    else if(Folder == "F_light_up")
+    else if(Folder == "Flight_up")
       Output = {1.042,0.944,0.925,0.813,1.307,0.944,0.810,1.302,0.940,0.817,1.314,0.949};
-    else if(Folder == "F_light_down")
+    else if(Folder == "Flight_down")
       Output = {1.042,0.944,0.925,0.813,1.307,0.924,0.810,1.302,0.920,0.817,1.314,0.929};
     else if(Folder == "MCNorm_zjets" || Folder == "Zjets_up" )
       Output = {1.024,0.937,0.915,0.909,1.223,0.945,0.904,1.216,0.94,0.906,1.219,0.943} ;
