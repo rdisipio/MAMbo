@@ -10,7 +10,8 @@ from xml.etree import ElementTree
 class YieldWrapper:
    nominal = 0.
    stat = 0.
-   sys = 0.
+   sys_u = 0.
+   sys_d = 0.
    
 ####################################################
 
@@ -18,7 +19,6 @@ class YieldWrapper:
 def ReadInput( filename ):
    
    SampleYield = YieldWrapper()
-  
    with open( filename, 'rt') as f:
       tree = ElementTree.parse(f)
       
@@ -45,14 +45,19 @@ def ReadInput( filename ):
                   nbins1 = len( thisstat )
                   SampleYield.stat = float(thisstat[nbins1-1])
                   
-             if systname == "systonly" : 
+             if systname == "statsyst" : 
                
-                for shift in syst.findall('.u'):                               
-                  thissyst = shift.text.split(',')
-                  nbins1 = len( thissyst )
-                  SampleYield.sys = float(thissyst[nbins1-1])
+                for shift_u in syst.findall('.u'):                               
+                  thissyst_u = shift_u.text.split(',')
+                  nbins1_u = len( thissyst_u )
+                  SampleYield.sys_u = float(thissyst_u[nbins1_u-1])
+                for shift_d in syst.findall('.d'):
+		  thissyst_d = shift_d.text.split(',')
+                  nbins1_d = len( thissyst_d )
+                  SampleYield.sys_d = float(thissyst_d[nbins1_d-1])
 
-   SampleYield.sys = SampleYield.sys * SampleYield.nominal / 100.   
+   SampleYield.sys_u = SampleYield.sys_u * SampleYield.nominal / 100. 
+   SampleYield.sys_d = SampleYield.sys_d * SampleYield.nominal / 100.
    SampleYield.stat = SampleYield.stat * SampleYield.nominal / 100.   
 
    return SampleYield
@@ -66,5 +71,5 @@ if __name__ == "__main__":
 
    thisyield = ReadInput( opts.input )
 
-   print "%s & %s & $\\pm$ %s & $\\pm$ %s \\\\" % ( opts.sample, thisyield.nominal, thisyield.stat, thisyield.sys)
+   print "%s & %s & +%s %s \\\\" % ( opts.sample, thisyield.nominal, thisyield.sys_u, thisyield.sys_d)
    
