@@ -4,15 +4,17 @@
 channels="el mu co"
 set -x
 
-systs=`cat boosted_reduced_systematics.txt`
-
+systs="Fcc_up Fcc_down Fc_up Fc_down Flight_up Flight_down"
+directory="/home/ATLAS-T3/ffabbri/13TeVAnalisys/AnalysisTop/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output/TTDIFFXS_62_v30_newNorm"
 
 for syst in $systs
 do
 	for c in $channels
 	do
-			nominal="output/nominal/tt_diffxs_13TeV.mc.Wjets.$c.nominal.histograms.root"
-			path="output/$syst/tt_diffxs_13TeV.mc.Wjets.$c.$syst.histograms.root"
+			nominal=${directory}"/nominal/tt_diffxs_13TeV.mc.Wjets.$c.nominal.histograms.root"
+			path=${directory}"/"${syst}"/tt_diffxs_13TeV.mc.Wjets.${c}.${syst}.histograms.root"
+			
+			echo ${path}
 					# £cp -v $nominal $path
 				  #cp -v $path $path.backup
 				   # continue
@@ -25,8 +27,8 @@ do
 EOF
 					chmod +x $script
 					echo $script
-#				   ./$script
-			               bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
+				  ./$script
+# 			               bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
 
 		
 
