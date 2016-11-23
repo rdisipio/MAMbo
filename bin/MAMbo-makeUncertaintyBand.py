@@ -70,6 +70,7 @@ def ReadConfiguration( configFileName ):
       samples_configuration[name].name        = name
   
       fpath = node.attrib.get('file')
+      
       if not fpath.startswith('/'): fpath = os.environ['MAMBOOUTPUTDIR'] + "/" + fpath
       samples_configuration[name].file        = TFile.Open( fpath )
 
@@ -92,9 +93,11 @@ def ReadConfiguration( configFileName ):
 def GatherHistograms( hname, hpath ):
     hlist = {}
 
+    
     for sample in samples_configuration:
 
         f = samples_configuration[sample].file
+        
         if f == None:
             print "ERROR: invalid input file for sample", sample
         hsource = f.Get( hpath )
@@ -203,7 +206,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
        outfile.cd()
 	
        hname = hpath.split('/')[-1]
-
+     
        #print "INFO: merging histogram", hpath
 
        hlist = GatherHistograms( hname, hpath )
@@ -277,7 +280,7 @@ def CreateMergedHistograms( outputClass = OutputType.graph ):
                  if samples_configuration[sample].systematics[systname].has_key( "up" ):
                     h_u = hlist[hpattern+"up"]
                     h_d = hlist[hpattern+"down"]
-
+                   
                     dy_u = h_u.GetBinContent(i+1) - h.GetBinContent(i+1)
                     dy_d = h_d.GetBinContent(i+1) - h.GetBinContent(i+1) 
 
