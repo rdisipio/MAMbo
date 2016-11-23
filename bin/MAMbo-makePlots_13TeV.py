@@ -465,7 +465,7 @@ def DoPlot( plot, iLumi = 1. ):
    # l.DrawLatex( 0.8, 0.961, prob );
     
 
-    MakeATLASLabel( 0.21, 0.87, "Internal", "3.2", "13" )
+    MakeATLASLabel( 0.21, 0.87, "Preliminary", "3.2", "13" )
     t.DrawLatex( 0.21, 0.735, opts.region );
    # t.DrawLatex( 0.2, 0.63, opts.region )
    
