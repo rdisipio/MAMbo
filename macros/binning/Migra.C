@@ -32,16 +32,18 @@ void PercDraw(const TH2D *resmat)
     }
   }
   percmat->GetZaxis()->SetRangeUser(0., 100.);
-  percmat->GetZaxis()->SetTitle("Migration [%]");
-  percmat->GetZaxis()->SetLabelSize(0.030);
-  percmat->GetZaxis()->SetTitleSize(0.04);
-  percmat->GetZaxis()->SetTitleOffset(1.1);
-  percmat->GetYaxis()->SetTitleOffset(1.1);
+  percmat->GetZaxis()->SetTitle("Migration [%]    ");
+  percmat->GetZaxis()->SetLabelSize(0.045);
+  percmat->GetYaxis()->SetLabelSize(0.045);
+  percmat->GetXaxis()->SetLabelSize(0.045);
+  percmat->GetZaxis()->SetTitleSize(0.045);
+  percmat->GetZaxis()->SetTitleOffset(1.13);
+  percmat->GetYaxis()->SetTitleOffset(1.21);
   percmat->Draw("colz");
   percmat->Draw("sametext");
   cout << "Setting labels..." << endl;
-  percmat->GetXaxis()->SetLabelOffset(999);
-  percmat->GetYaxis()->SetLabelOffset(999);
+  percmat->GetXaxis()->SetLabelOffset(999); // moving labels out of sight!:)
+  percmat->GetYaxis()->SetLabelOffset(999); // moving labels out of sight!:)
 
  return;
 }//end of the function for percentage calculation and drawing over resmat
@@ -63,6 +65,8 @@ void normalize_columns( TH2D * h )
 
   }
 }
+
+// HERE
 
 TH2D * MakeIntHisto(TH2D *input)
 {
@@ -119,7 +123,8 @@ TH2D * MakeIntHisto(TH2D *input)
 //   migra->GetXaxis()->SetLabelSize(0.044);
 //   migra->GetYaxis()->SetLabelSize(0.044);
 //   
-// 
+//
+
    return migra;
  }
 
@@ -161,7 +166,7 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
 
    gStyle->SetPaintTextFormat("4.0f");
    gStyle->SetOptStat(0);
-   gStyle->SetMarkerSize(1.5);
+   gStyle->SetMarkerSize(1.7);
    gStyle->SetOptTitle(0);
 
    const int Number = 3;
@@ -186,10 +191,10 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   TH2D *migra=MakeIntHisto(h);
   
   char buf[128];
-  sprintf( buf, "%s (detector level)", htitle );
+  sprintf( buf, "%s (detector level)    ", htitle );
   migra->GetXaxis()->SetTitle( buf );
   migra->GetXaxis()->SetTitleOffset( 1.1 );
-  sprintf( buf,	"%s (particle level)", htitle );
+  sprintf( buf,	"%s (particle level)    ", htitle );
   migra->GetYaxis()->SetTitle( buf );
   migra->GetYaxis()->SetTitleOffset( 1.1 );
 
@@ -209,11 +214,12 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   PercDraw(migra);
   
     TText labelX,labelY;
-    labelX.SetTextSize(0.028);
+    labelX.SetTextSize(0.045);// JKJK commented 0.028
     labelX.SetTextAlign(23);
-    labelY.SetTextSize(0.028);
+    labelY.SetTextSize(0.045);// JKJK commented 0.028
     labelY.SetTextAlign(32);
 
+    // HERE
   Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1) - 0.2*(migra->GetYaxis()->GetBinWidth(1));//ještě pošibovat a je to
   Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1) - 0.2*(migra->GetXaxis()->GetBinWidth(1));//ještě pošibovat
 
@@ -224,24 +230,37 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
       Double_t xnew = migra->GetXaxis()->GetBinLowEdge(k+1);
       if (xvals[nbins]-xvals[0]<30)
       {	
-      labelX.DrawText(xnew,ylabel,Form("%4.2f",xlow));
-      labelY.DrawText(xlabel,ynew,Form("%4.2f",xlow));
+	// JKJK hack: only odd:
+	//if (k % 2 == 1) {
+	  labelX.DrawText(xnew,ylabel,Form("%4.1f",xlow));
+	  labelY.DrawText(xlabel,ynew,Form("%4.1f",xlow));
+	  //}
       }
       else
       {
-      labelX.DrawText(xnew,ylabel,Form("%4.0f",xlow));
-      labelY.DrawText(xlabel,ynew,Form("%4.0f",xlow));	
+	// JKJK hack: only odd:
+	if (topotag == "Resolved" && (k % 2 == 1) ) {
+	  labelX.DrawText(xnew,ylabel,Form("%4.0f",xlow));
+	  labelY.DrawText(xlabel+0.12,ynew,Form("%4.0f",xlow));
+	}
       }
    }
  //gPad->RedrawAxis();
   
- // double x = 0.15; // eta distributions
-//  double x = 0.45;
- // double y = 0.93;
-  ATLAS_LABEL( 0.16, 0.80, kBlack );
-  myText( 0.31, 0.80, kBlack, " Simulation Internal" );
+  // double x = 0.15; // eta distributions
+  //  double x = 0.45;
+  // double y = 0.93;
+  double xx = 0.17;
+  double yy = 0.80;
+  double xxoffset = 0.31-0.16;
+  double yyoffset = 0.80-0.75;
+  ATLAS_LABEL( xx, yy, kBlack );
+  ////myText( 0.31, 0.80, kBlack, " Simulation Internal" );
+  //myText( xx+xxoffset, 0.80, kBlack, " Simulation Preliminary" );
+  myText( xx+xxoffset, yy, kBlack, " Simulation" );
+  myText( xx, 0.80-yyoffset, kBlack, "Preliminary" );
   //  myText( 0.31, 0.74, kBlack, " Internal" );
-  myText( 0.16, 0.74, kBlack, topotag );
+  myText( xx, yy-2*yyoffset, kBlack, topotag );
 
   //const double rho = h->GetCorrelationFactor();
   //sprintf( buf, "correlation: %3.2f", rho );
@@ -443,7 +462,8 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
   // obsolete?
-  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
+  ///  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
+  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
   //myText( 0.21, 0.92, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
