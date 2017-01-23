@@ -1,9 +1,18 @@
+
+// code by Josef Pacalt, modified by Jiri Kvita
+
 #include "includes.h"
+#include "TColor.h"
+#include "../../share/AtlasUtils.h"
+#include "../../share/AtlasStyle.h" 
 
 using namespace std;
 
+const double EPSILON = 1.e-9;
 
 //gROOT->SetBatch(1);
+
+// ____________________________________________________________________________
 
 void PercDraw(const TH2D *resmat)
 {  
@@ -24,10 +33,12 @@ void PercDraw(const TH2D *resmat)
       Double_t percentage;
          
       
-      percentage=(resmat->GetBinContent(j+1,i+1))/slicesum*100;  
-      if (percentage < 0.5)percentage = 0.;
+      percentage = (resmat->GetBinContent(j+1,i+1)) / slicesum * 100;  
+      if (percentage < 0.5)
+	percentage = 0.;
       percmat->SetBinContent(j+1,i+1,percentage);
-      if(slicesum==0)percmat->SetBinContent(j+1,i+1,0.);
+      if (slicesum < EPSILON)
+	percmat->SetBinContent(j+1,i+1,0.);
 	
     }
   }
@@ -48,6 +59,8 @@ void PercDraw(const TH2D *resmat)
  return;
 }//end of the function for percentage calculation and drawing over resmat
 
+// ____________________________________________________________________________
+
 void normalize_columns( TH2D * h )
 {
   const int nbins = h->GetNbinsX();
@@ -67,6 +80,7 @@ void normalize_columns( TH2D * h )
 }
 
 // HERE
+// ____________________________________________________________________________
 
 TH2D * MakeIntHisto(TH2D *input)
 {
@@ -128,6 +142,7 @@ TH2D * MakeIntHisto(TH2D *input)
    return migra;
  }
 
+//____________________________________________________________________________
 void normalize_rows( TH2D * h )
 {
   //cout<<h<<endl;
@@ -152,13 +167,15 @@ void normalize_rows( TH2D * h )
   }
 }
 
+// ____________________________________________________________________________
+// used for reco-particle, the main migrations:
 
 void basic_plot( const char * hname, const char * htitle = "", TString channel = "co", TString topotag = "Resolved")
 {
    
 
  // gROOT->Macro("./rootlogon.C");
-  gROOT->LoadMacro("../../share/AtlasUtils.C");
+  gROOT->LoadMacro( "../../share/AtlasUtils.C" );
   gROOT->LoadMacro( "../../share/rootlogon.C" );
   gROOT->LoadMacro( "../../share/AtlasStyle.C" );
   SetAtlasStyle();
@@ -183,10 +200,13 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   int nbins = h->GetXaxis()->GetNbins();
   
   normalize_rows( h );
-  
+
+  // computation of the bin edges! JKJK
   double xvals[256];
-  for(int i =0;i<nbins;i++){xvals[i]=h->GetXaxis()->GetBinLowEdge(i+1);}
-  xvals[nbins]=h->GetXaxis()->GetBinUpEdge(nbins);  
+  for(int i = 0; i < nbins;i++){
+    xvals[i] = h -> GetXaxis()->GetBinLowEdge(i+1);
+  }
+  xvals[nbins] = h->GetXaxis()->GetBinUpEdge(nbins);  
   
   TH2D *migra=MakeIntHisto(h);
   
@@ -220,8 +240,8 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
     labelY.SetTextAlign(32);
 
     // HERE
-  Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1) - 0.2*(migra->GetYaxis()->GetBinWidth(1));//ještě pošibovat a je to
-  Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1) - 0.2*(migra->GetXaxis()->GetBinWidth(1));//ještě pošibovat
+  Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1) - 0.2*(migra->GetYaxis()->GetBinWidth(1));// custom y
+  Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1) - 0.2*(migra->GetXaxis()->GetBinWidth(1));// custom x
 
    for (Int_t k=0;k<=nbins;k++)
    {
@@ -239,10 +259,10 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
       else
       {
 	// JKJK hack: only odd:
-	if (topotag == "Resolved" && (k % 2 == 1) ) {
+	//	if (topotag == "Resolved" && (k % 2 == 1) ) {
 	  labelX.DrawText(xnew,ylabel,Form("%4.0f",xlow));
 	  labelY.DrawText(xlabel+0.12,ynew,Form("%4.0f",xlow));
-	}
+	  //	}
       }
    }
  //gPad->RedrawAxis();
@@ -255,10 +275,13 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   double xxoffset = 0.31-0.16;
   double yyoffset = 0.80-0.75;
   ATLAS_LABEL( xx, yy, kBlack );
-  ////myText( 0.31, 0.80, kBlack, " Simulation Internal" );
+  ////
+  //  myText( 0.31, 0.80, kBlack, " Simulation Internal" );
   //myText( xx+xxoffset, 0.80, kBlack, " Simulation Preliminary" );
   myText( xx+xxoffset, yy, kBlack, " Simulation" );
-  myText( xx, 0.80-yyoffset, kBlack, "Preliminary" );
+  ///!!!
+  myText( xx, 0.80-yyoffset, kBlack, "Internal" );
+  //  myText( xx, 0.80-yyoffset, kBlack, "Preliminary" );
   //  myText( 0.31, 0.74, kBlack, " Internal" );
   myText( xx, yy-2*yyoffset, kBlack, topotag );
 
@@ -273,7 +296,11 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   c->SaveAs( pname );
 }
 
-void basic_plot_par( const char * hname, const char * htitle = "", TString channel = "co" )
+
+// ____________________________________________________________________________
+// parton level?
+
+void basic_plot_par( const char * hname, const char * htitle = "", TString channel = "co", TString topotag = "Resolved" ) // topotag not used!
 {
    
    gStyle->SetPaintTextFormat("4.0f");
@@ -375,7 +402,10 @@ void basic_plot_par( const char * hname, const char * htitle = "", TString chann
   c->SaveAs( pname );
 }
 
-void basic_plot_rp( const char * hname, const char * htitle = "", TString channel = "co" )
+// ____________________________________________________________________________
+// reco-parton
+
+void basic_plot_rp( const char * hname, const char * htitle = "", TString channel = "co", TString topotag = "Resolved" ) // topotag not used!
 {
    
    gStyle->SetPaintTextFormat("4.0f");
@@ -462,8 +492,11 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
  // double y = 0.93;
   ATLAS_LABEL( 0.05, 0.92, kBlack );
   // obsolete?
-  ///  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
-  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
+  ///
+  //  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
+  ///!!!
+  //  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
+  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
   //myText( 0.21, 0.92, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
@@ -513,6 +546,9 @@ void Migra(TString input, TString channel, TString topo = "4j2b")
   basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_Wt_had","p_{T}^{W,had}/p_{T}^{t,had}", channel, topotag);
   basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_Wt_lep","p_{T}^{W,lep}/p_{T}^{t,lep}", channel, topotag);
   basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_R_lb","(p_{T}^{Wj1}+p_{T}^{Wj2})/(p_{T}^{bj1}+p_{T}^{bj2})", channel, topotag);
+
+
+  /*
   
 //   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_px","p_{x}^{lep} [GeV]", channel, topotag);
 //   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_py","p_{y}^{lep} [GeV]", channel, topotag);
@@ -571,12 +607,14 @@ void Migra(TString input, TString channel, TString topo = "4j2b")
   basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_HT_ttbar_5","H_{T}^{t#bar{t}} [GeV]", channel, topotag);
   basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_Chi_ttbar_5","#chi_{t#bar{t}}", channel, topotag);
   basic_plot_rp("reco/" + topo + "/difference/Matrix_reco_parton_Yboost_5","y_{boost}", channel, topotag);
-
+  */
+  
   } else {
     // boosted:
     // 1fj1b:
     TString topotag = "Boosted";
-    basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]", channel, topotag);
+    // spaces after GeV important so that label does not overlap with axis numbers: hack by JK
+    basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]  ", channel, topotag);
     basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y|_{t,had}", channel, topotag);
 
   }
