@@ -1,0 +1,12 @@
+
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/b4/8f/user.ffabbri.10224836._000001.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/77/dc/user.ffabbri.10224836._000002.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/cd/72/user.ffabbri.10224836._000003.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/5b/fe/user.ffabbri.10224836._000004.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/67/17/user.ffabbri.10224836._000005.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/30/2c/user.ffabbri.10224836._000006.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/e7/ee/user.ffabbri.10224836._000007.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/83/08/user.ffabbri.10224836._000008.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/0a/ac/user.ffabbri.10224836._000009.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/b8/be/user.ffabbri.10224836._000010.output.root
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/6d/49/user.ffabbri.10224836._000011.output.root

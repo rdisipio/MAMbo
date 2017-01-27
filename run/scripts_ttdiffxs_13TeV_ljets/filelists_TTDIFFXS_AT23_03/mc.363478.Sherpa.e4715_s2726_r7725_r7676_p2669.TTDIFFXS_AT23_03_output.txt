@@ -1,0 +1,2 @@
+
+/gpfs_data/storm/atlas/localgroupdisk/rucio/user/ffabbri/6b/b0/user.ffabbri.10225074._000001.output.root
