@@ -99,9 +99,10 @@ bool NtupleWrapperTopXAODParticles::MakeEventInfo( EventData * ed )
   ed->info.mcWeight        = GET_VALUE( weight_mc ); //MC@NLO ??
   
   
-  SET_PROPERTY( passed_resolved_ejets_2j0b );
-  SET_PROPERTY( passed_resolved_mujets_2j0b );
+  //hack to cope with the removal of the 2j0b cutflow in the ntuple production
 
+  ed->property[ "passed_resolved_ejets_2j0b" ] = m_ntuple->passed_resolved_ejets_4j0b;
+  ed->property[ "passed_resolved_mujets_2j0b" ] = m_ntuple->passed_resolved_mujets_4j0b;
   SET_PROPERTY( passed_resolved_ejets_4j2b );
   SET_PROPERTY( passed_resolved_mujets_4j2b );
   SET_PROPERTY( passed_boosted_ejets_1fj0b );
