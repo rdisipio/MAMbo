@@ -37,6 +37,15 @@
         <Type name="5j_incl_2b_incl" inFolder="cutflow"/>
         <Type name="5j_incl_1b_incl" inFolder="cutflow"/>
         <Type name="5j_incl_0b_incl" inFolder="cutflow"/>
+        <Type name="5j_excl_2b_excl" inFolder="cutflow"/>
+        <Type name="5j_excl_1b_excl" inFolder="cutflow"/>
+        <Type name="5j_excl_0b_excl" inFolder="cutflow"/>
+        <Type name="6j_incl_2b_incl" inFolder="cutflow"/>
+        <Type name="6j_incl_1b_incl" inFolder="cutflow"/>
+        <Type name="6j_incl_0b_incl" inFolder="cutflow"/>
+        <Type name="6j_excl_2b_excl" inFolder="cutflow"/>
+        <Type name="6j_excl_1b_excl" inFolder="cutflow"/>
+        <Type name="6j_excl_0b_excl" inFolder="cutflow"/>
         <Type name="3j_excl_2b_incl" inFolder="cutflow"/>
         <Type name="3j_excl_1b_excl" inFolder="cutflow"/>
         <Type name="3j_excl_0b_excl" inFolder="cutflow"/>
@@ -46,9 +55,23 @@
         <Type name="3j_incl_2b_incl_lowmet" inFolder="cutflow"/>
         <Type name="3j_incl_1b_incl_lowmet" inFolder="cutflow"/>
         <Type name="3j_incl_0b_incl_lowmet" inFolder="cutflow"/>
-        <Type name="5j_incl_2b_incl_lowmet" inFolder="cutflow"/>
-        <Type name="5j_incl_1b_incl_lowmet" inFolder="cutflow"/>
-        <Type name="5j_incl_0b_incl_lowmet" inFolder="cutflow"/>
+        <Type name="5j_incl_2b_incl_lowmet" Folder="cutflow"/>
+        <Type name="5j_incl_1b_incl_lowmet" Folder="cutflow"/>
+        <Type name="5j_incl_0b_incl_lowmet" Folder="cutflow"/>
+        <Type name="5j_excl_2b_excl_lowmet" Folder="cutflow"/>
+        <Type name="5j_excl_1b_excl_lowmet" Folder="cutflow"/>
+        <Type name="5j_excl_0b_excl_lowmet" Folder="cutflow"/>
+        <Type name="6j_incl_2b_incl_lowmet" Folder="cutflow"/>
+        <Type name="6j_incl_1b_incl_lowmet" Folder="cutflow"/>
+        <Type name="6j_incl_0b_incl_lowmet" Folder="cutflow"/>
+        <Type name="6j_excl_2b_excl_lowmet" Folder="cutflow"/>
+        <Type name="6j_excl_1b_excl_lowmet" Folder="cutflow"/>
+        <Type name="6j_excl_0b_excl_lowmet" Folder="cutflow"/>
+        <Type name="3j_excl_2b_incl_lowmet" Folder="cutflow"/>
+        <Type name="3j_excl_1b_excl_lowmet" Folder="cutflow"/>
+        <Type name="3j_excl_0b_excl_lowmet" Folder="cutflow"/>
+        <Type name="4j_excl_2b_incl_lowmet" Folder="cutflow"/>
+        <Type name="4j_excl_1b_excl_lowmet" Folder="cutflow"/>
         <Type name="3j_excl_2b_incl_lowmet" inFolder="cutflow"/>
         <Type name="3j_excl_1b_excl_lowmet" inFolder="cutflow"/>
         <Type name="3j_excl_0b_excl_lowmet" inFolder="cutflow"/>

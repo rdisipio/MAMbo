@@ -282,7 +282,7 @@ bool CutFlowTTbarResolved::Apply(EventData * ed) {
                                 double delta = fabs(tt.M() - 800000);
                                 double sigma = 100000;
                                 double ratio2= delta*delta/(sigma*sigma);
-//                                cout << "delta = " << delta << " sigma " << sigma << " mass " << tt.M() << " exp factor " << 2*TMath::Exp( -1 *  ratio2 )<< endl;
+                                //                                cout << "delta = " << delta << " sigma " << sigma << " mass " << tt.M() << " exp factor " << 2*TMath::Exp( -1 *  ratio2 )<< endl;
 
                                 stressFactor = 1 + 2*TMath::Exp( -1 * ratio2 );
                         }
@@ -852,7 +852,50 @@ return passed;
                 MoreCRFillHistogramsControlPlotsReco( "3j_incl_2b_incl", values );
         }
 
+        if (jet_n == 5 && bjet_n == 0) {
+                MoreCRFillHistogramsControlPlotsReco( "5j_excl_0b_excl", values );
+        }
 
+        if (jet_n == 5 && bjet_n == 1) {
+                MoreCRFillHistogramsControlPlotsReco( "5j_excl_1b_excl", values );
+        }
+
+        if (jet_n == 5 && bjet_n == 2) {
+                MoreCRFillHistogramsControlPlotsReco( "5j_excl_2b_excl", values );
+        }
+        if (jet_n >= 5 && bjet_n >= 0) {
+                MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl", values );
+        }
+
+        if (jet_n >= 5 && bjet_n >= 1) {
+                MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl", values );
+        }
+
+        if (jet_n >= 5 && bjet_n >= 2) {
+                MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl", values );
+        }         
+        if (jet_n == 6 && bjet_n == 0) {
+                MoreCRFillHistogramsControlPlotsReco( "6j_excl_0b_excl", values );
+        }
+
+        if (jet_n == 6 && bjet_n == 1) {
+                MoreCRFillHistogramsControlPlotsReco( "6j_excl_1b_excl", values );
+        }
+
+        if (jet_n == 6 && bjet_n == 2) {
+                MoreCRFillHistogramsControlPlotsReco( "6j_excl_2b_excl", values );
+        }
+        if (jet_n >= 6 && bjet_n >= 0) {
+                MoreCRFillHistogramsControlPlotsReco( "6j_incl_0b_incl", values );
+        }
+
+        if (jet_n >= 6 && bjet_n >= 1) {
+                MoreCRFillHistogramsControlPlotsReco( "6j_incl_1b_incl", values );
+        }
+
+        if (jet_n >= 6 && bjet_n >= 2) {
+                MoreCRFillHistogramsControlPlotsReco( "6j_incl_2b_incl", values );
+        }
 
         if( values.ETmiss < minMet )
         {
@@ -880,6 +923,53 @@ return passed;
                 if (jet_n >= 3 && bjet_n >= 2) {
                         MoreCRFillHistogramsControlPlotsReco( "3j_incl_2b_incl_lowmet", values );
                 }
+                
+                if (jet_n == 5 && bjet_n == 0) {
+                        MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl_lowmet", values );
+                }
+
+                if (jet_n == 5 && bjet_n == 1) {
+                        MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl_lowmet", values );
+                }
+
+                if (jet_n == 5 && bjet_n == 2) {
+                        MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl_lowmet", values );
+                }
+                if (jet_n >= 5 && bjet_n >= 0) {
+                        MoreCRFillHistogramsControlPlotsReco( "5j_incl_0b_incl_lowmet", values );
+                }
+
+                if (jet_n >= 5 && bjet_n >= 1) {
+                        MoreCRFillHistogramsControlPlotsReco( "5j_incl_1b_incl_lowmet", values );
+                }
+
+                if (jet_n >= 5 && bjet_n >= 2) {
+                        MoreCRFillHistogramsControlPlotsReco( "5j_incl_2b_incl_lowmet", values );
+                }         
+                if (jet_n == 6 && bjet_n == 0) {
+                        MoreCRFillHistogramsControlPlotsReco( "6j_incl_0b_incl_lowmet", values );
+                }
+
+                if (jet_n == 6 && bjet_n == 1) {
+                        MoreCRFillHistogramsControlPlotsReco( "6j_incl_1b_incl_lowmet", values );
+                }
+
+                if (jet_n == 6 && bjet_n == 2) {
+                        MoreCRFillHistogramsControlPlotsReco( "6j_incl_2b_incl_lowmet", values );
+                }
+                if (jet_n >= 6 && bjet_n >= 0) {
+                        MoreCRFillHistogramsControlPlotsReco( "6j_incl_0b_incl_lowmet", values );
+                }
+
+                if (jet_n >= 6 && bjet_n >= 1) {
+                        MoreCRFillHistogramsControlPlotsReco( "6j_incl_1b_incl_lowmet", values );
+                }
+
+                if (jet_n >= 6 && bjet_n >= 2) {
+                        MoreCRFillHistogramsControlPlotsReco( "6j_incl_2b_incl_lowmet", values );
+                }
+                
+                
         }
 
 
