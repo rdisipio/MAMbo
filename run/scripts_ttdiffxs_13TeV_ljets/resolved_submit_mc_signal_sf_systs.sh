@@ -9,6 +9,7 @@ systs=$(tac resolved_scale_systematics.dat )
 decays="nofullhad ljets"
 decays="nofullhad"
 production=TTDIFFXS_62
+systs="`cat missingSysts.txt`"
 for syst in $systs
 do
 	mkdir -p output/$syst

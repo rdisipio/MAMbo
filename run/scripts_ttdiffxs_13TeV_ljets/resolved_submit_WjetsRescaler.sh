@@ -1,11 +1,8 @@
 #!/bin/bash
 
-backgrounds="" #single top is special
 channels="el mu co"
 set -x
-skipStop=
-systs=`cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat`
-
+systs="Fcc_up Fcc_down Fc_up Fc_down Flight_up Flight_down"
 
 for syst in $systs
 do
@@ -20,8 +17,8 @@ do
 					script="../jobs/$batchid.sh"
 					log="../logs/$batchid.log"
 					cat > $script << EOF
-				   root -b -q 'resolved_WjetsRescaler.C("$path", "$nominal" )'
-			  
+				   #root -b -q 'resolved_WjetsRescaler.C("$path", "$nominal" )'
+                                   ./resolved_WjetsRescaler $path $nominal
 EOF
 					chmod +x $script
 					echo $script

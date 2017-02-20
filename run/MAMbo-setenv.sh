@@ -1,1 +1,1 @@
-/afs/cern.ch/work/d/disipio/public/ttbar_diffxs_13TeV/MAMbo/bin/MAMbo-setenv.sh
+/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/bin/MAMbo-setenv.sh

@@ -1,8 +1,8 @@
 void RemoveEmptyBinQCD(string filename){
   
-  TFile *f = new TFile(filename.c_str(),"update");
+  TFile *f = new TFile(filename.c_str() );
   
-  string RegionNameArray[]={"1fj1b","QCDcontrol"};
+  string RegionNameArray[]={"4j2b","cutflow"};
   std::vector<std::string> RegionName;
   RegionName.assign(RegionNameArray,RegionNameArray+2);
   
@@ -48,24 +48,17 @@ void RemoveEmptyBinQCD(string filename){
 	{
 	  
 	  if(thisHisto->GetBinContent(bin) < 0){ 
-	    thisHisto->SetBinContent(bin,0.);
-	    loop = true;
+	    cout << path+"/"+name << ", bin " << bin << " is negative (" << thisHisto->GetBinContent(bin) << ")\n";
 	    
 	  }
 	}
 	
-	if(loop == true) {
-	  
-	  gDirectory->Delete((name+";1").c_str());
-	  thisHisto->Write((name).c_str());
-	  if(counter==0) first = name;
 	  counter++;
 	}
 	
 	
-      }  
       
     }
   }
-  f->Close();
+//  f->Close();
 }

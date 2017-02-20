@@ -3,7 +3,7 @@
 analysis=tt_diffxs_13TeV
 #outtag=TTbarResolved_resolved
 
-systs="nominal nocut"
+systs="nominal"
 shapes="tt_rapidity tt_m tt_pt t_pt"
 #systs=$(cat systematics.dat) # | grep JET`
 decays="nofullhad ljets"

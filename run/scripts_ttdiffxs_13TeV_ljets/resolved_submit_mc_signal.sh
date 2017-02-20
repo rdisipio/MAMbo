@@ -8,6 +8,7 @@ systs="nominal nocut"
 systs="nominal nocut $(cat resolved_kinematic_systematics.dat )"
 decays="nofullhad ljets"
 decays="nofullhad"
+systs="nominal `cat resolved_*dat`"
 systs="nominal nocut"
 production=TTDIFFXS_62
 for syst in $systs

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -x
+wjetsSysts="CA_up CA_down Fcc_up Fcc_down Flight_up Flight_down"
+allSysts="nominal `cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat` Zjets_up Stop_up Diboson_up ttV_up fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S $wjetsSysts"
 
 systs="nominal `cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat` Zjets_up Stop_up Diboson_up ttV_up wjets_stat wjets_syst"
 #systs="nominal"
@@ -11,7 +14,17 @@ wjets_stat wjets_syst
 fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
 systs="Fakes_up Zjets_up Diboson_up Stop_up ttV_up"
 #systs="`cat resolved_scale_systematics.dat`"
+
 systs=nominal
+systs=$allSysts
+
+systs="ttV_up Diboson_up Zjets_up Fakes_up fakes_realEff_stat_D fakes_realEff_stat_U fakes_fakeEff_stat_D fakes_fakeEff_stat_U fakes_fakeEff_MCscale_D fakes_fakeEff_MCscale_U fakes_fakeEff_CR_S"
+#systs=$wjetsSysts
+systs="Stop_up"
+systs="nominal"
+systs="ttV_up Diboson_up Zjets_up Fakes_up"
+systs="nominal `cat resolved_*syst*.dat`"
+systs="`cat resolved_bkg*dat`"
 for  syst in $systs
 do
 	dir="$PWD/output/$syst/"
@@ -47,7 +60,8 @@ done
                 #hadd -f TotalPrediction_co.root TotalPrediction_el.root TotalPrediction_mu.root
 EOF
 	chmod +x $script
-	./$script
-#	bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
+#	./$script
+	bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
 
 done
+set +x

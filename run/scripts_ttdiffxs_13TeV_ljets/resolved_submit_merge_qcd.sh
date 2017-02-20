@@ -41,7 +41,7 @@ EOF
 		echo $script
 		chmod +x $script
 	#	./$script
-		#	qsub -q T3_BO_LOCAL $script
+			qsub -q T3_BO_LOCAL $script
 
 
 

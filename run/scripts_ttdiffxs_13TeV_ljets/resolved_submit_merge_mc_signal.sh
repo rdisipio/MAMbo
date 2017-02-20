@@ -84,7 +84,7 @@ analysis=tt_diffxs_13TeV
 
 systs="nocut"
 systs=$pdfsysts
-systs="nominal nocut `cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat`"
+systs="nominal  `cat resolved_kinematic_systematics.dat resolved_scale_systematics.dat`"
 # | egrep -e "EG|MUONS"`
 #systs=`cat  resolved_scale_systematics.dat | grep lepton`
 decays="nofullhad ljets"
@@ -92,8 +92,10 @@ decays="nofullhad"
 #systs=$(cat failedsysts.txt )
 production=TTDIFFXS_62
 samples=mc.410000.PowhegPythiaEvtGen.e3698_s2608_s2183_r7267_r6282_p2516.${production}_v5.txt
+#systs="nominal nocut"
+#systs=$pdfsysts
+systs="`cat resolved_scale_systematics.dat`"
 systs="nominal nocut"
-systs=$pdfsysts
 [ ! -z $1 ] && samples=$(cat $1)
 
 for sample in $samples
@@ -115,6 +117,7 @@ do
 
 			batchid=hadd.$dsid.$decay.$syst.$simulationtype
 			script=../jobs/$batchid.sh
+			log=../logs/$batchid.log
 			cat > $script << EOF
 	#!/bin/bash
 		if [[ $simulationtype == "s"* ]]
@@ -132,9 +135,11 @@ do
 			fi	
 	
 EOF
-	#		chmod +x $script
+			chmod +x $script
 	#		./$script
-			qsub -q T3_BO_LOCAL $script
+#			qsub -q T3_BO_LOCAL $script
+       			 bsub -oe -oo $log -J $batchid -q T3_BO_LOCAL $script
+
 		done
 
 
