@@ -4,6 +4,11 @@ ROOTCORELIBS = $(ROOTCOREBIN)/lib/$(ARCH)
 #ROOTCORETOOLS += FakesMacros 
 #ROOTCORETOOLS += CalibrationDataInterface 
 ROOTCORETOOLS += TopDataPreparation
+
+ifdef MAMBO_USE_BOOTSTRAP
+ROOTCORETOOLS += BootstrapGenerator
+
+endif
 #ROOTCORETOOLS += TopFakes
 #ROOTCORETOOLS += egammaAnalysisUtils egammaEvent
 #ROOTCORETOOLS += FakesTriggerUtils

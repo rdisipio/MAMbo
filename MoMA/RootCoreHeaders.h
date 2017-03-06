@@ -39,4 +39,17 @@
 // BTagging
 #include "CalibrationDataInterface/CalibrationDataInterfaceROOT.h"*/
 //#include "CalibrationDataInterface/
+
+//Bootstrap
+#ifdef BOOTSTRAP_MAMBO
+        #ifndef BOOTSTRAP_MAMBO_ADDED
+        #define BOOTSTRAP_MAMBO_ADDED
+        #pragma message("INFO: adding bootstrap support")
+
+        #include "BootstrapGenerator/BootstrapGenerator.h"
+        #include "BootstrapGenerator/TH1DBootstrap.h"
+        #endif
+#endif
+
+
 #endif /** __ROOTCORE_HEADERS_H__ */

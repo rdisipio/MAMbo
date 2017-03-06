@@ -34,6 +34,9 @@ XMLLIBS     = $(shell xml2-config --libs)
 LIBS = $(ROOTLIBS) $(XMLLIBS)
 ###JK LIBS = $(ROOTLIBS) $(XMLLIBS) -L$(MAMBODIR)/../BootstrapGenerator/StandAlone/ -lBootstrapGenerator
 
+
+
+
 # compile directives
 
 .SUFFIXES:
@@ -50,6 +53,11 @@ include $(MAMBODIR)/MoMA/Makefile.rootcore.inc
 
 CFLAGS += -I$(MAMBODIR)/MoMA
 LIBS   += -L$(MAMBODIR)/MoMA/lib -lMoMA
+ifdef MAMBO_USE_BOOTSTRAP
+
+CFLAGS += -DBOOTSTRAP_MAMBO
+endif
+
 endif
 
 ###JK CFLAGS += -I$(MAMBODIR)/../BootstrapGenerator/

@@ -16,7 +16,6 @@ HistogramManager::HistogramManager() :
 
 }
 
-
 HistogramManager::~HistogramManager()
 {
   /*
