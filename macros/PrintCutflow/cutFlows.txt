@@ -1,5 +1,3 @@
- 	passed_resolved_ejets_2j0b
- 	passed_resolved_mujets_2j0b	
  	passed_resolved_ejets_4j0b
  	passed_resolved_ejets_4j1b	
  	passed_resolved_ejets_4j2b
