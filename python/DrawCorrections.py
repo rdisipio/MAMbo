@@ -140,7 +140,7 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
 #    xtitle=h_rp.GetXaxis().GetTitle()
 #    ytitle=h_rp.GetYaxis().GetTitle()
 
-    PrintBinContent(h_part)
+    ###PrintBinContent(h_part)
     #PrintBinContent(h_pnr)
 
     print '  Making eff...'
@@ -251,11 +251,13 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
         opt = 'L'
         count = count+1
 
-    ATLAS_LABEL(0.16, 0.88, kBlack)
-    #myText(0.335, 0.88, kBlack, "Simulation Preliminary");
-    myText(0.335, 0.88, kBlack, "Simulation Internal");
+    yy = 0.865
+    yyoff = 0.80-0.75
+    ATLAS_LABEL(0.19, yy, kBlack)
+    myText(0.365, yy, kBlack, "Simulation Preliminary");
+    #myText(0.335, 0.88, kBlack, "Simulation Internal");
     #myText(0.335, 0.88, kBlack, "Simulation");
-    myText(0.16, 0.82, kBlack, "Resolved");
+    myText(0.19, yy-yyoff, kBlack, "Resolved");
 
     can.Print('eps/' + canname + '.eps')
     can.Print('png/' + canname + '.png')
@@ -271,13 +273,13 @@ SetAtlasStyle()
 gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
-ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
+#ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
 #ljets = [ 'el', 'mu' ] #, 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-#ljets = [ 'co' ]
+ljets = [ 'co' ]
 
 ptag=''
 ftag='nofullhad'
@@ -366,5 +368,5 @@ for ll in ljets:
 
     
 #
-gApplication.Run()
+#gApplication.Run()
 

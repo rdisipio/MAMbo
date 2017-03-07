@@ -140,7 +140,7 @@ def GetCorrection(rfile, pfile, objname = 'topH', varname = 'pt', icorr = 0, bas
 #    xtitle=h_rp.GetXaxis().GetTitle()
 #    ytitle=h_rp.GetYaxis().GetTitle()
 
-    PrintBinContent(h_part)
+    ###PrintBinContent(h_part)
     #PrintBinContent(h_pnr)
 
     print '  Making eff...'
@@ -252,11 +252,13 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
         opt = 'L'
         count = count+1
 
-    ATLAS_LABEL(0.16, 0.88, kBlack)
-    #myText(0.335, 0.88, kBlack, "Simulation Preliminary");
-    myText(0.335, 0.88, kBlack, "Simulation Internal");
-    #myText(0.335, 0.88, kBlack, "Simulation");
-    myText(0.16, 0.82, kBlack, "Boosted");
+    yy = 0.865
+    yyoff = 0.80-0.75
+    ATLAS_LABEL(0.19, yy, kBlack)
+    #myText(0.365, yy, kBlack, "Simulation Preliminary");
+    myText(0.365, yy, kBlack, "Simulation Internal");
+    #myText(0.365, yy, kBlack, "Simulation");
+    myText(0.19, yy-yyoff, kBlack, "Boosted");
 
     can.Print('eps/' + canname + '_boosted.eps')
     can.Print('png/' + canname + '_boosted.png')
@@ -288,8 +290,11 @@ ftag=''
 
 #ptag='_fixed_new'
 #ftag='_fixed_new'
-ppath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
-rpath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
+#ppath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
+#rpath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
+mainpath='/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/'
+ppath=mainpath
+rpath=mainpath
 
 GenNames = [ 'DiTop.410000'
          ]
@@ -356,5 +361,5 @@ for ll in ljets:
 
     
 #
-gApplication.Run()
+#gApplication.Run()
 
