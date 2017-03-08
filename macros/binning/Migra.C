@@ -95,11 +95,15 @@ TH2D * MakeIntHisto(TH2D *input)
   
   
   cout << "Setting contents..." << endl;
+  cout << migra->GetName() << endl;
   for (int i = 1; i <= migra -> GetXaxis()->GetNbins(); i++) {
+    cout << "Line" << i;
     for (int j = 1; j <= migra -> GetYaxis()->GetNbins(); j++) {
       migra -> SetBinContent(i, j, input -> GetBinContent(i, j));
       migra -> SetBinError(i, j, input -> GetBinError(i, j));
+      cout << " " <<  migra -> GetBinContent(i,j);
     }
+    cout << endl;
   }
   migra -> Scale(1.);
   migra->GetXaxis()->SetNdivisions(nx,0,0);
@@ -251,18 +255,19 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
       if (xvals[nbins]-xvals[0]<30)
       {	
 	// JKJK hack: only odd:
-	//if (k % 2 == 1) {
+	// // ??if (k % 2 == 1) {
+	if (topotag == "Resolved" && (k % 2 == 1) ) {
 	  labelX.DrawText(xnew,ylabel,Form("%4.1f",xlow));
 	  labelY.DrawText(xlabel,ynew,Form("%4.1f",xlow));
-	  //}
+	}
       }
       else
       {
 	// JKJK hack: only odd:
-	//	if (topotag == "Resolved" && (k % 2 == 1) ) {
+	if (topotag == "Resolved" && (k % 2 == 1) ) {
 	  labelX.DrawText(xnew,ylabel,Form("%4.0f",xlow));
 	  labelY.DrawText(xlabel+0.12,ynew,Form("%4.0f",xlow));
-	  //	}
+	}
       }
    }
  //gPad->RedrawAxis();
@@ -271,16 +276,18 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   //  double x = 0.45;
   // double y = 0.93;
   double xx = 0.17;
-  double yy = 0.80;
+  double yy = 0.75;
+  if (topotag == "Resolved")
+    yy =  0.80;
   double xxoffset = 0.31-0.16;
-  double yyoffset = 0.80-0.75;
+  double yyoffset = 0.05;
   ATLAS_LABEL( xx, yy, kBlack );
   ////
   //  myText( 0.31, 0.80, kBlack, " Simulation Internal" );
   //myText( xx+xxoffset, 0.80, kBlack, " Simulation Preliminary" );
   myText( xx+xxoffset, yy, kBlack, " Simulation" );
   ///!!!
-  myText( xx, 0.80-yyoffset, kBlack, "Internal" );
+  myText( xx, yy-1*yyoffset, kBlack, "Internal" );
   //  myText( xx, 0.80-yyoffset, kBlack, "Preliminary" );
   //  myText( 0.31, 0.74, kBlack, " Internal" );
   myText( xx, yy-2*yyoffset, kBlack, topotag );
@@ -490,15 +497,15 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
  // double x = 0.15; // eta distributions
 //  double x = 0.45;
  // double y = 0.93;
-  ATLAS_LABEL( 0.05, 0.92, kBlack );
+   double xx = 0.92 - 0.05;
+   ATLAS_LABEL( 0.05, xx, kBlack );
   // obsolete?
   ///
-  //  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
+  //  myText( 0.21, xx, kBlack, " Simulation Internal" );
   ///!!!
-  //  myText( 0.21, 0.92, kBlack, " Simulation Preliminary" );
-  myText( 0.21, 0.92, kBlack, " Simulation Internal" );
-  //myText( 0.21, 0.92, kBlack, " Simulation" );
-//  myText( x, y-0.05, kBlack, "Period A - Egamma stream" );
+  //  myText( 0.21, xx, kBlack, " Simulation Preliminary" );
+  myText( 0.21, xx, kBlack, " Simulation Internal" );
+  //myText( 0.21, xx, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
   //const double rho = h->GetCorrelationFactor();

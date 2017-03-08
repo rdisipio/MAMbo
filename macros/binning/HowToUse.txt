@@ -31,18 +31,24 @@ root -b -q -l 'Migra.C("/afs/cern.ch/user/q/qitek/public/TopDiff8/tt_diffxs_8TeV
 
 
 JK 13 TeV:
-root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root", "el")'
-root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
-root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
+# old
+#root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root", "el")'
+#root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
+#root -b -q -l 'Migra.C("/afs/cern.ch/user/m/mromano/public/Diff13TeV/Response_20160405/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
+# new:
+root -b -q -l 'Migra.C(" /afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-fixedjvt/nominal/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.nofullhad.histograms.root", "el")'
+root -b -q -l 'Migra.C(" /afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-fixedjvt/nominal/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.nofullhad.histograms.root", "mu")'
+root -b -q -l 'Migra.C(" /afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-fixedjvt/nominal/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.nofullhad.histograms.root", "co")'
+
 
 boosted: 
 # old:
-# note the BUG in lookingh at the same el channel!!! jk 7.3.2017
+# note the BUG in looking at the same el channel!!! jk 7.3.2017
 #root -b -q -l 'Migra.C("/afs/cern.ch/user/a/amenga/public/ForJiri/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "el", "1fj1b")'
 #root -b -q -l 'Migra.C("/afs/cern.ch/user/a/amenga/public/ForJiri/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "mu", "1fj1b")'
 #root -b -q -l 'Migra.C("/afs/cern.ch/user/a/amenga/public/ForJiri/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "co", "1fj1b")'
 
-# fixed jvt: 7.3.2017L
+# fixed jvt: 7.3.2017:
 root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/tt_diffxs_13TeV.mc.DiTop.410000.el.nominal.histograms.root", "el", "1fj1b")'
 root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.histograms.root", "mu", "1fj1b")'
 root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.histograms.root", "co", "1fj1b")'
