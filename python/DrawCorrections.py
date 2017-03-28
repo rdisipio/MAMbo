@@ -254,9 +254,9 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     yy = 0.865
     yyoff = 0.80-0.75
     ATLAS_LABEL(0.19, yy, kBlack)
-    myText(0.365, yy, kBlack, "Simulation Preliminary");
-    #myText(0.335, 0.88, kBlack, "Simulation Internal");
-    #myText(0.335, 0.88, kBlack, "Simulation");
+    #myText(0.365, yy, kBlack, "Simulation Preliminary");
+    myText(0.355, yy, kBlack, "Simulation Internal");
+    #myText(0.365, yy, kBlack, "Simulation");
     myText(0.19, yy-yyoff, kBlack, "Resolved");
 
     can.Print('eps/' + canname + '.eps')
@@ -303,8 +303,9 @@ ftag='nofullhad'
 #ppath='/home/ATLAS-T3/mromano/testarea/unversioned/Diff13TeV/MAMbo/run/scripts_ttdiffxs_13TeV_ljets/output_TTDIFFXS_55_final/nocut/'
 
 # afs:
-rpath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-allsysts/nominal/'
+#rpath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-allsysts/nominal/'
 ppath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-allsysts/nocut/'
+rpath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeV/output_AT2.3.45a-fixedjvt/nominal/'
 
 GenNames = [ 'DiTop.410000'
          ]
