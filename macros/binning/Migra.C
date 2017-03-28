@@ -32,9 +32,9 @@ void PercDraw(const TH2D *resmat)
       }
       Double_t percentage;
          
-      
+      // control the smallest value to be drawn!
       percentage = (resmat->GetBinContent(j+1,i+1)) / slicesum * 100;  
-      if (percentage < 0.5)
+      if (percentage < 0.67)
 	percentage = 0.;
       percmat->SetBinContent(j+1,i+1,percentage);
       if (slicesum < EPSILON)
@@ -276,7 +276,7 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   //  double x = 0.45;
   // double y = 0.93;
   double xx = 0.17;
-  double yy = 0.75;
+  double yy = 0.80;
   if (topotag == "Resolved")
     yy =  0.80;
   double xxoffset = 0.31-0.16;
