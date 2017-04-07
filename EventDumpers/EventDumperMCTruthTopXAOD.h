@@ -72,8 +72,9 @@ class EventDumperMCTruthTopXAOD
     template< class T > 
     bool DumpEventCutflows( const T * ntuple, EventData * ed )
     {
-     	  ed->property["passed_particle_resolved_ejets_2j0b" ] = ntuple-> passed_resolved_ejets_2j0b;
-	  ed->property["passed_particle_resolved_mujets_2j0b" ] = ntuple-> passed_resolved_mujets_2j0b;
+            //hack
+     	  ed->property["passed_particle_resolved_ejets_2j0b" ] = ntuple-> passed_resolved_ejets_4j0b;
+	  ed->property["passed_particle_resolved_mujets_2j0b" ] = ntuple-> passed_resolved_mujets_4j0b;
  	  ed->property["passed_particle_resolved_ejets_4j2b" ] = ntuple-> passed_resolved_ejets_4j2b;
 	  ed->property["passed_particle_resolved_mujets_4j2b" ] = ntuple-> passed_resolved_mujets_4j2b;
  	 ed->property["passed_particle_boosted_ejets_1fj0b" ] = ntuple-> passed_boosted_ejets_1fj0b;  
@@ -276,7 +277,7 @@ class EventDumperMCTruthTopXAOD
 	t = W_plus + b;
   	n_good_tops++;
 	float t_q = 1;
-	tbar = W_plus + bbar;
+	tbar = W_minus + bbar;
   	n_good_tops++;
 	float tbar_q = -1;
 	ttbar = t + tbar;
@@ -285,7 +286,7 @@ class EventDumperMCTruthTopXAOD
 
 	HelperFunctions::DumpTruthParticleToEventData( t, 6, 2, 0, t_q, &ed->mctruth );
 	ed->mctruth.property["isHadronic"].push_back( t_isHadronic );
-	HelperFunctions::DumpTruthParticleToEventData( t, -6, 2, 0, tbar_q, &ed->mctruth );
+	HelperFunctions::DumpTruthParticleToEventData( tbar, -6, 2, 0, tbar_q, &ed->mctruth );
 	ed->mctruth.property["isHadronic"].push_back( tbar_isHadronic );
 	
 	   
