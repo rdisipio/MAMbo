@@ -225,7 +225,11 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
             xtitle = TitleNames[varname][0] + '^{' + ObjNames[objname] + '} ' + TitleNames[varname][1]
         else:
             xtitle = TitleNames[varname][0] + ' ' + TitleNames[varname][1]
-        
+
+        xtitle = xtitle.replace('|y|^{t,lep}', '|y^{t,lep}|')
+        xtitle = xtitle.replace('|y|^{t,had}', '|y^{t,had}|')
+        xtitle = xtitle.replace('|y|^{t#bar{t}}', '|y^{t#bar{t}}|')
+
         print 'XTITLE=%s' % (xtitle,)
         ytitle = CorrNames[tag]
 
@@ -256,8 +260,8 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     yyoff = 0.80-0.75
     ATLAS_LABEL(0.19, yy, kBlack)
     #myText(0.365, yy, kBlack, "Simulation Preliminary");
-    myText(0.365, yy, kBlack, "Simulation Internal");
-    #myText(0.365, yy, kBlack, "Simulation");
+    #myText(0.365, yy, kBlack, "Simulation Internal");
+    myText(0.365, yy, kBlack, "Simulation");
     myText(0.19, yy-yyoff, kBlack, "Boosted");
 
     can.Print('eps/' + canname + '_boosted.eps')
@@ -274,12 +278,12 @@ SetAtlasStyle()
 gStyle.SetOptTitle(0)
 
 # do not even try this unless in bartch mode;)
-ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
+# ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
 # better use separate channels, due to the amount of plots:
 #
 #ljets = [ 'el' ]
 #ljets = [ 'mu' ]
-#ljets = [ 'co' ]
+ljets = [ 'co' ]
 
 ptag=''
 ftag=''
@@ -292,7 +296,7 @@ ftag=''
 #ftag='_fixed_new'
 #ppath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
 #rpath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
-mainpath='/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/'
+mainpath='/afs/cern.ch/user/f/ffabbri/public/InputForJiri/'
 ppath=mainpath
 rpath=mainpath
 

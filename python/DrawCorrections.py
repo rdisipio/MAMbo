@@ -224,7 +224,9 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
             xtitle = TitleNames[varname][0] + '^{' + ObjNames[objname] + '} ' + TitleNames[varname][1]
         else:
             xtitle = TitleNames[varname][0] + ' ' + TitleNames[varname][1]
-        
+        xtitle = xtitle.replace('|y|^{t,lep}', '|y^{t,lep}|')
+        xtitle = xtitle.replace('|y|^{t,had}', '|y^{t,had}|')
+        xtitle = xtitle.replace('|y|^{t#bar{t}}', '|y^{t#bar{t}}|')
         print 'XTITLE=%s' % (xtitle,)
         ytitle = CorrNames[tag]
 
@@ -254,9 +256,9 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     yy = 0.865
     yyoff = 0.80-0.75
     ATLAS_LABEL(0.19, yy, kBlack)
-    #myText(0.365, yy, kBlack, "Simulation Preliminary");
-    myText(0.355, yy, kBlack, "Simulation Internal");
-    #myText(0.365, yy, kBlack, "Simulation");
+    #myText(0.355, yy, kBlack, "Simulation Preliminary");
+    #myText(0.355, yy, kBlack, "Simulation Internal");
+    myText(0.355, yy, kBlack, "Simulation");
     myText(0.19, yy-yyoff, kBlack, "Resolved");
 
     can.Print('eps/' + canname + '.eps')
