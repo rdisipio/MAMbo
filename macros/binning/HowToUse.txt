@@ -53,6 +53,9 @@ root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/tt_diff
 root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/tt_diffxs_13TeV.mc.DiTop.410000.mu.nominal.histograms.root", "mu", "1fj1b")'
 root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputJiri_703/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.histograms.root", "co", "1fj1b")'
 
+# latest, co only, June28th 2017
+root -b -q -l 'Migra.C("/afs/cern.ch/user/f/ffabbri/public/InputForJiri/tt_diffxs_13TeV.mc.DiTop.410000.co.nominal.histograms.root", "co", "1fj1b")'
+
 
 In case of further questions send an e-mail to: 
 josef.pacalt@cern.ch

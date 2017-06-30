@@ -50,6 +50,7 @@ void PercDraw(const TH2D *resmat)
   percmat->GetZaxis()->SetTitleSize(0.045);
   percmat->GetZaxis()->SetTitleOffset(1.13);
   percmat->GetYaxis()->SetTitleOffset(1.21);
+  //  percmat->GetZaxis()->SetTextAlign(2);
   percmat->Draw("colz");
   percmat->Draw("sametext");
   cout << "Setting labels..." << endl;
@@ -182,10 +183,14 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   gROOT->LoadMacro( "../../share/AtlasUtils.C" );
   gROOT->LoadMacro( "../../share/rootlogon.C" );
   gROOT->LoadMacro( "../../share/AtlasStyle.C" );
+
   SetAtlasStyle();
 
-
-   gStyle->SetPaintTextFormat("4.0f");
+  // migration matrix percentage text precision
+   gStyle->SetPaintTextFormat("2.0f");
+   //   gStyle->SetTextAlign(2);
+   
+   
    gStyle->SetOptStat(0);
    gStyle->SetMarkerSize(1.7);
    gStyle->SetOptTitle(0);
@@ -256,7 +261,7 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
       {	
 	// JKJK hack: only odd:
 	// // ??if (k % 2 == 1) {
-	if (topotag == "Resolved" && (k % 2 == 1) ) {
+	if ( topotag == "Boosted" || (topotag == "Resolved" && (k % 2 == 1) ) ) {
 	  labelX.DrawText(xnew,ylabel,Form("%4.1f",xlow));
 	  labelY.DrawText(xlabel,ynew,Form("%4.1f",xlow));
 	}
@@ -264,7 +269,7 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
       else
       {
 	// JKJK hack: only odd:
-	if (topotag == "Resolved" && (k % 2 == 1) ) {
+	if (topotag == "Boosted" || (topotag == "Resolved" && (k % 2 == 1) ) ) {
 	  labelX.DrawText(xnew,ylabel,Form("%4.0f",xlow));
 	  labelY.DrawText(xlabel+0.12,ynew,Form("%4.0f",xlow));
 	}
@@ -287,10 +292,10 @@ void basic_plot( const char * hname, const char * htitle = "", TString channel =
   //myText( xx+xxoffset, 0.80, kBlack, " Simulation Preliminary" );
   myText( xx+xxoffset, yy, kBlack, " Simulation" );
   ///!!!
-  myText( xx, yy-1*yyoffset, kBlack, "Internal" );
+  ///  myText( xx, yy-1*yyoffset, kBlack, "Internal" );
   //  myText( xx, 0.80-yyoffset, kBlack, "Preliminary" );
   //  myText( 0.31, 0.74, kBlack, " Internal" );
-  myText( xx, yy-2*yyoffset, kBlack, topotag );
+  myText( xx, yy-1*yyoffset, kBlack, topotag );
 
   //const double rho = h->GetCorrelationFactor();
   //sprintf( buf, "correlation: %3.2f", rho );
@@ -367,8 +372,8 @@ void basic_plot_par( const char * hname, const char * htitle = "", TString chann
     labelY.SetTextSize(0.04);
     labelY.SetTextAlign(32);
   
-  Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1);//ještě pošibovat a je to
-  Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1);//ještě pošibovat
+  Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1);
+  Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1);
   
    for (Int_t k=0;k<=nbins;k++)
    {
@@ -472,8 +477,8 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
     labelY.SetTextSize(0.03);
     labelY.SetTextAlign(32);
   
-  Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1) - 0.2*(migra->GetYaxis()->GetBinWidth(1));//ještě pošibovat a je to
-  Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1) - 0.2*(migra->GetXaxis()->GetBinWidth(1));//ještě pošibovat
+  Double_t ylabel = migra->GetYaxis()->GetBinLowEdge(1) - 0.2*(migra->GetYaxis()->GetBinWidth(1));
+  Double_t xlabel = migra->GetXaxis()->GetBinLowEdge(1) - 0.2*(migra->GetXaxis()->GetBinWidth(1));
   
    for (Int_t k=0;k<=nbins;k++)
    {
@@ -504,7 +509,7 @@ void basic_plot_rp( const char * hname, const char * htitle = "", TString channe
   //  myText( 0.21, xx, kBlack, " Simulation Internal" );
   ///!!!
   //  myText( 0.21, xx, kBlack, " Simulation Preliminary" );
-  myText( 0.21, xx, kBlack, " Simulation Internal" );
+  myText( 0.21, xx, kBlack, " Simulation" );
   //myText( 0.21, xx, kBlack, " Simulation" );
 //  myText( x, y-0.05, kBlack, "e+jets 4j1b" );
 
@@ -530,16 +535,16 @@ void Migra(TString input, TString channel, TString topo = "4j2b")
   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_pt","p_{T}^{t,lep} [GeV]", channel, topotag);
 //  basic_plot("reco/" + topo + "/WL/Matrix_reco_particle_pt","p_{T}^{W,lep} [GeV]", channel, topotag);
 //  basic_plot("reco/" + topo + "/WH/Matrix_reco_particle_pt","p_{T}^{W,had} [GeV]", channel, topotag);
-//  basic_plot("reco/" + topo + "/WH/Matrix_reco_particle_absrap","|y|_{W,had}", channel, topotag);
-//  basic_plot("reco/" + topo + "/WL/Matrix_reco_particle_absrap","|y|_{W,lep}", channel, topotag);
+//  basic_plot("reco/" + topo + "/WH/Matrix_reco_particle_absrap","|y|^{W,had}", channel, topotag);
+//  basic_plot("reco/" + topo + "/WL/Matrix_reco_particle_absrap","|y|^{W,lep}", channel, topotag);
   basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_m","m_{t,lep}", channel, topotag);
   basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_m","m_{t,had}", channel, topotag); 
-  basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_absrap","|y|_{t,lep}", channel, topotag);
+  basic_plot("reco/" + topo + "/topL/Matrix_reco_particle_absrap","|y^{t,lep}|", channel, topotag);
   basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]", channel, topotag);
-  basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y|_{t,had}", channel, topotag);
+  basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y^{t,had}|", channel, topotag);
   basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_pt","p_{T}^{t#bar{t}} [GeV]", channel, topotag);
   basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_m","m_{t#bar{t}}", channel, topotag);
-  basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_absrap","|y|_{t#bar{t}}", channel, topotag);
+  basic_plot("reco/" + topo + "/tt/Matrix_reco_particle_absrap","|y^{t#bar{t}}|", channel, topotag);
   basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_Pout","p_{out}^{t#bar{t}} [GeV]", channel, topotag);
   //basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_absPout","|p_{out}^{t#bar{t}}| [GeV]", channel, topotag);  
   basic_plot("reco/" + topo + "/difference/Matrix_reco_particle_z_ttbar","z_{t#bar{t}}", channel, topotag);
@@ -622,7 +627,7 @@ void Migra(TString input, TString channel, TString topo = "4j2b")
     TString topotag = "Boosted";
     // spaces after GeV important so that label does not overlap with axis numbers: hack by JK
     basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_pt","p_{T}^{t,had} [GeV]  ", channel, topotag);
-    basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y|_{t,had}", channel, topotag);
+    basic_plot("reco/" + topo + "/topH/Matrix_reco_particle_absrap","|y^{t,had}|", channel, topotag);
 
   }
 
