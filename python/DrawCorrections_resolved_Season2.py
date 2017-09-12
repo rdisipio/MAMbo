@@ -27,12 +27,29 @@ _hists = []
 kEff   = 0
 kAcc   = 1
 kMatch = 2
-kCorrs     = { kEff : 'eff', kAcc : 'acc', kMatch : 'match' }
+kAccWithBoost = 3
+kAccMatch = 4
+kEffNoMatch = 5
+kEffNoMatchWithBoost = 6
+ 
+kCorrs     = { kEff   : 'eff',
+               kAcc   : 'acc',
+               kMatch : 'match',
+               kAccWithBoost : 'acc_withboost',
+               kAccMatch   : 'accmatch',
+               kEffNoMatch   : 'effnomatch',
+               kEffNoMatchWithBoost   : 'effnomatch_withboost', }
+
 kCorrNames = { kEff   : 'Efficiency #varepsilon',
                kAcc   : 'Acceptance correction f_{acc}', 
-               kMatch : 'Matching correction f_{match}' }
+               kMatch : 'Matching correction f_{match}',
+               kAccWithBoost : 'Acceptance correction f_{acc}, incl. boost',
+               kAccMatch   : 'Acceptance and matching correction f_{acc && match}',
+               kEffNoMatch   : 'Efficiency #varepsilon, no match',
+               kEffNoMatchWithBoost   : 'Efficiency #varepsilon, no match, incl. boost', }
 
-Col = [kOrange+10, kBlue+2, kViolet-1 ]
+
+Col = [kOrange+10, kBlue+2, kViolet-1, kGreen+2, kMagenta, kRed+2, kBlack]
 
 ObjNames = { #'top_lep' : 'leptonic pseudo-top','top_had' : 'hadronic pseudo-top',
              '' : '',
@@ -49,6 +66,8 @@ TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ],
                'absrap' : [  '|y|', '' ], 
                'rapidity' : [  'y', '' ],
                'y' : [  'y', '' ],
+               'y_coarse' : [  'y', '' ],
+               'y_fine' : [  'y', '' ],
 
                'top_had_cosThetaStar' : [  'cos#theta^{*}_{t,had}', '' ],
                'top_lep_cosThetaStar' : [  'cos#theta^{*}_{t,lep}', '' ],
@@ -66,8 +85,7 @@ TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ],
 #################
 def ZeroErrorBars(corr):
     for i in range(0,corr.GetN()):
-
-               corr.SetPointError(i,0., 0., 0., 0.)
+        corr.SetPointError(i,0., 0., 0., 0.)
 
 
 #################
@@ -85,69 +103,120 @@ def CheckAcc(acc,name):
 #################
 def GetCorrection(ll, rfile, pfile, objname = 'top_had', varname = 'pt', icorr = kEff, basepath = '4j2b'):
 
+    # naming convention for histogram identifiers:
+    # h_PASEDWHATCUTS_BINNEDINWHAT
+    # where PASEDWHATCUTS = reco, part, recopart, recopartmatch
+    #       BINNEDINWHAT = p...particle, r...reco
+    
     particle_name =  '/particle/' + basepath + '_' + ll + '/PseudoTop_Particle_' + objname + '_' + varname
     particle_name= particle_name.replace('__', '_')
     # here access particle spectrum:
     print '  accessing particle histogram %s' % (particle_name, )
-    h_part = pfile.Get(particle_name)
+    h_part_p = pfile.Get(particle_name)
 
-    # now on, access the migration matrix:
+    # now on, access the migration matrix, no matching:
     matrix_name = '/reco/' + basepath + '_' + ll + '/PseudoTop_Particle_' + objname + '_' + varname + '_vs_PseudoTop_Reco_' + objname + '_' + varname
     matrix_name= matrix_name.replace('__', '_')
     print 'Getting the matrix %s from file %s' % (matrix_name, rfile.GetName())
-    h_matrix = rfile.Get(matrix_name)
+    h_matrixMatch = rfile.Get(matrix_name)
 
+
+    # now on, access the migration matrix, no matching, incl. boosted:
+    matrixWithBoost_name = '/reco/' + basepath + '_' + ll + '_withboost/PseudoTop_Particle_' + objname + '_' + varname + '_vs_PseudoTop_Reco_' + objname + '_' + varname
+    matrixWithBoost_name= matrixWithBoost_name.replace('__', '_')
+    print 'Getting the matrix %s from file %s' % (matrixWithBoost_name, rfile.GetName())
+    h_matrixMatch_withBoost = rfile.Get(matrixWithBoost_name)
+
+    h_recopartWithBoost_p = h_matrixMatch_withBoost.ProjectionY( "particle_recoandparticleYwithboost", 1, h_matrixMatch.GetNbinsY() )   
+    
+    
     reco_name =  '/reco/' + basepath + '_' + ll + '/PseudoTop_Reco_' + objname + '_' + varname
     reco_name = reco_name.replace('__', '_')
     print '  accessing reco histogram %s' % (reco_name, )
-    h_reco = rfile.Get(reco_name)
+    h_reco_r = rfile.Get(reco_name)
 
-    # matched, binned in particle, as a projection of the migration matrix:
+    reco_name_withBoost =  '/reco/' + basepath + '_' + ll + '+_withboost/PseudoTop_Reco_' + objname + '_' + varname
+    reco_name_withBoost = reco_name.replace('__', '_')
+    print '  accessing reco histogram %s' % (reco_name_withBoost, )
+    h_recoWithBoost_r = rfile.Get(reco_name_withBoost)
+
+    
+    # pass particle and reco, matched, binned in particle, as a projection of the migration matrix:
     print 'Making the y projection...'
-    h_match_p = h_matrix.ProjectionY( "particle_recoandparticleY", 1, h_matrix.GetNbinsY() )
+    h_recopartmatch_p = h_matrixMatch.ProjectionY( "particle_recoandparticleYmatch", 1, h_matrixMatch.GetNbinsY() )   
+    
+    # access the migration matrix, incl. matching:
+    matrixmatch_name = '/reco/' + basepath + '_' + ll + '_match/PseudoTop_Particle_' + objname + '_' + varname + '_vs_PseudoTop_Reco_' + objname + '_' + varname
+    matrixmatch_name = matrixmatch_name.replace('__', '_')
+    print 'Getting the matched matrix %s from file %s' % (matrixmatch_name, rfile.GetName())
+    h_matrixmatch = rfile.Get(matrix_name)
 
-    # does not work:
-    #matrixmatch_name = '/reco/' + basepath + '_' + ll + '_match/PseudoTop_Particle_' + objname + '_' + varname + '_vs_PseudoTop_Reco_' + objname + '_' + varname
-    #matrixmatch_name = matrixmatch_name.replace('__', '_')
-    #print 'Getting the matched matrix %s from file %s' % (matrixmatch_name, rfile.GetName())
-    #h_matrixmatch = rfile.Get(matrix_name)
-    #h_match_r = h_matrixmatch.ProjectionX( "reco_recoandparticleXmatch", 1, h_matrixmatch.GetNbinsX() )
+    # access the migration matrix, no matching
+    matrix_name = '/reco/' + basepath + '_' + ll + '/PseudoTop_Particle_' + objname + '_' + varname + '_vs_PseudoTop_Reco_' + objname + '_' + varname
+    matrix_name = matrix_name.replace('__', '_')
+    print 'Getting the matrix %s from file %s' % (matrix_name, rfile.GetName())
+    h_matrix = rfile.Get(matrix_name)
 
+    
+    # pass particle and reco, binned in particle, as a projection of the migration matrix:
+    print 'Making the y projection...'
+    h_recopart_p = h_matrix.ProjectionY( "particle_recoandparticleY", 1, h_matrix.GetNbinsY() )
+ 
+
+    # does not seem to work...should not be Y projection??!!
+    # h_recopartmatch_r = h_matrixmatch.ProjectionX( "reco_recoandparticleXmatch", 1, h_matrixmatch.GetNbinsX() )
     # OR, works for top had pT:
     recomatch_name =  '/reco/' + basepath + '_' + ll +'_match' + '/PseudoTop_Reco_' + objname + '_' + varname
     recomatch_name = recomatch_name.replace('__', '_')
     print '  accessing reco matched histogram %s' % (recomatch_name, )
-    h_match_r = rfile.Get(recomatch_name)
+    h_recopartmatch_r = rfile.Get(recomatch_name)
 
     
     # reco and particle, binned in reco:
     print 'Making the x projection...'
-    h_recopart_r = h_matrix.ProjectionX( "reco_recoandparticleX", 1, h_matrix.GetNbinsX() )
+    h_recopart_r = h_matrixMatch.ProjectionX( "reco_recoandparticleXmatch", 1, h_matrixMatch.GetNbinsX() )
     
     #xtitle=h_recopart_r.GetXaxis().GetTitle()
     #ytitle=h_recopart_r.GetYaxis().GetTitle()
 
-    ###PrintBinContent(h_part)
+    ###PrintBinContent(h_part_p)
     #PrintBinContent(h_pnr)
 
     print '  Making eff...'
-    #print '    RMS check: %f ' % (h_part.GetRMS(),)
-    #print '    RMS check: %f ' % (h_match_p.GetRMS(),)
-    eff = MakeRatio( h_match_p, h_part,  False)
+    #print '    RMS check: %f ' % (h_part_p.GetRMS(),)
+    #print '    RMS check: %f ' % (h_recopartmatch_p.GetRMS(),)
+    eff = MakeRatio( h_recopartmatch_p, h_part_p,  False)
 
+    print '  Making effNoMatch...'
+    effNoMatch = MakeRatio( h_recopart_p, h_part_p,  False)
+
+    print '  Making effNoMatch_withboost...'
+    effNoMatch_withboost = MakeRatio( h_recopartWithBoost_p, h_part_p,  False)
+    
     print '  Making acc...'
-    #print '    RMS check: %f %f' % (h_recopart_r.GetRMS(), h_reco.GetRMS())
-    acc = MakeRatio( h_recopart_r, h_reco, False)
+    #print '    RMS check: %f %f' % (h_recopart_r.GetRMS(), h_reco_r.GetRMS())
+    acc = MakeRatio( h_recopart_r, h_reco_r, False)
     CheckAcc(acc,'%s %s' % (h_recopart_r.GetName(),h_recopart_r.GetTitle()) )
 
     print '  Making match...'
-    print '    RMS check: %f' % (h_match_r.GetRMS(), )
+    print '    RMS check: %f' % (h_recopartmatch_r.GetRMS(), )
     print '    RMS check: %f' % (h_recopart_r.GetRMS(), )
-    match = MakeRatio( h_match_r,  h_recopart_r, False)
+    match = MakeRatio( h_recopartmatch_r,  h_recopart_r, False)
 
-    if icorr == kEff:   return eff,   h_part,    h_match_p
-    if icorr == kAcc:   return acc,   h_recopart_r,      h_reco
-    if icorr == kMatch: return match, h_match_r, h_recopart_r
+    print '  Making acc with boosted...'
+    acc_withboost = MakeRatio( h_recopart_r, h_recoWithBoost_r, False)
+
+    print '  Making acc && match...'
+    accmatch = MakeRatio( h_recopartmatch_r, h_reco_r, False)
+
+    if icorr == kEff:                  return eff,                  h_part_p,          h_recopartmatch_p
+    if icorr == kAcc:                  return acc,                  h_recopart_r,      h_reco_r
+    if icorr == kMatch:                return match,                h_recopartmatch_r, h_recopart_r
+    if icorr == kAccWithBoost:         return acc_withboost,        h_recopart_r,      h_recoWithBoost_r
+    if icorr == kAccMatch:             return accmatch,             h_recopartmatch_r, h_reco_r
+    if icorr == kEffNoMatch:           return effNoMatch,           h_part_p,          h_recopart_p
+    if icorr == kEffNoMatchWithBoost:  return effNoMatch_withboost, h_part_p,          h_recopartWithBoost_p
+        
     return
 
 #################
@@ -298,18 +367,25 @@ for ll in ljets:
            #'WL',
            'ttbar'
     ]
-    Var = ['pt',
-           'm', 
-           #'y'
+    Var = [ 'y_coarse',
+            'pt',
+            'm', 
+          
     ]
 
     for obj in Obj:
         for var in Var:
             if ( obj.find('_top') >= 0 or obj.find('top_') >= 0) and var == 'm':
                 continue
+            if var == 'y_coarse' and (  obj.find('top_had') <= 0 and obj.find('ttbar') <= 0 ):
+                continue
             DrawCorrection(ll, rfiles, pfiles, obj, var, kEff)
             DrawCorrection(ll, rfiles, pfiles, obj, var, kAcc)
             DrawCorrection(ll, rfiles, pfiles, obj, var, kMatch)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kAccWithBoost)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kAccMatch)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kEffNoMatch)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kEffNoMatchWithBoost)
             pass
 
 
@@ -325,6 +401,10 @@ for ll in ljets:
             DrawCorrection(ll, rfiles, pfiles, obj, var, kEff)
             DrawCorrection(ll, rfiles, pfiles, obj, var, kAcc)
             DrawCorrection(ll, rfiles, pfiles, obj, var, kMatch)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kAccWithBoost)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kAccMatch)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kEffNoMatch)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kEffNoMatchWithBoost)
             pass
 
     

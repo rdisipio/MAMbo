@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# jiri kvita, 2015
+# jiri kvita, 2015, 2017
 
 from ROOT import *
 try:
@@ -16,55 +16,62 @@ from CorrStyle import *
 import os, sys
 from array import array
 
-_cans = []
-_files = []
-_corrs = []
-
-
-
 from MAMboPlottingToolkit import *
 
-Col = [kOrange+10, kBlue+2, kViolet-1 ]
 
-Paths = ['particle', 'reco_4j2b', 'bla', 'bla', 'particle']
+_cans  = []
+_files = []
+_corrs = []
+_hists = []
 
-ObjNames = { #'topL' : 'leptonic pseudo-top','topH' : 'hadronic pseudo-top',
+kEff   = 0
+kAcc   = 1
+kMatch = 2
+kAccWithBoost = 3
+kAccMatch = 4
+kEffNoMatch = 5
+kEffNoMatchWithBoost = 6
+ 
+kCorrs     = { kEff   : 'eff',
+               kAcc   : 'acc',
+}
 
-             'top_lep' : 't,lep',
-             'top_had' : 't,had',
+kCorrNames = { kEff   : 'Efficiency #varepsilon',
+               kAcc   : 'Acceptance correction f_{acc}', 
+}
 
-             'WL' : 'W,lep',
-             'WH' : 'W,had',
+Col = [kOrange+10, kBlue+2, kViolet-1, kGreen+2, kMagenta, kRed+2, kBlack]
 
-             #'topL' : '#hat{t}_{l}',
-             #'topH' : '#hat{t}_{h}',
-             #'WL' : '#hat{W}_{l}',
-             #'WH' : '#hat{W}_{h}',
-             'tt' : 't#bar{t}',
-             #'tt' : '#hat{t}_{l}#hat{t}_{h}',
+ObjNames = { #'lepTop' : 'leptonic pseudo-top','hadTop' : 'hadronic pseudo-top',
+             '' : '',
+             'lepTop' : 't,lep',
+             'hadTop' : 't,had',
+
+             'leading_top' : 't,lead',
+             'subleading_top' : 't,subled',
+             'ttbar' : 't#bar{t}',
              'difference' : ''}
+
 TitleNames = { 'pt' : [  'p_{T}', '[GeV]' ], 
                'm' : [  'm', '[GeV]' ], 
                'absrap' : [  '|y|', '' ], 
                'rapidity' : [  'y', '' ],
-               'Pout' : [  'p_{out}', '[GeV]' ],
-               'absPout' : [  '|p_{out}|', '[GeV]' ],
-               'z_ttbar' : [  'z_{#hat{t}_{l}#hat{t}_{h}}', '' ],
-               'Yboost' : [  'y_{boost}', '' ],
-               'Chi_ttbar' : [  '#chi_{#hat{t}_{l}#hat{t}_{h}}', '' ],
-               'dPhi_ttbar' : [  '#Delta#phi_{#hat{t}_{l}#hat{t}_{h}}', '' ],
-               'Salam_ttbar' : [  'S_{#hat{t}_{l}#hat{t}_{h}}', '' ],
-               'HT_ttbar' : [  'H_{T}^{t#bar{t}}', '[GeV]' ],
-               'HT_pseudo' : [  'H_{T}^{pseudo}', '[GeV]' ],
-               'R_lb' : [  '[p_{T}^{j1} + p_{T}^{j2}] / [ p_{T}^{b,lep} + p_{T}^{b,had}]', '' ],
-               'R_Wb_had' : [  'p_{T}^{W,had} / p_{T}^{b,had}', '' ],
-               'R_Wb_lep' : [  'p_{T}^{W,lep} / p_{T}^{b,lep}', '' ],
-               'R_Wt_had' : [  'p_{T}^{W,had} / p_{T}^{t,had}', '' ],
-               'R_Wt_lep' : [  'p_{T}^{W,lep} / p_{T}^{t,lep}', '' ],
+               'y' : [  'y', '' ],
+               'y_coarse' : [  'y', '' ],
+               'y_fine' : [  'y', '' ],
+
+
+               'hadTop_cosThetaStar' : [  'cos#theta^{*}_{t,had}', '' ],
+               'lepTop_cosThetaStar' : [  'cos#theta^{*}_{t,lep}', '' ],
+               
+               #'Pout' : [  'p_{out}', '[GeV]' ],
+               'Pout' : [  '|p_{out}|', '[GeV]' ],
+               'z_ttbar' : [  'z_{t#bar{t}}', '' ],
+               'y_boost' : [  'y_{boost}', '' ],
+               'chi_tt' : [  '#chi_{t#bar{t}}', '' ],
+               'deltaPhi_tt' : [  '#Delta#phi_{t#bar{t}}', '' ],
+               'HT_tt' : [  'H_{T}^{t#bar{t}}', '[GeV]' ],
                }
-CorrNames = { 'eff' : 'Efficiency #varepsilon', 
-              #'match' : 'Matching correction f_{match}', 
-              'acc' : 'Acceptance correction f_{acc}' }
 
 
 #################
@@ -85,111 +92,77 @@ def CheckAcc(acc,name):
             print '  ERROR: acceptance=%4.2f in bin %i of %s!' % (eff,i,name)
     return
 
-def GetTag(objname, varname):
-    tag = ''
-    #if objname.find('top') >= 0 and varname != "absrap": tag = '_0'
-    #if objname.find('tt') >= 0 and varname == "pt": tag = '_5'
-    return tag
-
-
-def GetMax(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fjb'):
-    tag = GetTag(objname, varname)
-    path =  '/' + basepath + '/' + objname + '/' + varname+tag
-    h_part = rfile.Get(Paths[0] + path)
-    return h_part.GetXaxis().GetXmax()
-def GetMin(rfile, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1f1b'):
-    tag = GetTag(objname, varname)
-    path =  '/' + basepath + '/' + objname + '/' + varname+tag
-    h_part = rfile.Get(Paths[0] + path)
-    return h_part.GetXaxis().GetXmin()
-
-
 #################
-def GetCorrection(rfile, pfile, objname = 'top_had', varname = 'pt', icorr = 0, basepath = '1fj1b'):
-    tag = GetTag(objname, varname)
-    path =  '/' + basepath + '/' + objname + '/' + varname+tag
+def GetCorrection(ll, rfile, pfile, objname = 'hadTop', varname = 'pt', icorr = kEff, basepath = '1fj1b', basepathreco = '1rcj1b', invert = False):
 
-    print '    Getting %s/%s/%s/%s' % (Paths[0],basepath,objname,varname+tag)
-
-    # here access the special particle file:
-    print '        %s' %(Paths[0] + path)
-    h_part = pfile.Get(Paths[0] + path)
-
-    # from now on, access reco file:
-
-    matrixPath =  '/' + basepath + '/' + objname + '/Matrix_reco_particle_' + varname+tag
-    print 'Getting the matrix %s from file %s' % (Paths[1] + matrixPath, rfile.GetName(),)
-    h_matrix = rfile.Get( Paths[1] + matrixPath )
-
-    print '        %s' %(Paths[1] + path)
-    h_reco = rfile.Get(Paths[1] + path)
-
-    #print '        %s' %(Paths[2] + path)
-    # h_match_p = rfile.Get(Paths[2] + path)
-    # fix by Marino:
-    h_match_p = h_matrix.ProjectionY( "particle_recoandparticle", 1, h_matrix.GetNbinsY() )
-
-    #print '        %s' %(Paths[3] + path)
-    #h_match_r = rfile.Get(Paths[3] + path)
-
-    print '        %s' %(Paths[4] + path)
-    h_rp = rfile.Get(Paths[4] + path)
-    # fix by Marino:
-    # h_rp = h_matrix.ProjectionX( "reco_recoandparticle", 1, h_matrix.GetNbinsX() )
+    # naming convention for histogram identifiers:
+    # h_PASEDWHATCUTS_BINNEDINWHAT
+    # where PASEDWHATCUTS = reco, part, recopart, recopartmatch
+    #       BINNEDINWHAT = p...particle, r...reco
     
-#    xtitle=h_rp.GetXaxis().GetTitle()
-#    ytitle=h_rp.GetYaxis().GetTitle()
+    particle_name =  '/particle/' + basepath + '/' + objname + '_boosted_rc_' + varname
+    if invert == True:
+        print 'OK, switching to inversed order naming convention!'
+        particle_name =  '/particle/' + basepath + '/boosted_rc_' + varname
+    particle_name= particle_name.replace('__', '_')
+    # here access particle spectrum:
+    print '  accessing particle histogram %s' % (particle_name, )
+    h_part_p = pfile.Get(particle_name)
 
-    ###PrintBinContent(h_part)
-    #PrintBinContent(h_pnr)
+    reco_name =  '/reco/' + basepathreco + '_' + ll + '/' + objname + '_boosted_rc_' + varname
+    if invert == True:
+        print 'OK, switching to inversed order naming convention!'
+        reco_name =  '/reco/' + basepathreco + '_' + ll + '/boosted_rc_' + varname
+    reco_name = reco_name.replace('__', '_')
+    print '  accessing reco histogram %s' % (reco_name, )
+    h_reco_r = rfile.Get(reco_name)
 
+      # access the migration matrix
+    matrix_name = '/reco/' + basepathreco + '_' + ll + '/' + objname + '_boosted_rc_' + varname + '_vs_' + objname + '_boosted_rc_' + varname
+    if invert == True:
+        print 'OK, switching to inversed order naming convention!'
+        matrix_name = '/reco/' + basepathreco + '_' + ll + '/boosted_rc_' + varname + '_vs_boosted_rc_' + varname
+    matrix_name = matrix_name.replace('__', '_')
+    print 'Getting the matrix %s from file %s' % (matrix_name, rfile.GetName())
+    h_matrix = rfile.Get(matrix_name)
+
+    
+    # pass particle and reco, binned in particle, as a projection of the migration matrix:
+    print 'Making the y projection...'
+    h_recopart_p = h_matrix.ProjectionY( "particle_recoandparticleY", 1, h_matrix.GetNbinsY() )
+ 
+    # reco and particle, binned in reco:
+    print 'Making the x projection...'
+    h_recopart_r = h_matrix.ProjectionX( "reco_recoandparticleX", 1, h_matrix.GetNbinsX() )
+    
     print '  Making eff...'
-    #print '    RMS check: %f %f' % (h_part.GetRMS(),h_match_p.GetRMS(),)
-    print '    RMS check: %f ' % (h_part.GetRMS(),)
-    #print '    RMS check: %f ' % (h_match_p.GetRMS(),)
-    eff = MakeRatio( h_match_p, h_part,  False)
+    #print '    RMS check: %f ' % (h_part_p.GetRMS(),)
+    #print '    RMS check: %f ' % (h_recopartmatch_p.GetRMS(),)
+    eff = MakeRatio( h_recopart_p, h_part_p,  False)
 
+     
     print '  Making acc...'
-    print '    RMS check: %f ' % (h_rp.GetRMS(), )
-    print '    RMS check: %f ' % (h_reco.GetRMS())
-    acc = MakeRatio( h_rp, h_reco, False)
-    CheckAcc(acc,'%s %s' % (h_rp.GetName(),h_rp.GetTitle()) )
+    #print '    RMS check: %f %f' % (h_recopart_r.GetRMS(), h_reco_r.GetRMS())
+    acc = MakeRatio( h_recopart_r, h_reco_r, False)
+    CheckAcc(acc,'%s %s' % (h_recopart_r.GetName(),h_recopart_r.GetTitle()) )
 
-    #print '  Making match...'
-    #print '    RMS check: %f %f' % (h_match_r.GetRMS(), h_rp.GetRMS())
-    #match = MakeRatio( h_match_r,  h_rp, False)
-
-    if icorr == 0: return eff,h_part,h_match_p
-    if icorr == 1: return acc,h_rp,h_reco
-    #if icorr == 2: return match,h_match_r,h_rp
+  
+    if icorr == kEff:                  return eff,                  h_part_p,          h_recopart_p
+    if icorr == kAcc:                  return acc,                  h_recopart_r,      h_reco_r
+          
     return
 
 #################
-def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr = 0, basepath = '1fj1b'):
+def DrawCorrection(ll, rfiles, pfiles, objname = 'hadTop', varname = 'pt', icorr = 0, basepath = '1fj1b', basepathreco = '1rcj1b', invert = False):
     print '  Drawing %s/%s/%s' % (basepath,objname,varname)
 
-    tag = ''
-    if icorr == 0: tag = 'eff'
-    if icorr == 1: tag = 'acc'
-    #if icorr == 2: tag = 'match'
+    tag = kCorrs[icorr]
 
     canname = '%s_%s_%s_%s' % (tag,objname,varname,ll)
     can = TCanvas(canname, canname, 1, 1, 800, 800)
     #can.Divide(2,1)
     _cans.append(can)
 
-    #can.cd(1)
-    #h1.SetMarkerColor(2)
-    #m1 = h1.GetMaximum()
-    #m2 = h2.GetMaximum()
-    #if m1 > m2:
-    #    h1.SetMaximum(m1)
-    #else:
-    #    h1.SetMaximum(m2)
-    #h1.Draw();
-    #h2.Draw("same");
-    
-    #can.cd(2)
     can.cd()
   
     opt = 'P'
@@ -198,7 +171,7 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     xmax = -1
     for rfile,pfile in zip(rfiles,pfiles):
 
-        corr,h1,h2 = GetCorrection(rfile, pfile, objname, varname, icorr, basepath)
+        corr,h1,h2 = GetCorrection(ll, rfile, pfile, objname, varname, icorr, basepath, basepathreco, invert)
 
         col = Col[icorr]
         corr.SetLineColor(col)
@@ -216,24 +189,22 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
             corr.SetMarkerColor(col)
             
         if count == 0:
-            xmin = GetMin(rfile, objname, varname, icorr, basepath)
-            xmax = GetMax(rfile, objname, varname, icorr, basepath)
-
+            xmin = h1.GetXaxis().GetXmin()
+            xmax = h1.GetXaxis().GetXmax()
+        
         # HERE
         # xtitle = ObjNames[objname] + ' ' + TitleNames[varname]
         if ObjNames[objname] != 'difference':
             xtitle = TitleNames[varname][0] + '^{' + ObjNames[objname] + '} ' + TitleNames[varname][1]
         else:
             xtitle = TitleNames[varname][0] + ' ' + TitleNames[varname][1]
-
         xtitle = xtitle.replace('|y|^{t,lep}', '|y^{t,lep}|')
         xtitle = xtitle.replace('|y|^{t,had}', '|y^{t,had}|')
         xtitle = xtitle.replace('|y|^{t#bar{t}}', '|y^{t#bar{t}}|')
-
         print 'XTITLE=%s' % (xtitle,)
-        ytitle = CorrNames[tag]
+        ytitle = kCorrNames[icorr]
 
-        title=CorrNames[tag] + ';' + xtitle# + ';' + ytitle
+        title = kCorrNames[icorr] + ';' + xtitle# + ';' + ytitle
         if count == 0:
             if icorr == 0:
                 tmp = next_tmp(xmin, xmax, title, 0., 1.)
@@ -248,7 +219,8 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
         tmp.GetXaxis().SetNdivisions(505)
 	#tmp.GetXaxis().SetLabelFont(43)
 	#tmp.GetXaxis().SetLabelSize(15)
-
+        _hists.append(tmp)
+        
         SetStyle(corr, xtitle, ytitle)
 
         corr.Draw(opt)
@@ -259,15 +231,15 @@ def DrawCorrection(ll, rfiles, pfiles, objname = 'topH', varname = 'pt', icorr =
     yy = 0.865
     yyoff = 0.80-0.75
     ATLAS_LABEL(0.19, yy, kBlack)
-    #myText(0.365, yy, kBlack, "Simulation Preliminary");
-    #myText(0.365, yy, kBlack, "Simulation Internal");
-    myText(0.365, yy, kBlack, "Simulation");
+    #myText(0.355, yy, kBlack, "Simulation Preliminary");
+    myText(0.355, yy, kBlack, "Simulation Internal");
+    #myText(0.355, yy, kBlack, "Simulation");
     myText(0.19, yy-yyoff, kBlack, "Boosted");
 
-    can.Print('eps/' + canname + '_boosted.eps')
-    can.Print('png/' + canname + '_boosted.png')
-    can.Print('pdf/' + canname + '_boosted.pdf')
-    can.Print('C/' + canname + '_boosted.C' )
+    #can.Print('eps_boosted/' + canname + '.eps')
+    can.Print('png_boosted/' + canname + '.png')
+    can.Print('pdf_boosted/' + canname + '.pdf')
+    can.Print('C_boosted/' + canname + '.C' )
 
 ####################################################
 ####################################################
@@ -277,93 +249,81 @@ SetAtlasStyle()
 
 gStyle.SetOptTitle(0)
 
-# do not even try this unless in bartch mode;)
-# ljets = [ 'co', 'el', 'mu' ] #, 'el', 'mu']
-# better use separate channels, due to the amount of plots:
-#
-#ljets = [ 'el' ]
-#ljets = [ 'mu' ]
-ljets = [ 'co' ]
+ljets = [ ###'ejet', 'mujet',
+          'ljet' ]
 
 ptag=''
-ftag=''
+ftag='nofullhad'
 
-#ptag='_incl'
-#ftag='_incl'
+ppath='/afs/cern.ch/user/f/ffabbri/public/InputForJiri_Phase2/'
+rpath=ppath
 
+GenNames = [ '410501', #nominal
+             '410511.AFII', #ifsr1
+             '410512.AFII', #ifsr2
+]
 
-#ptag='_fixed_new'
-#ftag='_fixed_new'
-#ppath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
-#rpath='/afs/cern.ch/user/a/amenga/public/ForJiri/'
-mainpath='/afs/cern.ch/user/m/mromano/work/public/Diff13TeVPhase2/output/nominal/'
-ppath=mainpath
-rpath=mainpath
-
-GenNames = [ 'DiTop.410000'
-         ]
-
-
-
-os.system('mkdir C png eps pdf')
+os.system('mkdir C_boosted png_boosted eps_boosted pdf_boosted')
 gROOT.SetBatch(1)
 
 for ll in ljets:
 
-
     rfiles = []
     pfiles = []
 
-    for genname in GenNames:
-        rfile = TFile('%s/mc.410501.nominal.allplots.v109.root' % (rpath, ), 'read')
+    for genname in GenNames[:1]:
+        rfile = TFile('%s/mc.%s.nominal.v109.root' % (rpath, genname), 'read')
         _files.append(rfile)
         rfiles.append(rfile)
         print 'Opened file %s' % (rfile.GetName(),)
         
-        pfile = rfile ### TFile('%stt_diffxs_13TeV.mc.%s.%s.nocut%s.histograms.root' % (ppath, genname, ll, ftag, ), 'read')
+        pfile = rfile ### TFile('%stt_diffxs_13TeV.mc.%s.%s.nocut.%s.histograms.root' % (ppath, genname, ll, ftag, ), 'read')
         _files.append(pfile)
         pfiles.append(pfile)
         print 'Opened file %s' % (pfile.GetName(),)
 
-
-
-    Obj = ['top_had', 
-           #'topL',
+    Obj = ['hadTop', 
+           'lepTop',
+           #'leading_top',
+           #'subleading_top',
+           ### 'topHad', ? for klfitter stuff?
            #'WH', 
            #'WL',
-           'tt'
+           'ttbar'
     ]
-    Var = ['pt', 
-            'm', 
-           'absrap'
+    Var = ['pt',
+           'm', 
+           'y',
     ]
 
     for obj in Obj:
         for var in Var:
-            DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
-            DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
-            #DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
+            if ( obj.find('_top') >= 0 or obj.find('top_') >= 0) and var == 'm':
+                continue
+            if var == 'y' and (  obj.find('hadTop') <= 0 and obj.find('ttbar') <= 0 ):
+                continue
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kEff)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kAcc)
             pass
 
 
-    SpecObj = ['difference' ]
-    SpecVar = ['Pout', 'absPout', 'z_ttbar', 'Yboost', 'Chi_ttbar', 'dPhi_ttbar', 'Salam_ttbar', 
-               'HT_ttbar', 'HT_pseudo',
-               'R_lb', 
-               'R_Wb_lep', 
-               'R_Wb_had',
-               'R_Wt_lep', 
-               'R_Wt_had' 
+    SpecObj = ['' ]
+    SpecVar = [#'hadTop_cosThetaStar',
+               #'hadTop_cosThetaStar',
+               'Pout',
+               #'y_boost',
+               'chi_tt',
+               #'deltaPhi_tt',
+               #'HT_tt',
     ]
 
-    #for obj in SpecObj:
-    #    for var in SpecVar:
-    #        DrawCorrection(ll, rfiles, pfiles, obj, var, 0)
-    #        DrawCorrection(ll, rfiles, pfiles, obj, var, 1)
-    #        #DrawCorrection(ll, rfiles, pfiles, obj, var, 2)
-    #        pass
+    for obj in SpecObj:
+        for var in SpecVar:
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kEff, invert = True)
+            DrawCorrection(ll, rfiles, pfiles, obj, var, kAcc, invert = True)
+            pass
 
     
-#
-#gApplication.Run()
+
+# gApplication.Run()
 
